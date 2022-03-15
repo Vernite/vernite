@@ -1,0 +1,11 @@
+{
+  "locales": ["pl-PL", "en-GB", "it-IT", "es-ES", "de-DE", "uk-UK"],
+  "editor": {
+    "messageLocations": ["src/locales/messages.xlf"],
+    "translationFileNamePattern": "${name}.${lang}.${region}",
+    "taskConfig": {
+      "intervalSeconds": 5,
+      "itemEachPack": 10
+    }
+  }
+}
