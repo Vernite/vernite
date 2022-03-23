@@ -18,6 +18,7 @@
     "simontest.simontest",
     "vscode-icons-team.vscode-icons",
     "rvest.vs-code-prettier-eslint",
-    "EditorConfig.EditorConfig"
+    "editorconfig.editorconfig",
+    "stylelint.vscode-stylelint"
   ]
 }

@@ -1,6 +1,32 @@
 {
-    "files.associations": {
-        ".xtm": "xml",
-        ".ngI18nconfig": "json"
-    }
+  "files.associations": {
+    ".xtm": "xml",
+    ".ngI18nconfig": "json"
+  },
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "html"
+  ],
+  "eslint.options": {
+    "extensions": [
+      ".js",
+      ".ts",
+      ".html"
+    ]
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+  "editor.formatOnSave": true,
+
+  "stylelint.enable": true,
+  "scss.validate": false,
+  "css.validate": false,
+  "less.validate": false,
+
+   "stylelint.validate": [
+    "scss"
+  ],
 }
