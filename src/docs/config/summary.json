@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Localization",
+    "file": "../pages/localization/localization.md",
+    "children": [
+      {
+        "title": "Adding new language",
+        "file": "../pages/localization/adding-language.md"
+      },
+      {
+        "title": "Making translations",
+        "file": "../pages/localization/making-translations.md"
+      }
+    ]
+  }
+]
