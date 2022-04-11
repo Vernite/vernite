@@ -16,3 +16,12 @@ jobs:
          npm i -g yarn
          yarn install
          yarn build
+      - uses: wlixcc/SFTP-Deploy-Action@v1.0
+        with:
+          username: 'frontend'
+          server: '51.77.50.209'
+          port: '2224'
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          local_path: './dist/*'
+          remote_path: '/var/www/html'
+          args: '-o ConnectTimeout=5'
