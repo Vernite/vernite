@@ -16,8 +16,8 @@ jobs:
           npm i -g yarn
           yarn install
           yarn build
-          yarn docs
-          mv documentation dist
+          yarn build:docs
+          mv documentation dist/workflow/docs
       - uses: wlixcc/SFTP-Deploy-Action@v1.0
         with:
           username: 'frontend'
