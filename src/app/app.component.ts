@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from './_common/services/api.service';
+import { ApiService } from './_main/services/api.service';
 
 /**
  * Main Component which contains redirects to submodules
