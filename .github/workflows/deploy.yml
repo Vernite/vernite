@@ -2,7 +2,7 @@ name: deploy
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   deploy:
@@ -13,9 +13,11 @@ jobs:
         with:
           node-version: '16.x'
       - run: |
-         npm i -g yarn
-         yarn install
-         yarn build
+          npm i -g yarn
+          yarn install
+          yarn build
+          yarn docs
+          mv documentation dist
       - uses: wlixcc/SFTP-Deploy-Action@v1.0
         with:
           username: 'frontend'
