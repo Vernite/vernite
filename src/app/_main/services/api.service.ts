@@ -18,29 +18,23 @@ export class ApiService {
     });
   }
 
-  public get(url: string, params?: RequestOptions['params']) {
-    return this.request('GET', url, { params });
+  public get(url: string, options?: RequestOptions) {
+    return this.request('GET', url, options);
   }
 
-  public post(url: string, params?: RequestOptions['params'], body?: any) {
-    return this.request('POST', url, { params, body });
+  public post(url: string, options?: RequestOptions) {
+    return this.request('POST', url, options);
   }
 
-  public delete(url: string, params?: RequestOptions['params']) {
-    return this.request('DELETE', url, { params });
+  public delete(url: string, options?: RequestOptions) {
+    return this.request('DELETE', url, options);
   }
 
-  public put(url: string, params?: RequestOptions['params'], body?: any) {
-    return this.request('PUT', url, { params, body });
+  public put(url: string, options?: RequestOptions) {
+    return this.request('PUT', url, options);
   }
 
-  public patch(url: string, params?: RequestOptions['params'], body?: any) {
-    return this.request('PATCH', url, { params, body });
-  }
-
-  public getHelloWorld(name: string) {
-    this.get('/hello', { name }).subscribe((response) => {
-      console.log(response);
-    });
+  public patch(url: string, options?: RequestOptions) {
+    return this.request('PATCH', url, options);
   }
 }
