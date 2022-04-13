@@ -41,6 +41,7 @@
     "**/.hg": true,
     "**/CVS": true,
     "**/.DS_Store": true,
+    "**/Thumbs.db": true,
     ".stylelintrc.json": true,
     ".browserslistrc": true,
     ".editorconfig": true,

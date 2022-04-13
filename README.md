@@ -1,7 +1,7 @@
 <h1 align="center">Workflow - Clean and powerful work management app.</h1>
 
 <p align="center">
-  <img src="src/docs/assets/logo_with_text.svg" alt="angular-logo" width="120px" height="80px"/>
+  <img src="https://workflow.adiantek.ovh/docs/assets/logo_with_text.svg" alt="angular-logo" width="120px" height="80px"/>
   <br>
   <i>Workflow is a task management app with multiple independent modules to speed up work.
     <br>tasks / mail / messages</i>
@@ -9,13 +9,13 @@
 </p>
 
 <p align="center">
-  <a href="https://www.google.pl/"><strong>PUT LINK HERE</strong></a>
+  <a href="https://workflow.adiantek.ovh/pl-PL/"><strong>DEVELOPMENT SERVER</strong></a>
   <br>
 </p>
 
 <p align="center" style="color:red">
-  <img src="src/docs/assets/badges/angular.svg" />
-  <img src="documentation/images/coverage-badge-documentation.svg" />
+  <img src="https://workflow.adiantek.ovh/docs/assets/badges/angular.svg" />
+  <img src="https://workflow.adiantek.ovh/docs/images/coverage-badge-documentation.svg" />
 </p>
 
 <hr>
