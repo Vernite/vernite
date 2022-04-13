@@ -21,6 +21,10 @@
   },
   "editor.formatOnSave": true,
 
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+
   "stylelint.enable": true,
   "scss.validate": false,
   "css.validate": false,
