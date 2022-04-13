@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TasksRoutes } from './tasks.routing';
+import { AuthRoutes } from './auth.routing';
 
 @NgModule({
-  imports: [CommonModule, TasksRoutes],
+  imports: [CommonModule, AuthRoutes],
   declarations: [],
 })
-export class TasksModule {}
+export class AuthModule {}
