@@ -4,6 +4,9 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { CreateWorkspacePage } from './create-workspace.page';
+import { MainModule } from 'src/app/_main/_main.module';
+import { NgControl, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('CreateWorkspaceComponent', () => {
   let component: CreateWorkspacePage;
@@ -11,7 +14,9 @@ describe('CreateWorkspaceComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [MainModule, BrowserAnimationsModule, ReactiveFormsModule],
       declarations: [CreateWorkspacePage],
+      providers: [NgControl],
     }).compileComponents();
   }));
 

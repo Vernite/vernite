@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,6 +17,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTabsModule } from '@angular/material/tabs';
+import { InputComponent } from './components/input/input.component';
+import { MatInputModule } from '@angular/material/input';
+import { ValidationErrorPipe } from './pipes/validation-error.pipe';
+import { ButtonComponent } from './components/button/button.component';
 
 /**
  * Main module configuration object
@@ -27,9 +31,8 @@ const ngModuleConfig = {
     =             Local dependencies              =
     =============================================*/
     CommonModule,
-    BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
   ],
   importExports: [
     /*=============================================
@@ -50,6 +53,7 @@ const ngModuleConfig = {
     MatCheckboxModule,
     MatDatepickerModule,
     MatFormFieldModule,
+    MatInputModule,
     MatTooltipModule,
     MatTabsModule,
 
@@ -67,6 +71,9 @@ const ngModuleConfig = {
     /*=============================================
     =         Exported custom components          =
     =============================================*/
+    InputComponent,
+    ButtonComponent,
+    ValidationErrorPipe,
   ],
 };
 

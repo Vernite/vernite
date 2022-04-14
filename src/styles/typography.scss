@@ -1,0 +1,36 @@
+:root {
+  // 1rem -> 16px
+
+  // Label
+  --label-font-size: 0.75rem;
+  --label-font-weight: 400;
+  --label-text-transform: uppercase;
+
+  // Body
+  --body-font-size: 0.875rem;
+  --body-font-weight: 400;
+  --body-text-transform: none;
+
+  // Title
+  --title-font-size: 0.875rem;
+  --title-font-weight: 500;
+  --title-text-transform: none;
+}
+
+@mixin typo-label {
+  font-size: var(--label-font-size);
+  font-weight: var(--label-font-weight);
+  text-transform: var(--label-text-transform);
+}
+
+@mixin typo-body {
+  font-size: var(--body-font-size);
+  font-weight: var(--body-font-weight);
+  text-transform: var(--body-text-transform);
+}
+
+@mixin typo-title {
+  font-size: var(--title-font-size);
+  font-weight: var(--title-font-weight);
+  text-transform: var(--title-text-transform);
+}

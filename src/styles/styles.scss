@@ -1,4 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+// Global files imports
+@import 'colors';
+@import 'typography';
+
+// Themes imports
+@import 'themes/default.theme';
+@import 'themes/dark.theme';
+
+// Material overrides
+@import 'material/input.material';
+
+// Tailwind dependencies imports
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,5 +21,11 @@ body { height: 100%; }
 
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: Montserrat, Roboto, 'Helvetica Neue', sans-serif;
+}
+
+app-root {
+  display: block;
+  width: 100%;
+  height: 100%;
 }

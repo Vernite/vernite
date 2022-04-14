@@ -9,7 +9,7 @@ import { MainModule } from './_main/_main.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, HttpClientModule, MainModule],
+  imports: [AppRoutingModule, BrowserAnimationsModule, HttpClientModule, MainModule],
   providers: [],
   bootstrap: [AppComponent],
 })

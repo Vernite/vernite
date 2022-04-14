@@ -19,6 +19,7 @@
     "vscode-icons-team.vscode-icons",
     "rvest.vs-code-prettier-eslint",
     "editorconfig.editorconfig",
-    "stylelint.vscode-stylelint"
+    "stylelint.vscode-stylelint",
+    "vunguyentuan.vscode-css-variables"
   ]
 }

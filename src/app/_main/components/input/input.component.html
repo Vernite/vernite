@@ -1,0 +1,10 @@
+<div class="form-field">
+  <label *ngIf="staticLabel" [class.required]="required">{{ staticLabel }}</label>
+  <mat-form-field appearance="outline" [class.without-floating-label]="!floatingLabel">
+    <mat-label *ngIf="floatingLabel">{{ floatingLabel }}</mat-label>
+    <input matInput [type]="type" [placeholder]="placeholder" [required]="required" [formControl]="control"
+      [autocomplete]="autocomplete" name="test">
+    <mat-error>{{ control.errors | validationError }}</mat-error>
+    <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
+  </mat-form-field>
+</div>

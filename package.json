@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build --stats-json",
     "watch": "ng build --watch --configuration development",
-    "lang": "ng extract-i18n --output-path=src/locales",
+    "extract:i18n": "ng extract-i18n --output-path=src/locales",
     "start:docs": "yarn build:docs -s",
     "build:docs": "compodoc -p tsconfig.doc.json -y src/docs/styles/ --includes src/docs/config/ -a src/docs/assets/",
     "analyze": "webpack-bundle-analyzer dist/workflow/stats.json",

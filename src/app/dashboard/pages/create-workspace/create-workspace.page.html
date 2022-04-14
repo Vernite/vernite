@@ -1,3 +1,12 @@
-<p>
-  create-workspace works!
-</p>
+<form [formGroup]="form">
+  <app-input formControlName="name" type="text" placeholder="New workspace" floatingLabel="Workspace name"
+    i18n-floatingLabel i18n-placeholder></app-input>
+  <app-input formControlName="name" type="text" placeholder="New workspace" staticLabel="Workspace name"
+    i18n-floatingLabel i18n-placeholder></app-input>
+  <app-input formControlName="name" type="text" placeholder="New workspace" floatingLabel="Workspace name"
+    i18n-floatingLabel i18n-placeholder [required]="true"></app-input>
+  <app-input formControlName="name" type="text" placeholder="New workspace" staticLabel="Workspace name"
+    i18n-floatingLabel i18n-placeholder [required]="true"></app-input>
+  <app-button variant="primary" i18n>Save</app-button>
+  <app-button variant="secondary" i18n>Save</app-button>
+</form>

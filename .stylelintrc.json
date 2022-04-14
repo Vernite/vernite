@@ -12,6 +12,7 @@
   ],
   "rules": {
     "order/properties-alphabetical-order": null,
+    "scss/at-import-partial-extension": null,
     "scss/at-rule-no-unknown": [
       true,
       {
@@ -20,6 +21,9 @@
     ],
     "declaration-block-trailing-semicolon": null,
     "no-descending-specificity": null,
-    "no-empty-source": null
+    "no-empty-source": null,
+    "max-nesting-depth": 6,
+    "selector-no-qualifying-type": null,
+    "selector-max-compound-selectors": null
   }
 }

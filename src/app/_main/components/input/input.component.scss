@@ -1,0 +1,25 @@
+@import '../../../../styles/typography';
+
+.form-field {
+  display: flex;
+  max-width: 300px;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+
+  > label {
+    @include typo-title;
+
+    margin-bottom: 0.4rem;
+    color: var(--color-input-text);
+
+    &.required::after {
+      margin-left: 0.2rem;
+      color: var(--color-input-text);
+      content: '*';
+    }
+  }
+}
+
+input {
+  cursor: text;
+}

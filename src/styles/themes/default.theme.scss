@@ -1,0 +1,26 @@
+body {
+  // Universal
+  --border-radius: 7px;
+
+  // Text
+  --color-text: var(--color-neutral-800);
+
+  // Inputs
+  --color-input-background: var(--color-secondary-500);
+  --color-input-background-hover: var(--color-secondary-600);
+  --color-input-border: var(--color-secondary-400);
+  --color-input-border-focus: var(--color-primary-500);
+  --color-input-text: var(--color-text);
+  --color-input-label-focused: var(--color-text);
+  --color-input-placeholder: var(--color-secondary-200);
+
+  // Buttons
+  --color-button-primary-background: var(--color-primary-500);
+  --color-button-primary-background-hover: var(--color-primary-600);
+  --color-button-primary-background-active: var(--color-primary-700);
+  --color-button-primary-border-active: var(--color-primary-700);
+  --color-button-secondary-background: var(--color-secondary-500);
+  --color-button-secondary-background-hover: var(--color-secondary-600);
+  --color-button-secondary-background-active: var(--color-secondary-700);
+  --color-button-secondary-border-active: var(--color-secondary-500);
+}
