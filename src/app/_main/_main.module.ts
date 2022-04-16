@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { BrowserModule } from '@angular/platform-browser';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -21,6 +19,13 @@ import { InputComponent } from './components/input/input.component';
 import { MatInputModule } from '@angular/material/input';
 import { ValidationErrorPipe } from './pipes/validation-error.pipe';
 import { ButtonComponent } from './components/button/button.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AlertDialog } from './dialogs/alert/alert.dialog';
+import { IconComponent } from './components/icon/icon.component';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { FocusInitialDirective } from './directives/focus-initial.directive';
+import { HttpClientModule } from '@angular/common/http';
 
 /**
  * Main module configuration object
@@ -33,6 +38,7 @@ const ngModuleConfig = {
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   importExports: [
     /*=============================================
@@ -56,6 +62,7 @@ const ngModuleConfig = {
     MatInputModule,
     MatTooltipModule,
     MatTabsModule,
+    MatProgressSpinnerModule,
 
     /*=============================================
       =              External modules               =
@@ -74,6 +81,9 @@ const ngModuleConfig = {
     InputComponent,
     ButtonComponent,
     ValidationErrorPipe,
+    AlertDialog,
+    IconComponent,
+    FocusInitialDirective,
   ],
 };
 

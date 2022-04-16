@@ -4,6 +4,11 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { ButtonComponent } from './button.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatIconModule } from '@angular/material/icon';
+import { IconComponent } from '../icon/icon.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ButtonComponent', () => {
   let component: ButtonComponent;
@@ -11,9 +16,9 @@ describe('ButtonComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ButtonComponent ]
-    })
-    .compileComponents();
+      imports: [MatProgressSpinnerModule, BrowserAnimationsModule],
+      declarations: [ButtonComponent, IconComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

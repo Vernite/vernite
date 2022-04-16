@@ -10,6 +10,11 @@
 
 // Material overrides
 @import 'material/input.material';
+@import 'material/spinner.material';
+@import 'material/table.material';
+@import 'material/menu.material';
+@import 'material/dialog.material';
+@import 'material/typography.material';
 
 // Tailwind dependencies imports
 @tailwind base;
@@ -21,7 +26,6 @@ body { height: 100%; }
 
 body {
   margin: 0;
-  font-family: Montserrat, Roboto, 'Helvetica Neue', sans-serif;
 }
 
 app-root {

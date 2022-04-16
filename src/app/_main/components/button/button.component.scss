@@ -1,5 +1,36 @@
 @import '../../../../styles/typography';
 
+button mat-spinner,
+button app-icon {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.2s;
+}
+
+button mat-spinner.hide,
+button app-icon.hide {
+  opacity: 0;
+}
+
+button .prefix {
+  position: relative;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.2s, margin-right 0.2s;
+
+  > * {
+    position: absolute;
+  }
+}
+
+button:not(.button-with-icon) .prefix:not(.pending) {
+  width: 0;
+  margin-right: 0;
+}
+
 button {
   @include typo-title;
 
@@ -15,6 +46,10 @@ button {
   color: var(--color-text);
   outline: 0 !important;
   transition: background-color 0.2s ease;
+
+  > * {
+    margin-right: 0.75rem;
+  }
 
   &::before {
     $offset: 4px;
@@ -70,6 +105,22 @@ button {
 
     &:active {
       background-color: var(--color-button-secondary-background-active);
+    }
+  }
+
+  &.important {
+    background-color: var(--color-button-important-background);
+
+    &::before {
+      border: 2px solid var(--color-button-important-border-active);
+    }
+
+    &:hover {
+      background-color: var(--color-button-important-background-hover);
+    }
+
+    &:active {
+      background-color: var(--color-button-important-background-active);
     }
   }
 }

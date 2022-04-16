@@ -1,4 +1,6 @@
 :root {
+  --font-family: montserrat, roboto, 'Helvetica Neue', sans-serif;
+
   // 1rem -> 16px
 
   // Label
@@ -13,8 +15,13 @@
 
   // Title
   --title-font-size: 0.875rem;
-  --title-font-weight: 500;
+  --title-font-weight: 700;
   --title-text-transform: none;
+
+  // Heading 5
+  --heading-5-font-size: 1.125rem;
+  --heading-5-font-weight: 700;
+  --heading-5-text-transform: none;
 }
 
 @mixin typo-label {
@@ -23,14 +30,44 @@
   text-transform: var(--label-text-transform);
 }
 
+.typo-label {
+  @include typo-label;
+
+  color: var(--color-text);
+}
+
 @mixin typo-body {
   font-size: var(--body-font-size);
   font-weight: var(--body-font-weight);
   text-transform: var(--body-text-transform);
 }
 
+.typo-body {
+  @include typo-body;
+
+  color: var(--color-text);
+}
+
 @mixin typo-title {
   font-size: var(--title-font-size);
   font-weight: var(--title-font-weight);
   text-transform: var(--title-text-transform);
+}
+
+.typo-title {
+  @include typo-title;
+
+  color: var(--color-text);
+}
+
+@mixin typo-heading-5 {
+  font-size: var(--heading-5-font-size);
+  font-weight: var(--heading-5-font-weight);
+  text-transform: var(--heading-5-text-transform);
+}
+
+.typo-heading-5 {
+  @include typo-heading-5;
+
+  color: var(--color-text);
 }

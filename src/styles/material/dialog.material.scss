@@ -1,0 +1,27 @@
+.mat-dialog-container {
+  background-color: var(--color-dialog-background);
+  border-radius: var(--border-radius);
+  color: var(--color-text);
+
+  .mat-dialog-title {
+    @include typo-heading-5;
+
+    margin-bottom: 0.25rem;
+  }
+
+  .mat-dialog-content {
+    @include typo-body;
+  }
+
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-dialog-delimiter);
+    margin-top: 1.25rem;
+
+    > * {
+      margin-left: 1.25rem;
+    }
+  }
+}

@@ -1,0 +1,50 @@
+<!-- Page header -->
+<section class="flex justify-between items-center">
+  <h2 class="typo-heading-5" i18n>Workspaces</h2>
+  <app-button variant="primary" routerLink="/workspaces/create" [icon]="faPlus" i18n>
+    New workspace
+  </app-button>
+</section>
+
+<!-- Table -->
+<table mat-table [dataSource]="(workspaces$ | async) || []">
+
+  <!-- Name column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef i18n> Name </th>
+    <td mat-cell *matCellDef="let row"> {{ row.name }} </td>
+  </ng-container>
+
+  <!-- Statistics column -->
+  <ng-container matColumnDef="statistics">
+    <th mat-header-cell *matHeaderCellDef i18n> Statistics </th>
+    <td mat-cell *matCellDef="let row"> - </td>
+  </ng-container>
+
+  <!-- Last update column -->
+  <ng-container matColumnDef="lastUpdate">
+    <th mat-header-cell *matHeaderCellDef i18n> Last update </th>
+    <td mat-cell *matCellDef="let row"> - </td>
+  </ng-container>
+
+  <!-- Actions column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef i18n> Actions </th>
+    <td mat-cell *matCellDef="let row">
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="flex items-center">
+        <app-icon icon="matMoreVert"></app-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="editWorkspace(row)">
+          <span>Edit workspace</span>
+        </button>
+        <button mat-menu-item class="important" (click)="deleteWorkspace(row)">
+          <span>Delete workspace</span>
+        </button>
+      </mat-menu>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['name', 'statistics', 'lastUpdate', 'actions']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['name', 'statistics', 'lastUpdate', 'actions'];"></tr>
+</table>

@@ -31,6 +31,7 @@ npm install
 And you are ready to go. It's highly recommended to use `yarn` instead of `npm`.
 ```
 npm install -g yarn
+yarn install
 ```
 <p><br/></p>
 

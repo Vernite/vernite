@@ -3,17 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'dashboard',
-  },
-  {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-  },
-  {
-    path: 'dashboard',
-    loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
     path: 'email',
@@ -22,6 +13,10 @@ const routes: Routes = [
   {
     path: 'messages',
     loadChildren: () => import('./messages/messages.module').then((m) => m.MessagesModule),
+  },
+  {
+    path: '',
+    loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
 ];
 

@@ -1,3 +1,7 @@
-<button [ngClass]="[variant]">
+<button #btn [ngClass]="[variant]" [class.button-with-icon]="icon">
+  <div class="prefix" [class.pending]="pending">
+    <mat-spinner diameter="18" [class.hide]="!pending"></mat-spinner>
+    <app-icon *ngIf="icon" [icon]="icon" [class.hide]="pending" size="16px"></app-icon>
+  </div>
   <ng-content></ng-content>
 </button>

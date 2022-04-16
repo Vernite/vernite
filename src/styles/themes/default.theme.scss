@@ -13,6 +13,7 @@ body {
   --color-input-text: var(--color-text);
   --color-input-label-focused: var(--color-text);
   --color-input-placeholder: var(--color-secondary-200);
+  --color-input-error: var(--color-red-500);
 
   // Buttons
   --color-button-primary-background: var(--color-primary-500);
@@ -23,4 +24,21 @@ body {
   --color-button-secondary-background-hover: var(--color-secondary-600);
   --color-button-secondary-background-active: var(--color-secondary-700);
   --color-button-secondary-border-active: var(--color-secondary-500);
+  --color-button-important-background: var(--color-red-500);
+  --color-button-important-background-hover: var(--color-red-600);
+  --color-button-important-background-active: var(--color-red-700);
+  --color-button-important-border-active: var(--color-red-500);
+
+  // Table
+  --color-table-header-border: var(--color-secondary-400);
+  --color-table-row-background: var(--color-secondary-600);
+
+  // Menu
+  --color-menu-background: var(--color-secondary-600);
+  --color-menu-background-hover: var(--color-secondary-700);
+  --color-menu-background-important: var(--color-red-500);
+
+  // Dialog
+  --color-dialog-background: var(--color-secondary-800);
+  --color-dialog-delimiter: var(--color-secondary-500);
 }

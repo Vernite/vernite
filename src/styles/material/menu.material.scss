@@ -1,0 +1,29 @@
+.mat-menu-panel {
+  background-color: var(--color-menu-background);
+
+  button.mat-menu-item {
+    transition: background-color 0.2s;
+
+    mat-icon.mat-icon,
+    span {
+      color: var(--color-text);
+    }
+
+    &:hover {
+      background-color: var(--color-menu-background-hover);
+    }
+
+    &[disabled] {
+      mat-icon.mat-icon,
+      span {
+        opacity: 0.5;
+      }
+    }
+
+    &.important {
+      span {
+        color: var(--color-menu-background-important);
+      }
+    }
+  }
+}

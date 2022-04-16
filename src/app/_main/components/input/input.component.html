@@ -4,7 +4,7 @@
     <mat-label *ngIf="floatingLabel">{{ floatingLabel }}</mat-label>
     <input matInput [type]="type" [placeholder]="placeholder" [required]="required" [formControl]="control"
       [autocomplete]="autocomplete" name="test">
-    <mat-error>{{ control.errors | validationError }}</mat-error>
+    <mat-error>{{ ngControl.control?.errors | validationError }}</mat-error>
     <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
   </mat-form-field>
 </div>

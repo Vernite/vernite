@@ -9,28 +9,22 @@ export class WorkspaceService {
   constructor(private apiService: ApiService) {}
 
   public create(workspace: Workspace) {
-    this.apiService.post('/workspaces', { body: workspace }).subscribe((response) => {
-      console.log(response);
-    });
+    return this.apiService.post('/workspaces', { body: workspace });
   }
 
   public list() {
-    this.apiService.get('/workspaces').subscribe((response) => {
-      console.log(response);
-    });
+    return this.apiService.get('/workspaces');
   }
 
-  public get(id: string) {
-    this.apiService.get(`/workspaces/${id}`).subscribe((response) => {
-      console.log(response);
-    });
+  public get(id: number) {
+    return this.apiService.get(`/workspaces/${id}`);
   }
 
   public update(workspace: Workspace) {
-    this.apiService
-      .put(`/workspaces/${workspace.id}`, { body: workspace })
-      .subscribe((response) => {
-        console.log(response);
-      });
+    return this.apiService.patch(`/workspaces/${workspace.id}`, { body: workspace });
+  }
+
+  public delete(id: number) {
+    return this.apiService.delete(`/workspaces/${id}`);
   }
 }

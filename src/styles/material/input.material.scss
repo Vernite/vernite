@@ -1,8 +1,5 @@
 mat-form-field.mat-form-field-appearance-outline {
-  input::placeholder {
-    color: var(--color-input-placeholder);
-  }
-
+  // default styling
   input {
     caret-color: var(--color-text);
     color: var(--color-text);
@@ -18,42 +15,27 @@ mat-form-field.mat-form-field-appearance-outline {
     }
   }
 
-  .mat-form-field-label-wrapper {
-    mat-label {
-      color: var(--color-text);
-    }
-
-    .mat-form-field-required-marker {
-      color: var(--color-text);
-    }
-  }
-
-  &.without-floating-label {
-    .mat-form-field-infix {
-      border-top-width: 5px;
-    }
-  }
-
-  &.mat-focused {
-    .mat-form-field-label-wrapper {
-      mat-label {
-        color: var(--color-input-label-focused);
-      }
-    }
+  .mat-form-field-flex {
+    padding: 0 1.1rem;
+    cursor: text;
 
     .mat-form-field-outline > * {
-      border-color: var(--color-input-border-focus);
-    }
-  }
+      position: relative;
+      background-color: var(--color-input-background);
 
-  .mat-form-field-flex:hover {
-    .mat-form-field-outline-thick {
-      color: var(--color-input-background);
+      &::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: var(--color-input-background-hover);
+        content: '';
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+      }
     }
-  }
-
-  .mat-form-field-flex {
-    cursor: text;
 
     .mat-form-field-outline-thick {
       > * {
@@ -70,6 +52,66 @@ mat-form-field.mat-form-field-appearance-outline {
 
       .mat-form-field-outline-end {
         border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      }
+    }
+  }
+
+  // Labels
+  .mat-form-field-label-wrapper {
+    mat-label {
+      color: var(--color-text);
+    }
+
+    .mat-form-field-required-marker {
+      color: var(--color-text);
+    }
+  }
+
+  &.without-floating-label {
+    .mat-form-field-infix {
+      border-top-width: 5px;
+    }
+  }
+
+  // Hint and error
+  .mat-form-field-subscript-wrapper {
+    padding: 0;
+  }
+
+  // Placeholder
+  input::placeholder {
+    color: var(--color-input-placeholder);
+  }
+
+  // Invalid value styling
+  &.ng-touched.ng-invalid {
+    .mat-form-field-outline > * {
+      border-color: var(--color-input-error);
+    }
+  }
+
+  // focused styling
+  &.mat-primary.mat-focused {
+    .mat-form-field-label-wrapper {
+      mat-label {
+        color: var(--color-input-label-focused);
+      }
+    }
+
+    .mat-form-field-outline > .mat-form-field-outline-gap {
+      border-top-color: transparent;
+    }
+
+    .mat-form-field-outline > * {
+      border-color: var(--color-input-border-focus);
+    }
+  }
+
+  // hover styling
+  .mat-form-field-flex:hover {
+    .mat-form-field-outline-thick > * {
+      &::before {
+        opacity: 0.3;
       }
     }
   }

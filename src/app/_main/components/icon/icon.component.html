@@ -1,0 +1,11 @@
+<ng-container [ngSwitch]="prefix">
+  <ng-container *ngSwitchCase="'fas'">
+    <fa-icon [icon]="iconDefinition" [ngStyle]="style"></fa-icon>
+  </ng-container>
+  <ng-container *ngSwitchCase="'mat'">
+    <mat-icon [ngStyle]="style">{{ snakeCaseName }}</mat-icon>
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    <mat-icon [ngStyle]="style">question_mark</mat-icon>
+  </ng-container>
+</ng-container>
