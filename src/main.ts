@@ -1,10 +1,9 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { createServer } from 'miragejs';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import { workspacesMock, workspacesSeed } from './mocks/workspaces.mocks';
+import { initMocks } from './mocks/_main.mocks';
 
 if (environment.production) {
   enableProdMode();
@@ -12,15 +11,9 @@ if (environment.production) {
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
+  .then((ref) => {
+    (window as any)['ngRef'] = ref;
+  })
   .catch((err) => console.error(err));
 
-createServer({
-  seeds(server) {
-    workspacesSeed(server);
-  },
-  routes() {
-    this.urlPrefix = environment.apiURL;
-
-    workspacesMock(this);
-  },
-});
+initMocks();

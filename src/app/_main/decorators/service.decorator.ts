@@ -1,9 +1,21 @@
+import { environment } from 'src/environments/environment';
+
+/**
+ * Decorator to mark class as a service and store theirs instances in global variable.
+ */
 export function Service() {
   return function decorator(target: any) {
-    if (!(window as any).SERVICES) {
-      (window as any).SERVICES = [];
-    }
+    if (environment.production) return;
 
-    (window as any).SERVICES.push(target);
+    setTimeout(() => {
+      const WINDOW = window as any;
+      const ngRef = WINDOW.ngRef;
+
+      if (!WINDOW.SERVICES) {
+        WINDOW.SERVICES = [];
+      }
+
+      WINDOW.SERVICES.push(ngRef.get(target));
+    });
   };
 }

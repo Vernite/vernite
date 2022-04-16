@@ -1,5 +1,4 @@
 import { AbstractControl, FormControl, NgControl } from '@angular/forms';
-import { has } from 'lodash-es';
 import { emailValidator } from '../validators/email.validator';
 import { ControlAccessor } from './control-accessor.class';
 

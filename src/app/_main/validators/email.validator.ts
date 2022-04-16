@@ -1,6 +1,10 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 import { ValidationError } from '../interfaces/validation-error.interface';
 
+/**
+ * Validator to check if email is valid
+ * @returns {ValidatorFn}
+ */
 export function emailValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationError | null => {
     if (

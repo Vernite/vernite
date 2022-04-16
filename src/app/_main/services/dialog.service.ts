@@ -2,8 +2,10 @@ import { ThisReceiver } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { filter } from 'rxjs';
+import { Service } from '../decorators/service.decorator';
 import { AlertDialog, AlertDialogData } from '../dialogs/alert/alert.dialog';
 
+@Service()
 @Injectable({
   providedIn: 'root',
 })

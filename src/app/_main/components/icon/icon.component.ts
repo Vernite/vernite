@@ -1,9 +1,7 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
 import { Utils } from '../../classes/utils.class';
-import snakeCase from 'lodash-es/snakeCase';
 import { faQuestion, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { isString } from 'lodash-es';
 
 @Component({
   selector: 'app-icon',
@@ -16,7 +14,7 @@ export class IconComponent {
   @Input() set icon(value: string | IconDefinition) {
     this._icon = value;
 
-    if (isString(value)) {
+    if (typeof value === 'string') {
       const splitIndex = Utils.regexIndexOf(value, /[A-Z]/);
 
       this.prefix = value.substring(0, splitIndex) as IconPrefix;
@@ -39,7 +37,7 @@ export class IconComponent {
   }
 
   public get iconDefinition(): IconDefinition {
-    if (isString(this._icon)) {
+    if (typeof this._icon === 'string') {
       return faQuestion;
     }
     return this._icon as IconDefinition;
@@ -60,7 +58,7 @@ export class IconComponent {
   public name: IconName = 'question';
 
   public get snakeCaseName(): IconName {
-    return snakeCase(this.name) as IconName;
+    return Utils.snakeCase(this.name) as IconName;
   }
 
   constructor() {}

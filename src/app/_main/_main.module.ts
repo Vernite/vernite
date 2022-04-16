@@ -22,10 +22,10 @@ import { ButtonComponent } from './components/button/button.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AlertDialog } from './dialogs/alert/alert.dialog';
 import { IconComponent } from './components/icon/icon.component';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FocusInitialDirective } from './directives/focus-initial.directive';
 import { HttpClientModule } from '@angular/common/http';
+import { DialogService } from './services/dialog.service';
+import { ApiService } from './services/api.service';
 
 /**
  * Main module configuration object
@@ -85,6 +85,7 @@ const ngModuleConfig = {
     IconComponent,
     FocusInitialDirective,
   ],
+  providers: [DialogService, ApiService],
 };
 
 /**
@@ -105,5 +106,6 @@ const ngModuleConfig = {
   imports: [...ngModuleConfig.imports, ...ngModuleConfig.importExports],
   declarations: [...ngModuleConfig.declarations, ...ngModuleConfig.exportDeclarations],
   exports: [...ngModuleConfig.importExports, ...ngModuleConfig.exportDeclarations],
+  providers: [...ngModuleConfig.providers],
 })
 export class MainModule {}
