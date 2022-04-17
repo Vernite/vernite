@@ -12,7 +12,7 @@
     "analyze": "webpack-bundle-analyzer dist/workflow/en-US/stats.json",
     "lint": "ng lint",
     "test": "ng test",
-    "build:test": "ng test --watch=false --code-coverage",
+    "build:test": "ng test --watch=false --code-coverage --browsers=ChromeHeadless",
     "build:badges": "node badge-generator.js",
     "e2e": "ng e2e"
   },
