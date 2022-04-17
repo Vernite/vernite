@@ -23,7 +23,7 @@ export class Utils {
     return inputString
       .split('')
       .map((character, index) => {
-        if (character == character.toUpperCase()) {
+        if (Utils.isLetter(character) && character == character.toUpperCase()) {
           if (index > 0) {
             return '_' + character.toLowerCase();
           } else {
@@ -34,5 +34,30 @@ export class Utils {
         }
       })
       .join('');
+  }
+
+  /**
+   * Check if object has all the properties from array
+   * @param object Object to check
+   * @param keys keys to search for
+   * @returns true if object has all of the specified properties, false otherwise.
+   */
+  public static has(object: any, keys: string[]) {
+    for (const key of keys) {
+      if (!object.hasOwnProperty(key)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * Checks if passed character is a letter
+   * @param char Character to check
+   * @returns
+   */
+  public static isLetter(char: String) {
+    if (char.length > 1) return false;
+    return (char >= 'A' && char <= 'Z') || (char >= 'a' && char <= 'z');
   }
 }

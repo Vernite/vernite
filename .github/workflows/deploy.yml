@@ -17,7 +17,8 @@ jobs:
           yarn install
           yarn build
           yarn build:docs
-          mv documentation dist/workflow/docs
+          yarn build:test
+          yarn build:badges
       - uses: wlixcc/SFTP-Deploy-Action@v1.0
         with:
           username: 'frontend'
