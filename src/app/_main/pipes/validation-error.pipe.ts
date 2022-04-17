@@ -1,5 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+/**
+ * Pipe to transform validation errors to a human readable string
+ */
 @Pipe({
   name: 'validationError',
 })

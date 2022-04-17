@@ -2,6 +2,9 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+/**
+ * Global environment configuration object, replaced in configurations other than development. Stores build specific data.
+ */
 export const environment = {
   production: false,
   apiURL: 'https://workflow.adiantek.ovh/api',

@@ -3,6 +3,9 @@ import { CreateWorkspacePage } from './pages/create-workspace/create-workspace.p
 import { EditWorkspacePage } from './pages/edit-workspace/edit-workspace.page';
 import { WorkspacesListPage } from './pages/workspaces-list/workspaces-list.page';
 
+/**
+ * Dashboard routes list
+ */
 const routes: Routes = [
   {
     path: '',
@@ -39,4 +42,7 @@ const routes: Routes = [
   },
 ];
 
+/**
+ * Dashboard routes module
+ */
 export const DashboardRoutes = RouterModule.forChild(routes);

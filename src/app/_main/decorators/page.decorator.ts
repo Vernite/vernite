@@ -1,7 +1,6 @@
 /**
  * Decorator to mark component or directive as a page.
  *
- * @example
  * ```typescript
  * (@)Page()
  * (@)Component({

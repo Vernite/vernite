@@ -7,6 +7,9 @@ import {
   platformBrowserDynamicTesting,
 } from '@angular/platform-browser-dynamic/testing';
 
+/**
+ * Context builder form karma tests
+ */
 declare const require: {
   context(
     path: string,
@@ -22,6 +25,7 @@ declare const require: {
 getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 
 // Then we find all the tests.
+/** Context for searching for tests */
 const context = require.context('../', true, /\.spec\.ts$/);
 // And load the modules.
 context.keys().map(context);

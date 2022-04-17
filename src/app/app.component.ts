@@ -1,19 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from './_main/services/api.service';
+import { Component } from '@angular/core';
 
 /**
- * Main Component which contains redirects to submodules
+ * Main Component with basic layout and main router outlet
  */
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  title = 'workflow';
-  current_language = $localize`english`;
-
-  constructor(private apiService: ApiService) {}
-
-  ngOnInit(): void {}
+export class AppComponent {
+  /**
+   * Title of the page
+   */
+  public title = 'workflow';
 }

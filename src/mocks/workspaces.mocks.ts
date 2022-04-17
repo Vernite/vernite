@@ -1,12 +1,20 @@
 import { Server } from 'miragejs/server';
 import { NO_CONTENT_PROVIDED, SUCCESS } from './helpers/response.mock.helper';
 
+/**
+ * Function to seed data into the mocking server
+ * @param server Miragejs server
+ */
 export function workspacesSeed(server: Server) {
   server.db.loadData({
     workspace: [{ name: 'Workspace 1' }, { name: 'Workspace 2' }, { name: 'Workspace 3' }],
   });
 }
 
+/**
+ * Function to create mocking routes for workspaces.
+ * @param server Miragejs server
+ */
 export function workspacesMock(server: Server) {
   server.get('/workspaces', (schema) => {
     return schema.db['workspace'];

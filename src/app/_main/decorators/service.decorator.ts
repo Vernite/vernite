@@ -11,6 +11,8 @@ export function Service() {
       const WINDOW = window as any;
       const ngRef = WINDOW.ngRef;
 
+      if (!ngRef) return;
+
       if (!WINDOW.SERVICES) {
         WINDOW.SERVICES = [];
       }
