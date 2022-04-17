@@ -2,7 +2,7 @@
 const { makeBadge } = require('badge-maker');
 const testsCoverageSummary = require('./coverage/workflow/coverage-summary.json');
 const testsResults = require('./coverage/karma-result.json');
-const { readFileSync, writeFileSync } = require('fs');
+const { readFileSync, writeFileSync, existsSync, mkdirSync } = require('fs');
 
 const colorFromCoverage = (coverage) => {
   if (coverage < 50) {
@@ -27,8 +27,12 @@ const getTestsResults = () => {
   return Number(testsResults.summary.failed) > 0 ? 0 : 100;
 };
 
+if (!existsSync('./dist')) mkdirSync('./dist');
+if (!existsSync('./dist/workflow')) mkdirSync('./dist/workflow');
+if (!existsSync('./dist/workflow/badges')) mkdirSync('./dist/workflow/badges');
+
 writeFileSync(
-  './coverage/badge-coverage.svg',
+  './dist/workflow/badges/badge-coverage.svg',
   makeBadge({
     label: 'coverage',
     color: colorFromCoverage(getTestsCoverage()),
@@ -37,7 +41,7 @@ writeFileSync(
 );
 
 writeFileSync(
-  './coverage/badge-documentation.svg',
+  './dist/workflow/badges/badge-documentation.svg',
   makeBadge({
     label: 'documentation',
     color: colorFromCoverage(getDocumentationCoverage()),
@@ -46,7 +50,7 @@ writeFileSync(
 );
 
 writeFileSync(
-  './coverage/badge-tests-result.svg',
+  './dist/workflow/badges/badge-tests-result.svg',
   makeBadge({
     label: 'tests',
     color: colorFromCoverage(getTestsResults()),
