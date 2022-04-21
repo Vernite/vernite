@@ -13,30 +13,25 @@ const routes: Routes = [
     component: WorkspacesListPage,
   },
   {
-    path: 'workspaces',
+    path: 'create',
+    component: CreateWorkspacePage,
+  },
+  {
+    path: ':workspaceId',
     children: [
+      {
+        path: 'edit',
+        component: EditWorkspacePage,
+      },
       {
         path: '',
         pathMatch: 'full',
-        component: WorkspacesListPage,
+        // Should show projects list
+        redirectTo: 'edit',
       },
       {
-        path: 'create',
-        component: CreateWorkspacePage,
-      },
-      {
-        path: ':id',
-        children: [
-          {
-            path: 'edit',
-            component: EditWorkspacePage,
-          },
-          {
-            path: '',
-            pathMatch: 'full',
-            redirectTo: 'edit',
-          },
-        ],
+        path: ':projectId',
+        loadChildren: () => import('../tasks/tasks.module').then((m) => m.TasksModule),
       },
     ],
   },
