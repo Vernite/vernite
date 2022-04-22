@@ -16,4 +16,4 @@ platformBrowserDynamic()
   })
   .catch((err) => console.error(err));
 
-initMocks();
+// initMocks();

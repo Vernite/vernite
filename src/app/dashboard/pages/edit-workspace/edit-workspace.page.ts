@@ -62,6 +62,7 @@ export class EditWorkspacePage implements OnDestroy {
    * Otherwise, displays an error message.
    */
   public submitUpdate() {
+    if (!this.updateSubscription?.closed && this.updateSubscription) return;
     this.form.markAllAsTouched();
     this.form.updateValueAndValidity();
     if (this.form.invalid) return;

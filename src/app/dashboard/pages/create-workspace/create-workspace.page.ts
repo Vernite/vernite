@@ -40,6 +40,7 @@ export class CreateWorkspacePage {
    * Otherwise, displays an error message.
    */
   public submitCreate(): void {
+    if (!this.createSubscription?.closed && this.createSubscription) return;
     this.form.markAllAsTouched();
     this.form.updateValueAndValidity();
     if (this.form.invalid) return;
