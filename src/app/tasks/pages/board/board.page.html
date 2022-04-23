@@ -1,3 +1,10 @@
-<p>
-  board works!
-</p>
+<div class="board" cdkDropListGroup>
+  <div *ngFor="let column of columns | async" class="column">
+    <div class="column-header">
+      <h3>{{column.name}}</h3>
+    </div>
+    <div class="column-content" [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event)" cdkDropList>
+      <app-board-task *ngFor="let task of column.tasks" class="task" [task]="task" cdkDrag></app-board-task>
+    </div>
+  </div>
+</div>

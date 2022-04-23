@@ -45,7 +45,7 @@ export class CreateWorkspacePage {
     if (this.form.invalid) return;
 
     this.createSubscription = this.workspaceService.create(this.form.value).subscribe(() => {
-      this.router.navigate(['/workspaces']);
+      this.router.navigate(['/']);
     });
   }
 }
