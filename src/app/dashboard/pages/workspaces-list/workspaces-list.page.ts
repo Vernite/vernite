@@ -85,7 +85,7 @@ export class WorkspacesListPage implements OnInit, OnDestroy {
    * @param workspace Workspace to edit
    */
   editWorkspace(workspace: Workspace) {
-    this.router.navigate(['/workspaces', workspace.id, 'edit']);
+    this.router.navigate(['/', workspace.id, 'edit']);
   }
 
   /**

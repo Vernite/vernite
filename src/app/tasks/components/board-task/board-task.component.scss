@@ -1,0 +1,58 @@
+@import '../../../../styles/typography';
+
+:host {
+  display: block;
+  cursor: move;
+}
+
+.task {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #444;
+  border-radius: var(--border-radius);
+
+  .top-section {
+    display: flex;
+
+    > * {
+      width: 50%;
+    }
+
+    .assignees {
+      .assignee {
+        $size: 32px;
+
+        @include typo-heading-5;
+
+        display: flex;
+        width: #{$size};
+        height: #{$size};
+        align-items: center;
+        justify-content: center;
+        background-color: #0a95d0;
+        border-radius: #{$size / 2};
+        color: var(--color-text);
+      }
+    }
+
+    .deadline {
+      color: var(--color-text);
+
+      .title {
+        @include typo-body;
+      }
+
+      .value {
+        @include typo-title;
+      }
+    }
+  }
+
+  .name {
+    @include typo-body;
+
+    color: var(--color-text);
+  }
+}

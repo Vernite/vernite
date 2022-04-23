@@ -42,9 +42,9 @@ export class EditWorkspacePage implements OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
   ) {
-    const { id } = this.activatedRoute.snapshot.params;
+    const { workspaceId } = this.activatedRoute.snapshot.params;
 
-    this.loadWorkspace(id);
+    this.loadWorkspace(workspaceId);
   }
 
   /**
@@ -68,7 +68,7 @@ export class EditWorkspacePage implements OnDestroy {
     if (this.form.invalid) return;
 
     this.updateSubscription = this.workspaceService.update(this.form.value).subscribe(() => {
-      this.router.navigate(['/workspaces']);
+      this.router.navigate(['/']);
     });
   }
 
