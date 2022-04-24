@@ -23,6 +23,8 @@ export class WorkspaceService {
    * @returns Request observable, which completes when request is finished
    */
   public get(id: number): Observable<Workspace> {
+    console.log('GET');
+
     const userId = this.userService.userId;
     return this.apiService.get(`/user/${userId}/workspace/${id}/`);
   }

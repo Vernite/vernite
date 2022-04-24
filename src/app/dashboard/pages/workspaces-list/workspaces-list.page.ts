@@ -88,6 +88,10 @@ export class WorkspacesListPage implements OnInit, OnDestroy {
     this.router.navigate(['/', workspace.id, 'edit']);
   }
 
+  openWorkspace(workspace: Workspace) {
+    this.router.navigate(['/', workspace.id]);
+  }
+
   /**
    * Lifecycle hook to unsubscribe from the workspace list subscription.
    */

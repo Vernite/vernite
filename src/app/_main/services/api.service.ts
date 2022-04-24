@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { RequestOptions } from '../interfaces/request-options.interface';
 import { Service } from '../decorators/service.decorator';
+import { from, Observable, of, Subject, switchMap } from 'rxjs';
 
 /**
  * Service to access the API
@@ -33,10 +34,18 @@ export class ApiService {
    * @returns Request observable, which completes when request is finished
    */
   public request(method: string, url: string, options?: RequestOptions) {
-    return this.httpClient.request(method, this.apiURL + url, {
-      responseType: 'json',
-      ...options,
-    });
+    const mappedRequest = new Subject<any>();
+
+    this.httpClient
+      .request(method, this.apiURL + url, {
+        responseType: 'json',
+        ...options,
+      })
+      .subscribe((response) => {
+        return mappedRequest.next(response);
+      });
+
+    return mappedRequest;
   }
 
   /**

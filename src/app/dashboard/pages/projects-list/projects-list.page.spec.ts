@@ -3,20 +3,23 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { BoardTaskComponent } from './board-task.component';
+import { ProjectsListPage } from './projects-list.page';
+import { MainModule } from 'src/app/_main/_main.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
-describe('BoardTaskComponent', () => {
-  let component: BoardTaskComponent;
-  let fixture: ComponentFixture<BoardTaskComponent>;
+describe('ProjectsListComponent', () => {
+  let component: ProjectsListPage;
+  let fixture: ComponentFixture<ProjectsListPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BoardTaskComponent],
+      imports: [MainModule, RouterTestingModule],
+      declarations: [ProjectsListPage],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BoardTaskComponent);
+    fixture = TestBed.createComponent(ProjectsListPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

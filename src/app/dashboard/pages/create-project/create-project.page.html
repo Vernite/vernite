@@ -1,0 +1,6 @@
+<form [formGroup]="form" (submit)="submitCreate()">
+  <app-input formControlName="name" type="text" placeholder="New project" floatingLabel="Project name"
+    i18n-floatingLabel i18n-placeholder></app-input>
+  <app-button variant="primary" [pending]="createSubscription && !createSubscription.closed" i18n>Save
+  </app-button>
+</form>

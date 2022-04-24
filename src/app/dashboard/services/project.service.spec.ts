@@ -2,17 +2,17 @@
 
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed, async, inject } from '@angular/core/testing';
-import { TaskService } from './task.service';
+import { ProjectService } from './project.service';
 
-describe('Service: Task', () => {
+describe('Service: Project', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      providers: [TaskService],
+      providers: [ProjectService],
     });
   });
 
-  it('should ...', inject([TaskService], (service: TaskService) => {
+  it('should ...', inject([ProjectService], (service: ProjectService) => {
     expect(service).toBeTruthy();
   }));
 });
