@@ -1,6 +1,6 @@
 <!-- Page header -->
 <section class="flex justify-between items-center">
-  <h2 class="typo-heading-5" i18n>{{ (workspace$ | async)?.name }}</h2>
+  <h2 class="typo-heading-5">{{ (workspace$ | async)?.name }}</h2>
   <app-button variant="primary" routerLink="create" [icon]="faPlus" i18n>
     New project
   </app-button>

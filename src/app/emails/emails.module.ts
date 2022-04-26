@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EmailsRoutes } from './emails.routing';
+import { EmailsRoutingModule } from './emails.routing';
 
 @NgModule({
-  imports: [CommonModule, EmailsRoutes],
+  imports: [CommonModule, EmailsRoutingModule],
   declarations: [],
 })
 export class EmailsModule {}

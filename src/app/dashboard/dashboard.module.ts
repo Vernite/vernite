@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardRoutes } from './dashboard.routing';
+import { DashboardRoutingModule } from './dashboard.routing';
 import { CreateWorkspacePage } from './pages/create-workspace/create-workspace.page';
 import { MainModule } from '../_main/_main.module';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +11,7 @@ import { CreateProjectPage } from './pages/create-project/create-project.page';
 import { EditProjectPage } from './pages/edit-project/edit-project.page';
 
 @NgModule({
-  imports: [CommonModule, MainModule, ReactiveFormsModule, DashboardRoutes],
+  imports: [CommonModule, MainModule, ReactiveFormsModule, DashboardRoutingModule],
   declarations: [
     CreateWorkspacePage,
     WorkspacesListPage,
