@@ -32,7 +32,7 @@
         align-items: center;
         justify-content: center;
         background-color: #0a95d0;
-        border-radius: #{$size / 2};
+        border-radius: calc($size / 2);
         color: var(--color-text);
       }
     }

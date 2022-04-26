@@ -15,7 +15,7 @@
         <target state="signed-off">To pole jest wymagane</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/validators/required.validator.ts</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9008042675195737518" datatype="html">
@@ -36,6 +36,142 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/create-workspace/create-workspace.page.html</context>
           <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8540729217579212886" datatype="html">
+        <source>New project</source>
+        <target state="signed-off">Nowy projekt</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/create-project/create-project.page.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/edit-project/edit-project.page.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2651912264744301649" datatype="html">
+        <source>Project name</source>
+        <target state="signed-off">Nazwa projektu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/create-project/create-project.page.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/edit-project/edit-project.page.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="662506850593821474" datatype="html">
+        <source>Save</source>
+        <target state="signed-off">Zapisz</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/create-project/create-project.page.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/create-workspace/create-workspace.page.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/edit-project/edit-project.page.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/edit-workspace/edit-workspace.page.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2291346166288082382" datatype="html">
+        <source>New project</source>
+        <target state="signed-off">Nowy projekt</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8778616811237742446" datatype="html">
+        <source>Name</source>
+        <target state="signed-off">Nazwa</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2301043202098268314" datatype="html">
+        <source>Statistics</source>
+        <target state="signed-off">Statystyki</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8697700456302772961" datatype="html">
+        <source>Last update</source>
+        <target state="signed-off">Ostatnia aktualizacja</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1196063204965083742" datatype="html">
+        <source>Workspaces</source>
+        <target state="translated">Przestrzenie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8778336716895792712" datatype="html">
+        <source>New workspace</source>
+        <target state="translated">Nowa przestrzeń</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7366547460347675809" datatype="html">
+        <source>Delete workspace</source>
+        <target state="translated">Usuń przestrzeń</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.ts</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7633910732080588042" datatype="html">
+        <source>Are you sure you want to delete this workspace?</source>
+        <target state="translated">Czy na pewno chcesz usunąć tą przestrzeń?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.ts</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7022070615528435141" datatype="html">
+        <source>Delete</source>
+        <target state="signed-off">Usuń</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.ts</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2159130950882492111" datatype="html">
+        <source>Cancel</source>
+        <target state="signed-off">Anuluj</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.ts</context>
+          <context context-type="linenumber">73</context>
         </context-group>
       </trans-unit>
     </body>

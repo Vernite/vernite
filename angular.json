@@ -31,8 +31,8 @@
           "es-ES": {
             "translation": "src/locales/messages.es-ES.xlf"
           },
-          "uk-UK": {
-            "translation": "src/locales/messages.uk-UK.xlf"
+          "uk-UA": {
+            "translation": "src/locales/messages.uk-UA.xlf"
           }
         }
       },

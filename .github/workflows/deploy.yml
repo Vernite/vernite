@@ -19,6 +19,7 @@ jobs:
           yarn build:docs
           yarn build:test
           yarn build:badges
+          cp src/redirect.html dist/workflow/index.html
       - uses: wlixcc/SFTP-Deploy-Action@v1.0
         with:
           username: 'frontend'

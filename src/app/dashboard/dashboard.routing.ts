@@ -5,6 +5,7 @@ import { WorkspacesListPage } from './pages/workspaces-list/workspaces-list.page
 import { ProjectsListPage } from './pages/projects-list/projects-list.page';
 import { CreateProjectPage } from './pages/create-project/create-project.page';
 import { EditProjectPage } from './pages/edit-project/edit-project.page';
+import { NgModule } from '@angular/core';
 
 /**
  * Dashboard routes list
@@ -50,4 +51,8 @@ const routes: Routes = [
 /**
  * Dashboard routes module
  */
-export const DashboardRoutes = RouterModule.forChild(routes);
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class DashboardRoutingModule {}

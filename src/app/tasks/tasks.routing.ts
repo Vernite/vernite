@@ -1,3 +1,4 @@
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BoardPage } from './pages/board/board.page';
 
@@ -19,4 +20,8 @@ const routes: Routes = [
 /**
  * Tasks routes module
  */
-export const TasksRoutes = RouterModule.forChild(routes);
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class TasksRoutingModule {}
