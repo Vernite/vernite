@@ -9,7 +9,7 @@
     const language = navigator.language || navigator.userLanguage || 'en-US';
     if (
       ['de-DE', 'en-GB', 'en-US', 'es-ES', 'it-IT', 'pl-PL', 'uk-UA']
-        .contains(language)) {
+        .includes(language)) {
       window.location = '/' + language;
     } else {
       window.location = '/en-US';
