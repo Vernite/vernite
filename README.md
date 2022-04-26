@@ -59,7 +59,7 @@ The build artifacts will be stored in the `dist/` directory.
 
 To execute the unit tests via `Karma` run:
 ```
-yarn test
+yarn start:test
 ```
 <p><br/></p>
 
@@ -74,8 +74,12 @@ yarn e2e
 ## Building documentation
 To build documentation via `compodoc` run:
 ```
-yarn docs
+yarn start:docs
 ```
+
+## API Documentation and repository
+Endpoints documentation is shared using Swagger library [here](https://workflow.adiantek.ovh/api/swagger-ui/index.html#/). The repository is in other GitHub account [here](https://github.com/SamPanDonte/workflow).
+
 
 ## Recommended Versions
 node - `16.13.0`<br>

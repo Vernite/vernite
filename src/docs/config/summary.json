@@ -1,6 +1,14 @@
 [
   {
+    "title": "Architecture",
+    "file": "../pages/architecture/architecture.md"
+  },
+  {
     "title": "Localization",
     "file": "../pages/localization/localization.md"
+  },
+  {
+    "title": "Continuos integration",
+    "file": "../pages/integration/integration.md"
   }
 ]
