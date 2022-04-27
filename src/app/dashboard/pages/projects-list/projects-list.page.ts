@@ -11,7 +11,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './projects-list.page.html',
   styleUrls: ['./projects-list.page.scss'],
 })
-export class ProjectsListPage implements OnInit {
+export class ProjectsListPage {
   workspace$: Observable<Workspace>;
   projects$: Observable<Project[]>;
 
@@ -43,6 +43,4 @@ export class ProjectsListPage implements OnInit {
   }
 
   public deleteProject(project: Project) {}
-
-  ngOnInit() {}
 }

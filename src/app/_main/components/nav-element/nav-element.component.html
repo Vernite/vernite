@@ -3,14 +3,20 @@
     <fa-icon></fa-icon>
     <ng-content></ng-content>
   </div>
-  <div class="open-below">
-    <fa-icon></fa-icon>
+  <div class="icons">
+    <div class="open-below" (click)="toggleNavElement()">
+      <app-icon [icon]="faAngleDown" size="16px"></app-icon>
+    </div>
+    <div class="options">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <ng-content select=".options"></ng-content>
+      </mat-menu>
+    </div>
   </div>
-  <div class="options">
-    <fa-icon></fa-icon>
-  </div>
-  <ng-content select=".options"></ng-content>
 </section>
-<div class="list">
+<div class="list" [class.active]="active">
   <ng-content select=".open-below"></ng-content>
 </div>

@@ -12,6 +12,7 @@ module.exports = function (config) {
       require('karma-coverage'),
       require('@angular-devkit/build-angular/plugins/karma'),
       require('karma-structured-json-reporter'),
+      require('karma-firefox-launcher')
     ],
     client: {
       jasmine: {
@@ -45,7 +46,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome_without_security'],
+    browsers: ['Firefox'],
     singleRun: false,
     restartOnFileChange: true,
     customLaunchers: {

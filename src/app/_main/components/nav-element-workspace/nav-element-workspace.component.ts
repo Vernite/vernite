@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/dashboard/interfaces/project.interface';
 import { Workspace } from 'src/app/dashboard/interfaces/workspace.interface';
 
@@ -8,13 +9,31 @@ import { Workspace } from 'src/app/dashboard/interfaces/workspace.interface';
   templateUrl: './nav-element-workspace.component.html',
   styleUrls: ['./nav-element-workspace.component.scss'],
 })
-export class NavElementWorkspaceComponent implements OnInit {
+export class NavElementWorkspaceComponent {
   @Input()
   public routerLink?: string;
 
-  // public projectList?: Observable<Project[]>;
   @Input()
-  public workspace!: Workspace;
+  public workspace: Workspace = { id: -1 } as unknown as Workspace;
+
+  faAngleDown = faAngleDown;
+  public activeWorkspace: boolean = false;
+
+  constructor(private router: Router) {}
+
+  public openWorkspace() {
+    this.activeWorkspace = true;
+  }
+  public closeWorkspace() {
+    this.activeWorkspace = false;
+  }
+  public toggleWorkspace() {
+    if (!this.activeWorkspace) {
+      this.openWorkspace();
+    } else {
+      this.closeWorkspace();
+    }
+  }
 
   routeToWorkspace() {
     this.router
@@ -28,7 +47,13 @@ export class NavElementWorkspaceComponent implements OnInit {
       .then(() => this.router.navigate(['/', this.workspace.id, project.id]));
   }
 
-  constructor(private router: Router) {}
+  createProject() {
+    this.router.navigate(['/', this.workspace.id, 'create']);
+  }
 
-  ngOnInit() {}
+  editWorkspace() {
+    this.router.navigate(['/', this.workspace.id, 'edit']);
+  }
+
+  deleteWorkspace() {}
 }

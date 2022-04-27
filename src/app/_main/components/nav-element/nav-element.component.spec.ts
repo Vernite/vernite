@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { NavElementComponent } from './nav-element.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('NavElementComponent', () => {
   let component: NavElementComponent;
@@ -11,6 +12,7 @@ describe('NavElementComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       declarations: [NavElementComponent],
     }).compileComponents();
   }));

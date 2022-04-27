@@ -6,11 +6,9 @@ import { Task } from '../../interfaces/task.interface';
   templateUrl: './board-task.component.html',
   styleUrls: ['./board-task.component.scss'],
 })
-export class BoardTaskComponent implements OnInit {
+export class BoardTaskComponent {
   @Input()
   public task!: Task;
 
   constructor() {}
-
-  ngOnInit() {}
 }

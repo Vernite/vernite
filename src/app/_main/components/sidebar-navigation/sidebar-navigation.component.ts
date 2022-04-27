@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { Workspace } from 'src/app/dashboard/interfaces/workspace.interface';
 import { WorkspaceService } from 'src/app/dashboard/services/workspace.service';
@@ -8,15 +9,17 @@ import { WorkspaceService } from 'src/app/dashboard/services/workspace.service';
   templateUrl: './sidebar-navigation.component.html',
   styleUrls: ['./sidebar-navigation.component.scss'],
 })
-export class SidebarNavigationComponent implements OnInit {
+export class SidebarNavigationComponent {
   @Input()
   public icon!: String;
 
   public workspaceList?: Observable<Workspace[]>;
 
-  constructor(private workspaceService: WorkspaceService) {
-    this.workspaceList = this.workspaceService.list();
+  createWorkspace() {
+    this.router.navigate(['/', 'create']);
   }
 
-  ngOnInit() {}
+  constructor(private workspaceService: WorkspaceService, private router: Router) {
+    this.workspaceList = this.workspaceService.list();
+  }
 }

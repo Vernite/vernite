@@ -1,16 +1,54 @@
 @import '../../../../styles/typography';
 
+:host {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
 section {
   @include typo-title;
 
+  display: flex;
   width: 100%;
-  padding: 14px 0 14px 40px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 5px 14px 20px;
   color: var(--color-text);
   cursor: pointer;
+
+  .icons {
+    display: flex;
+    align-items: center;
+
+    .open-below {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+
+      app-icon {
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    .options button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }
 
 .list {
-  display: block;
-  background-color: var(--color-secondary-600);
+  display: none;
+  width: 100%;
   cursor: pointer;
+
+  &.active {
+    display: block;
+    justify-content: center;
+    background-color: var(--color-secondary-600);
+  }
 }

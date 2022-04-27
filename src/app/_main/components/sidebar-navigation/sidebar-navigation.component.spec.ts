@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { SidebarNavigationComponent } from './sidebar-navigation.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('SidebarNavigationComponent', () => {
   let component: SidebarNavigationComponent;
@@ -11,6 +13,7 @@ describe('SidebarNavigationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [RouterTestingModule, HttpClientModule],
       declarations: [SidebarNavigationComponent],
     }).compileComponents();
   }));
