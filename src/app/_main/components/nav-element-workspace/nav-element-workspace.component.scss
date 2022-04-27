@@ -1,0 +1,19 @@
+@import '../../../../styles/typography';
+
+:host {
+  @include typo-title;
+
+  background-color: var(--color-secondary-600);
+}
+
+li {
+  background-color: var(--color-secondary-700);
+}
+
+section {
+  display: block;
+  width: 100%;
+  padding: 14px 0 14px 40px;
+  color: var(--color-text);
+  cursor: pointer;
+}

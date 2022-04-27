@@ -1,0 +1,14 @@
+<section>
+  <div class="logo"></div>
+  <div class="switch-navigation-weidth"></div>
+</section>
+<app-nav-element routerLink="/">Dashboard</app-nav-element>
+<app-nav-element>
+  <div routerLink="/">Workspaces</div>
+  <div class="open-below">
+    <ul>
+      <app-nav-element-workspace *ngFor="let workspace of workspaceList|async" [workspace]="workspace">
+        {{workspace.name}}</app-nav-element-workspace>
+    </ul>
+  </div>
+</app-nav-element>

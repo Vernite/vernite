@@ -1,0 +1,16 @@
+<section>
+  <div [routerLink]="routerLink">
+    <fa-icon></fa-icon>
+    <ng-content></ng-content>
+  </div>
+  <div class="open-below">
+    <fa-icon></fa-icon>
+  </div>
+  <div class="options">
+    <fa-icon></fa-icon>
+  </div>
+  <ng-content select=".options"></ng-content>
+</section>
+<div class="list">
+  <ng-content select=".open-below"></ng-content>
+</div>

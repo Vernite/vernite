@@ -26,6 +26,10 @@ import { FocusInitialDirective } from './directives/focus-initial.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { DialogService } from './services/dialog.service';
 import { ApiService } from './services/api.service';
+import { SidebarNavigationComponent } from './components/sidebar-navigation/sidebar-navigation.component';
+import { NavElementComponent } from './components/nav-element/nav-element.component';
+import { RouterModule } from '@angular/router';
+import { NavElementWorkspaceComponent } from './components/nav-element-workspace/nav-element-workspace.component';
 
 /**
  * Main module configuration object
@@ -39,6 +43,7 @@ const ngModuleConfig = {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RouterModule,
   ],
   importExports: [
     /*=============================================
@@ -84,6 +89,9 @@ const ngModuleConfig = {
     AlertDialog,
     IconComponent,
     FocusInitialDirective,
+    SidebarNavigationComponent,
+    NavElementComponent,
+    NavElementWorkspaceComponent,
   ],
   providers: [DialogService, ApiService],
 };

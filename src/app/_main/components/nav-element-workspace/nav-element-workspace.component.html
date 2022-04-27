@@ -1,0 +1,16 @@
+<section class="open-below">
+  <div class="workspace" (click)="routeToWorkspace()">
+    <ng-content></ng-content>
+  </div>
+  <div class="project">
+    <ul>
+      <li *ngFor="let projectWithPriv of workspace.projectsWithPrivileges"
+        (click)="routeToProject(projectWithPriv.project)">
+        {{projectWithPriv.project.name}}</li>
+    </ul>
+  </div>
+  <div class="options">
+    <fa-icon></fa-icon>
+  </div>
+  <ng-content select=".options"></ng-content>
+</section>
