@@ -9,4 +9,17 @@
     </div>
   </div>
   <div class="name">{{ task?.name }}</div>
+  <div class="options">
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="flex items-center">
+      <app-icon icon="matMoreVert"></app-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <span>Edit task</span>
+      </button>
+      <button mat-menu-item class="important">
+        <span>Delete task</span>
+      </button>
+    </mat-menu>
+  </div>
 </div>
