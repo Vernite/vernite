@@ -30,6 +30,10 @@ section {
       app-icon {
         display: flex;
         justify-content: center;
+
+        &.active {
+          transform: scaleY(-1);
+        }
       }
     }
 
@@ -51,4 +55,8 @@ section {
     justify-content: center;
     background-color: var(--color-secondary-600);
   }
+}
+
+.hidden {
+  visibility: hidden;
 }

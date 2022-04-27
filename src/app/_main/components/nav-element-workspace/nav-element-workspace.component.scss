@@ -31,6 +31,10 @@ li {
       app-icon {
         display: flex;
         justify-content: center;
+
+        &.active {
+          transform: scaleY(-1);
+        }
       }
     }
 
@@ -57,4 +61,8 @@ li {
       padding: 14px 0 14px 40px;
     }
   }
+}
+
+.hidden {
+  visibility: hidden;
 }

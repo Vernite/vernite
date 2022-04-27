@@ -5,6 +5,7 @@ import { DebugElement } from '@angular/core';
 
 import { NavElementWorkspaceComponent } from './nav-element-workspace.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MatMenuModule } from '@angular/material/menu';
 
 describe('NavElementWorkspaceComponent', () => {
   let component: NavElementWorkspaceComponent;
@@ -12,7 +13,7 @@ describe('NavElementWorkspaceComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, MatMenuModule],
       declarations: [NavElementWorkspaceComponent],
     }).compileComponents();
   }));

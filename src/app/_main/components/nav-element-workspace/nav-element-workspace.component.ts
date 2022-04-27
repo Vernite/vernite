@@ -35,6 +35,10 @@ export class NavElementWorkspaceComponent {
     }
   }
 
+  public showArrow(): boolean {
+    return true;
+  }
+
   routeToWorkspace() {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })

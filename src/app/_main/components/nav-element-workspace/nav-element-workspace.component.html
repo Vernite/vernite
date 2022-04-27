@@ -2,8 +2,8 @@
   <div class="workspace" (click)="routeToWorkspace()">
     <ng-content></ng-content>
     <div class="icons">
-      <div class="open-below" (click)="toggleWorkspace()">
-        <app-icon [icon]="faAngleDown" size="16px"></app-icon>
+      <div class="open-below" [class.hidden]="!showArrow()" (click)="toggleWorkspace()">
+        <app-icon [icon]="faAngleDown" size="16px" [class.active]="activeWorkspace"></app-icon>
       </div>
       <div class="options">
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">

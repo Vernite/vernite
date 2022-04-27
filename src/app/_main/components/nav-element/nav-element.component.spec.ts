@@ -5,6 +5,7 @@ import { DebugElement } from '@angular/core';
 
 import { NavElementComponent } from './nav-element.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MatMenuModule } from '@angular/material/menu';
 
 describe('NavElementComponent', () => {
   let component: NavElementComponent;
@@ -12,7 +13,7 @@ describe('NavElementComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, MatMenuModule],
       declarations: [NavElementComponent],
     }).compileComponents();
   }));

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -28,5 +28,13 @@ export class NavElementComponent {
     } else {
       this.closeNavElement();
     }
+  }
+
+  public showOptions(): boolean {
+    return true;
+  }
+
+  public showArrow(): boolean {
+    return true;
   }
 }
