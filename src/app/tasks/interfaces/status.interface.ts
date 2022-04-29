@@ -1,6 +1,7 @@
+import { color } from '../../_main/interfaces/color.interface';
 export interface Status {
   id: number;
   name: string;
-  color: number;
+  color: color;
   final: boolean;
 }

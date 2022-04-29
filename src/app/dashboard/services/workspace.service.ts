@@ -46,7 +46,7 @@ export class WorkspaceService {
    */
   public update(workspace: Workspace): Observable<Workspace> {
     const userId = this.userService.userId;
-    return this.apiService.patch(`/user/${userId}/workspace/${workspace.id}/`, { body: workspace });
+    return this.apiService.put(`/user/${userId}/workspace/${workspace.id}/`, { body: workspace });
   }
 
   /**

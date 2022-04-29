@@ -6,6 +6,9 @@ import { Task } from '../../interfaces/task.interface';
 import { TaskService } from '../../services/task.service';
 import { Observable, Subscription } from 'rxjs';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { StatusService } from '../../services/status.service';
+import { DialogService } from '../../../_main/services/dialog.service';
+import { TaskDialog, TaskDialogData, TaskDialogVariant } from '../../dialogs/task/task.dialog';
 
 @Component({
   selector: 'app-board',
@@ -13,33 +16,33 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./board.page.scss'],
 })
 export class BoardPage implements OnInit, OnDestroy {
-  public columns!: Observable<Status[]>;
+  public statuses!: Observable<Status[]>;
   public faPlus = faPlus;
 
-  private statuses: string[] = [];
+  private statusesList: Status[] = [];
 
-  private columnsSubscription?: Subscription;
-
-  constructor(private activatedRoute: ActivatedRoute, private taskService: TaskService) {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private taskService: TaskService,
+    private statusService: StatusService,
+    private dialogService: DialogService,
+  ) {
     const { workspaceId, projectId } = this.activatedRoute.snapshot.params;
-    console.log({ workspaceId, projectId });
 
-    this.columns = this.taskService.tree();
+    this.statuses = this.statusService.list();
   }
 
   ngOnInit() {
-    this.columnsSubscription = this.columns.subscribe((columns) => {
-      this.statuses = columns.map((column) => column.name);
+    this.statuses.subscribe((statuses) => {
+      this.statusesList = statuses;
     });
   }
 
-  ngOnDestroy() {
-    this.columnsSubscription?.unsubscribe();
-  }
+  ngOnDestroy() {}
 
   drop(event: CdkDragDrop<Task[]>) {
     const index = Number(event.container.element.nativeElement.dataset['index']);
-    const status = this.statuses[index];
+    const status = this.statusesList[index];
 
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -51,5 +54,18 @@ export class BoardPage implements OnInit, OnDestroy {
         event.currentIndex,
       );
     }
+  }
+
+  openNewTaskDialog() {
+    this.dialogService
+      .open(TaskDialog, {
+        variant: TaskDialogVariant.CREATE,
+      } as TaskDialogData)
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.taskService.create(result);
+        }
+      });
   }
 }

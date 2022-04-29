@@ -3,22 +3,20 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { BoardTaskComponent } from './board-task.component';
-import { MatMenuModule } from '@angular/material/menu';
+import { TaskDialog } from './task.dialog';
 
-describe('BoardTaskComponent', () => {
-  let component: BoardTaskComponent;
-  let fixture: ComponentFixture<BoardTaskComponent>;
+describe('TaskComponent', () => {
+  let component: TaskDialog;
+  let fixture: ComponentFixture<TaskDialog>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MatMenuModule],
-      declarations: [BoardTaskComponent],
+      declarations: [TaskDialog],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BoardTaskComponent);
+    fixture = TestBed.createComponent(TaskDialog);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

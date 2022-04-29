@@ -37,7 +37,7 @@ export class TaskService {
    * @returns Request observable with the updated task
    */
   public update(task: Task): Observable<Task> {
-    return this.apiService.patch(`/tasks/${task.id}`, { body: task });
+    return this.apiService.put(`/tasks/${task.id}`, { body: task });
   }
 
   /**
