@@ -84,6 +84,7 @@ export class ControlAccessor implements OnInit, OnDestroy, ControlValueAccessor 
    */
   private checkIfIsRequired(): void {
     if (!this.ngControl.control) return;
+    if (!(this.ngControl as any).control._rawValidators) return;
 
     for (const validator of (this.ngControl as any).control._rawValidators) {
       if (validator.name === 'required') {

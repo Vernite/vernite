@@ -1,29 +1,49 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Column } from '../../interfaces/column.interface';
+import { Status } from '../../interfaces/status.interface';
 import { Task } from '../../interfaces/task.interface';
 import { TaskService } from '../../services/task.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { StatusService } from '../../services/status.service';
+import { DialogService } from '../../../_main/services/dialog.service';
+import { TaskDialog, TaskDialogData, TaskDialogVariant } from '../../dialogs/task/task.dialog';
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.page.html',
   styleUrls: ['./board.page.scss'],
 })
-export class BoardPage implements OnInit {
-  public columns!: Observable<Column<Task>[]>;
+export class BoardPage implements OnInit, OnDestroy {
+  public statuses!: Observable<Status[]>;
+  public faPlus = faPlus;
 
-  constructor(private activatedRoute: ActivatedRoute, private taskService: TaskService) {
+  private statusesList: Status[] = [];
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private taskService: TaskService,
+    private statusService: StatusService,
+    private dialogService: DialogService,
+  ) {
     const { workspaceId, projectId } = this.activatedRoute.snapshot.params;
-    console.log({ workspaceId, projectId });
 
-    this.columns = this.taskService.tree();
+    this.statuses = this.statusService.list();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.statuses.subscribe((statuses) => {
+      this.statusesList = statuses;
+    });
+  }
+
+  ngOnDestroy() {}
 
   drop(event: CdkDragDrop<Task[]>) {
+    const index = Number(event.container.element.nativeElement.dataset['index']);
+    const status = this.statusesList[index];
+
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -34,5 +54,18 @@ export class BoardPage implements OnInit {
         event.currentIndex,
       );
     }
+  }
+
+  openNewTaskDialog() {
+    this.dialogService
+      .open(TaskDialog, {
+        variant: TaskDialogVariant.CREATE,
+      } as TaskDialogData)
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.taskService.create(result);
+        }
+      });
   }
 }

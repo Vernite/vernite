@@ -10,7 +10,19 @@
     padding: 1rem;
 
     .column-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1em;
       color: var(--color-text);
+
+      h3 {
+        margin: 0;
+      }
+
+      app-icon {
+        cursor: pointer;
+      }
     }
 
     .column-content {

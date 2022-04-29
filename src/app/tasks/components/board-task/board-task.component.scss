@@ -6,11 +6,12 @@
 }
 
 .task {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 1rem;
   margin-bottom: 1rem;
-  background-color: #444;
+  background-color: var(--color-board-task-background);
   border-radius: var(--border-radius);
 
   .top-section {
@@ -54,5 +55,11 @@
     @include typo-body;
 
     color: var(--color-text);
+  }
+
+  .options {
+    position: absolute;
+    right: 5px;
+    color: #fff;
   }
 }
