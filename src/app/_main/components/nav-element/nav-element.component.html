@@ -4,7 +4,7 @@
     <ng-content></ng-content>
   </div>
   <div class="icons">
-    <div class="open-below" [class.hidden]="!showArrow()" (click)="toggleNavElement()">
+    <div class="open-below" [class.hidden]="(showArrow$ | async) === false" (click)="toggleNavElement()">
       <app-icon [icon]="faAngleDown" size="16px" [class.active]="active"></app-icon>
     </div>
     <div class="options" [class.hidden]="!showOptions">

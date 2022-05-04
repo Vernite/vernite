@@ -27,6 +27,12 @@ table.cdk-table.mat-table {
       overflow: hidden;
       height: 60px;
 
+      &:hover {
+        td {
+          background-color: var(--color-table-row-hover-background);
+        }
+      }
+
       td {
         @include typo-body;
 
@@ -34,6 +40,7 @@ table.cdk-table.mat-table {
         border: none;
         background-color: var(--color-table-row-background);
         color: var(--color-text);
+        transition: background-color 0.2s ease-in-out;
 
         &:first-child {
           border-radius: var(--border-radius) 0 0 var(--border-radius);
@@ -50,11 +57,6 @@ table.cdk-table.mat-table {
 
         &.clickable-cell {
           cursor: pointer;
-          transition: background-color 0.2s ease-in-out;
-
-          &:hover {
-            background-color: var(--color-table-row-hover-background);
-          }
         }
       }
     }

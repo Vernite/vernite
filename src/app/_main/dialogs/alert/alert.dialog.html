@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{ data.title }}</h1>
+<h1 mat-dialog-title [class.important]="data.variant === AlertDialogVariant.IMPORTANT">{{ data.title }}</h1>
 <div mat-dialog-content>
   <div>{{ data.message }}</div>
 </div>

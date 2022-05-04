@@ -1,12 +1,13 @@
-import { Component, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-nav-element',
   templateUrl: './nav-element.component.html',
   styleUrls: ['./nav-element.component.scss'],
 })
-export class NavElementComponent {
+export class NavElementComponent implements AfterViewInit {
   @Input()
   public routerLink?: string;
 
@@ -14,6 +15,8 @@ export class NavElementComponent {
   public showOptions?: boolean;
 
   public active: boolean = false;
+
+  public showArrow$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @ViewChild('elementList')
   listElement?: ElementRef;
@@ -36,7 +39,9 @@ export class NavElementComponent {
     }
   }
 
-  public showArrow(): boolean {
-    return Boolean(this.listElement?.nativeElement.children.length);
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.showArrow$.next(Boolean(this.listElement?.nativeElement.children.length));
+    });
   }
 }

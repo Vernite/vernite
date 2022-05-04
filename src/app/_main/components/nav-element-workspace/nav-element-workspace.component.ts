@@ -1,6 +1,15 @@
-import { Component, Input, OnInit, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  ElementRef,
+  ViewChild,
+  AfterContentInit,
+  AfterViewInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { BehaviorSubject, delay } from 'rxjs';
 import { Project } from 'src/app/dashboard/interfaces/project.interface';
 import { Workspace } from 'src/app/dashboard/interfaces/workspace.interface';
 import { ProjectService } from 'src/app/dashboard/services/project.service';
@@ -13,7 +22,7 @@ import { DialogService } from '../../services/dialog.service';
   templateUrl: './nav-element-workspace.component.html',
   styleUrls: ['./nav-element-workspace.component.scss'],
 })
-export class NavElementWorkspaceComponent {
+export class NavElementWorkspaceComponent implements AfterViewInit {
   @Input()
   public routerLink?: string;
 
@@ -22,6 +31,8 @@ export class NavElementWorkspaceComponent {
 
   faAngleDown = faAngleDown;
   public activeWorkspace: boolean = false;
+
+  public showArrow$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @ViewChild('elementList')
   listElement?: ElementRef;
@@ -47,8 +58,10 @@ export class NavElementWorkspaceComponent {
     }
   }
 
-  public showArrow(): boolean {
-    return Boolean(this.listElement?.nativeElement.children.length);
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.showArrow$.next(Boolean(this.listElement?.nativeElement.children.length));
+    });
   }
 
   routeToWorkspace() {
