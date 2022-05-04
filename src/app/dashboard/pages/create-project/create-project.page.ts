@@ -53,8 +53,9 @@ export class CreateProjectPage {
     if (this.form.invalid) return;
 
     this.createSubscription = this.projectService.create(this.form.value).subscribe(() => {
-      this.router.navigate([this.workspaceId]);
-      window.location.reload();
+      this.router.navigate([this.workspaceId]).then(() => {
+        window.location.reload();
+      });
     });
   }
 }

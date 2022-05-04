@@ -72,7 +72,7 @@ export class WorkspacesListPage implements OnInit {
       })
       .subscribe(() => {
         this.workspaceService.delete(workspace.id).subscribe(() => {
-          this.loadWorkspaces();
+          // this.loadWorkspaces();
           window.location.reload();
         });
       });
