@@ -2,11 +2,9 @@
   <div class="logo"></div>
   <div class="switch-navigation-weidth"></div>
 </section>
-<app-nav-element [showOptions]="false" routerLink="/">
-  Dashboard
-</app-nav-element>
+<app-nav-element [showOptions]="false" routerLink="/" i18n>Dashboard</app-nav-element>
 <app-nav-element [showOptions]="true">
-  <div routerLink="/">Workspaces</div>
+  <div routerLink="/" i18n>Workspaces</div>
   <div class="open-below">
     <ul>
       <app-nav-element-workspace *ngFor="let workspace of workspaceList|async" [workspace]="workspace">
@@ -16,7 +14,7 @@
   </div>
   <div class="options">
     <button mat-menu-item (click)="createWorkspace()">
-      <span>Create workspace</span>
+      <span i18n>Create workspace</span>
     </button>
   </div>
 </app-nav-element>

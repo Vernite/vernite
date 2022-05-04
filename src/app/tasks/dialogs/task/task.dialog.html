@@ -1,17 +1,14 @@
-<h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.EDIT">Edit task: {{ data.task?.name }}</h1>
-<h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.CREATE">Create new task</h1>
+<h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.EDIT" i18n>Edit task: {{ data.task?.name }}</h1>
+<h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.CREATE" i18n>Create new task</h1>
 <div mat-dialog-content>
   <form (submit)="confirm()" [formGroup]="form">
-    <app-input floatingLabel="Name" placeholder="New task" formControlName="name"></app-input>
-    <app-input floatingLabel="Description" placeholder="Sample description..." formControlName="description">
+    <app-input floatingLabel="Name" placeholder="New task" formControlName="name" i18n-floatingLabel i18n-placeholder></app-input>
+    <app-input floatingLabel="Description" placeholder="Sample description..." formControlName="description" i18n-floatingLabel i18n-placeholder>
     </app-input>
   </form>
 </div>
 <div mat-dialog-actions>
-  <app-button mat-button (click)="cancel()">Cancel</app-button>
-  <app-button *ngIf="data.variant === TaskDialogVariant.CREATE" (click)="confirm()" variant="primary">
-    Create</app-button>
-  <app-button *ngIf="data.variant === TaskDialogVariant.EDIT" (click)="confirm()" variant="primary">Save
-    changes
-  </app-button>
+  <app-button mat-button (click)="cancel()" i18n>Cancel</app-button>
+  <app-button *ngIf="data.variant === TaskDialogVariant.CREATE" (click)="confirm()" variant="primary" i18n>Create</app-button>
+  <app-button *ngIf="data.variant === TaskDialogVariant.EDIT" (click)="confirm()" variant="primary" i18n>Save changes</app-button>
 </div>

@@ -1,9 +1,7 @@
 <!-- Page header -->
 <section class="flex justify-between items-center">
   <h2 class="typo-heading-5">{{ (workspace$ | async)?.name }}</h2>
-  <app-button variant="primary" routerLink="create" [icon]="faPlus" i18n>
-    New project
-  </app-button>
+  <app-button variant="primary" routerLink="create" [icon]="faPlus" i18n>New project</app-button>
 </section>
 
 <!-- Table -->
@@ -11,19 +9,19 @@
 
   <!-- Name column -->
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef i18n> Name </th>
+    <th mat-header-cell *matHeaderCellDef i18n>Name</th>
     <td mat-cell *matCellDef="let row" class="clickable-cell" (click)="openProject(row)"> {{ row.name }} </td>
   </ng-container>
 
   <!-- Statistics column -->
   <ng-container matColumnDef="statistics">
-    <th mat-header-cell *matHeaderCellDef i18n> Statistics </th>
+    <th mat-header-cell *matHeaderCellDef i18n>Statistics</th>
     <td mat-cell *matCellDef="let row"> - </td>
   </ng-container>
 
   <!-- Last update column -->
   <ng-container matColumnDef="lastUpdate">
-    <th mat-header-cell *matHeaderCellDef i18n> Last update </th>
+    <th mat-header-cell *matHeaderCellDef i18n>Last update</th>
     <td mat-cell *matCellDef="let row"> - </td>
   </ng-container>
 
@@ -36,10 +34,10 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="editProject(row)">
-          <span>Edit project</span>
+          <span i18n>Edit project</span>
         </button>
         <button mat-menu-item class="important" (click)="deleteProject(row)">
-          <span>Delete project</span>
+          <span i18n>Delete project</span>
         </button>
       </mat-menu>
     </td>
