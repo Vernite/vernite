@@ -1,8 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'src/app/dashboard/interfaces/project.interface';
 import { Workspace } from 'src/app/dashboard/interfaces/workspace.interface';
+import { ProjectService } from 'src/app/dashboard/services/project.service';
+import { WorkspaceService } from 'src/app/dashboard/services/workspace.service';
+import { AlertDialogVariant } from '../../dialogs/alert/alert.dialog';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-nav-element-workspace',
@@ -19,7 +23,15 @@ export class NavElementWorkspaceComponent {
   faAngleDown = faAngleDown;
   public activeWorkspace: boolean = false;
 
-  constructor(private router: Router) {}
+  @ViewChild('elementList')
+  listElement?: ElementRef;
+
+  constructor(
+    private workspaceService: WorkspaceService,
+    private dialogService: DialogService,
+    private projectService: ProjectService,
+    private router: Router,
+  ) {}
 
   public openWorkspace() {
     this.activeWorkspace = true;
@@ -36,7 +48,7 @@ export class NavElementWorkspaceComponent {
   }
 
   public showArrow(): boolean {
-    return true;
+    return Boolean(this.listElement?.nativeElement.children.length);
   }
 
   routeToWorkspace() {
@@ -55,9 +67,43 @@ export class NavElementWorkspaceComponent {
     this.router.navigate(['/', this.workspace.id, 'create']);
   }
 
+  editProject(project: Project) {
+    this.router.navigate(['/', this.workspace.id, project.id, 'edit']);
+  }
+
+  deleteProject(project: Project) {
+    this.dialogService
+      .confirm({
+        title: $localize`Delete project "${project.name}"`,
+        message: $localize`Are you sure you want to delete this project "${project.name}"?`,
+        confirmText: $localize`Delete`,
+        cancelText: $localize`Cancel`,
+        variant: AlertDialogVariant.IMPORTANT,
+      })
+      .subscribe(() => {
+        this.projectService.delete(project.id).subscribe(() => {
+          window.location.reload();
+        });
+      });
+  }
+
   editWorkspace() {
     this.router.navigate(['/', this.workspace.id, 'edit']);
   }
 
-  deleteWorkspace() {}
+  deleteWorkspace() {
+    this.dialogService
+      .confirm({
+        title: $localize`Delete workspace "${this.workspace.name}"`,
+        message: $localize`Are you sure you want to delete workspace "${this.workspace.name}"?`,
+        confirmText: $localize`Delete`,
+        cancelText: $localize`Cancel`,
+        variant: AlertDialogVariant.IMPORTANT,
+      })
+      .subscribe(() => {
+        this.workspaceService.delete(this.workspace.id).subscribe(() => {
+          window.location.reload();
+        });
+      });
+  }
 }

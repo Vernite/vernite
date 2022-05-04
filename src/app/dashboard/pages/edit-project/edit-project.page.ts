@@ -76,6 +76,7 @@ export class EditProjectPage implements OnDestroy {
 
     this.updateSubscription = this.projectService.update(this.form.value).subscribe(() => {
       this.router.navigate(['/', this.workspaceId]);
+      window.location.reload();
     });
   }
 

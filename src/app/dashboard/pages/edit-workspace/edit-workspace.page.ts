@@ -69,6 +69,7 @@ export class EditWorkspacePage implements OnDestroy {
 
     this.updateSubscription = this.workspaceService.update(this.form.value).subscribe(() => {
       this.router.navigate(['/']);
+      window.location.reload();
     });
   }
 

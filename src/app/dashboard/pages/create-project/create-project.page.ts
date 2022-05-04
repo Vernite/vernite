@@ -54,6 +54,7 @@ export class CreateProjectPage {
 
     this.createSubscription = this.projectService.create(this.form.value).subscribe(() => {
       this.router.navigate([this.workspaceId]);
+      window.location.reload();
     });
   }
 }

@@ -1,11 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Observable, Subscription } from 'rxjs';
 import { Page } from 'src/app/_main/decorators/page.decorator';
 import { AlertDialogVariant } from 'src/app/_main/dialogs/alert/alert.dialog';
 import { DialogService } from 'src/app/_main/services/dialog.service';
+import { Project } from '../../interfaces/project.interface';
 import { Workspace } from '../../interfaces/workspace.interface';
+import { ProjectService } from '../../services/project.service';
 import { WorkspaceService } from '../../services/workspace.service';
 
 /**
@@ -17,7 +19,7 @@ import { WorkspaceService } from '../../services/workspace.service';
   templateUrl: './workspaces-list.page.html',
   styleUrls: ['./workspaces-list.page.scss'],
 })
-export class WorkspacesListPage implements OnInit, OnDestroy {
+export class WorkspacesListPage implements OnInit {
   /**
    * Default constructor with dependency injection.
    * @param workspaceService Workspace service
@@ -26,6 +28,7 @@ export class WorkspacesListPage implements OnInit, OnDestroy {
    */
   constructor(
     private workspaceService: WorkspaceService,
+    private projectService: ProjectService,
     private dialogService: DialogService,
     private router: Router,
   ) {}
@@ -41,11 +44,6 @@ export class WorkspacesListPage implements OnInit, OnDestroy {
   public workspaces$?: Observable<Workspace[]>;
 
   /**
-   * Subscription to the workspace list.
-   */
-  public workspacesListSubscription?: Subscription;
-
-  /**
    * Lifecycle hook to load workspaces at the start of the page.
    */
   ngOnInit() {
@@ -57,7 +55,6 @@ export class WorkspacesListPage implements OnInit, OnDestroy {
    */
   loadWorkspaces() {
     this.workspaces$ = this.workspaceService.list();
-    this.workspacesListSubscription = this.workspaces$.subscribe();
   }
 
   /**
@@ -76,6 +73,7 @@ export class WorkspacesListPage implements OnInit, OnDestroy {
       .subscribe(() => {
         this.workspaceService.delete(workspace.id).subscribe(() => {
           this.loadWorkspaces();
+          window.location.reload();
         });
       });
   }
@@ -90,12 +88,5 @@ export class WorkspacesListPage implements OnInit, OnDestroy {
 
   openWorkspace(workspace: Workspace) {
     this.router.navigate(['/', workspace.id]);
-  }
-
-  /**
-   * Lifecycle hook to unsubscribe from the workspace list subscription.
-   */
-  ngOnDestroy() {
-    this.workspacesListSubscription?.unsubscribe();
   }
 }

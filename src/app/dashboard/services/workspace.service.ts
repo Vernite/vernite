@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ApiService } from 'src/app/_main/services/api.service';
 import { UserService } from 'src/app/_main/services/user.service';
 import { Workspace } from '../interfaces/workspace.interface';
@@ -11,6 +11,8 @@ import { Workspace } from '../interfaces/workspace.interface';
   providedIn: 'root',
 })
 export class WorkspaceService {
+  listSubject$ = new Subject<Workspace[]>();
+
   /**
    * Default constructor with `ApiService` dependency.
    * @param apiService Api service
@@ -23,14 +25,12 @@ export class WorkspaceService {
    * @returns Request observable, which completes when request is finished
    */
   public get(id: number): Observable<Workspace> {
-    console.log('GET');
-
     const userId = this.userService.userId;
     return this.apiService.get(`/user/${userId}/workspace/${id}/`);
   }
 
   /**
-   * Deletes the workspaces by its ID.
+   * Deletes the workspace by its ID.
    * @param id identifier of the workspace to delete from the API
    * @returns Request observable, which completes when request is finished
    */

@@ -2,13 +2,16 @@
   <div class="logo"></div>
   <div class="switch-navigation-weidth"></div>
 </section>
-<app-nav-element routerLink="/">Dashboard</app-nav-element>
-<app-nav-element>
+<app-nav-element [showOptions]="false" routerLink="/">
+  Dashboard
+</app-nav-element>
+<app-nav-element [showOptions]="true">
   <div routerLink="/">Workspaces</div>
   <div class="open-below">
     <ul>
       <app-nav-element-workspace *ngFor="let workspace of workspaceList|async" [workspace]="workspace">
-        {{workspace.name}}</app-nav-element-workspace>
+        {{workspace.name}}
+      </app-nav-element-workspace>
     </ul>
   </div>
   <div class="options">

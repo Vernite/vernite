@@ -58,7 +58,10 @@ li {
     color: var(--color-text);
 
     li {
-      padding: 14px 0 14px 40px;
+      padding: 14px 5px 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
   }
 }

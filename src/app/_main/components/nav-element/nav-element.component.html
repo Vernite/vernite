@@ -7,7 +7,7 @@
     <div class="open-below" [class.hidden]="!showArrow()" (click)="toggleNavElement()">
       <app-icon [icon]="faAngleDown" size="16px" [class.active]="active"></app-icon>
     </div>
-    <div class="options" [class.hidden]="!showOptions()">
+    <div class="options" [class.hidden]="!showOptions">
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
         <mat-icon>more_vert</mat-icon>
       </button>
@@ -17,6 +17,6 @@
     </div>
   </div>
 </section>
-<div class="list" [class.active]="active">
+<div class="list" #elementList [class.active]="active">
   <ng-content select=".open-below"></ng-content>
 </div>

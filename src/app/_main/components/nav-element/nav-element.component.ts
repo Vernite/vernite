@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild } from '@angular/core';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -10,7 +10,13 @@ export class NavElementComponent {
   @Input()
   public routerLink?: string;
 
+  @Input()
+  public showOptions?: boolean;
+
   public active: boolean = false;
+
+  @ViewChild('elementList')
+  listElement?: ElementRef;
 
   faAngleDown = faAngleDown;
 
@@ -30,11 +36,7 @@ export class NavElementComponent {
     }
   }
 
-  public showOptions(): boolean {
-    return true;
-  }
-
   public showArrow(): boolean {
-    return true;
+    return Boolean(this.listElement?.nativeElement.children.length);
   }
 }

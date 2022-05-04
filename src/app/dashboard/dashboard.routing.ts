@@ -17,6 +17,10 @@ const routes: Routes = [
     component: WorkspacesListPage,
   },
   {
+    path: 'dashboard',
+    redirectTo: '',
+  },
+  {
     path: 'create',
     component: CreateWorkspacePage,
   },

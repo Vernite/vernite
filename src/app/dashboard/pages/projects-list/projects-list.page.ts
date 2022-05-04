@@ -5,6 +5,9 @@ import { map, Observable } from 'rxjs';
 import { Project } from '../../interfaces/project.interface';
 import { Workspace } from '../../interfaces/workspace.interface';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { DialogService } from 'src/app/_main/services/dialog.service';
+import { ProjectService } from '../../services/project.service';
+import { AlertDialogVariant } from 'src/app/_main/dialogs/alert/alert.dialog';
 
 @Component({
   selector: 'app-projects-list',
@@ -22,6 +25,8 @@ export class ProjectsListPage {
   constructor(
     private activatedRoute: ActivatedRoute,
     private workspaceService: WorkspaceService,
+    private projectService: ProjectService,
+    private dialogService: DialogService,
     private router: Router,
   ) {
     const { workspaceId } = this.activatedRoute.snapshot.params;
@@ -42,5 +47,19 @@ export class ProjectsListPage {
     this.router.navigate(['/', this.workspaceId, project.id]);
   }
 
-  public deleteProject(project: Project) {}
+  deleteProject(project: Project) {
+    this.dialogService
+      .confirm({
+        title: $localize`Delete project "${project.name}"`,
+        message: $localize`Are you sure you want to delete this project "${project.name}"?`,
+        confirmText: $localize`Delete`,
+        cancelText: $localize`Cancel`,
+        variant: AlertDialogVariant.IMPORTANT,
+      })
+      .subscribe(() => {
+        this.projectService.delete(project.id).subscribe(() => {
+          window.location.reload();
+        });
+      });
+  }
 }

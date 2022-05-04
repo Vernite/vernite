@@ -6,6 +6,8 @@ import { DebugElement } from '@angular/core';
 import { NavElementWorkspaceComponent } from './nav-element-workspace.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatMenuModule } from '@angular/material/menu';
+import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 describe('NavElementWorkspaceComponent', () => {
   let component: NavElementWorkspaceComponent;
@@ -13,8 +15,13 @@ describe('NavElementWorkspaceComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, MatMenuModule],
+      imports: [RouterTestingModule, MatMenuModule, HttpClientModule, MatDialogModule],
       declarations: [NavElementWorkspaceComponent],
+      providers: [
+        MatDialogModule,
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
+      ]
     }).compileComponents();
   }));
 
