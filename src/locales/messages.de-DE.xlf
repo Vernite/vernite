@@ -2,42 +2,6 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" target-language="de-DE" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="6105581491285311381" datatype="html">
-        <source>english</source>
-        <target state="translated">Englisch</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">10</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2501969335659826225" datatype="html">
-        <source>This field is required</source>
-        <target state="signed-off">Dieses Feld wird benötigt</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/_main/validators/required.validator.ts</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="9008042675195737518" datatype="html">
-        <source>New workspace</source>
-        <target state="translated">Neuer Arbeitsbereich</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/create-workspace/create-workspace.page.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/create-workspace/create-workspace.page.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4786271583797086407" datatype="html">
-        <source>Workspace name</source>
-        <target state="translated">Arbeitsbereichsname</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/create-workspace/create-workspace.page.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
-      </trans-unit>
     </body>
   </file>
 </xliff>

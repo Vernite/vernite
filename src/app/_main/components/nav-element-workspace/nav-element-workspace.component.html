@@ -13,13 +13,13 @@
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="createProject()">
-            <span>Create project</span>
+            <span i18n>Create project</span>
           </button>
           <button mat-menu-item (click)="editWorkspace()">
-            <span>Edit workspace</span>
+            <span i18n>Edit workspace</span>
           </button>
           <button mat-menu-item class="important" (click)="deleteWorkspace()">
-            <span>Delete workspace</span>
+            <span i18n>Delete workspace</span>
           </button>
         </mat-menu>
       </div>
@@ -36,10 +36,10 @@
             </button>
             <mat-menu #menu="matMenu">
               <button mat-menu-item (click)="editProject(projectWithPriv.project)">
-                <span>Edit project</span>
+                <span i18n>Edit project</span>
               </button>
               <button mat-menu-item class="important" (click)="deleteProject(projectWithPriv.project)">
-                <span>Delete project</span>
+                <span i18n>Delete project</span>
               </button>
             </mat-menu>
           </div>

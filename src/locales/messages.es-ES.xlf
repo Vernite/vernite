@@ -2,12 +2,360 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" target-language="es-ES" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="6105581491285311381" datatype="html">
-        <source>english</source>
-        <target state="translated">inglés</target>
+      <trans-unit id="4301597531652727075" datatype="html">
+        <source>Create project</source>
+        <target state="translated">Crear proyecto</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1344445785103101296" datatype="html">
+        <source>Edit workspace</source>
+        <target state="translated">Editar espacio de trabajo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7366547460347675809" datatype="html">
+        <source>Delete workspace</source>
+        <target state="translated">Eliminar espacio de trabajo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.ts</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4239216302129874391" datatype="html">
+        <source>Edit project</source>
+        <target state="translated">Editar proyecto</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8753161405363995526" datatype="html">
+        <source>Delete project</source>
+        <target state="translated">Eliminar proyecto</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5662240898706671746" datatype="html">
+        <source>Delete project &quot;<x id="PH" equiv-text="project.name"/>&quot;</source>
+        <target state="translated">Eliminar proyecto "<x id="PH" equiv-text="project.name"/>"</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.ts</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.ts</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4100164289071488804" datatype="html">
+        <source>Are you sure you want to delete project &quot;<x id="PH" equiv-text="project.name"/>&quot;?</source>
+        <target state="translated">¿Está seguro de que desea eliminar el proyecto "<x id="PH" equiv-text="project.name"/>"?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.ts</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.ts</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2159130950882492111" datatype="html">
+        <source>Cancel</source>
+        <target state="translated">Cancelar</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.ts</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.ts</context>
+          <context context-type="linenumber">100</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.ts</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5645757188559356092" datatype="html">
+        <source>Delete workspace &quot;<x id="PH" equiv-text="this.workspace.name"/>&quot;</source>
+        <target state="translated">Eliminar espacio de trabajo "<x id="PH" equiv-text="this.workspace.name"/>"</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.ts</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6807343225986028186" datatype="html">
+        <source>Are you sure you want to delete workspace &quot;<x id="PH" equiv-text="this.workspace.name"/>&quot;?</source>
+        <target state="translated">¿Desea eliminar el espacio de trabajo "<x id="PH" equiv-text="this.workspace.name"/>"?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.ts</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6570363013146073520" datatype="html">
+        <source>Dashboard</source>
+        <target state="translated">Panel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/sidebar-navigation/sidebar-navigation.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1196063204965083742" datatype="html">
+        <source>Workspaces</source>
+        <target state="translated">Espacios de trabajo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/sidebar-navigation/sidebar-navigation.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="861528548944539400" datatype="html">
+        <source>Create workspace</source>
+        <target state="translated">Crear espacio de trabajo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/sidebar-navigation/sidebar-navigation.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2501969335659826225" datatype="html">
+        <source>This field is required</source>
+        <target state="translated">Este campo es requerido</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/validators/required.validator.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8540729217579212886" datatype="html">
+        <source>New project</source>
+        <target state="translated">Nuevo proyecto</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/create-project/create-project.page.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/edit-project/edit-project.page.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2651912264744301649" datatype="html">
+        <source>Project name</source>
+        <target state="translated">Nombre del proyecto</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/create-project/create-project.page.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/edit-project/edit-project.page.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="662506850593821474" datatype="html">
+        <source>Save</source>
+        <target state="translated">Guardar</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/create-project/create-project.page.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/create-workspace/create-workspace.page.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/edit-project/edit-project.page.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/edit-workspace/edit-workspace.page.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9008042675195737518" datatype="html">
+        <source>New workspace</source>
+        <target state="translated">Nuevo espacio de trabajo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/create-workspace/create-workspace.page.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/edit-workspace/edit-workspace.page.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4786271583797086407" datatype="html">
+        <source>Workspace name</source>
+        <target state="translated">Nombre del espacio de trabajo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/create-workspace/create-workspace.page.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/edit-workspace/edit-workspace.page.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8953033926734869941" datatype="html">
+        <source>Name</source>
+        <target state="translated">Nombre</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1069523139277190436" datatype="html">
+        <source>Statistics</source>
+        <target state="translated">Estadísticas</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8670565817959078431" datatype="html">
+        <source>Last update</source>
+        <target state="translated">Última actualización</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7633910732080588042" datatype="html">
+        <source>Are you sure you want to delete this workspace?</source>
+        <target state="translated">¿Quieres eliminar este espacio de trabajo?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.ts</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5726691094023644029" datatype="html">
+        <source>Edit task</source>
+        <target state="translated">Editar tarea</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/board-task/board-task.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4510676848705799339" datatype="html">
+        <source>Delete task</source>
+        <target state="translated">Eliminar tarea</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/board-task/board-task.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6136219026045671670" datatype="html">
+        <source>Edit task: <x id="INTERPOLATION" equiv-text="{{ data.task?.name }}"/></source>
+        <target state="translated">Editar tarea: <x id="INTERPOLATION" equiv-text="{{ data.task?.name }}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5488786542879754401" datatype="html">
+        <source>Create new task</source>
+        <target state="translated">Crear nueva tarea</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1315476018548197144" datatype="html">
+        <source>New task</source>
+        <target state="translated">Nueva tarea</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4902817035128594900" datatype="html">
+        <source>Description</source>
+        <target state="translated">Descripción</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7499763055766584569" datatype="html">
+        <source>Sample description...</source>
+        <target state="translated">Descripción de la muestra...</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5674286808255988565" datatype="html">
+        <source>Create</source>
+        <target state="translated">Crear</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7000649363168371045" datatype="html">
+        <source>Save changes</source>
+        <target state="translated">Guardar cambios</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
     </body>

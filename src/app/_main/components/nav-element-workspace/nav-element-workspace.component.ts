@@ -88,7 +88,7 @@ export class NavElementWorkspaceComponent implements AfterViewInit {
     this.dialogService
       .confirm({
         title: $localize`Delete project "${project.name}"`,
-        message: $localize`Are you sure you want to delete this project "${project.name}"?`,
+        message: $localize`Are you sure you want to delete project "${project.name}"?`,
         confirmText: $localize`Delete`,
         cancelText: $localize`Cancel`,
         variant: AlertDialogVariant.IMPORTANT,
