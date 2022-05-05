@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   constructor(private authService: AuthService, private router: Router) {}
 
   private loginSubscription?: Subscription;
@@ -22,8 +22,6 @@ export class LoginPage implements OnInit {
     email: new FormControl('', [requiredValidator()], []),
     password: new FormControl('', [requiredValidator()], []),
   });
-
-  ngOnInit() {}
 
   login() {
     if (this.loginSubscription && !this.loginSubscription.closed) return;

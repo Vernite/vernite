@@ -5,9 +5,10 @@ import { RegisterPage } from './pages/register/register.page';
 import { LoginPage } from './pages/login/login.page';
 import { MainModule } from '../_main/_main.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ForgotPasswordPage } from './pages/forgot-password/forgot-password.page';
 
 @NgModule({
   imports: [CommonModule, AuthRoutingModule, MainModule, ReactiveFormsModule],
-  declarations: [LoginPage, RegisterPage],
+  declarations: [LoginPage, RegisterPage, ForgotPasswordPage],
 })
 export class AuthModule {}

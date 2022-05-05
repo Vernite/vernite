@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
@@ -10,11 +10,14 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage {
   constructor(private authService: AuthService, private router: Router) {}
 
   private registerSubscription?: Subscription;
 
+  /**
+   * Form group for register.
+   */
   public form = new FormGroup({
     email: new FormControl('', [requiredValidator()], []),
     password: new FormControl('', [requiredValidator()], []),
@@ -33,6 +36,4 @@ export class RegisterPage implements OnInit {
       });
     }
   }
-
-  ngOnInit() {}
 }
