@@ -1,6 +1,5 @@
 <form [formGroup]="form" (submit)="submitUpdate()">
   <app-input formControlName="name" type="text" placeholder="New project" floatingLabel="Project name"
     i18n-floatingLabel i18n-placeholder></app-input>
-  <app-button variant="primary" [pending]="updateSubscription && !updateSubscription.closed" i18n>Save
-  </app-button>
+  <app-button variant="primary" [pending]="updateSubscription && !updateSubscription.closed" i18n>Save</app-button>
 </form>

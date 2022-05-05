@@ -1,0 +1,15 @@
+.logo {
+  width: calc(100% - 80px);
+  height: 64px;
+  margin: 10px 20px 0;
+  background-image: url('/assets/metadata/logo_with_name.svg');
+  background-position: 0 50%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transform-origin: 50% 25%;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}

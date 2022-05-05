@@ -30,6 +30,7 @@ import { SidebarNavigationComponent } from './components/sidebar-navigation/side
 import { NavElementComponent } from './components/nav-element/nav-element.component';
 import { RouterModule } from '@angular/router';
 import { NavElementWorkspaceComponent } from './components/nav-element-workspace/nav-element-workspace.component';
+import { MainViewComponent } from './components/main-view/main-view.component';
 
 /**
  * Main module configuration object
@@ -92,6 +93,7 @@ const ngModuleConfig = {
     SidebarNavigationComponent,
     NavElementComponent,
     NavElementWorkspaceComponent,
+    MainViewComponent,
   ],
   providers: [DialogService, ApiService],
 };
