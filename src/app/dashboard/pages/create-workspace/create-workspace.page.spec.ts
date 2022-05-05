@@ -4,11 +4,11 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { CreateWorkspacePage } from './create-workspace.page';
-import { MainModule } from 'src/app/_main/_main.module';
 import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MainModule } from '@main/_main.module';
 
 describe('CreateWorkspaceComponent', () => {
   let component: CreateWorkspacePage;
