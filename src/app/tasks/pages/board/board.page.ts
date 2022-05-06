@@ -20,6 +20,7 @@ export class BoardPage implements OnInit, OnDestroy {
   public faPlus = faPlus;
 
   private statusesList: Status[] = [];
+  private projectId!: number;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -28,8 +29,8 @@ export class BoardPage implements OnInit, OnDestroy {
     private dialogService: DialogService,
   ) {
     const { workspaceId, projectId } = this.activatedRoute.snapshot.params;
-
-    this.statuses = this.statusService.list();
+    this.projectId = projectId;
+    this.statuses = this.statusService.list(projectId);
   }
 
   ngOnInit() {
@@ -64,7 +65,7 @@ export class BoardPage implements OnInit, OnDestroy {
       .afterClosed()
       .subscribe((result) => {
         if (result) {
-          this.taskService.create(result);
+          this.taskService.create(this.projectId, result);
         }
       });
   }

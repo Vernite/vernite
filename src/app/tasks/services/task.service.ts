@@ -3,6 +3,7 @@ import { Task } from '../interfaces/task.interface';
 import { Observable, of } from 'rxjs';
 import { ApiService } from '../../_main/services/api.service';
 import { Status } from '../interfaces/status.interface';
+import { Project } from '@dashboard/interfaces/project.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -16,36 +17,40 @@ export class TaskService {
 
   /**
    * Get list of tasks
-   * @returns Request observable with the columns tree of tasks
+   * @param projectId Project id needed to list all tasks
+   * @returns Request observable with list of tasks
    */
-  public tree(): Observable<Status[]> {
-    return of([] as Status[]);
+  public list(projectId: number): Observable<Task[]> {
+    return this.apiService.get(`/project/${projectId}/task/`);
   }
 
   /**
    * Creates new task
    * @param task Task to create
+   * @param projectId Project id needed to create task
    * @returns Request observable with the created task
    */
-  public create(task: Task): Observable<Task> {
-    return this.apiService.post('/tasks', { body: task });
+  public create(projectId: number, task: Task): Observable<Task> {
+    return this.apiService.post(`/project/${projectId}/task/`, { body: task });
   }
 
   /**
    * Updates task
    * @param task Task to update
+   * @param projectId Project id needed to update task
    * @returns Request observable with the updated task
    */
-  public update(task: Task): Observable<Task> {
-    return this.apiService.put(`/tasks/${task.id}`, { body: task });
+  public update(projectId: number, task: Task): Observable<Task> {
+    return this.apiService.put(`/project/${projectId}/task/${task.id}`, { body: task });
   }
 
   /**
    * Deletes task
    * @param taskId Task id to delete
+   * @param projectId Project id needed to delete task
    * @returns Request observable
    */
-  public delete(taskId: number): Observable<null> {
-    return this.apiService.delete(`/tasks/${taskId}`);
+  public delete(projectId: number, task: Task): Observable<null> {
+    return this.apiService.delete(`/project/${projectId}/task/${task.id}`);
   }
 }
