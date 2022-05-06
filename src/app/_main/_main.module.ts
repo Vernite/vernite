@@ -33,6 +33,7 @@ import { NavElementWorkspaceComponent } from './components/nav-element-workspace
 import { SelectComponent } from './components/select/select.component';
 import { MatSelectModule } from '@angular/material/select';
 import { OptionComponent } from './components/option/option.component';
+import { MainViewComponent } from './components/main-view/main-view.component';
 
 /**
  * Main module configuration object
@@ -98,6 +99,7 @@ const ngModuleConfig = {
     NavElementWorkspaceComponent,
     SelectComponent,
     OptionComponent,
+    MainViewComponent,
   ],
   providers: [DialogService, ApiService],
 };

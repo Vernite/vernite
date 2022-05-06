@@ -1,0 +1,30 @@
+<section class="main">
+  <section class="box">
+    <section class="form-side">
+      <div class="logo" routerLink="/"></div>
+      <form [formGroup]="form" (submit)="register()">
+        <div>
+          <h2 class="typo-heading-5" i18n>Register</h2>
+          <p class="typo-body" i18n>This is a secure site. Please enter your register information or if you have an account already, <a routerLink="/auth/login">click here</a> to login.</p>
+        </div>
+
+        <app-input formControlName="email" type="email" placeholder="name@example.com" floatingLabel="Email" i18n-floatingLabel i18n-placeholder></app-input>
+
+        <app-input formControlName="password" type="password" placeholder="**********" floatingLabel="Password" i18n-floatingLabel i18n-placeholder></app-input>
+
+        <app-input formControlName="repeatPassword" type="password" placeholder="**********" floatingLabel="Repeat password" i18n-floatingLabel i18n-placeholder></app-input>
+
+        <div>
+          <!-- CHECKBOX TODO -->
+          <p class="typo-body" i18n>I agree to the <a>End User License Agreement</a> and <a>Privacy Statement</a>.</p>
+        </div>
+
+        <app-button variant="primary" i18n>Register</app-button>
+
+      </form>
+    </section>
+    <section class="image-side">
+
+    </section>
+  </section>
+</section>

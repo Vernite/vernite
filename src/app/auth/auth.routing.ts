@@ -1,10 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ForgotPasswordPage } from './pages/forgot-password/forgot-password.page';
+import { LoginPage } from './pages/login/login.page';
+import { RegisterPage } from './pages/register/register.page';
 
 /**
  * Auth routes list
  */
-const routes: Routes = [{}];
+const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginPage,
+  },
+  {
+    path: 'register',
+    component: RegisterPage,
+  },
+  {
+    path: 'password-reset',
+    component: ForgotPasswordPage,
+  },
+];
 
 /**
  * Auth routes module

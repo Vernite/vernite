@@ -2,11 +2,11 @@
 
 .form-field {
   display: flex;
-  max-width: 300px;
+  max-width: 400px;
   flex-direction: column;
   margin-bottom: 0.5rem;
 
-  > label {
+  >label {
     @include typo-title;
 
     margin-bottom: 0.4rem;
