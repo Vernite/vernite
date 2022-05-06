@@ -1,0 +1,38 @@
+mat-form-field.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+  color: var(--color-text);
+}
+
+mat-select.mat-select {
+  .mat-select-min-line {
+    color: var(--color-text);
+  }
+
+  .mat-select-arrow {
+    color: var(--color-text);
+  }
+}
+
+.mat-select-panel {
+  background-color: var(--color-select-panel-background);
+
+  mat-option.mat-option {
+    color: var(--color-select-panel-text);
+
+    .mat-option-text {
+      display: flex;
+      align-items: center;
+
+      app-icon {
+        margin-right: 16px;
+      }
+    }
+
+    &.mat-focused {
+      background-color: var(--color-select-panel-option-background-focused);
+    }
+
+    &.mat-selected:not(.at-option-disabled) {
+      color: var(--color-select-panel-text-selected);
+    }
+  }
+}

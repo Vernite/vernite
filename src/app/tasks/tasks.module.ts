@@ -6,9 +6,19 @@ import { BoardTaskComponent } from './components/board-task/board-task.component
 import { MainModule } from '../_main/_main.module';
 import { TaskDialog } from './dialogs/task/task.dialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TaskTypePipe } from './pipes/task-type.pipe';
+import { TaskPriorityPipe } from './pipes/task-priority.pipe';
+import { TaskPriorityIconPipe } from './pipes/task-priority-icon.pipe';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule],
-  declarations: [BoardPage, BoardTaskComponent, TaskDialog],
+  declarations: [
+    BoardPage,
+    BoardTaskComponent,
+    TaskDialog,
+    TaskTypePipe,
+    TaskPriorityPipe,
+    TaskPriorityIconPipe,
+  ],
 })
 export class TasksModule {}

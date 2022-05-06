@@ -2,13 +2,42 @@
 <h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.CREATE" i18n>Create new task</h1>
 <div mat-dialog-content>
   <form (submit)="confirm()" [formGroup]="form">
-    <app-input floatingLabel="Name" placeholder="New task" formControlName="name" i18n-floatingLabel i18n-placeholder></app-input>
-    <app-input floatingLabel="Description" placeholder="Sample description..." formControlName="description" i18n-floatingLabel i18n-placeholder>
+
+    <!-- Type field -->
+    <app-select formControlName="type">
+      <app-option *ngFor="let type of taskTypes" [value]="type">{{ type | taskType }}</app-option>
+    </app-select>
+
+    <!-- Name field -->
+    <app-input floatingLabel="Name" placeholder="New task" formControlName="name" i18n-floatingLabel i18n-placeholder>
     </app-input>
+
+    <!-- Description field -->
+    <app-input floatingLabel="Description" placeholder="Sample description..." formControlName="description"
+      i18n-floatingLabel i18n-placeholder></app-input>
+
+    <!-- Status -->
+
+    <!-- Assignees -->
+    <app-select formControlName="priority">
+      <app-option [value]="0">0</app-option>
+      <app-option [value]="1">1</app-option>
+      <app-option [value]="2">2</app-option>
+      <app-option [value]="3">3</app-option>
+    </app-select>
+
+    <!-- Priorities -->
+    <app-select formControlName="priority">
+      <app-option *ngFor="let priority of taskPriorities" [value]="priority" [icon]="priority | taskPriorityIcon">{{
+        priority | taskPriority }}</app-option>
+    </app-select>
+
   </form>
 </div>
 <div mat-dialog-actions>
   <app-button mat-button (click)="cancel()" i18n>Cancel</app-button>
-  <app-button *ngIf="data.variant === TaskDialogVariant.CREATE" (click)="confirm()" variant="primary" i18n>Create</app-button>
-  <app-button *ngIf="data.variant === TaskDialogVariant.EDIT" (click)="confirm()" variant="primary" i18n>Save changes</app-button>
+  <app-button *ngIf="data.variant === TaskDialogVariant.CREATE" (click)="confirm()" variant="primary" i18n>Create
+  </app-button>
+  <app-button *ngIf="data.variant === TaskDialogVariant.EDIT" (click)="confirm()" variant="primary" i18n>Save changes
+  </app-button>
 </div>

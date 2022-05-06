@@ -1,4 +1,7 @@
 mat-form-field.mat-form-field-appearance-outline {
+  width: 100%;
+  max-width: 300px;
+
   // default styling
   input {
     caret-color: var(--color-text);

@@ -30,6 +30,9 @@ import { SidebarNavigationComponent } from './components/sidebar-navigation/side
 import { NavElementComponent } from './components/nav-element/nav-element.component';
 import { RouterModule } from '@angular/router';
 import { NavElementWorkspaceComponent } from './components/nav-element-workspace/nav-element-workspace.component';
+import { SelectComponent } from './components/select/select.component';
+import { MatSelectModule } from '@angular/material/select';
+import { OptionComponent } from './components/option/option.component';
 
 /**
  * Main module configuration object
@@ -68,6 +71,7 @@ const ngModuleConfig = {
     MatTooltipModule,
     MatTabsModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
 
     /*=============================================
       =              External modules               =
@@ -92,6 +96,8 @@ const ngModuleConfig = {
     SidebarNavigationComponent,
     NavElementComponent,
     NavElementWorkspaceComponent,
+    SelectComponent,
+    OptionComponent,
   ],
   providers: [DialogService, ApiService],
 };

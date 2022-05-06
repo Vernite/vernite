@@ -5,6 +5,9 @@
   <ng-container *ngSwitchCase="'mat'">
     <mat-icon [ngStyle]="style">{{ snakeCaseName }}</mat-icon>
   </ng-container>
+  <ng-container *ngSwitchCase="'cu'">
+    <img [ngStyle]="style" [src]="'assets/icons/' + snakeCaseName + '.svg'" />
+  </ng-container>
   <ng-container *ngSwitchDefault>
     <mat-icon [ngStyle]="style">question_mark</mat-icon>
   </ng-container>
