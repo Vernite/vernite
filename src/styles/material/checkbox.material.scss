@@ -1,0 +1,24 @@
+mat-checkbox.mat-checkbox {
+  &.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: var(--color-primary-700);
+  }
+
+  &:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
+  &:active.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
+  &.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element {
+    background: var(--color-primary-700);
+  }
+
+  &:hover {
+    .mat-checkbox-frame {
+      background-color: var(--color-input-background-hover);
+    }
+  }
+
+  .mat-checkbox-frame {
+    border-width: 1px;
+    border-color: var(--color-input-border);
+    background-color: var(--color-input-background);
+    transition: background-color 0.2s ease;
+  }
+}

@@ -35,6 +35,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { OptionComponent } from './components/option/option.component';
 import { MainViewComponent } from './components/main-view/main-view.component';
 import { TextareaComponent } from './components/textarea/textarea.component';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
 
 /**
  * Main module configuration object
@@ -102,6 +103,7 @@ const ngModuleConfig = {
     OptionComponent,
     MainViewComponent,
     TextareaComponent,
+    CheckboxComponent,
   ],
   providers: [DialogService, ApiService],
 };

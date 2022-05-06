@@ -32,6 +32,7 @@ export class TaskDialog implements OnInit {
     name: new FormControl('', [requiredValidator()]),
     description: new FormControl(''),
     priority: new FormControl(this.taskPriorities[2], [requiredValidator()]),
+    checkbox: new FormControl(false),
   });
 
   constructor(
