@@ -21,6 +21,7 @@ export class LoginPage {
   public form = new FormGroup({
     email: new FormControl('', [requiredValidator()], []),
     password: new FormControl('', [requiredValidator()], []),
+    agreements: new FormControl('', [requiredValidator()], []),
   });
 
   login() {

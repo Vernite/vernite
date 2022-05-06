@@ -22,6 +22,7 @@ export class RegisterPage {
     email: new FormControl('', [requiredValidator()], []),
     password: new FormControl('', [requiredValidator()], []),
     repeatPassword: new FormControl('', [requiredValidator()], []),
+    agreements: new FormControl('', [requiredValidator()], []),
   });
 
   register() {

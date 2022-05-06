@@ -1,4 +1,8 @@
 mat-checkbox.mat-checkbox {
+  @include typo-body;
+
+  color: var(--color-text);
+
   &.mat-checkbox-checked.mat-accent .mat-checkbox-background {
     background-color: var(--color-primary-700);
   }

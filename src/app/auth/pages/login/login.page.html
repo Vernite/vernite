@@ -12,9 +12,10 @@
 
         <app-input formControlName="password" type="password" placeholder="●●●●●●●" floatingLabel="Password" i18n-floatingLabel i18n-placeholder></app-input>
 
-        <div>
-          <!-- CHECKBOX TODO -->
-          <p class="typo-body" i18n>Forgot your password? <a routerLink="/auth/password-reset">Reset password</a>.</p>
+        <p class="typo-body" i18n>Forgot your password? <a routerLink="/auth/password-reset">Reset password</a>.</p>
+
+        <div class="remember-me">
+          <app-checkbox formControlName="agreements" label="Remember me" i18n-label></app-checkbox>
         </div>
 
         <app-button variant="primary" i18n>Log in</app-button>
