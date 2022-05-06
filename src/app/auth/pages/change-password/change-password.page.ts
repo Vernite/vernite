@@ -1,37 +1,36 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { requiredValidator } from '@main/validators/required.validator';
 import { Subscription } from 'rxjs';
-import { requiredValidator } from 'src/app/_main/validators/required.validator';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+  selector: 'app-change-password',
+  templateUrl: './change-password.page.html',
+  styleUrls: ['./change-password.page.scss'],
 })
-export class RegisterPage {
+export class ChangePasswordPage {
   constructor(private authService: AuthService, private router: Router) {}
 
-  private registerSubscription?: Subscription;
+  private resetSubscription?: Subscription;
 
   /**
-   * Form group for register.
+   * Form group for setting new password.
    */
   public form = new FormGroup({
-    email: new FormControl('', [requiredValidator()], []),
     password: new FormControl('', [requiredValidator()], []),
     repeatPassword: new FormControl('', [requiredValidator()], []),
   });
 
-  register() {
-    if (this.registerSubscription && !this.registerSubscription.closed) return;
+  setNewPassword() {
+    if (this.resetSubscription && !this.resetSubscription.closed) return;
 
     this.form.markAllAsTouched();
     this.form.updateValueAndValidity();
 
     if (this.form.valid) {
-      this.registerSubscription = this.authService.register(this.form.value).subscribe(() => {
+      this.resetSubscription = this.authService.setNewPassword(this.form.value).subscribe(() => {
         this.router.navigate(['/']);
       });
     }

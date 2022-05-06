@@ -32,7 +32,7 @@ export class ForgotPasswordPage {
     this.form.updateValueAndValidity();
 
     if (this.form.valid) {
-      this.resetSubscription = this.authService.login(this.form.value).subscribe(() => {
+      this.resetSubscription = this.authService.resetPassword(this.form.value).subscribe(() => {
         this.router.navigate(['/']);
       });
     }

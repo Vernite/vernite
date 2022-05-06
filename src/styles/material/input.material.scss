@@ -9,18 +9,24 @@ mat-form-field.mat-form-field-appearance-outline {
     color: var(--color-text);
   }
 
+  // input {
+  //   padding-top: 12px;
+  //   padding-bottom: 16px;F
+  // }
+
   .mat-form-field-outline {
     background-color: var(--color-input-background);
     border-radius: var(--border-radius);
     color: var(--color-input-border);
 
-    > * {
+    >* {
       border-color: var(--color-input-border);
     }
   }
 
   .mat-form-field-infix {
     height: 55.56px;
+    padding: 0.6em 0;
 
     textarea.mat-input-element {
       margin-bottom: 1.5rem;
@@ -50,7 +56,7 @@ mat-form-field.mat-form-field-appearance-outline {
     }
 
     .mat-form-field-outline-thick {
-      > * {
+      >* {
         background-color: var(--color-input-background);
       }
 
@@ -75,9 +81,17 @@ mat-form-field.mat-form-field-appearance-outline {
       color: var(--color-text);
     }
 
+    .mat-form-field-label {
+      top: 1.6em;
+    }
+
     .mat-form-field-required-marker {
       color: var(--color-text);
     }
+  }
+
+  &.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.3938em) scale(0.75);
   }
 
   &.without-floating-label {

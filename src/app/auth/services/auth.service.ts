@@ -10,4 +10,16 @@ export class AuthService {
   public login({ email, password }: { email: string; password: string }) {
     return this.apiService.post(`/auth/login`, { body: { email, password } });
   }
+
+  public register({ email, password }: { email: string; password: string }) {
+    return this.apiService.post(`/auth/register`, { body: { email, password } });
+  }
+
+  public resetPassword({ email }: { email: string }) {
+    return this.apiService.post(`/auth/password-reset`, { body: { email } });
+  }
+
+  public setNewPassword({ email, password }: { email: string; password: string }) {
+    return this.apiService.post(`/auth/set-new-password`, { body: { email, password } });
+  }
 }

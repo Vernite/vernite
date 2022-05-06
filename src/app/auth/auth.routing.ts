@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ChangePasswordPage } from './pages/change-password/change-password.page';
 import { ForgotPasswordPage } from './pages/forgot-password/forgot-password.page';
 import { LoginPage } from './pages/login/login.page';
 import { RegisterPage } from './pages/register/register.page';
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'password-reset',
     component: ForgotPasswordPage,
+  },
+  {
+    path: 'set-new-password',
+    component: ChangePasswordPage,
   },
 ];
 
