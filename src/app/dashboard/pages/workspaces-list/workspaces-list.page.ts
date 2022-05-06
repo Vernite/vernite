@@ -62,20 +62,12 @@ export class WorkspacesListPage implements OnInit {
    * @param workspace Workspace to delete
    */
   deleteWorkspace(workspace: Workspace) {
-    this.dialogService
-      .confirm({
-        title: $localize`Delete workspace`,
-        message: $localize`Are you sure you want to delete this workspace?`,
-        confirmText: $localize`Delete`,
-        cancelText: $localize`Cancel`,
-        variant: AlertDialogVariant.IMPORTANT,
-      })
-      .subscribe(() => {
-        this.workspaceService.delete(workspace.id).subscribe(() => {
-          // this.loadWorkspaces();
-          window.location.reload();
-        });
+    this.dialogService.confirmWorkspaceDelete(workspace).subscribe(() => {
+      this.workspaceService.delete(workspace.id).subscribe(() => {
+        // this.loadWorkspaces();
+        window.location.reload();
       });
+    });
   }
 
   /**

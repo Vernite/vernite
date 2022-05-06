@@ -48,18 +48,10 @@ export class ProjectsListPage {
   }
 
   deleteProject(project: Project) {
-    this.dialogService
-      .confirm({
-        title: $localize`Delete project "${project.name}"`,
-        message: $localize`Are you sure you want to delete project "${project.name}"?`,
-        confirmText: $localize`Delete`,
-        cancelText: $localize`Cancel`,
-        variant: AlertDialogVariant.IMPORTANT,
-      })
-      .subscribe(() => {
-        this.projectService.delete(project.id).subscribe(() => {
-          window.location.reload();
-        });
+    this.dialogService.confirmProjectDelete(project).subscribe(() => {
+      this.projectService.delete(project.id).subscribe(() => {
+        window.location.reload();
       });
+    });
   }
 }
