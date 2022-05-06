@@ -4,8 +4,9 @@
   <form (submit)="confirm()" [formGroup]="form">
 
     <!-- Type field -->
-    <app-select formControlName="type">
-      <app-option *ngFor="let type of taskTypes" [value]="type">{{ type | taskType }}</app-option>
+    <app-select formControlName="type" floatingLabel="Type" i18n-floatingLabel>
+      <app-option *ngFor="let type of taskTypes" [value]="type" [icon]="type | taskTypeIcon">{{ type | taskType }}
+      </app-option>
     </app-select>
 
     <!-- Name field -->
@@ -13,21 +14,13 @@
     </app-input>
 
     <!-- Description field -->
-    <app-input floatingLabel="Description" placeholder="Sample description..." formControlName="description"
-      i18n-floatingLabel i18n-placeholder></app-input>
+    <app-textarea floatingLabel="Description" placeholder="Sample description..." formControlName="description"
+      i18n-floatingLabel i18n-placeholder [rows]="10"></app-textarea>
 
     <!-- Status -->
 
-    <!-- Assignees -->
-    <app-select formControlName="priority">
-      <app-option [value]="0">0</app-option>
-      <app-option [value]="1">1</app-option>
-      <app-option [value]="2">2</app-option>
-      <app-option [value]="3">3</app-option>
-    </app-select>
-
     <!-- Priorities -->
-    <app-select formControlName="priority">
+    <app-select formControlName="priority" floatingLabel="Priority" i18n-floatingLabel>
       <app-option *ngFor="let priority of taskPriorities" [value]="priority" [icon]="priority | taskPriorityIcon">{{
         priority | taskPriority }}</app-option>
     </app-select>

@@ -11,7 +11,9 @@
     "build:docs": "compodoc -p tsconfig.doc.json -y src/docs/styles/ --includes src/docs/config/ -a src/docs/assets/",
     "analyze": "webpack-bundle-analyzer dist/workflow/en-US/stats.json",
     "lint": "ng lint",
-    "start:test": "concurrently \"ng test\" \"http-server --port=9877 ./coverage/workflow\"",
+    "start:test": "yarn start:test:firefox",
+    "start:test:firefox": "concurrently \"ng test\" \"http-server --port=9877 ./coverage/workflow\"",
+    "start:test:chrome": "concurrently \"ng test --browsers=Chrome\" \"http-server --port=9877 ./coverage/workflow\"",
     "build:test": "ng test --watch=false --code-coverage --browsers=ChromeHeadless",
     "build:badges": "node badge-generator.js",
     "e2e": "ng e2e"

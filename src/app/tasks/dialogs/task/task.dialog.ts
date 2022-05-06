@@ -17,7 +17,7 @@ export interface TaskDialogData {
 }
 
 @Component({
-  selector: 'app-task',
+  selector: 'app-task-dialog',
   templateUrl: './task.dialog.html',
   styleUrls: ['./task.dialog.scss'],
 })

@@ -3,6 +3,8 @@ mat-form-field.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
 }
 
 mat-select.mat-select {
+  height: 15.75px;
+
   .mat-select-min-line {
     color: var(--color-text);
   }
@@ -34,5 +36,16 @@ mat-select.mat-select {
     &.mat-selected:not(.at-option-disabled) {
       color: var(--color-select-panel-text-selected);
     }
+  }
+}
+
+mat-select-trigger {
+  display: flex;
+  height: 15.75px;
+  align-items: center;
+  color: var(--color-text);
+
+  app-icon {
+    margin-right: 1rem;
   }
 }

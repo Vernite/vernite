@@ -7,6 +7,10 @@ import { TaskDialog } from './task.dialog';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TaskPriorityPipe } from '@tasks/pipes/task-priority.pipe';
+import { TaskPriorityIconPipe } from '@tasks/pipes/task-priority-icon.pipe';
+import { TaskTypePipe } from '@tasks/pipes/task-type.pipe';
+import { TaskTypeIconPipe } from '@tasks/pipes/task-type-icon.pipe';
 
 describe('TaskDialog', () => {
   let component: TaskDialog;
@@ -15,7 +19,13 @@ describe('TaskDialog', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [MainModule, BrowserAnimationsModule],
-      declarations: [TaskDialog],
+      declarations: [
+        TaskDialog,
+        TaskPriorityPipe,
+        TaskPriorityIconPipe,
+        TaskTypePipe,
+        TaskTypeIconPipe,
+      ],
       providers: [
         MatDialogModule,
         NgControl,

@@ -24,6 +24,10 @@ export class ControlAccessor implements OnInit, OnDestroy, ControlValueAccessor 
     return this._required;
   }
 
+  private get debug() {
+    return (this as any).constructor.debug;
+  }
+
   /**
    * Private property to set filed as required
    */
@@ -98,16 +102,28 @@ export class ControlAccessor implements OnInit, OnDestroy, ControlValueAccessor 
    * Apply the touched observable on ngControl and control fields
    */
   private initCheckForTouch(): void {
+    if (this.debug) console.log('[INIT] initializing checking for touch...');
     if (!this.ngControl.control) return;
+
+    let inTouchLoop = false;
 
     (this.ngControl.control as any)._markAsTouched = this.ngControl.control?.markAsTouched;
     this.ngControl.control!.markAsTouched = () => {
+      if (this.debug) console.log('[TOUCH] ngControl got touched');
+
+      if (inTouchLoop) return;
+      inTouchLoop = true;
+
       (this.ngControl.control as any)._markAsTouched();
       (this.control as any)._markAsTouched();
+
+      inTouchLoop = false;
     };
 
     (this.control as any)._markAsTouched = this.control.markAsTouched;
     this.control.markAsTouched = () => {
+      if (this.debug) console.log('[TOUCH] control got touched');
+
       (this.control as any)._markAsTouched();
       this.touched$.next(true);
     };

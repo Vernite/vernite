@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TaskTypePipe } from './pipes/task-type.pipe';
 import { TaskPriorityPipe } from './pipes/task-priority.pipe';
 import { TaskPriorityIconPipe } from './pipes/task-priority-icon.pipe';
+import { TaskTypeIconPipe } from './pipes/task-type-icon.pipe';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule],
@@ -19,6 +20,7 @@ import { TaskPriorityIconPipe } from './pipes/task-priority-icon.pipe';
     TaskTypePipe,
     TaskPriorityPipe,
     TaskPriorityIconPipe,
+    TaskTypeIconPipe,
   ],
 })
 export class TasksModule {}

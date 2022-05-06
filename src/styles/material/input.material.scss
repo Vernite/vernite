@@ -1,9 +1,10 @@
 mat-form-field.mat-form-field-appearance-outline {
   width: 100%;
-  max-width: 300px;
+  max-width: 400px;
 
   // default styling
-  input {
+  input,
+  textarea {
     caret-color: var(--color-text);
     color: var(--color-text);
   }
@@ -15,6 +16,14 @@ mat-form-field.mat-form-field-appearance-outline {
 
     > * {
       border-color: var(--color-input-border);
+    }
+  }
+
+  .mat-form-field-infix {
+    height: 55.56px;
+
+    textarea.mat-input-element {
+      margin-bottom: 1.5rem;
     }
   }
 
@@ -46,6 +55,7 @@ mat-form-field.mat-form-field-appearance-outline {
       }
 
       .mat-form-field-outline-start {
+        width: 12px !important;
         border-radius: var(--border-radius) 0 0 var(--border-radius);
       }
 
@@ -82,7 +92,8 @@ mat-form-field.mat-form-field-appearance-outline {
   }
 
   // Placeholder
-  input::placeholder {
+  input::placeholder,
+  textarea::placeholder {
     color: var(--color-input-placeholder);
   }
 
@@ -120,7 +131,8 @@ mat-form-field.mat-form-field-appearance-outline {
   }
 }
 
-input {
+input,
+textarea {
   color: var(--color-text);
   font-family: Montserrat, sans-serif;
 }
