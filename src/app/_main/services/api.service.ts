@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { RequestOptions } from '../interfaces/request-options.interface';
 import { Service } from '../decorators/service.decorator';
-import { from, Observable, of, Subject, switchMap } from 'rxjs';
+import { catchError, of, Subject } from 'rxjs';
 
 /**
  * Service to access the API
@@ -41,6 +41,11 @@ export class ApiService {
         responseType: 'json',
         ...options,
       })
+      .pipe(
+        catchError((e) => {
+          return of(e.error);
+        }),
+      )
       .subscribe((response) => {
         return mappedRequest.next(response);
       });

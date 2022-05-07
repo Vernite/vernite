@@ -18,6 +18,7 @@ mat-dialog-container.mat-dialog-container {
     @include typo-heading-5;
 
     margin-bottom: 0.25rem;
+    font-family: var(--font-family);
 
     &.important {
       color: var(--color-dialog-important-text);

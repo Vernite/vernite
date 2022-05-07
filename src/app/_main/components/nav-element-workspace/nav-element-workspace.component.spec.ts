@@ -1,7 +1,6 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { NavElementWorkspaceComponent } from './nav-element-workspace.component';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -21,7 +20,7 @@ describe('NavElementWorkspaceComponent', () => {
         MatDialogModule,
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} },
-      ]
+      ],
     }).compileComponents();
   }));
 

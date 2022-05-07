@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -128,4 +128,11 @@ const ngModuleConfig = {
   exports: [...ngModuleConfig.importExports, ...ngModuleConfig.exportDeclarations],
   providers: [...ngModuleConfig.providers],
 })
-export class MainModule {}
+export class MainModule {
+  static injector: Injector;
+
+  constructor(injector: Injector) {
+    MainModule.injector = injector;
+    (window as any).injector = injector;
+  }
+}
