@@ -1,13 +1,13 @@
 <div class="board" cdkDropListGroup>
-  <div *ngFor="let column of statuses | async; index as i" class="column">
+  <div *ngFor="let column of statusList; index as statusIndex" class="column">
     <div class="column-header">
       <h3>{{column.name}}</h3>
       <app-icon [icon]="faPlus" size="16px" (click)="openNewTaskDialog()"></app-icon>
     </div>
-    <div class="column-content" [cdkDropListData]="getTasksFromStatus(tasks$ | async, column.id)"
-      (cdkDropListDropped)="drop($event)" [attr.data-index]="i" cdkDropList cdkDropListSortingDisabled>
-      <app-board-task *ngFor="let task of getTasksFromStatus(tasks$ | async, column.id)" class="task" [task]="task"
-        [projectId]="projectId" cdkDrag>
+    <div class="column-content" [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event)"
+      [attr.data-index]="statusIndex" cdkDropList>
+      <app-board-task *ngFor="let task of column.tasks; index as taskIndex" class="task" [task]="task"
+        [projectId]="projectId" [attr.data-index]="taskIndex" cdkDrag>
       </app-board-task>
     </div>
   </div>

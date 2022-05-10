@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Workspace } from '@dashboard/interfaces/workspace.interface';
+import { Observable, Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { ProjectService } from '../../services/project.service';
 import { WorkspaceService } from '../../services/workspace.service';
@@ -24,6 +25,8 @@ export class CreateProjectPage {
    */
   public createSubscription?: Subscription;
 
+  public workspace$!: Observable<Workspace>;
+
   private workspaceId!: number;
 
   /**
@@ -39,6 +42,7 @@ export class CreateProjectPage {
   ) {
     const { workspaceId } = this.activatedRoute.snapshot.params;
     this.workspaceId = workspaceId;
+    this.workspace$ = this.workspaceService.get(workspaceId);
     this.form.addControl('workspaceId', new FormControl(workspaceId));
   }
 

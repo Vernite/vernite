@@ -26,12 +26,17 @@ export class BoardTaskComponent {
   }
 
   edit() {
-    this.dialogService.open(TaskDialog, {
-      variant: TaskDialogVariant.EDIT,
-      projectId: this.projectId,
-      task: { ...this.task, status: this.task.statusId },
-    }).afterClosed().subscribe((task) => {
-      this.taskService.update(this.projectId, task);
-    });
+    this.dialogService
+      .open(TaskDialog, {
+        variant: TaskDialogVariant.EDIT,
+        projectId: this.projectId,
+        task: { ...this.task, status: this.task.statusId },
+      })
+      .afterClosed()
+      .subscribe((task) => {
+        if (!task) return;
+
+        this.taskService.update(this.projectId, task);
+      });
   }
 }

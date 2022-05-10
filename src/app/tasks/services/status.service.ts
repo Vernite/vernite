@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { combineLatest, forkJoin, map, Observable, of, take } from 'rxjs';
 import { ApiService } from 'src/app/_main/services/api.service';
-import { Status } from '../interfaces/status.interface';
+import { Status, StatusWithTasks } from '../interfaces/status.interface';
+import { TaskService } from './task.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StatusService {
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private taskService: TaskService) {}
 
   /**
    * Get list of statuses
@@ -56,5 +57,16 @@ export class StatusService {
    */
   public delete(projectId: number, status: Status): Observable<null> {
     return this.apiService.delete(`/project/${projectId}/status/${status.id}`);
+  }
+
+  public listWithTasks(projectId: number): Observable<StatusWithTasks[]> {
+    return combineLatest([this.list(projectId), this.taskService.list(projectId)]).pipe(
+      map(([statuses, tasks]) => {
+        statuses.forEach((status) => {
+          (status as StatusWithTasks).tasks = tasks.filter((task) => task.statusId === status.id);
+        });
+        return statuses as StatusWithTasks[];
+      }),
+    );
   }
 }

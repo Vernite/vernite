@@ -1,4 +1,5 @@
 <form [formGroup]="form" (submit)="submitCreate()">
+  <h2 class="typo-heading-5 mb-5" i18n>Create new project in workspace: {{ (workspace$ | async)?.name }}</h2>
   <app-input formControlName="name" type="text" placeholder="New project" floatingLabel="Project name"
     i18n-floatingLabel i18n-placeholder></app-input>
   <app-button variant="primary" [pending]="createSubscription && !createSubscription.closed" i18n>Save</app-button>
