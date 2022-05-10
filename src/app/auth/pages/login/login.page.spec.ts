@@ -6,6 +6,11 @@ import { DebugElement } from '@angular/core';
 import { LoginPage } from './login.page';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
+import { ButtonComponent } from '@main/components/button/button.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgControl, ReactiveFormsModule } from '@angular/forms';
+import { MainModule } from '@main/_main.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('LoginPage', () => {
   let component: LoginPage;
@@ -13,8 +18,9 @@ describe('LoginPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientModule],
-      declarations: [LoginPage],
+      imports: [RouterTestingModule, BrowserAnimationsModule, ReactiveFormsModule, MainModule],
+      declarations: [LoginPage, ButtonComponent],
+      providers: [NgControl],
     }).compileComponents();
   }));
 

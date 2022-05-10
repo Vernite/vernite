@@ -6,6 +6,11 @@ import { DebugElement } from '@angular/core';
 import { RegisterPage } from './register.page';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ButtonComponent } from '@main/components/button/button.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MainModule } from '@main/_main.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('RegisterPage', () => {
   let component: RegisterPage;
@@ -13,8 +18,8 @@ describe('RegisterPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientModule],
-      declarations: [RegisterPage],
+      imports: [RouterTestingModule, BrowserAnimationsModule, ReactiveFormsModule, MainModule],
+      declarations: [RegisterPage, ButtonComponent],
     }).compileComponents();
   }));
 

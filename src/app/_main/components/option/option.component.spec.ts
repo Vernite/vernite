@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { OptionComponent } from './option.component';
+import { MatSelectModule } from '@angular/material/select';
 
 describe('OptionComponent', () => {
   let component: OptionComponent;
@@ -11,6 +12,7 @@ describe('OptionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [MatSelectModule],
       declarations: [OptionComponent],
     }).compileComponents();
   }));

@@ -5,6 +5,10 @@ import { DebugElement } from '@angular/core';
 
 import { BoardTaskComponent } from './board-task.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogTestingProvider } from '@tests/helpers/mat-dialog-testing-provider.helper';
+import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
+import { IconComponent } from '@main/components/icon/icon.component';
 
 describe('BoardTaskComponent', () => {
   let component: BoardTaskComponent;
@@ -12,8 +16,9 @@ describe('BoardTaskComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MatMenuModule],
-      declarations: [BoardTaskComponent],
+      imports: [MatMenuModule, MatDialogModule, HttpClientModule],
+      declarations: [BoardTaskComponent, IconComponent],
+      providers: [...MatDialogTestingProvider],
     }).compileComponents();
   }));
 

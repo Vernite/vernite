@@ -7,7 +7,7 @@
  */
 export const environment = {
   production: false,
-  apiURL: '/api',
+  apiURL: 'https://workflow.adiantek.ovh/api',
 };
 
 /*

@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { SelectComponent } from './select.component';
-import { NgControl } from '@angular/forms';
+import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -14,7 +14,7 @@ describe('SelectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MatSelectModule, BrowserAnimationsModule],
+      imports: [MatSelectModule, BrowserAnimationsModule, ReactiveFormsModule],
       declarations: [SelectComponent],
       providers: [NgControl],
     }).compileComponents();

@@ -6,6 +6,12 @@ import { DebugElement } from '@angular/core';
 import { ForgotPasswordPage } from './forgot-password.page';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ButtonComponent } from '@main/components/button/button.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { IconComponent } from '@main/components/icon/icon.component';
+import { MainModule } from '@main/_main.module';
+import { NgControl, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ForgotPasswordComponent', () => {
   let component: ForgotPasswordPage;
@@ -13,8 +19,9 @@ describe('ForgotPasswordComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule, RouterTestingModule],
-      declarations: [ForgotPasswordPage],
+      imports: [RouterTestingModule, MainModule, BrowserAnimationsModule, ReactiveFormsModule],
+      declarations: [ForgotPasswordPage, ButtonComponent, IconComponent],
+      providers: [NgControl],
     }).compileComponents();
   }));
 

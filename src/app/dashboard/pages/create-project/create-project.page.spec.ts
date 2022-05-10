@@ -6,7 +6,7 @@ import { DebugElement } from '@angular/core';
 import { CreateProjectPage } from './create-project.page';
 import { MainModule } from 'src/app/_main/_main.module';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NgControl } from '@angular/forms';
+import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('CreateProjectPage', () => {
@@ -15,7 +15,7 @@ describe('CreateProjectPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MainModule, RouterTestingModule, BrowserAnimationsModule],
+      imports: [MainModule, RouterTestingModule, BrowserAnimationsModule, ReactiveFormsModule],
       declarations: [CreateProjectPage],
       providers: [NgControl],
     }).compileComponents();

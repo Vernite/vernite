@@ -27,7 +27,8 @@
       "@emails/*": ["src/app/emails/*"],
       "@messages/*": ["src/app/messages/*"],
       "@tasks/*": ["src/app/tasks/*"],
-      "@components/*": ["src/app/_main/components/*"]
+      "@components/*": ["src/app/_main/components/*"],
+      "@tests/*": ["src/tests/*"]
     }
   },
   "angularCompilerOptions": {

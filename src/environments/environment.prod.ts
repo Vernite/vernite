@@ -3,5 +3,5 @@
  */
 export const environment = {
   production: true,
-  apiURL: '/api',
+  apiURL: 'https://workflow.adiantek.ovh/api',
 };

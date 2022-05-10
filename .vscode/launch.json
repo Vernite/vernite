@@ -22,7 +22,7 @@
       },
       "restart": true,
       "sourceMaps": true,
-      "preLaunchTask": "npm: test"
+      "preLaunchTask": "npm: start:test:chrome"
     }
   ]
 }

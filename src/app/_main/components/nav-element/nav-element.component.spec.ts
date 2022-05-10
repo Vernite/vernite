@@ -6,6 +6,9 @@ import { DebugElement } from '@angular/core';
 import { NavElementComponent } from './nav-element.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatMenuModule } from '@angular/material/menu';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconComponent } from '../icon/icon.component';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('NavElementComponent', () => {
   let component: NavElementComponent;
@@ -13,8 +16,8 @@ describe('NavElementComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, MatMenuModule],
-      declarations: [NavElementComponent],
+      imports: [RouterTestingModule, MatMenuModule, FontAwesomeModule, MatIconModule],
+      declarations: [NavElementComponent, IconComponent],
     }).compileComponents();
   }));
 

@@ -53,7 +53,6 @@ module.exports = function (config) {
       Chrome_without_security: {
         base: 'Chrome',
         flags: [
-          '--no-sandbox',
           '--disable-web-security',
           '--remote-debugging-address=0.0.0.0',
           '--remote-debugging-port=9222',

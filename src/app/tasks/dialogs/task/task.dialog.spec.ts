@@ -5,7 +5,7 @@ import { DebugElement } from '@angular/core';
 import { MainModule } from '../../../_main/_main.module';
 import { TaskDialog } from './task.dialog';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { NgControl } from '@angular/forms';
+import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TaskPriorityPipe } from '@tasks/pipes/task-priority.pipe';
 import { TaskPriorityIconPipe } from '@tasks/pipes/task-priority-icon.pipe';
@@ -18,7 +18,7 @@ describe('TaskDialog', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MainModule, BrowserAnimationsModule],
+      imports: [MainModule, BrowserAnimationsModule, ReactiveFormsModule],
       declarations: [
         TaskDialog,
         TaskPriorityPipe,
