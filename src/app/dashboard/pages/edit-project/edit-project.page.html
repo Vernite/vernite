@@ -1,4 +1,5 @@
 <form [formGroup]="form" (submit)="submitUpdate()">
+  <h2 class="typo-heading-5 mb-5" i18n>Edit project: {{ project$ | async }}</h2>
   <app-input formControlName="name" type="text" placeholder="New project" floatingLabel="Project name"
     i18n-floatingLabel i18n-placeholder></app-input>
   <app-button variant="primary" [pending]="updateSubscription && !updateSubscription.closed" i18n>Save</app-button>

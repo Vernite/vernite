@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Project } from '@dashboard/interfaces/project.interface';
+import { Observable, Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { ProjectService } from '../../services/project.service';
 import { WorkspaceService } from '../../services/workspace.service';
@@ -18,6 +19,8 @@ export class EditProjectPage implements OnDestroy {
   public form = new FormGroup({
     name: new FormControl('', [requiredValidator()], []),
   });
+
+  public project$!: Observable<Project>;
 
   /**
    * Subscription to the workspace updating.
@@ -59,7 +62,8 @@ export class EditProjectPage implements OnDestroy {
    * @param id project id
    */
   public loadProject(id: number) {
-    this.getSubscription = this.projectService.get(id).subscribe((workspace) => {
+    this.project$ = this.projectService.get(id);
+    this.getSubscription = this.project$.subscribe((workspace) => {
       this.form.patchValue(workspace);
     });
   }
