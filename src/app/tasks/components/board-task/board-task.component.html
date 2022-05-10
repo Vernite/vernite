@@ -14,10 +14,10 @@
       <app-icon icon="matMoreVert"></app-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item (click)="edit()">
         <span i18n>Edit task</span>
       </button>
-      <button mat-menu-item class="important">
+      <button mat-menu-item class="important" (click)="delete()">
         <span i18n>Delete task</span>
       </button>
     </mat-menu>

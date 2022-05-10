@@ -7,13 +7,13 @@ import { TaskType } from '@tasks/enums/task-type.enum';
 export class TaskTypeIconPipe implements PipeTransform {
   transform(value: any): any {
     switch (value) {
-      case TaskType.TASK:
+      case 'TASK':
         return 'cuTask';
-      case TaskType.ISSUE:
+      case 'ISSUE':
         return 'cuIssue';
-      case TaskType.EPIC:
+      case 'EPIC':
         return 'cuEpic';
-      case TaskType.USER_STORY:
+      case 'USER_STORY':
         return 'cuUserStory';
     }
   }

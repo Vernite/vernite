@@ -50,7 +50,7 @@ export class TaskService {
    * @param projectId Project id needed to delete task
    * @returns Request observable
    */
-  public delete(projectId: number, task: Task): Observable<null> {
-    return this.apiService.delete(`/project/${projectId}/task/${task.id}`);
+  public delete(projectId: number, taskId: number): Observable<null> {
+    return this.apiService.delete(`/project/${projectId}/task/${taskId}`);
   }
 }

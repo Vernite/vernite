@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Status } from '../../interfaces/status.interface';
 import { Task } from '../../interfaces/task.interface';
 import { TaskService } from '../../services/task.service';
-import { Observable, Subscription } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { StatusService } from '../../services/status.service';
 import { DialogService } from '../../../_main/services/dialog.service';
@@ -17,10 +17,11 @@ import { TaskDialog, TaskDialogData, TaskDialogVariant } from '../../dialogs/tas
 })
 export class BoardPage implements OnInit, OnDestroy {
   public statuses!: Observable<Status[]>;
+  public tasks$!: Observable<{ [key: number]: Task[] }>;
   public faPlus = faPlus;
+  public projectId!: number;
 
   private statusesList: Status[] = [];
-  private projectId!: number;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,8 +30,20 @@ export class BoardPage implements OnInit, OnDestroy {
     private dialogService: DialogService,
   ) {
     const { workspaceId, projectId } = this.activatedRoute.snapshot.params;
+
     this.projectId = projectId;
     this.statuses = this.statusService.list(projectId);
+    this.tasks$ = this.taskService.list(projectId).pipe(
+      map(tasks => tasks.reduce((acc, task) => {
+        acc[task.statusId] = acc[task.statusId] || [];
+        acc[task.statusId].push(task);
+        return acc;
+      }, {} as { [key: string]: Task[] })),
+    );
+  }
+
+  getTasksFromStatus(groupedTasks: { [key: number]: Task[] } | null, statusId: number) {
+    return groupedTasks?.[statusId] || [];
   }
 
   ngOnInit() {
@@ -60,6 +73,7 @@ export class BoardPage implements OnInit, OnDestroy {
   openNewTaskDialog() {
     this.dialogService
       .open(TaskDialog, {
+        projectId: this.projectId,
         variant: TaskDialogVariant.CREATE,
       } as TaskDialogData)
       .afterClosed()

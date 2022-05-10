@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
+import { Task } from '@tasks/interfaces/task.interface';
 import { filter } from 'rxjs';
 import { Service } from '../decorators/service.decorator';
 import { AlertDialog, AlertDialogData, AlertDialogVariant } from '../dialogs/alert/alert.dialog';
@@ -67,6 +68,16 @@ export class DialogService {
     return this.confirm({
       title: $localize`Delete workspace "${workspace.name}"`,
       message: $localize`Are you sure you want to delete this workspace "${workspace.name}"?`,
+      confirmText: $localize`Delete`,
+      cancelText: $localize`Cancel`,
+      variant: AlertDialogVariant.IMPORTANT,
+    });
+  }
+
+  confirmTaskDelete(task: Task) {
+    return this.confirm({
+      title: $localize`Delete task "${task.name}"`,
+      message: $localize`Are you sure you want to delete this task "${task.name}"?`,
       confirmText: $localize`Delete`,
       cancelText: $localize`Cancel`,
       variant: AlertDialogVariant.IMPORTANT,

@@ -6,13 +6,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TaskTypePipe implements PipeTransform {
   transform(value: any): any {
     switch (value) {
-      case 'task':
+      case 'TASK':
         return $localize`Task`;
-      case 'user-story':
+      case 'USER_STORY':
         return $localize`User story`;
-      case 'issue':
+      case 'ISSUE':
         return $localize`Issue`;
-      case 'epic':
+      case 'EPIC':
         return $localize`Epic`;
     }
   }

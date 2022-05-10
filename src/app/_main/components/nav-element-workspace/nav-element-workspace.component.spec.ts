@@ -1,6 +1,5 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 
 import { NavElementWorkspaceComponent } from './nav-element-workspace.component';
 import { RouterTestingModule } from '@angular/router/testing';

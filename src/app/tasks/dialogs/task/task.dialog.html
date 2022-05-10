@@ -5,7 +5,8 @@
 
     <!-- Type field -->
     <app-select formControlName="type" floatingLabel="Type" i18n-floatingLabel>
-      <app-option *ngFor="let type of taskTypes" [value]="type" [icon]="type | taskTypeIcon">{{ type | taskType }}
+      <app-option *ngFor="let type of taskTypes" [value]="type[1]" [icon]="type[1] | taskTypeIcon">{{ type[0] | taskType
+        }}
       </app-option>
     </app-select>
 
@@ -18,6 +19,12 @@
       i18n-floatingLabel i18n-placeholder [rows]="10"></app-textarea>
 
     <!-- Status -->
+    <ng-container *ngIf="statusListLoaded">
+      <app-select formControlName="status" floatingLabel="Status" i18n-floatingLabel>
+        <app-option *ngFor="let status of statusList" [value]="status?.id">{{ status?.name }}
+        </app-option>
+      </app-select>
+    </ng-container>
 
     <!-- Priorities -->
     <app-select formControlName="priority" floatingLabel="Priority" i18n-floatingLabel>

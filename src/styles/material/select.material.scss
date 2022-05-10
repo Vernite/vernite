@@ -39,6 +39,10 @@ mat-select.mat-select {
   }
 }
 
+mat-form-field.mat-form-field-appearance-outline .mat-select-arrow-wrapper {
+  transform: none;
+}
+
 mat-select-trigger {
   display: flex;
   height: 15.75px;

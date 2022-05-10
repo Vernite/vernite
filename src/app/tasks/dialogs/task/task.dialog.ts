@@ -5,6 +5,10 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { requiredValidator } from '../../../_main/validators/required.validator';
 import { TaskType } from '@tasks/enums/task-type.enum';
 import { TaskPriority } from '@tasks/enums/task-priority.enum';
+import { Enum } from '@main/classes/enum.class';
+import { StatusService } from '@tasks/services/status.service';
+import { Status } from '@tasks/interfaces/status.interface';
+import { Observable } from 'rxjs';
 
 export enum TaskDialogVariant {
   CREATE = 'create',
@@ -12,6 +16,7 @@ export enum TaskDialogVariant {
 }
 
 export interface TaskDialogData {
+  projectId: number;
   variant: TaskDialogVariant;
   task?: Partial<Task>;
 }
@@ -24,23 +29,41 @@ export interface TaskDialogData {
 export class TaskDialog implements OnInit {
   TaskDialogVariant = TaskDialogVariant;
 
-  public taskTypes = Object.values(TaskType);
+  public taskTypes = Enum.entries(TaskType);
   public taskPriorities = Object.values(TaskPriority);
 
+  public statusList$!: Observable<Status[]>;
+  public statusList!: Status[];
+  public statusListLoaded = false;
+
   public form = new FormGroup({
+    id: new FormControl(-1),
     type: new FormControl(this.taskTypes[0], [requiredValidator()]),
     name: new FormControl('', [requiredValidator()]),
+    status: new FormControl(null, [requiredValidator()]),
     description: new FormControl(''),
     priority: new FormControl(this.taskPriorities[2], [requiredValidator()]),
-    checkbox: new FormControl(false),
   });
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: TaskDialogData,
     private dialogRef: MatDialogRef<TaskDialog>,
+    private statusService: StatusService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const { projectId, task } = this.data;
+
+    if (task) {
+      this.form.patchValue(task);
+    }
+
+    this.statusList$ = this.statusService.list(projectId);
+    this.statusList$.subscribe((statuses) => {
+      this.statusList = statuses;
+      this.statusListLoaded = true;
+    });
+  }
 
   confirm() {
     this.form.markAllAsTouched();

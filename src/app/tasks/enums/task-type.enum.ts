@@ -1,6 +1,6 @@
 export enum TaskType {
-  TASK = 'task',
-  USER_STORY = 'user-story',
-  ISSUE = 'issue',
-  EPIC = 'epic',
+  TASK = 0,
+  USER_STORY = 1,
+  ISSUE = 2,
+  EPIC = 3,
 }
