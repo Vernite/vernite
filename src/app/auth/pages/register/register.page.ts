@@ -4,6 +4,12 @@ import { Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Enum } from '@main/classes/enum.class';
+
+enum RegisterStage {
+  IMPORTANT_DATA,
+  PERSONAL_DATA,
+}
 
 @Component({
   selector: 'app-register',
@@ -14,6 +20,8 @@ export class RegisterPage {
   constructor(private authService: AuthService, private router: Router) {}
 
   private registerSubscription?: Subscription;
+  public stage?: RegisterStage = RegisterStage.IMPORTANT_DATA;
+  RegisterStage = RegisterStage;
 
   /**
    * Form group for register.
@@ -22,8 +30,30 @@ export class RegisterPage {
     email: new FormControl('', [requiredValidator()], []),
     password: new FormControl('', [requiredValidator()], []),
     repeatPassword: new FormControl('', [requiredValidator()], []),
+    name: new FormControl('', [requiredValidator()], []),
+    surname: new FormControl('', [requiredValidator()], []),
+    username: new FormControl('', [requiredValidator()], []),
     agreements: new FormControl('', [requiredValidator()], []),
   });
+
+  nextStage() {
+    let formFields: string[] = ['email', 'password', 'repeatPassword', 'agreements'];
+    let correctData: boolean = true;
+    for (let field of formFields) {
+      this.form.get(field)?.markAsTouched();
+      this.form.get(field)?.updateValueAndValidity();
+      if (this.form.get(field)?.invalid) {
+        correctData = false;
+      }
+    }
+    if (correctData) {
+      this.stage = RegisterStage.PERSONAL_DATA;
+    }
+  }
+
+  previousStage() {
+    this.stage = RegisterStage.IMPORTANT_DATA;
+  }
 
   register() {
     if (this.registerSubscription && !this.registerSubscription.closed) return;

@@ -7,7 +7,12 @@ import { ValidationError } from '../interfaces/validation-error.interface';
  */
 export function requiredValidator(): ValidatorFn {
   return function required(control: AbstractControl): ValidationError | null {
-    if (control.value === null || control.value === undefined || control.value === '') {
+    if (
+      control.value === null ||
+      control.value === undefined ||
+      control.value === '' ||
+      control.value === false
+    ) {
       return { type: 'required', message: $localize`This field is required` };
     }
     return null;
