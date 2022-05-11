@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { passwordValidator } from '@main/validators/password.validator';
 import { requiredValidator } from '@main/validators/required.validator';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
@@ -19,8 +20,8 @@ export class ChangePasswordPage {
    * Form group for setting new password.
    */
   public form = new FormGroup({
-    password: new FormControl('', [requiredValidator()], []),
-    repeatPassword: new FormControl('', [requiredValidator()], []),
+    password: new FormControl('', [requiredValidator(), passwordValidator()], []),
+    repeatPassword: new FormControl('', [requiredValidator(), passwordValidator()], []),
   });
 
   setNewPassword() {

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { passwordValidator } from '@main/validators/password.validator';
 import { Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Enum } from '@main/classes/enum.class';
 
 enum RegisterStage {
   IMPORTANT_DATA,
@@ -28,8 +28,8 @@ export class RegisterPage {
    */
   public form = new FormGroup({
     email: new FormControl('', [requiredValidator()], []),
-    password: new FormControl('', [requiredValidator()], []),
-    repeatPassword: new FormControl('', [requiredValidator()], []),
+    password: new FormControl('', [requiredValidator(), passwordValidator()], []),
+    repeatPassword: new FormControl('', [requiredValidator(), passwordValidator()], []),
     name: new FormControl('', [requiredValidator()], []),
     surname: new FormControl('', [requiredValidator()], []),
     username: new FormControl('', [requiredValidator()], []),
