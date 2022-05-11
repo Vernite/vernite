@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl, ValidationErrors } from '@angular/forms';
-import { BehaviorSubject, merge, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 /**
  * A base class for creating custom control accessors like inputs, checkboxes, etc.
@@ -81,6 +81,8 @@ export class ControlAccessor implements OnInit, OnDestroy, ControlValueAccessor 
   ngOnInit() {
     this.initCheckForTouch();
     this.checkIfIsRequired();
+    if (this.ngControl.control?.validator)
+      this.control.validator = this.ngControl.control?.validator;
   }
 
   /**

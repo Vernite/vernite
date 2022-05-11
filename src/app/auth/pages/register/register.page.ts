@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { emailValidator } from '@main/validators/email.validator';
 import { passwordValidator } from '@main/validators/password.validator';
+import { sameAsValidator } from '@main/validators/same-as.validator';
 import { Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { AuthService } from '../../services/auth.service';
@@ -27,9 +29,17 @@ export class RegisterPage {
    * Form group for register.
    */
   public form = new FormGroup({
-    email: new FormControl('', [requiredValidator()], []),
+    email: new FormControl('', [requiredValidator(), emailValidator()], []),
     password: new FormControl('', [requiredValidator(), passwordValidator()], []),
-    repeatPassword: new FormControl('', [requiredValidator(), passwordValidator()], []),
+    repeatPassword: new FormControl(
+      '',
+      [
+        requiredValidator(),
+        passwordValidator(),
+        sameAsValidator('password', $localize`Given passwords are not the same `),
+      ],
+      [],
+    ),
     name: new FormControl('', [requiredValidator()], []),
     surname: new FormControl('', [requiredValidator()], []),
     username: new FormControl('', [requiredValidator()], []),
