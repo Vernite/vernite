@@ -1,14 +1,17 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardRoutingModule } from './dashboard.routing';
-import { CreateWorkspacePage } from './pages/create-workspace/create-workspace.page';
-import { MainModule } from '../_main/_main.module';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { WorkspacesListPage } from './pages/workspaces-list/workspaces-list.page';
+import { MainModule } from '../_main/_main.module';
+import { DashboardRoutingModule } from './dashboard.routing';
+import { CreateProjectPage } from './pages/create-project/create-project.page';
+import { CreateWorkspacePage } from './pages/create-workspace/create-workspace.page';
+import { EditProjectPage } from './pages/edit-project/edit-project.page';
 import { EditWorkspacePage } from './pages/edit-workspace/edit-workspace.page';
 import { ProjectsListPage } from './pages/projects-list/projects-list.page';
-import { CreateProjectPage } from './pages/create-project/create-project.page';
-import { EditProjectPage } from './pages/edit-project/edit-project.page';
+import { SettingsAccountPage } from './pages/settings-account/settings-account.page';
+import { SettingsLocalizationPage } from './pages/settings-localization/settings-localization.page';
+import { SettingsPage } from './pages/settings/settings.page';
+import { WorkspacesListPage } from './pages/workspaces-list/workspaces-list.page';
 
 @NgModule({
   imports: [CommonModule, MainModule, ReactiveFormsModule, DashboardRoutingModule],
@@ -19,6 +22,9 @@ import { EditProjectPage } from './pages/edit-project/edit-project.page';
     ProjectsListPage,
     CreateProjectPage,
     EditProjectPage,
+    SettingsPage,
+    SettingsAccountPage,
+    SettingsLocalizationPage,
   ],
 })
 export class DashboardModule {}

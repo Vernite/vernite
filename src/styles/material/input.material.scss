@@ -11,11 +11,6 @@ mat-form-field.mat-form-field-appearance-outline {
     color: var(--color-text);
   }
 
-  // input {
-  //   padding-top: 12px;
-  //   padding-bottom: 16px;F
-  // }
-
   .mat-form-field-outline {
     background-color: var(--color-input-background);
     border-radius: var(--border-radius);
@@ -101,7 +96,7 @@ mat-form-field.mat-form-field-appearance-outline {
 
   &.without-floating-label {
     .mat-form-field-infix {
-      border-top-width: 5px;
+      border-top-width: 11px;
     }
   }
 
@@ -163,6 +158,7 @@ input:autofill,
 input:autofill:focus,
 input:-webkit-autofill::first-line {
   @include typo-body;
+
   transition: background-color 600000s 0s, color 600000s 0s;
 }
 
@@ -174,4 +170,13 @@ input:-webkit-autofill::first-line {
   font-family: var(--font-family) !important;
   font-size: 0.875rem !important;
   font-weight: 400 !important;
+}
+
+app-input.full-width {
+  width: 100%;
+
+  .form-field,
+  .form-field .mat-form-field {
+    max-width: none;
+  }
 }

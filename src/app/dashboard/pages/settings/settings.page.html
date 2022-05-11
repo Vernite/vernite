@@ -1,0 +1,21 @@
+<section>
+  <nav class="sidebar">
+    <ul>
+      <li>
+        <a routerLink="/settings/account" routerLinkActive="active">
+          <app-icon [icon]="faUser" size="16px"></app-icon>
+          <span>Account</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/settings/localization" routerLinkActive="active">
+          <app-icon [icon]="faGlobe" size="16px"></app-icon>
+          <span>Localization</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</section>

@@ -53,3 +53,11 @@ mat-select-trigger {
     margin-right: 1rem;
   }
 }
+
+app-select.full-width {
+  width: 100%;
+
+  .mat-form-field {
+    max-width: none;
+  }
+}

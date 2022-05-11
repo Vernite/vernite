@@ -1,0 +1,50 @@
+<h2 class="typo-heading-5 mb-5" i18n>Account</h2>
+<form [formGroup]="form" (submit)="submit()">
+
+  <!-- Email -->
+  <app-input formControlName="email" type="email" staticLabel="Email" placeholder="test@example.com" class="full-width"
+    i18n-staticLabel i18n-placeholder>
+  </app-input>
+
+  <!-- Username -->
+  <app-input formControlName="username" type="text" staticLabel="Username" placeholder="username" class="full-width"
+    i18n-staticLabel i18n-placeholder>
+  </app-input>
+
+  <!-- Name -->
+  <app-input formControlName="name" type="text" staticLabel="Name" placeholder="John" class="full-width"
+    i18n-staticLabel i18n-placeholder>
+  </app-input>
+
+  <!-- Surname -->
+  <app-input formControlName="surname" type="text" staticLabel="Surname" placeholder="Smith" class="full-width"
+    i18n-staticLabel i18n-placeholder>
+  </app-input>
+
+  <!-- Actions section -->
+  <div class="actions">
+    <app-button variant="primary" i18n>Update profile</app-button>
+  </div>
+
+  <!-- Change password card -->
+  <app-card class="block mb-10">
+    <div class="card-title" i18n>Change password</div>
+    <div class="card-content" i18n>It's highly recommended to change the password every 30 days. It will increase your
+      account security.</div>
+    <div class="card-actions">
+      <app-button type="button" variant="secondary" i18n>Change password</app-button>
+    </div>
+  </app-card>
+
+  <!-- Delete account card -->
+  <app-card class="important">
+    <div class="card-title" i18n>Delete account</div>
+    <div class="card-content" i18n>Delete your account permanently. All not shared owned projects will also be deleted.
+      This action is reversible in period of 7 days - you need to log in to your account in this time to revert your
+      account deletion.</div>
+    <div class="card-actions">
+      <app-button type="button" variant="important" i18n>Delete account</app-button>
+    </div>
+  </app-card>
+
+</form>
