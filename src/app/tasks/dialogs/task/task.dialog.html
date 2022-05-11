@@ -20,7 +20,7 @@
 
     <!-- Status -->
     <ng-container *ngIf="statusListLoaded">
-      <app-select formControlName="status" floatingLabel="Status" i18n-floatingLabel>
+      <app-select formControlName="statusId" floatingLabel="Status" i18n-floatingLabel>
         <app-option *ngFor="let status of statusList" [value]="status?.id">{{ status?.name }}
         </app-option>
       </app-select>

@@ -1,14 +1,14 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Status, StatusWithTasks } from '../../interfaces/status.interface';
-import { Task } from '../../interfaces/task.interface';
-import { TaskService } from '../../services/task.service';
-import { map, Observable, Subscription } from 'rxjs';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { StatusService } from '../../services/status.service';
+import { Observable, Subscription } from 'rxjs';
 import { DialogService } from '../../../_main/services/dialog.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '../../dialogs/task/task.dialog';
+import { StatusWithTasks } from '../../interfaces/status.interface';
+import { Task } from '../../interfaces/task.interface';
+import { StatusService } from '../../services/status.service';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-board',
@@ -62,7 +62,7 @@ export class BoardPage implements OnInit, OnDestroy {
     const previousTaskIndex = event.previousIndex;
     const task = previousStatus.tasks[previousTaskIndex];
 
-    task.status = newStatus.id;
+    task.statusId = newStatus.id;
     this.taskService.update(this.projectId, task).subscribe();
 
     if (event.previousContainer === event.container) {

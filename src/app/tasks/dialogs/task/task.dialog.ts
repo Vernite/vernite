@@ -1,14 +1,14 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Task } from '../../interfaces/task.interface';
-import { FormGroup, FormControl } from '@angular/forms';
-import { requiredValidator } from '../../../_main/validators/required.validator';
-import { TaskType } from '@tasks/enums/task-type.enum';
-import { TaskPriority } from '@tasks/enums/task-priority.enum';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Enum } from '@main/classes/enum.class';
-import { StatusService } from '@tasks/services/status.service';
+import { TaskPriority } from '@tasks/enums/task-priority.enum';
+import { TaskType } from '@tasks/enums/task-type.enum';
 import { Status } from '@tasks/interfaces/status.interface';
+import { StatusService } from '@tasks/services/status.service';
 import { Observable } from 'rxjs';
+import { requiredValidator } from '../../../_main/validators/required.validator';
+import { Task } from '../../interfaces/task.interface';
 
 export enum TaskDialogVariant {
   CREATE = 'create',
@@ -40,7 +40,7 @@ export class TaskDialog implements OnInit {
     id: new FormControl(-1),
     type: new FormControl(this.taskTypes[0], [requiredValidator()]),
     name: new FormControl('', [requiredValidator()]),
-    status: new FormControl(null, [requiredValidator()]),
+    statusId: new FormControl(null, [requiredValidator()]),
     description: new FormControl(''),
     priority: new FormControl(this.taskPriorities[2], [requiredValidator()]),
   });
@@ -48,7 +48,7 @@ export class TaskDialog implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: TaskDialogData,
     private dialogRef: MatDialogRef<TaskDialog>,
-    private statusService: StatusService
+    private statusService: StatusService,
   ) {}
 
   ngOnInit() {
