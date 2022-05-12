@@ -4,6 +4,7 @@ import { CreateProjectPage } from './pages/create-project/create-project.page';
 import { CreateWorkspacePage } from './pages/create-workspace/create-workspace.page';
 import { EditProjectPage } from './pages/edit-project/edit-project.page';
 import { EditWorkspacePage } from './pages/edit-workspace/edit-workspace.page';
+import { GithubIntegrationPage } from './pages/github-integration/github-integration.page';
 import { ProjectsListPage } from './pages/projects-list/projects-list.page';
 import { SettingsAccountPage } from './pages/settings-account/settings-account.page';
 import { SettingsLocalizationPage } from './pages/settings-localization/settings-localization.page';
@@ -32,6 +33,10 @@ const routes: Routes = [
         component: SettingsLocalizationPage,
       },
     ],
+  },
+  {
+    path: 'github',
+    component: GithubIntegrationPage,
   },
   {
     path: 'dashboard',

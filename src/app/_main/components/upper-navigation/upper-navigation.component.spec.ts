@@ -1,8 +1,9 @@
 /* tslint:disable:no-unused-variable */
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
 
+import { MatDialogTestingProvider } from '@tests/helpers/mat-dialog-testing-provider.helper';
 import { UpperNavigationComponent } from './upper-navigation.component';
 
 describe('UpperNavigationComponent', () => {
@@ -11,9 +12,10 @@ describe('UpperNavigationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UpperNavigationComponent ]
-    })
-    .compileComponents();
+      imports: [MatDialogModule, HttpClientModule],
+      declarations: [UpperNavigationComponent],
+      providers: [...MatDialogTestingProvider],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,3 +1,5 @@
+<app-view-options [project]="(project$ | async)!"></app-view-options>
+
 <div class="board" cdkDropListGroup>
   <div *ngFor="let column of statusList; index as statusIndex" class="column">
     <div class="column-header">

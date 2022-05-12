@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { faAngleDown, faCog, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '@main/services/dialog.service';
+import { TaskDialog, TaskDialogData, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
 import { TaskService } from '@tasks/services/task.service';
 
 @Component({
@@ -19,16 +20,16 @@ export class UpperNavigationComponent {
   public active: boolean = false;
 
   createNewTask() {
-    // this.dialogService
-    //   .open(TaskDialog, {
-    //     variant: TaskDialogVariant.CREATE,
-    //   } as TaskDialogData)
-    //   .afterClosed()
-    //   .subscribe((result) => {
-    //     if (result) {
-    //       this.taskService.create(this.projectId, result);
-    //     }
-    //   });
+    this.dialogService
+      .open(TaskDialog, {
+        variant: TaskDialogVariant.CREATE,
+      } as TaskDialogData)
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.taskService.create(result.projectId, result);
+        }
+      });
   }
 
   public openProfile() {

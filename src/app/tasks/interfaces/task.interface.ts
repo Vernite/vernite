@@ -2,14 +2,6 @@ export interface Task {
   id: number;
   name: string;
   description: string;
-
-  /**
-   * Returned by the server using GET methods.
-   */
+  deadline: Date;
   statusId?: number;
-
-  /**
-   * Sent to the server using PUT and POST methods.
-   */
-  status?: number;
 }
