@@ -41,7 +41,7 @@ mat-checkbox.mat-checkbox {
 }
 
 app-checkbox {
-  &.ng-invalid {
+  &.ng-touched.ng-invalid {
     .mat-checkbox-frame {
       border-color: var(--color-red-600);
     }
