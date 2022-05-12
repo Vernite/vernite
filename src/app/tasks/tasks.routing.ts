@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { BoardPage } from './pages/board/board.page';
+import { TaskListPage } from './pages/task-list/task-list.page';
 
 /**
  * Tasks routes list
@@ -14,6 +15,10 @@ const routes: Routes = [
   {
     path: 'board',
     component: BoardPage,
+  },
+  {
+    path: 'list',
+    component: TaskListPage,
   },
 ];
 

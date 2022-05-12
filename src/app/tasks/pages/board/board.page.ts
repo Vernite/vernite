@@ -1,6 +1,8 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Project } from '@dashboard/interfaces/project.interface';
+import { ProjectService } from '@dashboard/services/project.service';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Observable, Subscription } from 'rxjs';
 import { DialogService } from '../../../_main/services/dialog.service';
@@ -20,6 +22,7 @@ export class BoardPage implements OnInit, OnDestroy {
   public projectId!: number;
 
   public statusList$!: Observable<StatusWithTasks[]>;
+  public project$: Observable<Project>;
   public statusList: StatusWithTasks[] = [];
   private statusListSubscription?: Subscription;
 
@@ -28,10 +31,12 @@ export class BoardPage implements OnInit, OnDestroy {
     private taskService: TaskService,
     private statusService: StatusService,
     private dialogService: DialogService,
+    private projectService: ProjectService,
   ) {
     const { workspaceId, projectId } = this.activatedRoute.snapshot.params;
 
     this.projectId = projectId;
+    this.project$ = this.projectService.get(projectId);
     this.statusList$ = this.statusService.listWithTasks(projectId);
     this.statusListSubscription = this.statusList$.subscribe((statusList) => {
       this.statusList = statusList;
