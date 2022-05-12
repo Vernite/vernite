@@ -16,7 +16,7 @@ export class GithubIntegrationPage implements OnInit {
   ngOnInit() {
     const { installation_id, setup_action } = this.activatedRoute.snapshot.queryParams;
 
-    if (setup_action !== 'update') {
+    if (installation_id && setup_action && setup_action !== 'update') {
       this.gitIntegrationService.postGitHubIntegration(installation_id).subscribe();
     }
   }

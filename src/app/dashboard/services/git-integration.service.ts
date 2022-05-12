@@ -33,9 +33,9 @@ export class GitIntegrationService {
     );
   }
 
-  public postGitHubIntegration(InstallationId: string): Observable<void> {
+  public postGitHubIntegration(installationId: string): Observable<void> {
     return this.apiService.post(`/integration/github`, {
-      params: { InstallationId },
+      params: { installationId },
     });
   }
 
