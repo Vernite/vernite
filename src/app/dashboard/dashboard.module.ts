@@ -12,6 +12,7 @@ import { SettingsAccountPage } from './pages/settings-account/settings-account.p
 import { SettingsLocalizationPage } from './pages/settings-localization/settings-localization.page';
 import { SettingsPage } from './pages/settings/settings.page';
 import { WorkspacesListPage } from './pages/workspaces-list/workspaces-list.page';
+import { GitIntegrationService } from './services/git-integration.service';
 
 @NgModule({
   imports: [CommonModule, MainModule, ReactiveFormsModule, DashboardRoutingModule],
@@ -26,5 +27,6 @@ import { WorkspacesListPage } from './pages/workspaces-list/workspaces-list.page
     SettingsAccountPage,
     SettingsLocalizationPage,
   ],
+  providers: [GitIntegrationService],
 })
 export class DashboardModule {}

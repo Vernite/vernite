@@ -72,7 +72,7 @@ export class ControlAccessor implements OnInit, OnDestroy, ControlValueAccessor 
      */
     public ngControl: NgControl,
   ) {
-    ngControl.valueAccessor = this;
+    this.ngControl.valueAccessor = this;
   }
 
   /**

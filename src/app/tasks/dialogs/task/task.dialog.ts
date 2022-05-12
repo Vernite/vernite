@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
+import { GitIntegrationService } from '@dashboard/services/git-integration.service';
 import { ProjectService } from '@dashboard/services/project.service';
 import { WorkspaceService } from '@dashboard/services/workspace.service';
 import { Enum } from '@main/classes/enum.class';
@@ -48,6 +49,7 @@ export class TaskDialog implements OnInit {
 
   public projectList!: Project[];
   public projectListLoaded = false;
+  public isGitHubIntegrationAvailable = false;
 
   public form = new FormGroup({
     id: new FormControl(-1),
@@ -58,6 +60,11 @@ export class TaskDialog implements OnInit {
     workspaceId: new FormControl(null, [requiredValidator()]),
     description: new FormControl(''),
     priority: new FormControl(this.taskPriorities[2], [requiredValidator()]),
+
+    // GitHub integration fields
+    connectWithIssueOnGitHub: new FormControl(false),
+    issueAttachGithub: new FormControl(false),
+    issueNumberGitHub: new FormControl(null),
   });
 
   constructor(
@@ -67,6 +74,7 @@ export class TaskDialog implements OnInit {
     private statusService: StatusService,
     private projectService: ProjectService,
     private workspaceService: WorkspaceService,
+    private gitIntegrationService: GitIntegrationService,
   ) {
     const { workspaceId, projectId } = this.activatedRoute.snapshot.params;
 
@@ -114,6 +122,10 @@ export class TaskDialog implements OnInit {
         this.statusList = statuses;
         this.statusListLoaded = true;
       });
+    });
+
+    this.gitIntegrationService.hasGitHubIntegration(projectId!).subscribe((value) => {
+      this.isGitHubIntegrationAvailable = value;
     });
   }
 
