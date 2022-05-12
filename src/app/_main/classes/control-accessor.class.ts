@@ -81,7 +81,6 @@ export class ControlAccessor implements OnInit, OnDestroy, ControlValueAccessor 
   ngOnInit() {
     this.initCheckForTouch();
     this.checkIfIsRequired();
-
     if (this.ngControl.control?.validator)
       this.control.validator = this.ngControl.control?.validator;
   }

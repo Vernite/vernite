@@ -43,7 +43,7 @@ export class TaskDialog implements OnInit {
     id: new FormControl(-1),
     type: new FormControl(this.taskTypes[0], [requiredValidator()]),
     name: new FormControl('', [requiredValidator()]),
-    status: new FormControl(null, [requiredValidator()]),
+    statusId: new FormControl(null, [requiredValidator()]),
     description: new FormControl(''),
     priority: new FormControl(this.taskPriorities[2], [requiredValidator()]),
 

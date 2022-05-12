@@ -20,6 +20,8 @@ export class ButtonComponent implements FocusableOption {
    */
   @Input() variant: 'primary' | 'secondary' | 'important' = 'secondary';
 
+  @Input() type: 'button' | 'subbmit' = 'subbmit';
+
   /**
    * Information about the pending. If button is pending the loader icon will be shown
    */

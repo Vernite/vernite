@@ -11,8 +11,22 @@ export class AuthService {
     return this.apiService.post(`/auth/login`, { body: { email, password } });
   }
 
-  public register({ email, password }: { email: string; password: string }) {
-    return this.apiService.post(`/auth/register`, { body: { email, password } });
+  public register({
+    email,
+    password,
+    name,
+    surname,
+    username,
+  }: {
+    email: string;
+    password: string;
+    name: string;
+    surname: string;
+    username: string;
+  }) {
+    return this.apiService.post(`/auth/register`, {
+      body: { email, password, name, surname, username },
+    });
   }
 
   public resetPassword({ email }: { email: string }) {
