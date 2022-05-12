@@ -32,6 +32,20 @@
         priority | taskPriority }}</app-option>
     </app-select>
 
+    <!-- GitHub integration -->
+    <app-checkbox *ngIf="isGitHubIntegrationAvailable" formControlName="connectWithIssueOnGitHub" i18n>Create or attach
+      GitHub issue simultaneously</app-checkbox>
+
+    <div *ngIf="form.get('connectWithIssueOnGitHub')?.value" class="git-issue-connection">
+      <app-select formControlName="issueAttachGithub">
+        <app-option [value]="false" i18n>Create</app-option>
+        <app-option [value]="true" i18n>Attach</app-option>
+      </app-select>
+
+      <app-input *ngIf="form.get('issueAttachGithub')?.value" formControlName="issueNumberGitHub"
+        floatingLabel="Issue number" i18n-floatingLabel></app-input>
+    </div>
+
   </form>
 </div>
 <div mat-dialog-actions>

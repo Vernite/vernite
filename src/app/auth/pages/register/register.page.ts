@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { emailValidator } from '@main/validators/email.validator';
 import { Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class RegisterPage {
    * Form group for register.
    */
   public form = new FormGroup({
-    email: new FormControl('', [requiredValidator()], []),
+    email: new FormControl('', [requiredValidator(), emailValidator()], []),
     password: new FormControl('', [requiredValidator()], []),
     repeatPassword: new FormControl('', [requiredValidator()], []),
     agreements: new FormControl('', [requiredValidator()], []),
