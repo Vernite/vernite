@@ -1,8 +1,8 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
+import { MainModule } from '@main/_main.module';
 import { ViewOptionsComponent } from './view-options.component';
 
 describe('ViewOptionsComponent', () => {
@@ -11,9 +11,9 @@ describe('ViewOptionsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewOptionsComponent ]
-    })
-    .compileComponents();
+      imports: [MainModule, RouterTestingModule],
+      declarations: [ViewOptionsComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

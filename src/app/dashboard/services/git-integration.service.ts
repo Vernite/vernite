@@ -44,9 +44,13 @@ export class GitIntegrationService {
   }
 
   public attachGitHubIntegration(projectId: number, repositoryName: string): Observable<void> {
-    return this.apiService.post(`/project${projectId}/integration/github`, {
+    return this.apiService.post(`/project/${projectId}/integration/github`, {
       body: repositoryName,
     });
+  }
+
+  public getConnectedGitHubAccounts(): Observable<any> {
+    return this.apiService.get('/user/integration/github');
   }
 
   // ----------------------------------------------------------------
