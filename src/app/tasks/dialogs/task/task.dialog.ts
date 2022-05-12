@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { GitIssue } from '@dashboard/interfaces/git-integration.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
 import { GitIntegrationService } from '@dashboard/services/git-integration.service';
@@ -50,6 +51,9 @@ export class TaskDialog implements OnInit {
   public projectList!: Project[];
   public projectListLoaded = false;
   public isGitHubIntegrationAvailable = false;
+
+  public issueList!: GitIssue[];
+  public issueListLoaded = false;
 
   public form = new FormGroup({
     id: new FormControl(-1),
@@ -121,6 +125,11 @@ export class TaskDialog implements OnInit {
       this.statusList$.subscribe((statuses) => {
         this.statusList = statuses;
         this.statusListLoaded = true;
+      });
+      this.issueListLoaded = false;
+      this.gitIntegrationService.gitHubIssueList(projectId).subscribe((issueList) => {
+        this.issueList = issueList;
+        this.issueListLoaded = true;
       });
     });
 

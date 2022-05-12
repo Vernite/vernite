@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '@dashboard/interfaces/project.interface';
@@ -32,7 +32,7 @@ export class EditProjectPage implements OnDestroy {
   private getSubscription?: Subscription;
 
   private workspaceId!: number;
-  private projectId!: number;
+  public projectId!: number;
 
   /**
    * Default constructor. Injects the Workspace, Router service and ActivatedRoute service.

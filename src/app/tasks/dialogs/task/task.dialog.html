@@ -58,8 +58,11 @@
         <app-option [value]="true" i18n>Attach</app-option>
       </app-select>
 
-      <app-input *ngIf="form.get('issueAttachGithub')?.value" formControlName="issueNumberGitHub"
-        floatingLabel="Issue number" i18n-floatingLabel></app-input>
+      <ng-container *ngIf="form.get('issueAttachGithub')?.value">
+        <app-select formControlName="issueNumberGitHub" floatingLabel="Issue number" i18n-floatingLabel>
+          <app-option *ngFor="let issue of issueList" [value]="issue.number">{{issue.title}}</app-option>
+        </app-select>
+      </ng-container>
     </div>
 
   </form>

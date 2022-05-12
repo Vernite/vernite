@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MainModule } from '../_main/_main.module';
+import { IntegrationGithubComponent } from './components/integration-github/integration-github.component';
 import { DashboardRoutingModule } from './dashboard.routing';
 import { CreateProjectPage } from './pages/create-project/create-project.page';
 import { CreateWorkspacePage } from './pages/create-workspace/create-workspace.page';
@@ -26,6 +27,7 @@ import { GitIntegrationService } from './services/git-integration.service';
     SettingsPage,
     SettingsAccountPage,
     SettingsLocalizationPage,
+    IntegrationGithubComponent,
   ],
   providers: [GitIntegrationService],
 })

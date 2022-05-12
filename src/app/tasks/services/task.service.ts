@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Task } from '../interfaces/task.interface';
-import { Observable, of } from 'rxjs';
+import { GitIntegrationService } from '@dashboard/services/git-integration.service';
+import { Observable, of, switchMap } from 'rxjs';
 import { ApiService } from '../../_main/services/api.service';
-import { Status } from '../interfaces/status.interface';
-import { Project } from '@dashboard/interfaces/project.interface';
+import { Task } from '../interfaces/task.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +12,10 @@ export class TaskService {
    * Default constructor with dependency injection.
    * @param apiService ApiService
    */
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private gitIntegrationService: GitIntegrationService,
+  ) {}
 
   /**
    * Get list of tasks
@@ -30,8 +32,23 @@ export class TaskService {
    * @param projectId Project id needed to create task
    * @returns Request observable with the created task
    */
-  public create(projectId: number, task: Task): Observable<Task> {
-    return this.apiService.post(`/project/${projectId}/task/`, { body: task });
+  public create(
+    projectId: number,
+    task: Task & { issueNumber?: number; connectWithIssueOnGitHub: boolean },
+  ): Observable<Task> {
+    return this.apiService.post(`/project/${projectId}/task/`, { body: task }).pipe(
+      switchMap((task) => {
+        if (task.connectWithIssueOnGitHub) {
+          return this.gitIntegrationService.connectGitHubIssue(
+            projectId,
+            task.id,
+            task.issueNumber,
+          );
+        } else {
+          return of(task);
+        }
+      }),
+    );
   }
 
   /**

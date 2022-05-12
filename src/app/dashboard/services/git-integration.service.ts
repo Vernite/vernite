@@ -54,11 +54,29 @@ export class GitIntegrationService {
   }
 
   // ----------------------------------------------------------------
-  public deleteGitHubIntegration(): Observable<void> {
-    return this.apiService.delete('/integration/github');
+  public deleteGitHubIntegration(projectId: number): Observable<void> {
+    return this.apiService.delete(`/project/${projectId}/integration/github`);
   }
 
   public hasGitHubIntegration(projectId: number): Observable<boolean> {
     return of(true); // TODO: Implement logic for this feature
+  }
+
+  public gitHubIssueList(projectId: number) {
+    return this.apiService.get(`/project/${projectId}/integration/github/issue`);
+  }
+
+  public connectGitHubIssue(projectId: number, taskId: number, issueNumber?: number) {
+    if (issueNumber) {
+      return this.apiService.post(
+        `/project/${projectId}/task/${taskId}/integration/github/${issueNumber}`,
+      );
+    } else {
+      return this.apiService.post(`/project/${projectId}/task/${taskId}/integration/github`);
+    }
+  }
+
+  public disconnectGitHubIssue(projectId: number, taskId: number, issueNumber?: number) {
+    return this.apiService.delete(`/project/${projectId}/task/${taskId}/integration/github`);
   }
 }
