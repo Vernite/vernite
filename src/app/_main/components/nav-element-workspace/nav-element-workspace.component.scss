@@ -15,8 +15,10 @@ li {
   width: 100%;
   justify-content: space-between;
   padding: 14px 5px 14px 30px;
-  color: var(--color-text);
+  border-radius: var(--border-radius);
+  color: var(--color-neutral-300);
   cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 
   .icons {
     display: flex;
@@ -44,6 +46,10 @@ li {
       justify-content: center;
     }
   }
+
+  &:hover {
+    background-color: var(--color-secondary-500);
+  }
 }
 
 .project {
@@ -55,13 +61,19 @@ li {
     display: block;
     justify-content: center;
     background-color: var(--color-secondary-600);
-    color: var(--color-text);
+    color: var(--color-neutral-300);
+    transition: background-color 0.2s ease-in-out;
 
     li {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 14px 5px 14px 40px;
+      border-radius: var(--border-radius);
+
+      &:hover {
+        background-color: var(--color-secondary-500);
+      }
     }
   }
 }

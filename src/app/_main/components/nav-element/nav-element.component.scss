@@ -15,8 +15,9 @@ section {
   align-items: center;
   justify-content: space-between;
   padding: 14px 5px 14px 20px;
-  color: var(--color-text);
+  color: var(--color-neutral-300);
   cursor: pointer;
+  transition: color 0.2s ease-in-out;
 
   .icons {
     display: flex;
@@ -43,6 +44,10 @@ section {
       align-items: center;
       justify-content: center;
     }
+  }
+
+  &:hover {
+    color: var(--color-text);
   }
 }
 
