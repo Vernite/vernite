@@ -37,10 +37,10 @@ button {
   position: relative;
   display: flex;
   min-width: 80px;
+  height: 42px;
   align-items: center;
   justify-content: center;
   padding: 0.8125rem 1.25rem;
-  margin-bottom: 1rem;
   border-radius: var(--border-radius);
   box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
   color: var(--color-text);

@@ -1,7 +1,23 @@
 <h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.EDIT" i18n>Edit task: {{ data.task?.name }}</h1>
 <h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.CREATE" i18n>Create new task</h1>
 <div mat-dialog-content>
-  <form (submit)="confirm()" [formGroup]="form">
+  <form (submit)="confirm()" [formGroup]="form" autocomplete="off">
+
+    <!-- Workspace -->
+    <ng-container *ngIf="workspaceListLoaded">
+      <app-select formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
+        <app-option *ngFor="let workspace of workspaceList" [value]="workspace.id">{{ workspace.name }}
+        </app-option>
+      </app-select>
+    </ng-container>
+
+    <!-- Project -->
+    <ng-container *ngIf="projectListLoaded">
+      <app-select formControlName="projectId" floatingLabel="Project" i18n-floatingLabel>
+        <app-option *ngFor="let project of projectList" [value]="project.id">{{project.name}}
+        </app-option>
+      </app-select>
+    </ng-container>
 
     <!-- Type field -->
     <app-select formControlName="type" floatingLabel="Type" i18n-floatingLabel>

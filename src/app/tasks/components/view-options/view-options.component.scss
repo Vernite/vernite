@@ -35,7 +35,7 @@ section {
 
         &::before {
           position: absolute;
-          bottom: 22px;
+          bottom: 10px;
           left: 5px;
           width: calc(100% - 10px);
           height: 2px;
@@ -53,6 +53,7 @@ section {
     align-items: center;
 
     .options-element {
+      display: flex;
       align-items: center;
       padding: 10px;
       color: var(--color-neutral-300);
@@ -61,6 +62,7 @@ section {
       app-icon {
         display: flex;
         align-items: center;
+        padding-right: 10px;
       }
 
       &:hover {
