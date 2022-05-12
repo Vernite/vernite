@@ -32,6 +32,7 @@ import { OptionComponent } from './components/option/option.component';
 import { SelectComponent } from './components/select/select.component';
 import { SidebarNavigationComponent } from './components/sidebar-navigation/sidebar-navigation.component';
 import { TextareaComponent } from './components/textarea/textarea.component';
+import { UpperNavigationComponent } from './components/upper-navigation/upper-navigation.component';
 import { AlertDialog } from './dialogs/alert/alert.dialog';
 import { FocusInitialDirective } from './directives/focus-initial.directive';
 import { ValidationErrorPipe } from './pipes/validation-error.pipe';
@@ -100,6 +101,7 @@ const ngModuleConfig = {
     SidebarNavigationComponent,
     NavElementComponent,
     NavElementWorkspaceComponent,
+    UpperNavigationComponent,
     SelectComponent,
     OptionComponent,
     MainViewComponent,
