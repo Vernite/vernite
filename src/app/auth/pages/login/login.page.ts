@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +21,7 @@ export class LoginPage {
   public form = new FormGroup({
     email: new FormControl('', [requiredValidator()], []),
     password: new FormControl('', [requiredValidator()], []),
-    agreements: new FormControl('', [requiredValidator()], []),
+    rememberMe: new FormControl('', [], []),
   });
 
   login() {
