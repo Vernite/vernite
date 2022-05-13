@@ -48,7 +48,7 @@ export class SettingsLocalizationPage implements OnInit {
   ngOnInit() {}
 
   changeLanguage() {
-    location.href = `https://workflow.adiantek.ovh/${this.form.value.language.code}/settings/localization`;
+    location.href = `https://workflow.adiantek.ovh/${this.form.value.language}/settings/localization`;
   }
 
   submit() {}
