@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { requiredValidator } from '@main/validators/required.validator';
 
 @Component({
@@ -14,20 +15,42 @@ export class SettingsLocalizationPage implements OnInit {
 
   languages = [
     {
+      code: 'de-DE',
+      name: 'Deutsch',
+    },
+    {
+      code: 'en-GB',
+      name: 'English (British)',
+    },
+    {
+      code: 'es-ES',
+      name: 'Español',
+    },
+    {
+      code: 'it-It',
+      name: 'Italiano',
+    },
+    {
       code: 'pl-PL',
-      name: 'Polish',
+      name: 'Polski',
     },
     {
       code: 'en-US',
-      name: 'English',
+      name: 'English (American)',
+    },
+    {
+      code: 'uk-UK',
+      name: 'Українська',
     },
   ];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
-  submit() {
-    console.log('submit');
+  changeLanguage() {
+    location.href = `https://workflow.adiantek.ovh/${this.form.value.language.code}/settings/localization`;
   }
+
+  submit() {}
 }
