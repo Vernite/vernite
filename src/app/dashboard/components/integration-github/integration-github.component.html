@@ -1,20 +1,22 @@
-<section>
-  <div class="github">
-    <h2>Github</h2>
-  </div>
-  <app-button (click)='connectToGithub()' type='button'  variant="secondary">Connect to Github</app-button>
-</section>
+<main>
+  <section>
+    <div class="github">
+      <h2 class="typo-heading-5 mb-5">Github</h2>
+    </div>
+    <app-button (click)='connectToGithub()' type='button'  variant="secondary" i18n>Connect to Github</app-button>
+  </section>
 
-<form [formGroup]="form" autocomplete="off">
+  <form [formGroup]="form" autocomplete="off">
 
-  <!-- Project -->
-  <ng-container *ngIf="repositoryListLoaded">
-    <app-select formControlName="repository" floatingLabel="Repository" i18n-floatingLabel>
-      <app-option *ngFor="let repository of repositoryList" [value]="repository.fullName">{{repository.fullName}}
-      </app-option>
-    </app-select>
-    <app-button variant="secondary" (click)='addRepository()'>Add repository</app-button>
-  </ng-container>
+    <!-- Project -->
+    <ng-container *ngIf="repositoryListLoaded">
+      <app-select formControlName="repository" floatingLabel="Repository" i18n-floatingLabel>
+        <app-option *ngFor="let repository of repositoryList" [value]="repository.fullName">{{repository.fullName}}
+        </app-option>
+      </app-select>
+      <app-button variant="secondary" (click)='addRepository()' i18n>Add repository</app-button>
+    </ng-container>
 
-</form>
+  </form>
+</main>
 

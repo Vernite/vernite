@@ -2,5 +2,7 @@
   <h2 class="typo-heading-5 mb-5" i18n>Edit workspace: {{ workspace$ | async }}</h2>
   <app-input formControlName="name" type="text" placeholder="New workspace" floatingLabel="Workspace name"
     i18n-floatingLabel i18n-placeholder></app-input>
-  <app-button variant="primary" [pending]="updateSubscription && !updateSubscription.closed" i18n>Save</app-button>
+  <div class="app-button">
+    <app-button variant="primary" [pending]="updateSubscription && !updateSubscription.closed" i18n>Save</app-button>
+  </div>
 </form>

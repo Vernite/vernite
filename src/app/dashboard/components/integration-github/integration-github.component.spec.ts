@@ -1,8 +1,7 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
+import { MainModule } from '@main/_main.module';
 import { IntegrationGithubComponent } from './integration-github.component';
 
 describe('IntegrationGithubComponent', () => {
@@ -11,9 +10,9 @@ describe('IntegrationGithubComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IntegrationGithubComponent ]
-    })
-    .compileComponents();
+      imports: [MainModule],
+      declarations: [IntegrationGithubComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
