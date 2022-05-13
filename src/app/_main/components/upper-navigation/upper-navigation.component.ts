@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { faAngleDown, faCog, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '@main/services/dialog.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
 import { TaskService } from '@tasks/services/task.service';
+import { fromEvent, skip, take } from 'rxjs';
 
 @Component({
   selector: 'app-upper-navigation',
@@ -11,6 +12,8 @@ import { TaskService } from '@tasks/services/task.service';
 })
 export class UpperNavigationComponent {
   constructor(private dialogService: DialogService, private taskService: TaskService) {}
+
+  @ViewChild('openBelow') openBelow!: ElementRef<HTMLElement>;
 
   faAngleDown = faAngleDown;
   faUser = faUser;
@@ -34,7 +37,13 @@ export class UpperNavigationComponent {
 
   public openProfile() {
     this.active = true;
+    fromEvent(document, 'click')
+      .pipe(skip(1), take(1))
+      .subscribe(() => {
+        this.closeProfile();
+      });
   }
+
   public closeProfile() {
     this.active = false;
   }

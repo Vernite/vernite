@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { requiredValidator } from '@main/validators/required.validator';
 
 @Component({
@@ -44,7 +43,7 @@ export class SettingsLocalizationPage implements OnInit {
     },
   ];
 
-  constructor(private router: Router) {}
+  constructor() {}
 
   ngOnInit() {}
 

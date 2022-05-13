@@ -5,7 +5,7 @@
   <div class="profile">
     <div class="avatar"></div>
     <div class="name"></div>
-    <div class="open-below" (click)="toggleProfile()" [class.active]="active">
+    <div #openBelow class="open-below" (click)="toggleProfile()" [class.active]="active">
       <app-icon [icon]="faAngleDown" size="16px"></app-icon>
     </div>
   </div>
