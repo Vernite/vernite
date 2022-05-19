@@ -1,12 +1,11 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
-import { CheckboxComponent } from './checkbox.component';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgControl, ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ValidationErrorPipe } from '@main/pipes/validation-error.pipe';
+import { CheckboxComponent } from './checkbox.component';
 
 describe('CheckboxComponent', () => {
   let component: CheckboxComponent;
@@ -15,7 +14,7 @@ describe('CheckboxComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [MatCheckboxModule, ReactiveFormsModule, BrowserAnimationsModule],
-      declarations: [CheckboxComponent],
+      declarations: [CheckboxComponent, ValidationErrorPipe],
       providers: [NgControl],
     }).compileComponents();
   }));
