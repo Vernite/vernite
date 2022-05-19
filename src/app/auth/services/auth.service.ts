@@ -7,10 +7,6 @@ import { ApiService } from 'src/app/_main/services/api.service';
 export class AuthService {
   constructor(private apiService: ApiService) {}
 
-  public login({ email, password }: { email: string; password: string }) {
-    return this.apiService.post(`/auth/login`, { body: { email, password } });
-  }
-
   public register({
     email,
     password,
@@ -27,6 +23,26 @@ export class AuthService {
     return this.apiService.post(`/auth/register`, {
       body: { email, password, name, surname, username },
     });
+  }
+
+  public login({
+    email,
+    password,
+    remember,
+  }: {
+    email: string;
+    password: string;
+    remember: boolean;
+  }) {
+    return this.apiService.post(`/auth/login`, { body: { email, password, remember } });
+  }
+
+  public logout() {
+    return this.apiService.post(`/auth/logout`, { body: {} });
+  }
+
+  public getMyself() {
+    return this.apiService.post(`/auth/me`, { body: {} });
   }
 
   public resetPassword({ email }: { email: string }) {

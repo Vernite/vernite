@@ -26,7 +26,7 @@ export class SettingsLocalizationPage implements OnInit {
       name: 'Español',
     },
     {
-      code: 'it-It',
+      code: 'it-IT',
       name: 'Italiano',
     },
     {

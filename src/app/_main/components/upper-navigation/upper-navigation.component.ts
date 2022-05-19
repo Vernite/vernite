@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AuthService } from '@auth/services/auth.service';
 import { faAngleDown, faCog, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '@main/services/dialog.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
@@ -11,7 +12,11 @@ import { fromEvent, skip, take } from 'rxjs';
   styleUrls: ['./upper-navigation.component.scss'],
 })
 export class UpperNavigationComponent {
-  constructor(private dialogService: DialogService, private taskService: TaskService) {}
+  constructor(
+    private dialogService: DialogService,
+    private taskService: TaskService,
+    private authService: AuthService,
+  ) {}
 
   @ViewChild('openBelow') openBelow!: ElementRef<HTMLElement>;
 
@@ -33,6 +38,10 @@ export class UpperNavigationComponent {
           this.taskService.create(result.projectId, result);
         }
       });
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
   public openProfile() {
