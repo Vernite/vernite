@@ -3,12 +3,18 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import { initMocks } from './mocks/_main.mocks';
 
 import './typings/typings';
 
 if (environment.production) {
   enableProdMode();
+}
+
+if (environment.disableConsoleLog && window) {
+  window.console.log = () => {};
+  window.console.info = () => {};
+  window.console.warn = () => {};
+  window.console.error = () => {};
 }
 
 platformBrowserDynamic()

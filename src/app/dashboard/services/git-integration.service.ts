@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { GitIntegration } from '@dashboard/interfaces/git-integration.interface';
 import { Service } from '@main/decorators/service.decorator';
 import { ApiService } from '@main/services/api.service';
-import { filter, interval, map, mergeMap, Observable, of, take, tap } from 'rxjs';
+import { filter, interval, map, mergeMap, Observable, take, tap } from 'rxjs';
+import { ProjectService } from './project.service';
 
 @Service()
 @Injectable({
   providedIn: 'root',
 })
 export class GitIntegrationService {
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private projectService: ProjectService) {}
 
   public startGitHubIntegration(): Observable<boolean> {
     return this.apiService.get('/integration/github').pipe(
@@ -53,13 +54,16 @@ export class GitIntegrationService {
     return this.apiService.get('/user/integration/github');
   }
 
-  // ----------------------------------------------------------------
+  public deleteConnectedGitHubAccount(gitHubAccountId: number) {
+    return this.apiService.delete(`/user/integration/github/${gitHubAccountId}`);
+  }
+
   public deleteGitHubIntegration(projectId: number): Observable<void> {
     return this.apiService.delete(`/project/${projectId}/integration/github`);
   }
 
   public hasGitHubIntegration(projectId: number): Observable<boolean> {
-    return of(true); // TODO: Implement logic for this feature
+    return this.projectService.get(projectId).pipe(map((project) => !!project.gitHubIntegration));
   }
 
   public gitHubIssueList(projectId: number) {

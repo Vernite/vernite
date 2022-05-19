@@ -4,24 +4,24 @@
   <form (submit)="confirm()" [formGroup]="form" autocomplete="off">
 
     <!-- Workspace -->
-    <ng-container *ngIf="workspaceListLoaded">
+    <ng-container>
       <app-select formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
-        <app-option *ngFor="let workspace of workspaceList" [value]="workspace.id">{{ workspace.name }}
+        <app-option *ngFor="let workspace of workspaceList$ | async" [value]="workspace.id">{{ workspace.name }}
         </app-option>
       </app-select>
     </ng-container>
 
     <!-- Project -->
-    <ng-container *ngIf="projectListLoaded">
+    <ng-container *ngIf="form.get('workspaceId')?.value">
       <app-select formControlName="projectId" floatingLabel="Project" i18n-floatingLabel>
-        <app-option *ngFor="let project of projectList" [value]="project.id">{{project.name}}
+        <app-option *ngFor="let project of projectList$ | async" [value]="project.id">{{project.name}}
         </app-option>
       </app-select>
     </ng-container>
 
     <!-- Type field -->
     <app-select formControlName="type" floatingLabel="Type" i18n-floatingLabel>
-      <app-option *ngFor="let type of taskTypes" [value]="type[1]" [icon]="type[1] | taskTypeIcon">{{ type[0] | taskType
+      <app-option *ngFor="let type of taskTypes" [value]="type[1]" [icon]="type[0] | taskTypeIcon">{{ type[0] | taskType
         }}
       </app-option>
     </app-select>
@@ -35,9 +35,9 @@
       i18n-floatingLabel i18n-placeholder [rows]="10"></app-textarea>
 
     <!-- Status -->
-    <ng-container *ngIf="statusListLoaded">
+    <ng-container>
       <app-select formControlName="statusId" floatingLabel="Status" i18n-floatingLabel>
-        <app-option *ngFor="let status of statusList" [value]="status?.id">{{ status?.name }}
+        <app-option *ngFor="let status of statusList$ | async" [value]="status?.id">{{ status?.name }}
         </app-option>
       </app-select>
     </ng-container>
@@ -60,7 +60,7 @@
 
       <ng-container *ngIf="form.get('issueAttachGithub')?.value">
         <app-select formControlName="issueNumberGitHub" floatingLabel="Issue number" i18n-floatingLabel>
-          <app-option *ngFor="let issue of issueList" [value]="issue.number">{{issue.title}}</app-option>
+          <app-option *ngFor="let issue of issueList$ | async" [value]="issue.number">{{issue.title}}</app-option>
         </app-select>
       </ng-container>
     </div>

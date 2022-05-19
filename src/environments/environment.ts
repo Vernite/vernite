@@ -6,8 +6,20 @@
  * Global environment configuration object, replaced in configurations other than development. Stores build specific data.
  */
 export const environment = {
+  /**
+   * Whether the application is running in production mode.
+   */
   production: false,
+
+  /**
+   * API URL for the backend.
+   */
   apiURL: 'https://workflow.adiantek.ovh/api',
+
+  /**
+   * Whether to disable console logging.
+   */
+  disableConsoleLog: false,
 };
 
 /*

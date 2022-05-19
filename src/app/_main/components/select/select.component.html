@@ -1,9 +1,9 @@
 <mat-form-field appearance="outline">
   <mat-label>{{ floatingLabel }}</mat-label>
   <mat-select [formControl]="control" name="test" disableOptionCentering="true">
-    <mat-select-trigger *ngIf="yet && selected">
-      <app-icon *ngIf="selected.icon" [icon]="selected.icon" size="15.75px"></app-icon>
-      {{ selected.viewValue }}
+    <mat-select-trigger *ngIf="(selected$ | async) as selectedItem">
+      <app-icon *ngIf="selectedItem.icon" [icon]="selectedItem.icon" size="15.75px"></app-icon>
+      {{ selectedItem.viewValue }}
     </mat-select-trigger>
     <ng-container *ngIf="yet">
       <mat-option *ngFor="let option of options" [value]="option.value">

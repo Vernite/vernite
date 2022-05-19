@@ -3,7 +3,6 @@
 <!-- Page header -->
 <section class="flex justify-between items-center">
   <h2 class="typo-heading-5">Task List</h2>
-  <app-button variant="primary" routerLink="create" [icon]="faPlus" i18n>New project</app-button>
 </section>
 
 <!-- Table -->
@@ -45,7 +44,7 @@
         <app-icon icon="matMoreVert"></app-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item >
+        <button mat-menu-item>
           <span i18n>Edit task</span>
         </button>
         <button mat-menu-item class="important">

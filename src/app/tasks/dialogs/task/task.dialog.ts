@@ -1,19 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { GitIssue } from '@dashboard/interfaces/git-integration.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
 import { GitIntegrationService } from '@dashboard/services/git-integration.service';
-import { ProjectService } from '@dashboard/services/project.service';
 import { WorkspaceService } from '@dashboard/services/workspace.service';
 import { Enum } from '@main/classes/enum.class';
+import { RouterExtensionsService } from '@main/services/router-extensions.service';
 import { TaskPriority } from '@tasks/enums/task-priority.enum';
 import { TaskType } from '@tasks/enums/task-type.enum';
 import { Status } from '@tasks/interfaces/status.interface';
 import { StatusService } from '@tasks/services/status.service';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { requiredValidator } from '../../../_main/validators/required.validator';
 import { Task } from '../../interfaces/task.interface';
 
@@ -41,23 +40,15 @@ export class TaskDialog implements OnInit {
   public taskPriorities = Object.values(TaskPriority);
 
   public statusList$!: Observable<Status[]>;
-  public statusList!: Status[];
-  public statusListLoaded = false;
-
   public workspaceList$!: Observable<Workspace[]>;
-  public workspaceList!: Workspace[];
-  public workspaceListLoaded = false;
+  public projectList$: Observable<Project[]> = new BehaviorSubject([]);
+  public issueList$!: Observable<GitIssue[]>;
 
-  public projectList!: Project[];
-  public projectListLoaded = false;
-  public isGitHubIntegrationAvailable = false;
-
-  public issueList!: GitIssue[];
-  public issueListLoaded = false;
+  public isGitHubIntegrationAvailable: boolean = false;
 
   public form = new FormGroup({
     id: new FormControl(-1),
-    type: new FormControl(this.taskTypes[0], [requiredValidator()]),
+    type: new FormControl(TaskType.TASK, [requiredValidator()]),
     name: new FormControl('', [requiredValidator()]),
     statusId: new FormControl(null, [requiredValidator()]),
     projectId: new FormControl(null, [requiredValidator()]),
@@ -73,68 +64,66 @@ export class TaskDialog implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: TaskDialogData,
-    private activatedRoute: ActivatedRoute,
     private dialogRef: MatDialogRef<TaskDialog>,
     private statusService: StatusService,
-    private projectService: ProjectService,
     private workspaceService: WorkspaceService,
     private gitIntegrationService: GitIntegrationService,
-  ) {
-    const { workspaceId, projectId } = this.activatedRoute.snapshot.params;
-
-    this.data.projectId = this.data.projectId || projectId;
-    this.data.workspaceId = this.data.workspaceId || workspaceId;
-  }
+    private routerExtensions: RouterExtensionsService,
+  ) {}
 
   ngOnInit() {
-    const { workspaceId, projectId, task } = this.data;
-    this.form.patchValue({
-      workspaceId,
-      projectId,
-    });
+    this.loadParamsFromUrl();
 
-    if (task) {
-      this.form.patchValue(task);
-    }
+    const { workspaceId, projectId, task } = this.data;
+    this.form.patchValue({ workspaceId, projectId });
+    if (task) this.form.patchValue(task);
 
     this.workspaceList$ = this.workspaceService.list();
 
-    this.workspaceList$.subscribe((val) => {
-      this.workspaceListLoaded = true;
-      this.workspaceList = val;
-    });
+    this.form.get('workspaceId')?.valueChanges.subscribe(this.onWorkspaceIdChange.bind(this));
+    this.form.get('projectId')?.valueChanges.subscribe(this.onProjectIdChange.bind(this));
 
-    this.form.get('workspaceId')?.valueChanges.subscribe((workspaceId) => {
-      this.projectListLoaded = false;
-      this.workspaceService
-        .get(workspaceId)
-        .pipe(
-          map(
-            (workspace) => workspace.projectsWithPrivileges.map((project) => project.project) || [],
-          ),
-        )
-        .subscribe((projects) => {
-          this.projectList = projects;
-          this.projectListLoaded = true;
-        });
-    });
+    if (workspaceId) {
+      this.onWorkspaceIdChange(workspaceId);
+    }
 
-    this.form.get('projectId')?.valueChanges.subscribe((projectId) => {
-      this.statusListLoaded = false;
-      this.statusList$ = this.statusService.list(projectId!);
-      this.statusList$.subscribe((statuses) => {
-        this.statusList = statuses;
-        this.statusListLoaded = true;
-      });
-      this.issueListLoaded = false;
-      this.gitIntegrationService.gitHubIssueList(projectId).subscribe((issueList) => {
-        this.issueList = issueList;
-        this.issueListLoaded = true;
-      });
-    });
+    if (projectId) {
+      this.onProjectIdChange(projectId);
+    }
+  }
+
+  onWorkspaceIdChange(workspaceId: number) {
+    this.projectList$ = this.projectList$ = this.workspaceService
+      .get(workspaceId)
+      .pipe(map((workspace) => workspace.projectsWithPrivileges.map((project) => project.project)));
+  }
+
+  onProjectIdChange(projectId: number) {
+    this.statusList$ = this.statusService.list(projectId);
 
     this.gitIntegrationService.hasGitHubIntegration(projectId!).subscribe((value) => {
       this.isGitHubIntegrationAvailable = value;
+
+      if (this.isGitHubIntegrationAvailable) {
+        this.issueList$ = this.gitIntegrationService.gitHubIssueList(projectId);
+      } else {
+        this.issueList$ = new BehaviorSubject([]);
+        this.clearGitHubIntegrationFields();
+      }
+    });
+  }
+
+  loadParamsFromUrl() {
+    const { workspaceId, projectId } = this.routerExtensions.snapshot.params;
+    this.data.workspaceId = this.data.workspaceId || Number(workspaceId);
+    this.data.projectId = this.data.projectId || Number(projectId);
+  }
+
+  clearGitHubIntegrationFields() {
+    this.form.patchValue({
+      issueNumberGitHub: null,
+      issueAttachGithub: null,
+      connectWithIssueOnGitHub: false,
     });
   }
 

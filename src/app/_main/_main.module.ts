@@ -1,4 +1,5 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ObserversModule } from '@angular/cdk/observers';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -52,6 +53,7 @@ const ngModuleConfig = {
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
+    ObserversModule,
   ],
   importExports: [
     /*=============================================
