@@ -100,6 +100,7 @@ export class TaskDialog implements OnInit {
 
   onProjectIdChange(projectId: number) {
     this.statusList$ = this.statusService.list(projectId);
+    this.clearGitHubIntegrationFields();
 
     this.gitIntegrationService.hasGitHubIntegration(projectId!).subscribe((value) => {
       this.isGitHubIntegrationAvailable = value;
@@ -108,7 +109,6 @@ export class TaskDialog implements OnInit {
         this.issueList$ = this.gitIntegrationService.gitHubIssueList(projectId);
       } else {
         this.issueList$ = new BehaviorSubject([]);
-        this.clearGitHubIntegrationFields();
       }
     });
   }
@@ -122,7 +122,7 @@ export class TaskDialog implements OnInit {
   clearGitHubIntegrationFields() {
     this.form.patchValue({
       issueNumberGitHub: null,
-      issueAttachGithub: null,
+      issueAttachGithub: false,
       connectWithIssueOnGitHub: false,
     });
   }

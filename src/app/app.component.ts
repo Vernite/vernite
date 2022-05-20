@@ -13,4 +13,10 @@ export class AppComponent {
    * Title of the page
    */
   public title = 'workflow';
+
+  constructor() {
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.remove('preload');
+    });
+  }
 }

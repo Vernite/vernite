@@ -1,0 +1,16 @@
+:host {
+  position: relative;
+}
+
+mat-checkbox.ng-invalid.ng-touched~mat-error {
+  // Set this to 'block' if you want to see mat-error label
+  display: none;
+}
+
+mat-error {
+  position: absolute;
+  bottom: -5px;
+  left: 28px;
+  display: none;
+  font-size: 12px;
+}

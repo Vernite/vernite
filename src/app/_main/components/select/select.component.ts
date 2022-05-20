@@ -26,7 +26,11 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit, O
     this.control.valueChanges.subscribe((value) => {
       console.log('Value changed to: ' + value);
       this.optionsMap?.forEach((option, key) => {
-        option.selected = key === value;
+        const selected = key === value;
+        option.selected = selected;
+        if (selected) {
+          this.selected$.next(option);
+        }
       });
     });
 

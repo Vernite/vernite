@@ -1,4 +1,5 @@
-<mat-checkbox [formControl]="control">
+<mat-checkbox [formControl]="control" [class.required]="required">
   <span>{{ label }}</span>
   <ng-content></ng-content>
 </mat-checkbox>
+<mat-error>{{ control.errors | validationError }}</mat-error>

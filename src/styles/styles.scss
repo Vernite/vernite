@@ -3,6 +3,7 @@
 // Global files imports
 @import 'colors';
 @import 'typography';
+@import 'preload';
 
 // @import 'scrollbar';
 
@@ -26,7 +27,9 @@
 @tailwind utilities;
 
 html,
-body { height: 100%; }
+body {
+  height: 100%;
+}
 
 body {
   margin: 0;

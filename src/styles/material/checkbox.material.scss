@@ -4,11 +4,12 @@ mat-checkbox.mat-checkbox {
   color: var(--color-text);
 
   label {
+    align-items: flex-start;
     margin-bottom: 1rem;
     white-space: normal;
 
     .mat-checkbox-inner-container {
-      margin: 7px 10px 7px 0;
+      margin: 2px 10px 7px 0;
     }
 
     .mat-checkbox-label {

@@ -4,12 +4,10 @@
   <form (submit)="confirm()" [formGroup]="form" autocomplete="off">
 
     <!-- Workspace -->
-    <ng-container>
-      <app-select formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
-        <app-option *ngFor="let workspace of workspaceList$ | async" [value]="workspace.id">{{ workspace.name }}
-        </app-option>
-      </app-select>
-    </ng-container>
+    <app-select formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
+      <app-option *ngFor="let workspace of workspaceList$ | async" [value]="workspace.id">{{ workspace.name }}
+      </app-option>
+    </app-select>
 
     <!-- Project -->
     <ng-container *ngIf="form.get('workspaceId')?.value">
@@ -35,12 +33,10 @@
       i18n-floatingLabel i18n-placeholder [rows]="10"></app-textarea>
 
     <!-- Status -->
-    <ng-container>
-      <app-select formControlName="statusId" floatingLabel="Status" i18n-floatingLabel>
-        <app-option *ngFor="let status of statusList$ | async" [value]="status?.id">{{ status?.name }}
-        </app-option>
-      </app-select>
-    </ng-container>
+    <app-select formControlName="statusId" floatingLabel="Status" i18n-floatingLabel>
+      <app-option *ngFor="let status of statusList$ | async" [value]="status.id">{{ status.name }}
+      </app-option>
+    </app-select>
 
     <!-- Priorities -->
     <app-select formControlName="priority" floatingLabel="Priority" i18n-floatingLabel>
@@ -52,17 +48,16 @@
     <app-checkbox *ngIf="isGitHubIntegrationAvailable" formControlName="connectWithIssueOnGitHub" i18n>Create or attach
       GitHub issue simultaneously</app-checkbox>
 
-    <div *ngIf="form.get('connectWithIssueOnGitHub')?.value" class="git-issue-connection">
+    <div [class.hidden]="!form.get('connectWithIssueOnGitHub')?.value" class="git-issue-connection">
       <app-select formControlName="issueAttachGithub">
         <app-option [value]="false" i18n>Create</app-option>
         <app-option [value]="true" i18n>Attach</app-option>
       </app-select>
 
-      <ng-container *ngIf="form.get('issueAttachGithub')?.value">
-        <app-select formControlName="issueNumberGitHub" floatingLabel="Issue number" i18n-floatingLabel>
-          <app-option *ngFor="let issue of issueList$ | async" [value]="issue.number">{{issue.title}}</app-option>
-        </app-select>
-      </ng-container>
+      <app-select [class.hidden]="!form.get('issueAttachGithub')?.value" formControlName="issueNumberGitHub"
+        floatingLabel="Issue number" i18n-floatingLabel>
+        <app-option *ngFor="let issue of issueList$ | async" [value]="issue.number">{{issue.title}}</app-option>
+      </app-select>
     </div>
 
   </form>
