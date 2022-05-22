@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
 import { faAngleDown, faCog, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '@main/services/dialog.service';
@@ -16,6 +17,7 @@ export class UpperNavigationComponent {
     private dialogService: DialogService,
     private taskService: TaskService,
     private authService: AuthService,
+    private router: Router,
   ) {}
 
   @ViewChild('openBelow') openBelow!: ElementRef<HTMLElement>;
@@ -42,6 +44,7 @@ export class UpperNavigationComponent {
 
   logout() {
     this.authService.logout().subscribe();
+    this.router.navigate(['/', 'auth', 'login']);
   }
 
   public openProfile() {
