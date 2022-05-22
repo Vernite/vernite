@@ -11,6 +11,6 @@ describe('Test length limit validator', () => {
 
   it('should not pass', () => {
     const control = new FormControl('012345678901234567890123456789012345678901234567890');
-    expect(validator(control)).toBeFalse();
+    expect(validator(control)).toBeTruthy();
   });
 });

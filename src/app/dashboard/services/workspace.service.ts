@@ -26,8 +26,7 @@ export class WorkspaceService {
    * @returns Request observable, which completes when request is finished
    */
   public get(id: number): Observable<Workspace> {
-    const userId = this.userService.userId;
-    return this.apiService.get(`/user/${userId}/workspace/${id}/`).pipe(this.validate('GET'));
+    return this.apiService.get(`/workspace/${id}`).pipe(this.validate('GET'));
   }
 
   /**
@@ -36,8 +35,7 @@ export class WorkspaceService {
    * @returns Request observable, which completes when request is finished
    */
   public delete(id: number): Observable<null> {
-    const userId = this.userService.userId;
-    return this.apiService.delete(`/user/${userId}/workspace/${id}/`).pipe(this.validate('DELETE'));
+    return this.apiService.delete(`/workspace/${id}`).pipe(this.validate('DELETE'));
   }
 
   /**
@@ -46,8 +44,7 @@ export class WorkspaceService {
    * @returns Request observable, which completes when request is finished
    */
   public update(workspace: Workspace): Observable<Workspace> {
-    const userId = this.userService.userId;
-    return this.apiService.put(`/user/${userId}/workspace/${workspace.id}/`, { body: workspace });
+    return this.apiService.put(`/workspace/${workspace.id}`, { body: workspace });
   }
 
   /**
@@ -55,8 +52,7 @@ export class WorkspaceService {
    * @returns Request observable, which completes when request is finished
    */
   public list(): Observable<Workspace[]> {
-    const userId = this.userService.userId;
-    return this.apiService.get(`/user/${userId}/workspace/`);
+    return this.apiService.get(`/workspace`);
   }
 
   /**
@@ -65,8 +61,7 @@ export class WorkspaceService {
    * @returns Request observable, which completes when request is finished
    */
   public create(workspace: Workspace): Observable<Workspace> {
-    const userId = this.userService.userId;
-    return this.apiService.post(`/user/${userId}/workspace/`, { body: workspace });
+    return this.apiService.post(`/workspace`, { body: workspace });
   }
 
   @ServiceValidator({
