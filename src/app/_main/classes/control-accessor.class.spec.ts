@@ -26,20 +26,20 @@ describe('Control Accessor', () => {
   it('should return empty value when not set', () => {
     const ngControl = new TestNgControl();
     const controlAccessor = new ControlAccessor(ngControl);
-    expect(controlAccessor.value).toBe(null);
+    expect(controlAccessor.value).toEqual('');
   });
 
   it('should return empty value when set', () => {
     const ngControl = new TestNgControl();
     const controlAccessor = new ControlAccessor(ngControl);
-    controlAccessor.writeValue('test');
+    controlAccessor.control.setValue('test');
     expect(controlAccessor.value).toBe('test');
   });
 
   it('should return null when has no errors', () => {
     const ngControl = new TestNgControl();
     const controlAccessor = new ControlAccessor(ngControl);
-    controlAccessor.writeValue('test');
+    controlAccessor.control.setValue('test');
     expect(controlAccessor.errors).toBeNull();
   });
 
@@ -47,7 +47,7 @@ describe('Control Accessor', () => {
     const ngControl = new TestNgControl();
     const controlAccessor = new ControlAccessor(ngControl);
     controlAccessor.control.setValidators(emailValidator());
-    controlAccessor.writeValue('TEST');
+    controlAccessor.control.setValue('TEST');
     expect(values(controlAccessor.errors)).toContain('email');
   });
 

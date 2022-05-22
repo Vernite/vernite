@@ -7,7 +7,7 @@
     </div>
     <div class="fragment-right"></div>
     <input #input [type]="type" [placeholder]="placeholder" [formControl]="control" [autocomplete]="autocomplete"
-      (focus)="onFocus()" (blur)="onBlur()" (input)="onInput()">
+      (focus)="onFocus()" (blur)="onBlur()">
   </div>
   <div *ngIf="control.touched && control.invalid" class="error">{{ control?.errors | validationError }}</div>
 </div>

@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl, ValidationErrors } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 
 /**
  * A base class for creating custom control accessors like inputs, checkboxes, etc.
@@ -36,7 +36,9 @@ export class ControlAccessor implements OnInit, OnDestroy, ControlValueAccessor 
   /**
    * Control that is used by the form.
    */
-  public control: FormControl = new FormControl();
+  public get control(): FormControl {
+    return (this.ngControl.control as FormControl) || new FormControl();
+  }
 
   /**
    * Observable that emits when the control is destroyed.
@@ -81,16 +83,14 @@ export class ControlAccessor implements OnInit, OnDestroy, ControlValueAccessor 
   ngOnInit() {
     this.initCheckForTouch();
     this.checkIfIsRequired();
-    if (this.ngControl.control?.validator)
-      this.control.validator = this.ngControl.control?.validator;
   }
 
   /**
    * Check if the control is required by provided validators.
    */
   private checkIfIsRequired(): void {
-    if (!this.ngControl.control) return;
-    if (!(this.ngControl as any).control._rawValidators) return;
+    if (!this.control) return;
+    if (!(this.control as any)._rawValidators) return;
 
     for (const validator of (this.ngControl as any).control._rawValidators) {
       if (validator.name === 'required') {
@@ -105,22 +105,10 @@ export class ControlAccessor implements OnInit, OnDestroy, ControlValueAccessor 
    */
   private initCheckForTouch(): void {
     if (this.debug) console.log('[INIT] initializing checking for touch...');
-    if (!this.ngControl.control) return;
-
-    let inTouchLoop = false;
-
-    (this.ngControl.control as any)._markAsTouched = this.ngControl.control?.markAsTouched;
-    this.ngControl.control!.markAsTouched = () => {
-      if (this.debug) console.log('[TOUCH] ngControl got touched');
-
-      if (inTouchLoop) return;
-      inTouchLoop = true;
-
-      (this.ngControl.control as any)._markAsTouched();
-      (this.control as any)._markAsTouched();
-
-      inTouchLoop = false;
-    };
+    if (!this.control) {
+      if (this.debug) console.log('[INIT] control is not defined');
+      return;
+    }
 
     (this.control as any)._markAsTouched = this.control.markAsTouched;
     this.control.markAsTouched = () => {
@@ -139,9 +127,7 @@ export class ControlAccessor implements OnInit, OnDestroy, ControlValueAccessor 
    *
    * @param value The new value for the element
    */
-  writeValue(value: any): void {
-    this.control.setValue(value);
-  }
+  writeValue(value: any): void {}
 
   /**
    * Registers a callback function that is called when the control's value changes in the UI.
@@ -149,22 +135,14 @@ export class ControlAccessor implements OnInit, OnDestroy, ControlValueAccessor 
    * This method is called by the forms API on initialization to update the form model when values propagate from the view to the model.
    * @param fn Callback to be called when the control value changes.
    */
-  registerOnChange(fn: any): void {
-    this.control.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => {
-      fn(value);
-    });
-  }
+  registerOnChange(fn: any): void {}
 
   /**
    * Registers a callback function that is called by the forms API on initialization to update the form model on blur.
    *
    * @param fn Callback to be called when the control is touched.
    */
-  registerOnTouched(fn: any): void {
-    this.touched$.pipe(takeUntil(this.destroy$)).subscribe((value) => {
-      fn(value);
-    });
-  }
+  registerOnTouched(fn: any): void {}
 
   /**
    * Set disabled state on the control. If set to true, the control will be disabled.

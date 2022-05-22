@@ -13,8 +13,6 @@ export class ValidationErrorPipe implements PipeTransform {
    * @returns message from validation error
    */
   transform(value: any): any {
-    console.log(value?.message);
-
     return value?.message || null;
   }
 }

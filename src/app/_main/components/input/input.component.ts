@@ -1,12 +1,5 @@
 import { AutofillMonitor } from '@angular/cdk/text-field';
-import {
-  Component,
-  ElementRef,
-  HostBinding,
-  Input,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { ControlAccessor } from '../../classes/control-accessor.class';
 
@@ -54,22 +47,7 @@ export class InputComponent extends ControlAccessor implements OnInit {
 
   override ngOnInit(): void {
     super.ngOnInit();
-
-    // this.control.valueChanges.subscribe((val) => {
-    //   this.onChange(val);
-    // });
-
-    setTimeout(() => {
-      this.input.nativeElement.classList.add('app-input-animation');
-      console.log(this.input.nativeElement);
-    }, 1000);
   }
-
-  // ngAfterViewInit(): void {
-  //   this.autofillMonitor.monitor(this.input.nativeElement).subscribe((event) => {
-  //     this.hasValue = true;
-  //   });
-  // }
 
   onFocus() {
     this.focused = true;
@@ -77,17 +55,5 @@ export class InputComponent extends ControlAccessor implements OnInit {
 
   onBlur() {
     this.focused = false;
-  }
-
-  // onChange(val: string) {
-  //   if (val) {
-  //     this.hasValue = true;
-  //   } else {
-  //     this.hasValue = false;
-  //   }
-  // }
-
-  onInput() {
-    console.log('on input');
   }
 }

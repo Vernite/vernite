@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Service } from '@main/decorators/service.decorator';
 import { ApiService } from 'src/app/_main/services/api.service';
 
+@Service()
 @Injectable({
   providedIn: 'root',
 })
