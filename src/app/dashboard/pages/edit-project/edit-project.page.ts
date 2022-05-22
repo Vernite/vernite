@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '@dashboard/interfaces/project.interface';
+import { maxLengthValidator } from '@main/validators/max-length.validator';
 import { Observable, Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { ProjectService } from '../../services/project.service';
@@ -17,7 +18,7 @@ export class EditProjectPage implements OnDestroy {
    * Form group for the workspace editing.
    */
   public form = new FormGroup({
-    name: new FormControl('', [requiredValidator()], []),
+    name: new FormControl('', [requiredValidator(), maxLengthValidator(50)], []),
   });
 
   public project$!: Observable<Project>;

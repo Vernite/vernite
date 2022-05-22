@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
+import { maxLengthValidator } from '@main/validators/max-length.validator';
 import { Observable, Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { WorkspaceService } from '../../services/workspace.service';
@@ -19,7 +20,7 @@ export class EditWorkspacePage implements OnDestroy {
    * Form group for the workspace editing.
    */
   public form = new FormGroup({
-    name: new FormControl('', [requiredValidator()], []),
+    name: new FormControl('', [requiredValidator(), maxLengthValidator(50)], []),
     id: new FormControl(-1),
   });
 

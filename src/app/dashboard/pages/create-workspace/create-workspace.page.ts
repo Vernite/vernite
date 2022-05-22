@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { maxLengthValidator } from '@main/validators/max-length.validator';
 import { Subscription } from 'rxjs';
 import { Page } from 'src/app/_main/decorators/page.decorator';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
@@ -20,7 +21,7 @@ export class CreateWorkspacePage {
    * Form group for the workspace creation.
    */
   public form = new FormGroup({
-    name: new FormControl('', [requiredValidator()], []),
+    name: new FormControl('', [requiredValidator(), maxLengthValidator(50)], []),
   });
 
   /**

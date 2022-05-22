@@ -30,7 +30,6 @@ export class IntegrationGithubComponent implements OnInit {
 
   loadRepositories() {
     this.repositoryListLoaded = false;
-    console.log('test nie wykona się');
     this.gitIntegrationService.getGitHubIntegration().subscribe((integration) => {
       this.repositoryList = integration.gitRepositories;
       this.repositoryListLoaded = true;
