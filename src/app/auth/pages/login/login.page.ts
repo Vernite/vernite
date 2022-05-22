@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { catchError, Subscription, throwError } from 'rxjs';
+import { catchError, EMPTY, Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { AuthService } from '../../services/auth.service';
 
@@ -14,6 +14,7 @@ export class LoginPage {
   constructor(private authService: AuthService, private router: Router) {}
 
   private loginSubscription?: Subscription;
+  public error?: string;
 
   /**
    * Form group for login.
@@ -35,13 +36,24 @@ export class LoginPage {
         .login(this.form.value)
         .pipe(
           catchError((e) => {
-            console.log('Ouch!');
-            return throwError(() => new Error(e));
+            this.handleError(e);
+            return EMPTY;
           }),
         )
         .subscribe(() => {
           this.router.navigate(['/']);
         });
+    }
+  }
+
+  handleError(error: any) {
+    switch (error.status) {
+      case 403:
+        this.error = $localize`User is already logged`;
+        break;
+      case 404:
+        this.error = $localize`Wrong username or password`;
+        break;
     }
   }
 }
