@@ -41,7 +41,7 @@ export class UpperNavigationComponent {
   }
 
   logout() {
-    this.authService.logout();
+    this.authService.logout().subscribe();
   }
 
   public openProfile() {

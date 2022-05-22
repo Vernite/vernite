@@ -128,12 +128,18 @@ export class TaskDialog implements OnInit {
   }
 
   confirm() {
+    const formValues = this.form.value;
+
     this.form.markAllAsTouched();
     this.form.updateValueAndValidity();
 
     if (this.form.invalid) return;
 
-    this.dialogRef.close(this.form.value);
+    if (formValues.connectWithIssueOnGitHub && !formValues.issueAttachGithub) {
+      formValues.createIssue = true;
+    }
+
+    this.dialogRef.close(formValues);
   }
 
   cancel() {
