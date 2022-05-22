@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { RequestOptions } from '../interfaces/request-options.interface';
 import { Service } from '../decorators/service.decorator';
-import { catchError, of, Subject } from 'rxjs';
+import { RequestOptions } from '../interfaces/request-options.interface';
 
 /**
  * Service to access the API
@@ -34,23 +33,23 @@ export class ApiService {
    * @returns Request observable, which completes when request is finished
    */
   public request(method: string, url: string, options?: RequestOptions) {
-    const mappedRequest = new Subject<any>();
+    // const mappedRequest = new Subject<any>();
 
-    this.httpClient
-      .request(method, this.apiURL + url, {
-        responseType: 'json',
-        ...options,
-      })
-      .pipe(
-        catchError((e) => {
-          return of(e.error);
-        }),
-      )
-      .subscribe((response) => {
-        return mappedRequest.next(response);
-      });
+    return this.httpClient.request(method, this.apiURL + url, {
+      responseType: 'json',
+      withCredentials: true,
+      ...options,
+    });
+    // .pipe(
+    //   catchError((e) => {
+    //     return of(e.error);
+    //   }),
+    // )
+    // .subscribe((response) => {
+    //   return mappedRequest.next(response);
+    // });
 
-    return mappedRequest;
+    // return mappedRequest;
   }
 
   /**

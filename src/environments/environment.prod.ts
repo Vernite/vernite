@@ -3,6 +3,6 @@
  */
 export const environment = {
   production: true,
-  apiURL: 'https://workflow.adiantek.ovh/api',
+  apiURL: '/api',
   disableConsoleLog: true,
 };

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { catchError, Subscription, throwError } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { AuthService } from '../../services/auth.service';
 
@@ -31,9 +31,17 @@ export class LoginPage {
     this.form.updateValueAndValidity();
 
     if (this.form.valid) {
-      this.loginSubscription = this.authService.login(this.form.value).subscribe(() => {
-        this.router.navigate(['/']);
-      });
+      this.loginSubscription = this.authService
+        .login(this.form.value)
+        .pipe(
+          catchError((e) => {
+            console.log('Ouch!');
+            return throwError(() => new Error(e));
+          }),
+        )
+        .subscribe(() => {
+          this.router.navigate(['/']);
+        });
     }
   }
 }

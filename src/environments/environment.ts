@@ -14,7 +14,7 @@ export const environment = {
   /**
    * API URL for the backend.
    */
-  apiURL: 'https://workflow.adiantek.ovh/api',
+  apiURL: '/api',
 
   /**
    * Whether to disable console logging.
