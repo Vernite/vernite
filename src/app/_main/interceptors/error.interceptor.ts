@@ -1,36 +1,28 @@
-import {
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-  HttpResponse,
-} from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { DialogService } from '@main/services/dialog.service';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, EMPTY, Observable } from 'rxjs';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private dialogService: DialogService) {}
+  constructor(private dialogService: DialogService, private router: Router) {}
+
+  private unauthorizedInARow = 0;
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((e, obs) => {
-        this.handleError(e);
-        return of();
-      }),
-      map((event: HttpEvent<any>) => {
-        if (event instanceof HttpResponse) {
-          if (event.status >= 200 && event.status < 300) {
-            this.handleSuccess(event);
-          } else if (event.status >= 400 && event.status < 500) {
-            this.handleError(event);
-          }
+        if (e.status === 401) {
+          this.unauthorizedInARow++;
+
+          if (this.unauthorizedInARow > 1) return EMPTY;
+          this.dialogService.openErrorDialog($localize`Your session has expired.`);
+          this.router.navigate(['/auth/login']);
         }
-        return event;
+
+        return EMPTY;
       }),
     );
   }
-  handleError(res: HttpResponse<any>) {}
-  handleSuccess(res: HttpResponse<any>) {}
 }

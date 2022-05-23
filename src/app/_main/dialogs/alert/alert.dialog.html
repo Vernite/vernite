@@ -4,10 +4,10 @@
 </div>
 <div mat-dialog-actions>
   <app-button mat-button (click)="cancel()">{{ data.cancelText }}</app-button>
-  <ng-container *ngIf="data.variant === AlertDialogVariant.IMPORTANT">
+  <ng-container *ngIf="data.variant === AlertDialogVariant.IMPORTANT && data.confirmText">
     <app-button mat-button (click)="confirm()" variant="important" appFocusInitial>{{ data.confirmText }}</app-button>
   </ng-container>
-  <ng-container *ngElse>
+  <ng-container *ngIf="data.variant !== AlertDialogVariant.IMPORTANT && data.confirmText">
     <app-button mat-button (click)="confirm()" variant="primary" appFocusInitial>{{ data.confirmText }}</app-button>
   </ng-container>
 </div>

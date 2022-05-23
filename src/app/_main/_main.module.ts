@@ -2,7 +2,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ObserversModule } from '@angular/cdk/observers';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Injector, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -36,6 +36,7 @@ import { TextareaComponent } from './components/textarea/textarea.component';
 import { UpperNavigationComponent } from './components/upper-navigation/upper-navigation.component';
 import { AlertDialog } from './dialogs/alert/alert.dialog';
 import { FocusInitialDirective } from './directives/focus-initial.directive';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { ValidationErrorPipe } from './pipes/validation-error.pipe';
 import { ApiService } from './services/api.service';
 import { DialogService } from './services/dialog.service';
@@ -111,7 +112,11 @@ const ngModuleConfig = {
     CheckboxComponent,
     CardComponent,
   ],
-  providers: [DialogService, ApiService],
+  providers: [
+    DialogService,
+    ApiService,
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
 };
 
 /**

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
 import { Task } from '@tasks/interfaces/task.interface';
-import { filter } from 'rxjs';
+import { BehaviorSubject, filter } from 'rxjs';
+import { v4 as uuid } from 'uuid';
 import { Service } from '../decorators/service.decorator';
 import { AlertDialog, AlertDialogData, AlertDialogVariant } from '../dialogs/alert/alert.dialog';
 
@@ -15,6 +16,12 @@ import { AlertDialog, AlertDialogData, AlertDialogVariant } from '../dialogs/ale
   providedIn: 'root',
 })
 export class DialogService {
+  private dialogsMap = new Map();
+  private dialogs$ = new BehaviorSubject<Map<number, MatDialogRef<unknown, any>>>(this.dialogsMap);
+
+  public get isAnyDialogOpen() {
+    return this.dialogs$.getValue().size > 0;
+  }
   /**
    * Default constructor with `MatDialog` dependency.
    * @param matDialog MatDialog instance
@@ -28,10 +35,22 @@ export class DialogService {
    * @returns Reference to the newly-opened dialog.
    */
   open(component: any, data: any) {
-    return this.matDialog.open(component, {
+    const dialog = this.matDialog.open(component, {
       data,
       width: '400px',
     });
+
+    const uid = uuid();
+    this.dialogsMap.set(uid, dialog);
+
+    dialog.afterClosed().subscribe(() => {
+      this.dialogsMap.delete(uid);
+      this.dialogs$.next(this.dialogsMap);
+    });
+
+    this.dialogs$.next(this.dialogsMap);
+
+    return dialog;
   }
 
   /**
@@ -43,6 +62,16 @@ export class DialogService {
     return this.open(AlertDialog, data)
       .afterClosed()
       .pipe(filter((result) => result));
+  }
+
+  openErrorDialog(error: string) {
+    const data: AlertDialogData = {
+      title: 'Error',
+      message: error,
+      variant: AlertDialogVariant.IMPORTANT,
+      cancelText: $localize`Close`,
+    };
+    return this.alert(data);
   }
 
   /**
