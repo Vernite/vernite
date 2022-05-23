@@ -41,6 +41,6 @@ export class ProjectService {
    * @returns Request observable, which completes when request is finished
    */
   public create(project: { name: string; workspaceId: number }) {
-    return this.apiService.post('/project/', { body: project });
+    return this.apiService.post('/project', { body: project });
   }
 }

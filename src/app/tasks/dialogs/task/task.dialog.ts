@@ -137,6 +137,8 @@ export class TaskDialog implements OnInit {
 
     if (formValues.connectWithIssueOnGitHub && !formValues.issueAttachGithub) {
       formValues.createIssue = true;
+    } else {
+      formValues.createIssue = false;
     }
 
     this.dialogRef.close(formValues);
