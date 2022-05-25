@@ -13,11 +13,17 @@
   margin-bottom: 1rem;
   background-color: var(--color-board-task-background);
   border-radius: var(--border-radius);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background-color: var(--color-board-task-background-hover);
+    box-shadow: 0 0 0.5rem 0.1rem var(--color-board-task-background-hover);
+  }
 
   .top-section {
     display: flex;
 
-    > * {
+    >* {
       width: 50%;
     }
 
@@ -54,6 +60,7 @@
   .name {
     @include typo-body;
 
+    margin-top: 1rem;
     color: var(--color-text);
   }
 
@@ -61,5 +68,20 @@
     position: absolute;
     right: 5px;
     color: #fff;
+  }
+
+  .commit {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 0 0.5rem;
+    color: var(--color-text);
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }

@@ -9,6 +9,11 @@
     </div>
   </div>
   <div class="name">{{ task?.name }}</div>
+  <div *ngIf="task?.issue" class="commit">
+    <a [href]="task?.issue">
+      <app-icon [icon]="faCodeCommit"></app-icon>
+    </a>
+  </div>
   <div class="options">
     <button mat-icon-button [matMenuTriggerFor]="menu" class="flex items-center">
       <app-icon icon="matMoreVert"></app-icon>
@@ -16,6 +21,9 @@
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="edit()">
         <span i18n>Edit task</span>
+      </button>
+      <button mat-menu-item (click)="createSubtask()">
+        <span i18n>Create subtask</span>
       </button>
       <button mat-menu-item class="important" (click)="delete()">
         <span i18n>Delete task</span>

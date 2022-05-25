@@ -10,9 +10,10 @@ export interface GitIntegration {
 }
 
 export interface GitIssue {
+  id: number;
   url: string;
   state: string;
   title: string;
-  body: string;
-  number: number;
+  description: string;
+  service: string;
 }

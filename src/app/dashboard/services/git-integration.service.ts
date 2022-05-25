@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GitIntegration } from '@dashboard/interfaces/git-integration.interface';
+import { GitIntegration, GitIssue } from '@dashboard/interfaces/git-integration.interface';
 import { Service } from '@main/decorators/service.decorator';
 import { ApiService } from '@main/services/api.service';
 import { filter, interval, map, mergeMap, Observable, take, tap } from 'rxjs';
@@ -13,7 +13,7 @@ export class GitIntegrationService {
   constructor(private apiService: ApiService, private projectService: ProjectService) {}
 
   public startGitHubIntegration(): Observable<boolean> {
-    return this.apiService.get('/integration/github').pipe(
+    return this.apiService.get('/user/integration/github/repository').pipe(
       map((response: any) => response.link),
       mergeMap((url) => {
         const win = window.open(url, '_blank');
@@ -35,13 +35,13 @@ export class GitIntegrationService {
   }
 
   public postGitHubIntegration(installationId: string): Observable<void> {
-    return this.apiService.post(`/integration/github`, {
+    return this.apiService.post(`/user/integration/github`, {
       params: { installationId },
     });
   }
 
   public getGitHubIntegration(): Observable<GitIntegration> {
-    return this.apiService.get('/integration/github');
+    return this.apiService.get('/user/integration/github/repository');
   }
 
   public attachGitHubIntegration(projectId: number, repositoryName: string): Observable<void> {
@@ -67,20 +67,21 @@ export class GitIntegrationService {
   }
 
   public gitHubIssueList(projectId: number) {
-    return this.apiService.get(`/project/${projectId}/integration/github/issue`);
+    return this.apiService.get(`/project/${projectId}/integration/git/issue`);
   }
 
-  public connectGitHubIssue(projectId: number, taskId: number, issueNumber?: number) {
-    if (issueNumber) {
-      return this.apiService.post(
-        `/project/${projectId}/task/${taskId}/integration/github/${issueNumber}`,
-      );
+  /**@TODO: Refactor */
+  public connectGitHubIssue(projectId: number, taskId: number, issue?: GitIssue) {
+    if (issue) {
+      return this.apiService.post(`/project/${projectId}/task/${taskId}/integration/git`, {
+        body: issue,
+      });
     } else {
-      return this.apiService.post(`/project/${projectId}/task/${taskId}/integration/github`);
+      return this.apiService.post(`/project/${projectId}/task/${taskId}/integration/git`);
     }
   }
 
   public disconnectGitHubIssue(projectId: number, taskId: number, issueNumber?: number) {
-    return this.apiService.delete(`/project/${projectId}/task/${taskId}/integration/github`);
+    return this.apiService.delete(`/project/${projectId}/task/${taskId}/integration/git`);
   }
 }

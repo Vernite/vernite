@@ -39,11 +39,7 @@ export class TaskService {
     return this.apiService.post(`/project/${projectId}/task/`, { body: task }).pipe(
       switchMap((task) => {
         if (task.connectWithIssueOnGitHub) {
-          return this.gitIntegrationService.connectGitHubIssue(
-            projectId,
-            task.id,
-            task.issueNumber,
-          );
+          return this.gitIntegrationService.connectGitHubIssue(projectId, task.id, task.issue);
         } else {
           return of(task);
         }

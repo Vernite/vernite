@@ -1,16 +1,17 @@
 <h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.EDIT" i18n>Edit task: {{ data.task?.name }}</h1>
-<h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.CREATE" i18n>Create new task</h1>
+<h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.CREATE && !data.subtask" i18n>Create new task</h1>
+<h1 mat-dialog-title *ngIf="data.subtask" i18n>Create new subtask</h1>
 <div mat-dialog-content>
   <form (submit)="confirm()" [formGroup]="form" autocomplete="off">
 
     <!-- Workspace -->
-    <app-select formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
+    <app-select *ngIf="!data.subtask" formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
       <app-option *ngFor="let workspace of workspaceList$ | async" [value]="workspace.id">{{ workspace.name }}
       </app-option>
     </app-select>
 
     <!-- Project -->
-    <ng-container *ngIf="form.get('workspaceId')?.value">
+    <ng-container *ngIf="!data.subtask && form.get('workspaceId')?.value">
       <app-select formControlName="projectId" floatingLabel="Project" i18n-floatingLabel>
         <app-option *ngFor="let project of projectList$ | async" [value]="project.id">{{project.name}}
         </app-option>
@@ -54,9 +55,9 @@
         <app-option [value]="true" i18n>Attach</app-option>
       </app-select>
 
-      <app-select [class.hidden]="!form.get('issueAttachGithub')?.value" formControlName="issueNumberGitHub"
-        floatingLabel="Issue number" i18n-floatingLabel>
-        <app-option *ngFor="let issue of issueList$ | async" [value]="issue.number">{{issue.title}}</app-option>
+      <app-select [class.hidden]="!form.get('issueAttachGithub')?.value" formControlName="issue" floatingLabel="Issue"
+        i18n-floatingLabel>
+        <app-option *ngFor="let issue of issueList$ | async" [value]="issue">{{issue.title}}</app-option>
       </app-select>
     </div>
 

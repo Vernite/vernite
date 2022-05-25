@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { faCodeCommit } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '@main/services/dialog.service';
 import { TaskDialog, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
 import { TaskService } from '@tasks/services/task.service';
@@ -16,11 +17,15 @@ export class BoardTaskComponent {
   @Input()
   public projectId!: number;
 
+  faCodeCommit = faCodeCommit;
+
   constructor(private dialogService: DialogService, private taskService: TaskService) {}
 
   delete() {
     this.dialogService.confirmTaskDelete(this.task).subscribe(() => {
-      this.taskService.delete(this.projectId, this.task.id);
+      this.taskService.delete(this.projectId, this.task.id).subscribe(() => {
+        location.reload();
+      });
     });
   }
 
@@ -36,6 +41,26 @@ export class BoardTaskComponent {
         if (!task) return;
 
         this.taskService.update(this.projectId, task).subscribe(() => {
+          location.reload();
+        });
+      });
+  }
+
+  createSubtask() {
+    this.dialogService
+      .open(TaskDialog, {
+        variant: TaskDialogVariant.CREATE,
+        projectId: this.projectId,
+        subtask: true,
+        task: {
+          parentTaskId: this.task.id,
+        },
+      })
+      .afterClosed()
+      .subscribe((task) => {
+        if (!task) return;
+
+        this.taskService.create(this.projectId, task).subscribe(() => {
           location.reload();
         });
       });

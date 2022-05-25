@@ -26,6 +26,7 @@ export interface TaskDialogData {
   projectId?: number;
   variant: TaskDialogVariant;
   task?: Partial<Task>;
+  subtask?: boolean;
 }
 
 @Component({
@@ -47,7 +48,8 @@ export class TaskDialog implements OnInit {
   public isGitHubIntegrationAvailable: boolean = false;
 
   public form = new FormGroup({
-    id: new FormControl(-1),
+    id: new FormControl(null),
+    parentTaskId: new FormControl(null),
     type: new FormControl(TaskType.TASK, [requiredValidator()]),
     name: new FormControl('', [requiredValidator()]),
     statusId: new FormControl(null, [requiredValidator()]),
@@ -59,7 +61,7 @@ export class TaskDialog implements OnInit {
     // GitHub integration fields
     connectWithIssueOnGitHub: new FormControl(false),
     issueAttachGithub: new FormControl(false),
-    issueNumberGitHub: new FormControl(null),
+    issue: new FormControl(null),
   });
 
   constructor(
