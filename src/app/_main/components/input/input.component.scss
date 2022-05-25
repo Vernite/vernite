@@ -84,6 +84,7 @@ $height: 55px;
   }
 
   .input-wrapper {
+    position: relative;
     display: flex;
     width: 100%;
     height: 100%;
@@ -148,6 +149,8 @@ $height: 55px;
 }
 
 .required {
+
+  .static-label::after,
   .floating-label::after {
     margin-left: 0.2rem;
     color: var(--color-red-500);

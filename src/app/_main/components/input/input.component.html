@@ -3,7 +3,7 @@
   <div class="input-wrapper">
     <div class="fragment-left"></div>
     <div class="fragment-middle">
-      <label class="floating-label">{{ floatingLabel }}</label>
+      <label *ngIf="floatingLabel" class="floating-label">{{ floatingLabel }}</label>
     </div>
     <div class="fragment-right"></div>
     <input #input [type]="type" [placeholder]="placeholder" [formControl]="control" [autocomplete]="autocomplete"
