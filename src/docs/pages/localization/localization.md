@@ -29,15 +29,6 @@ For `polish` language for example:
 ```
 
 Languages also requires separated file in `src/locales` folder to be created before build.
-
-Nginx configuration:
-
-```nginx
-location /pl-PL/ {
-  try_files $uri /pl-PL/index.html = 404;
-}
-```
-
 In the future adding new language will need some more work to do. For example adding new element in language selection list.
 
 
