@@ -91,7 +91,9 @@ export class BoardPage implements OnInit, OnDestroy {
       .afterClosed()
       .subscribe((result) => {
         if (result) {
-          this.taskService.create(this.projectId, result);
+          this.taskService.create(this.projectId, result).subscribe(() => {
+            location.reload();
+          });
         }
       });
   }

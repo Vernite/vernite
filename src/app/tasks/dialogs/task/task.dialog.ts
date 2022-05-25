@@ -141,6 +141,8 @@ export class TaskDialog implements OnInit {
       formValues.createIssue = false;
     }
 
+    console.log(formValues);
+
     this.dialogRef.close(formValues);
   }
 

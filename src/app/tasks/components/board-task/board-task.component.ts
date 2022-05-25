@@ -1,5 +1,4 @@
-import { Component, Input, OnInit, ViewContainerRef } from '@angular/core';
-import { MatMenu } from '@angular/material/menu';
+import { Component, Input } from '@angular/core';
 import { DialogService } from '@main/services/dialog.service';
 import { TaskDialog, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
 import { TaskService } from '@tasks/services/task.service';
@@ -36,7 +35,9 @@ export class BoardTaskComponent {
       .subscribe((task) => {
         if (!task) return;
 
-        this.taskService.update(this.projectId, task);
+        this.taskService.update(this.projectId, task).subscribe(() => {
+          location.reload();
+        });
       });
   }
 }
