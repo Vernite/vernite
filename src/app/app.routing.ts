@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoggedInUsersGuard } from './auth/guard/logged-in-users.guard';
 import { MainViewComponent } from './_main/components/main-view/main-view.component';
 
 const routes: Routes = [
@@ -10,6 +11,7 @@ const routes: Routes = [
   {
     path: '',
     component: MainViewComponent,
+    canActivate: [LoggedInUsersGuard],
     children: [
       {
         path: 'email',

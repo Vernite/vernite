@@ -22,7 +22,7 @@ export class LoginPage {
   public form = new FormGroup({
     email: new FormControl('', [requiredValidator()], []),
     password: new FormControl('', [requiredValidator()], []),
-    rememberMe: new FormControl('', [], []),
+    remember: new FormControl('', [], []),
   });
 
   login() {
@@ -41,6 +41,7 @@ export class LoginPage {
           }),
         )
         .subscribe(() => {
+          localStorage.setItem('logged', 'true');
           this.router.navigate(['/']);
         });
     }
