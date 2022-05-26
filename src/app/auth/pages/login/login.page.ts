@@ -41,6 +41,7 @@ export class LoginPage {
           }),
         )
         .subscribe(() => {
+          localStorage.setItem('logged', 'true');
           this.router.navigate(['/']);
         });
     }

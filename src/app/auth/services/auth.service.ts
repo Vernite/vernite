@@ -40,6 +40,7 @@ export class AuthService {
   }
 
   public logout() {
+    localStorage.removeItem('logged');
     return this.apiService.post(`/auth/logout`, { body: {} });
   }
 
@@ -53,5 +54,13 @@ export class AuthService {
 
   public setNewPassword({ email, password }: { email: string; password: string }) {
     return this.apiService.post(`/auth/set-new-password`, { body: { email, password } });
+  }
+
+  public isLoggedIn() {
+    if (localStorage.getItem('logged')) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
