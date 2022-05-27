@@ -43,4 +43,13 @@ export class ProjectService {
   public create(project: { name: string; workspaceId: number }) {
     return this.apiService.post('/project', { body: project });
   }
+
+  /**
+   * Changes the workspace of the project.
+   * @param project project to modify
+   * @returns Request observable, which completes when request is finished
+   */
+  public changeWorkspace(projectId: number, newWorkspaceId: number) {
+    return this.apiService.put(`/project/${projectId}/workspace/${newWorkspaceId}`);
+  }
 }

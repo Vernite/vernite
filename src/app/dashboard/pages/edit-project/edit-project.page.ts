@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '@dashboard/interfaces/project.interface';
+import { Workspace } from '@dashboard/interfaces/workspace.interface';
 import { maxLengthValidator } from '@main/validators/max-length.validator';
 import { Observable, Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
@@ -19,9 +20,12 @@ export class EditProjectPage implements OnDestroy {
    */
   public form = new FormGroup({
     name: new FormControl('', [requiredValidator(), maxLengthValidator(50)], []),
+    newWorkspaceId: new FormControl(null),
   });
 
   public project$!: Observable<Project>;
+  public workspaceList$: Observable<Workspace[]> = this.workspaceService.list();
+  // public workspace: Workspace = this.workspaceService.get(id);
 
   /**
    * Subscription to the workspace updating.
@@ -79,9 +83,28 @@ export class EditProjectPage implements OnDestroy {
     this.form.updateValueAndValidity();
     if (this.form.invalid) return;
 
+    let newWorkspaceId: number = this.form.get('newWorkspaceId')?.value;
+
+    if (this.workspaceId != newWorkspaceId && newWorkspaceId != null) {
+      this.editProjectWithWorkspace(newWorkspaceId);
+    } else {
+      this.editProject();
+    }
+  }
+
+  public editProjectWithWorkspace(newWorkspaceId: number) {
+    this.updateSubscription = this.projectService
+      .changeWorkspace(this.projectId, newWorkspaceId)
+      .subscribe(() => {
+        this.updateSubscription = this.projectService.update(this.form.value).subscribe(() => {
+          this.router.navigate(['/', newWorkspaceId]);
+        });
+      });
+  }
+
+  public editProject() {
     this.updateSubscription = this.projectService.update(this.form.value).subscribe(() => {
       this.router.navigate(['/', this.workspaceId]);
-      window.location.reload();
     });
   }
 
