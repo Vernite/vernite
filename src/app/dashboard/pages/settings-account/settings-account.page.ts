@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { UserService } from '@auth/services/user.service';
 import { requiredValidator } from '@main/validators/required.validator';
 
 @Component({
@@ -8,7 +9,7 @@ import { requiredValidator } from '@main/validators/required.validator';
   styleUrls: ['./settings-account.page.scss'],
 })
 export class SettingsAccountPage implements OnInit {
-  constructor() {}
+  constructor(private userService: UserService) {}
 
   public form = new FormGroup({
     email: new FormControl('', requiredValidator()),
@@ -17,9 +18,17 @@ export class SettingsAccountPage implements OnInit {
     username: new FormControl('', requiredValidator()),
   });
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userService.getMyself().subscribe((response) => {
+      this.form.patchValue(response);
+    });
+  }
 
   submit() {
-    console.log('submit');
+    this.form.markAllAsTouched();
+    this.form.updateValueAndValidity();
+    if (this.form.invalid) return;
+
+    this.userService.update(this.form.value).subscribe(() => {});
   }
 }

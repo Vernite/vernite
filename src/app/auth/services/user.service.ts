@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class UserService {
   constructor(private apiService: ApiService) {}
 
-  public edit(modUser: ModifyUser): Observable<ModifyUser> {
+  public update(modUser: ModifyUser): Observable<ModifyUser> {
     return this.apiService.put(`/auth/edit`, { body: modUser });
   }
 
