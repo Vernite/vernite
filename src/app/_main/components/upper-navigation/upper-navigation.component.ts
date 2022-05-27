@@ -37,7 +37,9 @@ export class UpperNavigationComponent {
       .afterClosed()
       .subscribe((result) => {
         if (result) {
-          this.taskService.create(result.projectId, result);
+          this.taskService.create(result.projectId, result).subscribe(() => {
+            location.reload();
+          });
         }
       });
   }

@@ -6,6 +6,7 @@ export interface Task {
   estimatedDate: Date;
   statusId?: number;
   parentTaskId?: number;
+  subTasks?: Task[];
 
   /**
    * Optional link to the GitHub issue
