@@ -44,10 +44,6 @@ export class AuthService {
     return this.apiService.post(`/auth/logout`, { body: {} });
   }
 
-  public getMyself() {
-    return this.apiService.post(`/auth/me`, { body: {} });
-  }
-
   public resetPassword({ email }: { email: string }) {
     return this.apiService.post(`/auth/password-reset`, { body: { email } });
   }

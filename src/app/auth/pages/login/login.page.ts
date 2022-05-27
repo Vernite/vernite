@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from '@auth/services/user.service';
 import { catchError, EMPTY, Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { AuthService } from '../../services/auth.service';
@@ -10,8 +11,12 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage {
-  constructor(private authService: AuthService, private router: Router) {}
+export class LoginPage implements OnInit {
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+    private router: Router,
+  ) {}
 
   private loginSubscription?: Subscription;
   public error?: string;
@@ -24,6 +29,13 @@ export class LoginPage {
     password: new FormControl('', [requiredValidator()], []),
     remember: new FormControl('', [], []),
   });
+
+  ngOnInit() {
+    this.userService.getMyself().subscribe(() => {
+      localStorage.setItem('logged', 'true');
+      this.router.navigate(['/']);
+    });
+  }
 
   login() {
     if (this.loginSubscription && !this.loginSubscription.closed) return;

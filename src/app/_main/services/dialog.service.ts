@@ -53,6 +53,12 @@ export class DialogService {
     return dialog;
   }
 
+  closeAll() {
+    this.dialogsMap.forEach((dialog) => {
+      dialog.close();
+    });
+  }
+
   /**
    * Opens a alert/information dialog.
    * @param data Object to pass as data to the dialog

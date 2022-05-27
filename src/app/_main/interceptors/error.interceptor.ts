@@ -18,6 +18,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
           if (this.unauthorizedInARow > 1) return EMPTY;
           localStorage.removeItem('logged');
+          this.dialogService.closeAll();
           this.dialogService.openErrorDialog($localize`Your session has expired.`);
           this.router.navigate(['/auth/login']);
         }
