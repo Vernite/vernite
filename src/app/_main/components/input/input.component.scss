@@ -56,7 +56,7 @@ $height: 55px;
   .fragment-left,
   .fragment-middle,
   .fragment-right {
-    z-index: 2;
+    z-index: 1;
     height: 100%;
     border: 2px solid var(--color-input-border);
     pointer-events: none;
@@ -131,7 +131,6 @@ $height: 55px;
 }
 
 :host.ng-touched.ng-invalid {
-
   .fragment-left,
   .fragment-middle,
   .fragment-right {
@@ -140,7 +139,6 @@ $height: 55px;
 }
 
 :host.focused .input-form-field {
-
   .fragment-left,
   .fragment-middle,
   .fragment-right {
@@ -149,7 +147,6 @@ $height: 55px;
 }
 
 .required {
-
   .static-label::after,
   .floating-label::after {
     margin-left: 0.2rem;

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ServiceValidator } from '@main/decorators/service-validator.decorator';
 import { Observable, Subject } from 'rxjs';
 import { ApiService } from 'src/app/_main/services/api.service';
-import { UserService } from 'src/app/_main/services/user.service';
 import { Workspace } from '../interfaces/workspace.interface';
 
 /**
@@ -18,7 +17,7 @@ export class WorkspaceService {
    * Default constructor with `ApiService` dependency.
    * @param apiService Api service
    */
-  constructor(private apiService: ApiService, private userService: UserService) {}
+  constructor(private apiService: ApiService) {}
 
   /**
    * Gets a workspace by its ID.
