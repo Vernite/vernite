@@ -6,9 +6,6 @@ import { EditProjectPage } from './pages/edit-project/edit-project.page';
 import { EditWorkspacePage } from './pages/edit-workspace/edit-workspace.page';
 import { GithubIntegrationPage } from './pages/github-integration/github-integration.page';
 import { ProjectsListPage } from './pages/projects-list/projects-list.page';
-import { SettingsAccountPage } from './pages/settings-account/settings-account.page';
-import { SettingsLocalizationPage } from './pages/settings-localization/settings-localization.page';
-import { SettingsPage } from './pages/settings/settings.page';
 import { WorkspacesListPage } from './pages/workspaces-list/workspaces-list.page';
 
 /**
@@ -22,17 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    component: SettingsPage,
-    children: [
-      {
-        path: 'account',
-        component: SettingsAccountPage,
-      },
-      {
-        path: 'localization',
-        component: SettingsLocalizationPage,
-      },
-    ],
+    loadChildren: () => import('../settings/settings.module').then((m) => m.SettingsModule),
   },
   {
     path: 'github',

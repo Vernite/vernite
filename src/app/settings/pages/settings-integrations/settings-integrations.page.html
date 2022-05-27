@@ -1,0 +1,12 @@
+<h2 class="typo-heading-5 mb-5" i18n>Integrations</h2>
+
+<!-- GitHub integrations list -->
+<ng-container>
+  <app-list-group label="GitHub" i18n-label></app-list-group>
+  <div class="list">
+    <app-integration-entry *ngFor="let o of gitHubAccounts$ | async" [label]="o.account.gitHubUsername"
+      [integration]="o.account" (disconnect)="disconnect($event)" [suspended]="o.account.suspended"
+      [description]="o.usage | async" i18n-label>
+    </app-integration-entry>
+  </div>
+</ng-container>

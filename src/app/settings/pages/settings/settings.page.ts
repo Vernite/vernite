@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faGlobe, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCircleNodes, faGlobe, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-settings-page',
@@ -9,6 +9,7 @@ import { faGlobe, faUser } from '@fortawesome/free-solid-svg-icons';
 export class SettingsPage implements OnInit {
   faUser = faUser;
   faGlobe = faGlobe;
+  faCircleNodes = faCircleNodes;
 
   constructor() {}
 

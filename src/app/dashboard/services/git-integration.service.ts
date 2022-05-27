@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { GitIntegration, GitIssue } from '@dashboard/interfaces/git-integration.interface';
+import {
+  GitAccount,
+  GitIntegration,
+  GitIssue
+} from '@dashboard/interfaces/git-integration.interface';
+import { Project } from '@dashboard/interfaces/project.interface';
 import { Service } from '@main/decorators/service.decorator';
 import { ApiService } from '@main/services/api.service';
 import { filter, interval, map, mergeMap, Observable, take, tap } from 'rxjs';
@@ -50,11 +55,17 @@ export class GitIntegrationService {
     });
   }
 
-  public getConnectedGitHubAccounts(): Observable<any> {
-    return this.apiService.get('/user/integration/github');
+  public getConnectedGitHubAccounts(): Observable<GitAccount[]> {
+    return this.apiService
+      .get('/user/integration/github')
+      .pipe(
+        map((accounts: GitAccount[]) =>
+          accounts.map((account) => ({ ...account, gitHubUsername: `@${account.gitHubUsername}` })),
+        ),
+      );
   }
 
-  public deleteConnectedGitHubAccount(gitHubAccountId: number) {
+  public deleteConnectedGitHubAccount(gitHubAccountId: number): Observable<{ link: string }> {
     return this.apiService.delete(`/user/integration/github/${gitHubAccountId}`);
   }
 
@@ -83,5 +94,30 @@ export class GitIntegrationService {
 
   public disconnectGitHubIssue(projectId: number, taskId: number, issueNumber?: number) {
     return this.apiService.delete(`/project/${projectId}/task/${taskId}/integration/git`);
+  }
+
+  /**
+   * Checks if the given account is the owner of the repository
+   * @param repositoryName Repository name with it's owner ex. @czemar/cli
+   * @param account GitHub account object to test with
+   * @returns true if the repository is owned by the account
+   */
+  public isOwnerOfRepository(repositoryName: string, account: GitAccount): boolean {
+    const preparedUsername = account.gitHubUsername.replace('@', '');
+    return Boolean(repositoryName.match(new RegExp('^' + preparedUsername + '/*')));
+  }
+
+  public getGitHubAccountConnectedProjects(account: GitAccount): Observable<Project[]> {
+    return this.projectService
+      .list()
+      .pipe(
+        map((projects) =>
+          projects.filter(
+            (project: Project) =>
+              project.gitHubIntegration &&
+              this.isOwnerOfRepository(project.gitHubIntegration, account),
+          ),
+        ),
+      );
   }
 }

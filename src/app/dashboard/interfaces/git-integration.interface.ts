@@ -17,3 +17,9 @@ export interface GitIssue {
   description: string;
   service: string;
 }
+
+export interface GitAccount {
+  id: number;
+  gitHubUsername: string;
+  suspended: boolean;
+}

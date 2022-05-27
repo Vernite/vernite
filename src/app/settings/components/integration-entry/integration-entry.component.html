@@ -1,0 +1,13 @@
+<div class="integration-entry" [class.suspended]="suspended">
+  <div class="labels">
+    <p class="typo-body label">
+      {{ label }}
+    </p>
+    <p class="typo-body description">
+      {{ description }}
+    </p>
+  </div>
+  <div class="actions">
+    <app-button variant="secondary" (click)="disconnect.emit(integration)" i18n>Disconnect</app-button>
+  </div>
+</div>
