@@ -1,25 +1,32 @@
 <h2 class="typo-heading-5 mb-5" i18n>Sessions</h2>
 
-<!-- GitHub integrations list -->
+<!-- Sessions list -->
 <ng-container>
-  <app-list-group label="Sessions" i18n-label></app-list-group>
+  <app-list-group label="Where You are logged in" i18n-label></app-list-group>
   <div class="list">
     <ul *ngFor="let session of sessionsList$ | async" >
       <li>
         <div class="sessions-entry">
           <div class="labels">
-            <p class="typo-body label">
-              {{ agentType(session.userAgent) }}
-            </p>
-            <p *ngIf="session.geoip" class="typo-body description">
-              {{ session.geoip.city }}, {{ session.geoip.country }}
-            </p>
-            <p *ngIf="!session.current" class="typo-body description">
-              {{ changeDate(session.lastUsed) }}
-            </p>
-            <p *ngIf="session.current" class="typo-body">
-              <mark i18n>Active now</mark>
-            </p>
+            <div class="agent">
+              <p class="typo-body label">
+                {{ agentType("os", session.userAgent) }},
+              </p>
+              <p class="typo-body description">
+                {{ agentType("browser", session.userAgent) }}
+              </p>
+            </div>
+            <div class="local">
+              <p *ngIf="session.geoip" class="typo-body">
+                {{ session.geoip.city }}, {{ session.geoip.country }}
+              </p>
+              <p *ngIf="!session.current" class="typo-body description">
+                {{ changeDate(session.lastUsed) }}
+              </p>
+              <p *ngIf="session.current" class="typo-body">
+                <mark i18n>Active now</mark>
+              </p>
+            </div>
           </div>
           <div *ngIf="!session.current" class="actions">
             <app-button variant="secondary" (click)="deleteSession(session.id)" i18n>Log out</app-button>

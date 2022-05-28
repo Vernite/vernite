@@ -33,10 +33,16 @@ export class SettingsSessionsPage implements OnInit {
     }
   }
 
-  agentType(agent: string) {
+  agentType(type: string, agent: string) {
     let uaParser = new UAParser(agent);
     let osName = uaParser.getOS().name || '';
     let browser = uaParser.getBrowser().name || '';
+    if (type == 'os') {
+      return osName;
+    }
+    if (type == 'browser') {
+      return browser;
+    }
     return osName + ', ' + browser;
   }
 
