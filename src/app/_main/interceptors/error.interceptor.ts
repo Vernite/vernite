@@ -2,7 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogService } from '@main/services/dialog.service';
-import { catchError, EMPTY, Observable } from 'rxjs';
+import { catchError, EMPTY, Observable, throwError } from 'rxjs';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -17,13 +17,19 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.unauthorizedInARow++;
 
           if (this.unauthorizedInARow > 1) return EMPTY;
-          localStorage.removeItem('logged');
+
           this.dialogService.closeAll();
-          this.dialogService.openErrorDialog($localize`Your session has expired.`);
+
+          if (localStorage.getItem('logged')) {
+            localStorage.removeItem('logged');
+            this.dialogService.openErrorDialog($localize`Your session has expired.`);
+          }
+
           this.router.navigate(['/auth/login']);
+          return EMPTY;
         }
 
-        return EMPTY;
+        return throwError(() => e);
       }),
     );
   }

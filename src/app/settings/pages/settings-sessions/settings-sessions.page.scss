@@ -1,3 +1,10 @@
+.list {
+  >* {
+    display: block;
+    margin-top: 1rem;
+  }
+}
+
 .sessions-entry {
   display: flex;
   align-items: center;

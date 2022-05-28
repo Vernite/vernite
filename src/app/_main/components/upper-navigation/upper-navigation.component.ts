@@ -45,8 +45,9 @@ export class UpperNavigationComponent {
   }
 
   logout() {
-    this.authService.logout().subscribe();
-    this.router.navigate(['/', 'auth', 'login']);
+    this.authService.logout().subscribe(() => {
+      this.router.navigate(['/', 'auth', 'login']);
+    });
   }
 
   public openProfile() {
