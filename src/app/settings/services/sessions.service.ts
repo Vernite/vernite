@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { UserSession } from '@dashboard/interfaces/session.interface';
 import { Observable } from 'rxjs';
+import { UserSession } from 'src/app/settings/interfaces/session.interface';
 import { ApiService } from 'src/app/_main/services/api.service';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class SessionsService {
     return this.apiService.get(`/session`);
   }
 
-  public delete(id: UserSession) {
-    return this.apiService.get(`/session/${id}`);
+  public delete(id: number) {
+    return this.apiService.delete(`/session/${id}`);
   }
 }

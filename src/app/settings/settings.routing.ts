@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SettingsAccountPage } from './pages/settings-account/settings-account.page';
 import { SettingsIntegrationsPage } from './pages/settings-integrations/settings-integrations.page';
 import { SettingsLocalizationPage } from './pages/settings-localization/settings-localization.page';
+import { SettingsSessionsPage } from './pages/settings-sessions/settings-sessions.page';
 import { SettingsPage } from './pages/settings/settings.page';
 
 /**
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: 'integrations',
         component: SettingsIntegrationsPage,
+      },
+      {
+        path: 'sessions',
+        component: SettingsSessionsPage,
       },
     ],
   },

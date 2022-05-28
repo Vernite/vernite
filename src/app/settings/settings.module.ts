@@ -8,6 +8,7 @@ import { ListGroupComponent } from './components/list-group/list-group.component
 import { SettingsAccountPage } from './pages/settings-account/settings-account.page';
 import { SettingsIntegrationsPage } from './pages/settings-integrations/settings-integrations.page';
 import { SettingsLocalizationPage } from './pages/settings-localization/settings-localization.page';
+import { SettingsSessionsPage } from './pages/settings-sessions/settings-sessions.page';
 import { SettingsRoutingModule } from './settings.routing';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { SettingsRoutingModule } from './settings.routing';
     SettingsLocalizationPage,
     SettingsAccountPage,
     SettingsIntegrationsPage,
+    SettingsSessionsPage,
     ListGroupComponent,
     IntegrationEntryComponent,
   ],
