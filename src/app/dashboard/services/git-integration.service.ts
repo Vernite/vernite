@@ -7,9 +7,16 @@ import {
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Service } from '@main/decorators/service.decorator';
 import { ApiService } from '@main/services/api.service';
-import { filter, interval, map, mergeMap, Observable, take, tap } from 'rxjs';
+import { filter, interval, map, mergeMap, Observable, take } from 'rxjs';
 import { ProjectService } from './project.service';
 
+/**
+ * How to use Git integration service:
+ *
+ * 1. Run method `startGitHubIntegration()` to start the integration process and open the browser to the GitHub login page.
+ *
+ *
+ */
 @Service()
 @Injectable({
   providedIn: 'root',
@@ -17,6 +24,11 @@ import { ProjectService } from './project.service';
 export class GitIntegrationService {
   constructor(private apiService: ApiService, private projectService: ProjectService) {}
 
+  /**
+   * Start GitHub integration process - opens the GitHub page in new window, to give user ability to choose witch account and repositories wants to give access to.
+   * @example this.gitHubIntegrationService.startGitHubIntegration()
+   * @returns Observable<boolean> true if the opened window with GitHub integration was closed
+   */
   public startGitHubIntegration(): Observable<boolean> {
     return this.apiService.get('/user/integration/github/repository').pipe(
       map((response: any) => response.link),
@@ -29,11 +41,6 @@ export class GitIntegrationService {
           map(() => win.closed),
           filter((closed) => closed),
           take(1),
-          tap(() => {
-            this.getGitHubIntegration().subscribe((integration) => {
-              console.log(integration);
-            });
-          }),
         );
       }),
     );
@@ -81,15 +88,10 @@ export class GitIntegrationService {
     return this.apiService.get(`/project/${projectId}/integration/git/issue`);
   }
 
-  /**@TODO: Refactor */
   public connectGitHubIssue(projectId: number, taskId: number, issue?: GitIssue) {
-    if (issue) {
-      return this.apiService.post(`/project/${projectId}/task/${taskId}/integration/git`, {
-        body: issue,
-      });
-    } else {
-      return this.apiService.post(`/project/${projectId}/task/${taskId}/integration/git`);
-    }
+    return this.apiService.post(`/project/${projectId}/task/${taskId}/integration/git`, {
+      body: issue,
+    });
   }
 
   public disconnectGitHubIssue(projectId: number, taskId: number, issueNumber?: number) {
@@ -100,6 +102,7 @@ export class GitIntegrationService {
    * Checks if the given account is the owner of the repository
    * @param repositoryName Repository name with it's owner ex. @czemar/cli
    * @param account GitHub account object to test with
+   * @example this.gitHubIntegrationService.isOwnerOfRepository('@czemar/cli', account)
    * @returns true if the repository is owned by the account
    */
   public isOwnerOfRepository(repositoryName: string, account: GitAccount): boolean {

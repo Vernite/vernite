@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GitAccount } from '@dashboard/interfaces/git-integration.interface';
 import { GitIntegrationService } from '@dashboard/services/git-integration.service';
 import { map, Observable, take } from 'rxjs';
@@ -13,10 +13,16 @@ interface GitAccountWithUsage {
   templateUrl: './settings-integrations.page.html',
   styleUrls: ['./settings-integrations.page.scss'],
 })
-export class SettingsIntegrationsPage {
-  public gitHubAccounts$: Observable<GitAccountWithUsage[]>;
+export class SettingsIntegrationsPage implements OnInit {
+  public gitHubAccounts$!: Observable<GitAccountWithUsage[]>;
 
-  constructor(private gitIntegrationService: GitIntegrationService) {
+  constructor(private gitIntegrationService: GitIntegrationService) {}
+
+  ngOnInit() {
+    this.loadGitHubIntegration();
+  }
+
+  public loadGitHubIntegration(): void {
     this.gitHubAccounts$ = this.gitIntegrationService.getConnectedGitHubAccounts().pipe(
       map((accounts) => {
         return accounts.map((account) => {
@@ -27,10 +33,6 @@ export class SettingsIntegrationsPage {
         });
       }),
     );
-
-    this.gitHubAccounts$.subscribe((res) => {
-      console.log(res);
-    });
   }
 
   public disconnect(account: GitAccount): void {

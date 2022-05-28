@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { ProjectService } from '@dashboard/services/project.service';
-import { faDiagramNext, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { ESet } from '@main/classes/e-set.class';
 import { DialogService } from '@main/services/dialog.service';
 import { TaskDialog, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
@@ -19,7 +19,7 @@ import { map, Observable } from 'rxjs';
 })
 export class TaskListPage {
   faPlus = faPlus;
-  faDiagramNext = faDiagramNext;
+  faChevronRight = faChevronRight;
 
   public projectId!: number;
 
