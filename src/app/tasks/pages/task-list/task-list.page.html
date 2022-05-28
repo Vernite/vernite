@@ -1,10 +1,5 @@
 <app-view-options [project]="(project$ | async)!"></app-view-options>
 
-<!-- Page header -->
-<section class="flex justify-between items-center">
-  <h2 class="typo-heading-5">Task List</h2>
-</section>
-
 <!-- Table -->
 <table mat-table [dataSource]="(taskList$ | async) || []">
 
@@ -13,7 +8,7 @@
     <th mat-header-cell *matHeaderCellDef i18n>Title</th>
     <td mat-cell *matCellDef="let task">
       <div class="task-title">
-        <app-icon *ngIf="task.subTasks.length" [icon]="faDiagramNext" size="16px"></app-icon>
+        <app-icon [icon]="faChevronRight" size="16px" [class.invisible]="!task.subTasks.length"></app-icon>
         <span>{{ task.name }}</span>
       </div>
     </td>
@@ -35,7 +30,7 @@
     <td mat-cell *matCellDef="let task"> - </td>
   </ng-container>
 
-  <!-- Last update column -->
+  <!-- Deadline column -->
   <ng-container matColumnDef="deadline">
     <th mat-header-cell *matHeaderCellDef i18n>Deadline</th>
     <td mat-cell *matCellDef="let task">{{task.deadline | date:'dd.MM.yyyy'}}</td>

@@ -48,6 +48,7 @@ export class LoginPage implements OnInit {
         .login(this.form.value)
         .pipe(
           catchError((e) => {
+            console.log('Ouch');
             this.handleError(e);
             return EMPTY;
           }),

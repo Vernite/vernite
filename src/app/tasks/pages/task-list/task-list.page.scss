@@ -30,9 +30,10 @@
 
 .subtask-row {
   position: relative;
-  padding-right: 0;
 
   >td[mat-cell] {
+    padding-right: 0;
+    padding-left: 4rem;
     background-color: transparent;
 
     &:hover {
@@ -42,12 +43,21 @@
     &::before {
       position: absolute;
       top: 0;
-      left: -0.1rem;
+      left: 2rem;
       display: block;
-      width: 1px;
-      height: 100%;
+      width: 2px;
+      height: calc(100% - 3rem);
       background-color: var(--color-secondary-400);
+      border-radius: 1px;
       content: '';
+    }
+  }
+}
+
+.element-row {
+  &.expanded {
+    .task-title app-icon {
+      transform: rotate(90deg);
     }
   }
 }

@@ -1,5 +1,6 @@
 {
-  "integrationFolder": "cypress/integration",
+  "integrationFolder": "src/",
+  "testFiles": "**/**.spec.ts",
   "supportFile": "cypress/support/index.ts",
   "videosFolder": "cypress/videos",
   "screenshotsFolder": "cypress/screenshots",

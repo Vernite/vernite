@@ -15,9 +15,30 @@ table.cdk-table.mat-table {
       th {
         @include typo-title;
 
+        position: relative;
+
         /* stylelint-disable-next-line declaration-property-value-disallowed-list */
         border: none;
         color: var(--color-text);
+
+        &::before,
+        &::after {
+          position: absolute;
+          left: 0;
+          display: block;
+          width: 100%;
+          height: 1px;
+          background-color: var(--color-table-header-border);
+          content: '';
+        }
+
+        &::before {
+          top: 0;
+        }
+
+        &::after {
+          bottom: 0;
+        }
       }
     }
   }
@@ -25,10 +46,9 @@ table.cdk-table.mat-table {
   tbody {
     .mat-row {
       overflow: hidden;
-      height: 60px;
 
       &:hover {
-        td {
+        >td {
           background-color: var(--color-table-row-hover-background);
         }
       }

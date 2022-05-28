@@ -11,7 +11,7 @@
     </td>
   </ng-container>
 
-  <!-- Statistics column -->
+  <!-- Status column -->
   <ng-container matColumnDef="status">
     <th mat-header-cell *matHeaderCellDef i18n>Status</th>
     <td mat-cell *matCellDef="let task">
@@ -27,7 +27,7 @@
     <td mat-cell *matCellDef="let task"> - </td>
   </ng-container>
 
-  <!-- Last update column -->
+  <!-- Deadline column -->
   <ng-container matColumnDef="deadline">
     <th mat-header-cell *matHeaderCellDef i18n>Deadline</th>
     <td mat-cell *matCellDef="let task">{{task.deadline | date:'dd.MM.yyyy'}}</td>
@@ -51,6 +51,7 @@
     </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="['title', 'status', 'assignee', 'deadline', 'actions']"></tr>
+  <tr mat-header-row *matHeaderRowDef="['title', 'status', 'assignee', 'deadline', 'actions']" class="fully-hidden">
+  </tr>
   <tr mat-row *matRowDef="let row; columns: ['title', 'status', 'assignee', 'deadline', 'actions'];"></tr>
 </table>
