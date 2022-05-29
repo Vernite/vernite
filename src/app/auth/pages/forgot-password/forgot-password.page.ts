@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { requiredValidator } from '@main/validators/required.validator';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-forgot-page',
@@ -32,9 +32,7 @@ export class ForgotPasswordPage {
     this.form.updateValueAndValidity();
 
     if (this.form.valid) {
-      this.resetSubscription = this.authService.resetPassword(this.form.value).subscribe(() => {
-        this.router.navigate(['/']);
-      });
+      this.resetSubscription = this.authService.resetPassword(this.form.value).subscribe();
     }
   }
 }

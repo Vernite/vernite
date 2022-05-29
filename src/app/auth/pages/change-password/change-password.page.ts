@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { passwordValidator } from '@main/validators/password.validator';
 import { requiredValidator } from '@main/validators/required.validator';
 import { Subscription } from 'rxjs';
@@ -11,8 +11,19 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './change-password.page.html',
   styleUrls: ['./change-password.page.scss'],
 })
-export class ChangePasswordPage {
-  constructor(private authService: AuthService, private router: Router) {}
+export class ChangePasswordPage implements OnInit {
+  private token?: string;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+  ) {}
+
+  ngOnInit() {
+    const { token } = this.activatedRoute.snapshot.params;
+    this.token = token;
+  }
 
   private resetSubscription?: Subscription;
 
@@ -30,10 +41,12 @@ export class ChangePasswordPage {
     this.form.markAllAsTouched();
     this.form.updateValueAndValidity();
 
-    if (this.form.valid) {
-      this.resetSubscription = this.authService.setNewPassword(this.form.value).subscribe(() => {
-        this.router.navigate(['/']);
-      });
+    if (this.form.valid && this.token) {
+      this.resetSubscription = this.authService
+        .setNewPassword(this.token, this.form.value.password)
+        .subscribe(() => {
+          this.router.navigate(['/auth/login']);
+        });
     }
   }
 }

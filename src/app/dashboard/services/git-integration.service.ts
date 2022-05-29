@@ -89,13 +89,23 @@ export class GitIntegrationService {
   }
 
   public connectGitHubIssue(projectId: number, taskId: number, issue?: GitIssue) {
-    return this.apiService.post(`/project/${projectId}/task/${taskId}/integration/git`, {
+    return this.apiService.post(`/project/${projectId}/task/${taskId}/integration/git/issue`, {
       body: issue,
     });
   }
 
-  public disconnectGitHubIssue(projectId: number, taskId: number, issueNumber?: number) {
-    return this.apiService.delete(`/project/${projectId}/task/${taskId}/integration/git`);
+  public disconnectGitHubIssue(projectId: number, taskId: number) {
+    return this.apiService.delete(`/project/${projectId}/task/${taskId}/integration/git/issue`);
+  }
+
+  public connectGitHubPull(projectId: number, taskId: number, issue?: GitIssue) {
+    return this.apiService.post(`/project/${projectId}/task/${taskId}/integration/git/pull`, {
+      body: issue,
+    });
+  }
+
+  public disconnectGitHubPull(projectId: number, taskId: number) {
+    return this.apiService.delete(`/project/${projectId}/task/${taskId}/integration/git/pull`);
   }
 
   /**
