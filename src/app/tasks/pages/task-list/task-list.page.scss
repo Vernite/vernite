@@ -1,19 +1,28 @@
+@import '../../../../styles/typography';
+
 :host {
   display: block;
   padding: 2rem;
 }
 
-.status {
+.table {
+  width: 100%;
+}
+
+.table .row .cell .status {
+  @include typo-title;
+
   display: flex;
-  width: calc(100% - 1rem);
+  width: 100%;
   max-width: 250px;
   height: 100%;
+  height: 40px;
+  align-items: center;
   justify-content: center;
-  padding: 0.5rem;
-  margin: 0.5rem;
+  padding: 0 1rem;
+  margin: 0 1rem;
   background-color: var(--color-secondary-400);
   border-radius: var(--border-radius);
-  font-weight: bold;
 }
 
 .task-title {
@@ -28,40 +37,48 @@
   }
 }
 
-.subtask-row {
+.expanded~.subtasks {
+  display: block;
+}
+
+.subtasks {
   position: relative;
+  display: none;
+  padding-left: 4rem;
 
-  >td[mat-cell] {
-    padding-right: 0;
-    padding-left: 4rem;
-    background-color: transparent;
+  .row {
+    position: relative;
 
-    &:hover {
-      background-color: transparent;
-    }
-
-    &::before {
+    &::before,
+    &::after {
       position: absolute;
       top: 0;
-      left: 2rem;
+      left: -2.5rem;
       display: block;
-      width: 2px;
-      height: calc(100% - 3rem);
-      background-color: var(--color-secondary-400);
-      border-radius: 1px;
       content: '';
+    }
+
+    &:not(:last-child)::before {
+      width: 2px;
+      height: calc(100% + 1rem);
+      background-color: var(--color-secondary-400);
+    }
+
+    &::after {
+      width: 29px;
+      height: 29px;
+      border: 2px solid var(--color-secondary-400);
+      border-top-width: 0;
+      border-right-width: 0;
+      border-bottom-left-radius: 50%;
     }
   }
 }
 
-.element-row {
+.row {
   &.expanded {
     .task-title app-icon {
       transform: rotate(90deg);
     }
   }
-}
-
-.subtask-row:not(.expanded) {
-  display: none;
 }

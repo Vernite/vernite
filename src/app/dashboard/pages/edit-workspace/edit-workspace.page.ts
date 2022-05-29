@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
@@ -15,7 +15,7 @@ import { WorkspaceService } from '../../services/workspace.service';
   templateUrl: './edit-workspace.page.html',
   styleUrls: ['./edit-workspace.page.scss'],
 })
-export class EditWorkspacePage implements OnDestroy {
+export class EditWorkspacePage {
   /**
    * Form group for the workspace editing.
    */
@@ -77,13 +77,5 @@ export class EditWorkspacePage implements OnDestroy {
         window.location.reload();
       });
     });
-  }
-
-  /**
-   * Attach to lifecycle hook to unsubscribe from all subscriptions.
-   */
-  ngOnDestroy(): void {
-    if (this.getSubscription) this.getSubscription.unsubscribe();
-    if (this.updateSubscription) this.updateSubscription.unsubscribe();
   }
 }

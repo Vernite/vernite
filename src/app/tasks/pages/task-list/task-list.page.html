@@ -1,72 +1,99 @@
 <app-view-options [project]="(project$ | async)!"></app-view-options>
 
 <!-- Table -->
-<table mat-table [dataSource]="(taskList$ | async) || []">
+<div class="table">
 
-  <!-- Name column -->
-  <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef i18n>Title</th>
-    <td mat-cell *matCellDef="let task">
-      <div class="task-title">
-        <app-icon [icon]="faChevronRight" size="16px" [class.invisible]="!task.subTasks.length"></app-icon>
-        <span>{{ task.name }}</span>
+  <!-- Header -->
+  <div class="header-row">
+    <div class="header-cell w-full">Title</div>
+    <div class="header-cell w-52">Status</div>
+    <div class="header-cell w-52">Assignee</div>
+    <div class="header-cell w-52">Deadline</div>
+    <div class="header-cell action">
+      <!-- Actions -->
+    </div>
+  </div>
+
+  <!-- Body -->
+  <ng-container *ngFor="let task of taskList$ | async">
+    <div class="row" [class.expanded]="expandedSubtasks.has(task.id)" (click)="expandedSubtasks.toggle(task.id)">
+
+      <!-- Title cell -->
+      <div class="cell w-full">
+        <div class="task-title">
+          <app-icon [icon]="faChevronRight" size="16px" [class.invisible]="!task.subTasks?.length"></app-icon>
+          <span>{{ task.name }}</span>
+        </div>
       </div>
-    </td>
-  </ng-container>
 
-  <!-- Statistics column -->
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef i18n>Status</th>
-    <td mat-cell *matCellDef="let task">
-      <div class="status">
-        {{getStatus(task.statusId)}}
+      <!-- Status cell -->
+      <div class="cell w-52 p-0">
+        <div class="status">{{ task.statusId && getStatus(task.statusId) }}</div>
       </div>
-    </td>
-  </ng-container>
 
-  <!-- Last update column -->
-  <ng-container matColumnDef="assignee">
-    <th mat-header-cell *matHeaderCellDef i18n>Assignee</th>
-    <td mat-cell *matCellDef="let task"> - </td>
-  </ng-container>
+      <!-- Assignee cell -->
+      <div class="cell w-52">-</div>
 
-  <!-- Deadline column -->
-  <ng-container matColumnDef="deadline">
-    <th mat-header-cell *matHeaderCellDef i18n>Deadline</th>
-    <td mat-cell *matCellDef="let task">{{task.deadline | date:'dd.MM.yyyy'}}</td>
-  </ng-container>
+      <!-- Deadline cell -->
+      <div class="cell w-52">-</div>
 
-  <!-- Actions column -->
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef i18n></th>
-    <td mat-cell *matCellDef="let task" class="action-cell">
-      <button mat-icon-button [matMenuTriggerFor]="menu" class="flex items-center">
-        <app-icon icon="matMoreVert"></app-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <span i18n>Edit task</span>
+      <!-- Actions cell -->
+      <div class="cell action justify-center">
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="flex items-center">
+          <app-icon icon="matMoreVert"></app-icon>
         </button>
-        <button mat-menu-item (click)="createSubtask(task)">
-          <span i18n>Create subtask</span>
-        </button>
-        <button mat-menu-item class="important">
-          <span i18n>Delete task</span>
-        </button>
-      </mat-menu>
-    </td>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <span i18n>Edit task</span>
+          </button>
+          <button mat-menu-item (click)="createSubtask(task)">
+            <span i18n>Create subtask</span>
+          </button>
+          <button mat-menu-item class="important">
+            <span i18n>Delete task</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+    <div class="subtasks">
+      <div *ngFor="let subtask of task.subTasks" class="row">
+
+        <!-- Title cell -->
+        <div class="cell w-full">
+          <div class="task-title">
+            <span>{{ subtask.name }}</span>
+          </div>
+        </div>
+
+        <!-- Status cell -->
+        <div class="cell w-52 p-0">
+          <div class="status">{{ subtask.statusId && getStatus(subtask.statusId) }}</div>
+        </div>
+
+        <!-- Assignee cell -->
+        <div class="cell w-52">-</div>
+
+        <!-- Deadline cell -->
+        <div class="cell w-52">-</div>
+
+        <!-- Actions cell -->
+        <div class="cell action justify-center">
+          <button mat-icon-button [matMenuTriggerFor]="menu" class="flex items-center">
+            <app-icon icon="matMoreVert"></app-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <span i18n>Edit task</span>
+            </button>
+            <button mat-menu-item (click)="createSubtask(subtask)">
+              <span i18n>Create subtask</span>
+            </button>
+            <button mat-menu-item class="important">
+              <span i18n>Delete task</span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+    </div>
   </ng-container>
-
-  <ng-container matColumnDef="expandedDetail">
-    <td mat-cell *matCellDef="let task" colspan="5">
-      <app-tasks-table [tasks]="task.subTasks" [projectId]="projectId"></app-tasks-table>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="['title', 'status', 'assignee', 'deadline', 'actions']"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['title', 'status', 'assignee', 'deadline', 'actions'];" class="element-row"
-    [class.expanded]="expandedSubtasks.has(row.id)" (click)="expandedSubtasks.toggle(row.id)"></tr>
-
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isSubtasksRow" class="subtask-row"
-    [class.expanded]="expandedSubtasks.has(row.id)"></tr>
-</table>
+</div>

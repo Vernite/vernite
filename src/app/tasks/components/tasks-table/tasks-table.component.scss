@@ -1,9 +1,9 @@
 :host {
   display: block;
-  margin-top: -2rem;
+  width: 100%;
 }
 
-tr {
+.mat-row {
   position: relative;
 
   &::before {

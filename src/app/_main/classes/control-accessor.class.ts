@@ -24,6 +24,10 @@ export class ControlAccessor implements OnInit, OnDestroy, ControlValueAccessor 
     return this._required;
   }
 
+  public get name() {
+    return this.ngControl.name?.toString() || '';
+  }
+
   private get debug() {
     return (this as any).constructor.debug;
   }

@@ -42,33 +42,33 @@ describe('Service: Api', () => {
     testRequest.flush({ test: 'test' });
   });
 
-  // it('should can perform POST > PATCH > DELETE chain', inject(
-  //   [ApiService],
-  //   (service: ApiService) => {
-  //     (async () => {
-  //       const testObject = {
-  //         name: 'Test Workspace',
-  //         role: 'Test description',
-  //       };
-  //       const newlyCreatedTest = await firstValueFrom(
-  //         service.post('/tests/', { body: testObject }),
-  //       );
+  it('delete() - should send delete request', (done) => {
+    service.delete('/test').subscribe((response) => {
+      expect(response).toEqual({ test: 'test' });
+      done();
+    });
 
-  //       newlyCreatedTest.role = 'Test description 2';
+    const testRequest = httpTestingController.expectOne('/api/test');
+    testRequest.flush({ test: 'test' });
+  });
 
-  //       await firstValueFrom(
-  //         service.patch(`/tests/${newlyCreatedTest.id}`, { body: newlyCreatedTest }),
-  //       );
-  //       await firstValueFrom(service.delete(`/tests/${newlyCreatedTest.id}`));
+  it('put() - should send put request', (done) => {
+    service.put('/test', { body: 'test' }).subscribe((response) => {
+      expect(response).toEqual({ test: 'test' });
+      done();
+    });
 
-  //       expect(service.get(`/test/${newlyCreatedTest.id}`)).toThrowError();
-  //     })();
-  //   },
-  // ));
+    const testRequest = httpTestingController.expectOne('/api/test');
+    testRequest.flush({ test: 'test' });
+  });
 
-  // it('Should send GET request to tests endpoint', inject([ApiService], (service: ApiService) => {
-  //   service.get('/tests/').subscribe((data) => {
-  //     expect(data.length).toBeGreaterThan(0);
-  //   });
-  // }));
+  it('patch() - should send patch request', (done) => {
+    service.patch('/test', { body: 'test' }).subscribe((response) => {
+      expect(response).toEqual({ test: 'test' });
+      done();
+    });
+
+    const testRequest = httpTestingController.expectOne('/api/test');
+    testRequest.flush({ test: 'test' });
+  });
 });

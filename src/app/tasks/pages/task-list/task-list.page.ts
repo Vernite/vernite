@@ -45,7 +45,7 @@ export class TaskListPage {
     this.project$ = this.projectService.get(projectId);
     this.taskList$ = this.taskService.list(projectId).pipe(
       map((tasks) => tasks.filter((task) => !task.parentTaskId)),
-      map((tasks) => this.populateSubtasks(tasks)),
+      // map((tasks) => this.populateSubtasks(tasks)),
     );
     this.statusList$ = this.statusService.list(projectId);
     this.statusList$.subscribe((list) => {

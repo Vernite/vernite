@@ -22,6 +22,9 @@
 @import 'material/checkbox.material';
 @import 'material/error-box.material';
 
+// Elements
+@import 'elements/table';
+
 // Tailwind dependencies imports
 @tailwind base;
 @tailwind components;
@@ -40,8 +43,4 @@ app-root {
   display: block;
   width: 100%;
   height: 100%;
-}
-
-.w-256 {
-  width: 64rem;
 }

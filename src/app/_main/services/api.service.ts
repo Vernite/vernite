@@ -18,12 +18,7 @@ export class ApiService {
   private apiURL: string = environment.apiURL;
 
   /** Default service constructor with `HttpClient` dependency */
-  constructor(
-    /**
-     * Client for managing HTTP requests.
-     */
-    private httpClient: HttpClient,
-  ) {}
+  constructor(private httpClient: HttpClient) {}
 
   /**
    * Sends request to the API.
@@ -33,23 +28,11 @@ export class ApiService {
    * @returns Request observable, which completes when request is finished
    */
   public request(method: string, url: string, options?: RequestOptions) {
-    // const mappedRequest = new Subject<any>();
-
     return this.httpClient.request(method, this.apiURL + url, {
       responseType: 'json',
       withCredentials: true,
       ...options,
     });
-    // .pipe(
-    //   catchError((e) => {
-    //     return of(e.error);
-    //   }),
-    // )
-    // .subscribe((response) => {
-    //   return mappedRequest.next(response);
-    // });
-
-    // return mappedRequest;
   }
 
   /**
