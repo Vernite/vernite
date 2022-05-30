@@ -2,7 +2,7 @@ describe('Workspaces tests', () => {
   beforeEach(() => {
     cy.visit('/auth/login');
 
-    cy.get('input[name=email]').type('admin@admin.com');
+    cy.get('input[name=email]').type('admin');
     cy.get('input[name=password]').type('admin123');
 
     cy.get('button[type=submit]').click();

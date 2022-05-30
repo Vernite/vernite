@@ -45,7 +45,7 @@
         priority | taskPriority }}</app-option>
     </app-select>
 
-    <!-- GitHub integration -->
+    <!-- GitHub issue integration -->
     <app-checkbox *ngIf="isGitHubIntegrationAvailable" formControlName="connectWithIssueOnGitHub" i18n>Create or attach
       GitHub issue simultaneously</app-checkbox>
 
@@ -58,6 +58,18 @@
       <app-select [class.hidden]="!form.get('issueAttachGithub')?.value" formControlName="issue" floatingLabel="Issue"
         i18n-floatingLabel>
         <app-option *ngFor="let issue of issueList$ | async" [value]="issue">{{issue.title}}</app-option>
+      </app-select>
+    </div>
+
+    <!-- Github pull request integration -->
+    <app-checkbox *ngIf="isGitHubIntegrationAvailable" formControlName="connectWithPullRequestOnGitHub" i18n>
+      Connect with GitHub pull request
+    </app-checkbox>
+
+    <div [class.hidden]="!form.get('connectWithPullRequestOnGitHub')?.value" class="git-pull-connection">
+      <app-select formControlName="pull" floatingLabel="Pull request" i18n-floatingLabel>
+        <app-option *ngFor="let pullRequest of pullList$ | async" [value]="pullRequest">{{pullRequest.title}}
+        </app-option>
       </app-select>
     </div>
 

@@ -7,7 +7,7 @@ describe('Login tests', () => {
   it('Should be able to log in', () => {
     cy.contains('Log in');
 
-    cy.get('input[name=email]').type('admin@admin.com');
+    cy.get('input[name=email]').type('admin');
     cy.get('input[name=password]').type('admin123');
 
     cy.get('button[type=submit]').click();
@@ -18,7 +18,7 @@ describe('Login tests', () => {
   it('Should be able to log in with remember me', () => {
     cy.contains('Log in');
 
-    cy.get('input[name=email]').type('admin@admin.com');
+    cy.get('input[name=email]').type('admin');
     cy.get('input[name=password]').type('admin123');
     cy.get('input[name=remember]').click({ force: true });
 
@@ -30,7 +30,7 @@ describe('Login tests', () => {
   it('Should not be able to log in with wrong password', () => {
     cy.contains('Log in');
 
-    cy.get('input[name=email]').type('admin@admin.com');
+    cy.get('input[name=email]').type('admin');
     cy.get('input[name=password]').type('admin');
 
     cy.get('button[type=submit]').click();

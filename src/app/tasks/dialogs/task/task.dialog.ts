@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { GitIssue } from '@dashboard/interfaces/git-integration.interface';
+import { GitIssue, GitPull } from '@dashboard/interfaces/git-integration.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
 import { GitIntegrationService } from '@dashboard/services/git-integration.service';
@@ -44,6 +44,7 @@ export class TaskDialog implements OnInit {
   public workspaceList$!: Observable<Workspace[]>;
   public projectList$: Observable<Project[]> = new BehaviorSubject([]);
   public issueList$!: Observable<GitIssue[]>;
+  public pullList$!: Observable<GitPull[]>;
 
   public isGitHubIntegrationAvailable: boolean = false;
 
@@ -58,10 +59,14 @@ export class TaskDialog implements OnInit {
     description: new FormControl(''),
     priority: new FormControl(this.taskPriorities[2], [requiredValidator()]),
 
-    // GitHub integration fields
+    // GitHub issue integration fields
     connectWithIssueOnGitHub: new FormControl(false),
     issueAttachGithub: new FormControl(false),
     issue: new FormControl(null),
+
+    // Github pull requests integration fields
+    connectWithPullRequestOnGitHub: new FormControl(false),
+    pull: new FormControl(null),
   });
 
   constructor(
@@ -109,8 +114,10 @@ export class TaskDialog implements OnInit {
 
       if (this.isGitHubIntegrationAvailable) {
         this.issueList$ = this.gitIntegrationService.gitHubIssueList(projectId);
+        this.pullList$ = this.gitIntegrationService.gitHubPullList(projectId);
       } else {
         this.issueList$ = new BehaviorSubject([]);
+        this.pullList$ = new BehaviorSubject([]);
       }
     });
   }

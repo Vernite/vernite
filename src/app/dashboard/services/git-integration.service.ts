@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {
   GitAccount,
   GitIntegration,
-  GitIssue
+  GitIssue,
+  GitPull
 } from '@dashboard/interfaces/git-integration.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Service } from '@main/decorators/service.decorator';
@@ -72,6 +73,11 @@ export class GitIntegrationService {
       );
   }
 
+  /**
+   * Delete the given account connection
+   * @param gitHubAccountId GitHub account id
+   * @returns object with link to open the GitHub page with application removal
+   */
   public deleteConnectedGitHubAccount(gitHubAccountId: number): Observable<{ link: string }> {
     return this.apiService.delete(`/user/integration/github/${gitHubAccountId}`);
   }
@@ -98,9 +104,13 @@ export class GitIntegrationService {
     return this.apiService.delete(`/project/${projectId}/task/${taskId}/integration/git/issue`);
   }
 
-  public connectGitHubPull(projectId: number, taskId: number, issue?: GitIssue) {
+  public gitHubPullList(projectId: number) {
+    return this.apiService.get(`/project/${projectId}/integration/git/pull`);
+  }
+
+  public connectGitHubPull(projectId: number, taskId: number, pull?: GitPull) {
     return this.apiService.post(`/project/${projectId}/task/${taskId}/integration/git/pull`, {
-      body: issue,
+      body: pull,
     });
   }
 

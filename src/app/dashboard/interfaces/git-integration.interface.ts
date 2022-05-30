@@ -23,3 +23,13 @@ export interface GitAccount {
   gitHubUsername: string;
   suspended: boolean;
 }
+
+export interface GitPull {
+  id: number;
+  url: string;
+  state: string;
+  title: string;
+  description: string;
+  service: string;
+  branch: string;
+}
