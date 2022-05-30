@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AuthService } from '@auth/services/auth.service';
 import { UserService } from '@auth/services/user.service';
 import { requiredValidator } from '@main/validators/required.validator';
 
@@ -9,7 +10,7 @@ import { requiredValidator } from '@main/validators/required.validator';
   styleUrls: ['./settings-account.page.scss'],
 })
 export class SettingsAccountPage implements OnInit {
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private authService: AuthService) {}
 
   public form = new FormGroup({
     email: new FormControl('', requiredValidator()),
@@ -30,5 +31,15 @@ export class SettingsAccountPage implements OnInit {
     if (this.form.invalid) return;
 
     this.userService.update(this.form.value).subscribe(() => {});
+  }
+
+  resetPassword() {
+    this.authService.resetPassword(this.form.value.email).subscribe(() => {
+      this.authService.logout().subscribe();
+    });
+  }
+
+  deleteAccountMailCheck() {
+    this.authService.deleteAccount().subscribe();
   }
 }

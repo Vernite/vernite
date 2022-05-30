@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { passwordValidator } from '@main/validators/password.validator';
 import { requiredValidator } from '@main/validators/required.validator';
+import { sameAsValidator } from '@main/validators/same-as.validator';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
@@ -21,7 +22,7 @@ export class ChangePasswordPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    const { token } = this.activatedRoute.snapshot.params;
+    const { token } = this.activatedRoute.snapshot.queryParams;
     this.token = token;
   }
 
@@ -32,7 +33,15 @@ export class ChangePasswordPage implements OnInit {
    */
   public form = new FormGroup({
     password: new FormControl('', [requiredValidator(), passwordValidator()], []),
-    repeatPassword: new FormControl('', [requiredValidator(), passwordValidator()], []),
+    repeatPassword: new FormControl(
+      '',
+      [
+        requiredValidator(),
+        passwordValidator(),
+        sameAsValidator('password', $localize`Given passwords are not the same `),
+      ],
+      [],
+    ),
   });
 
   setNewPassword() {

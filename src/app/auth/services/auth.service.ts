@@ -52,6 +52,14 @@ export class AuthService {
     return this.apiService.post(`/auth/resetPassword`, { body: { token, password } });
   }
 
+  public deleteAccount() {
+    return this.apiService.delete(`/auth/delete`, { body: {} });
+  }
+
+  public deleteAccountConfirmation(token: string) {
+    return this.apiService.delete(`/auth/delete/confirm`, { body: { token } });
+  }
+
   public isLoggedIn() {
     if (localStorage.getItem('logged')) {
       return true;

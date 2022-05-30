@@ -32,7 +32,7 @@
     <div class="card-content" i18n>It's highly recommended to change the password every 30 days. It will increase your
       account security.</div>
     <div class="card-actions">
-      <app-button type="button" variant="secondary" i18n>Change password</app-button>
+      <app-button type="button" (click)="resetPassword()" variant="secondary" i18n>Change password</app-button>
     </div>
   </app-card>
 
@@ -43,7 +43,7 @@
       This action is reversible in period of 7 days - you need to log in to your account in this time to revert your
       account deletion.</div>
     <div class="card-actions">
-      <app-button type="button" variant="important" i18n>Delete account</app-button>
+      <app-button type="button" (click)="deleteAccountMailCheck()" variant="important" i18n>Delete account</app-button>
     </div>
   </app-card>
 
