@@ -1,14 +1,22 @@
 /* tslint:disable:no-unused-variable */
 
 import { HttpClientModule } from '@angular/common/http';
-import { TestBed, async, inject } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogService } from '@main/services/dialog.service';
 import { TaskService } from './task.service';
 
 describe('Service: Task', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
-      providers: [TaskService],
+      imports: [HttpClientModule, MatDialogModule],
+      providers: [
+        TaskService,
+        DialogService,
+        MatDialogModule,
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
+      ],
     });
   });
 

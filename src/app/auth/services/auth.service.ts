@@ -45,11 +45,11 @@ export class AuthService {
   }
 
   public resetPassword({ email }: { email: string }) {
-    return this.apiService.post(`/auth/recoverPassword`, { body: { email } });
+    return this.apiService.post(`/auth/password/recover`, { body: { email } });
   }
 
   public setNewPassword(token: string, password: string) {
-    return this.apiService.post(`/auth/resetPassword`, { body: { token, password } });
+    return this.apiService.post(`/auth/password/reset`, { body: { token, password } });
   }
 
   public deleteAccount() {
