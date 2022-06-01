@@ -4,7 +4,7 @@ import { GitIntegrationService } from '@dashboard/services/git-integration.servi
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 import { DialogService } from '@main/services/dialog.service';
 import { TaskDialog, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
-import { EMPTY, Observable, of, switchMap } from 'rxjs';
+import { EMPTY, Observable, of, switchMap, tap } from 'rxjs';
 import { ApiService } from '../../_main/services/api.service';
 import { Task } from '../interfaces/task.interface';
 
@@ -51,12 +51,12 @@ export class TaskService {
       switchMap((newTask) => {
         if (task.connectWithPullRequestOnGitHub) {
           return this.gitIntegrationService.connectGitHubPull(projectId, newTask.id, task.pull);
-        } else return EMPTY;
+        } else return of(null);
       }),
       switchMap((newTask) => {
         if (task.connectWithIssueOnGitHub) {
           return this.gitIntegrationService.connectGitHubIssue(projectId, newTask.id, task.issue);
-        } else return EMPTY;
+        } else return of(null);
       }),
     );
   }
@@ -81,12 +81,12 @@ export class TaskService {
       switchMap((newTask) => {
         if (task.connectWithPullRequestOnGitHub) {
           return this.gitIntegrationService.connectGitHubPull(projectId, newTask.id, task.pull);
-        } else return EMPTY;
+        } else return of(null);
       }),
       switchMap((newTask) => {
         if (task.connectWithIssueOnGitHub) {
           return this.gitIntegrationService.connectGitHubIssue(projectId, newTask.id, task.issue);
-        } else return EMPTY;
+        } else return of(null);
       }),
     );
   }
@@ -115,7 +115,7 @@ export class TaskService {
           if (confirmed) {
             return this.delete(projectId, task.id).pipe(switchMap(() => of(true)));
           } else {
-            return of(null);
+            return EMPTY;
           }
         }),
       );
@@ -130,11 +130,14 @@ export class TaskService {
       })
       .afterClosed()
       .pipe(
+        tap((data) => {
+          console.log(data);
+        }),
         switchMap((updatedTask: any) => {
           if (updatedTask) {
             return this.update(projectId, updatedTask);
           } else {
-            return of(null);
+            return EMPTY;
           }
         }),
       );

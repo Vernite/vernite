@@ -99,6 +99,18 @@ export class TaskListPage {
       });
   }
 
+  editTask(task: Task) {
+    this.taskService.openEditTaskDialog(this.projectId, task).subscribe(() => {
+      location.reload();
+    });
+  }
+
+  deleteTask(task: Task) {
+    this.taskService.deleteWithConfirmation(this.projectId, task).subscribe(() => {
+      location.reload();
+    });
+  }
+
   public getSubtasksContainerHeight(taskId: number, element: HTMLElement) {
     return `${Number(this.expandedSubtasks.has(taskId)) * element.scrollHeight}px`;
   }

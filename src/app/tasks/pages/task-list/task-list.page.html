@@ -52,13 +52,13 @@
           <app-icon icon="matMoreVert"></app-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
+          <button mat-menu-item (click)="editTask(task)">
             <span i18n>Edit task</span>
           </button>
           <button mat-menu-item (click)="createSubtask(task)">
             <span i18n>Create subtask</span>
           </button>
-          <button mat-menu-item class="important">
+          <button mat-menu-item (click)="deleteTask(task)" class="important">
             <span i18n>Delete task</span>
           </button>
         </mat-menu>
@@ -92,13 +92,13 @@
             <app-icon icon="matMoreVert"></app-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <button mat-menu-item (click)="editTask(subtask)">
               <span i18n>Edit task</span>
             </button>
             <button mat-menu-item (click)="createSubtask(subtask)">
               <span i18n>Create subtask</span>
             </button>
-            <button mat-menu-item class="important">
+            <button mat-menu-item (click)="deleteTask(subtask)" class="important">
               <span i18n>Delete task</span>
             </button>
           </mat-menu>
