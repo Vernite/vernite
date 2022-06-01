@@ -3,6 +3,7 @@ import { GitIssue, GitPull } from '@dashboard/interfaces/git-integration.interfa
 import { GitIntegrationService } from '@dashboard/services/git-integration.service';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 import { DialogService } from '@main/services/dialog.service';
+import { TaskDialog, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
 import { EMPTY, Observable, of, switchMap } from 'rxjs';
 import { ApiService } from '../../_main/services/api.service';
 import { Task } from '../interfaces/task.interface';
@@ -48,8 +49,6 @@ export class TaskService {
   ): Observable<Task> {
     return this.apiService.post(`/project/${projectId}/task/`, { body: task }).pipe(
       switchMap((newTask) => {
-        console.log(task, task.connectWithPullRequestOnGitHub);
-
         if (task.connectWithPullRequestOnGitHub) {
           return this.gitIntegrationService.connectGitHubPull(projectId, newTask.id, task.pull);
         } else return EMPTY;
@@ -68,8 +67,28 @@ export class TaskService {
    * @param projectId Project id needed to update task
    * @returns Request observable with the updated task
    */
-  public update(projectId: number, task: Task): Observable<Task> {
-    return this.apiService.put(`/project/${projectId}/task/${task.id}`, { body: task });
+  public update(
+    projectId: number,
+    task: Task & {
+      issueNumber?: number;
+      connectWithIssueOnGitHub?: boolean;
+      connectWithPullRequestOnGitHub?: boolean;
+      pull?: GitPull;
+      issue?: GitIssue;
+    },
+  ): Observable<Task> {
+    return this.apiService.put(`/project/${projectId}/task/${task.id}`, { body: task }).pipe(
+      switchMap((newTask) => {
+        if (task.connectWithPullRequestOnGitHub) {
+          return this.gitIntegrationService.connectGitHubPull(projectId, newTask.id, task.pull);
+        } else return EMPTY;
+      }),
+      switchMap((newTask) => {
+        if (task.connectWithIssueOnGitHub) {
+          return this.gitIntegrationService.connectGitHubIssue(projectId, newTask.id, task.issue);
+        } else return EMPTY;
+      }),
+    );
   }
 
   /**
@@ -82,7 +101,7 @@ export class TaskService {
     return this.apiService.delete(`/project/${projectId}/task/${taskId}`);
   }
 
-  public deleteWithConfirmation(projectId: number, task: Task): Observable<null> {
+  public deleteWithConfirmation(projectId: number, task: Task): Observable<boolean | null> {
     return this.dialogService
       .confirm({
         title: $localize`Delete task "${task.name}"`,
@@ -94,7 +113,26 @@ export class TaskService {
       .pipe(
         switchMap((confirmed) => {
           if (confirmed) {
-            return this.delete(projectId, task.id);
+            return this.delete(projectId, task.id).pipe(switchMap(() => of(true)));
+          } else {
+            return of(null);
+          }
+        }),
+      );
+  }
+
+  public openEditTaskDialog(projectId: number, task: Task): Observable<Task | null> {
+    return this.dialogService
+      .open(TaskDialog, {
+        variant: TaskDialogVariant.EDIT,
+        projectId,
+        task,
+      })
+      .afterClosed()
+      .pipe(
+        switchMap((updatedTask: any) => {
+          if (updatedTask) {
+            return this.update(projectId, updatedTask);
           } else {
             return of(null);
           }

@@ -22,8 +22,10 @@ export class BoardTaskComponent {
   constructor(private dialogService: DialogService, private taskService: TaskService) {}
 
   delete() {
-    this.taskService.deleteWithConfirmation(this.projectId, this.task).subscribe(() => {
-      location.reload();
+    this.taskService.deleteWithConfirmation(this.projectId, this.task).subscribe((res) => {
+      if (res) {
+        location.reload();
+      }
     });
   }
 

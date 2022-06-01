@@ -1,13 +1,9 @@
+import auth from '../fixtures/auth.json';
+
 describe('Workspaces tests', () => {
   beforeEach(() => {
-    cy.visit('/auth/login');
-
-    cy.get('input[name=email]').type('admin');
-    cy.get('input[name=password]').type('admin123');
-
-    cy.get('button[type=submit]').click();
-
-    cy.url().should('not.include', 'login');
+    cy.login(auth.email, auth.password);
+    cy.visit('/');
   });
 
   it('Should be able to create a new workspace', () => {
@@ -36,5 +32,10 @@ describe('Workspaces tests', () => {
     cy.contains('Delete').click();
     cy.get('.mat-dialog-container').contains('button', 'Delete').click();
     cy.contains('Test workspace - renamed').should('not.exist');
+  });
+
+  after(() => {
+    cy.login(auth.email, auth.password);
+    cy.clearUser();
   });
 });

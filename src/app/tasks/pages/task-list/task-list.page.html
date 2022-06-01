@@ -22,7 +22,16 @@
       <div class="cell w-full">
         <div class="task-title">
           <app-icon [icon]="faChevronRight" size="16px" [class.invisible]="!task.subTasks?.length"></app-icon>
+          <span class="task-id">#{{ task.id }}</span>
           <span>{{ task.name }}</span>
+          <a *ngIf="task.issue" [href]="task.issue" class="task-property" target="_blank" matTooltip="GitHub issue"
+            i18n-matTooltip>
+            <app-icon [icon]="faCodeCommit" size="14px"></app-icon>
+          </a>
+          <a *ngIf="task.pull" [href]="task.pull" class="task-property" target="_blank" matTooltip="GitHub pull request"
+            i18n-matTooltip>
+            <app-icon [icon]="faCodePullRequest" size="14px"></app-icon>
+          </a>
         </div>
       </div>
 
@@ -55,12 +64,13 @@
         </mat-menu>
       </div>
     </div>
-    <div class="subtasks">
+    <div #subtasks class="subtasks" [style.maxHeight]="getSubtasksContainerHeight(task.id, subtasks)">
       <div *ngFor="let subtask of task.subTasks" class="row">
 
         <!-- Title cell -->
         <div class="cell w-full">
           <div class="task-title">
+            <span class="task-id">#{{ task.id }}</span>
             <span>{{ subtask.name }}</span>
           </div>
         </div>

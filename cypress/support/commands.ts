@@ -1,43 +1,89 @@
-// ***********************************************
-// This example namespace declaration will help
-// with Intellisense and code completion in your
-// IDE or Text Editor.
-// ***********************************************
-// declare namespace Cypress {
-//   interface Chainable<Subject = any> {
-//     customCommand(param: any): typeof customCommand;
-//   }
-// }
-//
-// function customCommand(param: any): void {
-//   console.warn(param);
-// }
-//
-// NOTE: You can use it like so:
-// Cypress.Commands.add('customCommand', customCommand);
-//
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+declare namespace Cypress {
+  interface Chainable<Subject = any> {
+    login(email: string, password: string): typeof login;
+    logout(): typeof logout;
+    createWorkspace(name: string): typeof createWorkspace;
+    createProject(name: string): typeof createProject;
+    deleteProject(id: number): typeof deleteProject;
+    deleteWorkspace(id: number): typeof deleteWorkspace;
+    deleteAllProjectsAndWorkspaces(): typeof deleteAllProjectsAndWorkspaces;
+    clearUser(): typeof clearUser;
+  }
+}
+
+function login(email: string, password: string) {
+  cy.request({
+    method: 'POST',
+    url: '/api/auth/login',
+    body: { email, password },
+  }).then((response) => {
+    localStorage.setItem('logged', response.body.token);
+  });
+}
+
+function logout() {
+  cy.request({
+    method: 'POST',
+    url: '/api/auth/logout',
+  }).then((response) => {
+    localStorage.removeItem('logged');
+  });
+}
+
+function createWorkspace(name: string) {
+  cy.request({
+    method: 'POST',
+    url: '/api/workspaces',
+    body: { name },
+  });
+}
+
+function createProject(name: string) {
+  cy.request({
+    method: 'POST',
+    url: '/api/projects',
+    body: { name },
+  });
+}
+
+function deleteProject(id: number) {
+  cy.request({
+    method: 'DELETE',
+    url: `/api/projects/${id}`,
+  });
+}
+
+function deleteWorkspace(id: number) {
+  cy.request({
+    method: 'DELETE',
+    url: `/api/workspaces/${id}`,
+  });
+}
+
+function deleteAllProjectsAndWorkspaces() {
+  cy.request({
+    method: 'GET',
+    url: '/api/workspace',
+  }).then((response) => {
+    response.body.forEach((workspace: any) => {
+      workspace.projectsWithPrivileges.forEach((projectWithPrivileges: any) => {
+        deleteProject(projectWithPrivileges.project.id);
+      });
+      deleteWorkspace(workspace.id);
+    });
+  });
+}
+
+function clearUser() {
+  deleteAllProjectsAndWorkspaces();
+  logout();
+}
+
+Cypress.Commands.add('login', login);
+Cypress.Commands.add('logout', logout);
+Cypress.Commands.add('createWorkspace', createWorkspace);
+Cypress.Commands.add('createProject', createProject);
+Cypress.Commands.add('deleteProject', deleteProject);
+Cypress.Commands.add('deleteWorkspace', deleteWorkspace);
+Cypress.Commands.add('deleteAllProjectsAndWorkspaces', deleteAllProjectsAndWorkspaces);
+Cypress.Commands.add('clearUser', clearUser);

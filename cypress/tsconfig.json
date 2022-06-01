@@ -3,6 +3,8 @@
   "include": ["**/*.ts"],
   "compilerOptions": {
     "sourceMap": false,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "types": ["cypress", "node"]
   }
 }
