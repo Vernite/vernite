@@ -4,3 +4,8 @@ export enum TaskType {
   ISSUE = 2,
   EPIC = 3,
 }
+
+export enum SubTaskType {
+  SUBTASK = 4,
+  ISSUE = 1,
+}

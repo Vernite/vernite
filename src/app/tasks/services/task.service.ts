@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { GitIssue, GitPull } from '@dashboard/interfaces/git-integration.interface';
 import { GitIntegrationService } from '@dashboard/services/git-integration.service';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 import { DialogService } from '@main/services/dialog.service';
-import { TaskDialog, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
+import { TaskDialog, TaskDialogData, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
 import { EMPTY, Observable, of, switchMap, tap } from 'rxjs';
 import { ApiService } from '../../_main/services/api.service';
-import { Task } from '../interfaces/task.interface';
+import { Task, TaskWithAdditionalData } from '../interfaces/task.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -37,16 +36,7 @@ export class TaskService {
    * @param projectId Project id needed to create task
    * @returns Request observable with the created task
    */
-  public create(
-    projectId: number,
-    task: Task & {
-      issueNumber?: number;
-      connectWithIssueOnGitHub: boolean;
-      connectWithPullRequestOnGitHub: boolean;
-      pull: GitPull;
-      issue: GitIssue;
-    },
-  ): Observable<Task> {
+  public create(projectId: number, task: TaskWithAdditionalData): Observable<Task> {
     return this.apiService.post(`/project/${projectId}/task/`, { body: task }).pipe(
       switchMap((newTask) => {
         if (task.connectWithPullRequestOnGitHub) {
@@ -67,16 +57,7 @@ export class TaskService {
    * @param projectId Project id needed to update task
    * @returns Request observable with the updated task
    */
-  public update(
-    projectId: number,
-    task: Task & {
-      issueNumber?: number;
-      connectWithIssueOnGitHub?: boolean;
-      connectWithPullRequestOnGitHub?: boolean;
-      pull?: GitPull;
-      issue?: GitIssue;
-    },
-  ): Observable<Task> {
+  public update(projectId: number, task: TaskWithAdditionalData): Observable<Task> {
     return this.apiService.put(`/project/${projectId}/task/${task.id}`, { body: task }).pipe(
       switchMap((newTask) => {
         if (task.connectWithPullRequestOnGitHub) {
@@ -101,6 +82,12 @@ export class TaskService {
     return this.apiService.delete(`/project/${projectId}/task/${taskId}`);
   }
 
+  /**
+   * Opens dialog to delete specific task
+   * @param projectId Project id needed to delete task
+   * @param task Task to delete
+   * @returns Observable with true if task was deleted, EMPTY otherwise (when user cancels the dialog)
+   */
   public deleteWithConfirmation(projectId: number, task: Task): Observable<boolean | null> {
     return this.dialogService
       .confirm({
@@ -121,6 +108,12 @@ export class TaskService {
       );
   }
 
+  /**
+   * Opens dialog to edit specific task
+   * @param projectId Project id needed to update task
+   * @param task Task to update
+   * @returns Observable with updated task, EMPTY otherwise (when user cancels the dialog)
+   */
   public openEditTaskDialog(projectId: number, task: Task): Observable<Task | null> {
     return this.dialogService
       .open(TaskDialog, {
@@ -136,6 +129,55 @@ export class TaskService {
         switchMap((updatedTask: any) => {
           if (updatedTask) {
             return this.update(projectId, updatedTask);
+          } else {
+            return EMPTY;
+          }
+        }),
+      );
+  }
+
+  /**
+   * Opens dialog to create new task
+   * @returns created task, EMPTY otherwise (when user cancels the dialog)
+   */
+  public openCreateNewTaskDialog() {
+    return this.dialogService
+      .open(TaskDialog, {
+        variant: TaskDialogVariant.CREATE,
+      } as TaskDialogData)
+      .afterClosed()
+      .pipe(
+        switchMap((task: TaskWithAdditionalData) => {
+          if (task) {
+            return this.create(task.projectId, task);
+          } else {
+            return EMPTY;
+          }
+        }),
+      );
+  }
+
+  /**
+   * Opens dialog to create new subtask
+   * @param projectId Project id needed to update subtask
+   * @param parentTask Parent task id to which attach subtask
+   * @returns created subtask, EMPTY otherwise (when user cancels the dialog)
+   */
+  public openCreateSubtaskDialog(projectId: number, parentTask: Task): Observable<Task | null> {
+    return this.dialogService
+      .open(TaskDialog, {
+        variant: TaskDialogVariant.CREATE,
+        projectId: projectId,
+        subtask: true,
+        task: {
+          parentTaskId: parentTask.id,
+        },
+      })
+      .afterClosed()
+      .pipe(
+        switchMap((newTask: any) => {
+          if (newTask) {
+            return this.create(projectId, newTask);
           } else {
             return EMPTY;
           }

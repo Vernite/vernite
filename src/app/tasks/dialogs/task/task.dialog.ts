@@ -9,7 +9,7 @@ import { WorkspaceService } from '@dashboard/services/workspace.service';
 import { Enum } from '@main/classes/enum.class';
 import { RouterExtensionsService } from '@main/services/router-extensions.service';
 import { TaskPriority } from '@tasks/enums/task-priority.enum';
-import { TaskType } from '@tasks/enums/task-type.enum';
+import { SubTaskType, TaskType } from '@tasks/enums/task-type.enum';
 import { Status } from '@tasks/interfaces/status.interface';
 import { StatusService } from '@tasks/services/status.service';
 import { BehaviorSubject, map, Observable } from 'rxjs';
@@ -38,6 +38,7 @@ export class TaskDialog implements OnInit {
   TaskDialogVariant = TaskDialogVariant;
 
   public taskTypes = Enum.entries(TaskType);
+  public subTaskTypes = Enum.entries(SubTaskType);
   public taskPriorities = Object.values(TaskPriority);
 
   public statusList$!: Observable<Status[]>;

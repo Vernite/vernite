@@ -1,3 +1,8 @@
+import { GitIssue, GitPull } from '@dashboard/interfaces/git-integration.interface';
+
+/**
+ * Project task interface
+ */
 export interface Task {
   /**
    * Task id (unique per project)
@@ -48,4 +53,44 @@ export interface Task {
    * Optional link to the GitHub pull request
    */
   pull?: string;
+}
+
+/**
+ * Extended project task interface
+ */
+export interface TaskWithAdditionalData extends Omit<Task, 'pull' | 'issue'> {
+  /**
+   * Project identifier
+   */
+  projectId: number;
+
+  /**
+   * Workspace identifier
+   */
+  workspaceId: string;
+
+  /**
+   * Boolean to determine if task is connected to GitHub issue
+   */
+  connectWithIssueOnGitHub: boolean;
+
+  /**
+   * Boolean to determine if task should be attached to existing GitHub issue instead of creating new one
+   */
+  issueAttachGithub: boolean;
+
+  /**
+   * Boolean to determine if task is connected to GitHub pull request
+   */
+  connectWithPullRequestOnGitHub: boolean;
+
+  /**
+   * GitHub pull to which the task is connected to
+   */
+  pull: GitPull;
+
+  /**
+   * GitHub issue to which the task is connected to
+   */
+  issue: GitIssue;
 }

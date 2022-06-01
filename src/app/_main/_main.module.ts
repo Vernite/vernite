@@ -35,6 +35,7 @@ import { SidebarNavigationComponent } from './components/sidebar-navigation/side
 import { TextareaComponent } from './components/textarea/textarea.component';
 import { UpperNavigationComponent } from './components/upper-navigation/upper-navigation.component';
 import { AlertDialog } from './dialogs/alert/alert.dialog';
+import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
 import { FocusInitialDirective } from './directives/focus-initial.directive';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { ValidationErrorPipe } from './pipes/validation-error.pipe';
@@ -111,6 +112,7 @@ const ngModuleConfig = {
     TextareaComponent,
     CheckboxComponent,
     CardComponent,
+    ClickStopPropagationDirective,
   ],
   providers: [
     DialogService,

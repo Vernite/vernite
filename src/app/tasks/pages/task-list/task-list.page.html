@@ -48,7 +48,7 @@
 
       <!-- Actions cell -->
       <div class="cell action justify-center">
-        <button mat-icon-button [matMenuTriggerFor]="menu" class="flex items-center">
+        <button mat-icon-button click-stop-propagation [matMenuTriggerFor]="menu" class="flex items-center">
           <app-icon icon="matMoreVert"></app-icon>
         </button>
         <mat-menu #menu="matMenu">
@@ -88,7 +88,7 @@
 
         <!-- Actions cell -->
         <div class="cell action justify-center">
-          <button mat-icon-button [matMenuTriggerFor]="menu" class="flex items-center">
+          <button mat-icon-button click-stop-propagation [matMenuTriggerFor]="menu" class="flex items-center">
             <app-icon icon="matMoreVert"></app-icon>
           </button>
           <mat-menu #menu="matMenu">

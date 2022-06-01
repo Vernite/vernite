@@ -20,7 +20,8 @@
 
     <!-- Type field -->
     <app-select formControlName="type" floatingLabel="Type" i18n-floatingLabel>
-      <app-option *ngFor="let type of taskTypes" [value]="type[1]" [icon]="type[0] | taskTypeIcon">{{ type[0] | taskType
+      <app-option *ngFor="let type of (data.subtask ? subTaskTypes : taskTypes)" [value]="type[1]"
+        [icon]="type[0] | taskTypeIcon">{{ type[0] | taskType
         }}
       </app-option>
     </app-select>

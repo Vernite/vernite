@@ -14,6 +14,11 @@ export class TaskTypePipe implements PipeTransform {
         return $localize`Issue`;
       case 'EPIC':
         return $localize`Epic`;
+      case 'SUBTASK':
+        return $localize`Subtask`;
+      default:
+        console.warn('Unknown task type:', value);
+        return value;
     }
   }
 }
