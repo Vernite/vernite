@@ -91,6 +91,7 @@
     justify-content: flex-end;
 
     >* {
+      display: flex;
       margin-left: 1rem;
       color: var(--color-text);
       cursor: pointer;
@@ -99,6 +100,11 @@
 
       &:hover {
         opacity: 1;
+      }
+
+      .check {
+        margin-left: 5px;
+        color: #2ecc71;
       }
     }
   }

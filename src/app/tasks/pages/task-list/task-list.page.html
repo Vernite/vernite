@@ -32,6 +32,11 @@
             i18n-matTooltip>
             <app-icon [icon]="faCodePullRequest" size="14px"></app-icon>
           </a>
+          <a *ngIf="task.mergedPullList" [href]="task.mergedPullList[0]" class="task-property" target="_blank"
+            matTooltip="GitHub pull request" i18n-matTooltip>
+            <app-icon [icon]="faCodePullRequest" size="14px"></app-icon>
+            <app-icon class="check" [icon]="faCheck" size="14px"></app-icon>
+          </a>
         </div>
       </div>
 
@@ -69,9 +74,22 @@
 
         <!-- Title cell -->
         <div class="cell w-full">
-          <div class="task-title">
-            <span class="task-id">#{{ task.id }}</span>
+          <div class="subtask-title">
+            <span class="subtask-id">#{{ subtask.id }}</span>
             <span>{{ subtask.name }}</span>
+            <a *ngIf="subtask.issue" [href]="subtask.issue" class="task-property" target="_blank"
+              matTooltip="GitHub issue" i18n-matTooltip>
+              <app-icon [icon]="faCodeCommit" size="14px"></app-icon>
+            </a>
+            <a *ngIf="subtask.pull" [href]="subtask.pull" class="task-property" target="_blank"
+              matTooltip="GitHub pull request" i18n-matTooltip>
+              <app-icon [icon]="faCodePullRequest" size="14px"></app-icon>
+            </a>
+            <a *ngIf="subtask.mergedPullList" [href]="subtask.mergedPullList[0]" class="task-property" target="_blank"
+              matTooltip="GitHub pull request" i18n-matTooltip>
+              <app-icon [icon]="faCodePullRequest" size="14px"></app-icon>
+              <app-icon class="check" [icon]="faCheck" size="14px"></app-icon>
+            </a>
           </div>
         </div>
 

@@ -38,6 +38,7 @@
   }
 
   .task-property {
+    display: flex;
     margin-left: 1rem;
     cursor: pointer;
     opacity: 0.5;
@@ -45,6 +46,11 @@
 
     &:hover {
       opacity: 1;
+    }
+
+    .check {
+      margin-left: 5px;
+      color: #2ecc71;
     }
   }
 

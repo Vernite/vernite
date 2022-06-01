@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { faCodeCommit, faCodePullRequest } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faCodeCommit, faCodePullRequest } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '@main/services/dialog.service';
 import { TaskDialog, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
 import { TaskService } from '@tasks/services/task.service';
@@ -19,6 +19,7 @@ export class BoardTaskComponent {
 
   faCodeCommit = faCodeCommit;
   faCodePullRequest = faCodePullRequest;
+  faCheck = faCheck;
 
   constructor(private dialogService: DialogService, private taskService: TaskService) {}
 

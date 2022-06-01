@@ -16,6 +16,10 @@
     <a *ngIf="task.pull" [href]="task.pull">
       <app-icon [icon]="faCodePullRequest" size="14px"></app-icon>
     </a>
+    <a *ngIf="task.mergedPullList" [href]="task.mergedPullList[0]">
+      <app-icon [icon]="faCodePullRequest" size="14px"></app-icon>
+      <app-icon class="check" [icon]="faCheck" size="14px"></app-icon>
+    </a>
   </div>
   <div class="options">
     <button mat-icon-button [matMenuTriggerFor]="menu" class="flex items-center">

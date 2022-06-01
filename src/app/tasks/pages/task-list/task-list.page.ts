@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { ProjectService } from '@dashboard/services/project.service';
 import {
+  faCheck,
   faChevronRight,
   faCodeCommit,
   faCodePullRequest,
@@ -27,6 +28,7 @@ export class TaskListPage {
   faChevronRight = faChevronRight;
   faCodeCommit = faCodeCommit;
   faCodePullRequest = faCodePullRequest;
+  faCheck = faCheck;
 
   public projectId!: number;
 

@@ -53,6 +53,11 @@ export interface Task {
    * Optional link to the GitHub pull request
    */
   pull?: string;
+
+  /**
+   * Optional merged pull requests list
+   */
+  mergedPullList?: String[];
 }
 
 /**

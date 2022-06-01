@@ -67,18 +67,52 @@ export class BoardPage implements OnInit, OnDestroy {
     const previousTaskIndex = event.previousIndex;
     const task = previousStatus.tasks[previousTaskIndex];
 
-    task.statusId = newStatus.id;
-    this.taskService.update(this.projectId, task as any).subscribe();
+    const onSuccess = () => {
+      task.statusId = newStatus.id;
+      this.taskService.update(this.projectId, task as any).subscribe();
 
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      if (event.previousContainer === event.container) {
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      } else {
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex,
+        );
+      }
+    };
+
+    // Catch if the task has pull request and user is trying to move to finishing state
+    if (task.pull && newStatus.final) {
+      this.dialogService
+        .alert({
+          title: $localize`Are you sure?`,
+          message: $localize`If you will move this task to finishing state, the attached pull request will be merged to the repository.`,
+          confirmText: $localize`Merge`,
+          cancelText: $localize`Cancel`,
+        })
+        .subscribe((result) => {
+          if (!result) return;
+
+          onSuccess();
+        });
+      // } else if (task.mergedPullList && !newStatus.final) {
+      //   this.dialogService
+      //     .alert({
+      //       title: $localize`Are you sure?`,
+      //       message: $localize`If you will move this task to not finishing state, the pull request will be detached.`,
+      //       confirmText: $localize`Detach`,
+      //       cancelText: $localize`Cancel`,
+      //     })
+      //     .subscribe((result) => {
+      //       if (!result) return;
+
+      //       onSuccess();
+      //     });
+      // }
     } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
+      onSuccess();
     }
   }
 
