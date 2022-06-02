@@ -20,6 +20,12 @@ export class ErrorInterceptor implements HttpInterceptor {
 
           this.dialogService.closeAll();
 
+          if (e.message == 'user deleted') {
+            localStorage.removeItem('logged');
+            this.router.navigate(['/auth/delete-account']);
+            return EMPTY;
+          }
+
           if (localStorage.getItem('logged')) {
             localStorage.removeItem('logged');
             this.dialogService.openErrorDialog($localize`Your session has expired.`);
