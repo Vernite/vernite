@@ -59,6 +59,8 @@ export class TaskDialog implements OnInit {
     workspaceId: new FormControl(null, [requiredValidator()]),
     description: new FormControl(''),
     priority: new FormControl(this.taskPriorities[2], [requiredValidator()]),
+    deadline: new FormControl(null),
+    estimatedDate: new FormControl(null),
 
     // GitHub issue integration fields
     connectWithIssueOnGitHub: new FormControl(false),

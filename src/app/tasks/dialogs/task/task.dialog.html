@@ -46,6 +46,14 @@
         priority | taskPriority }}</app-option>
     </app-select>
 
+    <!-- Deadline -->
+    <app-input-date-time formControlName="deadline" floatingLabel="Deadline" placeholder="Choose a date" i18n-floatingLabel i18n-placeholder>
+    </app-input-date-time>
+
+    <!-- Estimate time -->
+    <app-input-date-time formControlName="estimatedDate" floatingLabel="Estimated date" placeholder="Choose a date" i18n-floatingLabel i18n-placeholder>
+    </app-input-date-time>
+
     <!-- GitHub issue integration -->
     <app-checkbox *ngIf="isGitHubIntegrationAvailable" formControlName="connectWithIssueOnGitHub" i18n>Create or attach
       GitHub issue simultaneously</app-checkbox>

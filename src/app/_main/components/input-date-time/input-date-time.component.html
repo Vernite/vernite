@@ -1,0 +1,7 @@
+<mat-form-field class="form" appearance="fill">
+  <mat-label *ngIf="floatingLabel"> {{floatingLabel}}
+  </mat-label>
+  <input matInput [placeholder]="placeholder" [matDatepicker]="picker" [formControl]="control">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
