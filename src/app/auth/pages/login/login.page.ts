@@ -48,14 +48,17 @@ export class LoginPage implements OnInit {
         .login(this.form.value)
         .pipe(
           catchError((e) => {
-            console.log('Ouch');
             this.handleError(e);
             return EMPTY;
           }),
         )
-        .subscribe(() => {
-          localStorage.setItem('logged', 'true');
-          this.router.navigate(['/']);
+        .subscribe((response) => {
+          if (response.deleted) {
+            this.router.navigate(['/auth/restore-account']);
+          } else {
+            localStorage.setItem('logged', 'true');
+            this.router.navigate(['/']);
+          }
         });
     }
   }

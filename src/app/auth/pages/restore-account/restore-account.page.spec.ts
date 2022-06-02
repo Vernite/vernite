@@ -2,6 +2,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 import { MainModule } from '@main/_main.module';
 
 import { RestoreAccountPage } from './restore-account.page';
@@ -12,7 +13,7 @@ describe('RestoreAccountPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MainModule, ReactiveFormsModule, BrowserAnimationsModule],
+      imports: [RouterTestingModule, MainModule, ReactiveFormsModule, BrowserAnimationsModule],
       declarations: [RestoreAccountPage],
     }).compileComponents();
   }));

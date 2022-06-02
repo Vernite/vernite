@@ -40,6 +40,9 @@ export class SettingsAccountPage implements OnInit {
   }
 
   deleteAccountMailCheck() {
-    this.authService.deleteAccount().subscribe();
+    this.authService.deleteAccount().subscribe(() => {
+      // dodac popup czy na pewno zgadzamy sie na usuniecie konta, jesli tak to infomracja ze zostal wyslany link na maila dezaktywujacy konto i ze ma mozliwosc jego przywrocenia do 7 dni
+      this.authService.logout().subscribe();
+    });
   }
 }

@@ -10,8 +10,8 @@
         </div>
 
         <div class="actions">
-          <app-button variant="secondary" i18n>Log out</app-button>
-          <app-button variant="primary" i18n>Restore</app-button>
+          <app-button variant="secondary" (click)="logOut()" i18n>Log out</app-button>
+          <app-button variant="primary" (click)="restore()" i18n>Restore</app-button>
         </div>
       </form>
     </section>

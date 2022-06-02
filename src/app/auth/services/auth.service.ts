@@ -60,6 +60,10 @@ export class AuthService {
     return this.apiService.delete(`/auth/delete/confirm`, { body: { token } });
   }
 
+  public recoverAccount() {
+    return this.apiService.post(`/auth/delete/recover`, { body: {} });
+  }
+
   public isLoggedIn() {
     if (localStorage.getItem('logged')) {
       return true;
