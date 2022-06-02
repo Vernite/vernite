@@ -5,7 +5,7 @@
     </div>
     <div *ngIf="task.deadline" class="deadline">
       <div class="title" i18n>Due date</div>
-      <div class="value">29.04.2022r.</div>
+      <div class="value">{{ changeDate(task.deadline) }}</div>
     </div>
   </div>
   <div class="name">{{ task?.name }}</div>
