@@ -16,6 +16,7 @@ import { Status } from '@tasks/interfaces/status.interface';
 import { Task } from '@tasks/interfaces/task.interface';
 import { StatusService } from '@tasks/services/status.service';
 import { TaskService } from '@tasks/services/task.service';
+import * as dayjs from 'dayjs';
 import { map, Observable } from 'rxjs';
 
 @Component({
@@ -64,6 +65,11 @@ export class TaskListPage {
 
   getStatus(statusId: number) {
     return this.statusList.find((status) => status.id === statusId)?.name;
+  }
+
+  changeDate(date: Date) {
+    let sessionDate = dayjs(date);
+    return sessionDate.format('YYYY-MM-DD, hh:mm A');
   }
 
   populateSubtasks(taskList: Task[]) {

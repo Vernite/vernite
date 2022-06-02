@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -25,6 +26,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { CardComponent } from './components/card/card.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { IconComponent } from './components/icon/icon.component';
+import { InputDateTimeComponent } from './components/input-date-time/input-date-time.component';
 import { InputComponent } from './components/input/input.component';
 import { MainViewComponent } from './components/main-view/main-view.component';
 import { NavElementWorkspaceComponent } from './components/nav-element-workspace/nav-element-workspace.component';
@@ -75,6 +77,7 @@ const ngModuleConfig = {
     MatBadgeModule,
     MatCheckboxModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
     MatTooltipModule,
@@ -113,11 +116,14 @@ const ngModuleConfig = {
     CheckboxComponent,
     CardComponent,
     ClickStopPropagationDirective,
+    InputDateTimeComponent,
   ],
   providers: [
     DialogService,
     ApiService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    MatCheckboxModule,
+    MatDatepickerModule,
   ],
 };
 
