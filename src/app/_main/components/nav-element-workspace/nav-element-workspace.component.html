@@ -35,6 +35,10 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
+              <button mat-menu-item *ngIf="projectWithPriv.project.gitHubIntegration"
+                (click)="openWithVSCode(projectWithPriv.project)">
+                <span i18n>Open in Visual Studio Code</span>
+              </button>
               <button mat-menu-item (click)="editProject(projectWithPriv.project)">
                 <span i18n>Edit project</span>
               </button>

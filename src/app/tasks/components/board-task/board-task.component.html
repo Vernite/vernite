@@ -8,7 +8,10 @@
       <div class="value">29.04.2022r.</div>
     </div>
   </div>
-  <div class="name">{{ task?.name }}</div>
+  <div class="name">
+    <span class="task-id">#{{ task.id }}</span>
+    <span>{{ task?.name }}</span>
+  </div>
   <div class="actions">
     <a *ngIf="task.issue" [href]="task.issue">
       <app-icon [icon]="faCodeCommit" size="14px"></app-icon>
