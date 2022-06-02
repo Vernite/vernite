@@ -1,20 +1,11 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  ElementRef,
-  ViewChild,
-  AfterContentInit,
-  AfterViewInit,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-import { BehaviorSubject, delay } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Project } from 'src/app/dashboard/interfaces/project.interface';
 import { Workspace } from 'src/app/dashboard/interfaces/workspace.interface';
 import { ProjectService } from 'src/app/dashboard/services/project.service';
 import { WorkspaceService } from 'src/app/dashboard/services/workspace.service';
-import { AlertDialogVariant } from '../../dialogs/alert/alert.dialog';
 import { DialogService } from '../../services/dialog.service';
 
 @Component({
@@ -102,5 +93,9 @@ export class NavElementWorkspaceComponent implements AfterViewInit {
         window.location.reload();
       });
     });
+  }
+
+  openWithVSCode(project: Project) {
+    window.open(`https://github.dev/${project.gitHubIntegration}`, '_blank');
   }
 }
