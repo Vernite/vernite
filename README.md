@@ -1,7 +1,7 @@
 <h1 align="center">Workflow - Clean and powerful work management app.</h1>
 
 <p align="center">
-  <img src="https://workflow.adiantek.ovh/docs/assets/logo_with_text.svg" alt="angular-logo" width="120px" height="80px"/>
+  <img src="https://workflow.adiantek.ovh/en-US/assets/metadata/logo_with_name.svg" alt="angular-logo" width="120px" height="80px"/>
   <br>
   <i>Workflow is a task management app with multiple independent modules to speed up work.
     <br>tasks / mail / messages</i>
