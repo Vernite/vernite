@@ -68,4 +68,8 @@ export class ProjectService {
       ),
     );
   }
+
+  public membersList(projectId: number) {
+    return this.apiService.get(`/project/${projectId}/member`);
+  }
 }

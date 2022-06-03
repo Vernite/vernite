@@ -7,6 +7,7 @@ import { TasksTableComponent } from './components/tasks-table/tasks-table.compon
 import { ViewOptionsComponent } from './components/view-options/view-options.component';
 import { TaskDialog } from './dialogs/task/task.dialog';
 import { BoardPage } from './pages/board/board.page';
+import { SchedulePage } from './pages/schedule/schedule.page';
 import { TaskListPage } from './pages/task-list/task-list.page';
 import { TaskPriorityIconPipe } from './pipes/task-priority-icon.pipe';
 import { TaskPriorityPipe } from './pipes/task-priority.pipe';
@@ -27,6 +28,7 @@ import { TasksRoutingModule } from './tasks.routing';
     TaskTypeIconPipe,
     ViewOptionsComponent,
     TasksTableComponent,
+    SchedulePage,
   ],
 })
 export class TasksModule {}

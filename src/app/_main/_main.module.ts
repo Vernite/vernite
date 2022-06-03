@@ -39,6 +39,7 @@ import { UpperNavigationComponent } from './components/upper-navigation/upper-na
 import { AlertDialog } from './dialogs/alert/alert.dialog';
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
 import { FocusInitialDirective } from './directives/focus-initial.directive';
+import { LetDirective } from './directives/let.directive';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { ValidationErrorPipe } from './pipes/validation-error.pipe';
 import { ApiService } from './services/api.service';
@@ -117,6 +118,7 @@ const ngModuleConfig = {
     CardComponent,
     ClickStopPropagationDirective,
     InputDateTimeComponent,
+    LetDirective,
   ],
   providers: [
     DialogService,

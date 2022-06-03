@@ -1,0 +1,48 @@
+<app-view-options [project]="(project$ | async)!"></app-view-options>
+
+<div class="schedule" *ngLet="schedule$ | async as schedule">
+  <div class="people-header">
+    <div class="header-row">
+      <div class="cell">
+        {{ cursor | date:'MMMM' }}
+      </div>
+    </div>
+    <div class="group-event-row">
+      <!-- Nothing here, only spacing -->
+    </div>
+    <div *ngFor="let singleSchedule of schedule" class="single-person-row">
+      <!-- Person avatar here -->
+      <div class="cell">
+        <div class="avatar">
+          {{ singleSchedule.user.name.substring(0, 1) }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="header-row">
+      <!-- Day names here -->
+      <div class="cell" *ngFor="let date of dates">
+        <span class="number">{{ date | date:'d' }}</span>
+        <span class="day-of-week">{{ date | date:'EEE' }}</span>
+      </div>
+    </div>
+    <div class="group-event-row">
+      <!-- Group event goes here -->
+      <div class="cell" *ngFor="let date of dates"></div>
+    </div>
+    <div class="single-person-row" *ngFor="let singleSchedule of schedule">
+      <!-- Personal events here -->
+      <div class="cell" *ngFor="let date of dates">
+        <ng-container *ngLet="singleSchedule.tasks.get(date | date:'YYYY-MM-dd') as task">
+          <div class="task" *ngIf="task">
+            <span class="name">
+              {{ task.name }}
+            </span>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

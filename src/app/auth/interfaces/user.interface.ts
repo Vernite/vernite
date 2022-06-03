@@ -8,6 +8,11 @@ export interface User {
   avatar: string;
 }
 
+export interface UserWithPrivileges {
+  user: User;
+  privileges: number;
+}
+
 export interface ModifyUser {
   name: string;
   surname: string;

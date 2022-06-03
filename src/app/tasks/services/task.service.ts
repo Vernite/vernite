@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
+import { UserWithPrivileges } from '@auth/interfaces/user.interface';
 import { GitIntegrationService } from '@dashboard/services/git-integration.service';
+import { ProjectService } from '@dashboard/services/project.service';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 import { DialogService } from '@main/services/dialog.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
-import { EMPTY, Observable, of, switchMap, tap } from 'rxjs';
+import { Schedule } from '@tasks/interfaces/schedule.interface';
+import * as dayjs from 'dayjs';
+import { combineLatest, EMPTY, map, Observable, of, switchMap, take, tap } from 'rxjs';
 import { ApiService } from '../../_main/services/api.service';
 import { Task, TaskWithAdditionalData } from '../interfaces/task.interface';
 
@@ -19,6 +23,7 @@ export class TaskService {
     private apiService: ApiService,
     private gitIntegrationService: GitIntegrationService,
     private dialogService: DialogService,
+    private projectService: ProjectService,
   ) {}
 
   /**
@@ -183,5 +188,37 @@ export class TaskService {
           }
         }),
       );
+  }
+
+  public schedule(projectId: number): Observable<Schedule> {
+    return combineLatest([
+      this.list(projectId).pipe(take(1)),
+      this.projectService.membersList(projectId).pipe(take(1)),
+    ]).pipe(
+      map(([tasks, members]: [tasks: Task[], members: UserWithPrivileges[]]) => {
+        const schedules = [];
+        console.log(tasks, members);
+
+        for (const { user } of members) {
+          schedules.push({ user, tasks: new Map() });
+          schedules.push({ user, tasks: new Map() });
+          schedules.push({ user, tasks: new Map() });
+        }
+
+        for (const task of tasks) {
+          const schedule = schedules[Math.floor(Math.random() * schedules.length)];
+
+          if (task.estimatedDate) {
+            schedule.tasks.set(dayjs(task.estimatedDate).format('YYYY-MM-DD'), task);
+          } else {
+            if (!schedule.tasks.has(null)) schedule.tasks.set(null, []);
+
+            schedule.tasks.get(null).push(task);
+          }
+        }
+
+        return schedules;
+      }),
+    );
   }
 }
