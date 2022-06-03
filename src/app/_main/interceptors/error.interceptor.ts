@@ -20,7 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
           this.dialogService.closeAll();
 
-          if (e.message == 'user deleted') {
+          if (e.error.message == 'user deleted') {
             localStorage.removeItem('logged');
             this.router.navigate(['/auth/delete-account']);
             return EMPTY;
