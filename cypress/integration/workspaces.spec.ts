@@ -2,6 +2,7 @@ import auth from '../fixtures/auth.json';
 
 describe('Workspaces tests', () => {
   beforeEach(() => {
+    cy.logout();
     cy.login(auth.email, auth.password);
     cy.visit('/');
   });
@@ -35,7 +36,6 @@ describe('Workspaces tests', () => {
   });
 
   after(() => {
-    cy.login(auth.email, auth.password);
-    cy.clearUser();
+    cy.deleteAllProjectsAndWorkspaces();
   });
 });

@@ -17,4 +17,8 @@
 import '@cypress/code-coverage/support';
 import './commands';
 
+Cypress.Cookies.defaults({
+  preserve: 'session',
+});
+
 // import 'chai-jasmine';

@@ -2,7 +2,7 @@ import auth from '../fixtures/auth.json';
 
 describe('Login tests', () => {
   beforeEach(() => {
-    localStorage.clear();
+    cy.logout();
     cy.visit('/auth/login');
   });
 
@@ -50,5 +50,9 @@ describe('Login tests', () => {
 
     cy.url().should('include', 'login');
     cy.contains('Wrong');
+  });
+
+  afterEach(() => {
+    cy.logout();
   });
 });

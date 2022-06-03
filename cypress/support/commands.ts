@@ -7,8 +7,28 @@ declare namespace Cypress {
     deleteProject(id: number): typeof deleteProject;
     deleteWorkspace(id: number): typeof deleteWorkspace;
     deleteAllProjectsAndWorkspaces(): typeof deleteAllProjectsAndWorkspaces;
-    clearUser(): typeof clearUser;
+    clearUser(email: string, password: string): typeof clearUser;
   }
+}
+
+function requestWithAuth(
+  { method, url, body }: { method: string; url: string; body?: any },
+  fn?: (response: any) => void,
+) {
+  cy.getCookie('session').then((cookie) => {
+    const cookieValue = cookie?.value;
+
+    cy.request({
+      method,
+      url,
+      body,
+      headers: {
+        Cookie: 'session=' + cookieValue,
+      },
+    }).then((res) => {
+      fn?.(res);
+    });
+  });
 }
 
 function login(email: string, password: string) {
@@ -16,67 +36,80 @@ function login(email: string, password: string) {
     method: 'POST',
     url: '/api/auth/login',
     body: { email, password },
-  }).then((response) => {
-    localStorage.setItem('logged', response.body.token);
+  }).then(() => {
+    localStorage.setItem('logged', 'true');
   });
 }
 
 function logout() {
-  cy.request({
-    method: 'POST',
-    url: '/api/auth/logout',
-  }).then((response) => {
-    localStorage.removeItem('logged');
+  cy.getCookie('session').then((cookie) => {
+    const cookieValue = cookie?.value;
+
+    if (!cookieValue) return;
+
+    cy.request({
+      method: 'POST',
+      url: '/api/auth/logout',
+      headers: {
+        Cookie: 'session=' + cookieValue,
+      },
+    }).then((res) => {
+      cy.clearCookies();
+      cy.clearLocalStorage();
+    });
   });
 }
 
 function createWorkspace(name: string) {
-  cy.request({
+  requestWithAuth({
     method: 'POST',
-    url: '/api/workspaces',
+    url: '/api/workspace',
     body: { name },
   });
 }
 
 function createProject(name: string) {
-  cy.request({
+  requestWithAuth({
     method: 'POST',
-    url: '/api/projects',
+    url: '/api/project',
     body: { name },
   });
 }
 
 function deleteProject(id: number) {
-  cy.request({
+  requestWithAuth({
     method: 'DELETE',
-    url: `/api/projects/${id}`,
+    url: `/api/project/${id}`,
   });
 }
 
 function deleteWorkspace(id: number) {
-  cy.request({
+  requestWithAuth({
     method: 'DELETE',
-    url: `/api/workspaces/${id}`,
+    url: `/api/workspace/${id}`,
   });
 }
 
 function deleteAllProjectsAndWorkspaces() {
-  cy.request({
-    method: 'GET',
-    url: '/api/workspace',
-  }).then((response) => {
-    response.body.forEach((workspace: any) => {
-      workspace.projectsWithPrivileges.forEach((projectWithPrivileges: any) => {
-        deleteProject(projectWithPrivileges.project.id);
+  requestWithAuth(
+    {
+      method: 'GET',
+      url: '/api/workspace',
+    },
+    (response) => {
+      response.body.forEach((workspace: any) => {
+        workspace.projectsWithPrivileges.forEach((projectWithPrivileges: any) => {
+          cy.deleteProject(projectWithPrivileges.project.id);
+        });
+        cy.deleteWorkspace(workspace.id);
       });
-      deleteWorkspace(workspace.id);
-    });
-  });
+    },
+  );
 }
 
-function clearUser() {
-  deleteAllProjectsAndWorkspaces();
-  logout();
+function clearUser(email: string, password: string) {
+  cy.login(email, password);
+  cy.deleteAllProjectsAndWorkspaces();
 }
 
 Cypress.Commands.add('login', login);

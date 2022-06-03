@@ -5,7 +5,6 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --stats-json",
-    "watch": "ng build --watch --configuration development",
     "extract:i18n": "ng extract-i18n --output-path=src/locales",
     "start:docs": "yarn build:docs -s --watch",
     "build:docs": "compodoc -p tsconfig.doc.json -y src/docs/styles/ --includes src/docs/config/ -a src/docs/assets/",
@@ -18,7 +17,10 @@
     "build:badges": "node badge-generator.js",
     "e2e": "ng run workflow:e2e",
     "e2e:ci": "ng run workflow:e2e-ci",
-    "e2e:coverage": "npx nyc report --reporter=lcov --reporter=text-summary"
+    "e2e:coverage": "npx nyc report --reporter=lcov --reporter=text-summary",
+    "copy:reports": "(mkdir reports || true) && cp coverage/workflow-e2e/coverage-final.json reports/from-cypress.json && cp coverage/workflow/coverage-final.json reports/from-jest.json",
+    "combine:reports": "npx nyc merge reports && mv coverage.json .nyc_output/out.json",
+    "finalize:combined-report": "npx nyc report --reporter html --reporter text --reporter json-summary --report-dir coverage/workflow-combined"
   },
   "private": true,
   "dependencies": {
@@ -69,7 +71,7 @@
     "@typescript-eslint/parser": "5.11.0",
     "autoprefixer": "^10.4.4",
     "badge-maker": "^3.3.1",
-    "cypress": "latest",
+    "cypress": "^10.0.2",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -83,6 +85,7 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "karma-structured-json-reporter": "^1.0.1",
+    "lcov-result-merger": "^3.2.0",
     "nyc": "^15.1.0",
     "postcss": "^8.4.12",
     "prettier": "^2.6.0",
