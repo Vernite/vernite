@@ -20,6 +20,7 @@
     "rvest.vs-code-prettier-eslint",
     "editorconfig.editorconfig",
     "stylelint.vscode-stylelint",
-    "vunguyentuan.vscode-css-variables"
+    "vunguyentuan.vscode-css-variables",
+    "Tobermory.es6-string-html"
   ]
 }

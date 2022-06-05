@@ -13,6 +13,7 @@ module.exports = function (config) {
       require('@angular-devkit/build-angular/plugins/karma'),
       require('karma-structured-json-reporter'),
       require('karma-firefox-launcher'),
+      require('karma-spec-reporter'),
     ],
     client: {
       jasmine: {
@@ -38,7 +39,7 @@ module.exports = function (config) {
         { type: 'lcov' },
       ],
     },
-    reporters: ['progress', 'kjhtml', 'json-result'],
+    reporters: ['spec', 'kjhtml', 'json-result'],
     jsonResultReporter: {
       outputFile: './coverage/karma-result.json',
       isSynchronous: true,

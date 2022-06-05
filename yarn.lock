@@ -2347,10 +2347,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/jasmine@~3.10.0":
-  version "3.10.6"
-  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-3.10.6.tgz#8c8fe733d89813bf3dc3f9282d347fa1dbc90567"
-  integrity sha512-twY9adK/vz72oWxCWxzXaxoDtF9TpfEEsxvbc1ibjF3gMD/RThSuSud/GKUTR3aJnfbivAbC/vLqhY+gdWCHfA==
+"@types/jasmine@^4.0.3":
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-4.0.3.tgz#097ce710d70eb7f3662e96c1f75824dd22c27d5c"
+  integrity sha512-Opp1LvvEuZdk8fSSvchK2mZwhVrsNT0JgJE9Di6MjnaIpmEXM8TLCPPrVtNTYh8+5MPdY8j9bAHMu2SSfwpZJg==
 
 "@types/json-schema@*", "@types/json-schema@^7.0.5", "@types/json-schema@^7.0.8", "@types/json-schema@^7.0.9":
   version "7.0.11"
@@ -6752,6 +6752,13 @@ karma-source-map-support@1.4.0:
   dependencies:
     source-map-support "^0.5.5"
 
+karma-spec-reporter@^0.0.34:
+  version "0.0.34"
+  resolved "https://registry.yarnpkg.com/karma-spec-reporter/-/karma-spec-reporter-0.0.34.tgz#7dc79cdc76b0e37f17006921439600ae3c648669"
+  integrity sha512-l5H/Nh9q4g2Ysx2CDU2m+NIPyLQpCVbk9c4V02BTZHw3NM6RO1dq3eRpKXCSSdPt4RGfhHk8jDt3XYkGp+5PWg==
+  dependencies:
+    colors "1.4.0"
+
 karma-structured-json-reporter@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/karma-structured-json-reporter/-/karma-structured-json-reporter-1.0.1.tgz#1d6409ea65c0168b345caf77d3d2bd9f4ced15d5"
@@ -9389,6 +9396,11 @@ shallow-copy@~0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/shallow-copy/-/shallow-copy-0.0.1.tgz#415f42702d73d810330292cc5ee86eae1a11a170"
   integrity sha1-QV9CcC1z2BAzApLMXuhurhoRoXA=
+
+shallow-render@^13.0.1:
+  version "13.0.1"
+  resolved "https://registry.yarnpkg.com/shallow-render/-/shallow-render-13.0.1.tgz#ac033afd51f53cc330ce8c78cdcc8eb9b1cc2ba0"
+  integrity sha512-0WFVNqD8A6BwG8sXxhjRpAzGuwMTko5I+/S0ru9tvJBcFpMG6Q9623w0RAudZYIMVdCUZqBhCCzSZWJnvdYdUA==
 
 shebang-command@^2.0.0:
   version "2.0.0"

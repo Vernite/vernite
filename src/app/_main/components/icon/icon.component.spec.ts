@@ -1,30 +1,16 @@
-/* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
+import { MainModule } from '@main/_main.module';
+import { Shallow } from 'shallow-render';
 import { IconComponent } from './icon.component';
-import { MatIconModule } from '@angular/material/icon';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-describe('IconComponent', () => {
-  let component: IconComponent;
-  let fixture: ComponentFixture<IconComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [MatIconModule, FontAwesomeModule],
-      declarations: [IconComponent],
-    }).compileComponents();
-  }));
+describe(IconComponent.name, () => {
+  let shallow: Shallow<IconComponent>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IconComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    shallow = new Shallow(IconComponent, MainModule);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should create', async () => {
+    const { instance } = await shallow.render();
+    expect(instance).toBeTruthy();
   });
 });
