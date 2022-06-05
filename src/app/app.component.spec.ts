@@ -5,7 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { MainModule } from './_main/_main.module';
 
-describe('AppComponent', () => {
+describe(AppComponent.name, () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, MainModule, HttpClientModule, BrowserAnimationsModule],
@@ -23,5 +23,22 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('workflow');
+  });
+
+  it(`should have preload class in body`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+
+    document.body.classList.add('preload');
+    expect(document.body.classList).toContain('preload');
+
+    window.document.dispatchEvent(
+      new Event('DOMContentLoaded', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+
+    expect(document.body.classList).not.toContain('preload');
   });
 });

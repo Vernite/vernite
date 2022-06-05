@@ -1,16 +1,6 @@
-import { AbstractControl, FormControl, NgControl } from '@angular/forms';
+import { TestNgControl } from '../../../tests/helpers/ng-control-testing-provider.helper';
 import { emailValidator } from '../validators/email.validator';
 import { ControlAccessor } from './control-accessor.class';
-
-class TestNgControl extends NgControl {
-  private _control = new FormControl('');
-  viewToModelUpdate(newValue: any): void {
-    this._control = newValue;
-  }
-  get control(): AbstractControl | null {
-    return this._control;
-  }
-}
 
 function values(obj: any): string[] {
   if (!obj) return [];

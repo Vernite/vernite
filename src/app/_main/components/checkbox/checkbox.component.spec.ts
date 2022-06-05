@@ -1,31 +1,21 @@
-/* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { NgControl, ReactiveFormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ValidationErrorPipe } from '@main/pipes/validation-error.pipe';
+import { NgControl } from '@angular/forms';
+import { MainModule } from '@main/_main.module';
+import { Shallow } from 'shallow-render';
+import { TestNgControl } from '../../../../tests/helpers/ng-control-testing-provider.helper';
 import { CheckboxComponent } from './checkbox.component';
 
 describe('CheckboxComponent', () => {
-  let component: CheckboxComponent;
-  let fixture: ComponentFixture<CheckboxComponent>;
+  let shallow: Shallow<CheckboxComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [MatCheckboxModule, ReactiveFormsModule, BrowserAnimationsModule],
-      declarations: [CheckboxComponent, ValidationErrorPipe],
-      providers: [NgControl],
-    }).compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CheckboxComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(async () => {
+    shallow = new Shallow(CheckboxComponent, MainModule).provide({
+      provide: NgControl,
+      useClass: TestNgControl,
+    });
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should create', async () => {
+    const { instance } = await shallow.render();
+    expect(instance).toBeTruthy();
   });
 });
