@@ -7,5 +7,12 @@ export class ClickStopPropagationDirective {
   @HostListener('click', ['$event'])
   public onClick(event: any): void {
     event.stopPropagation();
+
+    window.document.dispatchEvent(
+      new Event('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
   }
 }

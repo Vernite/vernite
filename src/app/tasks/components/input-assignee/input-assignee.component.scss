@@ -12,7 +12,13 @@
   cursor: pointer;
   transition: background-color 0.4s ease;
 
-  &:hover {
+  &:not(.add) {
+    @include typo-title;
+
+    background-color: var(--color-primary-500);
+  }
+
+  &:not(.add):hover {
     background-color: var(--color-secondary-300);
   }
 }

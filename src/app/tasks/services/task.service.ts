@@ -223,4 +223,10 @@ export class TaskService {
       }),
     );
   }
+
+  public assign(userId: number | null, taskId: number, projectId: number): Observable<Task> {
+    return this.apiService.put(`/project/${projectId}/task/${taskId}`, {
+      body: { assigneeId: userId },
+    });
+  }
 }

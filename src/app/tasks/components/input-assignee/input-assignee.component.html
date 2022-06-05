@@ -4,11 +4,16 @@
   {{ assignee ? assignee.user.name[0] : '+' }}
 </button>
 
-<ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="isOpen">
+<ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="(isOpen$ | async) || false"
+  [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'" [cdkConnectedOverlayHasBackdrop]="true">
   <ul #overlay class="members-overlay">
-    <li *ngFor="let member of members$ | async">
+    <li *ngFor="let member of members$ | async" (click)="select(member)">
       <div class="avatar">{{ member.user.name[0] }}</div>
       <span>{{ member.user.name }} {{ member.user.surname }}</span>
+    </li>
+    <li (click)="select(null)">
+      <span i18n>Unassign</span>
     </li>
   </ul>
 </ng-template>

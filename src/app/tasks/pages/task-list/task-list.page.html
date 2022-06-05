@@ -1,7 +1,7 @@
 <app-view-options [project]="(project$ | async)!"></app-view-options>
 
 <!-- Table -->
-<div class="table">
+<div class="table" *ngLet="(members$ | async) as members">
 
   <!-- Header -->
   <div class="header-row">
@@ -46,9 +46,9 @@
       </div>
 
       <!-- Assignee cell -->
-      <div *ngLet="(members$ | async) as members" class="cell w-52">
+      <div class="cell w-52">
         <app-input-assignee [assignee]="task.assigneeId && members.get(task.assigneeId)" [members]="members"
-          click-stop-propagation>
+          [projectId]="projectId" [taskId]="task.id" click-stop-propagation>
         </app-input-assignee>
       </div>
 
@@ -103,9 +103,9 @@
         </div>
 
         <!-- Assignee cell -->
-        <div *ngLet="(members$ | async) as members" class="cell w-52">
+        <div class="cell w-52">
           <app-input-assignee [assignee]="task.assigneeId && members.get(task.assigneeId)" [members]="members"
-            click-stop-propagation>
+            [projectId]="projectId" [taskId]="subtask.id" click-stop-propagation>
           </app-input-assignee>
         </div>
 

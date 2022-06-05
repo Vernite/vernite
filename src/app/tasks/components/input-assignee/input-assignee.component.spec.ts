@@ -1,25 +1,18 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TasksModule } from '@tasks/tasks.module';
+import { Shallow } from 'shallow-render';
 
 import { InputAssigneeComponent } from './input-assignee.component';
 
 describe(InputAssigneeComponent.name, () => {
-  let component: InputAssigneeComponent;
-  let fixture: ComponentFixture<InputAssigneeComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [InputAssigneeComponent],
-    }).compileComponents();
-  }));
+  let shallow: Shallow<InputAssigneeComponent>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InputAssigneeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    shallow = new Shallow(InputAssigneeComponent, TasksModule);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should create', async () => {
+    const { instance } = await shallow.render();
+    expect(instance).toBeTruthy();
   });
 });

@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { ControlAccessor } from '@main/classes/control-accessor.class';
+import { TaskService } from '@tasks/services/task.service';
 import { TestNgControl } from '@tests/helpers/ng-control-testing-provider.helper';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, filter, fromEvent, take } from 'rxjs';
 
 @Component({
   selector: 'app-input-assignee',
@@ -21,6 +22,9 @@ export class InputAssigneeComponent extends ControlAccessor {
     }
   }
   @Input() taskId?: number;
+  @Input() projectId?: number;
+
+  @ViewChild('overlay') overlay!: ElementRef<HTMLElement>;
 
   public members$ = new BehaviorSubject<ProjectMember[]>([]);
   public readonly isOpen$ = new BehaviorSubject<boolean>(false);
@@ -33,12 +37,20 @@ export class InputAssigneeComponent extends ControlAccessor {
     return this.isOpen$.value;
   }
 
-  constructor(public override ngControl: NgControl) {
+  constructor(public override ngControl: NgControl, private taskService: TaskService) {
     super(ngControl);
   }
 
   public open() {
-    this.isOpen$.next(true);
+    setTimeout(() => {
+      fromEvent(document, 'click')
+        .pipe(
+          take(1),
+          filter((e) => !this.overlay?.nativeElement.contains(e.target as Node)),
+        )
+        .subscribe(() => this.close());
+      this.isOpen$.next(true);
+    });
   }
 
   public close() {
@@ -50,5 +62,15 @@ export class InputAssigneeComponent extends ControlAccessor {
       return this.close();
     }
     return this.open();
+  }
+
+  public select(member: ProjectMember | null) {
+    if (this.taskId && this.projectId)
+      this.taskService
+        .assign(member?.user.id || null, this.taskId, this.projectId)
+        .subscribe(() => {
+          this.close();
+          location.reload();
+        });
   }
 }
