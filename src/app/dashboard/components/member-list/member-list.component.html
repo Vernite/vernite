@@ -1,0 +1,36 @@
+<!-- Table -->
+<div class="table" *ngLet="(members$ | async) as members">
+
+  <!-- Header -->
+  <div class="header-row">
+    <div class="header-cell w-full">Title</div>
+    <div class="header-cell w-52">Assignee</div>
+    <div class="header-cell action">
+      <!-- Actions -->
+    </div>
+  </div>
+
+  <!-- Body -->
+  <ng-container *ngFor="let member of memberList$ | async">
+
+    <!-- Title cell -->
+    <div class="cell w-full">
+      <div class="member-name">
+        <span class="member-id">#{{ member.name +" "+ member.surname}}</span>
+        <span>{{ member.username }}</span>
+      </div>
+    </div>
+
+    <!-- Actions cell -->
+    <div class="cell action justify-center">
+      <button mat-icon-button click-stop-propagation [matMenuTriggerFor]="menu" class="flex items-center">
+        <app-icon icon="matMoreVert"></app-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="deleteMember(member.id)" class="important">
+          <span i18n>Delete Member</span>
+        </button>
+      </mat-menu>
+    </div>
+  </ng-container>
+</div>

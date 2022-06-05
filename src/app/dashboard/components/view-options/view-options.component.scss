@@ -1,0 +1,49 @@
+:host {
+  width: 100%;
+  align-items: center;
+  color: var(--color-text);
+}
+
+section {
+  position: relative;
+  display: flex;
+  margin-bottom: 1rem;
+
+  .tabs {
+    display: flex;
+
+    .project-name {
+      align-items: center;
+      padding: 10px;
+      margin-right: 10px;
+    }
+
+    a {
+      position: relative;
+      display: block;
+      padding: 10px;
+      margin-right: 10px;
+      color: var(--color-neutral-300);
+      cursor: pointer;
+
+      &:hover {
+        color: var(--color-text);
+      }
+
+      &.active {
+        color: var(--color-text);
+
+        &::before {
+          position: absolute;
+          bottom: 10px;
+          left: 5px;
+          width: calc(100% - 10px);
+          height: 2px;
+          background-color: var(--color-primary-700);
+          border-radius: var(--border-radius);
+          content: '';
+        }
+      }
+    }
+  }
+}

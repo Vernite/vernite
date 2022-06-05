@@ -1,0 +1,24 @@
+<section>
+  <div class="tabs">
+    <div class="project-name">
+      <h2 *ngIf="project" class="typo-heading-5">{{project.name}}</h2>
+      <h2 *ngIf="title" class="typo-heading-5">{{title}}</h2>
+    </div>
+    <ng-container *ngIf="project">
+      <a [routerLink]="['/', workspaceId, project.id, 'edit', 'general']" routerLinkActive="active">
+        <h2 i18n>General</h2>
+      </a>
+      <a [routerLink]="['/', workspaceId, project.id, 'edit', 'members' ]" routerLinkActive="active">
+        <h2 i18n>Members</h2>
+      </a>
+    </ng-container>
+    <ng-container *ngIf="title">
+      <a [routerLink]="['/', workspaceId, 'create', 'general' ]" routerLinkActive="active">
+        <h2 i18n>General</h2>
+      </a>
+      <a [routerLink]="['/', workspaceId, 'create', 'members' ]" routerLinkActive="active">
+        <h2 i18n>Members</h2>
+      </a>
+    </ng-container>
+  </div>
+</section>
