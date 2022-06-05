@@ -1,5 +1,6 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ObserversModule } from '@angular/cdk/observers';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -66,6 +67,7 @@ const ngModuleConfig = {
       =============================================*/
     DragDropModule,
     PlatformModule,
+    OverlayModule,
 
     /*=============================================
       =              Material modules               =

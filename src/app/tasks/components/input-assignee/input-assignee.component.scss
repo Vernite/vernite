@@ -1,0 +1,53 @@
+@import '../../../../styles/typography';
+
+.assignee {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-secondary-400);
+  border-radius: 50%;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color 0.4s ease;
+
+  &:hover {
+    background-color: var(--color-secondary-300);
+  }
+}
+
+.members-overlay {
+  padding: 1rem;
+  padding: 0.5rem 0;
+  background-color: var(--color-secondary-500);
+  border-radius: var(--border-radius);
+
+  li {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-secondary-500);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: background-color 0.4s ease;
+
+    &:hover {
+      background-color: var(--color-secondary-400);
+    }
+
+    .avatar {
+      @include typo-title;
+
+      display: flex;
+      width: 40px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      background-color: var(--color-blue-500);
+      border-radius: 50%;
+      color: var(--color-text);
+    }
+  }
+}

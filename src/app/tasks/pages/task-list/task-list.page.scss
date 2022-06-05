@@ -67,6 +67,16 @@
   padding-left: 4rem;
   transition: max-height 0.4s ease;
 
+  .subtask-title {
+    display: flex;
+  }
+
+  .subtask-id {
+    display: block;
+    margin-right: 1rem;
+    opacity: 0.5;
+  }
+
   .row {
     position: relative;
 

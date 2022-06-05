@@ -46,7 +46,11 @@
       </div>
 
       <!-- Assignee cell -->
-      <div class="cell w-52">-</div>
+      <div *ngLet="(members$ | async) as members" class="cell w-52">
+        <app-input-assignee [assignee]="task.assigneeId && members.get(task.assigneeId)" [members]="members"
+          click-stop-propagation>
+        </app-input-assignee>
+      </div>
 
       <!-- Deadline cell -->
       <div class="cell w-52">{{changeDate(task.deadline)}}</div>
@@ -99,7 +103,11 @@
         </div>
 
         <!-- Assignee cell -->
-        <div class="cell w-52">-</div>
+        <div *ngLet="(members$ | async) as members" class="cell w-52">
+          <app-input-assignee [assignee]="task.assigneeId && members.get(task.assigneeId)" [members]="members"
+            click-stop-propagation>
+          </app-input-assignee>
+        </div>
 
         <!-- Deadline cell -->
         <div class="cell w-52">-</div>

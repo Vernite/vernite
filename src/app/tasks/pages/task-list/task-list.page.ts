@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
+import { MemberService } from '@dashboard/services/member.service';
 import { ProjectService } from '@dashboard/services/project.service';
 import {
   faCheck,
@@ -36,6 +39,8 @@ export class TaskListPage {
   public taskList$!: Observable<Task[]>;
   public statusList$!: Observable<Status[]>;
   public project$!: Observable<Project>;
+  public members$!: Observable<Map<number, ProjectMember>>;
+  public assigneeControl = new FormControl(null);
 
   private statusList: Status[] = [];
 
@@ -48,15 +53,23 @@ export class TaskListPage {
     private statusService: StatusService,
     private projectService: ProjectService,
     private dialogService: DialogService,
+    private memberService: MemberService,
   ) {
     const { workspaceId, projectId } = this.activatedRoute.snapshot.params;
 
     this.projectId = projectId;
     this.project$ = this.projectService.get(projectId);
-    this.taskList$ = this.taskService.list(projectId).pipe(
-      map((tasks) => tasks.filter((task) => !task.parentTaskId)),
-      // map((tasks) => this.populateSubtasks(tasks)),
+    this.members$ = this.memberService.list(projectId).pipe(
+      map((members) =>
+        members.reduce((acc: Map<number, ProjectMember>, member: ProjectMember) => {
+          acc.set(member.user.id, member);
+          return acc;
+        }, new Map<number, ProjectMember>()),
+      ),
     );
+    this.taskList$ = this.taskService
+      .list(projectId)
+      .pipe(map((tasks) => tasks.filter((task) => !task.parentTaskId)));
     this.statusList$ = this.statusService.list(projectId);
     this.statusList$.subscribe((list) => {
       this.statusList = list;
@@ -67,7 +80,8 @@ export class TaskListPage {
     return this.statusList.find((status) => status.id === statusId)?.name;
   }
 
-  changeDate(date: Date) {
+  changeDate(date?: Date) {
+    if (!date) return '-';
     let sessionDate = dayjs(date);
     return sessionDate.format('YYYY-MM-DD, hh:mm A');
   }
@@ -117,6 +131,10 @@ export class TaskListPage {
     this.taskService.deleteWithConfirmation(this.projectId, task).subscribe(() => {
       location.reload();
     });
+  }
+
+  initAssigneeChanging() {
+    this.assigneeControl.valueChanges.subscribe((assignee) => {});
   }
 
   public getSubtasksContainerHeight(taskId: number, element: HTMLElement) {

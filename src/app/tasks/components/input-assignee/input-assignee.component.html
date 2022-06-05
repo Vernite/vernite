@@ -1,0 +1,14 @@
+<!-- This button triggers the overlay and is it's origin -->
+<button (click)="toggle()" type="button" class="assignee" [class.add]="!assignee" cdkOverlayOrigin
+  #trigger="cdkOverlayOrigin">
+  {{ assignee ? assignee.user.name[0] : '+' }}
+</button>
+
+<ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="isOpen">
+  <ul #overlay class="members-overlay">
+    <li *ngFor="let member of members$ | async">
+      <div class="avatar">{{ member.user.name[0] }}</div>
+      <span>{{ member.user.name }} {{ member.user.surname }}</span>
+    </li>
+  </ul>
+</ng-template>

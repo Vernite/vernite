@@ -58,6 +58,11 @@ export interface Task {
    * Optional merged pull requests list
    */
   mergedPullList?: String[];
+
+  /**
+   * Optional user id who is assigned to task
+   */
+  assigneeId?: number;
 }
 
 /**

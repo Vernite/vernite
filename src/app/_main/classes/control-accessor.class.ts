@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl, ValidationErrors } from '@angular/forms';
+import { TestNgControl } from '@tests/helpers/ng-control-testing-provider.helper';
 import { Subject } from 'rxjs';
 
 /**
@@ -7,6 +8,7 @@ import { Subject } from 'rxjs';
  */
 @Component({
   template: '',
+  providers: [{ provide: NgControl, useClass: TestNgControl }],
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class ControlAccessor implements OnInit, OnDestroy, ControlValueAccessor {

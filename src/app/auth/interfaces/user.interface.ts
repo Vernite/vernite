@@ -19,3 +19,11 @@ export interface ModifyUser {
   password: string;
   avatar: string;
 }
+
+export interface UserData {
+  id: number;
+  name: string;
+  surname: string;
+  username: string;
+  avatar: string;
+}

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MainModule } from '../_main/_main.module';
 import { BoardTaskComponent } from './components/board-task/board-task.component';
+import { InputAssigneeComponent } from './components/input-assignee/input-assignee.component';
 import { TasksTableComponent } from './components/tasks-table/tasks-table.component';
 import { ViewOptionsComponent } from './components/view-options/view-options.component';
 import { TaskDialog } from './dialogs/task/task.dialog';
@@ -29,6 +30,7 @@ import { TasksRoutingModule } from './tasks.routing';
     ViewOptionsComponent,
     TasksTableComponent,
     SchedulePage,
+    InputAssigneeComponent,
   ],
 })
 export class TasksModule {}

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { UserWithPrivileges } from '@auth/interfaces/user.interface';
+import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { GitIntegrationService } from '@dashboard/services/git-integration.service';
+import { MemberService } from '@dashboard/services/member.service';
 import { ProjectService } from '@dashboard/services/project.service';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 import { DialogService } from '@main/services/dialog.service';
@@ -24,6 +25,7 @@ export class TaskService {
     private gitIntegrationService: GitIntegrationService,
     private dialogService: DialogService,
     private projectService: ProjectService,
+    private memberService: MemberService,
   ) {}
 
   /**
@@ -193,9 +195,9 @@ export class TaskService {
   public schedule(projectId: number): Observable<Schedule> {
     return combineLatest([
       this.list(projectId).pipe(take(1)),
-      this.projectService.membersList(projectId).pipe(take(1)),
+      this.memberService.list(projectId).pipe(take(1)),
     ]).pipe(
-      map(([tasks, members]: [tasks: Task[], members: UserWithPrivileges[]]) => {
+      map(([tasks, members]: [tasks: Task[], members: ProjectMember[]]) => {
         const schedules = [];
         console.log(tasks, members);
 
