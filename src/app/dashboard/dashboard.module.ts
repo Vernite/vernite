@@ -6,6 +6,7 @@ import { IntegrationGithubComponent } from './components/integration-github/inte
 import { MemberListComponent } from './components/member-list/member-list.component';
 import { ViewOptionsComponent } from './components/view-options/view-options.component';
 import { DashboardRoutingModule } from './dashboard.routing';
+import { AddMemberDialog } from './dialogs/add-member/add-member.dialog';
 import { CreateProjectMembersPage } from './pages/create-project-members/create-project-members.page';
 import { CreateProjectPage } from './pages/create-project/create-project.page';
 import { CreateWorkspacePage } from './pages/create-workspace/create-workspace.page';
@@ -30,6 +31,7 @@ import { GitIntegrationService } from './services/git-integration.service';
     IntegrationGithubComponent,
     ViewOptionsComponent,
     MemberListComponent,
+    AddMemberDialog,
   ],
   providers: [GitIntegrationService],
 })
