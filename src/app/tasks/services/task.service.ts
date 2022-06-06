@@ -192,6 +192,11 @@ export class TaskService {
       );
   }
 
+  /**
+   * Generates schedule object for specific project
+   * @param projectId Project id to generate schedule from
+   * @returns Schedule object with all tasks
+   */
   public schedule(projectId: number): Observable<Schedule> {
     return combineLatest([
       this.list(projectId).pipe(take(1)),
@@ -224,9 +229,29 @@ export class TaskService {
     );
   }
 
+  /**
+   * Assign task to specific user
+   * @param userId user to assign task to (if null, task will be unassigned)
+   * @param taskId task to assign
+   * @param projectId project id needed to assign task
+   * @returns Updated task object
+   */
   public assign(userId: number | null, taskId: number, projectId: number): Observable<Task> {
     return this.apiService.put(`/project/${projectId}/task/${taskId}`, {
       body: { assigneeId: userId },
+    });
+  }
+
+  /**
+   * Change status of specific task
+   * @param statusId status to change task to
+   * @param taskId task to change status of
+   * @param projectId project id needed to change status
+   * @returns Updated task object
+   */
+  public changeStatus(statusId: number, taskId: number, projectId: number): Observable<Task> {
+    return this.apiService.put(`/project/${projectId}/task/${taskId}`, {
+      body: { statusId },
     });
   }
 }

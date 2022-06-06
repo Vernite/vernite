@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { combineLatest, forkJoin, map, Observable, of, take } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
 import { ApiService } from 'src/app/_main/services/api.service';
 import { Status, StatusWithTasks } from '../interfaces/status.interface';
 import { TaskService } from './task.service';
@@ -15,7 +15,7 @@ export class StatusService {
    * @param projectId Project id needed to create status
    * @returns Request observable with list of statuses
    */
-  public list(projectId: number): Observable<Status[]> {
+  public list(projectId: number): Observable<(Status & { id: number })[]> {
     return this.apiService.get(`/project/${projectId}/status/`);
   }
 

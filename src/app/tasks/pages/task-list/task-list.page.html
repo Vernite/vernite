@@ -42,7 +42,9 @@
 
       <!-- Status cell -->
       <div class="cell w-52 p-0">
-        <div class="status">{{ task.statusId && getStatus(task.statusId) }}</div>
+        <app-status-label [projectId]="projectId" [taskId]="task.id" [statuses]="statusList" [statusId]="task.statusId!"
+          click-stop-propagation>
+        </app-status-label>
       </div>
 
       <!-- Assignee cell -->
@@ -99,7 +101,8 @@
 
         <!-- Status cell -->
         <div class="cell w-52 p-0">
-          <div class="status">{{ subtask.statusId && getStatus(subtask.statusId) }}</div>
+          <app-status-label [projectId]="projectId" [taskId]="subtask.id" [statuses]="statusList"
+            [statusId]="subtask.statusId!" click-stop-propagation></app-status-label>
         </div>
 
         <!-- Assignee cell -->
@@ -110,7 +113,7 @@
         </div>
 
         <!-- Deadline cell -->
-        <div class="cell w-52">-</div>
+        <div class="cell w-52">{{changeDate(subtask.deadline)}}</div>
 
         <!-- Actions cell -->
         <div class="cell action justify-center">
