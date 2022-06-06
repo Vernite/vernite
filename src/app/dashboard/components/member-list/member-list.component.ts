@@ -13,7 +13,6 @@ export class MemberListComponent implements OnInit {
   public projectId!: number;
 
   public memberList$!: Observable<ProjectMember[]>;
-  public members$!: Observable<Map<number, ProjectMember>>;
 
   @Input()
   memberList!: ProjectMember[];
@@ -21,6 +20,8 @@ export class MemberListComponent implements OnInit {
   constructor(private memberService: MemberService, private activatedRoute: ActivatedRoute) {
     const { workspaceId, projectId } = this.activatedRoute.snapshot.params;
     this.projectId = projectId;
+
+    this.memberList$ = this.memberService.list(projectId);
   }
 
   deleteMember(id: number[]) {
