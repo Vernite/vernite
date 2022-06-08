@@ -1,4 +1,5 @@
-.mat-menu-panel {
+div.mat-menu-panel {
+  max-width: none;
   background-color: var(--color-menu-background);
 
   button.mat-menu-item {
@@ -14,6 +15,7 @@
     }
 
     &[disabled] {
+
       mat-icon.mat-icon,
       span {
         opacity: 0.5;

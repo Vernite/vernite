@@ -42,7 +42,7 @@ export class TaskListPage {
   public members$!: Observable<Map<number, ProjectMember>>;
   public assigneeControl = new FormControl(null);
 
-  private statusList: Status[] = [];
+  public statusList: Status[] = [];
 
   isSubtasksRow = (i: number, row: Object) => row.hasOwnProperty('withSubtasks');
   expandedSubtasks = new ESet();

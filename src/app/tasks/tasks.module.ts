@@ -4,12 +4,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MainModule } from '../_main/_main.module';
 import { BoardTaskComponent } from './components/board-task/board-task.component';
 import { InputAssigneeComponent } from './components/input-assignee/input-assignee.component';
-import { TasksTableComponent } from './components/tasks-table/tasks-table.component';
+import { StatusLabelComponent } from './components/status-label/status-label.component';
 import { ViewOptionsComponent } from './components/view-options/view-options.component';
 import { TaskDialog } from './dialogs/task/task.dialog';
 import { BoardPage } from './pages/board/board.page';
 import { SchedulePage } from './pages/schedule/schedule.page';
 import { TaskListPage } from './pages/task-list/task-list.page';
+import { StatusColorPipe } from './pipes/status-color.pipe';
 import { TaskPriorityIconPipe } from './pipes/task-priority-icon.pipe';
 import { TaskPriorityPipe } from './pipes/task-priority.pipe';
 import { TaskTypeIconPipe } from './pipes/task-type-icon.pipe';
@@ -28,9 +29,10 @@ import { TasksRoutingModule } from './tasks.routing';
     TaskPriorityIconPipe,
     TaskTypeIconPipe,
     ViewOptionsComponent,
-    TasksTableComponent,
     SchedulePage,
     InputAssigneeComponent,
+    StatusLabelComponent,
+    StatusColorPipe,
   ],
 })
 export class TasksModule {}

@@ -98,4 +98,18 @@ export class NavElementWorkspaceComponent implements AfterViewInit {
   openWithVSCode(project: Project) {
     window.open(`https://github.dev/${project.gitHubIntegration}`, '_blank');
   }
+
+  openWithLocalVSCode(project: Project) {
+    window.open(
+      `vscode://vscode.git/clone?url=https://github.com/${project.gitHubIntegration}`,
+      '_blank',
+    );
+  }
+
+  openWithLocalVSCodeInsiders(project: Project) {
+    window.open(
+      `vscode-insiders://vscode.git/clone?url=https://github.com/${project.gitHubIntegration}`,
+      '_blank',
+    );
+  }
 }
