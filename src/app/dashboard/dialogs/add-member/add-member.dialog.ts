@@ -25,10 +25,7 @@ export class AddMemberDialog implements OnInit {
   public workspaceList$!: Observable<Workspace[]>;
 
   public form = new FormGroup({
-    id: new FormControl(null),
-    type: new FormControl('', [requiredValidator()]),
-    name: new FormControl('', [requiredValidator()]),
-    description: new FormControl(''),
+    email: new FormControl('', [requiredValidator()]),
   });
 
   constructor(
@@ -61,7 +58,7 @@ export class AddMemberDialog implements OnInit {
 
     if (this.form.invalid) return;
 
-    this.dialogRef.close(formValues);
+    this.dialogRef.close([formValues]);
   }
 
   cancel() {

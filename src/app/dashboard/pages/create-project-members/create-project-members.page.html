@@ -1,3 +1,7 @@
 <app-view-options [title]='"Creating new project"'></app-view-options>
 
+<div class="button">
+  <app-button [icon]="faPlus" variant="primary" (click)="openAddMembersDialog()">Add member</app-button>
+</div>
+
 <app-member-list></app-member-list>

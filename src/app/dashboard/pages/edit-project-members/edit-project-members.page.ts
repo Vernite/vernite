@@ -1,8 +1,15 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import {
+  AddMemberDialog,
+  AddMemberDialogData
+} from '@dashboard/dialogs/add-member/add-member.dialog';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
+import { MemberService } from '@dashboard/services/member.service';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { DialogService } from '@main/services/dialog.service';
 import { maxLengthValidator } from '@main/validators/max-length.validator';
 import { Observable, Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
@@ -15,6 +22,8 @@ import { WorkspaceService } from '../../services/workspace.service';
   styleUrls: ['./edit-project-members.page.scss'],
 })
 export class EditProjectMembersPage {
+  faPlus = faPlus;
+
   /**
    * Form group for the workspace editing.
    */
@@ -50,6 +59,8 @@ export class EditProjectMembersPage {
     private projectService: ProjectService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private dialogService: DialogService,
+    private memberService: MemberService,
   ) {
     const { workspaceId, projectId } = this.activatedRoute.snapshot.params;
 
@@ -106,6 +117,23 @@ export class EditProjectMembersPage {
     this.updateSubscription = this.projectService.update(this.form.value).subscribe(() => {
       this.router.navigate(['/', this.workspaceId]);
     });
+  }
+
+  public addMembers() {}
+
+  openAddMembersDialog() {
+    this.dialogService
+      .open(AddMemberDialog, {
+        projectId: this.projectId,
+      } as AddMemberDialogData)
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.memberService.add(result, [this.projectId]).subscribe(() => {
+            location.reload();
+          });
+        }
+      });
   }
 
   /**
