@@ -4,10 +4,6 @@ import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { TaskPriorityIconPipe } from '@tasks/pipes/task-priority-icon.pipe';
-import { TaskPriorityPipe } from '@tasks/pipes/task-priority.pipe';
-import { TaskTypeIconPipe } from '@tasks/pipes/task-type-icon.pipe';
-import { TaskTypePipe } from '@tasks/pipes/task-type.pipe';
 import { MainModule } from '../../../_main/_main.module';
 import { AddMemberDialog } from './add-member.dialog';
 
@@ -18,13 +14,7 @@ describe('AddMemberDialog', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [MainModule, BrowserAnimationsModule, ReactiveFormsModule, RouterTestingModule],
-      declarations: [
-        AddMemberDialog,
-        TaskPriorityPipe,
-        TaskPriorityIconPipe,
-        TaskTypePipe,
-        TaskTypeIconPipe,
-      ],
+      declarations: [AddMemberDialog],
       providers: [
         MatDialogModule,
         NgControl,

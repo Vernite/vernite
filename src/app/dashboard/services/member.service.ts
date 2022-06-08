@@ -3,7 +3,6 @@ import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { Service } from '@main/decorators/service.decorator';
 import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/_main/services/api.service';
-import { Project } from '../interfaces/project.interface';
 
 @Service()
 @Injectable({
@@ -49,8 +48,8 @@ export class MemberService {
    */
   public add(
     emails: string[],
-    projectList: Project[],
-  ): Observable<{ emails: string[]; projectList: Project[] }> {
+    projectList: number[],
+  ): Observable<{ emails: string[]; projectList: number[] }> {
     return this.apiService.post(`/project/member`, { body: { emails, projectList } });
   }
 }
