@@ -58,7 +58,7 @@ export class AddMemberDialog implements OnInit {
 
     if (this.form.invalid) return;
 
-    this.dialogRef.close([formValues]);
+    this.dialogRef.close([formValues.email]);
   }
 
   cancel() {
