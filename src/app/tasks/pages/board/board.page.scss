@@ -6,6 +6,8 @@
 .board {
   display: flex;
   min-height: 100%;
+  padding-left: 10px;
+  margin-left: -1rem;
 
   .column {
     display: flex;

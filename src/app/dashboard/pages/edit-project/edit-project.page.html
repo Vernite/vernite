@@ -1,6 +1,7 @@
+<app-view-options title="Edit project: " [project]="(project$ | async)!"></app-view-options>
+
 <form [formGroup]="form" (submit)="submitUpdate()">
   <div>
-    <h2 class="typo-heading-5 mb-5" i18n>Edit project: {{ (project$ | async)?.name }}</h2>
     <app-input formControlName="name" type="text" placeholder="New project" floatingLabel="Project name"
       i18n-floatingLabel i18n-placeholder></app-input>
   </div>
@@ -14,7 +15,7 @@
   </div>
 
   <div class="modules">
-      <h2 class="typo-heading-5 mb-5" i18n>Modules</h2>
+    <h2 class="typo-heading-5 mb-5" i18n>Modules</h2>
   </div>
   <app-integration-github [projectId]="projectId"></app-integration-github>
   <div class="app-button">
