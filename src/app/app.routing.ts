@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoggedInUsersGuard } from './auth/guard/logged-in-users.guard';
+import { LandingPageComponent } from './landing-page/landing-page/landing-page.component';
 import { MainViewComponent } from './_main/components/main-view/main-view.component';
 
 const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
+    path: 'landing-page',
+    component: LandingPageComponent,
   },
   {
     path: '',

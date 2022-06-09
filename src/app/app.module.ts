@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app.routing';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app.routing';
+import { LandingPageComponent } from './landing-page/landing-page/landing-page.component';
 import { MainModule } from './_main/_main.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LandingPageComponent],
   imports: [AppRoutingModule, BrowserAnimationsModule, MainModule],
   providers: [],
   bootstrap: [AppComponent],
