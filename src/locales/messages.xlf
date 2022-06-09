@@ -2,6 +2,20 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="20353189334801298" datatype="html">
+        <source>Only my tasks</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/classes/filters.class.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6839797091123255492" datatype="html">
+        <source>Save filters</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/filters/filters.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4301597531652727075" datatype="html">
         <source>Create project</source>
         <context-group purpose="location">
@@ -9,11 +23,18 @@
           <context context-type="linenumber">16,17</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="1672477553208499441" datatype="html">
+        <source>Manage projects</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.html</context>
+          <context context-type="linenumber">19,20</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="1344445785103101296" datatype="html">
         <source>Edit workspace</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.html</context>
-          <context context-type="linenumber">19,20</context>
+          <context context-type="linenumber">22,23</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.html</context>
@@ -24,18 +45,39 @@
         <source>Delete workspace</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.html</context>
-          <context context-type="linenumber">22,23</context>
+          <context context-type="linenumber">25,26</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.html</context>
           <context context-type="linenumber">40,41</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="3678747862932298827" datatype="html">
+        <source>Open in github.dev</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.html</context>
+          <context context-type="linenumber">43,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9004445717480887353" datatype="html">
+        <source>Open in Visual Studio Code</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.html</context>
+          <context context-type="linenumber">47,48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9149162144342070196" datatype="html">
+        <source>Open in Visual Studio Code Insiders</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.html</context>
+          <context context-type="linenumber">51,52</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4239216302129874391" datatype="html">
         <source>Edit project</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.html</context>
-          <context context-type="linenumber">39,40</context>
+          <context context-type="linenumber">54,55</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.html</context>
@@ -46,7 +88,7 @@
         <source>Delete project</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.html</context>
-          <context context-type="linenumber">42,43</context>
+          <context context-type="linenumber">57,58</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.html</context>
@@ -78,6 +120,24 @@
           <context context-type="linenumber">17,18</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="490129905633184251" datatype="html">
+        <source>Manage workspaces</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/sidebar-navigation/sidebar-navigation.component.html</context>
+          <context context-type="linenumber">20,21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1315476018548197144" datatype="html">
+        <source>New task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/upper-navigation/upper-navigation.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4915431133669985304" datatype="html">
         <source>Profile</source>
         <context-group purpose="location">
@@ -102,6 +162,10 @@
           <context context-type="sourcefile">src/app/auth/pages/restore-account/restore-account.page.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-sessions/settings-sessions.page.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="4648900870671159218" datatype="html">
         <source>Success</source>
@@ -124,80 +188,88 @@
           <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="4647477941219843206" datatype="html">
+        <source>Your session has expired.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/interceptors/error.interceptor.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7819314041543176992" datatype="html">
+        <source>Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/services/dialog.service.ts</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="5662240898706671746" datatype="html">
         <source>Delete project &quot;<x id="PH" equiv-text="project.name"/>&quot;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/services/dialog.service.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">93</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4100164289071488804" datatype="html">
         <source>Are you sure you want to delete project &quot;<x id="PH" equiv-text="project.name"/>&quot;?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/services/dialog.service.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7022070615528435141" datatype="html">
         <source>Delete</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/services/dialog.service.ts</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">95</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/services/dialog.service.ts</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">105</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/_main/services/dialog.service.ts</context>
-          <context context-type="linenumber">81</context>
+          <context context-type="sourcefile">src/app/tasks/services/task.service.ts</context>
+          <context context-type="linenumber">111</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2159130950882492111" datatype="html">
         <source>Cancel</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/services/dialog.service.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">96</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/services/dialog.service.ts</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">106</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/_main/services/dialog.service.ts</context>
-          <context context-type="linenumber">82</context>
+          <context context-type="sourcefile">src/app/dashboard/dialogs/add-member/add-member.dialog.html</context>
+          <context context-type="linenumber">12</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/board/board.page.ts</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/task.service.ts</context>
+          <context context-type="linenumber">112</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5645757188559356092" datatype="html">
         <source>Delete workspace &quot;<x id="PH" equiv-text="workspace.name"/>&quot;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/services/dialog.service.ts</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">103</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6759164171597055058" datatype="html">
         <source>Are you sure you want to delete this workspace &quot;<x id="PH" equiv-text="workspace.name"/>&quot;?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/services/dialog.service.ts</context>
-          <context context-type="linenumber">70</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="312262311476590184" datatype="html">
-        <source>Delete task &quot;<x id="PH" equiv-text="task.name"/>&quot;</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/_main/services/dialog.service.ts</context>
-          <context context-type="linenumber">79</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1263703513734435128" datatype="html">
-        <source>Are you sure you want to delete this task &quot;<x id="PH" equiv-text="task.name"/>&quot;?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/_main/services/dialog.service.ts</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">104</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6166496530300942880" datatype="html">
@@ -205,6 +277,13 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/validators/email.validator.ts</context>
           <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7320351812897102937" datatype="html">
+        <source>Length should not be greater than <x id="PH" equiv-text="length"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/validators/max-length.validator.ts</context>
+          <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1827548857416381358" datatype="html">
@@ -255,7 +334,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/login/login.page.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
@@ -274,7 +353,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/login/login.page.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
@@ -299,6 +378,32 @@
           <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="6229539150746485362" datatype="html">
+        <source>Given passwords are not the same </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/change-password/change-password.page.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register/register.page.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5046289386020266294" datatype="html">
+        <source>Your account has been deleted.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/delete-account/delete-account.page.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="554611068951376473" datatype="html">
+        <source>If you are going to revive your account, you can log in to your account <x id="START_LINK" ctype="x-a" equiv-text="&lt;a
+            routerLink=&quot;/auth/login&quot;&gt;"/>click here to log in<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/delete-account/delete-account.page.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="6448403652407957362" datatype="html">
         <source>When you enter your email address, you will receive an email with a link to reset your password.</source>
         <context-group purpose="location">
@@ -314,11 +419,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/login/login.page.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
           <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/dialogs/add-member/add-member.dialog.html</context>
+          <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4768749765465246664" datatype="html">
@@ -328,15 +437,15 @@
           <context context-type="linenumber">15</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/auth/pages/login/login.page.html</context>
-          <context context-type="linenumber">11</context>
-        </context-group>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-account/settings-account.page.html</context>
+          <context context-type="sourcefile">src/app/dashboard/components/member-list/member-list.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
@@ -348,31 +457,57 @@
         </context-group>
       </trans-unit>
       <trans-unit id="8968050172452408179" datatype="html">
-        <source>This is a secure site. Please enter your login information to enter or <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/auth/register&quot;&gt;"/>click here<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> to register.</source>
+        <source>This is a secure site. Please enter your login information to enter or <x id="START_LINK" ctype="x-a" equiv-text="&lt;a
+              routerLink=&quot;/auth/register&quot;&gt;"/>click here<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> to register.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/login/login.page.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3345100339948313641" datatype="html">
+        <source>Email or Username</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/login/login.page.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/dialogs/add-member/add-member.dialog.html</context>
+          <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="962217098528959904" datatype="html">
         <source>Forgot your password? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/auth/password-reset&quot;&gt;"/>Reset password<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/login/login.page.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="931252989873527145" datatype="html">
         <source>Remember me</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/login/login.page.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2336550011721758066" datatype="html">
         <source>Log in</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/login/login.page.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3451483669820128990" datatype="html">
+        <source>User is already logged</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/login/login.page.ts</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7527980706824212298" datatype="html">
+        <source>Wrong username or password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/login/login.page.ts</context>
+          <context context-type="linenumber">72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3301086086650990787" datatype="html">
@@ -414,7 +549,7 @@
           <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-account/settings-account.page.html</context>
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
@@ -425,16 +560,20 @@
           <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/member-list/member-list.component.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.html</context>
           <context context-type="linenumber">12,13</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-account/settings-account.page.html</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.html</context>
           <context context-type="linenumber">12,13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
@@ -455,7 +594,11 @@
           <context context-type="linenumber">27</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-account/settings-account.page.html</context>
+          <context context-type="sourcefile">src/app/dashboard/components/member-list/member-list.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
           <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
@@ -466,7 +609,7 @@
           <context context-type="linenumber">29</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-account/settings-account.page.html</context>
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
@@ -477,7 +620,11 @@
           <context context-type="linenumber">29</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-account/settings-account.page.html</context>
+          <context context-type="sourcefile">src/app/dashboard/components/member-list/member-list.component.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
@@ -486,13 +633,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
           <context context-type="linenumber">31</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6229539150746485362" datatype="html">
-        <source>Given passwords are not the same </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/auth/pages/register/register.page.ts</context>
-          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5008929893571451339" datatype="html">
@@ -537,8 +677,58 @@
           <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7310363773317614514" datatype="html">
-        <source>Create new project in workspace: <x id="INTERPOLATION" equiv-text="{{ (workspace$ | async)?.name }}"/></source>
+      <trans-unit id="4522126822651023664" datatype="html">
+        <source>Delete member</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/member-list/member-list.component.html</context>
+          <context context-type="linenumber">37,38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8753404881694620186" datatype="html">
+        <source>Username or Email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/member-list/member-list.component.html</context>
+          <context context-type="linenumber">51,52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6439365426343089851" datatype="html">
+        <source>General</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/view-options/view-options.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/view-options/view-options.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4691887509600985309" datatype="html">
+        <source>Members</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/view-options/view-options.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/view-options/view-options.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1589749564133337410" datatype="html">
+        <source>Add members</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/dialogs/add-member/add-member.dialog.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3249513483374643425" datatype="html">
+        <source>Add</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/dialogs/add-member/add-member.dialog.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="953401520354685927" datatype="html">
+        <source>Workspace: <x id="INTERPOLATION" equiv-text="{{ (workspace$ | async)?.name }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/create-project/create-project.page.html</context>
           <context context-type="linenumber">3,4</context>
@@ -552,15 +742,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/edit-project/edit-project.page.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">5</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.html</context>
           <context context-type="linenumber">4</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
-          <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2651912264744301649" datatype="html">
@@ -571,14 +757,14 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/edit-project/edit-project.page.html</context>
-          <context context-type="linenumber">4,5</context>
+          <context context-type="linenumber">5,6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3768927257183755959" datatype="html">
         <source>Save</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/create-project/create-project.page.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/create-workspace/create-workspace.page.html</context>
@@ -586,7 +772,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/edit-project/edit-project.page.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/edit-workspace/edit-workspace.page.html</context>
@@ -626,18 +812,29 @@
           <context context-type="linenumber">3,4</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="415864374438730455" datatype="html">
-        <source>Edit project: <x id="INTERPOLATION" equiv-text="{{ project$ | async }}"/></source>
+      <trans-unit id="7935463823468085342" datatype="html">
+        <source>Workspace:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/edit-project/edit-project.page.html</context>
-          <context context-type="linenumber">3,4</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2244471832629453998" datatype="html">
+        <source>Workspace</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/edit-project/edit-project.page.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5519350180308640048" datatype="html">
         <source>Modules</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/edit-project/edit-project.page.html</context>
-          <context context-type="linenumber">8,9</context>
+          <context context-type="linenumber">18,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3521243892251427711" datatype="html">
@@ -677,132 +874,204 @@
           <context context-type="linenumber">24,25</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4086606389696938932" datatype="html">
-        <source>Account</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-account/settings-account.page.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="723305924372771226" datatype="html">
-        <source>test@example.com</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-account/settings-account.page.html</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2082740537345398835" datatype="html">
-        <source>Smith</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-account/settings-account.page.html</context>
-          <context context-type="linenumber">20</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2650040249203729637" datatype="html">
-        <source>Update profile</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-account/settings-account.page.html</context>
-          <context context-type="linenumber">26</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6309828574111583895" datatype="html">
-        <source>Change password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-account/settings-account.page.html</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-account/settings-account.page.html</context>
-          <context context-type="linenumber">35</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5556964859629628625" datatype="html">
-        <source>It&apos;s highly recommended to change the password every 30 days. It will increase your account security.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-account/settings-account.page.html</context>
-          <context context-type="linenumber">32,33</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7662015208795302518" datatype="html">
-        <source>Delete account</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-account/settings-account.page.html</context>
-          <context context-type="linenumber">41</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-account/settings-account.page.html</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="710127565656702255" datatype="html">
-        <source>Delete your account permanently. All not shared owned projects will also be deleted. This action is reversible in period of 7 days - you need to log in to your account in this time to revert your account deletion.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-account/settings-account.page.html</context>
-          <context context-type="linenumber">42,44</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2732752787737094710" datatype="html">
-        <source>Localization</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-localization/settings-localization.page.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2826581353496868063" datatype="html">
-        <source>Language</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-localization/settings-localization.page.html</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5550126009216036505" datatype="html">
-        <source>Save settings</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/pages/settings-localization/settings-localization.page.html</context>
-          <context context-type="linenumber">11</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="6175458373683903360" datatype="html">
         <source>Workspace is not empty. Only empty workspaces can be deleted.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/services/workspace.service.ts</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">68</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4073411496062340055" datatype="html">
         <source>Workspace with this ID does not exist.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/services/workspace.service.ts</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2907016025519254862" datatype="html">
+        <source>Disconnect</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/integration-entry/integration-entry.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4086606389696938932" datatype="html">
+        <source>Account</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="723305924372771226" datatype="html">
+        <source>test@example.com</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2082740537345398835" datatype="html">
+        <source>Smith</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2650040249203729637" datatype="html">
+        <source>Update profile</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6309828574111583895" datatype="html">
+        <source>Change password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5556964859629628625" datatype="html">
+        <source>It&apos;s highly recommended to change the password every 30 days. It will increase your account security.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">32,33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7662015208795302518" datatype="html">
+        <source>Delete account</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="710127565656702255" datatype="html">
+        <source>Delete your account permanently. All not shared owned projects will also be deleted. This action is reversible in period of 7 days - you need to log in to your account in this time to revert your account deletion.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">42,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4944372417149760037" datatype="html">
+        <source>Integrations</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-integrations/settings-integrations.page.html</context>
+          <context context-type="linenumber">1,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1534029177398918729" datatype="html">
+        <source>GitHub</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-integrations/settings-integrations.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2732752787737094710" datatype="html">
+        <source>Localization</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-localization/settings-localization.page.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2826581353496868063" datatype="html">
+        <source>Language</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-localization/settings-localization.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5550126009216036505" datatype="html">
+        <source>Save settings</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-localization/settings-localization.page.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="721963055036507192" datatype="html">
+        <source>Sessions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-sessions/settings-sessions.page.html</context>
+          <context context-type="linenumber">1,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="411205853842504544" datatype="html">
+        <source>Where You are logged in</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-sessions/settings-sessions.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2649506029256405673" datatype="html">
+        <source>Active now</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-sessions/settings-sessions.page.html</context>
+          <context context-type="linenumber">27,28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2413171611497962745" datatype="html">
         <source>Due date</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/board-task/board-task.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5726691094023644029" datatype="html">
         <source>Edit task</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/board-task/board-task.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
-          <context context-type="linenumber">49,50</context>
+          <context context-type="linenumber">68,69</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
+          <context context-type="linenumber">126,127</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5739298932347687314" datatype="html">
+        <source>Create subtask</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/board-task/board-task.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
+          <context context-type="linenumber">71,72</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
+          <context context-type="linenumber">129,130</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4510676848705799339" datatype="html">
         <source>Delete task</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/board-task/board-task.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
-          <context context-type="linenumber">52,53</context>
+          <context context-type="linenumber">74,75</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
+          <context context-type="linenumber">132,133</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3290193501558345471" datatype="html">
+        <source>Unassign</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/input-assignee/input-assignee.component.html</context>
+          <context context-type="linenumber">16,17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="467515590191938529" datatype="html">
@@ -819,74 +1088,74 @@
           <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="5433782699501161466" datatype="html">
+        <source>Schedule</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/view-options/view-options.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="3825802286872185103" datatype="html">
         <source>Calendar</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/view-options/view-options.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5194912054053114732" datatype="html">
         <source>Backlog</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/view-options/view-options.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7585826646011739428" datatype="html">
         <source>Edit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/view-options/view-options.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4163272119298020373" datatype="html">
         <source>Filters</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/view-options/view-options.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6136219026045671670" datatype="html">
         <source>Edit task: <x id="INTERPOLATION" equiv-text="{{ data.task?.name }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">1</context>
+          <context context-type="linenumber">1,2</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5488786542879754401" datatype="html">
         <source>Create new task</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">2</context>
+          <context context-type="linenumber">2,3</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2244471832629453998" datatype="html">
-        <source>Workspace</source>
+      <trans-unit id="4121038867184388115" datatype="html">
+        <source>Create new subtask</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">3,4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8117668572148231876" datatype="html">
         <source>Project</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8650499415827640724" datatype="html">
         <source>Type</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1315476018548197144" datatype="html">
-        <source>New task</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4902817035128594900" datatype="html">
@@ -907,81 +1176,150 @@
         <source>Status</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
-          <context context-type="linenumber">20,21</context>
+          <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2734022681675842051" datatype="html">
         <source>Priority</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3108168000666137165" datatype="html">
+        <source>Deadline</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6524262610032366385" datatype="html">
+        <source>Choose a date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8706787861441663087" datatype="html">
+        <source>Estimated date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7149538147822739051" datatype="html">
         <source>Create or attach GitHub issue simultaneously</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">52,53</context>
+          <context context-type="linenumber">58,59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5674286808255988565" datatype="html">
         <source>Create</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2347606750632868580" datatype="html">
         <source>Attach</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">64</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7755266189850965726" datatype="html">
-        <source>Issue number</source>
+      <trans-unit id="5833626790712999947" datatype="html">
+        <source>Issue</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-type.pipe.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3303739134922391686" datatype="html">
+        <source> Connect with GitHub pull request </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">75,76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6750058174402929867" datatype="html">
+        <source>Pull request</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6830089790008082791" datatype="html">
         <source>Create </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">72,73</context>
+          <context context-type="linenumber">90</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7308843625516475377" datatype="html">
         <source>Save changes </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">74,75</context>
+          <context context-type="linenumber">91,92</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5701618810648052610" datatype="html">
-        <source>Title</source>
+      <trans-unit id="7515883357904500238" datatype="html">
+        <source>Are you sure?</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
-          <context context-type="linenumber">14,15</context>
+          <context context-type="sourcefile">src/app/tasks/pages/board/board.page.ts</context>
+          <context context-type="linenumber">95,94</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8224724288725812333" datatype="html">
-        <source>Assignee</source>
+      <trans-unit id="3541542172268855520" datatype="html">
+        <source>If you will move this task to finishing state, the attached pull request will be merged to the repository.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
-          <context context-type="linenumber">30,31</context>
+          <context context-type="sourcefile">src/app/tasks/pages/board/board.page.ts</context>
+          <context context-type="linenumber">96,94</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3108168000666137165" datatype="html">
-        <source>Deadline</source>
+      <trans-unit id="3206542606001340679" datatype="html">
+        <source>Merge</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/board/board.page.ts</context>
+          <context context-type="linenumber">97,94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2778913900547914602" datatype="html">
+        <source>GitHub issue</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
-          <context context-type="linenumber">36,37</context>
+          <context context-type="linenumber">28,29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3044141660640131996" datatype="html">
+        <source>GitHub pull request</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
+          <context context-type="linenumber">32,33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
+          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8552442134903163947" datatype="html">
@@ -1033,18 +1371,32 @@
           <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5833626790712999947" datatype="html">
-        <source>Issue</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/pipes/task-type.pipe.ts</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="8442545351023010426" datatype="html">
         <source>Epic</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/pipes/task-type.pipe.ts</context>
           <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9139518053026948448" datatype="html">
+        <source>Subtask</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-type.pipe.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="312262311476590184" datatype="html">
+        <source>Delete task &quot;<x id="PH" equiv-text="task.name"/>&quot;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/task.service.ts</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1263703513734435128" datatype="html">
+        <source>Are you sure you want to delete this task &quot;<x id="PH" equiv-text="task.name"/>&quot;?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/task.service.ts</context>
+          <context context-type="linenumber">110</context>
         </context-group>
       </trans-unit>
     </body>

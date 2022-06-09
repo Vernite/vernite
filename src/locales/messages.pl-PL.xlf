@@ -722,6 +722,462 @@
           <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="20353189334801298" datatype="html">
+        <source>Only my tasks</source>
+        <target state="translated">Tylko moje zadania</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/classes/filters.class.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6839797091123255492" datatype="html">
+        <source>Save filters</source>
+        <target state="translated">Zapisz filtry</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/filters/filters.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1672477553208499441" datatype="html">
+        <source>Manage projects</source>
+        <target state="translated">Zarządzaj projektami</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3678747862932298827" datatype="html">
+        <source>Open in github.dev</source>
+        <target state="translated">Otwórz w github.dev</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9004445717480887353" datatype="html">
+        <source>Open in Visual Studio Code</source>
+        <target state="translated">Otwórz w Visual Studio Code</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9149162144342070196" datatype="html">
+        <source>Open in Visual Studio Code Insiders</source>
+        <target state="translated">Otwórz w Visual Studio Code Insiders</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/nav-element-workspace/nav-element-workspace.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="490129905633184251" datatype="html">
+        <source>Manage workspaces</source>
+        <target state="translated">Zarządzaj przestrzeniami pracy</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/sidebar-navigation/sidebar-navigation.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="960665565485640516" datatype="html">
+        <source>Something went wrong</source>
+        <target state="translated">Coś poszło nie tak</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/decorators/service-validator.decorator.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4647477941219843206" datatype="html">
+        <source>Your session has expired.</source>
+        <target state="translated">Twoja sesja wygasła</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/interceptors/error.interceptor.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7819314041543176992" datatype="html">
+        <source>Close</source>
+        <target state="translated">Zamknij</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/services/dialog.service.ts</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4648900870671159218" datatype="html">
+        <source>Success</source>
+        <target state="translated">Sukces</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/decorators/service-validator.decorator.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8998179362936748717" datatype="html">
+        <source>OK</source>
+        <target state="translated">OK</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/decorators/service-validator.decorator.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6166496530300942880" datatype="html">
+        <source>Email is not valid</source>
+        <target state="translated">Email jest niepoprawny</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/validators/email.validator.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7320351812897102937" datatype="html">
+        <source>Length should not be greater than <x id="PH" equiv-text="length"/></source>
+        <target state="translated">Długość nie powinna być większa niż "<x id="PH" equiv-text="length"/>"</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/validators/max-length.validator.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6759164171597055058" datatype="html">
+        <source>Are you sure you want to delete this workspace &quot;<x id="PH" equiv-text="workspace.name"/>&quot;?</source>
+        <target state="translated">Jestes pewien, że chcesz usunąć przestrzeń pracy "<x id="PH" equiv-text="workspace.name"/>"?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/services/dialog.service.ts</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1827548857416381358" datatype="html">
+        <source>Password requires minimum eight characters, at least one letter and one number</source>
+        <target state="translated">Hasło musi posiadać minimum 8 znaków, conajmniej jedną literę i cyfrę</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/validators/password.validator.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5563707991210417503" datatype="html">
+        <source>Enter your new password.</source>
+        <target state="translated">Wpisz nowe hasło</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/change-password/change-password.page.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6229539150746485362" datatype="html">
+        <source>Given passwords are not the same</source>
+        <target state="translated">Podane hasła nie są takie same</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/change-password/change-password.page.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register/register.page.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5046289386020266294" datatype="html">
+        <source>Your account has been deleted.</source>
+        <target state="translated">Twoje konto zostało usunięte</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/delete-account/delete-account.page.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3451483669820128990" datatype="html">
+        <source>User is already logged</source>
+        <target state="translated">Użytkownik jest już zalogowany</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/login/login.page.ts</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7527980706824212298" datatype="html">
+        <source>Wrong username or password</source>
+        <target state="translated">Niepoprawna nazwa użytkownika lub hasło</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/login/login.page.ts</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6987388674475678589" datatype="html">
+        <source>John</source>
+        <target state="translated">Jan</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2955808527230122938" datatype="html">
+        <source>Bayer</source>
+        <target state="translated">Kowalski</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3212364621904068858" datatype="html">
+        <source>John98</source>
+        <target state="translated">Jan98</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5158827663873735127" datatype="html">
+        <source>Your account has been deleted. You can restore your account within 7 days of deletion.</source>
+        <target state="translated">Twoje konto zostało usunięte. Możesz je przywrócić w ciagu 7 dni od usunięcia.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/restore-account/restore-account.page.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5008929893571451339" datatype="html">
+        <source>Restore account</source>
+        <target state="translated">Przywróć konto</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/restore-account/restore-account.page.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6770769801335635194" datatype="html">
+        <source>Restore</source>
+        <target state="translated">Przywróć</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/restore-account/restore-account.page.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4522126822651023664" datatype="html">
+        <source>Delete member</source>
+        <target state="translated">Usuń członka zespołu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/member-list/member-list.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8753404881694620186" datatype="html">
+        <source>Username or Email</source>
+        <target state="translated">Nazwa użytkownika lub Email</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/member-list/member-list.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6439365426343089851" datatype="html">
+        <source>General</source>
+        <target state="translated">Ogólne</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/view-options/view-options.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/view-options/view-options.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4691887509600985309" datatype="html">
+        <source>Members</source>
+        <target state="translated">Członkowie zespołu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/view-options/view-options.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/view-options/view-options.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1589749564133337410" datatype="html">
+        <source>Add members</source>
+        <target state="translated">Dodaj członków zespołu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/dialogs/add-member/add-member.dialog.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="953401520354685927" datatype="html">
+        <source>Workspace: <x id="INTERPOLATION" equiv-text="{{ (workspace$ | async)?.name }}"/></source>
+        <target state="translated">Przestrzeń pracy: "<x id="INTERPOLATION" equiv-text="{{ (workspace$ | async)?.name }}"/>"</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/create-project/create-project.page.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7935463823468085342" datatype="html">
+        <source>Workspace:</source>
+        <target state="translated">Przestrzeń pracy:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/edit-project/edit-project.page.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3249513483374643425" datatype="html">
+        <source>Add</source>
+        <target state="translated">Dodaj</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/dialogs/add-member/add-member.dialog.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6448403652407957362" datatype="html">
+        <source>When you enter your email address, you will receive an email with a link to reset your password.</source>
+        <target state="translated">Po wpisaniu adresu email, otrzymasz wiadomość z linkiem do zrestartowania Twojego hasła</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/forgot-password/forgot-password.page.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3521243892251427711" datatype="html">
+        <source>Edit workspace: <x id="INTERPOLATION" equiv-text="{{ workspace$ | async }}"/></source>
+        <target state="translated">Edytuj przestrzeń pracy "<x id="INTERPOLATION" equiv-text="{{ workspace$ | async }}"/>"</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/edit-workspace/edit-workspace.page.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6175458373683903360" datatype="html">
+        <source>Workspace is not empty. Only empty workspaces can be deleted.</source>
+        <target state="translated">Przestrzeń pracy nie jest pusta. Tylko pusta przestrzeń może zostać usunięta.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/services/workspace.service.ts</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1263703513734435128" datatype="html">
+        <source>Are you sure you want to delete this task &quot;<x id="PH" equiv-text="task.name"/>&quot;?</source>
+        <target state="translated">Czy na pewno chcesz usunąć zadanie "<x id="PH" equiv-text="task.name"/>"?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/task.service.ts</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4162618798623345902" datatype="html">
+        <source>Now you can close this page</source>
+        <target state="translated">Już możesz zamknąć tę stronę</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/github-integration/github-integration.page.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4944372417149760037" datatype="html">
+        <source>Integrations</source>
+        <target state="translated">Integracje</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-integrations/settings-integrations.page.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2732752787737094710" datatype="html">
+        <source>Localization</source>
+        <target state="translated">Język</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-localization/settings-localization.page.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="721963055036507192" datatype="html">
+        <source>Sessions</source>
+        <target state="translated">Sesje</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-sessions/settings-sessions.page.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="411205853842504544" datatype="html">
+        <source>Where You are logged in</source>
+        <target state="translated">Gdzie jesteś zalogowany</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-sessions/settings-sessions.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2649506029256405673" datatype="html">
+        <source>Active now</source>
+        <target state="translated">Aktywny</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-sessions/settings-sessions.page.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8650499415827640724" datatype="html">
+        <source>Type</source>
+        <target state="translated">Typ</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6524262610032366385" datatype="html">
+        <source>Choose a date</source>
+        <target state="translated">Wybierz datę</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="802458941707537739" datatype="html">
+        <source>Low</source>
+        <target state="translated">Niski</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-priority.pipe.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5982496808088686844" datatype="html">
+        <source>Medium</source>
+        <target state="translated">Średni</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-priority.pipe.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8063651736083474594" datatype="html">
+        <source>High</source>
+        <target state="translated">Wysoki</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-priority.pipe.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6096447832515616854" datatype="html">
+        <source>Highest</source>
+        <target state="translated">Najwyższy</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-priority.pipe.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8552442134903163947" datatype="html">
+        <source>Lowest</source>
+        <target state="translated">Najniższy</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-priority.pipe.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5556964859629628625" datatype="html">
+        <source>It&apos;s highly recommended to change the password every 30 days. It will increase your account security.</source>
+        <target state="translated">Zaleca się zmianę hasła co ok. 30 dni. Może to pomóc zwiększyć bezpieczeńśtwo Twojego konta.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2650040249203729637" datatype="html">
+        <source>Update profile</source>
+        <target state="translated">Zaktualizuj profil</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>
