@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AddMemberDialog } from '@dashboard/dialogs/add-member/add-member.dialog';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
 import { MemberService } from '@dashboard/services/member.service';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -35,6 +36,8 @@ export class CreateProjectMembersPage {
 
   private workspaceId!: number;
 
+  private memberList?: string[];
+
   /**
    * Default constructor. Injects the Workspace and Router service.
    * @param workspaceService Workspace service
@@ -60,16 +63,12 @@ export class CreateProjectMembersPage {
    */
 
   openAddMembersDialog() {
-    // this.dialogService
-    //   .open(AddMemberDialog, {})
-    //   .afterClosed()
-    //   .subscribe((result) => {
-    //     if (result) {
-    //       this.memberService.add(result, [this.projectId]).subscribe(() => {
-    //         location.reload();
-    //       });
-    //     }
-    //   });
+    this.dialogService
+      .open(AddMemberDialog, {})
+      .afterClosed()
+      .subscribe((result) => {
+        this.memberList = result;
+      });
   }
 
   public submitCreate(): void {
@@ -78,10 +77,18 @@ export class CreateProjectMembersPage {
     this.form.updateValueAndValidity();
     if (this.form.invalid) return;
 
-    this.createSubscription = this.projectService.create(this.form.value).subscribe(() => {
-      this.router.navigate([this.workspaceId]).then(() => {
-        window.location.reload();
-      });
+    this.createSubscription = this.projectService.create(this.form.value).subscribe((response) => {
+      if (this.memberList) {
+        this.memberService.add(this.memberList, [response.id]).subscribe(() => {
+          this.router.navigate([this.workspaceId]).then(() => {
+            window.location.reload();
+          });
+        });
+      } else {
+        this.router.navigate([this.workspaceId]).then(() => {
+          window.location.reload();
+        });
+      }
     });
   }
 }

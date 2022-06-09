@@ -2,11 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
-import { GitIntegrationService } from '@dashboard/services/git-integration.service';
-import { WorkspaceService } from '@dashboard/services/workspace.service';
 import { RouterExtensionsService } from '@main/services/router-extensions.service';
 import { Status } from '@tasks/interfaces/status.interface';
-import { StatusService } from '@tasks/services/status.service';
 import { Observable } from 'rxjs';
 import { requiredValidator } from '../../../_main/validators/required.validator';
 
@@ -31,9 +28,6 @@ export class AddMemberDialog implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: AddMemberDialogData,
     private dialogRef: MatDialogRef<AddMemberDialog>,
-    private statusService: StatusService,
-    private workspaceService: WorkspaceService,
-    private gitIntegrationService: GitIntegrationService,
     private routerExtensions: RouterExtensionsService,
   ) {}
 

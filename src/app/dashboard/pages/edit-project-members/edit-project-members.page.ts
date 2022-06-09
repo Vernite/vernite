@@ -119,8 +119,6 @@ export class EditProjectMembersPage {
     });
   }
 
-  public addMembers() {}
-
   openAddMembersDialog() {
     this.dialogService
       .open(AddMemberDialog, {
