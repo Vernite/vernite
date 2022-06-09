@@ -26,6 +26,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtonComponent } from './components/button/button.component';
 import { CardComponent } from './components/card/card.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { FiltersComponent } from './components/filters/filters.component';
 import { IconComponent } from './components/icon/icon.component';
 import { InputDateTimeComponent } from './components/input-date-time/input-date-time.component';
 import { InputComponent } from './components/input/input.component';
@@ -121,6 +122,7 @@ const ngModuleConfig = {
     ClickStopPropagationDirective,
     InputDateTimeComponent,
     LetDirective,
+    FiltersComponent,
   ],
   providers: [
     DialogService,

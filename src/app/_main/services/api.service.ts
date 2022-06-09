@@ -27,9 +27,9 @@ export class ApiService {
    * @param options advanced options to configure request
    * @returns Request observable, which completes when request is finished
    */
-  public request(method: string, url: string, options?: RequestOptions) {
-    return this.httpClient.request(method, this.apiURL + url, {
-      responseType: 'json',
+  public request<T = any>(method: string, url: string, options?: RequestOptions) {
+    return this.httpClient.request<T>(method, this.apiURL + url, {
+      responseType: 'json' as any,
       withCredentials: true,
       ...options,
     });
@@ -41,8 +41,8 @@ export class ApiService {
    * @param options advanced options to configure request
    * @returns Request observable, which completes when request is finished
    */
-  public get(url: string, options?: RequestOptions) {
-    return this.request('GET', url, options);
+  public get<T = any>(url: string, options?: RequestOptions) {
+    return this.request<T>('GET', url, options);
   }
 
   /**
@@ -51,8 +51,8 @@ export class ApiService {
    * @param options advanced options to configure request
    * @returns Request observable, which completes when request is finished
    */
-  public post(url: string, options?: RequestOptions) {
-    return this.request('POST', url, options);
+  public post<T = any>(url: string, options?: RequestOptions) {
+    return this.request<T>('POST', url, options);
   }
 
   /**
@@ -61,8 +61,8 @@ export class ApiService {
    * @param options advanced options to configure request
    * @returns Request observable, which completes when request is finished
    */
-  public delete(url: string, options?: RequestOptions) {
-    return this.request('DELETE', url, options);
+  public delete<T = any>(url: string, options?: RequestOptions) {
+    return this.request<T>('DELETE', url, options);
   }
 
   /**
@@ -71,8 +71,8 @@ export class ApiService {
    * @param options advanced options to configure request
    * @returns Request observable, which completes when request is finished
    */
-  public put(url: string, options?: RequestOptions) {
-    return this.request('PUT', url, options);
+  public put<T = any>(url: string, options?: RequestOptions) {
+    return this.request<T>('PUT', url, options);
   }
 
   /**
@@ -81,7 +81,7 @@ export class ApiService {
    * @param options advanced options to configure request
    * @returns Request observable, which completes when request is finished
    */
-  public patch(url: string, options?: RequestOptions) {
-    return this.request('PATCH', url, options);
+  public patch<T = any>(url: string, options?: RequestOptions) {
+    return this.request<T>('PATCH', url, options);
   }
 }

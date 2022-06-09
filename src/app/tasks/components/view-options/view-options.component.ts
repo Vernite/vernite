@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { faFilter, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { Filter } from '@main/interfaces/filters.interface';
 
 @Component({
   selector: 'app-view-options',
@@ -17,6 +19,14 @@ export class ViewOptionsComponent {
 
   @Input()
   project!: Project;
+
+  @Input()
+  filters: Filter[] = [];
+
+  @Input()
+  public filtersControl = new FormControl();
+
+  public isFiltersOpen = false;
 
   constructor(private activatedRoute: ActivatedRoute) {
     const { workspaceId, projectId } = this.activatedRoute.snapshot.params;

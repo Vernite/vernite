@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from '@auth/services/user.service';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { MemberService } from '@dashboard/services/member.service';
@@ -13,6 +14,8 @@ import {
   faPlus
 } from '@fortawesome/free-solid-svg-icons';
 import { ESet } from '@main/classes/e-set.class';
+import { Filters } from '@main/classes/filters.class';
+import { Filter } from '@main/interfaces/filters.interface';
 import { DialogService } from '@main/services/dialog.service';
 import { TaskDialog, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
 import { Status } from '@tasks/interfaces/status.interface';
@@ -44,6 +47,9 @@ export class TaskListPage {
 
   public statusList: Status[] = [];
 
+  public filters: Filter[] = [];
+  public filtersControl = new FormControl();
+
   isSubtasksRow = (i: number, row: Object) => row.hasOwnProperty('withSubtasks');
   expandedSubtasks = new ESet();
 
@@ -54,11 +60,16 @@ export class TaskListPage {
     private projectService: ProjectService,
     private dialogService: DialogService,
     private memberService: MemberService,
+    private userService: UserService,
   ) {
     const { workspaceId, projectId } = this.activatedRoute.snapshot.params;
 
     this.projectId = projectId;
     this.project$ = this.projectService.get(projectId);
+
+    /**
+     * TODO: Use method from service
+     */
     this.members$ = this.memberService.list(projectId).pipe(
       map((members) =>
         members.reduce((acc: Map<number, ProjectMember>, member: ProjectMember) => {
@@ -73,6 +84,13 @@ export class TaskListPage {
     this.statusList$ = this.statusService.list(projectId);
     this.statusList$.subscribe((list) => {
       this.statusList = list;
+    });
+    this.userService.getMyself().subscribe((user) => {
+      this.filters.push(Filters.ONLY_MY_TASKS(user.id));
+    });
+
+    this.filtersControl.valueChanges.subscribe((filters) => {
+      this.taskList$ = this.taskService.list(projectId, filters);
     });
   }
 
@@ -101,6 +119,9 @@ export class TaskListPage {
     return populatedTasks;
   }
 
+  /**
+   * TODO: Move this method to service
+   */
   createSubtask(task: Task) {
     this.dialogService
       .open(TaskDialog, {

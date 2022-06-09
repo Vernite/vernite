@@ -33,8 +33,16 @@ export class TaskService {
    * @param projectId Project id needed to list all tasks
    * @returns Request observable with list of tasks
    */
-  public list(projectId: number): Observable<Task[]> {
-    return this.apiService.get(`/project/${projectId}/task/`);
+  public list(projectId: number, filters?: { assigneeId: number }): Observable<Task[]> {
+    return this.apiService
+      .get<Task[]>(`/project/${projectId}/task/`)
+      .pipe(
+        map((tasks) =>
+          filters && Object.keys(filters).length
+            ? tasks.filter((task) => task.assigneeId === filters.assigneeId)
+            : tasks,
+        ),
+      );
   }
 
   /**
@@ -204,16 +212,15 @@ export class TaskService {
     ]).pipe(
       map(([tasks, members]: [tasks: Task[], members: ProjectMember[]]) => {
         const schedules = [];
-        console.log(tasks, members);
 
         for (const { user } of members) {
-          schedules.push({ user, tasks: new Map() });
-          schedules.push({ user, tasks: new Map() });
           schedules.push({ user, tasks: new Map() });
         }
 
         for (const task of tasks) {
-          const schedule = schedules[Math.floor(Math.random() * schedules.length)];
+          const schedule = schedules.find((s) => s.user.id === task.assigneeId);
+
+          if (!schedule) continue;
 
           if (task.estimatedDate) {
             schedule.tasks.set(dayjs(task.estimatedDate).format('YYYY-MM-DD'), task);

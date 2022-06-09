@@ -1,0 +1,11 @@
+.filters {
+  width: 100%;
+
+  app-button {
+    width: 100%;
+
+    ::ng-deep button {
+      width: 100%;
+    }
+  }
+}

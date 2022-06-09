@@ -1,0 +1,12 @@
+<div class="filters">
+  <ng-container *ngFor="let filter of filters; index as i">
+    <ng-container [ngSwitch]="filter.type">
+      <div class="filter" *ngSwitchCase="'checkbox'">
+        <app-checkbox [formControl]="getControl(i)">{{ filter.label }}</app-checkbox>
+      </div>
+      <p *ngSwitchDefault>Unknown filter type: {{ filter.type }}</p>
+    </ng-container>
+  </ng-container>
+
+  <app-button variant="primary" (click)="saveFilters()" i18n>Save filters</app-button>
+</div>

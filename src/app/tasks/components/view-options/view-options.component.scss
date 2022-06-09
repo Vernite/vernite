@@ -54,6 +54,7 @@ section {
     align-items: center;
 
     .options-element {
+      position: relative;
       display: flex;
       align-items: center;
       padding: 10px;
@@ -68,6 +69,18 @@ section {
 
       &:hover {
         color: var(--color-text);
+      }
+
+      .overlay {
+        position: absolute;
+        z-index: 150;
+        right: 0;
+        bottom: 0;
+        width: 200px;
+        padding: 1rem;
+        background-color: var(--color-secondary-600);
+        border-radius: var(--border-radius);
+        transform: translateY(100%);
       }
     }
   }

@@ -1,6 +1,6 @@
 <div *ngIf="task" class="task">
   <div class="top-section">
-    <div class="assignees">
+    <div class="assignees" *ngIf="members">
       <app-input-assignee [assignee]="members.get(task.assigneeId || -1)" [projectId]="projectId" [taskId]="task.id"
         [members]="members || []"></app-input-assignee>
     </div>
