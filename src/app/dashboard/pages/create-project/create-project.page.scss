@@ -11,3 +11,24 @@ form {
   display: flex;
   margin-top: 2rem;
 }
+
+.members {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding-top: 20px;
+
+  h2 {
+    margin: 0;
+  }
+
+  .button {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+.app-member-list {
+  padding-left: 10px;
+}

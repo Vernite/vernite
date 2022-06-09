@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AddMemberDialog } from '@dashboard/dialogs/add-member/add-member.dialog';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
+import { MemberService } from '@dashboard/services/member.service';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { DialogService } from '@main/services/dialog.service';
 import { maxLengthValidator } from '@main/validators/max-length.validator';
 import { Observable, Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
@@ -21,6 +25,7 @@ export class CreateProjectPage {
     name: new FormControl('', [requiredValidator(), maxLengthValidator(50)], []),
   });
 
+  faPlus = faPlus;
   /**
    * Subscription to the workspace creation.
    */
@@ -29,6 +34,8 @@ export class CreateProjectPage {
   public workspace$!: Observable<Workspace>;
 
   private workspaceId!: number;
+
+  public memberList: string[] = [];
 
   /**
    * Default constructor. Injects the Workspace and Router service.
@@ -40,11 +47,22 @@ export class CreateProjectPage {
     private projectService: ProjectService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private dialogService: DialogService,
+    private memberService: MemberService,
   ) {
     const { workspaceId } = this.activatedRoute.snapshot.params;
     this.workspaceId = workspaceId;
     this.workspace$ = this.workspaceService.get(workspaceId);
     this.form.addControl('workspaceId', new FormControl(workspaceId));
+  }
+
+  openAddMembersDialog() {
+    this.dialogService
+      .open(AddMemberDialog, {})
+      .afterClosed()
+      .subscribe((result) => {
+        this.memberList = [...this.memberList, ...result];
+      });
   }
 
   /**
@@ -57,10 +75,18 @@ export class CreateProjectPage {
     this.form.updateValueAndValidity();
     if (this.form.invalid) return;
 
-    this.createSubscription = this.projectService.create(this.form.value).subscribe(() => {
-      this.router.navigate([this.workspaceId]).then(() => {
-        window.location.reload();
-      });
+    this.createSubscription = this.projectService.create(this.form.value).subscribe((response) => {
+      if (this.memberList) {
+        this.memberService.add(this.memberList, [response.id]).subscribe(() => {
+          this.router.navigate([this.workspaceId]).then(() => {
+            window.location.reload();
+          });
+        });
+      } else {
+        this.router.navigate([this.workspaceId]).then(() => {
+          window.location.reload();
+        });
+      }
     });
   }
 }

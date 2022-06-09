@@ -15,6 +15,12 @@ export class MemberListComponent implements OnInit {
   public memberList$!: Observable<ProjectMember[]>;
 
   @Input()
+  addedMembers?: string[];
+
+  @Input()
+  type: 'create' | 'edit' = 'edit';
+
+  @Input()
   memberList!: ProjectMember[];
 
   constructor(private memberService: MemberService, private activatedRoute: ActivatedRoute) {
