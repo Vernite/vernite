@@ -13,19 +13,36 @@ li {
 .workspace {
   display: flex;
   width: 100%;
+  height: 46px;
   justify-content: space-between;
-  padding: 14px 5px 14px 30px;
   border-radius: var(--border-radius);
   color: var(--color-neutral-300);
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
 
+  .element {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    padding: 0 0 0 30px;
+  }
+
   .icons {
     display: flex;
+    height: 100%;
     align-items: center;
+
+    .options {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      padding: 0 5px 0 0;
+    }
 
     .open-below {
       display: flex;
+      height: 100%;
       align-items: center;
       justify-content: center;
       padding: 0 5px;
@@ -66,16 +83,37 @@ li {
 
     li {
       display: flex;
+      width: 100%;
+      height: 46px;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 5px 14px 40px;
       border-radius: var(--border-radius);
+
+      .sub-element {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        padding: 0 0 0 40px;
+      }
+
+      .icons {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        padding: 0 5px 0 0;
+      }
 
       &:hover {
         background-color: var(--color-secondary-500);
       }
     }
   }
+}
+
+button {
+  display: flex;
+  align-items: center;
 }
 
 .hidden {

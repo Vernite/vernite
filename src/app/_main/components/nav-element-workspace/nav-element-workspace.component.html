@@ -1,6 +1,6 @@
 <section>
   <div class="workspace">
-    <div (click)="routeToWorkspace()">
+    <div class="element" (click)="toggleWorkspace()">
       <ng-content></ng-content>
     </div>
     <div class="icons">
@@ -15,6 +15,9 @@
           <button mat-menu-item (click)="createProject()">
             <span i18n>Create project</span>
           </button>
+          <button mat-menu-item (click)="routeToWorkspace()">
+            <span i18n>Manage projecs</span>
+          </button>
           <button mat-menu-item (click)="editWorkspace()">
             <span i18n>Edit workspace</span>
           </button>
@@ -28,10 +31,10 @@
   <div class="project" [class.active]="activeWorkspace">
     <ul #elementList>
       <li *ngFor="let projectWithPriv of workspace.projectsWithPrivileges">
-        <div (click)="routeToProject(projectWithPriv.project)">{{projectWithPriv.project.name}}</div>
-        <div class="icons">
+        <div class="sub-element" (click)="routeToProject(projectWithPriv.project)">{{projectWithPriv.project.name}}</div>
+        <div class="icons" [matMenuTriggerFor]="menu">
           <div class="options">
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+            <button mat-icon-button aria-label="Menu">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">

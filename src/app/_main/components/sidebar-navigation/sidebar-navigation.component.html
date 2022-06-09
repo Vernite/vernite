@@ -4,7 +4,7 @@
 </section>
 <app-nav-element [showOptions]="false" routerLink="/" i18n>Dashboard</app-nav-element>
 <app-nav-element [showOptions]="true">
-  <div routerLink="/" i18n>Workspaces</div>
+  <div i18n>Workspaces</div>
   <div class="open-below">
     <ul>
       <app-nav-element-workspace *ngFor="let workspace of workspaceList|async" [workspace]="workspace">
@@ -15,6 +15,9 @@
   <div class="options">
     <button mat-menu-item (click)="createWorkspace()">
       <span i18n>Create workspace</span>
+    </button>
+    <button mat-menu-item routerLink="/">
+      <span i18n>Manage workspaces</span>
     </button>
   </div>
 </app-nav-element>

@@ -1,5 +1,5 @@
 <section>
-  <div [routerLink]="routerLink">
+  <div class="element" (click)="toggleNavElement()">
     <fa-icon></fa-icon>
     <ng-content></ng-content>
   </div>
@@ -7,8 +7,8 @@
     <div class="open-below" [class.hidden]="(showArrow$ | async) === false" (click)="toggleNavElement()">
       <app-icon [icon]="faAngleDown" size="16px" [class.active]="active"></app-icon>
     </div>
-    <div class="options" [class.hidden]="!showOptions">
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+    <div class="options" [class.hidden]="!showOptions" [matMenuTriggerFor]="menu">
+      <button mat-icon-button aria-label="Menu">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
