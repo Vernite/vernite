@@ -48,9 +48,9 @@ export class MemberService {
    */
   public add(
     emails: string[],
-    projectList: number[],
+    projects: number[],
   ): Observable<{ emails: string[]; projectList: number[] }> {
-    return this.apiService.post(`/project/member`, { body: { emails, projectList } });
+    return this.apiService.post(`/project/member`, { body: { emails, projects } });
   }
 
   /**

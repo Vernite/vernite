@@ -68,11 +68,15 @@ export class NavElementWorkspaceComponent implements AfterViewInit {
   }
 
   createProject() {
-    this.router.navigate(['/', this.workspace.id, 'create']);
+    this.router
+      .navigateByUrl('/', { skipLocationChange: true })
+      .then(() => this.router.navigate(['/', this.workspace.id, 'create']));
   }
 
   editProject(project: Project) {
-    this.router.navigate(['/', this.workspace.id, project.id, 'edit']);
+    this.router
+      .navigateByUrl('/', { skipLocationChange: true })
+      .then(() => this.router.navigate(['/', this.workspace.id, project.id, 'edit']));
   }
 
   deleteProject(project: Project) {
@@ -84,7 +88,9 @@ export class NavElementWorkspaceComponent implements AfterViewInit {
   }
 
   editWorkspace() {
-    this.router.navigate(['/', this.workspace.id, 'edit']);
+    this.router
+      .navigateByUrl('/', { skipLocationChange: true })
+      .then(() => this.router.navigate(['/', this.workspace.id, 'edit']));
   }
 
   deleteWorkspace() {
