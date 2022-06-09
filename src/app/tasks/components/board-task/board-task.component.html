@@ -1,7 +1,8 @@
 <div *ngIf="task" class="task">
   <div class="top-section">
     <div class="assignees">
-      <div class="assignee">R</div>
+      <app-input-assignee [assignee]="members.get(task.assigneeId || -1)" [projectId]="projectId" [taskId]="task.id"
+        [members]="members || []"></app-input-assignee>
     </div>
     <div *ngIf="task.deadline" class="deadline">
       <div class="title" i18n>Due date</div>

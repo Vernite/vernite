@@ -9,7 +9,7 @@
     <div class="column-content" [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event)"
       [attr.data-index]="statusIndex" cdkDropList>
       <app-board-task *ngFor="let task of column.tasks; index as taskIndex" class="task" [task]="task"
-        [projectId]="projectId" [attr.data-index]="taskIndex" cdkDrag>
+        [projectId]="projectId" [members]="(members$ | async)!" [attr.data-index]="taskIndex" cdkDrag>
       </app-board-task>
     </div>
   </div>

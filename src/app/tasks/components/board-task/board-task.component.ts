@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { faCheck, faCodeCommit, faCodePullRequest } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '@main/services/dialog.service';
 import { TaskDialog, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
@@ -17,6 +18,9 @@ export class BoardTaskComponent {
 
   @Input()
   public projectId!: number;
+
+  @Input()
+  public members: Map<number, ProjectMember> = new Map();
 
   faCodeCommit = faCodeCommit;
   faCodePullRequest = faCodePullRequest;

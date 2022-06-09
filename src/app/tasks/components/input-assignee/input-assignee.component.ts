@@ -13,7 +13,7 @@ import { BehaviorSubject, filter, fromEvent, take } from 'rxjs';
   providers: [{ provide: NgControl, useClass: TestNgControl }],
 })
 export class InputAssigneeComponent extends ControlAccessor {
-  @Input() assignee?: ProjectMember;
+  @Input() assignee?: ProjectMember | null;
   @Input() set members(members: Map<number, ProjectMember> | ProjectMember[]) {
     if (Array.isArray(members)) {
       this.members$.next(members);
