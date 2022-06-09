@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { Service } from '@main/decorators/service.decorator';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ApiService } from 'src/app/_main/services/api.service';
 
 @Service()
@@ -51,5 +51,21 @@ export class MemberService {
     projectList: number[],
   ): Observable<{ emails: string[]; projectList: number[] }> {
     return this.apiService.post(`/project/member`, { body: { emails, projectList } });
+  }
+
+  /**
+   * Creates members map from given project
+   * @param projectId project which are members from
+   * @returns Request observable, which completes when request is finished
+   */
+  public map(projectId: number): Observable<Map<number, ProjectMember>> {
+    return this.list(projectId).pipe(
+      map((members) =>
+        members.reduce((acc: Map<number, ProjectMember>, member: ProjectMember) => {
+          acc.set(member.user.id, member);
+          return acc;
+        }, new Map<number, ProjectMember>()),
+      ),
+    );
   }
 }
