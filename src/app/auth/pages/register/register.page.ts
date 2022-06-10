@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { emailValidator } from '@main/validators/email.validator';
 import { passwordValidator } from '@main/validators/password.validator';
 import { sameAsValidator } from '@main/validators/same-as.validator';
-import { Subscription } from 'rxjs';
+import { catchError, EMPTY, Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { AuthService } from '../../services/auth.service';
 
@@ -24,6 +24,8 @@ export class RegisterPage {
   private registerSubscription?: Subscription;
   public stage?: RegisterStage = RegisterStage.IMPORTANT_DATA;
   RegisterStage = RegisterStage;
+
+  public error?: string;
 
   /**
    * Form group for register.
@@ -72,9 +74,25 @@ export class RegisterPage {
     this.form.updateValueAndValidity();
 
     if (this.form.valid) {
-      this.registerSubscription = this.authService.register(this.form.value).subscribe(() => {
-        this.router.navigate(['/']);
-      });
+      this.registerSubscription = this.authService
+        .register(this.form.value)
+        .pipe(
+          catchError((e) => {
+            this.handleError(e);
+            return EMPTY;
+          }),
+        )
+        .subscribe(() => {
+          this.router.navigate(['/']);
+        });
+    }
+  }
+
+  handleError(error: any) {
+    switch (error.status) {
+      case 422:
+        this.error = $localize`Username already exists`;
+        break;
     }
   }
 }

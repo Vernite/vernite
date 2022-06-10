@@ -1,24 +1,42 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
+import { WorkspaceService } from '@dashboard/services/workspace.service';
 import { faAngleDown, faCog, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '@main/services/dialog.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
 import { TaskService } from '@tasks/services/task.service';
-import { fromEvent, skip, take } from 'rxjs';
+import { fromEvent, map, skip, take } from 'rxjs';
 
 @Component({
   selector: 'app-upper-navigation',
   templateUrl: './upper-navigation.component.html',
   styleUrls: ['./upper-navigation.component.scss'],
 })
-export class UpperNavigationComponent {
+export class UpperNavigationComponent implements OnInit {
   constructor(
     private dialogService: DialogService,
     private taskService: TaskService,
+    private workspaceService: WorkspaceService,
     private authService: AuthService,
     private router: Router,
   ) {}
+
+  ngOnInit() {
+    this.workspaceService.list().pipe(
+      map((workspaces) => {
+        if (workspaces.length === 0) {
+          this._isButtonDisabled = false;
+        } else if (
+          workspaces.filter((workspace) => workspace.projectsWithPrivileges.length).length === 0
+        ) {
+          this._isButtonDisabled = false;
+        } else {
+          this._isButtonDisabled = true;
+        }
+      }),
+    );
+  }
 
   @ViewChild('openBelow') openBelow!: ElementRef<HTMLElement>;
 
@@ -28,6 +46,7 @@ export class UpperNavigationComponent {
   faSignOut = faSignOut;
 
   public active: boolean = false;
+  public _isButtonDisabled = true;
 
   createNewTask() {
     this.dialogService
@@ -50,6 +69,9 @@ export class UpperNavigationComponent {
     });
   }
 
+  public isButtonDisabled() {
+    return this._isButtonDisabled;
+  }
   public openProfile() {
     this.active = true;
     fromEvent(document, 'click')

@@ -38,7 +38,7 @@ export class SettingsLocalizationPage implements OnInit {
       name: 'English (American)',
     },
     {
-      code: 'uk-UK',
+      code: 'uk-UA',
       name: 'Українська',
     },
   ];

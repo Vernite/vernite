@@ -53,8 +53,8 @@ export class EditProjectPage implements OnDestroy {
   ) {
     const { workspaceId, projectId } = this.activatedRoute.snapshot.params;
 
-    this.workspaceId = workspaceId;
-    this.projectId = projectId;
+    this.workspaceId = Number(workspaceId);
+    this.projectId = Number(projectId);
 
     this.form.addControl('workspaceId', new FormControl(workspaceId));
     this.form.addControl('id', new FormControl(projectId));
@@ -68,8 +68,17 @@ export class EditProjectPage implements OnDestroy {
    */
   public loadProject(id: number) {
     this.project$ = this.projectService.get(id);
-    this.getSubscription = this.project$.subscribe((workspace) => {
-      this.form.patchValue(workspace);
+    this.getSubscription = this.project$.subscribe((project) => {
+      this.form.patchValue(project);
+    });
+
+    this.workspaceList$.subscribe((workspaces) => {
+      const workspace = workspaces.find((workspace) => workspace.id === this.workspaceId);
+      if (workspace) {
+        this.form.patchValue({
+          newWorkspaceId: workspace.id,
+        });
+      }
     });
   }
 
@@ -97,7 +106,9 @@ export class EditProjectPage implements OnDestroy {
       .changeWorkspace(this.projectId, newWorkspaceId)
       .subscribe(() => {
         this.updateSubscription = this.projectService.update(this.form.value).subscribe(() => {
-          this.router.navigate(['/', newWorkspaceId]);
+          this.router.navigate(['/', newWorkspaceId]).then(() => {
+            location.reload();
+          });
         });
       });
   }
