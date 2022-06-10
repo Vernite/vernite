@@ -5,14 +5,23 @@
       <form [formGroup]="form" (submit)="register()">
         <div>
           <h2 class="typo-heading-5" i18n>Register</h2>
-          <p class="typo-body" i18n>This is a secure site. Please enter your register information or if you have an account already, <a routerLink="/auth/login">click here</a> to login.</p>
+          <p class="typo-body" i18n>This is a secure site. Please enter your register information or if you have an
+            account already, <a routerLink="/auth/login">click here</a> to login.</p>
         </div>
+
+        <div *ngIf="error" class="error-box">
+          {{ error }}
+        </div>
+
         <ng-container *ngIf="stage===RegisterStage.IMPORTANT_DATA">
-          <app-input formControlName="email" type="email" placeholder="name@example.com" floatingLabel="Email" i18n-floatingLabel i18n-placeholder></app-input>
+          <app-input formControlName="email" type="email" placeholder="name@example.com" floatingLabel="Email"
+            i18n-floatingLabel i18n-placeholder></app-input>
 
-          <app-input formControlName="password" type="password" placeholder="●●●●●●●" floatingLabel="Password" i18n-floatingLabel i18n-placeholder></app-input>
+          <app-input formControlName="password" type="password" placeholder="●●●●●●●" floatingLabel="Password"
+            i18n-floatingLabel i18n-placeholder></app-input>
 
-          <app-input formControlName="repeatPassword" type="password" placeholder="●●●●●●●" floatingLabel="Repeat password" i18n-floatingLabel i18n-placeholder></app-input>
+          <app-input formControlName="repeatPassword" type="password" placeholder="●●●●●●●"
+            floatingLabel="Repeat password" i18n-floatingLabel i18n-placeholder></app-input>
 
           <div class="agreements">
             <app-checkbox formControlName="agreements"></app-checkbox>
@@ -22,11 +31,14 @@
           <app-button variant="primary" type="button" (click)="nextStage()" i18n>Next</app-button>
         </ng-container>
         <ng-container *ngIf="stage===RegisterStage.PERSONAL_DATA">
-          <app-input formControlName="name" type="text" placeholder="John" floatingLabel="Name" i18n-floatingLabel i18n-placeholder></app-input>
+          <app-input formControlName="name" type="text" placeholder="John" floatingLabel="Name" i18n-floatingLabel
+            i18n-placeholder></app-input>
 
-          <app-input formControlName="surname" type="text" placeholder="Bayer" floatingLabel="Surname" i18n-floatingLabel i18n-placeholder></app-input>
+          <app-input formControlName="surname" type="text" placeholder="Bayer" floatingLabel="Surname"
+            i18n-floatingLabel i18n-placeholder></app-input>
 
-          <app-input formControlName="username" type="text" placeholder="John98" floatingLabel="Username" i18n-floatingLabel i18n-placeholder></app-input>
+          <app-input formControlName="username" type="text" placeholder="John98" floatingLabel="Username"
+            i18n-floatingLabel i18n-placeholder></app-input>
           <div class="buttons">
             <app-button variant="primary" type="button" (click)="previousStage()" i18n>Back</app-button>
             <app-button variant="primary" i18n>Register</app-button>

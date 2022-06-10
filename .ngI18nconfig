@@ -1,5 +1,5 @@
 {
-  "locales": ["pl-PL", "en-GB", "it-IT", "es-ES", "de-DE", "uk-UK"],
+  "locales": ["pl-PL", "en-GB", "it-IT", "es-ES", "de-DE", "uk-UA"],
   "editor": {
     "messageLocations": ["src/locales/messages.xlf"],
     "translationFileNamePattern": "${name}.${lang}-${region}",

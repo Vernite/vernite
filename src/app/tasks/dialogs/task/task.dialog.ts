@@ -112,6 +112,14 @@ export class TaskDialog implements OnInit {
     this.statusList$ = this.statusService.list(projectId);
     this.clearGitHubIntegrationFields();
 
+    this.statusList$.subscribe((statuses) => {
+      const statusId = statuses.find((status) => status.begin)?.id;
+
+      if (!statusId) return;
+
+      this.form.patchValue({ statusId });
+    });
+
     this.gitIntegrationService.hasGitHubIntegration(projectId!).subscribe((value) => {
       this.isGitHubIntegrationAvailable = value;
 
