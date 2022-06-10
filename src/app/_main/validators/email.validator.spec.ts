@@ -25,24 +25,24 @@ describe('Test email validator', () => {
     expectToPass(validator(control));
   });
 
-  it('should not match ABC', () => {
-    const control = new FormControl('ABC');
-    expectToFail(validator(control));
-  });
-
   it('Should match 伊昭傑@郵件.商務', () => {
     const control = new FormControl('伊昭傑@郵件.商務');
     expectToPass(validator(control));
   });
 
-  it('ाम@मोहन.ईन्फो', () => {
+  it('Should match ाम@मोहन.ईन्फो', () => {
     const control = new FormControl('ाम@मोहन.ईन्फो');
     expectToPass(validator(control));
   });
 
-  it('FoO@BaR.CoM', () => {
+  it('Should match FoO@BaR.CoM', () => {
     const control = new FormControl('FoO@BaR.CoM');
     expectToPass(validator(control));
+  });
+
+  it('should not match ABC', () => {
+    const control = new FormControl('ABC');
+    expectToFail(validator(control));
   });
 
   it('should not match test.test', () => {

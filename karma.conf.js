@@ -15,6 +15,10 @@ module.exports = function (config) {
       require('karma-firefox-launcher'),
       require('karma-spec-reporter'),
     ],
+    files: [
+      'src/tests/karma/karma.css',
+      'src/tests/karma/karma.js',
+    ],
     client: {
       jasmine: {
         // you can add configuration options for Jasmine here

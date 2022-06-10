@@ -1,0 +1,120 @@
+body {
+  overflow-y: auto;
+}
+
+.jasmine_html-reporter {
+  margin: 0;
+  background-color: #222222;
+}
+
+.jasmine_html-reporter .jasmine-summary li.jasmine-passed a {
+  color: #dddddd;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.jasmine-banner {
+  display: none;
+}
+
+.jasmine_html-reporter .jasmine-symbol-summary {
+  width: 100%;
+  padding: 0;
+  margin: 0 0 10px 0;
+  display: flex;
+}
+
+.jasmine_html-reporter .jasmine-symbol-summary li.jasmine-passed {
+  width: 100%;
+  animation: make-green .4s ease-in-out forwards;
+}
+
+.jasmine_html-reporter .jasmine-symbol-summary li.jasmine-failed {
+  width: 100%;
+  animation: make-red .4s ease-in-out forwards;
+}
+
+@keyframes make-green {
+  0% {
+    background-color: #444;
+  }
+  100% {
+    background-color: #226644;
+  }
+}
+
+@keyframes make-red {
+  0% {
+    background-color: #444;
+  }
+  100% {
+    background-color: #8a2c21;
+  }
+}
+
+.jasmine_html-reporter .jasmine-bar.jasmine-failed, .jasmine_html-reporter .jasmine-bar.jasmine-errored  {
+  border-bottom: 0;
+}
+
+.jasmine_html-reporter .jasmine-failures .jasmine-spec-detail.jasmine-warning .jasmine-description {
+  background-color: #ca8008;
+}
+
+.jasmine_html-reporter .jasmine-bar.jasmine-menu {
+  background-color: #333;
+}
+
+.jasmine_html-reporter .jasmine-result-message {
+  color: #cd6041;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.jasmine-description {
+  font-size: 12px;
+  padding: 6px;
+}
+
+.jasmine-duration {
+  font-size: 12px;
+}
+
+.jasmine_html-reporter .jasmine-bar.jasmine-menu a {
+  color: #ddd;
+}
+
+.jasmine_html-reporter .jasmine-stack-trace {
+  color: #c7c7c7;
+  border: 0;
+  background: #222;
+}
+
+.jasmine_html-reporter .jasmine-symbol-summary li.jasmine-passed:before,
+.jasmine_html-reporter .jasmine-symbol-summary li.jasmine-failed:before {
+  display: none;
+}
+
+/* Options trigger */
+.jasmine_html-reporter .jasmine-run-options .jasmine-trigger {
+  display: none;
+}
+
+/* Scrollbar */
+html {
+  scrollbar-face-color: #444;
+  scrollbar-base-color: #444;
+  scrollbar-3dlight-color: #444;
+  scrollbar-highlight-color: #444;
+  scrollbar-track-color: #222;
+  scrollbar-arrow-color: #222;
+  scrollbar-shadow-color: #444;
+  scrollbar-dark-shadow-color: #444;
+}
+
+::-webkit-scrollbar { width: 8px; height: 3px;}
+::-webkit-scrollbar-button { display: none; }
+::-webkit-scrollbar-track { background-color: #444;}
+::-webkit-scrollbar-track-piece { background-color: #222;}
+::-webkit-scrollbar-thumb { height: 50px; background-color: #444; border-radius: 1px;}
+::-webkit-scrollbar-corner { background-color: #444;}
+::-webkit-resizer { background-color: #444;}
