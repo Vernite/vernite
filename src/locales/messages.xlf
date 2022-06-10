@@ -127,36 +127,33 @@
           <context context-type="linenumber">20,21</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1315476018548197144" datatype="html">
-        <source>New task</source>
+      <trans-unit id="4101721509955949060" datatype="html">
+        <source>New task
+</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/components/upper-navigation/upper-navigation.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">1,2</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4915431133669985304" datatype="html">
         <source>Profile</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/components/upper-navigation/upper-navigation.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4930506384627295710" datatype="html">
         <source>Settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/components/upper-navigation/upper-navigation.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7507948636555938109" datatype="html">
         <source>Log out</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/components/upper-navigation/upper-navigation.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/restore-account/restore-account.page.html</context>
@@ -338,11 +335,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1431416938026210429" datatype="html">
@@ -357,7 +354,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5373727393387841282" datatype="html">
@@ -368,7 +365,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4099895221156718403" datatype="html">
@@ -386,7 +383,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.ts</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5046289386020266294" datatype="html">
@@ -423,7 +420,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dialogs/add-member/add-member.dialog.html</context>
@@ -438,7 +435,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/components/member-list/member-list.component.html</context>
@@ -518,35 +515,35 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1850014256995864128" datatype="html">
         <source>This is a secure site. Please enter your register information or if you have an account already, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/auth/login&quot;&gt;"/>click here<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> to login.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">8,9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8168479455536236198" datatype="html">
         <source>I agree to the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>End User License Agreement<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Privacy Statement<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3885497195825665706" datatype="html">
         <source>Next</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6987388674475678589" datatype="html">
         <source>John</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
@@ -557,7 +554,7 @@
         <source>Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/components/member-list/member-list.component.html</context>
@@ -584,14 +581,14 @@
         <source>Bayer</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2045112409653231798" datatype="html">
         <source>Surname</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/components/member-list/member-list.component.html</context>
@@ -606,7 +603,7 @@
         <source>John98</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
@@ -617,7 +614,7 @@
         <source>Username</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/components/member-list/member-list.component.html</context>
@@ -632,7 +629,14 @@
         <source>Back</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2052441892406108576" datatype="html">
+        <source>Username already exists</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register/register.page.ts</context>
+          <context context-type="linenumber">94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5008929893571451339" datatype="html">
@@ -838,7 +842,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="3521243892251427711" datatype="html">
-        <source>Edit workspace: <x id="INTERPOLATION" equiv-text="{{ workspace$ | async }}"/></source>
+        <source>Edit workspace: <x id="INTERPOLATION" equiv-text="{{ (workspace$ | async)?.name }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/edit-workspace/edit-workspace.page.html</context>
           <context context-type="linenumber">2,3</context>
@@ -1156,6 +1160,13 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
           <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1315476018548197144" datatype="html">
+        <source>New task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4902817035128594900" datatype="html">

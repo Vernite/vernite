@@ -20,7 +20,8 @@
     "e2e:coverage": "npx nyc report --reporter=lcov --reporter=text-summary",
     "copy:reports": "(mkdir reports || true) && cp coverage/workflow-e2e/coverage-final.json reports/from-cypress.json && cp coverage/workflow/coverage-final.json reports/from-jest.json",
     "combine:reports": "npx nyc merge reports && mv coverage.json .nyc_output/out.json",
-    "finalize:combined-report": "npx nyc report --reporter html --reporter text --reporter json-summary --report-dir coverage/workflow-combined"
+    "finalize:combined-report": "npx nyc report --reporter html --reporter text --reporter json-summary --report-dir coverage/workflow-combined",
+    "i18n:report": "node tools/i18n-report.mjs"
   },
   "private": true,
   "dependencies": {
@@ -71,6 +72,7 @@
     "@typescript-eslint/parser": "5.11.0",
     "autoprefixer": "^10.4.4",
     "badge-maker": "^3.3.1",
+    "chalk": "^5.0.1",
     "cypress": "^10.0.2",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.5.0",
