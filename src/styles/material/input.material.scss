@@ -16,7 +16,7 @@ mat-form-field.mat-form-field-appearance-outline {
     border-radius: var(--border-radius);
     color: var(--color-input-border);
 
-    >* {
+    > * {
       border-color: var(--color-input-border);
     }
   }
@@ -35,7 +35,7 @@ mat-form-field.mat-form-field-appearance-outline {
     padding: 0 1.1rem;
     cursor: text;
 
-    .mat-form-field-outline>* {
+    .mat-form-field-outline > * {
       position: relative;
       background-color: var(--color-input-background);
 
@@ -54,7 +54,7 @@ mat-form-field.mat-form-field-appearance-outline {
     }
 
     .mat-form-field-outline-thick {
-      >* {
+      > * {
         background-color: var(--color-input-background);
       }
 
@@ -113,7 +113,7 @@ mat-form-field.mat-form-field-appearance-outline {
 
   // Invalid value styling
   &.ng-touched.ng-invalid {
-    .mat-form-field-outline>* {
+    .mat-form-field-outline > * {
       border-color: var(--color-input-error);
     }
   }
@@ -126,18 +126,18 @@ mat-form-field.mat-form-field-appearance-outline {
       }
     }
 
-    .mat-form-field-outline>.mat-form-field-outline-gap {
+    .mat-form-field-outline > .mat-form-field-outline-gap {
       border-top-color: transparent;
     }
 
-    .mat-form-field-outline>* {
+    .mat-form-field-outline > * {
       border-color: var(--color-input-border-focus);
     }
   }
 
   // hover styling
   .mat-form-field-flex:hover {
-    .mat-form-field-outline-thick>* {
+    .mat-form-field-outline-thick > * {
       &::before {
         opacity: 0.3;
       }

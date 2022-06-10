@@ -2,7 +2,7 @@
   position: relative;
 }
 
-mat-checkbox.ng-invalid.ng-touched~mat-error {
+mat-checkbox.ng-invalid.ng-touched ~ mat-error {
   // Set this to 'block' if you want to see mat-error label
   display: none;
 }

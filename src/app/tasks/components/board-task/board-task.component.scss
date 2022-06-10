@@ -23,7 +23,7 @@
   .top-section {
     display: flex;
 
-    >* {
+    > * {
       width: 50%;
     }
 
@@ -95,7 +95,7 @@
     width: 100%;
     justify-content: flex-end;
 
-    >* {
+    > * {
       display: flex;
       margin-left: 1rem;
       color: var(--color-text);
