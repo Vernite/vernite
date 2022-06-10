@@ -1,8 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';
-import { inject, TestBed } from '@angular/core/testing';
-import { ApiService } from '../services/api.service';
-import { Service } from './service.decorator';
-
 // describe('Service decorator', () => {
 //   beforeEach(() => {
 //     const testBed = TestBed.configureTestingModule({

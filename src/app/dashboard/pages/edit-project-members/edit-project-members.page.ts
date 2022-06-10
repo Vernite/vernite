@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   AddMemberDialog,
-  AddMemberDialogData
+  AddMemberDialogData,
 } from '@dashboard/dialogs/add-member/add-member.dialog';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';

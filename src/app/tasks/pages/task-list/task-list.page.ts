@@ -11,7 +11,7 @@ import {
   faChevronRight,
   faCodeCommit,
   faCodePullRequest,
-  faPlus
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import { ESet } from '@main/classes/e-set.class';
 import { Filters } from '@main/classes/filters.class';

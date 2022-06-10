@@ -10,5 +10,4 @@ declare global {
   console.log('submit');
 };
 
-export { };
-
+export {};

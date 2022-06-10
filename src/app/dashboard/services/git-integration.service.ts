@@ -3,7 +3,7 @@ import {
   GitAccount,
   GitIntegration,
   GitIssue,
-  GitPull
+  GitPull,
 } from '@dashboard/interfaces/git-integration.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Service } from '@main/decorators/service.decorator';

@@ -75,6 +75,7 @@
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "http-server": "^14.1.0",
     "istanbul-lib-coverage": "^3.2.0",
     "jasmine-core": "~4.0.0",

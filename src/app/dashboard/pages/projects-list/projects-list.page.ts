@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkspaceService } from '../../services/workspace.service';
 import { map, Observable } from 'rxjs';
@@ -7,7 +7,6 @@ import { Workspace } from '../../interfaces/workspace.interface';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from 'src/app/_main/services/dialog.service';
 import { ProjectService } from '../../services/project.service';
-import { AlertDialogVariant } from 'src/app/_main/dialogs/alert/alert.dialog';
 
 @Component({
   selector: 'app-projects-list',

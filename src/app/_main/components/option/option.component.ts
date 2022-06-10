@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 import { faQuestion, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({

@@ -1,5 +1,4 @@
 import { FormControl } from '@angular/forms';
-import { emailValidator } from './email.validator';
 import { requiredValidator } from './required.validator';
 
 describe('Test required validator', () => {

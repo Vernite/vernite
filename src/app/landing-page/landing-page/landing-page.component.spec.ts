@@ -1,7 +1,5 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { LandingPageComponent } from './landing-page.component';
 
@@ -11,9 +9,8 @@ describe('LandingPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LandingPageComponent ]
-    })
-    .compileComponents();
+      declarations: [LandingPageComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

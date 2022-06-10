@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Page } from 'src/app/_main/decorators/page.decorator';
-import { AlertDialogVariant } from 'src/app/_main/dialogs/alert/alert.dialog';
 import { DialogService } from 'src/app/_main/services/dialog.service';
-import { Project } from '../../interfaces/project.interface';
 import { Workspace } from '../../interfaces/workspace.interface';
 import { ProjectService } from '../../services/project.service';
 import { WorkspaceService } from '../../services/workspace.service';

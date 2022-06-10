@@ -1,17 +1,11 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
+  "ignorePatterns": ["projects/**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "tsconfig.json"
-        ],
+        "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
       "extends": [
@@ -19,28 +13,34 @@
         "plugin:@angular-eslint/template/process-inline-templates",
         "plugin:prettier/recommended"
       ],
+      "plugins": ["unused-imports"],
       "rules": {
-        "@angular-eslint/no-empty-lifecycle-method": "warn"
+        "@angular-eslint/no-empty-lifecycle-method": "warn",
+        "comma-dangle": ["error", "always-multiline"],
+        "@typescript-eslint/comma-dangle": ["error", "only-multiline"],
+        "no-unused-vars": "off",
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+          "warn",
+          {
+            "vars": "all",
+            "varsIgnorePattern": "^_",
+            "args": "after-used",
+            "argsIgnorePattern": "^_"
+          }
+        ]
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ]
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"]
     }
   ],
   "rules": {
     "@angular-eslint/component-class-suffix": [
       "error",
       {
-        "suffixes": [
-          "Component",
-          "Page",
-          "Dialog"
-        ]
+        "suffixes": ["Component", "Page", "Dialog"]
       }
     ]
   }
