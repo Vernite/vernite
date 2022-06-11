@@ -21,8 +21,7 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit, O
     return this.optionsMap?.get(this.control.value);
   }
 
-  override ngOnInit(): void {
-    super.ngOnInit();
+  ngOnInit(): void {
     this.control.valueChanges.subscribe((value) => {
       console.log('Value changed to: ' + value);
       this.optionsMap?.forEach((option, key) => {
@@ -58,14 +57,6 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit, O
       return option;
     });
     setTimeout(() => {
-      // const value = `${this.control.value}`;
-
-      console.log(typeof this.control.value); // 44
-      console.log(this.optionsMap?.get(44)); // [Object object]
-      console.log(this.optionsMap?.get(this.control.value)); // undefined
-
-      console.log(this.control.value == 44);
-
       this.selected$.next(this.optionsMap?.get(this.control.value));
       this.yet = true;
     });

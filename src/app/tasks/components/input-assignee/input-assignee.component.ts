@@ -1,9 +1,11 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { NgControl } from '@angular/forms';
+import { UserUtils } from '@dashboard/classes/user.class';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { ControlAccessor } from '@main/classes/control-accessor.class';
 import { TaskService } from '@tasks/services/task.service';
 import { TestNgControl } from '@tests/helpers/ng-control-testing-provider.helper';
+import * as Color from 'color';
 import { BehaviorSubject, filter, fromEvent, take } from 'rxjs';
 
 @Component({
@@ -13,12 +15,31 @@ import { BehaviorSubject, filter, fromEvent, take } from 'rxjs';
   providers: [{ provide: NgControl, useClass: TestNgControl }],
 })
 export class InputAssigneeComponent extends ControlAccessor {
-  @Input() assignee?: ProjectMember | null;
+  @Input() set assignee(assignee: ProjectMember | null) {
+    this._assignee = assignee;
+
+    if (assignee) {
+      this.assigneeColor = UserUtils.getColorById(assignee?.user.id);
+    } else {
+      this.assigneeColor = undefined;
+    }
+  }
+  public get assignee(): ProjectMember | null {
+    return this._assignee;
+  }
+
   @Input() set members(members: Map<number, ProjectMember> | ProjectMember[]) {
     if (Array.isArray(members)) {
-      this.members$.next(members);
+      for (const member of members) {
+        (member as any).color = UserUtils.getColorById(member.user.id);
+      }
+      this.members$.next(members as any);
     } else if (members) {
-      this.members$.next([...members.values()]);
+      const membersArray = [...members.values()];
+      for (const member of membersArray) {
+        (member as any).color = UserUtils.getColorById(member.user.id);
+      }
+      this.members$.next(membersArray as any);
     }
   }
   @Input() taskId?: number;
@@ -26,8 +47,11 @@ export class InputAssigneeComponent extends ControlAccessor {
 
   @ViewChild('overlay') overlay!: ElementRef<HTMLElement>;
 
-  public members$ = new BehaviorSubject<ProjectMember[]>([]);
+  private _assignee: ProjectMember | null = null;
+
+  public members$ = new BehaviorSubject<(ProjectMember & { color: Color })[]>([] as any);
   public readonly isOpen$ = new BehaviorSubject<boolean>(false);
+  public assigneeColor?: Color;
 
   public set isOpen(val: boolean) {
     this.isOpen$.next(val);

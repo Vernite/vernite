@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl, ValidationErrors } from '@angular/forms';
 import { TestNgControl } from '@tests/helpers/ng-control-testing-provider.helper';
 import { Subject } from 'rxjs';
@@ -11,7 +11,7 @@ import { Subject } from 'rxjs';
   providers: [{ provide: NgControl, useClass: TestNgControl }],
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
-export class ControlAccessor implements OnInit, OnDestroy, ControlValueAccessor {
+export class ControlAccessor implements OnDestroy, ControlValueAccessor {
   /**
    * Property that defines if field should prompt user how to fill it. For example
    * in a form, if a field is email, it will give the user last used emails
@@ -28,10 +28,6 @@ export class ControlAccessor implements OnInit, OnDestroy, ControlValueAccessor 
 
   public get name() {
     return this.ngControl.name?.toString() || '';
-  }
-
-  private get debug() {
-    return (this as any).constructor.debug;
   }
 
   /**
@@ -81,12 +77,7 @@ export class ControlAccessor implements OnInit, OnDestroy, ControlValueAccessor 
     public ngControl: NgControl,
   ) {
     this.ngControl.valueAccessor = this;
-  }
 
-  /**
-   * A callback method that is invoked immediately after the default change detector has checked the directive's data-bound properties for the first time, and before any of the view or content children have been checked. It is invoked only once when the directive is instantiated.
-   */
-  ngOnInit() {
     this.initCheckForTouch();
     this.checkIfIsRequired();
   }
@@ -110,16 +101,12 @@ export class ControlAccessor implements OnInit, OnDestroy, ControlValueAccessor 
    * Apply the touched observable on ngControl and control fields
    */
   private initCheckForTouch(): void {
-    if (this.debug) console.log('[INIT] initializing checking for touch...');
     if (!this.control) {
-      if (this.debug) console.log('[INIT] control is not defined');
       return;
     }
 
     (this.control as any)._markAsTouched = this.control.markAsTouched;
     this.control.markAsTouched = () => {
-      if (this.debug) console.log('[TOUCH] control got touched');
-
       (this.control as any)._markAsTouched();
       this.touched$.next(true);
     };

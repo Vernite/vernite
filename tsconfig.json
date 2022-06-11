@@ -19,6 +19,7 @@
     "target": "es2017",
     "module": "esnext",
     "lib": ["esnext", "dom"],
+    "skipLibCheck": true,
     "paths": {
       "@assets/*": ["src/assets/*"],
       "@main/*": ["src/app/_main/*"],

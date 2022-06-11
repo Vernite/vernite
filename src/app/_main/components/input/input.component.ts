@@ -1,5 +1,5 @@
 import { AutofillMonitor } from '@angular/cdk/text-field';
-import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, ViewChild } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { ControlAccessor } from '../../classes/control-accessor.class';
 
@@ -11,7 +11,7 @@ import { ControlAccessor } from '../../classes/control-accessor.class';
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
 })
-export class InputComponent extends ControlAccessor implements OnInit {
+export class InputComponent extends ControlAccessor {
   /**
    * Type of the input
    */
@@ -43,10 +43,6 @@ export class InputComponent extends ControlAccessor implements OnInit {
 
   constructor(public override ngControl: NgControl, private autofillMonitor: AutofillMonitor) {
     super(ngControl);
-  }
-
-  override ngOnInit(): void {
-    super.ngOnInit();
   }
 
   onFocus() {

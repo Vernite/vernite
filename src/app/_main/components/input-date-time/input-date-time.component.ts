@@ -23,8 +23,7 @@ export class InputDateTimeComponent extends ControlAccessor implements OnInit {
     super(ngControl);
   }
 
-  override ngOnInit(): void {
-    super.ngOnInit();
+  ngOnInit(): void {
     this.changedDate.valueChanges.subscribe((date) =>
       this.control.setValue(this.changeDate(date), { emitEvent: false }),
     );

@@ -91,7 +91,13 @@ export class RegisterPage {
   handleError(error: any) {
     switch (error.status) {
       case 422:
-        this.error = $localize`Username already exists`;
+        switch (error.error.message) {
+          case 'this email is already taken':
+            this.error = $localize`Email is already taken`;
+            break;
+          case 'this username is already taken':
+            this.error = $localize`Username is already taken`;
+        }
         break;
     }
   }

@@ -1,6 +1,7 @@
 <!-- This button triggers the overlay and is it's origin -->
 <button (click)="toggle()" type="button" class="assignee" [class.add]="!assignee" cdkOverlayOrigin
-  #trigger="cdkOverlayOrigin">
+  #trigger="cdkOverlayOrigin" [style.background-color]="assigneeColor?.rgb()?.string()"
+  matTooltip="{{ assignee?.user?.name }} {{ assignee?.user?.surname }}">
   {{ assignee ? assignee.user.name[0] : '+' }}
 </button>
 
@@ -9,11 +10,16 @@
   [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'" [cdkConnectedOverlayHasBackdrop]="true">
   <ul #overlay class="members-overlay">
     <li *ngFor="let member of members$ | async" (click)="select(member)">
-      <div class="avatar">{{ member.user.name[0] }}</div>
-      <span>{{ member.user.name }} {{ member.user.surname }}</span>
+      <div class="avatar" [style.background-color]="member.color?.rgb()?.string()">{{ member.user.name[0] }}</div>
+      <div class="details">
+        <span class="full-name">{{ member.user.name }} {{ member.user.surname }}</span>
+        <span class="username">@{{ member.user.username }}</span>
+      </div>
     </li>
-    <li (click)="select(null)">
-      <span i18n>Unassign</span>
+    <li class="line"></li>
+    <li class="entry-remove" (click)="select(null)">
+      <div class="avatar-remove">-</div>
+      <span i18n>Remove assignee</span>
     </li>
   </ul>
 </ng-template>

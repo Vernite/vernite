@@ -5,6 +5,6 @@
     "sourceMap": false,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["node"]
+    "types": ["node", "mocha", "cypress"]
   }
 }
