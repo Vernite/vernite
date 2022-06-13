@@ -44,6 +44,10 @@ jobs:
       - name: Redirect page copy
         run: cp src/redirect.html dist/workflow/index.html
 
+      # Copy coverage directory
+      - name: Copy coverage directory
+        run: cp coverage documentation/coverage
+
       # Deploy to the server using rsync
       - name: Deploy app 🚀
         uses: easingthemes/ssh-deploy@main
