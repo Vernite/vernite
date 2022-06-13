@@ -46,7 +46,7 @@ jobs:
 
       # Copy coverage directory
       - name: Copy coverage directory
-        run: cp coverage documentation/coverage
+        run: cp -R coverage documentation/coverage
 
       # Deploy to the server using rsync
       - name: Deploy app 🚀
