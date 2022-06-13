@@ -86,7 +86,6 @@ export class ControlAccessor implements OnDestroy, ControlValueAccessor {
    * Check if the control is required by provided validators.
    */
   private checkIfIsRequired(): void {
-    if (!this.control) return;
     if (!(this.control as any)._rawValidators) return;
 
     for (const validator of (this.ngControl as any).control._rawValidators) {
@@ -101,10 +100,6 @@ export class ControlAccessor implements OnDestroy, ControlValueAccessor {
    * Apply the touched observable on ngControl and control fields
    */
   private initCheckForTouch(): void {
-    if (!this.control) {
-      return;
-    }
-
     (this.control as any)._markAsTouched = this.control.markAsTouched;
     this.control.markAsTouched = () => {
       (this.control as any)._markAsTouched();

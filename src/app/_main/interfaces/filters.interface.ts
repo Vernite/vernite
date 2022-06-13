@@ -6,6 +6,7 @@ export interface FilterCheckbox<T = boolean> {
   };
   value: 1 | 0;
   label: string;
+  apply(input: T, option: any): T;
 }
 
 export type Filter = FilterCheckbox<any>;

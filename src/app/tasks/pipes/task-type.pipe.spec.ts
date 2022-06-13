@@ -2,7 +2,7 @@
 
 import { TaskTypePipe } from './task-type.pipe';
 
-describe('Pipe: TaskTypee', () => {
+describe('Pipe: TaskType', () => {
   it('create an instance', () => {
     let pipe = new TaskTypePipe();
     expect(pipe).toBeTruthy();

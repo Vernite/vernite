@@ -1,3 +1,4 @@
+import { requiredValidator } from '@main/validators/required.validator';
 import { TestNgControl } from '../../../tests/helpers/ng-control-testing-provider.helper';
 import { emailValidator } from '../validators/email.validator';
 import { ControlAccessor } from './control-accessor.class';
@@ -53,5 +54,21 @@ describe('Control Accessor', () => {
     const controlAccessor = new ControlAccessor(ngControl);
     controlAccessor.setDisabledState(true);
     expect(controlAccessor.control.disabled).toBe(true);
+  });
+
+  it('should have required flag if has required validator', () => {
+    const ngControl = new TestNgControl();
+    ngControl.control?.setValidators([requiredValidator()]);
+    const controlAccessor = new ControlAccessor(ngControl);
+    controlAccessor.control.setValue('');
+    expect(controlAccessor.errors).toBeTruthy();
+    expect(controlAccessor.required).toBeTrue();
+  });
+
+  it('should not throw error if control is not defined', () => {
+    const ngControl = new TestNgControl();
+    (ngControl as any)._control = null;
+    const controlAccessor = new ControlAccessor(ngControl);
+    expect(() => controlAccessor.control).not.toThrow();
   });
 });

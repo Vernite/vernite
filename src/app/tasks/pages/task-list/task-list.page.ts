@@ -78,9 +78,7 @@ export class TaskListPage {
         }, new Map<number, ProjectMember>()),
       ),
     );
-    this.taskList$ = this.taskService
-      .list(projectId)
-      .pipe(map((tasks) => tasks.filter((task) => !task.parentTaskId)));
+    this.taskList$ = this.taskService.list(projectId);
     this.statusList$ = this.statusService.list(projectId);
     this.statusList$.subscribe((list) => {
       this.statusList = list;

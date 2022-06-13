@@ -1,0 +1,2 @@
+<app-snackbar *ngFor="let entry of (snackbars$ | async)?.entries(); trackBy: trackSnackbarTuple" [uid]="entry[0]"
+  [message]="entry[1].message"></app-snackbar>

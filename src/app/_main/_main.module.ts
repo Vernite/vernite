@@ -36,6 +36,8 @@ import { NavElementComponent } from './components/nav-element/nav-element.compon
 import { OptionComponent } from './components/option/option.component';
 import { SelectComponent } from './components/select/select.component';
 import { SidebarNavigationComponent } from './components/sidebar-navigation/sidebar-navigation.component';
+import { SnackbarOutletComponent } from './components/snackbar-outlet/snackbar-outlet.component';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { TextareaComponent } from './components/textarea/textarea.component';
 import { UpperNavigationComponent } from './components/upper-navigation/upper-navigation.component';
 import { AlertDialog } from './dialogs/alert/alert.dialog';
@@ -123,6 +125,8 @@ const ngModuleConfig = {
     InputDateTimeComponent,
     LetDirective,
     FiltersComponent,
+    SnackbarComponent,
+    SnackbarOutletComponent,
   ],
   providers: [
     DialogService,

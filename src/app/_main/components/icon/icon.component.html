@@ -2,6 +2,9 @@
   <ng-container *ngSwitchCase="'fas'">
     <fa-icon [icon]="iconDefinition" [ngStyle]="style"></fa-icon>
   </ng-container>
+  <ng-container *ngSwitchCase="'fab'">
+    <fa-icon [icon]="iconDefinition" [ngStyle]="style"></fa-icon>
+  </ng-container>
   <ng-container *ngSwitchCase="'mat'">
     <mat-icon [ngStyle]="style">{{ snakeCaseName }}</mat-icon>
   </ng-container>

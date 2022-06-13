@@ -2,6 +2,9 @@
   <div class="tabs">
     <div class="project-name">
       <h2 class="typo-heading-5">{{project.name}}</h2>
+      <a *ngIf="project.gitHubIntegration" href="https://github.com/{{ project.gitHubIntegration }}" target="blank">
+        <app-icon [icon]="faGithub"></app-icon>
+      </a>
     </div>
     <a [routerLink]="['/', workspaceId, project.id, 'board']" routerLinkActive="active">
       <h2 i18n>Board</h2>

@@ -5,7 +5,7 @@ import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { MemberService } from '@dashboard/services/member.service';
 import { ProjectService } from '@dashboard/services/project.service';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, faCodeCommit, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Observable, Subscription } from 'rxjs';
 import { DialogService } from '../../../_main/services/dialog.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '../../dialogs/task/task.dialog';
@@ -20,10 +20,14 @@ import { TaskService } from '../../services/task.service';
   styleUrls: ['./board.page.scss'],
 })
 export class BoardPage implements OnInit, OnDestroy {
-  public faPlus = faPlus;
+  faPlus = faPlus;
+  faChevronRight = faChevronRight;
+  faCodeCommit = faCodeCommit;
+
   public projectId!: number;
 
   public statusList$!: Observable<StatusWithTasks[]>;
+  public board$!: Observable<[Task | string, StatusWithTasks[]][]>;
   public project$: Observable<Project>;
   public members$: Observable<Map<number, ProjectMember>>;
   public statusList: StatusWithTasks[] = [];
@@ -41,6 +45,7 @@ export class BoardPage implements OnInit, OnDestroy {
 
     this.projectId = projectId;
     this.project$ = this.projectService.get(projectId);
+    this.board$ = this.statusService.board(projectId);
     this.statusList$ = this.statusService.listWithTasks(projectId);
     this.statusListSubscription = this.statusList$.subscribe((statusList) => {
       this.statusList = statusList;

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from '@dashboard/interfaces/project.interface';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faFilter, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { Filter } from '@main/interfaces/filters.interface';
 
@@ -12,6 +13,7 @@ import { Filter } from '@main/interfaces/filters.interface';
 })
 export class ViewOptionsComponent {
   penToSquare = faPenToSquare;
+  faGithub = faGithub;
   filter = faFilter;
 
   public workspaceId: number;

@@ -12,10 +12,10 @@ export function Service() {
       if (!ngRef) return;
 
       if (!WINDOW.SERVICES) {
-        WINDOW.SERVICES = [];
+        WINDOW.SERVICES = {};
       }
 
-      WINDOW.SERVICES.push(ngRef.get(target));
+      WINDOW.SERVICES[target.name] = ngRef.get(target);
     });
   };
 }
