@@ -1,16 +1,19 @@
 <app-view-options [project]="(project$ | async)!"></app-view-options>
 
-<ng-container *ngLet="(members$ | async)! as members">
+<div class="status-list-banner">
+  <div *ngFor="let status of statusList$ | async" class="status-banner">
+    {{ status.name }}
+  </div>
+</div>
+
+<div *ngLet="(members$ | async)! as members" class="boards">
   <div *ngFor="let board of board$ | async" class="board" cdkDropListGroup>
-    <div *ngFor="let column of board[1]; index as statusIndex" class="column">
-      <!-- <div class="column-header">
-        <h3>{{column.name}}</h3>
-        <app-icon [icon]="faPlus" size="16px" (click)="openNewTaskDialog()"></app-icon>
-      </div> -->
-      <!-- <div class="row">
+    <div class="table">
+      <div class="row" *ngLet="board[0] as task"
+        (click)="taskMap.set(idOf(board[0]), !taskMap.get(idOf(board[0])) || false)">
         <div class="cell w-full">
-          <div class="task-title">
-            <app-icon [icon]="faChevronRight" size="16px" [class.invisible]="!task.subTasks?.length"></app-icon>
+          <div *ngIf="task !== 'OTHER'" class="task-title">
+            <app-icon [icon]="faChevronRight" size="16px"></app-icon>
             <span class="task-id">#{{ task.id }}</span>
             <span>{{ task.name }}</span>
             <a *ngIf="task.issue" [href]="task.issue" class="task-property" target="_blank" matTooltip="GitHub issue"
@@ -26,15 +29,26 @@
               <app-icon [icon]="faCodePullRequest" size="14px"></app-icon>
               <app-icon class="check" [icon]="faCheck" size="14px"></app-icon>
             </a>
+            <app-status-label [projectId]="projectId" [taskId]="task.id" [statuses]="statusList" variant="small"
+              [statusId]="task.statusId!" click-stop-propagation>
+            </app-status-label>
+          </div>
+          <div *ngIf="task === 'OTHER'" class="task-title">
+            <app-icon [icon]="faChevronRight" size="16px"></app-icon>
+            <span i18n>Other tasks</span>
           </div>
         </div>
-      </div> -->
-      <div class="column-content" [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event)"
-        [attr.data-index]="statusIndex" cdkDropList>
-        <app-board-task *ngFor="let task of column.tasks; index as taskIndex" class="task" [task]="task"
-          [projectId]="projectId" [members]="members" [attr.data-index]="taskIndex" cdkDrag>
-        </app-board-task>
+      </div>
+    </div>
+    <div class="columns" [class.collapsed]="taskMap.get(idOf(board[0]))">
+      <div *ngFor="let column of board[1]; index as statusIndex" class="column">
+        <div class="column-content" [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event)"
+          [attr.data-index]="statusIndex" cdkDropList>
+          <app-board-task *ngFor="let task of column.tasks; index as taskIndex" class="task" [task]="task"
+            [projectId]="projectId" [members]="members" [attr.data-index]="taskIndex" cdkDrag>
+          </app-board-task>
+        </div>
       </div>
     </div>
   </div>
-</ng-container>
+</div>

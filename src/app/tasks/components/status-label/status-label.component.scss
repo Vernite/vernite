@@ -20,6 +20,12 @@
   background-color: var(--color-secondary-400);
   border-radius: var(--border-radius);
   text-transform: uppercase;
+
+  &.small {
+    width: auto;
+    height: auto;
+    padding: 0.25rem 0.75rem;
+  }
 }
 
 .statuses-overlay {

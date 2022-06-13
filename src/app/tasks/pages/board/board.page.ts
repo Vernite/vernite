@@ -5,7 +5,14 @@ import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { MemberService } from '@dashboard/services/member.service';
 import { ProjectService } from '@dashboard/services/project.service';
-import { faChevronRight, faCodeCommit, faPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCheck,
+  faChevronRight,
+  faCodeCommit,
+  faCodePullRequest,
+  faPlus,
+} from '@fortawesome/free-solid-svg-icons';
+import { PersistentMap } from '@main/classes/persistent-map.class';
 import { Observable, Subscription } from 'rxjs';
 import { DialogService } from '../../../_main/services/dialog.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '../../dialogs/task/task.dialog';
@@ -23,7 +30,10 @@ export class BoardPage implements OnInit, OnDestroy {
   faPlus = faPlus;
   faChevronRight = faChevronRight;
   faCodeCommit = faCodeCommit;
+  faCodePullRequest = faCodePullRequest;
+  faCheck = faCheck;
 
+  public taskMap = new PersistentMap<number | string, boolean>({ persistentKey: 'board' });
   public projectId!: number;
 
   public statusList$!: Observable<StatusWithTasks[]>;
@@ -75,7 +85,16 @@ export class BoardPage implements OnInit, OnDestroy {
     const previousStatus = this.statusList[previousStatusIndex];
     const newStatus = this.statusList[newStatusIndex];
     const previousTaskIndex = event.previousIndex;
-    const task = previousStatus.tasks[previousTaskIndex];
+    const task = event.previousContainer.data[previousTaskIndex];
+
+    console.log({ previousStatus, task });
+
+    console.log(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex,
+    );
 
     const onSuccess = () => {
       task.statusId = newStatus.id;
@@ -140,5 +159,9 @@ export class BoardPage implements OnInit, OnDestroy {
           });
         }
       });
+  }
+
+  idOf(o: Task | string) {
+    return (o as any).id || o;
   }
 }

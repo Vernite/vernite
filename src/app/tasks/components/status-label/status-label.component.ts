@@ -13,6 +13,7 @@ import { BehaviorSubject, filter, fromEvent, take } from 'rxjs';
   providers: [{ provide: NgControl, useClass: TestNgControl }],
 })
 export class StatusLabelComponent extends ControlAccessor {
+  @Input() variant: 'default' | 'small' = 'default';
   @Input() projectId!: number;
   @Input() statusId!: number;
   @Input() taskId?: number;
