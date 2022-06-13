@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Task } from '@tasks/interfaces/task.interface';
 import { combineLatest, map, Observable } from 'rxjs';
 import { ApiService } from 'src/app/_main/services/api.service';
 import { Status, StatusWithTasks } from '../interfaces/status.interface';
@@ -66,6 +67,36 @@ export class StatusService {
           (status as StatusWithTasks).tasks = tasks.filter((task) => task.statusId === status.id);
         });
         return statuses as StatusWithTasks[];
+      }),
+    );
+  }
+
+  public board(projectId: number): Observable<[Task | string, StatusWithTasks[]][]> {
+    return combineLatest([this.list(projectId), this.taskService.list(projectId)]).pipe(
+      map(([statuses, tasks]) => {
+        const board: [Task | string, StatusWithTasks[]][] = [];
+        const OTHER = ['OTHER', statuses as StatusWithTasks[]] as [string, StatusWithTasks[]];
+
+        for (const task of tasks) {
+          if (task.subTasks?.length) {
+            const statusesWithSubtasks = statuses.map((status) => ({
+              ...status,
+              tasks: task.subTasks?.filter((subtask) => subtask.statusId === status.id) || [],
+            }));
+            board.push([task, statusesWithSubtasks]);
+          } else {
+            let status = OTHER[1].find((status) => status.id === task.statusId)!;
+            if (!status.tasks) {
+              status.tasks = [];
+            }
+            status.tasks.push(task);
+          }
+        }
+
+        board.push(OTHER);
+
+        console.log(board);
+        return board;
       }),
     );
   }

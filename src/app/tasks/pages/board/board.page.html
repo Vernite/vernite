@@ -1,16 +1,40 @@
 <app-view-options [project]="(project$ | async)!"></app-view-options>
 
-<div *ngLet="(members$ | async)! as members" class="board" cdkDropListGroup>
-  <div *ngFor="let column of statusList; index as statusIndex" class="column">
-    <div class="column-header">
-      <h3>{{column.name}}</h3>
-      <app-icon [icon]="faPlus" size="16px" (click)="openNewTaskDialog()"></app-icon>
-    </div>
-    <div class="column-content" [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event)"
-      [attr.data-index]="statusIndex" cdkDropList>
-      <app-board-task *ngFor="let task of column.tasks; index as taskIndex" class="task" [task]="task"
-        [projectId]="projectId" [members]="members" [attr.data-index]="taskIndex" cdkDrag>
-      </app-board-task>
+<ng-container *ngLet="(members$ | async)! as members">
+  <div *ngFor="let board of board$ | async" class="board" cdkDropListGroup>
+    <div *ngFor="let column of board[1]; index as statusIndex" class="column">
+      <!-- <div class="column-header">
+        <h3>{{column.name}}</h3>
+        <app-icon [icon]="faPlus" size="16px" (click)="openNewTaskDialog()"></app-icon>
+      </div> -->
+      <div class="row">
+        <div class="cell w-full">
+          <div class="task-title">
+            <app-icon [icon]="faChevronRight" size="16px" [class.invisible]="!task.subTasks?.length"></app-icon>
+            <span class="task-id">#{{ task.id }}</span>
+            <span>{{ task.name }}</span>
+            <a *ngIf="task.issue" [href]="task.issue" class="task-property" target="_blank" matTooltip="GitHub issue"
+              i18n-matTooltip>
+              <app-icon [icon]="faCodeCommit" size="14px"></app-icon>
+            </a>
+            <a *ngIf="task.pull" [href]="task.pull" class="task-property" target="_blank"
+              matTooltip="GitHub pull request" i18n-matTooltip>
+              <app-icon [icon]="faCodePullRequest" size="14px"></app-icon>
+            </a>
+            <a *ngIf="task.mergedPullList" [href]="task.mergedPullList[0]" class="task-property" target="_blank"
+              matTooltip="GitHub pull request" i18n-matTooltip>
+              <app-icon [icon]="faCodePullRequest" size="14px"></app-icon>
+              <app-icon class="check" [icon]="faCheck" size="14px"></app-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="column-content" [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event)"
+        [attr.data-index]="statusIndex" cdkDropList>
+        <app-board-task *ngFor="let task of column.tasks; index as taskIndex" class="task" [task]="task"
+          [projectId]="projectId" [members]="members" [attr.data-index]="taskIndex" cdkDrag>
+        </app-board-task>
+      </div>
     </div>
   </div>
-</div>
+</ng-container>

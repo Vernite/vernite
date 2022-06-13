@@ -10,7 +10,7 @@ import { Workspace } from '../interfaces/workspace.interface';
   providedIn: 'root',
 })
 export class WorkspaceService {
-  listSubject$ = new Subject<Workspace[]>();
+  list$ = new Subject<Workspace[]>();
 
   /**
    * Default constructor with `ApiService` dependency.

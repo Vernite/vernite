@@ -37,12 +37,12 @@ export class FiltersComponent extends ControlAccessor {
   public saveFilters() {
     if (!this.form) return;
 
-    let formValue = {};
+    let formValue: Filter[] = [];
 
     for (const [index, filter] of this.filters.entries()) {
       const filterValue = Number(this.form?.controls[index].value) as 0 | 1;
-      const val = filter.options[filterValue];
-      Object.assign(formValue, val);
+      filter.value = filterValue;
+      formValue.push(filter);
     }
 
     this.control.setValue(formValue);

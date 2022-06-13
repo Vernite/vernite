@@ -1,14 +1,28 @@
 import { Injectable } from '@angular/core';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
+import { Project } from '@dashboard/interfaces/project.interface';
 import { GitIntegrationService } from '@dashboard/services/git-integration.service';
 import { MemberService } from '@dashboard/services/member.service';
 import { ProjectService } from '@dashboard/services/project.service';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
+import { Filter } from '@main/interfaces/filters.interface';
+import { applyFilters } from '@main/operators/apply-filters.operator';
 import { DialogService } from '@main/services/dialog.service';
+import { SnackbarService } from '@main/services/snackbar.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
 import { Schedule } from '@tasks/interfaces/schedule.interface';
 import * as dayjs from 'dayjs';
-import { combineLatest, EMPTY, map, Observable, of, switchMap, take, tap } from 'rxjs';
+import {
+  combineLatest,
+  EMPTY,
+  map,
+  Observable,
+  of,
+  ReplaySubject,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs';
 import { ApiService } from '../../_main/services/api.service';
 import { Task, TaskWithAdditionalData } from '../interfaces/task.interface';
 
@@ -16,6 +30,8 @@ import { Task, TaskWithAdditionalData } from '../interfaces/task.interface';
   providedIn: 'root',
 })
 export class TaskService {
+  private lists = new Map<Project['id'], ReplaySubject<Task[]>>();
+
   /**
    * Default constructor with dependency injection.
    * @param apiService ApiService
@@ -26,6 +42,7 @@ export class TaskService {
     private dialogService: DialogService,
     private projectService: ProjectService,
     private memberService: MemberService,
+    private snackbarService: SnackbarService,
   ) {}
 
   /**
@@ -33,16 +50,19 @@ export class TaskService {
    * @param projectId Project id needed to list all tasks
    * @returns Request observable with list of tasks
    */
-  public list(projectId: number, filters?: { assigneeId: number }): Observable<Task[]> {
-    return this.apiService
-      .get<Task[]>(`/project/${projectId}/task/`)
-      .pipe(
-        map((tasks) =>
-          filters && Object.keys(filters).length
-            ? tasks.filter((task) => task.assigneeId === filters.assigneeId)
-            : tasks,
-        ),
-      );
+  public list(projectId: number, filters?: Filter[]): Observable<Task[]> {
+    let subject: ReplaySubject<Task[]>;
+    if (this.lists.has(projectId)) {
+      subject = this.lists.get(projectId)!;
+    } else {
+      subject = new ReplaySubject<Task[]>();
+      this.lists.set(projectId, subject);
+      this.apiService.get(`/project/${projectId}/task`).subscribe((tasks) => {
+        subject.next(tasks);
+      });
+    }
+
+    return subject.pipe(applyFilters(filters));
   }
 
   /**
@@ -56,12 +76,15 @@ export class TaskService {
       switchMap((newTask) => {
         if (task.connectWithPullRequestOnGitHub) {
           return this.gitIntegrationService.connectGitHubPull(projectId, newTask.id, task.pull);
-        } else return of(null);
+        } else return of(newTask);
       }),
       switchMap((newTask) => {
         if (task.connectWithIssueOnGitHub) {
           return this.gitIntegrationService.connectGitHubIssue(projectId, newTask.id, task.issue);
-        } else return of(null);
+        } else return of(newTask);
+      }),
+      tap(() => {
+        this.snackbarService.show($localize`Task created successfully!`);
       }),
     );
   }
