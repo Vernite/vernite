@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ServiceValidator } from '@main/decorators/service-validator.decorator';
 import { Observable, Subject } from 'rxjs';
 import { ApiService } from 'src/app/_main/services/api.service';
 import { Workspace } from '../interfaces/workspace.interface';
@@ -33,7 +34,7 @@ export class WorkspaceService {
    * @returns Request observable, which completes when request is finished
    */
   public delete(id: number): Observable<null> {
-    return this.apiService.delete(`/workspace/${id}`);
+    return this.apiService.delete(`/workspace/${id}`).pipe(this.validate('DELETE'));
   }
 
   /**
@@ -61,4 +62,14 @@ export class WorkspaceService {
   public create(workspace: Workspace): Observable<Workspace> {
     return this.apiService.post(`/workspace`, { body: workspace });
   }
+
+  @ServiceValidator({
+    DELETE: {
+      400: $localize`Workspace is not empty. Only empty workspaces can be deleted.`,
+    },
+    GET: {
+      404: $localize`Workspace with this ID does not exist.`,
+    },
+  })
+  private validate(identifier: string): any {}
 }

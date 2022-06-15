@@ -52,7 +52,7 @@ export function ServiceValidator(errorValidationTree: ErrorValidationTree) {
               const m = match(error);
 
               if (m) {
-                showAlert(error, 'ERROR');
+                showAlert(m, 'ERROR');
               } else {
                 subscriber.error(error);
               }

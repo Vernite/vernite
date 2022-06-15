@@ -79,7 +79,7 @@ export class TaskService {
         } else return of(newTask);
       }),
       switchMap((newTask) => {
-        if (task.connectWithIssueOnGitHub) {
+        if (task.connectWithIssueOnGitHub && task.issue) {
           return this.gitIntegrationService.connectGitHubIssue(projectId, newTask.id, task.issue);
         } else return of(newTask);
       }),
@@ -100,12 +100,12 @@ export class TaskService {
       switchMap((newTask) => {
         if (task.connectWithPullRequestOnGitHub) {
           return this.gitIntegrationService.connectGitHubPull(projectId, newTask.id, task.pull);
-        } else return of(null);
+        } else return of(newTask);
       }),
       switchMap((newTask) => {
         if (task.connectWithIssueOnGitHub) {
           return this.gitIntegrationService.connectGitHubIssue(projectId, newTask.id, task.issue);
-        } else return of(null);
+        } else return of(newTask);
       }),
     );
   }
