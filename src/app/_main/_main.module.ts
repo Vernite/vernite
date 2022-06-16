@@ -45,6 +45,7 @@ import { ClickStopPropagationDirective } from './directives/click-stop-propagati
 import { FocusInitialDirective } from './directives/focus-initial.directive';
 import { LetDirective } from './directives/let.directive';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { MockPage } from './pages/mock/mock.page';
 import { ValidationErrorPipe } from './pipes/validation-error.pipe';
 import { ApiService } from './services/api.service';
 import { DialogService } from './services/dialog.service';
@@ -127,6 +128,7 @@ const ngModuleConfig = {
     FiltersComponent,
     SnackbarComponent,
     SnackbarOutletComponent,
+    MockPage,
   ],
   providers: [
     DialogService,

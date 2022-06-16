@@ -26,6 +26,9 @@ const routes: Routes = [
   {
     path: 'github',
     component: GithubIntegrationPage,
+    data: {
+      hideNavigation: true,
+    },
   },
   {
     path: 'dashboard',

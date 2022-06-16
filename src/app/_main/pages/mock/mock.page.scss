@@ -1,0 +1,22 @@
+img {
+  width: 100%;
+  border: 4px solid #f39c12;
+}
+
+:host {
+  position: relative;
+
+  &::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    padding: 1rem 4rem;
+    background-color: #f39c12;
+    border-radius: var(--border-radius);
+    color: #222;
+    content: 'Work in progress';
+    font-weight: bold;
+    transform: translate(-50%, -50%);
+  }
+}
