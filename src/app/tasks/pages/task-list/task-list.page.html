@@ -108,7 +108,7 @@
 
         <!-- Assignee cell -->
         <div class="cell w-52">
-          <app-input-assignee [assignee]="task.assigneeId && members && members.get(task.assigneeId)"
+          <app-input-assignee [assignee]="subtask.assigneeId && members && members.get(subtask.assigneeId)"
             [members]="members" [projectId]="projectId" [taskId]="subtask.id" click-stop-propagation>
           </app-input-assignee>
         </div>
