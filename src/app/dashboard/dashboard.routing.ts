@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MockPage } from '@main/pages/mock/mock.page';
 import { CreateProjectMembersPage } from './pages/create-project-members/create-project-members.page';
 import { CreateProjectPage } from './pages/create-project/create-project.page';
 import { CreateWorkspacePage } from './pages/create-workspace/create-workspace.page';
@@ -32,7 +33,10 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    redirectTo: '',
+    component: MockPage,
+    data: {
+      image: 'assets/mocks/dashboard.svg',
+    },
   },
   {
     path: 'create',
