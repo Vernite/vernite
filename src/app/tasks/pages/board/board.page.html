@@ -7,7 +7,8 @@
 </div>
 
 <div *ngLet="(members$ | async)! as members" class="boards">
-  <div *ngFor="let board of board$ | async" class="board" cdkDropListGroup>
+  <div *ngFor="let board of board$ | async" class="board" [class.collapsed]="taskMap.get(idOf(board[0]))"
+    cdkDropListGroup>
     <div class="table">
       <div class="row" *ngLet="board[0] as task"
         (click)="taskMap.set(idOf(board[0]), !taskMap.get(idOf(board[0])) || false)">
@@ -40,7 +41,8 @@
         </div>
       </div>
     </div>
-    <div class="columns" [class.collapsed]="taskMap.get(idOf(board[0]))">
+    <div #columns class="columns" [class.collapsed]="taskMap.get(idOf(board[0]))"
+      [style.maxHeight]="getColumnsContainerHeight(idOf(board[0]), columns)">
       <div *ngFor="let column of board[1]; index as statusIndex" class="column">
         <div class="column-content" [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event)"
           [attr.data-index]="statusIndex" cdkDropList>

@@ -26,13 +26,18 @@ app-status-label {
   padding-left: 10px;
   margin-left: -1rem;
 
+  &:not(.collapsed) .task-title>app-icon {
+    transform: rotate(90deg);
+  }
+
   .columns {
     display: flex;
     overflow: hidden;
+    transition: max-height .2s ease;
 
-    &.collapsed {
-      height: 0;
-    }
+    // &.collapsed {
+    //   height: 0;
+    // }
   }
 
   .column {
@@ -121,6 +126,7 @@ app-status-label {
   &>app-icon {
     margin-right: 1rem;
     opacity: 0.5;
+    transition: transform .2s ease;
   }
 }
 

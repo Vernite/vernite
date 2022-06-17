@@ -164,4 +164,8 @@ export class BoardPage implements OnInit, OnDestroy {
   idOf(o: Task | string) {
     return (o as any).id || o;
   }
+
+  getColumnsContainerHeight(mapKey: string | number, element: HTMLElement) {
+    return `${Number(!this.taskMap.get(mapKey)) * element.scrollHeight + 16}px`;
+  }
 }
