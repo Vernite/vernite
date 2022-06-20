@@ -1,8 +1,16 @@
 /* eslint-disable */
-const { makeBadge } = require('badge-maker');
+let { makeBadge, Format } = require('badge-maker');
 const testsCoverageSummary = require('./coverage/workflow/coverage-summary.json');
 const testsResults = require('./coverage/karma-result.json');
 const { readFileSync, writeFileSync, existsSync, mkdirSync } = require('fs');
+
+const createBadge = makeBadge;
+makeBadge = (format) => {
+  console.log(`Generating badge for:`);
+  console.dir(format);
+  const badge = createBadge(format);
+  return badge;
+}
 
 const colorFromCoverage = (coverage) => {
   if (coverage < 50) {
@@ -16,7 +24,7 @@ const colorFromCoverage = (coverage) => {
 
 const getDocumentationCoverage = () => {
   const coverage = readFileSync('./documentation/images/coverage-badge-documentation.svg', 'utf8');
-  return parseFloat(coverage.match(/(?<=>).*(?=%<)/g)[0]);
+  return Math.min(parseFloat(coverage.match(/(?<=>).*(?=%<)/g)[0]) * 2, 100);
 };
 
 const getTestsCoverage = () => {
