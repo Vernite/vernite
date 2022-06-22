@@ -32,7 +32,7 @@
           <app-button variant="primary" type="button" (click)="nextStage()" i18n>Next</app-button>
         </ng-container>
         <ng-container *ngIf="stage===RegisterStage.PERSONAL_DATA">
-          <app-input formControlName="name" type="text" placeholder="John" floatingLabel="Name" i18n-floatingLabel
+          <app-input formControlName="name" type="text" placeholder="John" floatingLabel="Name" i18n-floatingLabel="first name of a person"
             i18n-placeholder></app-input>
 
           <app-input formControlName="surname" type="text" placeholder="Bayer" floatingLabel="Surname"
