@@ -3,8 +3,9 @@
   <app-input formControlName="name" type="text" placeholder="New workspace" floatingLabel="Workspace name"
     i18n-floatingLabel i18n-placeholder></app-input>
 
-  <div class="app-button">
+  <div class="buttons">
     <app-button variant="primary" [pending]="createSubscription && !createSubscription.closed" i18n>Save</app-button>
+    <app-button variant="secondary" type="button" routerLink="/" i18n>Cancel</app-button>
   </div>
 
 </form>

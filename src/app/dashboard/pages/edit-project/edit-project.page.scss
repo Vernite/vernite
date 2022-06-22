@@ -7,8 +7,12 @@ form {
   padding-left: 10px;
 }
 
-.app-button {
+.buttons {
   display: flex;
-  justify-content: flex-end;
   margin-top: 1rem;
+
+  &>* {
+    display: block;
+    margin-right: 1rem;
+  }
 }

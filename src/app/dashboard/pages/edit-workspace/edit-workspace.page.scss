@@ -2,7 +2,12 @@ form {
   padding: 4rem;
 }
 
-.app-button {
+.buttons {
   display: flex;
   margin-top: 1rem;
+
+  &>* {
+    display: block;
+    margin-right: 1rem;
+  }
 }

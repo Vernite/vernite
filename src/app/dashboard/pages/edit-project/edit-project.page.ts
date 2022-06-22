@@ -36,7 +36,7 @@ export class EditProjectPage implements OnDestroy {
    */
   private getSubscription?: Subscription;
 
-  private workspaceId!: number;
+  public workspaceId!: number;
   public projectId!: number;
 
   /**

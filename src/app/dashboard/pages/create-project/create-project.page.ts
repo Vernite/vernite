@@ -33,7 +33,7 @@ export class CreateProjectPage {
 
   public workspace$!: Observable<Workspace>;
 
-  private workspaceId!: number;
+  public workspaceId!: number;
 
   public memberList: string[] = [];
 

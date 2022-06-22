@@ -18,7 +18,8 @@
     <h2 class="typo-heading-5 mb-5" i18n>Modules</h2>
   </div>
   <app-integration-github [projectId]="projectId"></app-integration-github>
-  <div class="app-button">
+  <div class="buttons">
     <app-button variant="primary" [pending]="updateSubscription && !updateSubscription.closed" i18n>Save</app-button>
+    <app-button variant="secondary" type="button" [routerLink]="['/', workspaceId, projectId]" i18n>Cancel</app-button>
   </div>
 </form>

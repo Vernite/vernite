@@ -25,7 +25,7 @@
   <div class="options">
     <div class="options-element">
       <app-icon [icon]="penToSquare" size="16px"></app-icon>
-      <h2 i18n>Edit</h2>
+      <h2 [routerLink]="['/', workspaceId, projectId, 'edit']" i18n>Edit</h2>
     </div>
     <div class="options-element">
       <app-icon (click)="isFiltersOpen = !isFiltersOpen" [icon]="filter" size="16px"></app-icon>
