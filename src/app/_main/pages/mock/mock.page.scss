@@ -5,6 +5,8 @@ img {
 
 :host {
   position: relative;
+  display: block;
+  text-align: center;
 
   &::after {
     position: absolute;
@@ -17,6 +19,7 @@ img {
     color: #222;
     content: 'Work in progress';
     font-weight: bold;
+    text-align: center;
     transform: translate(-50%, -50%);
   }
 }
