@@ -84,7 +84,7 @@
         <div class="cell w-full">
           <div class="subtask-title">
             <span class="subtask-id">#{{ subtask.id }}</span>
-            <span class="task-type" [style.background-color]="task.type | taskType:'color'"></span>
+            <span class="task-type" [style.background-color]="subtask.type | taskType:'color'"></span>
             <span>{{ subtask.name }}</span>
             <a *ngIf="subtask.issue" [href]="subtask.issue" class="task-property" target="_blank"
               matTooltip="GitHub issue" i18n-matTooltip>

@@ -30,18 +30,27 @@
 
 .statuses-overlay {
   padding: 1rem;
-  padding: 0.5rem 0;
+  padding: 0.5rem;
   background-color: var(--color-secondary-500);
   border-radius: var(--border-radius);
 
   li {
     display: flex;
+    height: 40px;
     align-items: center;
+    justify-content: center;
     padding: 0.5rem 1rem;
     background-color: var(--color-secondary-500);
+    border-radius: var(--border-radius);
     color: var(--color-text);
     cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
     transition: background-color 0.4s ease;
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
 
     &:hover {
       background-color: var(--color-secondary-400);

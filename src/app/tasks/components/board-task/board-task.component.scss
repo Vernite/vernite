@@ -23,7 +23,7 @@
   .top-section {
     display: flex;
 
-    > * {
+    >* {
       width: 50%;
     }
 
@@ -59,6 +59,8 @@
 
   .name {
     @include typo-body;
+    display: flex;
+    align-items: center;
 
     margin-top: 1rem;
     color: var(--color-text);
@@ -95,7 +97,7 @@
     width: 100%;
     justify-content: flex-end;
 
-    > * {
+    >* {
       display: flex;
       margin-left: 1rem;
       color: var(--color-text);
@@ -113,4 +115,12 @@
       }
     }
   }
+}
+
+.task-type {
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin-right: 1rem;
+  border-radius: 4px;
 }

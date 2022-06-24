@@ -8,7 +8,8 @@
   [cdkConnectedOverlayOpen]="(isOpen$ | async) || false"
   [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'" [cdkConnectedOverlayHasBackdrop]="true">
   <ul #overlay class="statuses-overlay">
-    <li *ngFor="let status of statuses$ | async" (click)="select(status)">
+    <li *ngFor="let status of statuses$ | async" (click)="select(status)"
+      [style.background-color]="statusMap.get(status.id)?.name | statusColor">
       <span>{{ status.name }}</span>
     </li>
   </ul>

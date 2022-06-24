@@ -1,7 +1,8 @@
 {
   "name": "workflow",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
+    "postinstall": "husky install",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --stats-json",
@@ -84,6 +85,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "http-server": "^14.1.0",
+    "husky": "^8.0.1",
     "istanbul-lib-coverage": "^3.2.0",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",

@@ -10,6 +10,7 @@
     </div>
   </div>
   <div class="name">
+    <span class="task-type" [style.background-color]="task.type | taskType:'color'"></span>
     <span class="task-id">#{{ task.id }}</span>
     <span>{{ task?.name }}</span>
   </div>
