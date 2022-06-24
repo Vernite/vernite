@@ -38,7 +38,7 @@ jobs:
 
       # Install dependencies
       - name: Install dependencies
-        if: ${{ steps.cache-node-modules.outputs.cache-hit == 'false' }}
+        if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
         run: yarn install
 
       # Build
