@@ -1,3 +1,4 @@
+import app from '../../package.json';
 /**
  * Variant of global environment file for production.
  */
@@ -5,5 +6,5 @@ export const environment = {
   production: true,
   apiURL: '/api',
   disableConsoleLog: true,
-  version: require('../../package.json').version,
+  version: app.version,
 };

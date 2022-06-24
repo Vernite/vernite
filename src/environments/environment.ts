@@ -2,6 +2,8 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import app from '../../package.json';
+
 /**
  * Global environment configuration object, replaced in configurations other than development. Stores build specific data.
  */
@@ -24,7 +26,7 @@ export const environment = {
   /**
    * App version
    */
-  version: require('../../package.json').version,
+  version: app.version,
 };
 
 /*
