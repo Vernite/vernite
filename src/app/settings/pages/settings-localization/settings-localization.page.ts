@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { requiredValidator } from '@main/validators/required.validator';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'app-settings-localization-page',
   templateUrl: './settings-localization.page.html',
   styleUrls: ['./settings-localization.page.scss'],
 })
-export class SettingsLocalizationPage implements OnInit {
+export class SettingsLocalizationPage {
   public form = new FormGroup({
     language: new FormControl('', requiredValidator()),
+    dateFormat: new FormControl(''),
   });
 
   languages = [
@@ -43,13 +45,23 @@ export class SettingsLocalizationPage implements OnInit {
     },
   ];
 
-  constructor() {}
+  dateFormats = [
+    $localize`YYYY-MM-DD`,
+    $localize`DD-MM-YYYY`,
+    $localize`MM/DD/YYYY`,
+    $localize`DD.MM.YYYY`,
+  ].map((format) => ({
+    format,
+    example: dayjs().format(format),
+  }));
 
-  ngOnInit() {}
+  constructor() {}
 
   changeLanguage() {
     location.href = `https://workflow.adiantek.ovh/${this.form.value.language}/settings/localization`;
   }
 
-  submit() {}
+  submit() {
+    this.changeLanguage();
+  }
 }

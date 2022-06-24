@@ -6,9 +6,14 @@
     <app-option *ngFor="let language of languages" [value]="language.code">{{ language.name }}</app-option>
   </app-select>
 
+  <!-- Date format -->
+  <app-select formControlName="dateFormat" floatingLabel="Date format" class="full-width" i18n-floatingLabel>
+    <app-option *ngFor="let dateFormat of dateFormats" [value]="dateFormat.format">{{ dateFormat.example }}</app-option>
+  </app-select>
+
   <!-- Actions section -->
   <div class="actions">
-    <app-button variant="primary" (click)="changeLanguage()" i18n>Save settings</app-button>
+    <app-button variant="primary" i18n>Save settings</app-button>
   </div>
 
 </form>

@@ -42,6 +42,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.1.0",
     "@fortawesome/free-regular-svg-icons": "^6.1.0",
     "@fortawesome/free-solid-svg-icons": "^6.1.0",
+    "@tabuckner/material-dayjs-adapter": "^1.1.0",
     "color": "^4.2.3",
     "concurrently": "^7.1.0",
     "dayjs": "^1.11.2",
