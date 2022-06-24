@@ -20,6 +20,11 @@ export const environment = {
    * Whether to disable console logging.
    */
   disableConsoleLog: false,
+
+  /**
+   * App version
+   */
+  version: require('../../package.json').version,
 };
 
 /*

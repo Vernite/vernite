@@ -19,3 +19,11 @@ section {
     overflow-y: auto;
   }
 }
+
+.version {
+  position: absolute;
+  bottom: 1rem;
+  left: 1em;
+  color: var(--color-text);
+  opacity: 0.5;
+}

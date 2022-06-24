@@ -5,4 +5,5 @@ export const environment = {
   production: true,
   apiURL: '/api',
   disableConsoleLog: true,
+  version: require('../../package.json').version,
 };
