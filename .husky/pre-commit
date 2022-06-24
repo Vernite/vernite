@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm --no-git-tag-version version patch
+git add package.json
+git add package-lock.json

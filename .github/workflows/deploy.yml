@@ -23,10 +23,10 @@ jobs:
         id: cache-node-modules
         uses: actions/cache@v3
         env:
-          cache-name: cache-node-modules
+          cache-name: cache-node-modules-yarn
         with:
           path: node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
@@ -42,7 +42,7 @@ jobs:
         run: yarn install
 
       # Build
-      - name: Build 🪛
+      - name: Build ⚙️
         run: yarn build
 
       # Run tests
@@ -77,7 +77,7 @@ jobs:
           EXCLUDE: "/dist/, /node_modules/"
 
       # Deploy documentation to Github pages
-      - name: Deploy documentation 🗎
+      - name: Deploy documentation 📄
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           branch: gh-pages
