@@ -24,7 +24,7 @@ const colorFromCoverage = (coverage) => {
 
 const getDocumentationCoverage = () => {
   const coverage = readFileSync('./documentation/images/coverage-badge-documentation.svg', 'utf8');
-  return Math.min(parseFloat(coverage.match(/(?<=>).*(?=%<)/g)[0]) * 2, 100);
+  return Math.min(parseFloat(coverage.match(/(?<=>).*(?=%<)/g)[0]), 100);
 };
 
 const getTestsCoverage = () => {
