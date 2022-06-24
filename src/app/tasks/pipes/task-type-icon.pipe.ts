@@ -4,6 +4,9 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'taskTypeIcon',
 })
 export class TaskTypeIconPipe implements PipeTransform {
+  /**
+   * @deprecated
+   */
   transform(value: any): any {
     switch (value) {
       case 'TASK':

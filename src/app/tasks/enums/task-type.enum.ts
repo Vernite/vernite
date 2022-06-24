@@ -7,5 +7,5 @@ export enum TaskType {
 
 export enum SubTaskType {
   SUBTASK = 4,
-  ISSUE = 1,
+  ISSUE = 2,
 }

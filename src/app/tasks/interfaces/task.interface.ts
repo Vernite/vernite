@@ -50,6 +50,11 @@ export interface Task {
   issue?: string;
 
   /**
+   * Task type (ex. EPIC, USER_STORY)
+   */
+  type: string;
+
+  /**
    * Optional link to the GitHub pull request
    */
   pull?: string;
