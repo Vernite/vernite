@@ -1,6 +1,7 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgControl } from '@angular/forms';
+import { ButtonComponent } from '../button/button.component';
 import { FiltersComponent } from './filters.component';
 
 describe('FiltersComponent', () => {
@@ -9,7 +10,7 @@ describe('FiltersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FiltersComponent],
+      declarations: [FiltersComponent, ButtonComponent],
       providers: [NgControl],
     }).compileComponents();
   }));

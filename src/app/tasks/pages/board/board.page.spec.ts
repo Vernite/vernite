@@ -4,6 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BoardPage } from './board.page';
 import { MainModule } from 'src/app/_main/_main.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ViewOptionsComponent } from '@tasks/components/view-options/view-options.component';
 
 describe('BoardComponent', () => {
   let component: BoardPage;
@@ -12,7 +13,7 @@ describe('BoardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [MainModule, RouterTestingModule],
-      declarations: [BoardPage],
+      declarations: [BoardPage, ViewOptionsComponent],
     }).compileComponents();
   }));
 

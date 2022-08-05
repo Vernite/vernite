@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TextareaComponent } from './textarea.component';
 import { NgControl, ReactiveFormsModule } from '@angular/forms';
-import { ValidationErrorPipe } from '@main/pipes/validation-error.pipe';
+import { ValidationErrorPipe } from '@main/pipes/validation-error/validation-error.pipe';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

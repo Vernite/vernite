@@ -10,6 +10,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconComponent } from '../icon/icon.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { UpperNavigationComponent } from '../upper-navigation/upper-navigation.component';
+import { SnackbarOutletComponent } from '../snackbar-outlet/snackbar-outlet.component';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgControl } from '@angular/forms';
 
 describe('MainViewComponent', () => {
   let component: MainViewComponent;
@@ -23,12 +27,21 @@ describe('MainViewComponent', () => {
         FontAwesomeModule,
         MatIconModule,
         MatMenuModule,
+        MatDialogModule,
       ],
       declarations: [
         MainViewComponent,
         SidebarNavigationComponent,
         NavElementComponent,
         IconComponent,
+        UpperNavigationComponent,
+        SnackbarOutletComponent,
+      ],
+      providers: [
+        MatDialogModule,
+        NgControl,
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
       ],
     }).compileComponents();
   }));

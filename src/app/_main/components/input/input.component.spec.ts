@@ -2,7 +2,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InputComponent } from './input.component';
-import { ValidationErrorPipe } from '../../pipes/validation-error.pipe';
+import { ValidationErrorPipe } from '../../pipes/validation-error/validation-error.pipe';
 import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';

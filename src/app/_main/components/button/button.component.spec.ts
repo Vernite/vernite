@@ -1,3 +1,4 @@
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MainModule } from '@main/_main.module';
 import { Shallow } from 'shallow-render';
 import { ButtonComponent } from './button.component';
@@ -6,7 +7,7 @@ describe(ButtonComponent.name, () => {
   let shallow: Shallow<ButtonComponent>;
 
   beforeEach(() => {
-    shallow = new Shallow(ButtonComponent, MainModule);
+    shallow = new Shallow(ButtonComponent, MainModule).import(MatProgressSpinnerModule);
   });
 
   it('should create', async () => {
