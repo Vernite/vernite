@@ -33,7 +33,8 @@
       "@components/*": ["src/app/_main/components/*"],
       "@tests/*": ["src/tests/*"]
     },
-    "typeRoots": ["./types"]
+    "typeRoots": ["./types"],
+    "types": ["jasmine"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
