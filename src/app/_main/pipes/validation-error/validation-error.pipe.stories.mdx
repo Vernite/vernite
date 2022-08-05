@@ -1,0 +1,23 @@
+import { Meta } from '@storybook/addon-docs';
+import { Source } from '@storybook/addon-docs';
+
+<Meta title="Pipes/ValidationError" />
+
+# ValidationError pipe
+
+Displays the message of validation error.
+
+## Example usage
+
+```ts
+const control = new FormControl(null, [requiredValidator()]);
+control.markAsTouched();
+```
+
+```html
+<div>
+  {{ control.errors | validationError }}
+</div>
+```
+
+Will produce output like: `This field is required`.

@@ -1,11 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
+import { DialogRef } from '@main/classes/dialog-ref.class';
 import { BehaviorSubject, filter } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 import { Service } from '../decorators/service.decorator';
 import { AlertDialog, AlertDialogData, AlertDialogVariant } from '../dialogs/alert/alert.dialog';
+
+export enum DialogOutlet {
+  CONTENT_RIGHT = 'CONTENT_RIGHT',
+}
 
 /**
  * Service to manage dialogs.
@@ -16,7 +21,10 @@ import { AlertDialog, AlertDialogData, AlertDialogVariant } from '../dialogs/ale
 })
 export class DialogService {
   private dialogsMap = new Map();
-  private dialogs$ = new BehaviorSubject<Map<number, MatDialogRef<unknown, any>>>(this.dialogsMap);
+  private dialogs$ = new BehaviorSubject<Map<number, MatDialogRef<unknown, any> | DialogRef>>(
+    this.dialogsMap,
+  );
+  private outlets = new Map<DialogOutlet, any>();
 
   public get isAnyDialogOpen() {
     return this.dialogs$.getValue().size > 0;
@@ -25,7 +33,7 @@ export class DialogService {
    * Default constructor with `MatDialog` dependency.
    * @param matDialog MatDialog instance
    */
-  constructor(private matDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog, private injector: Injector) {}
 
   /**
    * Opens a modal dialog containing the given component.
@@ -33,11 +41,26 @@ export class DialogService {
    * @param data Object to pass as data to the dialog
    * @returns Reference to the newly-opened dialog.
    */
-  open(component: any, data: any) {
-    const dialog = this.matDialog.open(component, {
-      data,
-      width: '400px',
-    });
+  open(component: any, data: any, outlet?: DialogOutlet): MatDialogRef<any> | DialogRef {
+    console.log();
+
+    let dialog: MatDialogRef<any> | DialogRef;
+
+    if (outlet) {
+      const outletComponent = this.outlets.get(outlet);
+
+      if (!outletComponent)
+        throw new Error(
+          `${outlet} is not assigned to any dialog outlet component, you need to call registerOutlet()`,
+        );
+
+      dialog = outletComponent.renderDialog(component, data);
+    } else {
+      dialog = this.matDialog.open(component, {
+        data,
+        width: '400px',
+      });
+    }
 
     const uid = uuid();
     this.dialogsMap.set(uid, dialog);
@@ -56,6 +79,10 @@ export class DialogService {
     this.dialogsMap.forEach((dialog) => {
       dialog.close();
     });
+  }
+
+  registerOutlet(outlet: DialogOutlet, component: any) {
+    this.outlets.set(outlet, component);
   }
 
   /**

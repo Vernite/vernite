@@ -4,8 +4,6 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
-import './typings/typings';
-
 if (environment.production) {
   enableProdMode();
 }
@@ -23,5 +21,3 @@ platformBrowserDynamic()
     (window as any)['ngRef'] = ref;
   })
   .catch((err) => console.error(err));
-
-// initMocks();

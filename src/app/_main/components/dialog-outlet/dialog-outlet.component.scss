@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  overflow: hidden;
+  width: 0;
+  flex-shrink: 0;
+  transition: width .4s ease;
+}
+
+.dialog-outlet {
+  width: 450px;
+  height: 100%;
+  overflow-y: auto;
+}

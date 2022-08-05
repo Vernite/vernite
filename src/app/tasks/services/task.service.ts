@@ -7,7 +7,7 @@ import { ProjectService } from '@dashboard/services/project.service';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 import { Filter } from '@main/interfaces/filters.interface';
 import { applyFilters } from '@main/operators/apply-filters.operator';
-import { DialogService } from '@main/services/dialog.service';
+import { DialogOutlet, DialogService } from '@main/services/dialog.service';
 import { SnackbarService } from '@main/services/snackbar.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
 import { Schedule } from '@tasks/interfaces/schedule.interface';
@@ -154,11 +154,15 @@ export class TaskService {
    */
   public openEditTaskDialog(projectId: number, task: Task): Observable<Task | null> {
     return this.dialogService
-      .open(TaskDialog, {
-        variant: TaskDialogVariant.EDIT,
-        projectId,
-        task,
-      })
+      .open(
+        TaskDialog,
+        {
+          variant: TaskDialogVariant.EDIT,
+          projectId,
+          task,
+        } as TaskDialogData,
+        DialogOutlet.CONTENT_RIGHT,
+      )
       .afterClosed()
       .pipe(
         tap((data) => {
@@ -180,9 +184,13 @@ export class TaskService {
    */
   public openCreateNewTaskDialog() {
     return this.dialogService
-      .open(TaskDialog, {
-        variant: TaskDialogVariant.CREATE,
-      } as TaskDialogData)
+      .open(
+        TaskDialog,
+        {
+          variant: TaskDialogVariant.CREATE,
+        } as TaskDialogData,
+        DialogOutlet.CONTENT_RIGHT,
+      )
       .afterClosed()
       .pipe(
         switchMap((task: TaskWithAdditionalData) => {

@@ -13,7 +13,7 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "declaration": false,
+    "declaration": true,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
@@ -32,7 +32,8 @@
       "@tasks/*": ["src/app/tasks/*"],
       "@components/*": ["src/app/_main/components/*"],
       "@tests/*": ["src/tests/*"]
-    }
+    },
+    "typeRoots": ["./types"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

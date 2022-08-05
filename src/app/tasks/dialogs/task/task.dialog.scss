@@ -1,5 +1,9 @@
 form {
-  > * {
+  >* {
     width: 100%;
+  }
+
+  app-textarea {
+    margin-bottom: 2rem;
   }
 }

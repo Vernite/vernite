@@ -4,7 +4,6 @@ import { AuthService } from '@auth/services/auth.service';
 import { WorkspaceService } from '@dashboard/services/workspace.service';
 import { faAngleDown, faCog, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '@main/services/dialog.service';
-import { TaskDialog, TaskDialogData, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
 import { TaskService } from '@tasks/services/task.service';
 import { fromEvent, map, skip, take } from 'rxjs';
 
@@ -49,18 +48,9 @@ export class UpperNavigationComponent implements OnInit {
   public _isButtonDisabled = true;
 
   createNewTask() {
-    this.dialogService
-      .open(TaskDialog, {
-        variant: TaskDialogVariant.CREATE,
-      } as TaskDialogData)
-      .afterClosed()
-      .subscribe((result) => {
-        if (result) {
-          this.taskService.create(result.projectId, result).subscribe(() => {
-            location.reload();
-          });
-        }
-      });
+    this.taskService.openCreateNewTaskDialog().subscribe(() => {
+      location.reload();
+    });
   }
 
   logout() {

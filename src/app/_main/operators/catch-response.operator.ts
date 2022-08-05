@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
 
+/** @deprecated */
 export function catchResponse(message: string, action: (res?: any) => void) {
   return <T = any>(source: Observable<T>) => {
     const match = (response: any) => {

@@ -23,7 +23,6 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit, O
 
   ngOnInit(): void {
     this.control.valueChanges.subscribe((value) => {
-      console.log('Value changed to: ' + value);
       this.optionsMap?.forEach((option, key) => {
         const selected = key === value;
         option.selected = selected;
@@ -32,23 +31,16 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit, O
         }
       });
     });
-
-    this.selected$.subscribe((val) => {
-      console.log(val);
-    });
   }
 
   ngAfterViewInit(): void {
     this.queryOptions?.changes.subscribe((options) => {
-      console.log('updated options');
       this.updateOptions();
     });
     this.updateOptions();
   }
 
   updateOptions() {
-    console.log(this.control.value);
-
     this.yet = false;
     this.options = this.queryOptions?.map((x) => {
       const option = { value: x.value, viewValue: x.viewValue, icon: x.icon };

@@ -61,13 +61,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "2mb"
+                  "maximumWarning": "1.5mb",
+                  "maximumError": "10mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "10kb",
+                  "maximumError": "40kb"
                 }
               ],
               "fileReplacements": [
@@ -193,6 +193,33 @@
             "production": {
               "devServerTarget": "workflow:serve-coverage:production"
             }
+          }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "browserTarget": "angular-cli:build",
+            "port": 6006,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "--disablePrivate",
+              "--disableInternal",
+              "--disableLifeCycleHooks"
+            ]
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "browserTarget": "angular-cli:build",
+            "compodocArgs": [
+              "-e",
+              "json",
+              "--disablePrivate",
+              "--disableInternal",
+              "--disableLifeCycleHooks"
+            ]
           }
         }
       }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DialogOutlet } from '@main/services/dialog.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -8,6 +9,8 @@ import { environment } from 'src/environments/environment';
 })
 export class MainViewComponent implements OnInit {
   public version = environment.version;
+
+  public DialogOutlet = DialogOutlet;
 
   constructor() {}
 

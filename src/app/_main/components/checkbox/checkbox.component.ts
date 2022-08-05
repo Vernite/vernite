@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ControlAccessor } from '@main/classes/control-accessor.class';
 
 @Component({
@@ -6,6 +6,4 @@ import { ControlAccessor } from '@main/classes/control-accessor.class';
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
 })
-export class CheckboxComponent extends ControlAccessor {
-  @Input() label: string = '';
-}
+export class CheckboxComponent extends ControlAccessor {}

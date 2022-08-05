@@ -26,6 +26,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtonComponent } from './components/button/button.component';
 import { CardComponent } from './components/card/card.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { DialogOutletComponent } from './components/dialog-outlet/dialog-outlet.component';
 import { FiltersComponent } from './components/filters/filters.component';
 import { IconComponent } from './components/icon/icon.component';
 import { InputDateTimeComponent } from './components/input-date-time/input-date-time.component';
@@ -44,9 +45,10 @@ import { AlertDialog } from './dialogs/alert/alert.dialog';
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
 import { FocusInitialDirective } from './directives/focus-initial.directive';
 import { LetDirective } from './directives/let.directive';
+import { ViewContainerDirective } from './directives/view-container.directive';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { MockPage } from './pages/mock/mock.page';
-import { ValidationErrorPipe } from './pipes/validation-error.pipe';
+import { ValidationErrorPipe } from './pipes/validation-error/validation-error.pipe';
 import { ApiService } from './services/api.service';
 import { DialogService } from './services/dialog.service';
 
@@ -59,9 +61,6 @@ const ngModuleConfig = {
     =             Local dependencies              =
     =============================================*/
     CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
     RouterModule,
     ObserversModule,
   ],
@@ -69,6 +68,9 @@ const ngModuleConfig = {
     /*=============================================
       =                Dependencies                 =
       =============================================*/
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     DragDropModule,
     PlatformModule,
     OverlayModule,
@@ -129,6 +131,8 @@ const ngModuleConfig = {
     SnackbarComponent,
     SnackbarOutletComponent,
     MockPage,
+    DialogOutletComponent,
+    ViewContainerDirective,
   ],
   providers: [
     DialogService,

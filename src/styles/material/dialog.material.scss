@@ -1,10 +1,11 @@
-mat-dialog-container.mat-dialog-container {
+mat-dialog-container.mat-dialog-container,
+app-dialog-outlet {
   padding: 0;
   background-color: var(--color-dialog-background);
   border-radius: var(--border-radius);
   color: var(--color-text);
 
-  > * {
+  >* {
     display: block;
     padding: 2rem;
     border-radius: var(--border-radius);
@@ -36,7 +37,7 @@ mat-dialog-container.mat-dialog-container {
     border-top: 1px solid var(--color-dialog-delimiter);
     margin-top: 1.25rem;
 
-    > * {
+    >* {
       margin-left: 1.25rem;
     }
   }

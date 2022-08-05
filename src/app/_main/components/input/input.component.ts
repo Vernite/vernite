@@ -37,18 +37,22 @@ export class InputComponent extends ControlAccessor {
    */
   @Input() hint?: string;
 
+  /** @ignore */
   @HostBinding('class.focused') focused = false;
 
+  /** @ignore */
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
 
   constructor(public override ngControl: NgControl, private autofillMonitor: AutofillMonitor) {
     super(ngControl);
   }
 
+  /** @ignore */
   onFocus() {
     this.focused = true;
   }
 
+  /** @ignore */
   onBlur() {
     this.focused = false;
   }

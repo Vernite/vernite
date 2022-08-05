@@ -5,9 +5,13 @@
 
   <app-snackbar-outlet></app-snackbar-outlet>
 
-  <main>
-    <router-outlet></router-outlet>
-  </main>
+  <section class="content">
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+
+    <app-dialog-outlet [outlet]="DialogOutlet.CONTENT_RIGHT"></app-dialog-outlet>
+  </section>
 </section>
 
 <span class="version">{{ version }}</span>
