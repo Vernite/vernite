@@ -94,12 +94,14 @@ export class GitIntegrationService {
     return this.apiService.get(`/project/${projectId}/integration/git/issue`);
   }
 
+  /** @deprecated */
   public connectGitHubIssue(projectId: number, taskId: number, issue?: GitIssue) {
     return this.apiService.post(`/project/${projectId}/task/${taskId}/integration/git/issue`, {
       body: issue,
     });
   }
 
+  /** @deprecated */
   public disconnectGitHubIssue(projectId: number, taskId: number) {
     return this.apiService.delete(`/project/${projectId}/task/${taskId}/integration/git/issue`);
   }
@@ -108,12 +110,14 @@ export class GitIntegrationService {
     return this.apiService.get(`/project/${projectId}/integration/git/pull`);
   }
 
+  /** @deprecated */
   public connectGitHubPull(projectId: number, taskId: number, pull?: GitPull) {
     return this.apiService.post(`/project/${projectId}/task/${taskId}/integration/git/pull`, {
       body: pull,
     });
   }
 
+  /** @deprecated */
   public disconnectGitHubPull(projectId: number, taskId: number) {
     return this.apiService.delete(`/project/${projectId}/task/${taskId}/integration/git/pull`);
   }

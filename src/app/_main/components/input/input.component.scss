@@ -6,7 +6,7 @@
   flex-direction: column;
   margin-bottom: 0.5rem;
 
-  > label {
+  >label {
     @include typo-title;
 
     margin-bottom: 0.4rem;
@@ -20,8 +20,8 @@
   }
 }
 
-$padding-left: 1rem;
-$height: 55px;
+$padding-left: 0.5rem;
+$height: 44px;
 
 // New input
 .input-form-field {
@@ -131,6 +131,7 @@ $height: 55px;
 }
 
 :host.ng-touched.ng-invalid {
+
   .fragment-left,
   .fragment-middle,
   .fragment-right {
@@ -139,6 +140,7 @@ $height: 55px;
 }
 
 :host.focused .input-form-field {
+
   .fragment-left,
   .fragment-middle,
   .fragment-right {
@@ -147,6 +149,7 @@ $height: 55px;
 }
 
 .required {
+
   .static-label::after,
   .floating-label::after {
     margin-left: 0.2rem;
@@ -157,7 +160,7 @@ $height: 55px;
 
 .error {
   position: absolute;
-  margin-top: 0.2rem;
+  margin-top: 0.4rem;
   color: var(--color-red-500);
   font-size: 12px;
   line-height: 0.8rem;

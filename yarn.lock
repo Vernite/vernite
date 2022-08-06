@@ -2798,6 +2798,13 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
+"@ngneat/until-destroy@^9.2.1":
+  version "9.2.1"
+  resolved "https://registry.yarnpkg.com/@ngneat/until-destroy/-/until-destroy-9.2.1.tgz#3cd22ee3306bbc1e4b2eeac8528bb07d4a676e03"
+  integrity sha512-St3lj5unUmcDe9YeWJl0fr292q6p7ReKH9lWJQ60Q2SdXWDUWDDff+81+5JZAfXFTEirNgRSgQ2iO4YpylBAAg==
+  dependencies:
+    tslib "^2.3.0"
+
 "@ngtools/webpack@13.2.6":
   version "13.2.6"
   resolved "https://registry.npmjs.org/@ngtools/webpack/-/webpack-13.2.6.tgz"

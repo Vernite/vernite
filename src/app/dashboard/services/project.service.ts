@@ -50,6 +50,7 @@ export class ProjectService {
 
   /**
    * Changes the workspace of the project.
+   * @deprecated
    * @param projectId project to move
    * @param newWorkspaceId workspace where the project will be moved
    * @returns Request observable, which completes when request is finished
