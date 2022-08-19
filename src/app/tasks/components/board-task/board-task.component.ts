@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { faCheck, faCodeCommit, faCodePullRequest } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '@main/services/dialog.service';
-import { TaskDialog, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
 import { TaskService } from '@tasks/services/task.service';
 import * as dayjs from 'dayjs';
 import { Task } from '../../interfaces/task.interface';
@@ -41,23 +40,11 @@ export class BoardTaskComponent {
   }
 
   createSubtask() {
-    this.dialogService
-      .open(TaskDialog, {
-        variant: TaskDialogVariant.CREATE,
-        projectId: this.projectId,
-        subtask: true,
-        task: {
-          parentTaskId: this.task.id,
-        },
-      })
-      .afterClosed()
-      .subscribe((task) => {
-        if (!task) return;
+    this.taskService.openCreateSubtaskDialog(this.projectId, this.task).subscribe((task) => {
+      if (!task) return;
 
-        this.taskService.create(this.projectId, task).subscribe(() => {
-          location.reload();
-        });
-      });
+      location.reload();
+    });
   }
 
   changeDate(date: Date) {

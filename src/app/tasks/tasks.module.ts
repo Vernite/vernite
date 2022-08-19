@@ -4,6 +4,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MainModule } from '../_main/_main.module';
 import { BoardTaskComponent } from './components/board-task/board-task.component';
 import { InputAssigneeComponent } from './components/input-assignee/input-assignee.component';
+import { InputIssueComponent } from './components/input-issue/input-issue.component';
+import { InputPullRequestComponent } from './components/input-pull-request/input-pull-request.component';
+import { InputTaskPropertyComponent } from './components/input-task-property/input-task-property.component';
 import { StatusLabelComponent } from './components/status-label/status-label.component';
 import { ViewOptionsComponent } from './components/view-options/view-options.component';
 import { TaskDialog } from './dialogs/task/task.dialog';
@@ -33,6 +36,9 @@ import { TasksRoutingModule } from './tasks.routing';
     InputAssigneeComponent,
     StatusLabelComponent,
     StatusColorPipe,
+    InputTaskPropertyComponent,
+    InputIssueComponent,
+    InputPullRequestComponent,
   ],
 })
 export class TasksModule {}

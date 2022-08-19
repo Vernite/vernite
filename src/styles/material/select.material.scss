@@ -1,63 +1,63 @@
-mat-form-field.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
-  color: var(--color-text);
-}
+// mat-form-field.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+//   color: var(--color-text);
+// }
 
-mat-select.mat-select {
-  height: 15.75px;
+// mat-select.mat-select {
+//   height: 15.75px;
 
-  .mat-select-min-line {
-    color: var(--color-text);
-  }
+//   .mat-select-min-line {
+//     color: var(--color-text);
+//   }
 
-  .mat-select-arrow {
-    color: var(--color-text);
-  }
-}
+//   .mat-select-arrow {
+//     color: var(--color-text);
+//   }
+// }
 
-.mat-select-panel {
-  background-color: var(--color-select-panel-background);
+// .mat-select-panel {
+//   background-color: var(--color-select-panel-background);
 
-  mat-option.mat-option {
-    color: var(--color-select-panel-text);
+//   mat-option.mat-option {
+//     color: var(--color-select-panel-text);
 
-    .mat-option-text {
-      display: flex;
-      align-items: center;
+//     .mat-option-text {
+//       display: flex;
+//       align-items: center;
 
-      app-icon {
-        margin-right: 16px;
-      }
-    }
+//       app-icon {
+//         margin-right: 16px;
+//       }
+//     }
 
-    &.mat-focused {
-      background-color: var(--color-select-panel-option-background-focused);
-    }
+//     &.mat-focused {
+//       background-color: var(--color-select-panel-option-background-focused);
+//     }
 
-    &.mat-selected:not(.at-option-disabled) {
-      color: var(--color-select-panel-text-selected);
-    }
-  }
-}
+//     &.mat-selected:not(.at-option-disabled) {
+//       color: var(--color-select-panel-text-selected);
+//     }
+//   }
+// }
 
-mat-form-field.mat-form-field-appearance-outline .mat-select-arrow-wrapper {
-  transform: none;
-}
+// mat-form-field.mat-form-field-appearance-outline .mat-select-arrow-wrapper {
+//   transform: none;
+// }
 
-mat-select-trigger {
-  display: flex;
-  height: 15.75px;
-  align-items: center;
-  color: var(--color-text);
+// mat-select-trigger {
+//   display: flex;
+//   height: 15.75px;
+//   align-items: center;
+//   color: var(--color-text);
 
-  app-icon {
-    margin-right: 1rem;
-  }
-}
+//   app-icon {
+//     margin-right: 1rem;
+//   }
+// }
 
-app-select.full-width {
-  width: 100%;
+// app-select.full-width {
+//   width: 100%;
 
-  .mat-form-field {
-    max-width: none;
-  }
-}
+//   .mat-form-field {
+//     max-width: none;
+//   }
+// }

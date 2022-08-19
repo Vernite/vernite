@@ -27,7 +27,6 @@ $height: 44px;
 .input-form-field {
   position: relative;
   height: $height;
-  margin-bottom: 2rem;
 
   // Static label for input
   .static-label {
@@ -63,10 +62,17 @@ $height: 44px;
   }
 
   .fragment-left {
+    display: flex;
     width: $padding-left;
+    align-items: center;
+    padding-left: $padding-left;
     border-right-width: 0;
     border-bottom-left-radius: var(--border-radius);
     border-top-left-radius: var(--border-radius);
+
+    .fragment-left-wrapper {
+      flex-shrink: 0;
+    }
   }
 
   .fragment-middle {
@@ -77,7 +83,11 @@ $height: 44px;
   }
 
   .fragment-right {
+    display: flex;
     flex-grow: 1;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 0.75rem;
     border-left-width: 0;
     border-bottom-right-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);

@@ -37,6 +37,11 @@ export class InputComponent extends ControlAccessor {
    */
   @Input() hint?: string;
 
+  /**
+   * Attribute to disable value edition without any visual changes
+   */
+  @Input() readonly?: boolean;
+
   /** @ignore */
   @HostBinding('class.focused') focused = false;
 

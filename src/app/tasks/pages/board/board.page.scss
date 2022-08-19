@@ -33,11 +33,11 @@ app-status-label {
   .columns {
     display: flex;
     overflow: hidden;
-    transition: max-height .2s ease;
+    transition: max-height .4s ease;
 
-    // &.collapsed {
-    //   height: 0;
-    // }
+    &.collapsed {
+      max-height: 0;
+    }
   }
 
   .column {

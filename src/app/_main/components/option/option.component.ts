@@ -1,5 +1,5 @@
-import { Component, ElementRef, Input } from '@angular/core';
-import { faQuestion, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { Component, ElementRef, HostBinding, Input } from '@angular/core';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-option',
@@ -7,14 +7,14 @@ import { faQuestion, IconDefinition } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./option.component.scss'],
 })
 export class OptionComponent {
-  @Input() value!: any;
+  @Input() @HostBinding('value') value!: any;
   @Input() icon?: string | IconDefinition;
 
-  faQuestion = faQuestion;
+  selected = false;
 
   public get viewValue(): string {
     return this.ref.nativeElement.innerText;
   }
 
-  constructor(private ref: ElementRef) {}
+  constructor(public ref: ElementRef) {}
 }

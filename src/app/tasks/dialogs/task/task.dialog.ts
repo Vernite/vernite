@@ -52,23 +52,18 @@ export class TaskDialog implements OnInit {
   public form = new FormGroup({
     id: new FormControl(null),
     parentTaskId: new FormControl(null),
-    type: new FormControl(TaskType.TASK, [requiredValidator()]),
+    type: new FormControl(this.data.subtask ? SubTaskType.SUBTASK : TaskType.TASK, [
+      requiredValidator(),
+    ]),
     name: new FormControl('', [requiredValidator()]),
     statusId: new FormControl(null, [requiredValidator()]),
     projectId: new FormControl(null, [requiredValidator()]),
     workspaceId: new FormControl(null, [requiredValidator()]),
     description: new FormControl(''),
-    priority: new FormControl(this.taskPriorities[2], [requiredValidator()]),
+    priority: new FormControl(TaskPriority.MEDIUM, [requiredValidator()]),
     deadline: new FormControl(null),
     estimatedDate: new FormControl(null),
-
-    // GitHub issue integration fields
-    connectWithIssueOnGitHub: new FormControl(false),
-    issueAttachGithub: new FormControl(false),
     issue: new FormControl(null),
-
-    // Github pull requests integration fields
-    connectWithPullRequestOnGitHub: new FormControl(false),
     pull: new FormControl(null),
   });
 
@@ -86,7 +81,9 @@ export class TaskDialog implements OnInit {
 
     const { workspaceId, projectId, task } = this.data;
     this.form.patchValue({ workspaceId, projectId });
-    if (task) this.form.patchValue(task);
+    if (task) {
+      this.form.patchValue(task);
+    }
 
     this.workspaceList$ = this.workspaceService.list();
 
@@ -110,7 +107,6 @@ export class TaskDialog implements OnInit {
 
   onProjectIdChange(projectId: number) {
     this.statusList$ = this.statusService.list(projectId);
-    this.clearGitHubIntegrationFields();
 
     this.statusList$.subscribe((statuses) => {
       const statusId = statuses.find((status) => status.begin)?.id;
@@ -122,14 +118,6 @@ export class TaskDialog implements OnInit {
 
     this.gitIntegrationService.hasGitHubIntegration(projectId!).subscribe((value) => {
       this.isGitHubIntegrationAvailable = value;
-
-      if (this.isGitHubIntegrationAvailable) {
-        this.issueList$ = this.gitIntegrationService.gitHubIssueList(projectId);
-        this.pullList$ = this.gitIntegrationService.gitHubPullList(projectId);
-      } else {
-        this.issueList$ = new BehaviorSubject([]);
-        this.pullList$ = new BehaviorSubject([]);
-      }
     });
   }
 
@@ -139,14 +127,6 @@ export class TaskDialog implements OnInit {
     this.data.projectId = this.data.projectId || Number(projectId);
   }
 
-  clearGitHubIntegrationFields() {
-    this.form.patchValue({
-      issueNumberGitHub: null,
-      issueAttachGithub: false,
-      connectWithIssueOnGitHub: false,
-    });
-  }
-
   confirm() {
     const formValues = this.form.value;
 
@@ -154,14 +134,6 @@ export class TaskDialog implements OnInit {
     this.form.updateValueAndValidity();
 
     if (this.form.invalid) return;
-
-    if (formValues.connectWithIssueOnGitHub && !formValues.issueAttachGithub) {
-      formValues.createIssue = true;
-    } else {
-      formValues.createIssue = false;
-    }
-
-    console.log(formValues);
 
     this.dialogRef.close(formValues);
   }

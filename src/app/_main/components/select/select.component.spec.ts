@@ -1,4 +1,5 @@
 /* tslint:disable:no-unused-variable */
+import { OverlayModule } from '@angular/cdk/overlay';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NgControl, ReactiveFormsModule } from '@angular/forms';
@@ -12,7 +13,7 @@ describe('SelectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MatSelectModule, BrowserAnimationsModule, ReactiveFormsModule],
+      imports: [MatSelectModule, BrowserAnimationsModule, ReactiveFormsModule, OverlayModule],
       declarations: [SelectComponent],
       providers: [NgControl],
     }).compileComponents();

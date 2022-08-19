@@ -1,0 +1,11 @@
+<div class="header">
+  <span class="label">{{ label }}</span>
+  <span class="icon" (click)="isOpenChange.emit(!isOpen)">
+    <app-icon [icon]="isOpen ? faMinus : faPlus" size="16px"></app-icon>
+  </span>
+</div>
+<div #content class="content" [style.max-height]="currentHeight">
+  <div class="content-wrapper">
+    <ng-content></ng-content>
+  </div>
+</div>

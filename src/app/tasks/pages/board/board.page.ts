@@ -126,20 +126,6 @@ export class BoardPage implements OnInit, OnDestroy {
 
           onSuccess();
         });
-      // } else if (task.mergedPullList && !newStatus.final) {
-      //   this.dialogService
-      //     .alert({
-      //       title: $localize`Are you sure?`,
-      //       message: $localize`If you will move this task to not finishing state, the pull request will be detached.`,
-      //       confirmText: $localize`Detach`,
-      //       cancelText: $localize`Cancel`,
-      //     })
-      //     .subscribe((result) => {
-      //       if (!result) return;
-
-      //       onSuccess();
-      //     });
-      // }
     } else {
       onSuccess();
     }
@@ -167,5 +153,11 @@ export class BoardPage implements OnInit, OnDestroy {
 
   getColumnsContainerHeight(mapKey: string | number, element: HTMLElement) {
     return `${Number(!this.taskMap.get(mapKey)) * element.scrollHeight + 16}px`;
+  }
+
+  toggle(board: [Task | string, StatusWithTasks[]], element: HTMLElement) {
+    element.style.maxHeight = this.getColumnsContainerHeight(this.idOf(board[0]), element);
+    this.taskMap.set(this.idOf(board[0]), !this.taskMap.get(this.idOf(board[0])) || false);
+    element.style.maxHeight = this.getColumnsContainerHeight(this.idOf(board[0]), element);
   }
 }

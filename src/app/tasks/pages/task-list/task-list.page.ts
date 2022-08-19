@@ -17,7 +17,6 @@ import { ESet } from '@main/classes/e-set.class';
 import { Filters } from '@main/classes/filters.class';
 import { Filter } from '@main/interfaces/filters.interface';
 import { DialogService } from '@main/services/dialog.service';
-import { TaskDialog, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
 import { Status } from '@tasks/interfaces/status.interface';
 import { Task } from '@tasks/interfaces/task.interface';
 import { StatusService } from '@tasks/services/status.service';
@@ -117,27 +116,12 @@ export class TaskListPage {
     return populatedTasks;
   }
 
-  /**
-   * TODO: Move this method to service
-   */
   createSubtask(task: Task) {
-    this.dialogService
-      .open(TaskDialog, {
-        variant: TaskDialogVariant.CREATE,
-        projectId: this.projectId,
-        subtask: true,
-        task: {
-          parentTaskId: task.id,
-        },
-      })
-      .afterClosed()
-      .subscribe((task) => {
-        if (!task) return;
+    this.taskService.openCreateSubtaskDialog(this.projectId, task).subscribe((task) => {
+      if (!task) return;
 
-        this.taskService.create(this.projectId, task).subscribe(() => {
-          location.reload();
-        });
-      });
+      location.reload();
+    });
   }
 
   editTask(task: Task) {

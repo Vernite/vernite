@@ -47,7 +47,7 @@ export interface Task {
   /**
    * Optional link to the GitHub issue
    */
-  issue?: string;
+  issue?: GitIssue;
 
   /**
    * Task type (ex. EPIC, USER_STORY)
@@ -57,12 +57,12 @@ export interface Task {
   /**
    * Optional link to the GitHub pull request
    */
-  pull?: string;
+  pull?: GitPull;
 
   /**
    * Optional merged pull requests list
    */
-  mergedPullList?: String[];
+  mergedPullList?: GitPull[];
 
   /**
    * Optional user id who is assigned to task

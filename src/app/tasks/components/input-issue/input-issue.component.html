@@ -1,0 +1,6 @@
+<input-task-property i18n-label label="GitHub issue" [(isOpen)]="isOpen">
+  <app-select [formControl]="control" floatingLabel="Issue" i18n-floatingLabel comparer="id">
+    <app-option [value]="'CREATE'">Create new issue</app-option>
+    <app-option *ngFor="let issue of issues$ | async" [value]="issue">{{ issue.title }}</app-option>
+  </app-select>
+</input-task-property>

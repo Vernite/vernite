@@ -2,7 +2,7 @@
 <h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.CREATE && !data.subtask" i18n>Create new task</h1>
 <h1 mat-dialog-title *ngIf="data.subtask" i18n>Create new subtask</h1>
 <div mat-dialog-content>
-  <form (submit)="confirm()" [formGroup]="form" autocomplete="off">
+  <form (submit)="confirm()" [formGroup]="form" autocomplete="off" *ngIf="statusList$">
 
     <!-- Workspace -->
     <app-select *ngIf="!data.subtask" formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
@@ -21,8 +21,8 @@
     <!-- Type field -->
     <app-select formControlName="type" floatingLabel="Type" i18n-floatingLabel>
       <app-option *ngFor="let type of (data.subtask ? subTaskTypes : taskTypes)" [value]="type[1]"
-        [icon]="type[0] | taskTypeIcon">{{ type[0] | taskType
-        }}
+        [icon]="type[0] | taskTypeIcon">
+        {{ type[1] | taskType }}
       </app-option>
     </app-select>
 
@@ -57,32 +57,12 @@
     </app-input-date-time>
 
     <!-- GitHub issue integration -->
-    <app-checkbox *ngIf="isGitHubIntegrationAvailable" formControlName="connectWithIssueOnGitHub" i18n>Create or attach
-      GitHub issue simultaneously</app-checkbox>
-
-    <div [class.hidden]="!form.get('connectWithIssueOnGitHub')?.value" class="git-issue-connection">
-      <app-select formControlName="issueAttachGithub">
-        <app-option [value]="false" i18n>Create</app-option>
-        <app-option [value]="true" i18n>Attach</app-option>
-      </app-select>
-
-      <app-select [class.hidden]="!form.get('issueAttachGithub')?.value" formControlName="issue" floatingLabel="Issue"
-        i18n-floatingLabel>
-        <app-option *ngFor="let issue of issueList$ | async" [value]="issue">{{issue.title}}</app-option>
-      </app-select>
-    </div>
+    <input-issue *ngIf="isGitHubIntegrationAvailable && form.get('projectId')?.value" formControlName="issue"
+      [projectId]="form.get('projectId')?.value"></input-issue>
 
     <!-- Github pull request integration -->
-    <app-checkbox *ngIf="isGitHubIntegrationAvailable" formControlName="connectWithPullRequestOnGitHub" i18n>
-      Connect with GitHub pull request
-    </app-checkbox>
-
-    <div [class.hidden]="!form.get('connectWithPullRequestOnGitHub')?.value" class="git-pull-connection">
-      <app-select formControlName="pull" floatingLabel="Pull request" i18n-floatingLabel>
-        <app-option *ngFor="let pullRequest of pullList$ | async" [value]="pullRequest">{{pullRequest.title}}
-        </app-option>
-      </app-select>
-    </div>
+    <input-pull-request *ngIf="isGitHubIntegrationAvailable && form.get('projectId')?.value" formControlName="pull"
+      [projectId]="form.get('projectId')?.value"></input-pull-request>
 
   </form>
 </div>

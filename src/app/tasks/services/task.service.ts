@@ -3,7 +3,6 @@ import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { GitIntegrationService } from '@dashboard/services/git-integration.service';
 import { MemberService } from '@dashboard/services/member.service';
-import { ProjectService } from '@dashboard/services/project.service';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 import { Filter } from '@main/interfaces/filters.interface';
 import { applyFilters } from '@main/operators/apply-filters.operator';
@@ -40,7 +39,6 @@ export class TaskService {
     private apiService: ApiService,
     private gitIntegrationService: GitIntegrationService,
     private dialogService: DialogService,
-    private projectService: ProjectService,
     private memberService: MemberService,
     private snackbarService: SnackbarService,
   ) {}
@@ -73,16 +71,6 @@ export class TaskService {
    */
   public create(projectId: number, task: TaskWithAdditionalData): Observable<Task> {
     return this.apiService.post(`/project/${projectId}/task/`, { body: task }).pipe(
-      switchMap((newTask) => {
-        if (task.connectWithPullRequestOnGitHub) {
-          return this.gitIntegrationService.connectGitHubPull(projectId, newTask.id, task.pull);
-        } else return of(newTask);
-      }),
-      switchMap((newTask) => {
-        if (task.connectWithIssueOnGitHub && task.issue) {
-          return this.gitIntegrationService.connectGitHubIssue(projectId, newTask.id, task.issue);
-        } else return of(newTask);
-      }),
       tap(() => {
         this.snackbarService.show($localize`Task created successfully!`);
       }),
@@ -97,15 +85,8 @@ export class TaskService {
    */
   public update(projectId: number, task: TaskWithAdditionalData): Observable<Task> {
     return this.apiService.put(`/project/${projectId}/task/${task.id}`, { body: task }).pipe(
-      switchMap((newTask) => {
-        if (task.connectWithPullRequestOnGitHub) {
-          return this.gitIntegrationService.connectGitHubPull(projectId, newTask.id, task.pull);
-        } else return of(newTask);
-      }),
-      switchMap((newTask) => {
-        if (task.connectWithIssueOnGitHub) {
-          return this.gitIntegrationService.connectGitHubIssue(projectId, newTask.id, task.issue);
-        } else return of(newTask);
+      tap(() => {
+        this.snackbarService.show($localize`Task updated successfully!`);
       }),
     );
   }
@@ -211,14 +192,18 @@ export class TaskService {
    */
   public openCreateSubtaskDialog(projectId: number, parentTask: Task): Observable<Task | null> {
     return this.dialogService
-      .open(TaskDialog, {
-        variant: TaskDialogVariant.CREATE,
-        projectId: projectId,
-        subtask: true,
-        task: {
-          parentTaskId: parentTask.id,
+      .open(
+        TaskDialog,
+        {
+          variant: TaskDialogVariant.CREATE,
+          projectId: projectId,
+          subtask: true,
+          task: {
+            parentTaskId: parentTask.id,
+          },
         },
-      })
+        DialogOutlet.CONTENT_RIGHT,
+      )
       .afterClosed()
       .pipe(
         switchMap((newTask: any) => {

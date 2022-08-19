@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, Optional } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl, ValidationErrors } from '@angular/forms';
 import { Subject } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
   // providers: [{ provide: NgControl, useClass: TestNgControl }],
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
-export class ControlAccessor implements OnDestroy, ControlValueAccessor {
+export class ControlAccessor<T = any> implements OnDestroy, ControlValueAccessor {
   /**
    * Property that defines if field should prompt user how to fill it. For example
    * in a form, if a field is email, it will give the user last used emails
@@ -60,7 +60,7 @@ export class ControlAccessor implements OnDestroy, ControlValueAccessor {
   /**
    * Get the value of the control.
    */
-  public get value(): any {
+  public get value(): T {
     return this.control.value;
   }
 
@@ -79,7 +79,7 @@ export class ControlAccessor implements OnDestroy, ControlValueAccessor {
     /**
      * Control passed from DOM to the component, contains all the information about form control
      */
-    public ngControl: NgControl,
+    @Optional() public ngControl: NgControl,
   ) {
     this.ngControl.valueAccessor = this;
 
@@ -124,7 +124,7 @@ export class ControlAccessor implements OnDestroy, ControlValueAccessor {
    *
    * @param value The new value for the element
    */
-  writeValue(value: any): void {}
+  writeValue(value: T): void {}
 
   /**
    * Registers a callback function that is called when the control's value changes in the UI.

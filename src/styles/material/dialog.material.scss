@@ -18,7 +18,7 @@ app-dialog-outlet {
   .mat-dialog-title {
     @include typo-heading-5;
 
-    margin-bottom: 0.25rem;
+    margin-bottom: 1rem;
     font-family: var(--font-family);
 
     &.important {

@@ -5,7 +5,9 @@
         [taskId]="task.id" [members]="members || []"></app-input-assignee>
     </div>
     <div *ngIf="task.deadline" class="deadline">
-      <div class="title" i18n>Due date</div>
+      <div class="title" i18n>
+        Due date
+      </div>
       <div class="value">{{ changeDate(task.deadline) }}</div>
     </div>
   </div>
@@ -15,10 +17,10 @@
     <span>{{ task?.name }}</span>
   </div>
   <div class="actions">
-    <a *ngIf="task.issue" [href]="task.issue" target="_blank">
+    <a *ngIf="task.issue" [href]="task.issue.url" target="_blank">
       <app-icon [icon]="faCodeCommit" size="14px"></app-icon>
     </a>
-    <a *ngIf="task.pull" [href]="task.pull" target="_blank">
+    <a *ngIf="task.pull" [href]="task.pull.url" target="_blank">
       <app-icon [icon]="faCodePullRequest" size="14px"></app-icon>
     </a>
     <a *ngIf="task.mergedPullList" [href]="task.mergedPullList[0]" target="_blank">

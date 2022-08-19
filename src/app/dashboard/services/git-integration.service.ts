@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  GitAccount,
-  GitIntegration,
-  GitIssue,
-  GitPull,
-} from '@dashboard/interfaces/git-integration.interface';
+import { GitAccount, GitIntegration } from '@dashboard/interfaces/git-integration.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Service } from '@main/decorators/service.decorator';
 import { ApiService } from '@main/services/api.service';
@@ -94,32 +89,8 @@ export class GitIntegrationService {
     return this.apiService.get(`/project/${projectId}/integration/git/issue`);
   }
 
-  /** @deprecated */
-  public connectGitHubIssue(projectId: number, taskId: number, issue?: GitIssue) {
-    return this.apiService.post(`/project/${projectId}/task/${taskId}/integration/git/issue`, {
-      body: issue,
-    });
-  }
-
-  /** @deprecated */
-  public disconnectGitHubIssue(projectId: number, taskId: number) {
-    return this.apiService.delete(`/project/${projectId}/task/${taskId}/integration/git/issue`);
-  }
-
   public gitHubPullList(projectId: number) {
     return this.apiService.get(`/project/${projectId}/integration/git/pull`);
-  }
-
-  /** @deprecated */
-  public connectGitHubPull(projectId: number, taskId: number, pull?: GitPull) {
-    return this.apiService.post(`/project/${projectId}/task/${taskId}/integration/git/pull`, {
-      body: pull,
-    });
-  }
-
-  /** @deprecated */
-  public disconnectGitHubPull(projectId: number, taskId: number) {
-    return this.apiService.delete(`/project/${projectId}/task/${taskId}/integration/git/pull`);
   }
 
   /**
