@@ -49,19 +49,9 @@ jobs:
       - name: Unit tests
         run: yarn unit:build
 
-      # Build documentation and badges
-      - name: Documentation
-        run: |
-          yarn docs:build
-          yarn badges:build
-
       # Copy default redirect page
       - name: Redirect page copy
         run: cp src/redirect.html dist/workflow/index.html
-
-      # Copy coverage directory
-      - name: Copy coverage directory
-        run: cp -R coverage documentation/coverage
 
       # Deploy to the server using rsync
       - name: Deploy app 🚀
@@ -75,6 +65,16 @@ jobs:
           REMOTE_USER: 'frontend'
           TARGET: '/var/www/html'
           EXCLUDE: "/dist/, /node_modules/"
+
+      # Build documentation and badges
+      - name: Documentation
+        run: |
+          yarn docs:build
+          yarn badges:build
+
+      # Copy coverage directory
+      - name: Copy coverage directory
+        run: cp -R coverage documentation/coverage
 
       # Deploy documentation to Github pages
       - name: Deploy documentation 📄
