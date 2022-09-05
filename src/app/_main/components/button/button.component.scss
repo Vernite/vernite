@@ -21,7 +21,7 @@ button .prefix {
   justify-content: center;
   transition: width 0.2s, margin-right 0.2s;
 
-  > * {
+  >* {
     position: absolute;
   }
 }
@@ -37,7 +37,7 @@ button {
   position: relative;
   display: flex;
   min-width: 80px;
-  height: 42px;
+  height: 38px;
   align-items: center;
   justify-content: center;
   padding: 0.8125rem 1.25rem;
@@ -47,7 +47,7 @@ button {
   outline: 0 !important;
   transition: background-color 0.2s ease;
 
-  > * {
+  >* {
     margin-right: 0.75rem;
   }
 

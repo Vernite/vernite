@@ -1,6 +1,6 @@
 import { InputComponent } from './input.component';
 import { DOCS_SELECT } from '../../../../stories/helpers/arg-type.helper';
-import { FormControl } from '@angular/forms';
+import { FormControl } from '@ngneat/reactive-forms';
 import { FormControlStoryPageConfig } from 'src/stories/helpers/classes/form-control-story-page-config.class';
 import { StoryTemplate } from 'src/stories/helpers/classes/story-template.class';
 import { Story } from 'src/stories/helpers/classes/story.class';
@@ -37,7 +37,8 @@ export const StaticLabel = new Story({
   props: {
     staticLabel: 'Sample field',
   },
-  description: `...`,
+  description: `This is the other way to show the user purpose of this field. Static label will be always displayed
+    above the input field regardless of state and content`,
 }).story();
 
 export const Hint = new Story({

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { GitRepository } from '@dashboard/interfaces/git-integration.interface';
 import { GitIntegrationService } from '@dashboard/services/git-integration.service';
 import { requiredValidator } from '@main/validators/required.validator';
@@ -37,6 +37,8 @@ export class IntegrationGithubComponent implements OnInit {
   }
 
   addRepository() {
+    if (!this.form.value.repository) return;
+
     this.gitIntegrationService
       .attachGitHubIntegration(this.projectId, this.form.value.repository)
       .subscribe();

@@ -1,0 +1,187 @@
+:host {
+  display: flex;
+  color: var(--color-text);
+}
+
+.general {
+  display: flex;
+  width: 180px;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: var(--color-secondary-500);
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+
+  .header {
+    .year {
+      opacity: 0.75;
+    }
+
+    .date {
+      font-size: 1.2rem;
+    }
+  }
+
+  .time-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .arrow-up,
+    .arrow-down {
+      padding: 0.25rem;
+      border: none;
+      background-color: transparent;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color .1s ease;
+
+      &:hover {
+        background-color: var(--color-secondary-600);
+      }
+    }
+  }
+
+  .time {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+
+    .colon {
+      display: inline-block;
+      margin: 0 0.5rem;
+    }
+
+    input {
+      width: 2rem;
+      background-color: transparent;
+      text-align: center;
+    }
+  }
+
+  .time-actions {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    button {
+      padding: 0.25rem 0.5rem;
+      background-color: transparent;
+      border-radius: 3px;
+      color: var(--color-text);
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color .1s ease;
+
+      &:hover {
+        background-color: var(--color-secondary-600);
+      }
+    }
+  }
+}
+
+.date {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+
+    .previous-month,
+    .next-month {
+      padding: 0.25rem;
+      background-color: transparent;
+      border-radius: 3px;
+      color: var(--color-text);
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color .1s ease;
+
+      &:hover {
+        background-color: var(--color-secondary-800);
+      }
+    }
+  }
+
+  .calendar {
+    width: 300px;
+    padding: 0 1rem;
+
+    .weekdays {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      margin-bottom: 0.25rem;
+      font-size: 0.75rem;
+      opacity: 0.5;
+
+      &>* {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    .calendar-grid {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .row {
+        display: flex;
+        width: 100%;
+        justify-content: stretch;
+
+        .cell {
+          display: flex;
+          width: 100%;
+          align-items: center;
+          justify-content: center;
+          padding: 0.1rem;
+          border-radius: 3px;
+          cursor: pointer;
+          transition: background-color .1s ease;
+
+          &:hover {
+            background-color: var(--color-secondary-800);
+          }
+        }
+      }
+    }
+  }
+
+  .date-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+
+    button {
+      padding: 0.25rem 0.5rem;
+      background-color: transparent;
+      border-radius: 3px;
+      color: var(--color-text);
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color .1s ease;
+
+      &:hover {
+        background-color: var(--color-secondary-800);
+      }
+    }
+  }
+}
+
+/* --- DISABLE ARROW BUTTONS IN INPUT TYPE NUMBER ---  */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

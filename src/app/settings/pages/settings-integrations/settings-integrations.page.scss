@@ -1,6 +1,10 @@
 .list {
-  > * {
+  >* {
     display: block;
     margin-top: 1rem;
   }
+}
+
+form>*:not(:last-child) {
+  margin-bottom: 1.5rem;
 }

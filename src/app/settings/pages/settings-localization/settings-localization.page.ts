@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { requiredValidator } from '@main/validators/required.validator';
 import * as dayjs from 'dayjs';
 
@@ -14,6 +14,7 @@ export class SettingsLocalizationPage {
     dateFormat: new FormControl(''),
   });
 
+  // TODO: Move this section to a service
   languages = [
     {
       code: 'de-DE',

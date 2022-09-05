@@ -1,17 +1,11 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
+  "ignorePatterns": ["projects/**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "tsconfig.json"
-        ],
+        "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
       "extends": [
@@ -20,19 +14,11 @@
         "plugin:prettier/recommended",
         "plugin:storybook/recommended"
       ],
-      "plugins": [
-        "unused-imports"
-      ],
+      "plugins": ["unused-imports", "@ngneat/reactive-forms"],
       "rules": {
         "@angular-eslint/no-empty-lifecycle-method": "warn",
-        "comma-dangle": [
-          "error",
-          "always-multiline"
-        ],
-        "@typescript-eslint/comma-dangle": [
-          "error",
-          "only-multiline"
-        ],
+        "comma-dangle": ["error", "always-multiline"],
+        "@typescript-eslint/comma-dangle": ["error", "only-multiline"],
         "storybook/prefer-pascal-case": "off",
         "no-unused-vars": "off",
         "unused-imports/no-unused-imports": "error",
@@ -44,27 +30,20 @@
             "args": "after-used",
             "argsIgnorePattern": "^_"
           }
-        ]
+        ],
+        "@ngneat/reactive-forms/no-angular-forms-imports": "error"
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ]
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"]
     }
   ],
   "rules": {
     "@angular-eslint/component-class-suffix": [
       "error",
       {
-        "suffixes": [
-          "Component",
-          "Page",
-          "Dialog"
-        ]
+        "suffixes": ["Component", "Page", "Dialog"]
       }
     ]
   }

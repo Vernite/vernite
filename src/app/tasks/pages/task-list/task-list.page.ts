@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl } from '@ngneat/reactive-forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '@auth/services/user.service';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
@@ -21,7 +21,6 @@ import { Status } from '@tasks/interfaces/status.interface';
 import { Task } from '@tasks/interfaces/task.interface';
 import { StatusService } from '@tasks/services/status.service';
 import { TaskService } from '@tasks/services/task.service';
-import * as dayjs from 'dayjs';
 import { map, Observable } from 'rxjs';
 
 @Component({
@@ -47,7 +46,7 @@ export class TaskListPage {
   public statusList: Status[] = [];
 
   public filters: Filter[] = [];
-  public filtersControl = new FormControl();
+  public filtersControl = new FormControl<Filter[]>();
 
   isSubtasksRow = (i: number, row: Object) => row.hasOwnProperty('withSubtasks');
   expandedSubtasks = new ESet();
@@ -95,12 +94,6 @@ export class TaskListPage {
     return this.statusList.find((status) => status.id === statusId)?.name;
   }
 
-  changeDate(date?: Date) {
-    if (!date) return '-';
-    let sessionDate = dayjs(date);
-    return sessionDate.format('YYYY-MM-DD, hh:mm A');
-  }
-
   populateSubtasks(taskList: Task[]) {
     const populatedTasks = [];
     const tasks = taskList.filter((task) => !task.parentTaskId);
@@ -118,8 +111,6 @@ export class TaskListPage {
 
   createSubtask(task: Task) {
     this.taskService.openCreateSubtaskDialog(this.projectId, task).subscribe((task) => {
-      if (!task) return;
-
       location.reload();
     });
   }
@@ -136,6 +127,11 @@ export class TaskListPage {
     });
   }
 
+  /**
+   * TODO: Remove this function
+   *
+   * @deprecated
+   */
   initAssigneeChanging() {
     this.assigneeControl.valueChanges.subscribe((assignee) => {});
   }

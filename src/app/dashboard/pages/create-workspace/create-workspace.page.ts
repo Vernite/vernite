@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { Router } from '@angular/router';
 import { maxLengthValidator } from '@main/validators/max-length.validator';
 import { Subscription } from 'rxjs';

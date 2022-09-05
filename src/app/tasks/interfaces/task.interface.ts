@@ -1,9 +1,12 @@
 import { GitIssue, GitPull } from '@dashboard/interfaces/git-integration.interface';
+import { TaskType } from '@tasks/enums/task-type.enum';
+import { JSONParsable } from './../../_main/interfaces/json-parsable.interface';
+import { unixTimestamp } from '../../_main/interfaces/date.interface';
 
 /**
  * Project task interface
  */
-export interface Task {
+export interface Task extends JSONParsable {
   /**
    * Task id (unique per project)
    */
@@ -22,12 +25,22 @@ export interface Task {
   /**
    * Task deadline to be completed
    */
-  deadline: Date;
+  deadline: unixTimestamp;
 
   /**
    * Task estimated date to work on it
    */
-  estimatedDate: Date;
+  estimatedDate: unixTimestamp;
+
+  /**
+   * Project identifier
+   */
+  projectId: number;
+
+  /**
+   * Workspace identifier
+   */
+  workspaceId: number;
 
   /**
    * Status id (unique per database)
@@ -52,7 +65,7 @@ export interface Task {
   /**
    * Task type (ex. EPIC, USER_STORY)
    */
-  type: string;
+  type: TaskType;
 
   /**
    * Optional link to the GitHub pull request
@@ -68,44 +81,4 @@ export interface Task {
    * Optional user id who is assigned to task
    */
   assigneeId?: number;
-}
-
-/**
- * Extended project task interface
- */
-export interface TaskWithAdditionalData extends Omit<Task, 'pull' | 'issue'> {
-  /**
-   * Project identifier
-   */
-  projectId: number;
-
-  /**
-   * Workspace identifier
-   */
-  workspaceId: string;
-
-  /**
-   * Boolean to determine if task is connected to GitHub issue
-   */
-  connectWithIssueOnGitHub: boolean;
-
-  /**
-   * Boolean to determine if task should be attached to existing GitHub issue instead of creating new one
-   */
-  issueAttachGithub: boolean;
-
-  /**
-   * Boolean to determine if task is connected to GitHub pull request
-   */
-  connectWithPullRequestOnGitHub: boolean;
-
-  /**
-   * GitHub pull to which the task is connected to
-   */
-  pull: GitPull;
-
-  /**
-   * GitHub issue to which the task is connected to
-   */
-  issue: GitIssue;
 }

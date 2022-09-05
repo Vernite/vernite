@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
 import { RouterExtensionsService } from '@main/services/router-extensions.service';
@@ -17,7 +17,7 @@ export interface AddMemberDialogData {
   templateUrl: './add-member.dialog.html',
   styleUrls: ['./add-member.dialog.scss'],
 })
-export class AddMemberDialog implements OnInit {
+export class AddMemberDialog {
   public statusList$!: Observable<Status[]>;
   public workspaceList$!: Observable<Workspace[]>;
 
@@ -30,19 +30,6 @@ export class AddMemberDialog implements OnInit {
     private dialogRef: MatDialogRef<AddMemberDialog>,
     private routerExtensions: RouterExtensionsService,
   ) {}
-
-  ngOnInit() {
-    this.loadParamsFromUrl();
-
-    const { workspaceId, projectId } = this.data;
-    this.form.patchValue({ workspaceId, projectId });
-  }
-
-  loadParamsFromUrl() {
-    const { workspaceId, projectId } = this.routerExtensions.snapshot.params;
-    this.data.workspaceId = this.data.workspaceId || Number(workspaceId);
-    this.data.projectId = this.data.projectId || Number(projectId);
-  }
 
   addMembers() {
     const formValues = this.form.value;

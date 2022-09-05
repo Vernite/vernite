@@ -1,4 +1,6 @@
-export interface User {
+import { JSONParsable } from '@main/interfaces/json-parsable.interface';
+
+export interface User extends JSONParsable {
   id: number;
   name: string;
   surname: string;
@@ -6,21 +8,22 @@ export interface User {
   username: string;
   password: string;
   avatar: string;
+  /** Not yet in API */
+  dateFormat: string;
 }
 
-export interface UserWithPrivileges {
+export interface UserWithPrivileges extends JSONParsable {
   user: User;
   privileges: number;
 }
 
-export interface ModifyUser {
-  name: string;
-  surname: string;
-  password: string;
-  avatar: string;
+export interface ModifyUser extends JSONParsable {
+  name?: string;
+  surname?: string;
+  avatar?: string;
 }
 
-export interface UserData {
+export interface UserData extends JSONParsable {
   id: number;
   name: string;
   surname: string;

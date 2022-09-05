@@ -1,5 +1,10 @@
 @import '../../../../styles/typography';
 
+:host {
+  display: inline-block;
+  width: 100%;
+}
+
 .form-field {
   display: flex;
   max-width: 400px;
@@ -26,7 +31,6 @@ $height: 44px;
 // New input
 .input-form-field {
   position: relative;
-  height: $height;
 
   // Static label for input
   .static-label {
@@ -97,7 +101,7 @@ $height: 44px;
     position: relative;
     display: flex;
     width: 100%;
-    height: 100%;
+    height: $height;
     background-color: var(--color-input-background);
     border-radius: var(--border-radius);
     transition: background-color 0.2s ease-in-out;
@@ -170,7 +174,7 @@ $height: 44px;
 
 .error {
   position: absolute;
-  margin-top: 0.4rem;
+  margin-top: 0.2rem;
   color: var(--color-red-500);
   font-size: 12px;
   line-height: 0.8rem;

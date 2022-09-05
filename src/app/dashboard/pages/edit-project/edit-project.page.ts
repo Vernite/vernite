@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
@@ -21,7 +21,7 @@ export class EditProjectPage implements OnDestroy {
    */
   public form = new FormGroup({
     name: new FormControl('', [requiredValidator(), maxLengthValidator(50)]),
-    workspaceId: new FormControl(null, [requiredValidator()]),
+    workspaceId: new FormControl<number | null>(null, [requiredValidator()]),
   });
 
   public project$!: Observable<Project>;
@@ -75,7 +75,7 @@ export class EditProjectPage implements OnDestroy {
       const workspace = workspaces.find((workspace) => workspace.id === this.workspaceId);
       if (workspace) {
         this.form.patchValue({
-          newWorkspaceId: workspace.id,
+          workspaceId: workspace.id,
         });
       }
     });

@@ -47,13 +47,13 @@ jobs:
 
       # Run tests
       - name: Unit tests
-        run: yarn build:test
+        run: yarn unit:build
 
       # Build documentation and badges
       - name: Documentation
         run: |
-          yarn build:docs
-          yarn build:badges
+          yarn docs:build
+          yarn badges:build
 
       # Copy default redirect page
       - name: Redirect page copy

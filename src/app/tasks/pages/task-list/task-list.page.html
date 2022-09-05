@@ -57,7 +57,7 @@
       </div>
 
       <!-- Deadline cell -->
-      <div class="cell w-52">{{changeDate(task.deadline)}}</div>
+      <div class="cell w-52">{{ task.deadline | dateByPreferences | async }}</div>
 
       <!-- Actions cell -->
       <div class="cell action justify-center">
@@ -116,7 +116,7 @@
         </div>
 
         <!-- Deadline cell -->
-        <div class="cell w-52">{{changeDate(subtask.deadline)}}</div>
+        <div class="cell w-52">{{ subtask.deadline | dateByPreferences | async }}</div>
 
         <!-- Actions cell -->
         <div class="cell action justify-center">

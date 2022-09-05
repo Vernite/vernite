@@ -121,11 +121,8 @@ export class SelectionEditPlugin {
 
   public static getSelectionEdits(edits: SelectionEditOperation): EditOperation[] {
     const editor: Editor = this as any;
-    console.log(editor);
     const selections = editor.getSelections();
     let _edits: EditOperation[] = [];
-
-    console.log(selections);
 
     if (!selections) return [];
 
@@ -157,7 +154,6 @@ export class SelectionEditPlugin {
   ) {
     const editor: Editor = this as any;
     const _edits = this.getSelectionEdits(edits);
-    console.log(_edits);
     editor.executeEdits('', _edits, endCursorState);
   }
 }

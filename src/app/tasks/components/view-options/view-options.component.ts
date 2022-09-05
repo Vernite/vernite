@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl } from '@ngneat/reactive-forms';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';

@@ -3,15 +3,15 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "ng serve",
-      "type": "pwa-chrome",
+      "name": "Development server",
+      "type": "chrome",
       "request": "launch",
       "preLaunchTask": "npm: start",
       "url": "http://localhost:4200/"
     },
     {
-      "name": "ng test",
-      "type": "pwa-chrome",
+      "name": "Unit tests (chrome)",
+      "type": "chrome",
       "request": "attach",
       "port": 9222,
       "address": "localhost",
@@ -23,6 +23,14 @@
       "restart": true,
       "sourceMaps": true,
       "preLaunchTask": "npm: start:test:chrome"
+    },
+    {
+      "name": "Unit tests (firefox)",
+      "type": "firefox",
+      "request": "attach",
+      "port": 9222,
+      "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "npm: start:test:firefox"
     }
   ]
 }

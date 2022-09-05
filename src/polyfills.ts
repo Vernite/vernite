@@ -53,4 +53,16 @@ import 'zone.js'; // Included with Angular CLI.
 
 /***************************************************************************************************
  * APPLICATION IMPORTS
+ *
+ * @ TODO: Think to move this somewhere else
  */
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import localeData from 'dayjs/plugin/localeData';
+import objectSupport from 'dayjs/plugin/objectSupport';
+import formatParser from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(utc);
+dayjs.extend(localeData);
+dayjs.extend(objectSupport);
+dayjs.extend(formatParser);

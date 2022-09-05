@@ -1,5 +1,5 @@
 import { DOCS_SELECT, DOCS_READONLY } from '../../../../stories/helpers/arg-type.helper';
-import { FormControl } from '@angular/forms';
+import { FormControl } from '@ngneat/reactive-forms';
 import { TextareaComponent } from './textarea.component';
 import { FormControlStoryPageConfig } from 'src/stories/helpers/classes/form-control-story-page-config.class';
 import { StoryTemplate } from 'src/stories/helpers/classes/story-template.class';

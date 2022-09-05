@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { Router } from '@angular/router';
 import { UserService } from '@auth/services/user.service';
 import { catchError, EMPTY, Subscription } from 'rxjs';
@@ -27,7 +27,7 @@ export class LoginPage implements OnInit {
   public form = new FormGroup({
     email: new FormControl('', [requiredValidator()], []),
     password: new FormControl('', [requiredValidator()], []),
-    remember: new FormControl('', [], []),
+    remember: new FormControl<boolean>(false, [], []),
   });
 
   ngOnInit() {

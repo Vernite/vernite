@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { FormArray, FormControl, NgControl } from '@angular/forms';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { NgControl } from '@angular/forms';
+import { FormArray, FormControl } from '@ngneat/reactive-forms';
 import { ControlAccessor } from '@main/classes/control-accessor.class';
 import { Filter } from '@main/interfaces/filters.interface';
 
@@ -23,14 +24,14 @@ export class FiltersComponent extends ControlAccessor {
   }
 
   private _filters: Filter[] = [];
-  public form?: FormArray;
+  public form?: FormArray<any>;
 
-  constructor(public override ngControl: NgControl) {
-    super(ngControl);
+  constructor(public override ngControl: NgControl, cdRef: ChangeDetectorRef) {
+    super(ngControl, cdRef);
   }
 
   public getControl(index: number) {
-    const control = (this.form?.controls[index] || new FormControl()) as FormControl;
+    const control = (this.form?.controls[index] || new FormControl()) as FormControl<any>;
     return control;
   }
 

@@ -18,10 +18,9 @@ const config = new StoryPageConfig({
   },
 });
 
-export default config.meta();
-
 const template = new StoryTemplate<ButtonComponent>({ content: 'Button' });
 
+export default config.meta();
 export const $Default = new Story({ template, config }).story();
 export const Variant = new Story({
   template,

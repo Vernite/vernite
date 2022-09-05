@@ -86,7 +86,8 @@ export class TextareaComponent extends ControlAccessor implements OnInit, AfterV
   /** @ignore */
   faFileCode = faFileCode;
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
+    super.ngOnInit();
     Marked.init();
     Monaco.init();
     hljs.configure({ languages: [] });

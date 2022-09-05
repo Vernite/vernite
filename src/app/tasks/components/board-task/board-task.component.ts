@@ -3,7 +3,6 @@ import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { faCheck, faCodeCommit, faCodePullRequest } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '@main/services/dialog.service';
 import { TaskService } from '@tasks/services/task.service';
-import * as dayjs from 'dayjs';
 import { Task } from '../../interfaces/task.interface';
 
 @Component({
@@ -45,10 +44,5 @@ export class BoardTaskComponent {
 
       location.reload();
     });
-  }
-
-  changeDate(date: Date) {
-    let sessionDate = dayjs(date);
-    return sessionDate.format('YYYY-MM-DD, hh:mm A');
   }
 }

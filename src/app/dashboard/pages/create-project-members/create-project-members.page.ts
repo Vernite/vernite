@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddMemberDialog } from '@dashboard/dialogs/add-member/add-member.dialog';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
@@ -8,9 +8,9 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '@main/services/dialog.service';
 import { maxLengthValidator } from '@main/validators/max-length.validator';
 import { Observable, Subscription } from 'rxjs';
-import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { ProjectService } from '../../services/project.service';
 import { WorkspaceService } from '../../services/workspace.service';
+import { requiredValidator } from '@main/validators/required.validator';
 
 @Component({
   selector: 'app-create-project-members',
@@ -25,6 +25,7 @@ export class CreateProjectMembersPage {
    */
   public form = new FormGroup({
     name: new FormControl('', [requiredValidator(), maxLengthValidator(50)], []),
+    workspaceId: new FormControl(0, [requiredValidator()]),
   });
 
   /**
@@ -54,7 +55,7 @@ export class CreateProjectMembersPage {
     const { workspaceId } = this.activatedRoute.snapshot.params;
     this.workspaceId = workspaceId;
     this.workspace$ = this.workspaceService.get(workspaceId);
-    this.form.addControl('workspaceId', new FormControl(workspaceId));
+    this.form.get('workspaceId').setValue(workspaceId);
   }
 
   /**

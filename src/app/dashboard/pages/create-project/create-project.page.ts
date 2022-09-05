@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddMemberDialog } from '@dashboard/dialogs/add-member/add-member.dialog';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
@@ -22,7 +22,8 @@ export class CreateProjectPage {
    * Form group for the project creation.
    */
   public form = new FormGroup({
-    name: new FormControl('', [requiredValidator(), maxLengthValidator(50)], []),
+    name: new FormControl<string>('', [requiredValidator(), maxLengthValidator(50)], []),
+    workspaceId: new FormControl<number>(0, [requiredValidator()], []),
   });
 
   faPlus = faPlus;
@@ -53,7 +54,7 @@ export class CreateProjectPage {
     const { workspaceId } = this.activatedRoute.snapshot.params;
     this.workspaceId = workspaceId;
     this.workspace$ = this.workspaceService.get(workspaceId);
-    this.form.addControl('workspaceId', new FormControl(workspaceId));
+    this.form.get('workspaceId').setValue(workspaceId);
   }
 
   openAddMembersDialog() {

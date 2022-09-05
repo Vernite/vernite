@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl } from '@ngneat/reactive-forms';
 import { requiredValidator } from './required.validator';
 
 describe('Test required validator', () => {

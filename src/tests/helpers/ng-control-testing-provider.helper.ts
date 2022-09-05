@@ -1,7 +1,8 @@
-import { AbstractControl, FormControl, NgControl } from '@angular/forms';
+import { FormControl } from '@ngneat/reactive-forms';
+import { AbstractControl, NgControl } from '@angular/forms';
 
 export class TestNgControl extends NgControl {
-  private _control = new FormControl('');
+  private _control = new FormControl<any>('');
   viewToModelUpdate(newValue: any): void {
     this._control = newValue;
   }

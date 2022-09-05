@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { ControlAccessor } from '@main/classes/control-accessor.class';
 import { Status } from '@tasks/interfaces/status.interface';
@@ -27,8 +27,12 @@ export class StatusLabelComponent extends ControlAccessor {
 
   statusMap = new Map<number, Status>();
 
-  constructor(public override ngControl: NgControl, private taskService: TaskService) {
-    super(ngControl);
+  constructor(
+    public override ngControl: NgControl,
+    private taskService: TaskService,
+    cdRef: ChangeDetectorRef,
+  ) {
+    super(ngControl, cdRef);
   }
 
   @ViewChild('overlay') overlay!: ElementRef<HTMLElement>;

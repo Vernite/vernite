@@ -2,12 +2,13 @@
 <h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.CREATE && !data.subtask" i18n>Create new task</h1>
 <h1 mat-dialog-title *ngIf="data.subtask" i18n>Create new subtask</h1>
 <div mat-dialog-content>
-  <form (submit)="confirm()" [formGroup]="form" autocomplete="off" *ngIf="statusList$">
+  <form (submit)="confirm()" [formGroup]="form" autocomplete="off">
 
     <!-- Workspace -->
     <app-select *ngIf="!data.subtask" formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
       <app-option *ngFor="let workspace of workspaceList$ | async" [value]="workspace.id">{{ workspace.name }}
       </app-option>
+      <app-empty-options i18n>There is no workspaces</app-empty-options>
     </app-select>
 
     <!-- Project -->
@@ -15,6 +16,7 @@
       <app-select formControlName="projectId" floatingLabel="Project" i18n-floatingLabel>
         <app-option *ngFor="let project of projectList$ | async" [value]="project.id">{{project.name}}
         </app-option>
+        <app-empty-options i18n>Selected workspace is empty</app-empty-options>
       </app-select>
     </ng-container>
 
@@ -36,8 +38,10 @@
 
     <!-- Status -->
     <app-select formControlName="statusId" floatingLabel="Status" i18n-floatingLabel>
-      <app-option *ngFor="let status of statusList$ | async" [value]="status.id">{{ status.name }}
+      <app-option *ngFor="let status of statusList$ | async" [value]="status.id">
+        {{ status.name }}
       </app-option>
+      <app-empty-options i18n>This project has no statuses</app-empty-options>
     </app-select>
 
     <!-- Priorities -->
@@ -58,11 +62,11 @@
 
     <!-- GitHub issue integration -->
     <input-issue *ngIf="isGitHubIntegrationAvailable && form.get('projectId')?.value" formControlName="issue"
-      [projectId]="form.get('projectId')?.value"></input-issue>
+      [projectId]="form.get('projectId').value || -1"></input-issue>
 
     <!-- Github pull request integration -->
     <input-pull-request *ngIf="isGitHubIntegrationAvailable && form.get('projectId')?.value" formControlName="pull"
-      [projectId]="form.get('projectId')?.value"></input-pull-request>
+      [projectId]="form.get('projectId').value || -1"></input-pull-request>
 
   </form>
 </div>

@@ -1,6 +1,7 @@
 import { ProjectMember } from './project-member.interface';
+import { JSONParsable } from './../../_main/interfaces/json-parsable.interface';
 
-export interface Project {
+export interface Project extends JSONParsable {
   /**
    * The project's ID.
    */

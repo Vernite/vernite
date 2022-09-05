@@ -1,5 +1,14 @@
 import { AutofillMonitor } from '@angular/cdk/text-field';
-import { Component, ElementRef, HostBinding, Input, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostBinding,
+  Input,
+  Output,
+  ViewChild,
+  EventEmitter,
+} from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { ControlAccessor } from '../../classes/control-accessor.class';
 
@@ -42,23 +51,34 @@ export class InputComponent extends ControlAccessor {
    */
   @Input() readonly?: boolean;
 
+  @Input() allowResizeByError?: boolean;
+
+  // eslint-disable-next-line @angular-eslint/no-output-native
+  @Output() focus: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   /** @ignore */
   @HostBinding('class.focused') focused = false;
 
   /** @ignore */
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
 
-  constructor(public override ngControl: NgControl, private autofillMonitor: AutofillMonitor) {
-    super(ngControl);
+  constructor(
+    public override ngControl: NgControl,
+    private autofillMonitor: AutofillMonitor,
+    cdRef: ChangeDetectorRef,
+  ) {
+    super(ngControl, cdRef);
   }
 
   /** @ignore */
   onFocus() {
     this.focused = true;
+    this.focus.emit(true);
   }
 
   /** @ignore */
   onBlur() {
     this.focused = false;
+    this.focus.emit(false);
   }
 }

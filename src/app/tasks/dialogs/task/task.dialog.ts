@@ -1,5 +1,4 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GitIssue, GitPull } from '@dashboard/interfaces/git-integration.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
@@ -7,14 +6,20 @@ import { Workspace } from '@dashboard/interfaces/workspace.interface';
 import { GitIntegrationService } from '@dashboard/services/git-integration.service';
 import { WorkspaceService } from '@dashboard/services/workspace.service';
 import { Enum } from '@main/classes/enum.class';
+import { validateForm } from '@main/classes/form.class';
+import { timeToInteraction } from '@main/classes/time-to-interaction.class';
 import { RouterExtensionsService } from '@main/services/router-extensions.service';
+import { FormControl, FormGroup } from '@ngneat/reactive-forms';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TaskPriority } from '@tasks/enums/task-priority.enum';
 import { SubTaskType, TaskType } from '@tasks/enums/task-type.enum';
 import { Status } from '@tasks/interfaces/status.interface';
 import { StatusService } from '@tasks/services/status.service';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { isNil } from 'lodash-es';
+import { distinctUntilChanged, map, Observable } from 'rxjs';
 import { requiredValidator } from '../../../_main/validators/required.validator';
 import { Task } from '../../interfaces/task.interface';
+import { unixTimestamp } from '../../../_main/interfaces/date.interface';
 
 export enum TaskDialogVariant {
   CREATE = 'create',
@@ -29,6 +34,7 @@ export interface TaskDialogData {
   subtask?: boolean;
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-task-dialog',
   templateUrl: './task.dialog.html',
@@ -43,29 +49,32 @@ export class TaskDialog implements OnInit {
 
   public statusList$!: Observable<Status[]>;
   public workspaceList$!: Observable<Workspace[]>;
-  public projectList$: Observable<Project[]> = new BehaviorSubject([]);
+  public projectList$!: Observable<Project[]>;
   public issueList$!: Observable<GitIssue[]>;
   public pullList$!: Observable<GitPull[]>;
 
   public isGitHubIntegrationAvailable: boolean = false;
 
   public form = new FormGroup({
-    id: new FormControl(null),
-    parentTaskId: new FormControl(null),
-    type: new FormControl(this.data.subtask ? SubTaskType.SUBTASK : TaskType.TASK, [
-      requiredValidator(),
-    ]),
-    name: new FormControl('', [requiredValidator()]),
-    statusId: new FormControl(null, [requiredValidator()]),
-    projectId: new FormControl(null, [requiredValidator()]),
-    workspaceId: new FormControl(null, [requiredValidator()]),
-    description: new FormControl(''),
-    priority: new FormControl(TaskPriority.MEDIUM, [requiredValidator()]),
-    deadline: new FormControl(null),
-    estimatedDate: new FormControl(null),
-    issue: new FormControl(null),
-    pull: new FormControl(null),
+    id: new FormControl<number | null>(null),
+    parentTaskId: new FormControl<number | null>(null),
+    type: new FormControl<TaskType | SubTaskType>(
+      this.data.subtask ? SubTaskType.SUBTASK : TaskType.TASK,
+      [requiredValidator()],
+    ),
+    name: new FormControl<string>('', [requiredValidator()]),
+    statusId: new FormControl<number | null>(null, [requiredValidator()]),
+    projectId: new FormControl<number | null>(null, [requiredValidator()]),
+    workspaceId: new FormControl<number | null>(null, [requiredValidator()]),
+    description: new FormControl<string>(''),
+    priority: new FormControl<TaskPriority>(TaskPriority.MEDIUM, [requiredValidator()]),
+    deadline: new FormControl<unixTimestamp | null>(null),
+    estimatedDate: new FormControl<unixTimestamp | null>(null),
+    issue: new FormControl<GitIssue | 'CREATE' | 'DETACH' | null>(null),
+    pull: new FormControl<GitPull | 'DETACH' | null>(null),
   });
+
+  public interactive$ = timeToInteraction();
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: TaskDialogData,
@@ -87,8 +96,14 @@ export class TaskDialog implements OnInit {
 
     this.workspaceList$ = this.workspaceService.list();
 
-    this.form.get('workspaceId')?.valueChanges.subscribe(this.onWorkspaceIdChange.bind(this));
-    this.form.get('projectId')?.valueChanges.subscribe(this.onProjectIdChange.bind(this));
+    this.form
+      .get('workspaceId')
+      .valueChanges.pipe(distinctUntilChanged(), untilDestroyed(this))
+      .subscribe(this.onWorkspaceIdChange.bind(this));
+    this.form
+      .get('projectId')
+      .valueChanges.pipe(distinctUntilChanged(), untilDestroyed(this))
+      .subscribe(this.onProjectIdChange.bind(this));
 
     if (workspaceId) {
       this.onWorkspaceIdChange(workspaceId);
@@ -99,16 +114,24 @@ export class TaskDialog implements OnInit {
     }
   }
 
-  onWorkspaceIdChange(workspaceId: number) {
-    this.projectList$ = this.projectList$ = this.workspaceService
+  onWorkspaceIdChange(workspaceId: number | null) {
+    if (this.interactive$.value) {
+      this.form.get('projectId').setValue(null);
+    }
+
+    if (!workspaceId) return;
+
+    this.projectList$ = this.workspaceService
       .get(workspaceId)
       .pipe(map((workspace) => workspace.projectsWithPrivileges.map((project) => project.project)));
   }
 
-  onProjectIdChange(projectId: number) {
+  onProjectIdChange(projectId: number | null) {
+    if (!projectId) return;
+
     this.statusList$ = this.statusService.list(projectId);
 
-    this.statusList$.subscribe((statuses) => {
+    this.statusList$.pipe(untilDestroyed(this)).subscribe((statuses) => {
       const statusId = statuses.find((status) => status.begin)?.id;
 
       if (!statusId) return;
@@ -123,19 +146,15 @@ export class TaskDialog implements OnInit {
 
   loadParamsFromUrl() {
     const { workspaceId, projectId } = this.routerExtensions.snapshot.params;
-    this.data.workspaceId = this.data.workspaceId || Number(workspaceId);
-    this.data.projectId = this.data.projectId || Number(projectId);
+
+    if (!isNil(workspaceId) && !this.data.workspaceId) this.data.workspaceId = Number(workspaceId);
+    if (!isNil(projectId) && !this.data.projectId) this.data.projectId = Number(projectId);
   }
 
   confirm() {
-    const formValues = this.form.value;
-
-    this.form.markAllAsTouched();
-    this.form.updateValueAndValidity();
-
-    if (this.form.invalid) return;
-
-    this.dialogRef.close(formValues);
+    if (validateForm(this.form)) {
+      this.dialogRef.close(this.form.value);
+    }
   }
 
   cancel() {

@@ -1,5 +1,8 @@
-import { Component, Input, OnDestroy, Optional } from '@angular/core';
-import { ControlValueAccessor, FormControl, NgControl, ValidationErrors } from '@angular/forms';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, Optional } from '@angular/core';
+import { AbstractControl, NgControl, Validator } from '@angular/forms';
+import { ControlValueAccessor } from '@ngneat/reactive-forms';
+import { ValidationError } from '@main/interfaces/validation-error.interface';
+import { FormControl } from '@ngneat/reactive-forms';
 import { Subject } from 'rxjs';
 
 /**
@@ -7,10 +10,11 @@ import { Subject } from 'rxjs';
  */
 @Component({
   template: '',
-  // providers: [{ provide: NgControl, useClass: TestNgControl }],
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
-export class ControlAccessor<T = any> implements OnDestroy, ControlValueAccessor {
+export class ControlAccessor<T = any>
+  implements OnInit, OnDestroy, ControlValueAccessor, Validator
+{
   /**
    * Property that defines if field should prompt user how to fill it. For example
    * in a form, if a field is email, it will give the user last used emails
@@ -29,6 +33,10 @@ export class ControlAccessor<T = any> implements OnDestroy, ControlValueAccessor
     return this.ngControl?.name?.toString() || '';
   }
 
+  public get isControlInitialized() {
+    return Boolean(this.ngControl?.control);
+  }
+
   /**
    * Private property to set field as required
    *
@@ -39,8 +47,8 @@ export class ControlAccessor<T = any> implements OnDestroy, ControlValueAccessor
   /**
    * Control that is used by the form.
    */
-  public get control(): FormControl {
-    return (this.ngControl?.control as FormControl) || new FormControl();
+  public get control(): FormControl<T> {
+    return ((this.ngControl as any)?.control as FormControl<T>) || new FormControl<T>();
   }
 
   /**
@@ -64,10 +72,7 @@ export class ControlAccessor<T = any> implements OnDestroy, ControlValueAccessor
     return this.control.value;
   }
 
-  /**
-   * Get the errors of the control.
-   */
-  public get errors(): ValidationErrors | null {
+  public get errors() {
     return this.control.errors;
   }
 
@@ -80,11 +85,37 @@ export class ControlAccessor<T = any> implements OnDestroy, ControlValueAccessor
      * Control passed from DOM to the component, contains all the information about form control
      */
     @Optional() public ngControl: NgControl,
+    protected cdRef: ChangeDetectorRef,
   ) {
     this.ngControl.valueAccessor = this;
+  }
 
-    this._initCheckForTouch();
-    this._checkIfIsRequired();
+  ngOnInit() {
+    this._watchForInit();
+  }
+
+  /**
+   * @ignore
+   */
+  private _watchForInit() {
+    const afterSetup = () => {
+      this._checkIfIsRequired();
+      this._initValidation();
+
+      this.ngAfterControlInit();
+    };
+
+    if (this.ngControl.control) {
+      return afterSetup();
+    }
+
+    const _setUpControl = (this.ngControl as any)._setUpControl;
+    (this.ngControl as any)._setUpControl = (...args: any[]) => {
+      const tmp = _setUpControl.apply(this.ngControl, ...args);
+
+      afterSetup();
+      return tmp;
+    };
   }
 
   /**
@@ -104,16 +135,14 @@ export class ControlAccessor<T = any> implements OnDestroy, ControlValueAccessor
   }
 
   /**
-   * Apply the touched observable on ngControl and control fields
-   *
    * @ignore
    */
-  private _initCheckForTouch(): void {
-    (this.control as any)._markAsTouched = this.control.markAsTouched;
-    this.control.markAsTouched = () => {
-      (this.control as any)._markAsTouched();
-      this.touched$.next(true);
-    };
+  private _initValidation(): void {
+    this.control.addValidators((control: AbstractControl) => this.validate(control));
+  }
+
+  validate(control: AbstractControl): null | ValidationError {
+    return null;
   }
 
   /**
@@ -124,7 +153,9 @@ export class ControlAccessor<T = any> implements OnDestroy, ControlValueAccessor
    *
    * @param value The new value for the element
    */
-  writeValue(value: T): void {}
+  writeValue(value: T): void {
+    // this.cdRef.markForCheck();
+  }
 
   /**
    * Registers a callback function that is called when the control's value changes in the UI.
@@ -146,11 +177,7 @@ export class ControlAccessor<T = any> implements OnDestroy, ControlValueAccessor
    * @param isDisabled State to set to the control
    */
   setDisabledState(isDisabled: boolean) {
-    if (isDisabled) {
-      this.control.disable();
-    } else {
-      this.control.enable();
-    }
+    this.control.setDisable(isDisabled);
   }
 
   /** @ignore */
@@ -159,4 +186,6 @@ export class ControlAccessor<T = any> implements OnDestroy, ControlValueAccessor
     this.destroy$.complete();
     this.touched$.complete();
   }
+
+  ngAfterControlInit(): void {}
 }

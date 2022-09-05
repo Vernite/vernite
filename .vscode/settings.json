@@ -25,6 +25,10 @@
   "stylelint.validate": ["scss"],
 
   "explorer.compactFolders": false,
+
+  /* ====================== */
+  /* ==== Hidden files ==== */
+  /* ====================== */
   "files.exclude": {
     "**/.git": false,
     "**/.svn": false,
@@ -57,5 +61,10 @@
     "proxy.conf.json": false,
     "coverage": false
   },
-  "explorerExclude.backup": null
+  "explorerExclude.backup": {},
+
+  /* ================== */
+  /* ==== Spelling ==== */
+  /* ================== */
+  "cSpell.words": ["compodoc", "devkit", "lcov", "ngneat", "tabuckner"]
 }

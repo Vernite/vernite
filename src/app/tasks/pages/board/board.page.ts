@@ -87,15 +87,6 @@ export class BoardPage implements OnInit, OnDestroy {
     const previousTaskIndex = event.previousIndex;
     const task = event.previousContainer.data[previousTaskIndex];
 
-    console.log({ previousStatus, task });
-
-    console.log(
-      event.previousContainer.data,
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex,
-    );
-
     const onSuccess = () => {
       task.statusId = newStatus.id;
       this.taskService.update(this.projectId, task as any).subscribe();

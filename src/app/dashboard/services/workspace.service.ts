@@ -42,7 +42,7 @@ export class WorkspaceService {
    * @param workspace workspace object to update in the API
    * @returns Request observable, which completes when request is finished
    */
-  public update(workspace: Workspace): Observable<Workspace> {
+  public update(workspace: Partial<Workspace>): Observable<Workspace> {
     return this.apiService.put(`/workspace/${workspace.id}`, { body: workspace });
   }
 
@@ -56,10 +56,10 @@ export class WorkspaceService {
 
   /**
    * Creates a new workspace.
-   * @param workspace workspace to modify
+   * @param workspace workspace options to create in the API
    * @returns Request observable, which completes when request is finished
    */
-  public create(workspace: Workspace): Observable<Workspace> {
+  public create(workspace: { name: string }): Observable<Workspace> {
     return this.apiService.post(`/workspace`, { body: workspace });
   }
 
@@ -71,5 +71,5 @@ export class WorkspaceService {
       404: $localize`Workspace with this ID does not exist.`,
     },
   })
-  private validate(identifier: string): any {}
+  private validate(_identifier: string): any {}
 }

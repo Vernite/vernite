@@ -1,8 +1,10 @@
 import { FilterCheckbox } from '@main/interfaces/filters.interface';
 import { Task } from '@tasks/interfaces/task.interface';
 
+/** @TODO: split this class into modules */
+
 export class Filters {
-  public static ONLY_MY_TASKS(currentUserId: string): FilterCheckbox<any> {
+  public static ONLY_MY_TASKS(currentUserId: number): FilterCheckbox<any> {
     return {
       type: 'checkbox',
       label: $localize`Only my tasks`,
@@ -11,8 +13,10 @@ export class Filters {
         0: {},
       },
       value: 0,
-      apply(tasks: Task[], option: { assigneeId?: string }) {
-        return tasks.filter((task) => task.assigneeId === option.assigneeId);
+      apply(tasks: Task[], option: { assigneeId?: number }) {
+        return tasks.filter((task) =>
+          option.assigneeId ? task.assigneeId === option.assigneeId : true,
+        );
       },
     };
   }

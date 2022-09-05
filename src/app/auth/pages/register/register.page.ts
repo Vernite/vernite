@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { Router } from '@angular/router';
 import { emailValidator } from '@main/validators/email.validator';
 import { passwordValidator } from '@main/validators/password.validator';
@@ -31,25 +31,27 @@ export class RegisterPage {
    * Form group for register.
    */
   public form = new FormGroup({
-    email: new FormControl('', [requiredValidator(), emailValidator()], []),
-    password: new FormControl('', [requiredValidator(), passwordValidator()], []),
-    repeatPassword: new FormControl(
-      '',
-      [
-        requiredValidator(),
-        passwordValidator(),
-        sameAsValidator('password', $localize`Given passwords are not the same `),
-      ],
-      [],
-    ),
-    name: new FormControl('', [requiredValidator()], []),
-    surname: new FormControl('', [requiredValidator()], []),
-    username: new FormControl('', [requiredValidator()], []),
-    agreements: new FormControl('', [requiredValidator()], []),
+    email: new FormControl('', [requiredValidator(), emailValidator()]),
+    password: new FormControl('', [requiredValidator(), passwordValidator()]),
+    repeatPassword: new FormControl('', [
+      requiredValidator(),
+      passwordValidator(),
+      sameAsValidator('password', $localize`Given passwords are not the same `),
+    ]),
+    name: new FormControl('', [requiredValidator()]),
+    surname: new FormControl('', [requiredValidator()]),
+    username: new FormControl('', [requiredValidator()]),
+    agreements: new FormControl('', [requiredValidator()]),
   });
 
   nextStage() {
-    let formFields: string[] = ['email', 'password', 'repeatPassword', 'agreements'];
+    // TODO: Think something about this stages and validation
+    let formFields: ['email', 'password', 'repeatPassword', 'agreements'] = [
+      'email',
+      'password',
+      'repeatPassword',
+      'agreements',
+    ];
     let correctData: boolean = true;
     for (let field of formFields) {
       this.form.get(field)?.markAsTouched();

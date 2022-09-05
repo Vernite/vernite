@@ -1,5 +1,5 @@
 import { DOCS_SELECT } from '../../../../stories/helpers/arg-type.helper';
-import { FormControl } from '@angular/forms';
+import { FormControl } from '@ngneat/reactive-forms';
 import { FormControlStoryPageConfig } from 'src/stories/helpers/classes/form-control-story-page-config.class';
 import { StoryTemplate } from 'src/stories/helpers/classes/story-template.class';
 import { Story } from 'src/stories/helpers/classes/story.class';
@@ -29,6 +29,8 @@ export const FloatingLabel = new Story({
   description: `Best way to describe field purpose is to add a \`floatingLabel\`. The floating label will
     be shown above the field if field is in focus state or when the input contains some value.`,
 }).story();
+
+// TODO: Make interactive documentation here
 
 // export const StaticLabel = new Story({
 //   template,

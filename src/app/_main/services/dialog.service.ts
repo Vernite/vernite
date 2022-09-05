@@ -42,8 +42,6 @@ export class DialogService {
    * @returns Reference to the newly-opened dialog.
    */
   open(component: any, data: any, outlet?: DialogOutlet): MatDialogRef<any> | DialogRef {
-    console.log();
-
     let dialog: MatDialogRef<any> | DialogRef;
 
     if (outlet) {

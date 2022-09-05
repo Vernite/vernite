@@ -1,8 +1,10 @@
 import { Project } from './project.interface';
+import { JSONParsable } from './../../_main/interfaces/json-parsable.interface';
+
 /**
  * Main workspace (projects/spaces grouping entity) interface
  */
-export interface Workspace {
+export interface Workspace extends JSONParsable {
   /**
    * Workspace ID
    */

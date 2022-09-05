@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { UserUtils } from '@dashboard/classes/user.class';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
@@ -62,8 +62,12 @@ export class InputAssigneeComponent extends ControlAccessor {
     return this.isOpen$.value;
   }
 
-  constructor(public override ngControl: NgControl, private taskService: TaskService) {
-    super(ngControl);
+  constructor(
+    public override ngControl: NgControl,
+    private taskService: TaskService,
+    cdRef: ChangeDetectorRef,
+  ) {
+    super(ngControl, cdRef);
   }
 
   public open() {

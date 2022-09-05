@@ -30,8 +30,6 @@ export const exposeAllPossibilities = <C = any>(
       const inputsArray = values.map((v) => addInputToTemplate(baseTemplate, v));
       const template = inputsArray.join('');
 
-      console.log(wrapWithDiv(template));
-
       return wrapWithDiv(template);
     }),
   ];

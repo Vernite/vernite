@@ -29,12 +29,14 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DialogOutletComponent } from './components/dialog-outlet/dialog-outlet.component';
 import { FiltersComponent } from './components/filters/filters.component';
 import { IconComponent } from './components/icon/icon.component';
+import { DatePickerComponent } from './components/input-date-time/date-picker/date-picker.component';
 import { InputDateTimeComponent } from './components/input-date-time/input-date-time.component';
 import { InputComponent } from './components/input/input.component';
 import { MainViewComponent } from './components/main-view/main-view.component';
 import { NavElementWorkspaceComponent } from './components/nav-element-workspace/nav-element-workspace.component';
 import { NavElementComponent } from './components/nav-element/nav-element.component';
-import { OptionComponent } from './components/option/option.component';
+import { EmptyOptionsComponent } from './components/select/empty-options/empty-options.component';
+import { OptionComponent } from './components/select/option/option.component';
 import { SelectComponent } from './components/select/select.component';
 import { SidebarNavigationComponent } from './components/sidebar-navigation/sidebar-navigation.component';
 import { SnackbarOutletComponent } from './components/snackbar-outlet/snackbar-outlet.component';
@@ -48,7 +50,13 @@ import { LetDirective } from './directives/let.directive';
 import { ViewContainerDirective } from './directives/view-container.directive';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { MockPage } from './pages/mock/mock.page';
+import { DayjsPipe } from './pipes/dayjs/dayjs.pipe';
+import { DateByPreferencesPipe } from './pipes/date-by-preferences/date-by-preferences.pipe';
+import { DayOfWeekPipe } from './pipes/day-of-week/day-of-week.pipe';
+import { DayjsFormatPipe } from './pipes/dayjs-format/dayjs-format.pipe';
+import { MonthPipe } from './pipes/month/month.pipe';
 import { ValidationErrorPipe } from './pipes/validation-error/validation-error.pipe';
+import { YearPipe } from './pipes/year/year.pipe';
 import { ApiService } from './services/api.service';
 import { DialogService } from './services/dialog.service';
 
@@ -133,6 +141,15 @@ const ngModuleConfig = {
     MockPage,
     DialogOutletComponent,
     ViewContainerDirective,
+    EmptyOptionsComponent,
+    DatePickerComponent,
+    MonthPipe,
+    DayjsPipe,
+    YearPipe,
+    DayjsFormatPipe,
+    DayOfWeekPipe,
+    DayjsPipe,
+    DateByPreferencesPipe,
   ],
   providers: [
     DialogService,
@@ -149,6 +166,7 @@ const ngModuleConfig = {
  * @example
  * ```js
  * import { MainModule } from '@app/main/main.module';
+import { DayjsPipe } from './pipes/dayjs/dayjs.pipe';
  *
  * (@)NgModule({
  *   imports: [ ..., MainModule ],

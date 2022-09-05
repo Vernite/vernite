@@ -1,4 +1,5 @@
 import { HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
+import { JSONParsable, JSONPrimitive } from './json-parsable.interface';
 
 /**
  * Request options interface
@@ -8,7 +9,7 @@ export interface RequestOptions {
   /**
    * Body to send with the request. Used int POST, PATH, PATCH, DELETE requests.
    */
-  body?: any;
+  body?: JSONParsable | JSONPrimitive | JSONPrimitive[];
   /**
    * Headers to send with the request.
    */

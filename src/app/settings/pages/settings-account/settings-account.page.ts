@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { AuthService } from '@auth/services/auth.service';
 import { UserService } from '@auth/services/user.service';
 import { requiredValidator } from '@main/validators/required.validator';
@@ -34,14 +34,16 @@ export class SettingsAccountPage implements OnInit {
   }
 
   resetPassword() {
-    this.authService.resetPassword(this.form.value.email).subscribe(() => {
+    const email = this.form.get('email').value;
+
+    this.authService.resetPassword({ email }).subscribe(() => {
       this.authService.logout().subscribe();
     });
   }
 
   deleteAccountMailCheck() {
     this.authService.deleteAccount().subscribe(() => {
-      // dodac popup czy na pewno zgadzamy sie na usuniecie konta, jesli tak to infomracja ze zostal wyslany link na maila dezaktywujacy konto i ze ma mozliwosc jego przywrocenia do 7 dni
+      // TODO: dodac popup czy na pewno zgadzamy sie na usuniecie konta, jesli tak to infomracja ze zostal wyslany link na maila dezaktywujacy konto i ze ma mozliwosc jego przywrocenia do 7 dni
       this.authService.logout().subscribe();
     });
   }

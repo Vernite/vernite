@@ -1,3 +1,5 @@
+import { isString } from 'lodash-es';
+
 /**
  * Utilities class with some useful methods not available in any libraries.
  */
@@ -59,5 +61,18 @@ export class Utils {
   public static isLetter(char: String) {
     if (char.length > 1) return false;
     return (char >= 'A' && char <= 'Z') || (char >= 'a' && char <= 'z');
+  }
+
+  public static isISODate(text: any) {
+    if (!isString(text)) return;
+    if ((new Date(text) as any) !== 'Invalid Date' && !isNaN(new Date(text) as any)) {
+      if (text == new Date(text).toISOString()) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 }

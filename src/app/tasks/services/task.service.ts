@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
-import { GitIntegrationService } from '@dashboard/services/git-integration.service';
 import { MemberService } from '@dashboard/services/member.service';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 import { Filter } from '@main/interfaces/filters.interface';
@@ -23,7 +22,7 @@ import {
   tap,
 } from 'rxjs';
 import { ApiService } from '../../_main/services/api.service';
-import { Task, TaskWithAdditionalData } from '../interfaces/task.interface';
+import { Task } from '../interfaces/task.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +36,6 @@ export class TaskService {
    */
   constructor(
     private apiService: ApiService,
-    private gitIntegrationService: GitIntegrationService,
     private dialogService: DialogService,
     private memberService: MemberService,
     private snackbarService: SnackbarService,
@@ -69,7 +67,7 @@ export class TaskService {
    * @param projectId Project id needed to create task
    * @returns Request observable with the created task
    */
-  public create(projectId: number, task: TaskWithAdditionalData): Observable<Task> {
+  public create(projectId: number, task: Task): Observable<Task> {
     return this.apiService.post(`/project/${projectId}/task/`, { body: task }).pipe(
       tap(() => {
         this.snackbarService.show($localize`Task created successfully!`);
@@ -83,7 +81,7 @@ export class TaskService {
    * @param projectId Project id needed to update task
    * @returns Request observable with the updated task
    */
-  public update(projectId: number, task: TaskWithAdditionalData): Observable<Task> {
+  public update(projectId: number, task: Task): Observable<Task> {
     return this.apiService.put(`/project/${projectId}/task/${task.id}`, { body: task }).pipe(
       tap(() => {
         this.snackbarService.show($localize`Task updated successfully!`);
@@ -146,9 +144,6 @@ export class TaskService {
       )
       .afterClosed()
       .pipe(
-        tap((data) => {
-          console.log(data);
-        }),
         switchMap((updatedTask: any) => {
           if (updatedTask) {
             return this.update(projectId, updatedTask);
@@ -174,7 +169,7 @@ export class TaskService {
       )
       .afterClosed()
       .pipe(
-        switchMap((task: TaskWithAdditionalData) => {
+        switchMap((task: Task) => {
           if (task) {
             return this.create(task.projectId, task);
           } else {

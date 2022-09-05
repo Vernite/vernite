@@ -8,13 +8,13 @@
       <div class="title" i18n>
         Due date
       </div>
-      <div class="value">{{ changeDate(task.deadline) }}</div>
+      <div class="value">{{ task.deadline | dateByPreferences | async }}</div>
     </div>
   </div>
   <div class="name">
     <span class="task-type" [style.background-color]="task.type | taskType:'color'"></span>
     <span class="task-id">#{{ task.id }}</span>
-    <span>{{ task?.name }}</span>
+    <span>{{ task.name }}</span>
   </div>
   <div class="actions">
     <a *ngIf="task.issue" [href]="task.issue.url" target="_blank">

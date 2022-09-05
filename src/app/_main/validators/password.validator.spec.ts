@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl } from '@ngneat/reactive-forms';
 import { passwordValidator } from './password.validator';
 
 describe('Test password validator', () => {

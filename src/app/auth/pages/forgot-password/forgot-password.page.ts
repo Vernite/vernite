@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { Router } from '@angular/router';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { requiredValidator } from '@main/validators/required.validator';

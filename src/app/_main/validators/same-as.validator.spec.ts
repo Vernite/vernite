@@ -1,4 +1,4 @@
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { sameAsValidator } from './same-as.validator';
 
 describe('Test if two values are the same', () => {

@@ -1,10 +1,11 @@
 import { color } from '../../_main/interfaces/color.interface';
 import { Task } from './task.interface';
+import { JSONParsable } from './../../_main/interfaces/json-parsable.interface';
 
 /**
  * Task status/column interface
  */
-export interface Status {
+export interface Status extends JSONParsable {
   /**
    * Status id (unique per database)
    */

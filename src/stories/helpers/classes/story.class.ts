@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl } from '@ngneat/reactive-forms';
 import { componentWrapperDecorator } from '@storybook/angular';
 import { merge, omit } from 'lodash-es';
 import { exposeAllPossibilities } from '../component-content-decorator.helper';
@@ -8,7 +8,7 @@ import { StoryFn } from '@storybook/angular';
 import { componentTemplateDecorator } from '../functions/component-template-decorator.function';
 
 export type Props<C> = Partial<C> & {
-  formControl?: FormControl;
+  formControl?: FormControl<any>;
   content?: string;
 };
 

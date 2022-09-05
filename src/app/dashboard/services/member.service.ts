@@ -36,8 +36,8 @@ export class MemberService {
    * @param id id of the member who will leave the project
    * @returns Request observable, which completes when request is finished
    */
-  public leave(projectId: number, id: number): Observable<null> {
-    return this.apiService.delete(`/project/${projectId}/member`, { body: id });
+  public leave(projectId: number): Observable<null> {
+    return this.apiService.delete(`/project/${projectId}/member`);
   }
 
   /**

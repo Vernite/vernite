@@ -35,7 +35,7 @@ export class ProjectService {
    * @param project project object to update in the API
    * @returns Request observable, which completes when request is finished
    */
-  public update(project: Project) {
+  public update(project: Partial<Project>) {
     return this.apiService.put(`/project/${project.id}`, { body: project });
   }
 

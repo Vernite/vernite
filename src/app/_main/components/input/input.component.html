@@ -16,5 +16,7 @@
       [autocomplete]="autocomplete" (focus)="onFocus()" (blur)="onBlur()"
       [style.padding-left]="(fragmentLeft.clientWidth + 16) + 'px'">
   </div>
-  <div *ngIf="control.touched && control.invalid" class="error">{{ control?.errors | validationError }}</div>
+  <div *ngIf="control.touched && control.invalid" class="error" [class.relative]="allowResizeByError">
+    {{ control.errors | validationError }}
+  </div>
 </div>

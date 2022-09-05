@@ -5,6 +5,7 @@ import { Meta, moduleMetadata } from '@storybook/angular';
 import { NgModuleMetadata } from '@storybook/angular/dist/ts3.9/client/preview/types';
 import { merge } from 'lodash-es';
 import { getAllProperties } from '../functions/get-all-properties.function';
+import { TestNgControl } from '../../../tests/helpers/ng-control-testing-provider.helper';
 
 export interface ExtendedMeta extends Meta {
   metadata?: Partial<NgModuleMetadata>;
@@ -13,7 +14,12 @@ export interface ExtendedMeta extends Meta {
 
 const DEFAULT_METADATA: Partial<NgModuleMetadata> = {
   imports: [MainModule, BrowserAnimationsModule],
-  providers: [NgControl],
+  providers: [
+    {
+      provide: NgControl,
+      useClass: TestNgControl,
+    },
+  ],
 };
 
 const IGNORED_PROPERTIES = getAllProperties({});
@@ -34,7 +40,6 @@ export class StoryPageConfig {
     }
 
     const properties = getAllProperties(this._meta.component.prototype);
-    console.log(properties);
     for (const [property, predicate] of properties.map(
       (p) => [p, this.propertyPredicate(p)] as [string, any],
     )) {

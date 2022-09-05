@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl } from '@ngneat/reactive-forms';
 import { maxLengthValidator } from './max-length.validator';
 
 describe('Test length limit validator', () => {

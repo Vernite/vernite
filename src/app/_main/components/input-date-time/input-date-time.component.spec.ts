@@ -1,41 +1,23 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgControl, ReactiveFormsModule } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ValidationErrorPipe } from '@main/pipes/validation-error/validation-error.pipe';
+import { MainModule } from '@main/_main.module';
+import { Shallow } from 'shallow-render';
 
 import { InputDateTimeComponent } from './input-date-time.component';
+import { NgControl } from '@angular/forms';
+import { TestNgControl } from '../../../../tests/helpers/ng-control-testing-provider.helper';
 
 describe('InputDateTimeComponent', () => {
-  let component: InputDateTimeComponent;
-  let fixture: ComponentFixture<InputDateTimeComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        MatNativeDateModule,
-        MatDatepickerModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-      ],
-      declarations: [InputDateTimeComponent, ValidationErrorPipe],
-      providers: [NgControl],
-    }).compileComponents();
-  }));
+  let shallow: Shallow<InputDateTimeComponent>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InputDateTimeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    shallow = new Shallow(InputDateTimeComponent, MainModule).provide({
+      provide: NgControl,
+      useClass: TestNgControl,
+    });
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should create', async () => {
+    const { instance } = await shallow.render();
+    expect(instance).toBeTruthy();
   });
 });

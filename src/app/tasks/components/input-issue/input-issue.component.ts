@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { GitIssue } from '@dashboard/interfaces/git-integration.interface';
 import { ControlAccessor } from '@main/classes/control-accessor.class';
 import { GitIntegrationService } from '@dashboard/services/git-integration.service';
@@ -27,15 +27,19 @@ export class InputIssueComponent extends ControlAccessor<GitIssue | 'DETACH' | '
   }
 
   get isOpen() {
-    return !['DETACH', null].includes(this.control.value);
+    return !['DETACH', null].includes(this.control.value as string);
   }
 
   private _projectId: number = 0;
 
   issues$: Observable<GitIssue[]> = of([]);
 
-  constructor(ngControl: NgControl, private gitIntegrationService: GitIntegrationService) {
-    super(ngControl);
+  constructor(
+    ngControl: NgControl,
+    private gitIntegrationService: GitIntegrationService,
+    cdRef: ChangeDetectorRef,
+  ) {
+    super(ngControl, cdRef);
   }
 
   loadIssues() {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   AddMemberDialog,
@@ -94,7 +94,7 @@ export class EditProjectMembersPage {
     this.form.updateValueAndValidity();
     if (this.form.invalid) return;
 
-    let newWorkspaceId: number = this.form.get('newWorkspaceId')?.value;
+    let newWorkspaceId = this.form.get('newWorkspaceId')?.value;
 
     if (this.workspaceId != newWorkspaceId && newWorkspaceId != null) {
       this.editProjectWithWorkspace(newWorkspaceId);

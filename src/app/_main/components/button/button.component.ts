@@ -1,4 +1,3 @@
-import { FocusableOption } from '@angular/cdk/a11y';
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,7 +9,7 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
 })
-export class ButtonComponent implements FocusableOption {
+export class ButtonComponent {
   /**
    * Style variant of the button.
    */

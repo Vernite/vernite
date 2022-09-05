@@ -39,12 +39,12 @@
         justify-content: center;
         padding: 4rem;
 
-        h2 {
-          margin-bottom: 0.5rem;
+        &>*:not(:last-child) {
+          margin-bottom: 1.5rem;
         }
 
-        p {
-          margin-bottom: 1.5rem;
+        h2 {
+          margin-bottom: 0.5rem;
         }
 
         .remember-me {

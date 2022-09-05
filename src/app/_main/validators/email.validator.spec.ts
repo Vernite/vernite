@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl } from '@ngneat/reactive-forms';
 import { expectToFail, expectToPass } from '@tests/helpers/validator-testing.helper';
 import { emailValidator } from './email.validator';
 

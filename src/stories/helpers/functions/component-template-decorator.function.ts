@@ -28,7 +28,7 @@ export function componentTemplateDecorator<C>(props: Props<C>, config: TemplateD
   });
 }
 
-export function buildTemplate<C>(selector: string, content: string, propsString: string) {
+export function buildTemplate(selector: string, content: string, propsString: string) {
   return `<${selector} ${propsString}>${content}</${selector}>`;
 }
 

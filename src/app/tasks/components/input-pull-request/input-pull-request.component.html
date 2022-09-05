@@ -1,5 +1,7 @@
 <input-task-property i18n-label label="GitHub pull request" [(isOpen)]="isOpen">
-  <app-select [formControl]="control" floatingLabel="Pull request" i18n-floatingLabel comparer="id">
+  <app-select [formControl]="control" [allowResizeByError]="true" floatingLabel="Pull request" i18n-floatingLabel
+    comparer="id">
     <app-option *ngFor="let pull of pulls$ | async" [value]="pull">{{ pull.title }}</app-option>
+    <app-empty-options i18n>Pull requests not found in this repository</app-empty-options>
   </app-select>
 </input-task-property>

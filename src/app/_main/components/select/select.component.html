@@ -1,16 +1,19 @@
-<ng-container *ngLet="selected$ | async as selected">
-  <app-input #input #trigger="cdkOverlayOrigin" (click)="toggle()" type="text" [formControl]="selected.control"
-    [readonly]="true" [floatingLabel]="floatingLabel" cdkOverlayOrigin>
-    <app-icon class="prefix" *ngIf="selected.icon" size="1rem" [icon]="selected.icon"></app-icon>
-    <app-icon class="suffix" [icon]="faChevronDown" size="0.75rem"></app-icon>
-  </app-input>
+<ng-container *ngIf="isControlInitialized">
+  <ng-container *ngLet="selected$ | async as selected">
+    <div class="trigger" #trigger="cdkOverlayOrigin" cdkOverlayOrigin></div>
+    <app-input #input (click)="toggle()" type="text" [formControl]="selected.control" [readonly]="true"
+      [floatingLabel]="floatingLabel" [allowResizeByError]="allowResizeByError">
+      <app-icon class="prefix" *ngIf="selected.icon" size="1rem" [icon]="selected.icon"></app-icon>
+      <app-icon class="suffix" [icon]="faChevronDown" size="0.75rem"></app-icon>
+    </app-input>
 
-  <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger"
-    [cdkConnectedOverlayOpen]="(isOpen$ | async) || false"
-    [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'" [cdkConnectedOverlayHasBackdrop]="true"
-    [cdkConnectedOverlayMinWidth]="overlayMinWidth + 'px'">
-    <div class="overlay">
-      <ng-content></ng-content>
-    </div>
-  </ng-template>
+    <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger"
+      [cdkConnectedOverlayOpen]="(isOpen$ | async) || false"
+      [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'" [cdkConnectedOverlayHasBackdrop]="true"
+      [cdkConnectedOverlayMinWidth]="overlayMinWidth + 'px'" [cdkConnectedOverlayWidth]="overlayMinWidth + 'px'">
+      <div #overlay class="overlay">
+        <ng-content></ng-content>
+      </div>
+    </ng-template>
+  </ng-container>
 </ng-container>
