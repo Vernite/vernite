@@ -67,18 +67,19 @@ jobs:
           EXCLUDE: "/dist/, /node_modules/"
 
       # Build documentation and badges
-      - name: Documentation
-        run: |
-          yarn docs:build
-          yarn badges:build
+      # - name: Documentation
+      #   run: |
+      #     yarn docs:build
+      #     yarn badges:build
 
       # Copy coverage directory
-      - name: Copy coverage directory
-        run: cp -R coverage documentation/coverage
+      # Uncomment this when coverage will be used in
+      # - name: Copy coverage directory
+      #   run: cp -R coverage documentation/coverage
 
       # Deploy documentation to Github pages
-      - name: Deploy documentation 📄
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
-        with:
-          branch: gh-pages
-          folder: documentation
+      # - name: Deploy documentation 📄
+      #   uses: JamesIves/github-pages-deploy-action@v4.3.3
+      #   with:
+      #     branch: gh-pages
+      #     folder: documentation
