@@ -1,7 +1,7 @@
 /* eslint-disable */
 let { makeBadge, Format } = require('badge-maker');
-const testsCoverageSummary = require('./coverage/workflow/coverage-summary.json');
-const testsResults = require('./coverage/karma-result.json');
+const testsCoverageSummary = require('../coverage/workflow/coverage-summary.json');
+const testsResults = require('../coverage/karma-result.json');
 const { readFileSync, writeFileSync, existsSync, mkdirSync } = require('fs');
 
 const createBadge = makeBadge;

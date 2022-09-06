@@ -3,9 +3,11 @@
 # Compiled output
 /dist
 /documentation
+/storybook-static
 /tmp
 /out-tsc
 /bazel-out
+documentation.json
 
 # Node
 /node_modules
