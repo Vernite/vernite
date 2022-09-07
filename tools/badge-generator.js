@@ -2,6 +2,7 @@
 let { makeBadge, Format } = require('badge-maker');
 const testsCoverageSummary = require('../coverage/workflow/coverage-summary.json');
 const testsResults = require('../coverage/karma-result.json');
+const docsSummary = require('../documentation.json');
 const { readFileSync, writeFileSync, existsSync, mkdirSync } = require('fs');
 
 const createBadge = makeBadge;
@@ -23,8 +24,7 @@ const colorFromCoverage = (coverage) => {
 };
 
 const getDocumentationCoverage = () => {
-  const coverage = readFileSync('../documentation/images/coverage-badge-documentation.svg', 'utf8');
-  return Math.min(parseFloat(coverage.match(/(?<=>).*(?=%<)/g)[0]), 100);
+  return Number(docsSummary.coverage.count);
 };
 
 const getTestsCoverage = () => {
