@@ -66,11 +66,11 @@ jobs:
           TARGET: '/var/www/html'
           EXCLUDE: "/dist/, /node_modules/"
 
-      # Build documentation and badges
-      # - name: Documentation
-      #   run: |
-      #     yarn docs:build
-      #     yarn badges:build
+      Build documentation and badges
+      - name: Documentation
+        run: |
+          yarn docs:build
+          yarn badges:build
 
       # Copy coverage directory
       # Uncomment this when coverage will be used in

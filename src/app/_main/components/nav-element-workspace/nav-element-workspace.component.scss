@@ -1,7 +1,7 @@
 @import '../../../../styles/typography';
 
 :host {
-  @include typo-title;
+  @include text-title;
 
   background-color: var(--color-secondary-600);
 }

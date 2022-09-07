@@ -1,6 +1,9 @@
 module.exports = {
+  corePlugins: {
+    fontSize: false
+  },
   content: [
-    "./src/**/*.{html,ts}"
+    "./src/**/*.{html,ts,mdx}"
   ],
   theme: {
     extend: {

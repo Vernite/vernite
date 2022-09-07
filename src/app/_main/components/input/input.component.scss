@@ -12,7 +12,7 @@
   margin-bottom: 0.5rem;
 
   >label {
-    @include typo-title;
+    @include text-title;
 
     margin-bottom: 0.4rem;
     color: var(--color-input-text);
@@ -34,7 +34,7 @@ $height: 44px;
 
   // Static label for input
   .static-label {
-    @include typo-title;
+    @include text-title;
 
     margin-bottom: 0.4rem;
     color: var(--color-input-text);
@@ -48,7 +48,7 @@ $height: 44px;
 
   // Floating label for input
   .floating-label {
-    @include typo-body;
+    @include text-base;
 
     padding: 0 0.4rem;
     color: var(--color-text);
@@ -112,7 +112,7 @@ $height: 44px;
   }
 
   input {
-    @include typo-body;
+    @include text-base;
 
     position: absolute;
     top: 0;

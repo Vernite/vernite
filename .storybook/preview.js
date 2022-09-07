@@ -6,6 +6,8 @@ setCompodocJson(docJson);
 import '../src/styles/styles.scss';
 import '@angular/localize/init';
 
+document.body.setAttribute('theme', 'dark');
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {

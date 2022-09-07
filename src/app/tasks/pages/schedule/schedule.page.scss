@@ -55,7 +55,7 @@
   }
 
   .header-row {
-    @include typo-title;
+    @include text-title;
 
     display: flex;
     height: 64px;
@@ -83,11 +83,11 @@
     justify-content: center;
 
     .number {
-      @include typo-title;
+      @include text-title;
     }
 
     .day-of-week {
-      @include typo-body;
+      @include text-base;
     }
 
     .task {
@@ -102,7 +102,7 @@
 }
 
 .avatar {
-  @include typo-heading-5;
+  @include text-xl;
 
   display: flex;
   width: 40px;
@@ -112,5 +112,6 @@
   background-color: var(--color-primary-500);
   border-radius: 50%;
   color: var(--color-text);
+  font-weight: 700;
   text-transform: uppercase;
 }

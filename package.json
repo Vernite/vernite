@@ -26,7 +26,7 @@
     "compodoc:serve": "compodoc -p ./tsconfig.doc.json -e json -w -s",
     "compodoc:build": "compodoc -p ./tsconfig.doc.json -e json -d .",
     "storybook:serve": "start-storybook -p 6006",
-    "storybook:build": "yarn compodoc:build && build-storybook --docs",
+    "storybook:build": "yarn compodoc:build && build-storybook",
     "badges:build": "node tools/badge-generator.js"
   },
   "private": true,

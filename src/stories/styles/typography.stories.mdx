@@ -1,10 +1,41 @@
-import { Meta, Typeset } from '@storybook/addon-docs';
+import { Canvas, Source, Meta } from '@storybook/addon-docs';
+import '../../styles/themes/documentation.theme.scss';
 
 <Meta title="Styles/Typography" />
 
+export const Init = () => {
+  document.body.style.setProperty('--color-text', '#000');
+  return <div></div>
+}
+
+<Init />
+
+export const Typeset = ({ fontWeight }) => (
+  <Canvas withSource='none'>
+    <div style={{ width: '100%', height: '100%' }}>
+      {
+        Object.entries(typography.size).map(([key, value]) => (
+          <div key={key} style={{ display: 'flex', width: '100%', alignItems: 'baseline', marginBottom: '1rem' }}>
+            <div style={{ width: '100px', flexShrink: 0 }}>
+              <div style={{ fontSize: '14px', opacity: '0.75' }}>
+                {key}
+              </div>
+            </div>
+            <div>
+              <div className={key} style={{ fontSize: `${value}px`, fontWeight: fontWeight }}>
+                {SampleText}
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </Canvas>
+)
+
 export const typography = {
   type: {
-    primary: '"Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif',
+    primary: 'montserrat, roboto, \'Helvetica Neue\', sans-serif',
   },
   weight: {
     regular: '400',
@@ -13,15 +44,15 @@ export const typography = {
     black: '900',
   },
   size: {
-    s1: 12,
-    s2: 14,
-    s3: 16,
-    m1: 20,
-    m2: 24,
-    m3: 28,
-    l1: 32,
-    l2: 40,
-    l3: 48,
+    'text-label': 12,
+    'text-title': 14,
+    'text-base': 14,
+    'text-lg': 16,
+    'text-xl': 18,
+    'text-2xl': 20,
+    'text-3xl': 24,
+    'text-4xl': 28,
+    'text-5xl': 32,
   },
 };
 
@@ -29,23 +60,135 @@ export const SampleText = 'Lorem ipsum dolor sit amet, consectetur adipiscing el
 
 # Typography
 
-**Font:** Nunito Sans
+## Font family
 
-**Weights:** 400(regular), 700(bold), 800(extrabold), 900(black)
+Montserrat
 
-<Typeset
-  fontSizes={[
-    Number(typography.size.s1),
-    Number(typography.size.s2),
-    Number(typography.size.s3),
-    Number(typography.size.m1),
-    Number(typography.size.m2),
-    Number(typography.size.m3),
-    Number(typography.size.l1),
-    Number(typography.size.l2),
-    Number(typography.size.l3),
-  ]}
-  fontWeight={typography.weight.black}
-  sampleText={SampleText}
-  fontFamily={typography.type.primary}
+## Font weights
+
+400 (`font-normal`),
+
+700 (`font-bold`),
+
+800 (`font-extrabold`),
+
+900 (`font-black`)
+
+## Classes
+
+### Regular typeset
+
+<Typeset fontWeight={typography.weight.regular} />
+
+#### Example usage:
+<Canvas withSource="open" withToolbar>
+  <span className="text-label">Sample text</span>
+  <span className="text-title">Sample text</span>
+  <span className="text-base">Sample text</span>
+  <span className="text-lg">Sample text</span>
+  <span className="text-xl">Sample text</span>
+</Canvas>
+
+<Source
+  language='html'
+  dark
+  format={false}
+  code={`
+<span class="text-label">Sample text</span>
+<span class="text-title">Sample text</span>
+<span class="text-base">Sample text</span>
+<span class="text-lg">Sample text</span>
+<span class="text-xl">Sample text</span>
+  `}
+/>
+
+You can also use it directly in the `scss` files:
+
+<Source
+  language='css'
+  dark
+  format={false}
+  code={`
+selector {
+  @include text-label;
+}
+  `}
+/>
+
+### Bold typeset
+
+<Typeset fontWeight={typography.weight.bold} />
+
+#### Example usage:
+<Canvas withSource="open" withToolbar>
+  <span className="text-label font-bold">Sample text</span>
+  <span className="text-title font-bold">Sample text</span>
+  <span className="text-base font-bold">Sample text</span>
+  <span className="text-lg font-bold">Sample text</span>
+  <span className="text-xl font-bold">Sample text</span>
+</Canvas>
+
+<Source
+  language='html'
+  dark
+  format={false}
+  code={`
+<span class="text-label font-bold">Sample text</span>
+<span class="text-title font-bold">Sample text</span>
+<span class="text-base font-bold">Sample text</span>
+<span class="text-lg font-bold">Sample text</span>
+<span class="text-xl font-bold">Sample text</span>
+  `}
+/>
+
+### Extra bold typeset
+
+<Typeset fontWeight={typography.weight.extrabold} />
+
+#### Example usage:
+<Canvas withSource="open" withToolbar>
+  <span className="text-label font-extrabold">Sample text</span>
+  <span className="text-title font-extrabold">Sample text</span>
+  <span className="text-base font-extrabold">Sample text</span>
+  <span className="text-lg font-extrabold">Sample text</span>
+  <span className="text-xl font-extrabold">Sample text</span>
+</Canvas>
+
+<Source
+  language='html'
+  dark
+  format={false}
+  code={`
+<span class="text-label font-extrabold">Sample text</span>
+<span class="text-title font-extrabold">Sample text</span>
+<span class="text-base font-extrabold">Sample text</span>
+<span class="text-lg font-extrabold">Sample text</span>
+<span class="text-xl font-extrabold">Sample text</span>
+  `}
+/>
+
+### Black typeset
+
+<Typeset fontWeight={typography.weight.black} />
+
+#### Example usage:
+<Canvas withSource="none" withToolbar>
+  <span className="text-label font-black">Sample text</span>
+  <span className="text-title font-black">Sample text</span>
+  <span className="text-base font-black">Sample text</span>
+  <span className="text-lg font-black">Sample text</span>
+  <span className="text-xl font-black">Sample text</span>
+</Canvas>
+
+<Source
+  language='html'
+  dark
+  format={false}
+  code={`
+<span class="text-label font-black">Sample text</span>
+<span class="text-title font-black">Sample text</span>
+<span class="text-base font-black">Sample text</span>
+<span class="text-lg font-black">Sample text</span>
+<span class="text-xl font-black">Sample text</span>
+  `}
 />

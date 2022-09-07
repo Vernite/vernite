@@ -21,14 +21,14 @@
 }
 
 .card-header-wrapper {
-  @include typo-title;
+  @include text-title;
 
   margin-bottom: 7px;
   color: var(--color-text);
 }
 
 .card-content-wrapper {
-  @include typo-body;
+  @include text-base;
 
   margin-bottom: 15px;
   color: var(--color-text);
@@ -36,7 +36,7 @@
 }
 
 .card-actions-wrapper {
-  @include typo-body;
+  @include text-base;
 
   color: var(--color-text);
 }

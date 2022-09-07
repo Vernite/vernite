@@ -28709,7 +28709,7 @@
                 "name": "$Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/_main/components/card/card.stories.ts",
+                "file": "src/app/_main/components/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -28719,7 +28719,7 @@
                 "name": "$Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/_main/components/button/button.stories.ts",
+                "file": "src/app/_main/components/card/card.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -28779,21 +28779,21 @@
                 "name": "config",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/_main/components/card/card.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "new StoryPageConfig({\n  title: 'Components/Card',\n  component: CardComponent,\n  selector: 'app-card',\n})"
-            },
-            {
-                "name": "config",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/_main/components/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "new StoryPageConfig({\n  title: 'Components/Button',\n  component: ButtonComponent,\n  selector: 'app-button',\n  argTypes: {\n    variant: DOCS_SELECT,\n    type: DOCS_SELECT,\n    icon: DOCS_ICON_SELECT,\n    elementRef: DOCS_READONLY,\n  },\n})"
+            },
+            {
+                "name": "config",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/_main/components/card/card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "new StoryPageConfig({\n  title: 'Components/Card',\n  component: CardComponent,\n  selector: 'app-card',\n})"
             },
             {
                 "name": "config",
@@ -29270,21 +29270,21 @@
                 "name": "template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/_main/components/card/card.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "new StoryTemplate({ content })"
-            },
-            {
-                "name": "template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/_main/components/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "new StoryTemplate<ButtonComponent>({ content: 'Button' })"
+            },
+            {
+                "name": "template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/_main/components/card/card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "new StoryTemplate({ content })"
             },
             {
                 "name": "template",
@@ -30481,48 +30481,6 @@
             }
         ],
         "groupedVariables": {
-            "src/app/_main/components/card/card.stories.ts": [
-                {
-                    "name": "$Default",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/_main/components/card/card.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "new Story({ template, config }).story()"
-                },
-                {
-                    "name": "config",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/_main/components/card/card.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "new StoryPageConfig({\n  title: 'Components/Card',\n  component: CardComponent,\n  selector: 'app-card',\n})"
-                },
-                {
-                    "name": "content",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/_main/components/card/card.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "`\n  <div class=\"card-title\">Sample card</div>\n  <div class=\"card-content\">Little bit of content</div>\n  <div class=\"card-content\">\n    <app-button>Action</app-button>\n  </div>\n`"
-                },
-                {
-                    "name": "template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/_main/components/card/card.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "new StoryTemplate({ content })"
-                }
-            ],
             "src/app/_main/components/button/button.stories.ts": [
                 {
                     "name": "$Default",
@@ -30593,6 +30551,48 @@
                     "deprecationMessage": "",
                     "type": "",
                     "defaultValue": "new Story({\n  template,\n  config,\n  multiple: {\n    prop: 'variant',\n    options: ['primary', 'secondary', 'important'],\n  },\n  description: `To customize the general appearance you need to use the \\`variant\\` property with one of the specified values.\n    If you will not specify variant, the button will appear with \\`secondary\\` styling.`,\n}).story()"
+                }
+            ],
+            "src/app/_main/components/card/card.stories.ts": [
+                {
+                    "name": "$Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/_main/components/card/card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "new Story({ template, config }).story()"
+                },
+                {
+                    "name": "config",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/_main/components/card/card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "new StoryPageConfig({\n  title: 'Components/Card',\n  component: CardComponent,\n  selector: 'app-card',\n})"
+                },
+                {
+                    "name": "content",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/_main/components/card/card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "`\n  <div class=\"card-title\">Sample card</div>\n  <div class=\"card-content\">Little bit of content</div>\n  <div class=\"card-content\">\n    <app-button>Action</app-button>\n  </div>\n`"
+                },
+                {
+                    "name": "template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/_main/components/card/card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "new StoryTemplate({ content })"
                 }
             ],
             "src/app/_main/components/checkbox/checkbox.stories.ts": [

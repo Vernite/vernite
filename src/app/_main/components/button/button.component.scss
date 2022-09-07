@@ -32,7 +32,7 @@ button:not(.button-with-icon) .prefix:not(.pending) {
 }
 
 button {
-  @include typo-title;
+  @include text-title;
 
   position: relative;
   display: flex;

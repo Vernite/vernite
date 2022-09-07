@@ -1,8 +1,8 @@
 <section>
   <div class="tabs">
     <div class="project-name">
-      <h2 *ngIf="!project" class="typo-heading-5">{{title}}</h2>
-      <h2 *ngIf="project" class="typo-heading-5">{{title}} {{project.name}}</h2>
+      <h2 *ngIf="!project" class="text-xl font-bold">{{title}}</h2>
+      <h2 *ngIf="project" class="text-xl font-bold">{{title}} {{project.name}}</h2>
     </div>
     <ng-container *ngIf="project">
       <a [routerLink]="['/', workspaceId, project.id, 'edit', 'general']" routerLinkActive="active">

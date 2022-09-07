@@ -1,10 +1,10 @@
-<h2 class="typo-heading-5 mb-5" i18n>Sessions</h2>
+<h2 class="text-xl font-bold mb-5" i18n>Sessions</h2>
 
 <!-- Sessions list -->
 <ng-container>
   <app-list-group label="Where You are logged in" i18n-label></app-list-group>
   <div class="list">
-    <ul *ngFor="let session of sessionsList$ | async" >
+    <ul *ngFor="let session of sessionsList$ | async">
       <li>
         <div class="sessions-entry">
           <div class="labels">

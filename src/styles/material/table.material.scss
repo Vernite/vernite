@@ -12,7 +12,7 @@
     border-bottom: 1px solid var(--color-table-header-border);
 
     .mat-header-cell {
-      @include typo-title;
+      @include text-title;
 
       position: relative;
 
@@ -50,13 +50,13 @@
     overflow: hidden;
 
     &:hover {
-      > td {
+      >td {
         background-color: var(--color-table-row-hover-background);
       }
     }
 
     .mat-cell {
-      @include typo-body;
+      @include text-base;
 
       /* stylelint-disable-next-line declaration-property-value-disallowed-list */
       border: none;

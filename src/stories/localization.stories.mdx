@@ -51,8 +51,11 @@ The config looks like:
 }
 ```
 
-```
-// TODO: Write something about redirect.html file
+After adding new language you need to add it to `redirect.html` file. In other case user will not be redirected to the new language when open the app (with this specific language in browser preferences).
+This file has a variable named `availableLanguages` with stored all available languages.:
+
+```js
+const availableLanguages = ['de-DE', 'en-GB', 'en-US', 'es-ES', 'it-IT', 'pl-PL', 'uk-UA'];
 ```
 
 In the future adding new language will need some more work to do. For example adding new element in language selection list.
@@ -62,9 +65,18 @@ In the future adding new language will need some more work to do. For example ad
 
 Before translating strings first what you need to do is to extract all translatable strings from the app. To do this run the command:
 ```bash
-yarn extract:i18n
+yarn i18n:extract
 ```
 
 Each language translations are located in `src/locales` folder, for example `src/locales/messages.pl-PL.xlf` file. This files can be edited using any text editor, but more convenient is to use external tools.
 
 In Visual Studio Code there is an extension named `Angular I18n Editor`. This extension is used to make translations in more human readable way. It serves an UI interface to edit translations. To open this extension press `F1` and search for `Angular I18n Editor: Open` command.
+
+## Coverage
+
+To check the translations coverage you can run command:
+```bash
+yarn i18n:coverage
+```
+
+NOTE: For the most accurate results you need to extract all strings from code using: `i18n:extract` command.

@@ -7,7 +7,7 @@
     width: 100%;
 
     .header-cell {
-      @include typo-title;
+      @include text-title;
 
       position: relative;
       display: flex;

@@ -6,13 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
+    const availableLanguages = ['de-DE', 'en-GB', 'en-US', 'es-ES', 'it-IT', 'pl-PL', 'uk-UA'];
+    const defaultLanguage = 'en-US';
     const language = navigator.language || navigator.userLanguage || 'en-US';
-    if (
-      ['de-DE', 'en-GB', 'en-US', 'es-ES', 'it-IT', 'pl-PL', 'uk-UA']
-        .includes(language)) {
+
+    if (availableLanguages.includes(language)) {
       window.location = '/' + language;
     } else {
-      window.location = '/en-US';
+      window.location = '/' + defaultLanguage;
     }
   </script>
   <title>Workflow</title>

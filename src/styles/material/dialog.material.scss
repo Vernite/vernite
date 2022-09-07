@@ -16,10 +16,11 @@ app-dialog-outlet {
   }
 
   .mat-dialog-title {
-    @include typo-heading-5;
+    @include text-xl;
 
     margin-bottom: 1rem;
     font-family: var(--font-family);
+    font-weight: 700;
 
     &.important {
       color: var(--color-dialog-important-text);
@@ -27,7 +28,7 @@ app-dialog-outlet {
   }
 
   .mat-dialog-content {
-    @include typo-body;
+    @include text-base;
   }
 
   .mat-dialog-actions {

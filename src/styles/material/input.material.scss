@@ -8,7 +8,7 @@ mat-form-field.mat-form-field-appearance-outline {
   // default styling
   input,
   textarea {
-    @include typo-body;
+    @include text-base;
 
     caret-color: var(--color-text);
     color: var(--color-text);
@@ -79,7 +79,7 @@ mat-form-field.mat-form-field-appearance-outline {
   // Labels
   .mat-form-field-label-wrapper {
     mat-label {
-      @include typo-body;
+      @include text-base;
 
       color: var(--color-text);
     }
@@ -160,7 +160,7 @@ input:-webkit-autofill:focus,
 input:autofill,
 input:autofill:focus,
 input:-webkit-autofill::first-line {
-  @include typo-body;
+  @include text-base;
 
   transition: background-color 600000s 0s, color 600000s 0s;
 }

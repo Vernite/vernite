@@ -1,4 +1,4 @@
-:root body[theme=dark] {
+:root body * {
   // primary
   --color-primary-500: var(--color-blue-500);
   --color-primary-600: var(--color-blue-600);
@@ -15,5 +15,5 @@
   --color-secondary-800: var(--color-gray-800);
 
   // Text
-  --color-text: var(--color-neutral-100);
+  --color-text: var(--color-neutral-800);
 }

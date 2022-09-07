@@ -31,8 +31,7 @@
       .assignee {
         $size: 32px;
 
-        @include typo-heading-5;
-
+        @include text-xl;
         display: flex;
         width: #{$size};
         height: #{$size};
@@ -41,6 +40,8 @@
         background-color: #0a95d0;
         border-radius: calc($size / 2);
         color: var(--color-text);
+
+        font-weight: 700;
       }
     }
 
@@ -48,17 +49,17 @@
       color: var(--color-text);
 
       .title {
-        @include typo-body;
+        @include text-base;
       }
 
       .value {
-        @include typo-title;
+        @include text-title;
       }
     }
   }
 
   .name {
-    @include typo-body;
+    @include text-base;
     display: flex;
     align-items: center;
 
