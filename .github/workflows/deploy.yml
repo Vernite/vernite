@@ -71,6 +71,7 @@ jobs:
         run: |
           yarn docs:build
           yarn badges:build
+          yarn analyze:build
 
       # Copy coverage directory
       - name: Copy coverage directory
