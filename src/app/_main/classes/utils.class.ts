@@ -2,6 +2,8 @@ import { isString } from 'lodash-es';
 
 /**
  * Utilities class with some useful methods not available in any libraries.
+ *
+ * TODO: Move this utility functions outside of class
  */
 export class Utils {
   /**

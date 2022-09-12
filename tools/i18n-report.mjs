@@ -3,12 +3,18 @@
  */
 
 /* eslint-disable */
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
+import { fileURLToPath } from 'url';
 import path from 'path';
 import chalk from 'chalk';
 
+const __filename = fileURLToPath(new URL(import.meta.url));
+
 const PATH_TO_CONFIG = './.ngI18nconfig';
 const PATH_TO_LOCALES = './src/locales/';
+const EXPORT_FILENAME = 'i18n-report.json';
+
+const EXPORT_TO_JSON = process.argv.includes('--json');
 
 const rawConfig = readFileSync(PATH_TO_CONFIG, 'utf8');
 const config = JSON.parse(rawConfig);
@@ -21,7 +27,7 @@ function parseXLFFile(filename) {
     'utf8'
   );
 
-  let ids = localeFile.match(/(id=")([0-9]*)(")/g);
+  let ids = localeFile.match(/(?<=id=")([0-9]*)(?=")/g);
   if (!ids) ids = [];
   return { ids };
 }
@@ -36,6 +42,12 @@ function getColorFromPercentage(percentage) {
   return chalk.red;
 }
 
+function exportResultToJson(result) {
+  const filePath = path.resolve(path.basename(__filename), '..', EXPORT_FILENAME);
+  const json = JSON.stringify(result, null, 2);
+  writeFileSync(filePath, json);
+}
+
 const targetResult = parseXLFFile('messages');
 
 for (const locale of config.locales) {
@@ -47,4 +59,8 @@ for (const locale of config.locales) {
   result[locale] = localResult;
 
   console.log(`${locale}: ${color(percentage + '%')}`);
+}
+
+if (EXPORT_TO_JSON) {
+  exportResultToJson(result);
 }

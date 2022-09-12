@@ -73,13 +73,12 @@ jobs:
           yarn badges:build
 
       # Copy coverage directory
-      # Uncomment this when coverage will be used in
-      # - name: Copy coverage directory
-      #   run: cp -R coverage documentation/coverage
+      - name: Copy coverage directory
+        run: cp -R coverage documentation/coverage
 
       # Deploy documentation to Github pages
-      # - name: Deploy documentation 📄
-      #   uses: JamesIves/github-pages-deploy-action@v4.3.3
-      #   with:
-      #     branch: gh-pages
-      #     folder: documentation
+      - name: Deploy documentation 📄
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+          branch: gh-pages
+          folder: documentation
