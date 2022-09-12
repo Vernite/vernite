@@ -10,7 +10,7 @@
     "build": "ng build --stats-json",
     "lint": "ng lint",
     "analyze:serve": "webpack-bundle-analyzer dist/workflow/en-US/stats.json",
-    "analyze:build": "yarn analyze:serve --mode static",
+    "analyze:build": "yarn analyze:serve -m static -O -r documentation/report/index.html",
     "unit:serve": "concurrently -r -k \"ng test\" \"http-server --port=9877 ./coverage/workflow\"",
     "unit:build": "ng test --watch=false --code-coverage --browsers=ChromeHeadless",
     "unit:coverage": "yarn unit:build",

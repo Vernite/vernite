@@ -74,7 +74,7 @@ jobs:
 
       # Copy coverage directory
       - name: Copy coverage directory
-        run: cp -R coverage documentation/coverage
+        run: cp -R coverage/workflow documentation/coverage
 
       # Deploy documentation to Github pages
       - name: Deploy documentation 📄
