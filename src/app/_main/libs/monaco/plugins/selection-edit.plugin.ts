@@ -1,5 +1,5 @@
 import { snakeCase } from 'lodash-es';
-import { CursorSTateComputer, EditOperation, Editor, Selection } from '../typings';
+import { CursorStateComputer, EditOperation, Editor, Selection } from '../typings';
 
 export type SelectionEditOperation = { [key in SelectionEditOperationType]: string };
 
@@ -113,7 +113,7 @@ export class SelectionEditPlugin {
 
     prototype.executeSelectionEdits = function (
       edits: SelectionEditOperation,
-      endCursorState?: CursorSTateComputer | Selection[],
+      endCursorState?: CursorStateComputer | Selection[],
     ) {
       return SelectionEditPlugin.executeSelectionEdits.bind(this)(edits, endCursorState);
     };
@@ -150,7 +150,7 @@ export class SelectionEditPlugin {
 
   public static executeSelectionEdits(
     edits: SelectionEditOperation,
-    endCursorState?: CursorSTateComputer | Selection[],
+    endCursorState?: CursorStateComputer | Selection[],
   ) {
     const editor: Editor = this as any;
     const _edits = this.getSelectionEdits(edits);

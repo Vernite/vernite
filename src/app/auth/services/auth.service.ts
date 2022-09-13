@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Service } from '@main/decorators/service.decorator';
+import dayjs from 'dayjs';
+import { tap } from 'rxjs';
 import { ApiService } from 'src/app/_main/services/api.service';
 
 @Service()
@@ -36,12 +38,14 @@ export class AuthService {
     password: string;
     remember: boolean;
   }) {
-    return this.apiService.post(`/auth/login`, { body: { email, password, remember } });
+    return this.apiService.post(`/auth/login`, { body: { email, password, remember } }).pipe(
+      tap(() => localStorage.setItem('lastLoginTry', dayjs().unix().toString()))
+    );
   }
 
   public logout() {
     localStorage.removeItem('logged');
-    return this.apiService.post(`/auth/logout`, { body: {} });
+    return this.apiService.post(`/auth/logout`);
   }
 
   public resetPassword({ email }: { email: string }) {
@@ -53,7 +57,7 @@ export class AuthService {
   }
 
   public deleteAccount() {
-    return this.apiService.delete(`/auth/delete`, { body: {} });
+    return this.apiService.delete(`/auth/delete`);
   }
 
   public deleteAccountConfirmation(token: string) {
@@ -61,7 +65,7 @@ export class AuthService {
   }
 
   public recoverAccount() {
-    return this.apiService.post(`/auth/delete/recover`, { body: {} });
+    return this.apiService.post(`/auth/delete/recover`);
   }
 
   public isLoggedIn() {
@@ -70,5 +74,13 @@ export class AuthService {
     } else {
       return false;
     }
+  }
+
+  public clearCache() {
+    localStorage.removeItem('logged');
+  }
+
+  public getLastLoginTime() {
+    return dayjs.unix(Number(localStorage.getItem('lastLoginTry') || 0));
   }
 }

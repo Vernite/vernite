@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { ModifyUser, User } from '@auth/interfaces/user.interface';
 import { ApiService } from '@main/services/api.service';
 import { Observable, map } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private authService: AuthService) {}
 
   public getUserDefaultPreferences() {
     return {
@@ -27,5 +28,13 @@ export class UserService {
 
   public getDateFormat(): Observable<string> {
     return this.getMyself().pipe(map((user: User) => user.dateFormat));
+  }
+
+  public clearCache(): void {
+    this.authService.clearCache();
+  }
+
+  public isLocallyLogged(): boolean {
+    return Boolean(localStorage.getItem('logged'));
   }
 }
