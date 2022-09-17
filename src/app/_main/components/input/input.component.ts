@@ -8,6 +8,7 @@ import {
   Output,
   ViewChild,
   EventEmitter,
+  AfterViewInit,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { ControlAccessor } from '../../classes/control-accessor.class';
@@ -20,7 +21,7 @@ import { ControlAccessor } from '../../classes/control-accessor.class';
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
 })
-export class InputComponent extends ControlAccessor {
+export class InputComponent extends ControlAccessor implements AfterViewInit {
   /**
    * Type of the input
    */
@@ -57,10 +58,12 @@ export class InputComponent extends ControlAccessor {
   @Output() focus: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   /** @ignore */
-  @HostBinding('class.focused') focused = false;
+  @HostBinding('class.focused') focused: boolean = false;
 
   /** @ignore */
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
+
+  public autofilledByBrowser: boolean = false;
 
   constructor(
     public override ngControl: NgControl,
@@ -68,6 +71,12 @@ export class InputComponent extends ControlAccessor {
     cdRef: ChangeDetectorRef,
   ) {
     super(ngControl, cdRef);
+  }
+
+  ngAfterViewInit(): void {
+    this.autofillMonitor.monitor(this.input.nativeElement).subscribe(() => {
+      this.autofilledByBrowser = true;
+    });
   }
 
   /** @ignore */
