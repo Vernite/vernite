@@ -6,4 +6,6 @@ export interface CalendarDay {
   isWeekend: boolean;
   isFromPreviousMonth: boolean;
   isFromNextMonth: boolean;
+  today: boolean;
+  selected: boolean;
 }

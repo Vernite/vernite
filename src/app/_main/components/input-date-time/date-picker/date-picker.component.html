@@ -30,6 +30,9 @@
   </div>
 </div>
 <div class="date">
+  <div class="year-header">
+    {{ cursor | dayjsFormat:'YYYY' }}
+  </div>
   <div class="header">
     <button class="previous-month" (click)="previousMonth()">
       <app-icon [icon]="faChevronLeft" size="1rem"></app-icon>
@@ -47,7 +50,8 @@
     </div>
     <div class="calendar-grid">
       <div class="row" *ngFor="let row of daysGrid">
-        <div class="cell" *ngFor="let day of row" (click)="selectDay(day)">
+        <div class="cell" *ngFor="let day of row" (click)="selectDay(day)" [class.today]="day.today"
+          [class.selected]="day.selected">
           <span class="day" [class.opacity-50]="day.isFromPreviousMonth || day.isFromNextMonth">{{ day.name }}</span>
         </div>
       </div>

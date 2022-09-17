@@ -9,21 +9,21 @@
         <div class="sessions-entry">
           <div class="labels">
             <div class="agent">
-              <p class="typo-body label">
+              <p class="text-base label">
                 {{ agentType("os", session.userAgent) }},
               </p>
-              <p class="typo-body description">
+              <p class="text-base description">
                 {{ agentType("browser", session.userAgent) }}
               </p>
             </div>
             <div class="local">
-              <p *ngIf="session.geoip" class="typo-body">
+              <p *ngIf="session.geoip" class="text-base">
                 {{ session.geoip.city }}, {{ session.geoip.country }}
               </p>
-              <p *ngIf="!session.current" class="typo-body description">
+              <p *ngIf="!session.current" class="text-base description">
                 {{ changeDate(session.lastUsed) }}
               </p>
-              <p *ngIf="session.current" class="typo-body">
+              <p *ngIf="session.current" class="text-base">
                 <mark i18n>Active now</mark>
               </p>
             </div>

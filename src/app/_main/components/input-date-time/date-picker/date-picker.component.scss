@@ -83,10 +83,16 @@
 }
 
 .date {
+  .year-header {
+    padding: 0.5rem;
+    opacity: 0.5;
+    text-align: center;
+  }
+
   .header {
     display: flex;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 0.5rem 1rem 1rem 1rem;
 
     .previous-month,
     .next-month {
@@ -142,6 +148,14 @@
           border-radius: 3px;
           cursor: pointer;
           transition: background-color .1s ease;
+
+          &.today {
+            background-color: var(--color-secondary-800);
+          }
+
+          &.selected {
+            background-color: var(--color-primary-500);
+          }
 
           &:hover {
             background-color: var(--color-secondary-800);

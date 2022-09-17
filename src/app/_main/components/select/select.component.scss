@@ -1,3 +1,8 @@
+:host {
+  display: inline-block;
+  width: 100%;
+}
+
 .overlay {
   overflow: auto;
   width: 100%;
@@ -19,6 +24,7 @@
   app-input,
   &>*,
   input {
+    color: var(--color-text);
     cursor: pointer !important;
   }
 }

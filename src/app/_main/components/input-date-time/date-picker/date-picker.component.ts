@@ -18,8 +18,10 @@ import { unixTimestamp } from '../../../interfaces/date.interface';
 export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> implements OnInit {
   // TODO: Read this from user settings
   firstDayOfWeek = 1;
+  daysOfWeekOrder = [1, 2, 3, 4, 5, 6, 0]; // Default: [0, 1, 2, 3, 4, 5, 6]
 
   cursor = this.control.value ? dayjs.unix(this.control.value) : dayjs();
+  currentDate = dayjs();
 
   monthNames = dayjs.months();
   weekdays = dayjs.weekdays();
@@ -33,44 +35,31 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
   daysGrid = this.calculateDaysGrid();
 
   private calculateDaysGrid() {
-    const daysInMonth = this.cursor.daysInMonth();
-    const daysInPreviousMonth = this.cursor.clone().subtract(1, 'month').daysInMonth();
-    const firstDayOfMonth = this.cursor.startOf('month').day();
+    let pointer = (() => {
+      const date = this.cursor.startOf('month');
+      const day = date.day();
 
-    const daysGrid: DaysGrid = [[]];
+      return date.subtract(day + 7 - this.firstDayOfWeek, 'day');
+    })();
 
-    for (let i = 0; i < firstDayOfMonth; i++) {
-      daysGrid[0].push({
-        id: i,
-        name: daysInPreviousMonth - firstDayOfMonth + i + 1,
-        isWeekend: i % 6 === 0,
-        isFromPreviousMonth: true,
-        isFromNextMonth: false,
-      });
-    }
+    const daysGrid: DaysGrid = [];
 
-    for (let i = firstDayOfMonth; i < 7; i++) {
-      daysGrid[0].push({
-        id: i,
-        name: i - firstDayOfMonth + 1,
-        isWeekend: i % 6 === 0,
-        isFromPreviousMonth: false,
-        isFromNextMonth: false,
-      });
-    }
-
-    for (let i = 1; i < 6; i++) {
-      daysGrid[i] = [];
+    for (let i = 0; i < 6; i++) {
+      daysGrid.push([]);
       for (let j = 0; j < 7; j++) {
-        const theoreticalDay = i * 7 + j - firstDayOfMonth + 1;
+        const day: CalendarDay = {
+          id: pointer.unix(),
+          name: pointer.date(),
+          isWeekend: pointer.day() === 0 || pointer.day() === 6,
+          isFromPreviousMonth: pointer.month() < this.cursor.month(),
+          isFromNextMonth: pointer.month() > this.cursor.month(),
+          today: pointer.isSame(this.currentDate, 'day'),
+          selected: pointer.isSame(dayjs.unix(this.control.value || 0), 'day'),
+        };
 
-        daysGrid[i].push({
-          id: i * 7 + j,
-          name: theoreticalDay <= daysInMonth ? theoreticalDay : theoreticalDay - daysInMonth,
-          isWeekend: j % 6 === 0,
-          isFromPreviousMonth: false,
-          isFromNextMonth: theoreticalDay > daysInMonth,
-        });
+        daysGrid[i].push(day);
+
+        pointer = pointer.add(1, 'day');
       }
     }
 

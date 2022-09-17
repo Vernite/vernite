@@ -7,7 +7,7 @@ export function applyFilters(filters?: Filter[]) {
       map((input: any) => {
         if (!filters) return input;
         return filters.reduce((acc, filter) => {
-          return filter.apply(acc, filter.options[filter.value]);
+          return filter.apply(acc);
         }, input);
       }),
     );

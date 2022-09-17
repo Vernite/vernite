@@ -26,6 +26,11 @@
 
   "explorer.compactFolders": false,
 
+  "search.exclude": {
+    ".git": true,
+    "node_modules": true
+  },
+
   /* ====================== */
   /* ==== Hidden files ==== */
   /* ====================== */

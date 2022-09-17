@@ -13,13 +13,14 @@ export class Filters {
         0: {},
       },
       value: 0,
-      apply(tasks: Task[], option) {
+      apply(tasks: Task[]) {
+        const option = this.options[this.value];
+        if (!option) return tasks;
+
         return tasks.filter((task) =>
           option.assigneeId ? task.assigneeId === option.assigneeId : true,
         );
       },
     };
   }
-
-  public static TASKS_BY_USER(userId: number):
 }

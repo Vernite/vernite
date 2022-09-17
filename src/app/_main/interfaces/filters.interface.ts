@@ -1,37 +1,39 @@
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
-export interface FilterBase<T> {
+export interface FilterBase {
   label: string;
-  apply(list: any[], option: T | null | undefined): any[];
+  value: any;
+  apply(list: any[]): any[];
 }
 
-export interface FilterCheckbox<T = boolean> extends FilterBase<T> {
+export interface FilterCheckbox<T = boolean> extends FilterBase {
   type: 'checkbox';
   options: {
     1: T | null;
     0: T | null;
   };
   value: 1 | 0;
-  apply(list: any[], option: T): any[];
+  apply(list: any[]): any[];
 }
 
-export interface FilterText extends FilterBase<string> {
+export interface FilterText extends FilterBase {
   type: 'text';
   value: string;
 }
 
-export interface FilterNumber extends FilterBase<number> {
+export interface FilterNumber extends FilterBase {
   type: 'number';
   value: number;
 }
 
-export interface FilterSelect<T> extends FilterBase<T> {
-  type: 'select',
+export interface FilterSelect<T> extends FilterBase {
+  type: 'select';
   options: {
-    label: string,
-    value: T,
-    icon?: IconDefinition | string,
-  }[],
+    label: string;
+    value: T;
+    icon?: IconDefinition | string;
+  }[];
+  value: T | null;
 }
 
 export type Filter = FilterCheckbox<any> | FilterText | FilterNumber | FilterSelect<any>;
