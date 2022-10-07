@@ -3,7 +3,7 @@ import { GitPull } from '@dashboard/interfaces/git-integration.interface';
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { AbstractControl, NgControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
-import { GitIntegrationService } from '@dashboard/services/git-integration.service';
+import { GitIntegrationService } from '@dashboard/services/git-integration/git-integration.service';
 import { ValidationError } from '@main/interfaces/validation-error.interface';
 import { requiredValidator } from '@main/validators/required.validator';
 

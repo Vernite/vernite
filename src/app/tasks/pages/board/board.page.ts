@@ -3,8 +3,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
-import { MemberService } from '@dashboard/services/member.service';
-import { ProjectService } from '@dashboard/services/project.service';
+import { MemberService } from '@dashboard/services/member/member.service';
+import { ProjectService } from '@dashboard/services/project/project.service';
 import {
   faCheck,
   faChevronRight,
@@ -14,7 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { PersistentMap } from '@main/classes/persistent-map.class';
 import { Observable, Subscription } from 'rxjs';
-import { DialogService } from '../../../_main/services/dialog.service';
+import { DialogService } from '../../../_main/services/dialog/dialog.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '../../dialogs/task/task.dialog';
 import { StatusWithTasks } from '../../interfaces/status.interface';
 import { Task } from '../../interfaces/task.interface';

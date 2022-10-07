@@ -44,10 +44,7 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { TextareaComponent } from './components/textarea/textarea.component';
 import { UpperNavigationComponent } from './components/upper-navigation/upper-navigation.component';
 import { AlertDialog } from './dialogs/alert/alert.dialog';
-import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
-import { FocusInitialDirective } from './directives/focus-initial.directive';
-import { LetDirective } from './directives/let.directive';
-import { ViewContainerDirective } from './directives/view-container.directive';
+import { ClickStopPropagationDirective } from './directives/click-stop-propagation/click-stop-propagation.directive';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { MockPage } from './pages/mock/mock.page';
 import { DayjsPipe } from './pipes/dayjs/dayjs.pipe';
@@ -57,8 +54,11 @@ import { DayjsFormatPipe } from './pipes/dayjs-format/dayjs-format.pipe';
 import { MonthPipe } from './pipes/month/month.pipe';
 import { ValidationErrorPipe } from './pipes/validation-error/validation-error.pipe';
 import { YearPipe } from './pipes/year/year.pipe';
-import { ApiService } from './services/api.service';
-import { DialogService } from './services/dialog.service';
+import { ApiService } from './services/api/api.service';
+import { DialogService } from './services/dialog/dialog.service';
+import { LetDirective } from './directives/let/let.directive';
+import { ViewContainerDirective } from './directives/view-container/view-container.directive';
+import { FocusInitialDirective } from './directives/focus-initial/focus-initial.directive';
 
 /**
  * Main module configuration object
@@ -152,11 +152,17 @@ const ngModuleConfig = {
     DateByPreferencesPipe,
   ],
   providers: [
-    DialogService,
-    ApiService,
+    /*=============================================
+    =              Local providers                =
+    =============================================*/
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     MatCheckboxModule,
     MatDatepickerModule,
+    /*=============================================
+    =              Exported providers             =
+    =============================================*/
+    DialogService,
+    ApiService,
   ],
 };
 
@@ -166,7 +172,6 @@ const ngModuleConfig = {
  * @example
  * ```js
  * import { MainModule } from '@app/main/main.module';
-import { DayjsPipe } from './pipes/dayjs/dayjs.pipe';
  *
  * (@)NgModule({
  *   imports: [ ..., MainModule ],

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { requiredValidator } from '@main/validators/required.validator';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '@auth/services/auth/auth.service';
 
 @Component({
   selector: 'app-forgot-page',

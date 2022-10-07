@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { Router } from '@angular/router';
-import { UserService } from '@auth/services/user.service';
+import { UserService } from '@auth/services/user/user.service';
 import { catchError, EMPTY, Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '@auth/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',

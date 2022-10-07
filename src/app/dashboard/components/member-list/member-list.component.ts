@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
-import { MemberService } from '@dashboard/services/member.service';
+import { MemberService } from '@dashboard/services/member/member.service';
 import { Observable } from 'rxjs';
 
 @Component({

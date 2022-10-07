@@ -1,0 +1,36 @@
+<main>
+  <h2 class="text-xl font-bold mb-5">Github</h2>
+
+  <app-card>
+    <div class="card-content">
+      <ng-container *ngIf="repositories.length">
+        <p i18n>You are already connected to at least one GitHub account, so you can choose repository to connect to the
+          project or configure GitHub accounts and repositories.</p>
+      </ng-container>
+      <ng-container *ngIf="!repositories.length">
+        <p i18n>You don't have any connected GitHub accounts or any authorized repositories. You need to configure
+          GitHub first.</p>
+      </ng-container>
+    </div>
+    <div class="card-actions flex justify-end">
+      <app-button (click)='connectToGithub()' type='button' variant="secondary" i18n>Configure Github</app-button>
+    </div>
+  </app-card>
+
+  <form [formGroup]="form" autocomplete="off" class="mt-4">
+
+    <!-- Repository select -->
+    <ng-container *ngIf="!loader.pending">
+      <app-select formControlName="repository" floatingLabel="Repository" i18n-floatingLabel>
+        <app-option *ngFor="let repository of repositories" [value]="repository.fullName"
+          [icon]="repository.private ? faLock : faGlobe" class="repository-option">
+          <span class="opacity-50">@</span>
+          {{repository.fullName.split('/')[0]}}
+          <span class="opacity-50">/</span>
+          {{repository.fullName.split('/')[1]}}
+        </app-option>
+      </app-select>
+    </ng-container>
+
+  </form>
+</main>

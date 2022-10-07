@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
-import { MemberService } from '@dashboard/services/member.service';
+import { MemberService } from '@dashboard/services/member/member.service';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 import { Filter } from '@main/interfaces/filters.interface';
 import { applyFilters } from '@main/operators/apply-filters.operator';
-import { DialogOutlet, DialogService } from '@main/services/dialog.service';
-import { SnackbarService } from '@main/services/snackbar.service';
+import { DialogOutlet, DialogService } from '@main/services/dialog/dialog.service';
+import { SnackbarService } from '@main/services/snackbar/snackbar.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
 import { Schedule } from '@tasks/interfaces/schedule.interface';
 import * as dayjs from 'dayjs';
@@ -21,7 +21,7 @@ import {
   take,
   tap,
 } from 'rxjs';
-import { ApiService } from '../../_main/services/api.service';
+import { ApiService } from '../../_main/services/api/api.service';
 import { Task } from '../interfaces/task.interface';
 
 @Injectable({

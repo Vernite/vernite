@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild, ChangeDetectorRef, OnInit } from '@angular/core';
 import { ControlAccessor } from '@main/classes/control-accessor.class';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { BehaviorSubject, fromEvent, take, filter } from 'rxjs';
@@ -7,6 +7,8 @@ import { NgControl } from '@angular/forms';
 import { FormControl } from '@ngneat/reactive-forms';
 import { unixTimestamp } from '../../interfaces/date.interface';
 import dayjs from 'dayjs';
+import { KeyboardKey } from '@main/interfaces/keyboard-key.interface';
+import { DatePickerComponent } from './date-picker/date-picker.component';
 
 @UntilDestroy()
 @Component({
@@ -14,7 +16,10 @@ import dayjs from 'dayjs';
   templateUrl: './input-date-time.component.html',
   styleUrls: ['./input-date-time.component.scss'],
 })
-export class InputDateTimeComponent extends ControlAccessor<unixTimestamp | null> {
+export class InputDateTimeComponent
+  extends ControlAccessor<unixTimestamp | null>
+  implements OnInit
+{
   @Input() placeholder: string = '';
 
   @Input() floatingLabel?: string;
@@ -22,6 +27,7 @@ export class InputDateTimeComponent extends ControlAccessor<unixTimestamp | null
   @Input() staticLabel?: string;
 
   @ViewChild('overlay') overlay!: ElementRef<HTMLElement>;
+  @ViewChild(DatePickerComponent) datePicker?: DatePickerComponent;
 
   /** @ignore */
   faCalendar = faCalendar;
@@ -33,18 +39,34 @@ export class InputDateTimeComponent extends ControlAccessor<unixTimestamp | null
 
   displayControl = new FormControl<string>(this.format(this.control?.value));
 
+  focused: boolean = false;
+
   constructor(private elementRef: ElementRef, cdRef: ChangeDetectorRef, ngControl: NgControl) {
     super(ngControl, cdRef);
   }
 
+  override ngOnInit() {
+    super.ngOnInit();
+
+    fromEvent<KeyboardEvent>(document, 'keydown')
+      .pipe(
+        filter((event) => (event.key as KeyboardKey) === 'Backspace'),
+        filter(() => this.focused),
+        untilDestroyed(this),
+      )
+      .subscribe(() => {
+        this.control.setValue(null);
+      });
+  }
+
   waitForClickOutside(fn: () => void) {
-    fromEvent(document, 'click')
+    fromEvent(document, 'mousedown')
       .pipe(
         untilDestroyed(this),
         filter((e) => {
           return (
-            !this.overlay.nativeElement.contains(e.target as Node) &&
-            !this.elementRef.nativeElement.contains(e.target as Node)
+            (!this.overlay || !this.overlay.nativeElement.contains(e.target as Node)) &&
+            (!this.elementRef || !this.elementRef.nativeElement.contains(e.target as Node))
           );
         }),
         take(1),
@@ -65,6 +87,7 @@ export class InputDateTimeComponent extends ControlAccessor<unixTimestamp | null
 
   onFocusStateChanged(state: boolean) {
     if (state) {
+      this.focused = state;
       this.openPicker();
     }
   }
@@ -74,8 +97,11 @@ export class InputDateTimeComponent extends ControlAccessor<unixTimestamp | null
     return dayjs.unix(value).format(this.displayFormat);
   }
 
-  override writeValue(value: unixTimestamp): void {
+  override writeValue(value: unixTimestamp | null): void {
     super.writeValue(value);
     this.displayControl.setValue(this.format(value));
+    if (this.datePicker) {
+      this.datePicker.writeValue(value);
+    }
   }
 }

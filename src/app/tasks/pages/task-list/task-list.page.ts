@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@ngneat/reactive-forms';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from '@auth/services/user.service';
+import { UserService } from '@auth/services/user/user.service';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
-import { MemberService } from '@dashboard/services/member.service';
-import { ProjectService } from '@dashboard/services/project.service';
+import { MemberService } from '@dashboard/services/member/member.service';
+import { ProjectService } from '@dashboard/services/project/project.service';
 import {
   faCheck,
   faChevronRight,
@@ -16,7 +16,7 @@ import {
 import { ESet } from '@main/classes/e-set.class';
 import { Filters } from '@main/classes/filters.class';
 import { Filter } from '@main/interfaces/filters.interface';
-import { DialogService } from '@main/services/dialog.service';
+import { DialogService } from '@main/services/dialog/dialog.service';
 import { Status } from '@tasks/interfaces/status.interface';
 import { Task } from '@tasks/interfaces/task.interface';
 import { StatusService } from '@tasks/services/status.service';

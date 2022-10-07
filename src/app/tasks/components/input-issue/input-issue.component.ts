@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { GitIssue } from '@dashboard/interfaces/git-integration.interface';
 import { ControlAccessor } from '@main/classes/control-accessor.class';
-import { GitIntegrationService } from '@dashboard/services/git-integration.service';
+import { GitIntegrationService } from '@dashboard/services/git-integration/git-integration.service';
 import { NgControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 

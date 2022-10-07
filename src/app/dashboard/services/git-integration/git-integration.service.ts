@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { GitAccount, GitIntegration } from '@dashboard/interfaces/git-integration.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
-import { Service } from '@main/decorators/service.decorator';
-import { ApiService } from '@main/services/api.service';
+import { Service } from '@main/decorators/service/service.decorator';
+import { ApiService } from '@main/services/api/api.service';
 import { filter, interval, map, mergeMap, Observable, take } from 'rxjs';
-import { ProjectService } from './project.service';
+import { ProjectService } from '../project/project.service';
 
 /**
  * How to use Git integration service:
  *
  * 1. Run method `startGitHubIntegration()` to start the integration process and open the browser to the GitHub login page.
  *
+ * 2. Run method `postGitHubIntegration(installationId: string)` after receiving `installationId` to finalize integration
+ * process.
  *
  */
 @Service()
@@ -42,22 +44,41 @@ export class GitIntegrationService {
     );
   }
 
+  /**
+   * After GitHub authentication, GitHub page redirects to our system with installationId, so It is needed to send the installationId to backend by ourselves.
+   * @param installationId Installation id returned by GitHub in redirect link
+   */
   public postGitHubIntegration(installationId: string): Observable<void> {
     return this.apiService.post(`/user/integration/github`, {
       params: { installationId },
     });
   }
 
+  /**
+   * Get GitHub integration object with repositories list
+   */
   public getGitHubIntegration(): Observable<GitIntegration> {
     return this.apiService.get('/user/integration/github/repository');
   }
 
-  public attachGitHubIntegration(projectId: number, repositoryName: string): Observable<void> {
+  /**
+   * Attach GitHub repository to specific project
+   * @param projectId Project id to attach GitHub account
+   * @param repositoryName Repository name to connect with
+   */
+  public attachGitHubIntegration(
+    projectId: number,
+    repositoryName: string,
+  ): Observable<{ id: number; name: string; gitHubIntegration: string }> {
     return this.apiService.post(`/project/${projectId}/integration/github`, {
       body: repositoryName,
     });
   }
 
+  /**
+   * Get list of connected GitHub accounts
+   * @returns List of connected GitHub accounts
+   */
   public getConnectedGitHubAccounts(): Observable<GitAccount[]> {
     return this.apiService
       .get('/user/integration/github')
@@ -77,18 +98,37 @@ export class GitIntegrationService {
     return this.apiService.delete(`/user/integration/github/${gitHubAccountId}`);
   }
 
+  /**
+   * Detach GitHub integration from project
+   * @param projectId Project id to remove integration from
+   */
   public deleteGitHubIntegration(projectId: number): Observable<void> {
     return this.apiService.delete(`/project/${projectId}/integration/github`);
   }
 
+  /**
+   * Check if project has GitHub integration (you can also check this with Project object by checking for
+   * `gitHubIntegration` property)
+   * @param projectId Id of the project to check
+   */
   public hasGitHubIntegration(projectId: number): Observable<boolean> {
     return this.projectService.get(projectId).pipe(map((project) => !!project.gitHubIntegration));
   }
 
+  /**
+   * Get list of issues from GitHub
+   * @param projectId Id of the project to get all issues available to connect to
+   * @returns list of GitHub issues
+   */
   public gitHubIssueList(projectId: number) {
     return this.apiService.get(`/project/${projectId}/integration/git/issue`);
   }
 
+  /**
+   * Get list of pull requests from GitHub
+   * @param projectId Id of the project to get all pull requests available to connect to
+   * @returns list of GitHub pull requests
+   */
   public gitHubPullList(projectId: number) {
     return this.apiService.get(`/project/${projectId}/integration/git/pull`);
   }
@@ -105,6 +145,11 @@ export class GitIntegrationService {
     return Boolean(repositoryName.match(new RegExp('^' + preparedUsername + '/*')));
   }
 
+  /**
+   * Returns list of projects connected to current user repositories
+   * @param account Current user GitAccount
+   * @returns list of projects connected to current user repositories
+   */
   public getGitHubAccountConnectedProjects(account: GitAccount): Observable<Project[]> {
     return this.projectService
       .list()

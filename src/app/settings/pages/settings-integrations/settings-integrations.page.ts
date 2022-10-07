@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GitAccount } from '@dashboard/interfaces/git-integration.interface';
-import { GitIntegrationService } from '@dashboard/services/git-integration.service';
+import { GitIntegrationService } from '@dashboard/services/git-integration/git-integration.service';
 import { map, Observable, take } from 'rxjs';
 
 interface GitAccountWithUsage {

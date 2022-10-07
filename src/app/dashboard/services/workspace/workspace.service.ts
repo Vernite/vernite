@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ServiceValidator } from '@main/decorators/service-validator.decorator';
 import { Observable, Subject } from 'rxjs';
-import { ApiService } from 'src/app/_main/services/api.service';
-import { Workspace } from '../interfaces/workspace.interface';
+import { ApiService } from '@main/services/api/api.service';
+import { Workspace } from '../../interfaces/workspace.interface';
 
 /**
  * Workspaces management service

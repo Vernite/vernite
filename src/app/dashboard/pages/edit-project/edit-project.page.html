@@ -1,25 +1,19 @@
 <app-view-options title="Edit project: " [project]="(project$ | async)!"></app-view-options>
 
-<form [formGroup]="form" (submit)="submitUpdate()">
-  <div>
-    <app-input formControlName="name" type="text" placeholder="New project" floatingLabel="Project name"
-      i18n-floatingLabel i18n-placeholder></app-input>
-  </div>
+<form *ngIf="project$ | async as project" [formGroup]="form" (submit)="submitUpdate()">
+  <app-input formControlName="name" type="text" placeholder="New project" floatingLabel="Project name"
+    i18n-floatingLabel i18n-placeholder></app-input>
 
-  <div>
-    <h2 class="text-xl font-bold mb-5" i18n>Workspace:</h2>
-    <app-select formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
-      <app-option *ngFor="let workspace of workspaceList$ | async" [value]="workspace.id">{{ workspace.name }}
-      </app-option>
-    </app-select>
-  </div>
+  <app-select formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
+    <app-option *ngFor="let workspace of workspaceList$ | async" [value]="workspace.id">
+      {{ workspace.name }}
+    </app-option>
+  </app-select>
 
-  <div class="modules">
-    <h2 class="text-xl font-bold mb-5" i18n>Modules</h2>
-  </div>
-  <app-integration-github [projectId]="projectId"></app-integration-github>
+  <integration-modules-grid [project]="project"></integration-modules-grid>
   <div class="buttons">
     <app-button variant="primary" [pending]="updateSubscription && !updateSubscription.closed" i18n>Save</app-button>
     <app-button variant="secondary" type="button" [routerLink]="['/', workspaceId, projectId]" i18n>Cancel</app-button>
   </div>
+
 </form>

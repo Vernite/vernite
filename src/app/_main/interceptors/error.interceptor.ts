@@ -1,11 +1,11 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { DialogService } from '@main/services/dialog.service';
+import { DialogService } from '@main/services/dialog/dialog.service';
 import { catchError, EMPTY, Observable, throwError } from 'rxjs';
-import { UserService } from '@auth/services/user.service';
-import { AuthService } from './../../auth/services/auth.service';
+import { UserService } from '@auth/services/user/user.service';
 import dayjs from 'dayjs';
+import { AuthService } from '@auth/services/auth/auth.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -13,7 +13,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     private dialogService: DialogService,
     private router: Router,
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   private _stoppedInterceptionProcess = false;
@@ -21,7 +21,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   constructError(e: any) {
     return {
       status: e?.status || -1,
-      message: e?.error?.message || ''
+      message: e?.error?.message || '',
     };
   }
 

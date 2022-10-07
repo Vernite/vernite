@@ -3,7 +3,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { inject, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogService } from '@main/services/dialog.service';
+import { DialogService } from '@main/services/dialog/dialog.service';
 import { TaskService } from './task.service';
 
 describe('Service: Task', () => {

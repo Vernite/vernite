@@ -1,6 +1,7 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
-import { SnackbarService } from '@main/services/snackbar.service';
+import { SnackbarService } from '@main/services/snackbar/snackbar.service';
+import { uniqueId } from 'lodash-es';
 import { SnackbarData } from './snackbar.interface';
 
 @Component({
@@ -12,7 +13,7 @@ export class SnackbarComponent implements OnInit {
   faClose = faClose;
 
   @Input()
-  public uid!: string;
+  public uid: string = uniqueId();
 
   @Input()
   public message!: SnackbarData['message'];

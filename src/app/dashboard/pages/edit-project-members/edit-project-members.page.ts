@@ -7,14 +7,14 @@ import {
 } from '@dashboard/dialogs/add-member/add-member.dialog';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
-import { MemberService } from '@dashboard/services/member.service';
+import { MemberService } from '@dashboard/services/member/member.service';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { DialogService } from '@main/services/dialog.service';
+import { DialogService } from '@main/services/dialog/dialog.service';
 import { maxLengthValidator } from '@main/validators/max-length.validator';
 import { Observable, Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
-import { ProjectService } from '../../services/project.service';
-import { WorkspaceService } from '../../services/workspace.service';
+import { ProjectService } from '../../services/project/project.service';
+import { WorkspaceService } from '../../services/workspace/workspace.service';
 
 @Component({
   selector: 'app-edit-project-members',

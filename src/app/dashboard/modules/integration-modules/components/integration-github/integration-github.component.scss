@@ -22,3 +22,7 @@ main {
     }
   }
 }
+
+.repository-option ::ng-deep app-icon {
+  opacity: 0.5;
+}

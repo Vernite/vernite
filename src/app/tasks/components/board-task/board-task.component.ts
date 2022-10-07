@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { faCheck, faCodeCommit, faCodePullRequest } from '@fortawesome/free-solid-svg-icons';
-import { DialogService } from '@main/services/dialog.service';
+import { DialogService } from '@main/services/dialog/dialog.service';
 import { TaskService } from '@tasks/services/task.service';
 import { Task } from '../../interfaces/task.interface';
 

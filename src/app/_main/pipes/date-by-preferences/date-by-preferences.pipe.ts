@@ -2,7 +2,7 @@ import { PipeTransform } from '@angular/core';
 import dayjs from 'dayjs';
 import { Pipe } from '@angular/core';
 import { isNumber } from 'lodash-es';
-import { UserService } from '@auth/services/user.service';
+import { UserService } from '@auth/services/user/user.service';
 import { EMPTY, map } from 'rxjs';
 
 @Pipe({

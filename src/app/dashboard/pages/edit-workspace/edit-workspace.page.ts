@@ -5,7 +5,7 @@ import { Workspace } from '@dashboard/interfaces/workspace.interface';
 import { maxLengthValidator } from '@main/validators/max-length.validator';
 import { Observable, Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
-import { WorkspaceService } from '../../services/workspace.service';
+import { WorkspaceService } from '../../services/workspace/workspace.service';
 
 /**
  * Edit workspace page component.

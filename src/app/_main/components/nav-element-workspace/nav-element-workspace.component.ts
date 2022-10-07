@@ -4,9 +4,9 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { BehaviorSubject } from 'rxjs';
 import { Project } from 'src/app/dashboard/interfaces/project.interface';
 import { Workspace } from 'src/app/dashboard/interfaces/workspace.interface';
-import { ProjectService } from 'src/app/dashboard/services/project.service';
-import { WorkspaceService } from 'src/app/dashboard/services/workspace.service';
-import { DialogService } from '../../services/dialog.service';
+import { ProjectService } from '@dashboard/services/project/project.service';
+import { WorkspaceService } from '@dashboard/services/workspace/workspace.service';
+import { DialogService } from '../../services/dialog/dialog.service';
 
 @Component({
   selector: 'app-nav-element-workspace',

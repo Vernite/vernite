@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SnackbarData } from '@main/components/snackbar/snackbar.interface';
-import { Service } from '@main/decorators/service.decorator';
+import { Service } from '@main/decorators/service/service.decorator';
 import { BehaviorSubject } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 

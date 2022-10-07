@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
-import { Page } from 'src/app/_main/decorators/page.decorator';
-import { DialogService } from 'src/app/_main/services/dialog.service';
+import { Page } from '@main/decorators/page/page.decorator';
+import { DialogService } from '@main/services/dialog/dialog.service';
 import { Workspace } from '../../interfaces/workspace.interface';
-import { ProjectService } from '../../services/project.service';
-import { WorkspaceService } from '../../services/workspace.service';
+import { ProjectService } from '../../services/project/project.service';
+import { WorkspaceService } from '../../services/workspace/workspace.service';
 
 /**
  * Workspaces list page component.

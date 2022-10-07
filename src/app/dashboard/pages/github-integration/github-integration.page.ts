@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GitIntegrationService } from '@dashboard/services/git-integration.service';
+import { GitIntegrationService } from '@dashboard/services/git-integration/git-integration.service';
 
 @Component({
   selector: 'app-github-integration-page',

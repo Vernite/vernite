@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { Workspace } from 'src/app/dashboard/interfaces/workspace.interface';
-import { WorkspaceService } from 'src/app/dashboard/services/workspace.service';
+import { WorkspaceService } from '@dashboard/services/workspace/workspace.service';
 
 @Component({
   selector: 'app-sidebar-navigation',

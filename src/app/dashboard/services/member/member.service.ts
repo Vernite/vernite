@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
-import { Service } from '@main/decorators/service.decorator';
 import { map, Observable } from 'rxjs';
-import { ApiService } from 'src/app/_main/services/api.service';
+import { ApiService } from '@main/services/api/api.service';
+import { Service } from '@main/decorators/service/service.decorator';
 
 @Service()
 @Injectable({

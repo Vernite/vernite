@@ -5,7 +5,7 @@ import { passwordValidator } from '@main/validators/password.validator';
 import { requiredValidator } from '@main/validators/required.validator';
 import { sameAsValidator } from '@main/validators/same-as.validator';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '@auth/services/auth/auth.service';
 
 @Component({
   selector: 'app-change-password',

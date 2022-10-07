@@ -6,7 +6,7 @@ import { passwordValidator } from '@main/validators/password.validator';
 import { sameAsValidator } from '@main/validators/same-as.validator';
 import { catchError, EMPTY, Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '@auth/services/auth/auth.service';
 
 enum RegisterStage {
   IMPORTANT_DATA,

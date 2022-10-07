@@ -5,6 +5,10 @@
 
 form {
   padding-left: 10px;
+
+  &>*:not(:last-child) {
+    margin-bottom: 1rem;
+  }
 }
 
 .buttons {

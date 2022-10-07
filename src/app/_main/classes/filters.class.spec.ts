@@ -19,8 +19,8 @@ describe('filters class', () => {
     expect(filter.label).toBe($localize`Only my tasks`);
     expect(filter.options).toBeDefined();
     expect(filter.options[1]).toBeDefined();
-    expect(filter.options[1].assigneeId).toBe(1);
+    expect(filter.options[1]?.assigneeId).toBe(1);
     expect(filter.options[0]).toBeDefined();
-    expect(filter.options[0].assigneeId).toBeUndefined();
+    expect(filter.options[0]?.assigneeId).toBeUndefined();
   });
 });

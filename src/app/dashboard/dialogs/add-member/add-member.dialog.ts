@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
-import { RouterExtensionsService } from '@main/services/router-extensions.service';
+import { RouterExtensionsService } from '@main/services/router-extensions/router-extensions.service';
 import { Status } from '@tasks/interfaces/status.interface';
 import { Observable } from 'rxjs';
 import { requiredValidator } from '../../../_main/validators/required.validator';

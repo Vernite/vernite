@@ -1,24 +1,29 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
 import { maxLengthValidator } from '@main/validators/max-length.validator';
-import { untilDestroyed } from '@ngneat/until-destroy';
-import { Observable, Subscription } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Observable, of, Subscription, switchMap } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
-import { ProjectService } from '../../services/project.service';
-import { WorkspaceService } from '../../services/workspace.service';
+import { ProjectService } from '../../services/project/project.service';
+import { WorkspaceService } from '../../services/workspace/workspace.service';
+import { IntegrationModulesGridComponent } from '@dashboard/components/integration-modules-grid/integration-modules-grid.component';
+import { Loader } from '@main/classes/loader/loader.class';
+import { setLoaderMessage, startLoader, stopLoader } from '@main/operators/loader.operator';
 
+@UntilDestroy()
 @Component({
   selector: 'app-edit-project',
   templateUrl: './edit-project.page.html',
   styleUrls: ['./edit-project.page.scss'],
 })
 export class EditProjectPage implements OnDestroy {
-  /**
-   * Form group for the workspace editing.
-   */
+  @ViewChild(IntegrationModulesGridComponent)
+  integrationModulesGrid!: IntegrationModulesGridComponent;
+
+  /** Form group for project editing. */
   public form = new FormGroup({
     name: new FormControl('', [requiredValidator(), maxLengthValidator(50)]),
     workspaceId: new FormControl<number | null>(null, [requiredValidator()]),
@@ -38,6 +43,8 @@ export class EditProjectPage implements OnDestroy {
 
   public workspaceId!: number;
   public projectId!: number;
+
+  public loader = new Loader();
 
   /**
    * Default constructor. Injects the Workspace, Router service and ActivatedRoute service.
@@ -91,11 +98,17 @@ export class EditProjectPage implements OnDestroy {
     this.form.updateValueAndValidity();
     if (this.form.invalid) return;
 
-    this.updateSubscription = this.projectService
-      .update(this.form.value)
-      .pipe(untilDestroyed(this))
+    this.updateSubscription = of(null)
+      .pipe(
+        startLoader(this.loader, $localize`Saving project`),
+        switchMap(() => this.projectService.update(this.form.value)),
+        setLoaderMessage(this.loader, $localize`Saving integrations`),
+        switchMap(() => this.integrationModulesGrid.saveAll()),
+        stopLoader(this.loader),
+        untilDestroyed(this),
+      )
       .subscribe(() => {
-        this.router.navigate(['/', this.workspaceId]);
+        this.router.navigate(['/', this.workspaceId, this.projectId]);
       });
   }
 

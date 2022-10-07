@@ -3,12 +3,13 @@ import { NgControl } from '@angular/forms';
 import { UserUtils } from '@dashboard/classes/user.class';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { ControlAccessor } from '@main/classes/control-accessor.class';
-import { untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TaskService } from '@tasks/services/task.service';
 import { TestNgControl } from '@tests/helpers/ng-control-testing-provider.helper';
 import * as Color from 'color';
 import { BehaviorSubject, filter, fromEvent, take } from 'rxjs';
 
+@UntilDestroy()
 @Component({
   selector: 'app-input-assignee',
   templateUrl: './input-assignee.component.html',

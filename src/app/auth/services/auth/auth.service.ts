@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Service } from '@main/decorators/service.decorator';
+import { Service } from '@main/decorators/service/service.decorator';
 import dayjs from 'dayjs';
 import { tap } from 'rxjs';
-import { ApiService } from 'src/app/_main/services/api.service';
+import { ApiService } from '@main/services/api/api.service';
 
 @Service()
 @Injectable({
@@ -38,9 +38,9 @@ export class AuthService {
     password: string;
     remember: boolean;
   }) {
-    return this.apiService.post(`/auth/login`, { body: { email, password, remember } }).pipe(
-      tap(() => localStorage.setItem('lastLoginTry', dayjs().unix().toString()))
-    );
+    return this.apiService
+      .post(`/auth/login`, { body: { email, password, remember } })
+      .pipe(tap(() => localStorage.setItem('lastLoginTry', dayjs().unix().toString())));
   }
 
   public logout() {

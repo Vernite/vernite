@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SnackbarService } from '@main/services/snackbar.service';
+import { SnackbarService } from '@main/services/snackbar/snackbar.service';
 import { SnackbarData } from '../snackbar/snackbar.interface';
 
 @Component({

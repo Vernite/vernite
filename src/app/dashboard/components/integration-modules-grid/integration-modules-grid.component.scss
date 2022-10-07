@@ -1,0 +1,30 @@
+:host {
+  display: block;
+}
+
+.empty-list {
+  border-radius: var(--border-radius);
+  background-color: var(--color-secondary-800);
+  padding: 1rem;
+  margin-top: 1rem;
+
+  span {
+    opacity: 0.5;
+    color: var(--color-text);
+  }
+}
+
+.grid {
+  display: flex !important;
+  flex-wrap: wrap;
+  margin-right: -1rem;
+  margin-top: 1rem;
+
+  &::ng-deep>* {
+    flex-grow: 1;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    min-width: 300px;
+    max-width: 600px;
+  }
+}

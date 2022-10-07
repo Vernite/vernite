@@ -21,6 +21,7 @@
     "editorconfig.editorconfig",
     "stylelint.vscode-stylelint",
     "vunguyentuan.vscode-css-variables",
-    "Tobermory.es6-string-html"
+    "tobermory.es6-string-html",
+    "Gruntfuggly.todo-tree"
   ]
 }

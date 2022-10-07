@@ -1,0 +1,11 @@
+<div class="box" (click)="toggle()">
+  <div class="checkbox">
+    <app-icon [icon]="control.value ? faCircleCheck : faCircle" size="1rem" [class.text-green-500]="control.value">
+    </app-icon>
+  </div>
+  <div class="flex mb-3">
+    <app-icon [icon]="icon" class="mr-3"></app-icon>
+    <h5 class="text-title">{{ title }}</h5>
+  </div>
+  <p class="text-base">{{ description }}</p>
+</div>

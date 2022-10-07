@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
-import { AuthService } from '@auth/services/auth.service';
-import { UserService } from '@auth/services/user.service';
+import { AuthService } from '@auth/services/auth/auth.service';
+import { UserService } from '@auth/services/user/user.service';
 import { requiredValidator } from '@main/validators/required.validator';
 
 @Component({

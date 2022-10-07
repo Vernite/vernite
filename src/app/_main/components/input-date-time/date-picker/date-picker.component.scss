@@ -157,7 +157,7 @@
             background-color: var(--color-primary-500);
           }
 
-          &:hover {
+          &:not(.selected):hover {
             background-color: var(--color-secondary-800);
           }
         }

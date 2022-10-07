@@ -3,10 +3,10 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
 import { DialogRef } from '@main/classes/dialog-ref.class';
+import { Service } from '@main/decorators/service/service.decorator';
 import { BehaviorSubject, filter } from 'rxjs';
 import { v4 as uuid } from 'uuid';
-import { Service } from '../decorators/service.decorator';
-import { AlertDialog, AlertDialogData, AlertDialogVariant } from '../dialogs/alert/alert.dialog';
+import { AlertDialog, AlertDialogData, AlertDialogVariant } from '../../dialogs/alert/alert.dialog';
 
 export enum DialogOutlet {
   CONTENT_RIGHT = 'CONTENT_RIGHT',
@@ -41,7 +41,7 @@ export class DialogService {
    * @param data Object to pass as data to the dialog
    * @returns Reference to the newly-opened dialog.
    */
-  open(component: any, data: any, outlet?: DialogOutlet): MatDialogRef<any> | DialogRef {
+  open(component: any, data: any = {}, outlet?: DialogOutlet): MatDialogRef<any> | DialogRef {
     let dialog: MatDialogRef<any> | DialogRef;
 
     if (outlet) {

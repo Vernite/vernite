@@ -3,13 +3,13 @@ import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddMemberDialog } from '@dashboard/dialogs/add-member/add-member.dialog';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
-import { MemberService } from '@dashboard/services/member.service';
+import { MemberService } from '@dashboard/services/member/member.service';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { DialogService } from '@main/services/dialog.service';
+import { DialogService } from '@main/services/dialog/dialog.service';
 import { maxLengthValidator } from '@main/validators/max-length.validator';
 import { Observable, Subscription } from 'rxjs';
-import { ProjectService } from '../../services/project.service';
-import { WorkspaceService } from '../../services/workspace.service';
+import { ProjectService } from '../../services/project/project.service';
+import { WorkspaceService } from '../../services/workspace/workspace.service';
 import { requiredValidator } from '@main/validators/required.validator';
 
 @Component({

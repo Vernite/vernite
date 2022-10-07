@@ -1,16 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddMemberDialog } from '@dashboard/dialogs/add-member/add-member.dialog';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
-import { MemberService } from '@dashboard/services/member.service';
+import { MemberService } from '@dashboard/services/member/member.service';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { DialogService } from '@main/services/dialog.service';
+import { DialogService } from '@main/services/dialog/dialog.service';
 import { maxLengthValidator } from '@main/validators/max-length.validator';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, of, Subscription, switchMap, tap } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
-import { ProjectService } from '../../services/project.service';
-import { WorkspaceService } from '../../services/workspace.service';
+import { ProjectService } from '../../services/project/project.service';
+import { WorkspaceService } from '../../services/workspace/workspace.service';
+import { Project } from '@dashboard/interfaces/project.interface';
+import { IntegrationModulesGridComponent } from '@dashboard/components/integration-modules-grid/integration-modules-grid.component';
+import { validateForm } from '@main/classes/form.class';
+import { startLoader } from './../../../_main/operators/loader.operator';
+import { setLoaderMessage } from '@main/operators/loader.operator';
+import { Loader } from '@main/classes/loader/loader.class';
 
 @Component({
   selector: 'app-create-project',
@@ -18,6 +24,9 @@ import { WorkspaceService } from '../../services/workspace.service';
   styleUrls: ['./create-project.page.scss'],
 })
 export class CreateProjectPage {
+  @ViewChild(IntegrationModulesGridComponent)
+  integrationModulesGrid!: IntegrationModulesGridComponent;
+
   /**
    * Form group for the project creation.
    */
@@ -37,6 +46,10 @@ export class CreateProjectPage {
   public workspaceId!: number;
 
   public memberList: string[] = [];
+
+  public project?: Project;
+
+  public loader = new Loader();
 
   /**
    * Default constructor. Injects the Workspace and Router service.
@@ -72,22 +85,20 @@ export class CreateProjectPage {
    */
   public submitCreate(): void {
     if (!this.createSubscription?.closed && this.createSubscription) return;
-    this.form.markAllAsTouched();
-    this.form.updateValueAndValidity();
-    if (this.form.invalid) return;
+    if (!validateForm(this.form)) return;
 
-    this.createSubscription = this.projectService.create(this.form.value).subscribe((response) => {
-      if (this.memberList) {
-        this.memberService.add(this.memberList, [response.id]).subscribe(() => {
-          this.router.navigate([this.workspaceId]).then(() => {
-            window.location.reload();
-          });
-        });
-      } else {
-        this.router.navigate([this.workspaceId]).then(() => {
-          window.location.reload();
-        });
-      }
-    });
+    of(null)
+      .pipe(
+        startLoader(this.loader),
+        switchMap(() => this.projectService.create(this.form.value)),
+        tap((project) => (this.project = project)),
+        setLoaderMessage(this.loader, $localize`Saving project members...`),
+        switchMap((project) => this.memberService.add(this.memberList, [project.id])),
+        setLoaderMessage(this.loader, $localize`Saving integrations...`),
+        switchMap(() => this.integrationModulesGrid.saveAll()),
+      )
+      .subscribe((project) => {
+        this.router.navigate(['/', this.workspaceId, project.id]);
+      });
   }
 }

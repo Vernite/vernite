@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { WorkspaceService } from '../../services/workspace.service';
+import { WorkspaceService } from '../../services/workspace/workspace.service';
 import { map, Observable } from 'rxjs';
 import { Project } from '../../interfaces/project.interface';
 import { Workspace } from '../../interfaces/workspace.interface';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { DialogService } from 'src/app/_main/services/dialog.service';
-import { ProjectService } from '../../services/project.service';
+import { DialogService } from '@main/services/dialog/dialog.service';
+import { ProjectService } from '../../services/project/project.service';
 
 @Component({
   selector: 'app-projects-list',

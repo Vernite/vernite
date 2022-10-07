@@ -1,0 +1,14 @@
+<h1 mat-dialog-title i18n>Integration modules selection</h1>
+<div mat-dialog-content>
+  <p class="text-base mb-5" i18n>
+    Select one or more integration modules to integration your project with external services.
+  </p>
+  <div class="flex flex-wrap">
+    <selectable-integration *ngFor="let module of modules$ | async; index as i" [title]="module.title"
+      [description]="module.description" [icon]="module.icon" [formControl]="form.get(module.id)" class="mb-2">
+    </selectable-integration>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <app-button type="button" variant="primary" (click)="close()" i18n>Save</app-button>
+</div>

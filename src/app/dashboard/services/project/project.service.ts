@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
-import { Service } from '@main/decorators/service.decorator';
-import { map } from 'rxjs';
-import { ApiService } from 'src/app/_main/services/api.service';
-import { Project } from '../interfaces/project.interface';
+import { map, Observable } from 'rxjs';
+import { ApiService } from '@main/services/api/api.service';
+import { Project } from '../../interfaces/project.interface';
+import { Service } from '@main/decorators/service/service.decorator';
 
 @Service()
 @Injectable({
@@ -17,7 +17,7 @@ export class ProjectService {
    * @param projectId identifier of the project to get from the API
    * @returns Request observable, which completes when request is finished
    */
-  public get(projectId: number) {
+  public get(projectId: number): Observable<Project> {
     return this.apiService.get(`/project/${projectId}`);
   }
 
@@ -26,7 +26,7 @@ export class ProjectService {
    * @param projectId identifier of the project to delete from the API
    * @returns Request observable, which completes when request is finished
    */
-  public delete(projectId: number) {
+  public delete(projectId: number): Observable<void> {
     return this.apiService.delete(`/project/${projectId}`);
   }
 
@@ -35,7 +35,7 @@ export class ProjectService {
    * @param project project object to update in the API
    * @returns Request observable, which completes when request is finished
    */
-  public update(project: Partial<Project>) {
+  public update(project: Partial<Project>): Observable<Project> {
     return this.apiService.put(`/project/${project.id}`, { body: project });
   }
 
@@ -44,7 +44,7 @@ export class ProjectService {
    * @param project project to add
    * @returns Request observable, which completes when request is finished
    */
-  public create(project: { name: string; workspaceId: number }) {
+  public create(project: { name: string; workspaceId: number }): Observable<Project> {
     return this.apiService.post('/project', { body: project });
   }
 
@@ -62,7 +62,7 @@ export class ProjectService {
   /**
    * List projects in given workspace.
    */
-  public list() {
+  public list(): Observable<Project[]> {
     return this.apiService.get('/workspace').pipe(
       map((workspaces) =>
         workspaces.reduce((projects: any, workspace: Workspace) => {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogOutlet } from '@main/services/dialog.service';
+import { DialogOutlet } from '@main/services/dialog/dialog.service';
 import { environment } from 'src/environments/environment';
 
 @Component({

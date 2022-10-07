@@ -3,9 +3,9 @@ import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { Router } from '@angular/router';
 import { maxLengthValidator } from '@main/validators/max-length.validator';
 import { Subscription } from 'rxjs';
-import { Page } from 'src/app/_main/decorators/page.decorator';
+import { Page } from '@main/decorators/page/page.decorator';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
-import { WorkspaceService } from '../../services/workspace.service';
+import { WorkspaceService } from '../../services/workspace/workspace.service';
 
 /**
  * Create workspace page component.

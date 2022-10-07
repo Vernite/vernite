@@ -1,4 +1,4 @@
-import { DialogService } from '@main/services/dialog.service';
+import { DialogService } from '@main/services/dialog/dialog.service';
 import { Observable } from 'rxjs';
 
 export interface ErrorValidationTree {
@@ -7,6 +7,9 @@ export interface ErrorValidationTree {
   };
 }
 
+/**
+ * @TODO: Replace this function with some kind of operator function in requests
+ */
 export function ServiceValidator(errorValidationTree: ErrorValidationTree) {
   return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
     descriptor.value = function (identifier: string) {

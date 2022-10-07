@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Task } from '@tasks/interfaces/task.interface';
 import { combineLatest, map, Observable } from 'rxjs';
-import { ApiService } from 'src/app/_main/services/api.service';
+import { ApiService } from '@main/services/api/api.service';
 import { Status, StatusWithTasks } from '../interfaces/status.interface';
 import { TaskService } from './task.service';
 
