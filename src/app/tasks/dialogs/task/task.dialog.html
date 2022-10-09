@@ -41,7 +41,7 @@
       <app-option *ngFor="let status of statusList$ | async" [value]="status.id">
         {{ status.name }}
       </app-option>
-      <app-empty-options i18n>This project has no statuses</app-empty-options>
+      <app-empty-options i18n>This project doesn't have any status.</app-empty-options>
     </app-select>
 
     <!-- Priorities -->
