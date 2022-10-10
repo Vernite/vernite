@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "workflow": {
+    "vernite": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -43,7 +43,7 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "outputPath": "dist/workflow",
+            "outputPath": "dist/vernite",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -106,10 +106,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "workflow:build:production"
+              "browserTarget": "vernite:build:production"
             },
             "development": {
-              "browserTarget": "workflow:build:development"
+              "browserTarget": "vernite:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -118,13 +118,13 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "proxyConfig": "proxy.conf.json",
-            "browserTarget": "workflow:build:e2e"
+            "browserTarget": "vernite:build:e2e"
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "workflow:build"
+            "browserTarget": "vernite:build"
           }
         },
         "test": {
@@ -153,11 +153,11 @@
         "cypress-run": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "workflow:serve"
+            "devServerTarget": "vernite:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "workflow:serve:production"
+              "devServerTarget": "vernite:serve:production"
             }
           }
         },
@@ -171,13 +171,13 @@
         "e2e": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "workflow:serve-coverage",
+            "devServerTarget": "vernite:serve-coverage",
             "watch": true,
             "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "workflow:serve-coverage:production"
+              "devServerTarget": "vernite:serve-coverage:production"
             }
           }
         },
@@ -185,13 +185,13 @@
           "builder": "@cypress/schematic:cypress",
           "options": {
             "browser": "chrome",
-            "devServerTarget": "workflow:serve-coverage",
+            "devServerTarget": "vernite:serve-coverage",
             "headless": true,
             "watch": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "workflow:serve-coverage:production"
+              "devServerTarget": "vernite:serve-coverage:production"
             }
           }
         },
@@ -225,7 +225,7 @@
       }
     }
   },
-  "defaultProject": "workflow",
+  "defaultProject": "vernite",
   "cli": {
     "defaultCollection": "@angular-eslint/schematics"
   }

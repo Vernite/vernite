@@ -19,10 +19,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'workflow'`, () => {
+  it(`should have as title 'vernite'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('workflow');
+    expect(app.title).toEqual('vernite');
   });
 
   it(`should have preload class in body`, () => {

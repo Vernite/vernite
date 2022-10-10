@@ -51,7 +51,7 @@ jobs:
 
       # Copy default redirect page
       - name: Redirect page copy
-        run: cp src/redirect.html dist/workflow/index.html
+        run: cp src/redirect.html dist/vernite/index.html
 
       # Deploy to the server using rsync
       - name: Deploy app 🚀
@@ -59,7 +59,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: "-rltgoDzvO --delete"
-          SOURCE: "./dist/workflow/"
+          SOURCE: "./dist/vernite/"
           REMOTE_HOST: '51.77.50.209'
           REMOTE_PORT: '2224'
           REMOTE_USER: 'frontend'
@@ -75,7 +75,7 @@ jobs:
 
       # Copy coverage directory
       - name: Copy coverage directory
-        run: cp -R coverage/workflow documentation/coverage
+        run: cp -R coverage/vernite documentation/coverage
 
       # Deploy documentation to Github pages
       - name: Deploy documentation 📄

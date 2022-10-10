@@ -11,5 +11,5 @@
   "include": [
     "src/**/*.ts"
   ],
-  "report-dir": "./coverage/workflow-e2e/"
+  "report-dir": "./coverage/vernite-e2e/"
 }

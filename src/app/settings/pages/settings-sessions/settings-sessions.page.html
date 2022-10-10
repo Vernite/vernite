@@ -18,7 +18,7 @@
             </div>
             <div class="local">
               <p *ngIf="session.geoip" class="text-base">
-                {{ session.geoip.city }}, {{ session.geoip.country }}
+                {{ location(session.geoip) }}
               </p>
               <p *ngIf="!session.current" class="text-base description">
                 {{ changeDate(session.lastUsed) }}

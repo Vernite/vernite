@@ -46,6 +46,18 @@ export class SettingsSessionsPage implements OnInit {
     return osName + ', ' + browser;
   }
 
+  location(geoip: UserSession['geoip']) {
+    let location = '';
+    if (geoip.city) {
+      location += geoip.city;
+    }
+    if (geoip.country) {
+      if (location) location += ', ';
+      location += geoip.country;
+    }
+    return location;
+  }
+
   deleteSession(id: number) {
     this.sessionService.delete(id).subscribe();
   }

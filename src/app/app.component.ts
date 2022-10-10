@@ -12,7 +12,7 @@ export class AppComponent {
   /**
    * Title of the page
    */
-  public title = 'workflow';
+  public title = 'vernite';
 
   constructor() {
     document.addEventListener('DOMContentLoaded', () => {
