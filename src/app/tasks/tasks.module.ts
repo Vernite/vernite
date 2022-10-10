@@ -19,6 +19,10 @@ import { TaskPriorityPipe } from './pipes/task-priority.pipe';
 import { TaskTypeIconPipe } from './pipes/task-type-icon.pipe';
 import { TaskTypePipe } from './pipes/task-type.pipe';
 import { TasksRoutingModule } from './tasks.routing';
+import { TrackerComponent } from './components/tracker/tracker.component';
+import { TimeTracksTotalPipe } from './pipes/time-tracks-total/time-tracks-total.pipe';
+import { TimeTrackTimerPipe } from './pipes/time-track-timer/time-track-timer.pipe';
+import { TimeTrackDurationPipe } from './pipes/time-track-duration/time-track-duration.pipe';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule],
@@ -39,6 +43,10 @@ import { TasksRoutingModule } from './tasks.routing';
     InputTaskPropertyComponent,
     InputIssueComponent,
     InputPullRequestComponent,
+    TrackerComponent,
+    TimeTracksTotalPipe,
+    TimeTrackTimerPipe,
+    TimeTrackDurationPipe,
   ],
 })
 export class TasksModule {}

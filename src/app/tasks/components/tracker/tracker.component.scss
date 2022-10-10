@@ -1,0 +1,38 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+
+  .total span {
+    display: inline-block;
+    width: 100px;
+    margin-right: 1rem;
+    color: var(--color-text);
+  }
+
+  .toggle {}
+}
+
+.tracker-overlay {
+  position: relative;
+  padding: 0.5rem 1.5rem;
+  margin-top: 1rem;
+  background-color: var(--color-secondary-800);
+  border-radius: var(--border-radius);
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 2rem;
+    background-color: red;
+    content: '';
+    transform: rotate(45deg);
+  }
+
+  li {
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+  }
+}

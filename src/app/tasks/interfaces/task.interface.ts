@@ -2,6 +2,7 @@ import { GitIssue, GitPull } from '@dashboard/interfaces/git-integration.interfa
 import { TaskType } from '@tasks/enums/task-type.enum';
 import { JSONParsable } from './../../_main/interfaces/json-parsable.interface';
 import { unixTimestamp } from '../../_main/interfaces/date.interface';
+import { TimeTrack } from './time-track.interface';
 
 /**
  * Project task interface
@@ -81,4 +82,9 @@ export interface Task extends JSONParsable {
    * Optional user id who is assigned to task
    */
   assigneeId?: number;
+
+  /**
+   * List of trackers for this task
+   */
+  timeTracks?: TimeTrack[];
 }

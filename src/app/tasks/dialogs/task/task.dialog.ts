@@ -16,7 +16,7 @@ import { SubTaskType, TaskType } from '@tasks/enums/task-type.enum';
 import { Status } from '@tasks/interfaces/status.interface';
 import { StatusService } from '@tasks/services/status.service';
 import { isNil } from 'lodash-es';
-import { distinctUntilChanged, map, Observable } from 'rxjs';
+import { distinctUntilChanged, map, Observable, pairwise } from 'rxjs';
 import { requiredValidator } from '../../../_main/validators/required.validator';
 import { Task } from '../../interfaces/task.interface';
 import { unixTimestamp } from '../../../_main/interfaces/date.interface';
@@ -86,6 +86,7 @@ export class TaskDialog implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('ngOnInit');
     this.loadParamsFromUrl();
 
     const { workspaceId, projectId, task } = this.data;
@@ -98,14 +99,20 @@ export class TaskDialog implements OnInit {
 
     this.form
       .get('workspaceId')
-      .valueChanges.pipe(distinctUntilChanged(), untilDestroyed(this))
-      .subscribe(this.onWorkspaceIdChange.bind(this));
+      .valueChanges.pipe(pairwise(), untilDestroyed(this))
+      .subscribe(([oldWorkspaceId, newWorkspaceId]) => {
+        if (oldWorkspaceId !== newWorkspaceId) {
+          console.log('fromSubscription');
+          this.onWorkspaceIdChange.bind(this)(newWorkspaceId);
+        }
+      });
     this.form
       .get('projectId')
       .valueChanges.pipe(distinctUntilChanged(), untilDestroyed(this))
       .subscribe(this.onProjectIdChange.bind(this));
 
     if (workspaceId) {
+      console.log('fromInit');
       this.onWorkspaceIdChange(workspaceId);
     }
 
@@ -115,6 +122,7 @@ export class TaskDialog implements OnInit {
   }
 
   onWorkspaceIdChange(workspaceId: number | null) {
+    console.log('onWorkspaceIdChange', workspaceId);
     if (this.interactive$.value) {
       this.form.get('projectId').setValue(null);
     }
@@ -152,6 +160,7 @@ export class TaskDialog implements OnInit {
   }
 
   confirm() {
+    console.log();
     if (validateForm(this.form)) {
       this.dialogRef.close(this.form.value);
     }

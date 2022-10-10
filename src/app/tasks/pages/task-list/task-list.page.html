@@ -9,6 +9,7 @@
     <div class="header-cell w-full">Title</div>
     <div class="header-cell w-52">Status</div>
     <div class="header-cell w-52">Assignee</div>
+    <div class="header-cell w-52">Time tracking</div>
     <div class="header-cell w-52">Deadline</div>
     <div class="header-cell action">
       <!-- Actions -->
@@ -54,6 +55,11 @@
         <app-input-assignee [assignee]="task.assigneeId && members && members.get(task.assigneeId)" [members]="members"
           [projectId]="projectId" [taskId]="task.id" click-stop-propagation>
         </app-input-assignee>
+      </div>
+
+      <!-- Time tracking cell -->
+      <div class="cell w-52">
+        <tracker [task]="task"></tracker>
       </div>
 
       <!-- Deadline cell -->
@@ -113,6 +119,11 @@
           <app-input-assignee [assignee]="subtask.assigneeId && members && members.get(subtask.assigneeId)"
             [members]="members" [projectId]="projectId" [taskId]="subtask.id" click-stop-propagation>
           </app-input-assignee>
+        </div>
+
+        <!-- Time tracking cell -->
+        <div class="cell w-52">
+          <tracker [task]="subtask"></tracker>
         </div>
 
         <!-- Deadline cell -->

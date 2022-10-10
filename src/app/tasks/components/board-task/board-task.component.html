@@ -16,6 +16,10 @@
     <span class="task-id">#{{ task.id }}</span>
     <span>{{ task.name }}</span>
   </div>
+  <!-- Time tracking cell -->
+  <div class="mt-3">
+    <tracker [task]="task"></tracker>
+  </div>
   <div class="actions">
     <a *ngIf="task.issue" [href]="task.issue.url" target="_blank">
       <app-icon [icon]="faCodeCommit" size="14px"></app-icon>
