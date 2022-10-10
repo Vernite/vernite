@@ -12,6 +12,7 @@ import { WorkspaceService } from '../../services/workspace/workspace.service';
 import { IntegrationModulesGridComponent } from '@dashboard/components/integration-modules-grid/integration-modules-grid.component';
 import { Loader } from '@main/classes/loader/loader.class';
 import { setLoaderMessage, startLoader, stopLoader } from '@main/operators/loader.operator';
+import { notEmptyValidator } from '@main/validators/not-empty.validator';
 
 @UntilDestroy()
 @Component({
@@ -25,7 +26,7 @@ export class EditProjectPage implements OnDestroy {
 
   /** Form group for project editing. */
   public form = new FormGroup({
-    name: new FormControl('', [requiredValidator(), maxLengthValidator(50)]),
+    name: new FormControl('', [requiredValidator(), maxLengthValidator(50), notEmptyValidator()]),
     workspaceId: new FormControl<number | null>(null, [requiredValidator()]),
   });
 

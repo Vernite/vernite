@@ -17,6 +17,7 @@ import { validateForm } from '@main/classes/form.class';
 import { startLoader } from './../../../_main/operators/loader.operator';
 import { setLoaderMessage } from '@main/operators/loader.operator';
 import { Loader } from '@main/classes/loader/loader.class';
+import { notEmptyValidator } from '@main/validators/not-empty.validator';
 
 @Component({
   selector: 'app-create-project',
@@ -31,8 +32,12 @@ export class CreateProjectPage {
    * Form group for the project creation.
    */
   public form = new FormGroup({
-    name: new FormControl<string>('', [requiredValidator(), maxLengthValidator(50)], []),
-    workspaceId: new FormControl<number>(0, [requiredValidator()], []),
+    name: new FormControl<string>('', [
+      requiredValidator(),
+      maxLengthValidator(50),
+      notEmptyValidator(),
+    ]),
+    workspaceId: new FormControl<number>(0, [requiredValidator()]),
   });
 
   faPlus = faPlus;
