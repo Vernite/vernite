@@ -8,7 +8,10 @@ export class TimeTracksTotalPipe implements PipeTransform {
   transform(value: TimeTrack[] | undefined, format: 'milliseconds' | 'string' = 'string'): any {
     if (!value) return format === 'string' ? '' : 0;
 
-    const milliseconds = value.reduce((acc, track) => acc + (track.timeEnd - track.timeStart), 0);
+    const milliseconds = value.reduce(
+      (acc, track) => acc + ((track.endDate || 0) - track.startDate),
+      0,
+    );
     if (format === 'milliseconds') {
       return milliseconds;
     } else {

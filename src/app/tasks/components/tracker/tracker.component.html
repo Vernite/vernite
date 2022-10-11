@@ -15,8 +15,8 @@
   [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'" [cdkConnectedOverlayHasBackdrop]="true">
   <ul #overlay class="tracker-overlay">
     <li *ngFor="let timeTrack of task.timeTracks">
-      <span>{{ timeTrack.timeStart | dateByPreferences | async }}</span>
-      <span>{{ timeTrack.timeEnd | dateByPreferences | async }}</span>
+      <span>{{ timeTrack.startDate | dateByPreferences | async }}</span>
+      <span>{{ timeTrack.endDate ? (timeTrack.endDate | dateByPreferences | async) : '-' }}</span>
       <span>{{ timeTrack | timeTrackDuration }}</span>
     </li>
     <li *ngIf="!task.timeTracks?.length" class="no-tracks">

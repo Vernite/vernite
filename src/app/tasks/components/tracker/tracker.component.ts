@@ -16,9 +16,10 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 export class TrackerComponent {
   @ViewChild('overlay') overlay!: ElementRef<HTMLElement>;
 
+  @Input() projectId!: number;
   @Input() set task(task: Task) {
     this._task = task;
-    this.enabled = task.timeTracks?.some((track) => track.enabled) || false;
+    this.enabled = (task.timeTracks && task.timeTracks?.some((track) => !track.endDate)) || false;
     this.timer$.next(this.timeTracksTotal.transform(task.timeTracks, 'milliseconds'));
   }
   get task() {
@@ -75,12 +76,12 @@ export class TrackerComponent {
   }
 
   public stop() {
-    this.trackerService.stop(this._task.id);
+    this.trackerService.stop(this.projectId, this._task.id).subscribe();
     this.disable();
   }
 
   public start() {
-    this.trackerService.start(this._task.id);
+    this.trackerService.start(this.projectId, this._task.id).subscribe();
     this.enable();
   }
 
