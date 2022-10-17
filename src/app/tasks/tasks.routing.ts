@@ -12,18 +12,26 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'board',
+    redirectTo: 'sprint',
   },
   {
-    path: 'board',
-    component: BoardPage,
-  },
-  {
-    path: 'list',
+    path: 'sprint',
     component: TaskListPage,
   },
   {
-    path: 'schedule',
+    path: 'backlog',
+    component: TaskListPage,
+  },
+  {
+    path: 'sprint/:sprintId/board',
+    component: BoardPage,
+  },
+  {
+    path: 'sprint/:sprintId/list',
+    component: TaskListPage,
+  },
+  {
+    path: 'sprint/:sprintId/schedule',
     component: SchedulePage,
   },
   {

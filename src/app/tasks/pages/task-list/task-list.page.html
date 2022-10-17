@@ -1,5 +1,6 @@
-<app-view-options [project]="(project$ | async)!" [filters]="filters" [filtersControl]="filtersControl">
-</app-view-options>
+<app-view-options [project]="(project$ | async)!"></app-view-options>
+
+<app-task-view-options [project]="(project$ | async)!" [filters]="filters" [filtersControl]="filtersControl"></app-task-view-options>
 
 <!-- Table -->
 <div class="table" *ngLet="(members$ | async) as members">

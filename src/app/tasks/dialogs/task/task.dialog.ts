@@ -86,7 +86,6 @@ export class TaskDialog implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('ngOnInit');
     this.loadParamsFromUrl();
 
     const { workspaceId, projectId, task } = this.data;
@@ -102,7 +101,6 @@ export class TaskDialog implements OnInit {
       .valueChanges.pipe(pairwise(), untilDestroyed(this))
       .subscribe(([oldWorkspaceId, newWorkspaceId]) => {
         if (oldWorkspaceId !== newWorkspaceId) {
-          console.log('fromSubscription');
           this.onWorkspaceIdChange.bind(this)(newWorkspaceId);
         }
       });
@@ -112,7 +110,6 @@ export class TaskDialog implements OnInit {
       .subscribe(this.onProjectIdChange.bind(this));
 
     if (workspaceId) {
-      console.log('fromInit');
       this.onWorkspaceIdChange(workspaceId);
     }
 
@@ -122,7 +119,6 @@ export class TaskDialog implements OnInit {
   }
 
   onWorkspaceIdChange(workspaceId: number | null) {
-    console.log('onWorkspaceIdChange', workspaceId);
     if (this.interactive$.value) {
       this.form.get('projectId').setValue(null);
     }

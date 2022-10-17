@@ -87,4 +87,9 @@ export interface Task extends JSONParsable {
    * List of trackers for this task
    */
   timeTracks?: TimeTrack[];
+
+  /**
+   * Id of assigned sprint
+   */
+  sprintId?: number;
 }

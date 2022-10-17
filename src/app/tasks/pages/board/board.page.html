@@ -1,5 +1,7 @@
 <app-view-options [project]="(project$ | async)!"></app-view-options>
 
+<app-task-view-options [project]="(project$ | async)!"></app-task-view-options>
+
 <div class="status-list-banner">
   <div *ngFor="let status of statusList$ | async" class="status-banner">
     {{ status.name }}

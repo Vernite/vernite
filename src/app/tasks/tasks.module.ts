@@ -10,6 +10,7 @@ import { InputTaskPropertyComponent } from './components/input-task-property/inp
 import { StatusLabelComponent } from './components/status-label/status-label.component';
 import { ViewOptionsComponent } from './components/view-options/view-options.component';
 import { TaskDialog } from './dialogs/task/task.dialog';
+import { SprintDialog } from './dialogs/sprint/sprint.dialog';
 import { BoardPage } from './pages/board/board.page';
 import { SchedulePage } from './pages/schedule/schedule.page';
 import { TaskListPage } from './pages/task-list/task-list.page';
@@ -23,6 +24,7 @@ import { TrackerComponent } from './components/tracker/tracker.component';
 import { TimeTracksTotalPipe } from './pipes/time-tracks-total/time-tracks-total.pipe';
 import { TimeTrackTimerPipe } from './pipes/time-track-timer/time-track-timer.pipe';
 import { TimeTrackDurationPipe } from './pipes/time-track-duration/time-track-duration.pipe';
+import { TaskViewOptionsComponent } from './components/task-view-options/task-view-options.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule],
@@ -47,6 +49,8 @@ import { TimeTrackDurationPipe } from './pipes/time-track-duration/time-track-du
     TimeTracksTotalPipe,
     TimeTrackTimerPipe,
     TimeTrackDurationPipe,
+    TaskViewOptionsComponent,
+    SprintDialog,
   ],
 })
 export class TasksModule {}

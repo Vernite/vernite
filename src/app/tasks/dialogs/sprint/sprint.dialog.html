@@ -1,0 +1,48 @@
+<h1 mat-dialog-title *ngIf="data.variant === SprintDialogVariant.EDIT" i18n>Edit sprint: {{ data.sprint?.name }}</h1>
+<h1 mat-dialog-title *ngIf="data.variant === SprintDialogVariant.CREATE" i18n>Create new sprint</h1>
+<div mat-dialog-content>
+  <form (submit)="confirm()" [formGroup]="form" autocomplete="off">
+
+    <!-- Workspace -->
+    <app-select formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
+      <app-option *ngFor="let workspace of workspaceList$ | async" [value]="workspace.id">{{ workspace.name }}
+      </app-option>
+      <app-empty-options i18n>There is no workspaces</app-empty-options>
+    </app-select>
+
+    <!-- Project -->
+    <ng-container *ngIf="form.get('workspaceId')?.value">
+      <app-select formControlName="projectId" floatingLabel="Project" i18n-floatingLabel>
+        <app-option *ngFor="let project of projectList$ | async" [value]="project.id">{{project.name}}
+        </app-option>
+        <app-empty-options i18n>Selected workspace is empty</app-empty-options>
+      </app-select>
+    </ng-container>
+
+    <!-- Name field -->
+    <app-input floatingLabel="Name" placeholder="New task" formControlName="name" i18n-floatingLabel i18n-placeholder>
+    </app-input>
+
+    <!-- Description field -->
+    <app-textarea floatingLabel="Description" placeholder="Sample description..." formControlName="description"
+      i18n-floatingLabel i18n-placeholder [rows]="10"></app-textarea>
+
+    <!-- Start date -->
+    <app-input-date-time formControlName="startDate" floatingLabel="Start date" placeholder="Choose a date"
+      i18n-floatingLabel i18n-placeholder>
+    </app-input-date-time>
+
+    <!-- Finish date -->
+    <app-input-date-time formControlName="finishDate" floatingLabel="Finish date" placeholder="Choose a date"
+      i18n-floatingLabel i18n-placeholder>
+    </app-input-date-time>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <app-button mat-button (click)="cancel()" i18n>Cancel</app-button>
+  <app-button *ngIf="data.variant === SprintDialogVariant.CREATE" (click)="confirm()" variant="primary" i18n>Create
+  </app-button>
+  <app-button *ngIf="data.variant === SprintDialogVariant.EDIT" (click)="confirm()" variant="primary" i18n>Save changes
+  </app-button>
+</div>

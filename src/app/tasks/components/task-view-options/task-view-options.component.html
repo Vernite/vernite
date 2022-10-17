@@ -1,0 +1,22 @@
+<section *ngIf="project">
+  <div class="tabs">
+    <a [routerLink]="['/', workspaceId, project.id, 'list']" routerLinkActive="active">
+      <h2 i18n>List</h2>
+    </a>
+    <a [routerLink]="['/', workspaceId, project.id, 'board']" routerLinkActive="active">
+      <h2 i18n>Board</h2>
+    </a>
+    <a [routerLink]="['/', workspaceId, project.id, 'schedule']" routerLinkActive="active">
+      <h2 i18n>Schedule</h2>
+    </a>
+  </div>
+  <div class="options">
+    <div class="options-element">
+      <app-icon (click)="isFiltersOpen = !isFiltersOpen" [icon]="filter" size="16px"></app-icon>
+      <h2 (click)="isFiltersOpen = !isFiltersOpen" i18n>Filters</h2>
+      <div [class.hidden]="!isFiltersOpen" class="overlay">
+        <app-filters [formControl]="filtersControl" [filters]="filters"></app-filters>
+      </div>
+    </div>
+  </div>
+</section>
