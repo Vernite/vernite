@@ -13,7 +13,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { IntegrationModuleService } from '@dashboard/modules/integration-modules/services/integration-module/integration-module.service';
 import { IntegrationModuleEntry } from '@main/interfaces/integration-module.interface';
 import { IntegrationComponent } from '@dashboard/modules/integration-modules/interfaces/integration-component.interface';
-import { forkJoin, of, switchMap } from 'rxjs';
+import { defaultIfEmpty, forkJoin, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'integration-modules-grid',
@@ -34,7 +34,7 @@ export class IntegrationModulesGridComponent implements OnInit, AfterViewInit {
 
   @ViewChild('grid', { read: ViewContainerRef }) grid!: ViewContainerRef;
 
-  private selectedModules = new Map<string, ComponentRef<IntegrationComponent>>();
+  public selectedModules = new Map<string, ComponentRef<IntegrationComponent>>();
   public integratedModules: IntegrationModuleEntry[] = [];
   public modulesToIntegrate: IntegrationModuleEntry[] = [];
 
@@ -107,6 +107,9 @@ export class IntegrationModulesGridComponent implements OnInit, AfterViewInit {
       ...modulesToDetach.map((module: IntegrationModuleEntry) =>
         module.detach(this.project as Project, this.injector),
       ),
-    ]).pipe(switchMap(() => of(this.project as Project)));
+    ]).pipe(
+      defaultIfEmpty([]),
+      switchMap(() => of(this.project as Project)),
+    );
   }
 }

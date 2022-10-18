@@ -1,0 +1,6 @@
+<div class="button">
+  <app-button type="button" [icon]="faPlus" variant="primary" (click)="openAddMembersDialog()" i18n>Add member
+  </app-button>
+</div>
+
+<member-list [members]="members.concat((existingMembers$ | async) || [], newMembers)"></member-list>

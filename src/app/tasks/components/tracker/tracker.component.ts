@@ -19,8 +19,10 @@ export class TrackerComponent {
   @Input() projectId!: number;
   @Input() set task(task: Task) {
     this._task = task;
-    this.enabled = (task.timeTracks && task.timeTracks?.some((track) => !track.endDate)) || false;
     this.timer$.next(this.timeTracksTotal.transform(task.timeTracks, 'milliseconds'));
+    if ((task.timeTracks && task.timeTracks?.some((track) => !track.endDate)) || false) {
+      this.enable();
+    }
   }
   get task() {
     return this._task;

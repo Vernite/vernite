@@ -59,6 +59,10 @@ import { DialogService } from './services/dialog/dialog.service';
 import { LetDirective } from './directives/let/let.directive';
 import { ViewContainerDirective } from './directives/view-container/view-container.directive';
 import { FocusInitialDirective } from './directives/focus-initial/focus-initial.directive';
+import { TabsComponent } from './components/tabs/tabs.component';
+import { TabComponent } from './components/tabs/tab/tab.component';
+import { InputColorComponent } from './components/input-color/input-color.component';
+import { ColorComponent } from './components/color/color.component';
 
 /**
  * Main module configuration object
@@ -150,6 +154,10 @@ const ngModuleConfig = {
     DayOfWeekPipe,
     DayjsPipe,
     DateByPreferencesPipe,
+    TabsComponent,
+    TabComponent,
+    InputColorComponent,
+    ColorComponent,
   ],
   providers: [
     /*=============================================

@@ -1,0 +1,76 @@
+<div class="w-100 flex justify-end mb-3">
+  <app-button [icon]="faPlus" (click)="createNewStatus()">Add new status</app-button>
+</div>
+
+<ng-container *ngIf="statusList.length">
+  <mat-table [dataSource]="statusList" cdkDropList (cdkDropListDropped)="drop($event)">
+
+    <!-- Name column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef i18n> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Begin column -->
+    <ng-container matColumnDef="begin">
+      <mat-header-cell *matHeaderCellDef i18n> Begin </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <ng-container *ngTemplateOutlet="mark; context: { value: element.begin }"></ng-container>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Final column -->
+    <ng-container matColumnDef="final">
+      <mat-header-cell *matHeaderCellDef i18n> Final </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <ng-container *ngTemplateOutlet="mark; context: { value: element.final }"></ng-container>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Color column -->
+    <ng-container matColumnDef="color">
+      <mat-header-cell *matHeaderCellDef i18n> Color </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <color [color]="element.color"></color>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Drag icon column -->
+    <ng-container matColumnDef="grip">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <app-icon [icon]="faGripLines"></app-icon>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Actions cell -->
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-icon-button click-stop-propagation [matMenuTriggerFor]="menu" class="flex items-center">
+          <app-icon icon="matMoreVert"></app-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="editStatus(element)">
+            <span i18n>Edit status</span>
+          </button>
+          <button mat-menu-item class="important">
+            <span i18n>Remove status</span>
+          </button>
+        </mat-menu>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="mt-3" cdkDrag></mat-row>
+  </mat-table>
+</ng-container>
+
+<ng-template #mark let-value="value">
+  <ng-container *ngIf="value">
+    <app-icon [icon]="faCheck" size="1rem"></app-icon>
+  </ng-container>
+  <ng-container *ngIf="!value">
+    <app-icon [icon]="faXmark" size="1rem"></app-icon>
+  </ng-container>
+</ng-template>

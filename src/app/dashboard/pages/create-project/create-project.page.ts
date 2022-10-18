@@ -1,109 +1,105 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AddMemberDialog } from '@dashboard/dialogs/add-member/add-member.dialog';
-import { Workspace } from '@dashboard/interfaces/workspace.interface';
-import { MemberService } from '@dashboard/services/member/member.service';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { DialogService } from '@main/services/dialog/dialog.service';
-import { maxLengthValidator } from '@main/validators/max-length.validator';
-import { Observable, of, Subscription, switchMap, tap } from 'rxjs';
-import { requiredValidator } from 'src/app/_main/validators/required.validator';
-import { ProjectService } from '../../services/project/project.service';
-import { WorkspaceService } from '../../services/workspace/workspace.service';
+import { ProjectFormGeneralComponent } from '@dashboard/components/project-form-general/project-form-general.component';
+import { ProjectFormIntegrationsComponent } from '@dashboard/components/project-form-integrations/project-form-integrations.component';
+import { ProjectFormMembersComponent } from '@dashboard/components/project-form-members/project-form-members.component';
+import { ProjectFormStatusesComponent } from '@dashboard/components/project-form-statuses/project-form-statuses.component';
 import { Project } from '@dashboard/interfaces/project.interface';
-import { IntegrationModulesGridComponent } from '@dashboard/components/integration-modules-grid/integration-modules-grid.component';
-import { validateForm } from '@main/classes/form.class';
-import { startLoader } from './../../../_main/operators/loader.operator';
-import { setLoaderMessage } from '@main/operators/loader.operator';
+import { Workspace } from '@dashboard/interfaces/workspace.interface';
+import { ProjectFormStage } from '@dashboard/models/project-form-stage.enum';
+import { WorkspaceService } from '@dashboard/services/workspace/workspace.service';
 import { Loader } from '@main/classes/loader/loader.class';
-import { notEmptyValidator } from '@main/validators/not-empty.validator';
+import { setLoaderMessage, startLoader, stopLoader } from '@main/operators/loader.operator';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Observable, of, switchMap, tap } from 'rxjs';
 
+@UntilDestroy()
 @Component({
-  selector: 'app-create-project',
   templateUrl: './create-project.page.html',
-  styleUrls: ['./create-project.page.scss'],
 })
 export class CreateProjectPage {
-  @ViewChild(IntegrationModulesGridComponent)
-  integrationModulesGrid!: IntegrationModulesGridComponent;
-
-  /**
-   * Form group for the project creation.
-   */
-  public form = new FormGroup({
-    name: new FormControl<string>('', [
-      requiredValidator(),
-      maxLengthValidator(50),
-      notEmptyValidator(),
-    ]),
-    workspaceId: new FormControl<number>(0, [requiredValidator()]),
-  });
-
-  faPlus = faPlus;
-  /**
-   * Subscription to the workspace creation.
-   */
-  public createSubscription?: Subscription;
-
-  public workspace$!: Observable<Workspace>;
-
-  public workspaceId!: number;
-
-  public memberList: string[] = [];
-
-  public project?: Project;
+  @ViewChild(ProjectFormGeneralComponent) projectFormGeneral!: ProjectFormGeneralComponent;
+  @ViewChild(ProjectFormMembersComponent) projectFormMembers!: ProjectFormMembersComponent;
+  @ViewChild(ProjectFormStatusesComponent) projectFormStatuses!: ProjectFormStatusesComponent;
+  @ViewChild(ProjectFormIntegrationsComponent)
+  projectFormIntegrations!: ProjectFormIntegrationsComponent;
 
   public loader = new Loader();
 
-  /**
-   * Default constructor. Injects the Workspace and Router service.
-   * @param workspaceService Workspace service
-   * @param router Router service
-   */
+  /** @ignore */
+  ProjectFormStage = ProjectFormStage;
+
+  public stage: ProjectFormStage = ProjectFormStage.GENERAL;
+
+  public stages = [
+    ProjectFormStage.GENERAL,
+    ProjectFormStage.MEMBERS,
+    ProjectFormStage.STATUSES,
+    ProjectFormStage.INTEGRATIONS,
+  ];
+
+  public project?: Project;
+
+  workspaceId?: number;
+  workspace$: Observable<Workspace> = of({} as Workspace);
+
   constructor(
-    private workspaceService: WorkspaceService,
-    private projectService: ProjectService,
-    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private dialogService: DialogService,
-    private memberService: MemberService,
+    private router: Router,
+    private workspaceService: WorkspaceService,
   ) {
-    const { workspaceId } = this.activatedRoute.snapshot.params;
-    this.workspaceId = workspaceId;
-    this.workspace$ = this.workspaceService.get(workspaceId);
-    this.form.get('workspaceId').setValue(workspaceId);
-  }
+    this.activatedRoute.params.pipe(untilDestroyed(this)).subscribe((params) => {
+      this.workspaceId = params['workspaceId'] ? Number(params['workspaceId']) : undefined;
 
-  openAddMembersDialog() {
-    this.dialogService
-      .open(AddMemberDialog, {})
-      .afterClosed()
-      .subscribe((result) => {
-        this.memberList = [...this.memberList, ...result];
-      });
+      if (this.workspaceId) {
+        this.workspace$ = this.workspaceService.get(this.workspaceId);
+      }
+    });
   }
 
   /**
-   * Creates a new workspace. Passes the form data to the workspace service. Then navigates to the workspace list if form was valid.
+   * Creates a new project by saving the form data, saving dependent stages and then navigating to the project page.
    * Otherwise, displays an error message.
    */
   public submitCreate(): void {
-    if (!this.createSubscription?.closed && this.createSubscription) return;
-    if (!validateForm(this.form)) return;
-
-    of(null)
-      .pipe(
-        startLoader(this.loader),
-        switchMap(() => this.projectService.create(this.form.value)),
-        tap((project) => (this.project = project)),
+    (
+      of(null).pipe(
+        startLoader(this.loader, $localize`Saving project...`),
+        switchMap(() => this.projectFormGeneral.save()),
+        tap((project) => {
+          this.project = project;
+          this.projectFormMembers.project = project;
+          this.projectFormStatuses.project = project;
+          this.projectFormIntegrations.project = project;
+        }),
         setLoaderMessage(this.loader, $localize`Saving project members...`),
-        switchMap((project) => this.memberService.add(this.memberList, [project.id])),
+        switchMap(() => this.projectFormMembers.save()),
+        setLoaderMessage(this.loader, $localize`Saving project statuses...`),
+        switchMap(() => this.projectFormStatuses.save()),
         setLoaderMessage(this.loader, $localize`Saving integrations...`),
-        switchMap(() => this.integrationModulesGrid.saveAll()),
-      )
-      .subscribe((project) => {
-        this.router.navigate(['/', this.workspaceId, project.id]);
-      });
+        switchMap(() => this.projectFormIntegrations.save()),
+        stopLoader(this.loader),
+      ) as Observable<Project>
+    ).subscribe((project) => {
+      this.router.navigate(['/', this.workspaceId, project.id]);
+    });
+  }
+
+  public setStage(stage: ProjectFormStage) {
+    this.stage = stage;
+  }
+
+  public nextStage() {
+    const index = this.stages.findIndex((s) => s === this.stage);
+    if (index >= 0 && index < this.stages.length - 1) {
+      this.setStage(this.stages[index + 1]);
+    }
+  }
+
+  public previousStage() {
+    const index = this.stages.findIndex((s) => s === this.stage);
+    if (index > 0 && index < this.stages.length) {
+      this.setStage(this.stages[index - 1]);
+    }
   }
 }

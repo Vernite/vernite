@@ -1,0 +1,6 @@
+export enum ProjectFormStage {
+  GENERAL = 'GENERAL',
+  MEMBERS = 'MEMBERS',
+  INTEGRATIONS = 'INTEGRATIONS',
+  STATUSES = 'STATUSES',
+}

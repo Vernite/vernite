@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text);
+}
+
+:host ::ng-deep {
+
+  .prefix,
+  .suffix {
+    padding: 1rem 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+}

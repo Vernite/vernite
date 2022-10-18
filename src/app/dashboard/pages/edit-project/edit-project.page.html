@@ -1,19 +1,48 @@
-<app-view-options title="Edit project: " [project]="(project$ | async)!"></app-view-options>
-
-<form *ngIf="project$ | async as project" [formGroup]="form" (submit)="submitUpdate()">
-  <app-input formControlName="name" type="text" placeholder="New project" floatingLabel="Project name"
-    i18n-floatingLabel i18n-placeholder></app-input>
-
-  <app-select formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
-    <app-option *ngFor="let workspace of workspaceList$ | async" [value]="workspace.id">
-      {{ workspace.name }}
-    </app-option>
-  </app-select>
-
-  <integration-modules-grid [project]="project"></integration-modules-grid>
-  <div class="buttons">
-    <app-button variant="primary" [pending]="updateSubscription && !updateSubscription.closed" i18n>Save</app-button>
-    <app-button variant="secondary" type="button" [routerLink]="['/', workspaceId, projectId]" i18n>Cancel</app-button>
+<tabs>
+  <div class="prefix" i18n>
+    Edit project
   </div>
+  <tab (click)="setStage(ProjectFormStage.GENERAL)" [class.active]="stage === ProjectFormStage.GENERAL" i18n>
+    General
+  </tab>
+  <tab (click)="setStage(ProjectFormStage.MEMBERS)" [class.active]="stage === ProjectFormStage.MEMBERS" i18n>
+    Members
+  </tab>
+  <tab (click)="setStage(ProjectFormStage.STATUSES)" [class.active]="stage === ProjectFormStage.STATUSES" i18n>
+    Statuses
+  </tab>
+  <tab (click)="setStage(ProjectFormStage.INTEGRATIONS)" [class.active]="stage === ProjectFormStage.INTEGRATIONS" i18n>
+    Integrations
+  </tab>
+</tabs>
 
-</form>
+<ng-container *ngIf="workspace$ | async as workspace">
+  <ng-container *ngIf="project$ | async as project">
+
+    <!-- General stage -->
+    <section [class.hidden]="stage !== ProjectFormStage.GENERAL" class="p-5">
+      <project-form-general [workspace]="workspace" [project]="project"></project-form-general>
+    </section>
+
+    <!-- Members stage -->
+    <section [class.hidden]="stage !== ProjectFormStage.MEMBERS" class="p-5">
+      <project-form-members [project]="project"></project-form-members>
+    </section>
+
+    <!-- Statuses stage -->
+    <section [class.hidden]="stage !== ProjectFormStage.STATUSES" class="p-5">
+      <project-form-statuses [project]="project"></project-form-statuses>
+    </section>
+
+    <!-- Integrations stage -->
+    <section [class.hidden]="stage !== ProjectFormStage.INTEGRATIONS" class="p-5">
+      <project-form-integrations [project]="project"></project-form-integrations>
+    </section>
+
+  </ng-container>
+</ng-container>
+
+<div class="flex justify-end pr-5">
+  <!-- <app-button type="button" variant="secondary" (click)="close()" i18n>Cancel</app-button> -->
+  <app-button type="button" variant="primary" (click)="submitUpdate()" i18n>Save changes</app-button>
+</div>

@@ -1,0 +1,9 @@
+form {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+
+  &>*:not(:last-child):not(app-checkbox) {
+    margin-bottom: 1.5rem;
+  }
+}

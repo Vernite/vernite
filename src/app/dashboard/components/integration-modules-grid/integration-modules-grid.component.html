@@ -5,10 +5,10 @@
   </app-button>
 </div>
 <div>
-  <div class="grid">
+  <div [class.hidden]="selectedModules.size === 0" class="grid">
     <template #grid></template>
   </div>
-  <div class="empty-list" *ngIf="integratedModules.length === 0">
+  <div class="empty-list" *ngIf="selectedModules.size === 0">
     <span class="text-base">
       There is no integration modules added to this list. Use "Add modules" to add one.
     </span>

@@ -9,7 +9,7 @@ export class TimeTracksTotalPipe implements PipeTransform {
     if (!value) return format === 'string' ? '' : 0;
 
     const milliseconds = value.reduce(
-      (acc, track) => acc + ((track.endDate || 0) - track.startDate),
+      (acc, track) => acc + ((track.endDate || new Date().getTime()) - track.startDate),
       0,
     );
     if (format === 'milliseconds') {

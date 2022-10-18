@@ -1,5 +1,5 @@
 <!-- Table -->
-<table *ngIf="type!=='create'" mat-table [dataSource]="(memberList$ | async) || []">
+<table *ngIf="oldMembers.length" mat-table [dataSource]="oldMembers">
 
   <!-- Name column -->
   <ng-container matColumnDef="username">
@@ -19,7 +19,7 @@
     <td mat-cell *matCellDef="let row"> {{ row.user.name }} </td>
   </ng-container>
 
-  <!-- Name column -->
+  <!-- Surname column -->
   <ng-container matColumnDef="surname">
     <th mat-header-cell *matHeaderCellDef i18n>Surname</th>
     <td mat-cell *matCellDef="let row"> {{ row.user.surname }} </td>
@@ -44,7 +44,7 @@
   <tr mat-row *matRowDef="let row; columns: ['username', 'email', 'name', 'surname', 'actions'];"></tr>
 </table>
 
-<table *ngIf="type==='create'" mat-table [dataSource]="(addedMembers) || []">
+<table *ngIf="newMembers.length" mat-table [dataSource]="newMembers">
 
   <!-- Username or email column -->
   <ng-container matColumnDef="username">

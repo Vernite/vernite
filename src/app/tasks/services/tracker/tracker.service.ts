@@ -10,11 +10,11 @@ export class TrackerService {
   constructor(private apiService: ApiService) {}
 
   stop(projectId: number, taskId: number): Observable<TimeTrack> {
-    return this.apiService.post(`/project/${projectId}/task/${taskId}/stop`);
+    return this.apiService.post(`/project/${projectId}/task/${taskId}/track/stop`);
   }
 
   start(projectId: number, taskId: number): Observable<TimeTrack> {
-    return this.apiService.post(`/project/${projectId}/task/${taskId}/start`);
+    return this.apiService.post(`/project/${projectId}/task/${taskId}/track/start`);
   }
 
   update(projectId: number, taskId: number, track: TimeTrack): Observable<TimeTrack> {

@@ -1,0 +1,14 @@
+<form [formGroup]="form">
+
+  <!-- Workspace input -->
+  <app-select formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
+    <app-option *ngFor="let workspace of workspaces$ | async" [value]="workspace.id">
+      {{ workspace.name }}
+    </app-option>
+  </app-select>
+
+  <!-- Name input -->
+  <app-input formControlName="name" type="text" placeholder="New project" floatingLabel="Project name"
+    i18n-floatingLabel i18n-placeholder></app-input>
+
+</form>

@@ -20,7 +20,7 @@ export class StatusLabelComponent extends ControlAccessor {
   @Input() set statuses(statuses: Status[]) {
     this.statuses$.next(statuses);
     this.statusMap = statuses.reduce((acc, status) => {
-      acc.set(status.id, status);
+      acc.set(status.id!, status);
       return acc;
     }, new Map<number, Status>());
   }
@@ -73,7 +73,7 @@ export class StatusLabelComponent extends ControlAccessor {
 
   public select(status: Status) {
     if (this.taskId && this.projectId)
-      this.taskService.changeStatus(status.id, this.taskId, this.projectId).subscribe(() => {
+      this.taskService.changeStatus(status.id!, this.taskId, this.projectId).subscribe(() => {
         this.close();
         location.reload();
       });

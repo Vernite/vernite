@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Task } from '@tasks/interfaces/task.interface';
-import { combineLatest, map, Observable } from 'rxjs';
+import { combineLatest, filter, map, Observable } from 'rxjs';
 import { ApiService } from '@main/services/api/api.service';
 import { Status, StatusWithTasks } from '../interfaces/status.interface';
 import { TaskService } from './task.service';
+import { StatusDialog, StatusDialogData } from './../../dashboard/dialogs/status/status.dialog';
+import { DialogService } from '@main/services/dialog/dialog.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StatusService {
-  constructor(private apiService: ApiService, private taskService: TaskService) {}
+  constructor(
+    private apiService: ApiService,
+    private taskService: TaskService,
+    private dialogService: DialogService,
+  ) {}
 
   /**
    * Get list of statuses
    * @param projectId Project id needed to create status
    * @returns Request observable with list of statuses
    */
-  public list(projectId: number): Observable<(Status & { id: number })[]> {
+  public list(projectId: number): Observable<Status[]> {
     return this.apiService.get(`/project/${projectId}/status/`);
   }
 
@@ -60,6 +66,14 @@ export class StatusService {
     return this.apiService.delete(`/project/${projectId}/status/${status.id}`);
   }
 
+  public getDefaultStatusList(): Status[] {
+    return [
+      { id: 1, name: 'To Do', color: 0, ordinal: 0, begin: true, final: false },
+      { id: 2, name: 'In Progress', color: 0, ordinal: 1, begin: false, final: false },
+      { id: 3, name: 'Done', color: 0, ordinal: 2, begin: false, final: true },
+    ];
+  }
+
   public listWithTasks(projectId: number): Observable<StatusWithTasks[]> {
     return combineLatest([this.list(projectId), this.taskService.list(projectId)]).pipe(
       map(([statuses, tasks]) => {
@@ -100,5 +114,35 @@ export class StatusService {
         return board;
       }),
     );
+  }
+
+  /**
+   * Opens dialog to edit specific status
+   * @param status Status to update
+   * @returns Observable with updated status, EMPTY otherwise (when user cancels the dialog)
+   */
+  public openEditStatusDialog(status: Status): Observable<Status> {
+    return this.dialogService
+      .open(StatusDialog, {
+        status,
+        title: $localize`Edit status`,
+        confirmButtonText: $localize`Update`,
+      } as StatusDialogData)
+      .afterClosed()
+      .pipe(filter(Boolean));
+  }
+
+  /**
+   * Opens dialog to create new task
+   * @returns created task, EMPTY otherwise (when user cancels the dialog)
+   */
+  public openCreateNewStatusDialog(): Observable<Status> {
+    return this.dialogService
+      .open(StatusDialog, {
+        title: $localize`Create new status`,
+        confirmButtonText: $localize`Create`,
+      } as StatusDialogData)
+      .afterClosed()
+      .pipe(filter(Boolean));
   }
 }

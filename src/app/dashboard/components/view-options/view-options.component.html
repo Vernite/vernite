@@ -11,6 +11,9 @@
       <a [routerLink]="['/', workspaceId, project.id, 'edit', 'members' ]" routerLinkActive="active">
         <h2 i18n>Members</h2>
       </a>
+      <a [routerLink]="['/', workspaceId, project.id, 'edit', 'statuses' ]" routerLinkActive="active">
+        <h2 i18n>Statuses</h2>
+      </a>
     </ng-container>
     <ng-container *ngIf="!project">
       <a [routerLink]="['/', workspaceId, 'create', 'general' ]" routerLinkActive="active">
@@ -18,6 +21,9 @@
       </a>
       <a [routerLink]="['/', workspaceId, 'create', 'members' ]" routerLinkActive="active">
         <h2 i18n>Members</h2>
+      </a>
+      <a [routerLink]="['/', workspaceId, 'create', 'statuses' ]" routerLinkActive="active">
+        <h2 i18n>Statuses</h2>
       </a>
     </ng-container>
   </div>
