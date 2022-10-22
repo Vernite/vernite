@@ -16,7 +16,7 @@ export class DateByPreferencesPipe implements PipeTransform {
       if (isNumber(value)) {
         return this.userService
           .getDateFormat()
-          .pipe(map((dateFormat: string) => dayjs.unix(value).format(dateFormat)));
+          .pipe(map((dateFormat: string) => dayjs(value).format(dateFormat)));
       } else {
         return this.userService
           .getDateFormat()

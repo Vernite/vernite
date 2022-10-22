@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ControlAccessor } from '@main/classes/control-accessor.class';
 import { color } from '@main/interfaces/color.interface';
 import { FormControl } from '@ngneat/reactive-forms';
@@ -13,6 +13,9 @@ import { filter } from 'rxjs';
   styleUrls: ['./input-color.component.scss'],
 })
 export class InputColorComponent extends ControlAccessor<color> {
+  @Input() floatingLabel?: string;
+  @Input() staticLabel?: string;
+
   public userControl = new FormControl<string>('');
   public colorRGB = 'rgb(0, 0, 0)';
 
@@ -55,7 +58,6 @@ export class InputColorComponent extends ControlAccessor<color> {
           changesFromInside = false;
         } catch (e) {
           // Unable to convert to color - give user an error
-          console.log(e);
         }
       }
     });

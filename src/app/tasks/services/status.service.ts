@@ -68,9 +68,9 @@ export class StatusService {
 
   public getDefaultStatusList(): Status[] {
     return [
-      { id: 1, name: 'To Do', color: 0, ordinal: 0, begin: true, final: false },
-      { id: 2, name: 'In Progress', color: 0, ordinal: 1, begin: false, final: false },
-      { id: 3, name: 'Done', color: 0, ordinal: 2, begin: false, final: true },
+      { name: 'To Do', color: 0, ordinal: 0, begin: true, final: false },
+      { name: 'In Progress', color: 0, ordinal: 1, begin: false, final: false },
+      { name: 'Done', color: 0, ordinal: 2, begin: false, final: true },
     ];
   }
 

@@ -12,7 +12,7 @@ export class DayjsPipe implements PipeTransform {
       return dayjs(value).format(format);
     } else if (value) {
       if (isNumber(value)) {
-        return dayjs.unix(value);
+        return dayjs(value);
       } else {
         return dayjs(value);
       }

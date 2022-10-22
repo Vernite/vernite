@@ -19,7 +19,7 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
   // TODO: Read this from user settings
   firstDayOfWeek = 1;
 
-  cursor = this.control.value ? dayjs.unix(this.control.value) : dayjs();
+  cursor = this.control.value ? dayjs(this.control.value) : dayjs();
   currentDate = dayjs();
 
   monthNames = dayjs.months();
@@ -49,13 +49,13 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
       daysGrid.push([]);
       for (let j = 0; j < 7; j++) {
         const day: CalendarDay = {
-          id: pointer.unix(),
+          id: pointer.valueOf(),
           name: pointer.date(),
           isWeekend: pointer.day() === 0 || pointer.day() === 6,
           isFromPreviousMonth: pointer.month() < this.cursor.month(),
           isFromNextMonth: pointer.month() > this.cursor.month(),
           today: pointer.isSame(this.currentDate, 'day'),
-          selected: pointer.isSame(dayjs.unix(this.control.value || 0), 'day'),
+          selected: pointer.isSame(dayjs(this.control.value || 0), 'day'),
         };
 
         daysGrid[i].push(day);
@@ -88,7 +88,7 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
 
     this.daysGrid = this.calculateDaysGrid();
 
-    this.control.setValue(this.cursor.unix());
+    this.control.setValue(this.cursor.valueOf());
   }
 
   now() {
@@ -97,7 +97,7 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
     this.cursor = this.cursor.set('hour', today.hour());
     this.cursor = this.cursor.set('minute', today.minute());
 
-    this.control.setValue(this.cursor.unix());
+    this.control.setValue(this.cursor.valueOf());
   }
 
   increaseMinutes() {
@@ -121,11 +121,11 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
   }
 
   setControlProperties(propertyNames: UnitType[], values: number[]) {
-    let value = dayjs.unix(this.control.value || 0);
+    let value = dayjs(this.control.value || 0);
     for (let i = 0; i < Math.min(propertyNames.length, values.length); i++) {
       value = value.set(propertyNames[i], values[i]);
     }
-    this.control.setValue(value.unix());
+    this.control.setValue(value.valueOf());
   }
 
   onHourChange(event: Event) {
@@ -146,14 +146,14 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
     }
 
     this.cursor = this.cursor.date(day.name);
-    this.control.setValue(this.cursor.unix());
+    this.control.setValue(this.cursor.valueOf());
 
     this.daysGrid = this.calculateDaysGrid();
   }
 
   override ngAfterControlInit(): void {
     if (this.control.value) {
-      this.cursor = dayjs.unix(this.control.value);
+      this.cursor = dayjs(this.control.value);
       this.daysGrid = this.calculateDaysGrid();
     }
   }

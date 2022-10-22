@@ -36,7 +36,7 @@ button {
 
   position: relative;
   display: flex;
-  min-width: 80px;
+  min-width: 64px;
   height: 38px;
   align-items: center;
   justify-content: center;
@@ -46,8 +46,9 @@ button {
   color: var(--color-text);
   outline: 0 !important;
   transition: background-color 0.2s ease;
+  width: 100%;
 
-  >* {
+  >*:not(:last-child) {
     margin-right: 0.75rem;
   }
 

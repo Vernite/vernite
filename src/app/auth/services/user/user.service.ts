@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ModifyUser, User } from '@auth/interfaces/user.interface';
 import { ApiService } from '@main/services/api/api.service';
-import { Observable, map } from 'rxjs';
+import { Observable, map, shareReplay } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
 @Injectable({
@@ -9,6 +9,8 @@ import { AuthService } from '../auth/auth.service';
 })
 export class UserService {
   constructor(private apiService: ApiService, private authService: AuthService) {}
+
+  private userData$?: Observable<User>;
 
   public getUserDefaultPreferences() {
     return {
@@ -21,9 +23,13 @@ export class UserService {
   }
 
   public getMyself(): Observable<User> {
-    return this.apiService
-      .get(`/auth/me`)
-      .pipe(map((user) => Object.assign({}, this.getUserDefaultPreferences(), user)));
+    if (this.userData$) return this.userData$;
+    this.userData$ = this.apiService.get(`/auth/me`).pipe(
+      map((user) => Object.assign({}, this.getUserDefaultPreferences(), user)),
+      shareReplay(1),
+    );
+
+    return this.userData$;
   }
 
   public getDateFormat(): Observable<string> {

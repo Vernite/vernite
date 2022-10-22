@@ -1,6 +1,6 @@
 <app-input #trigger="cdkOverlayOrigin" [formControl]="displayControl" [floatingLabel]="floatingLabel"
-  [staticLabel]="staticLabel" [placeholder]="placeholder" [readonly]="true" (focus)="onFocusStateChanged($event)"
-  cdkOverlayOrigin>
+  [staticLabel]="staticLabel" [placeholder]="placeholder" [readonly]="true" [pending]="pending"
+  (focus)="onFocusStateChanged($event)" cdkOverlayOrigin>
   <span class="suffix">
     <app-icon [icon]="faCalendar" size="16px"></app-icon>
   </span>

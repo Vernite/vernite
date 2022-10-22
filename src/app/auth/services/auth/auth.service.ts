@@ -40,7 +40,7 @@ export class AuthService {
   }) {
     return this.apiService
       .post(`/auth/login`, { body: { email, password, remember } })
-      .pipe(tap(() => localStorage.setItem('lastLoginTry', dayjs().unix().toString())));
+      .pipe(tap(() => localStorage.setItem('lastLoginTry', dayjs().valueOf().toString())));
   }
 
   public logout() {
@@ -81,6 +81,6 @@ export class AuthService {
   }
 
   public getLastLoginTime() {
-    return dayjs.unix(Number(localStorage.getItem('lastLoginTry') || 0));
+    return dayjs(Number(localStorage.getItem('lastLoginTry') || 0));
   }
 }

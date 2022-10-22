@@ -10,7 +10,12 @@
       <label *ngIf="floatingLabel" class="floating-label">{{ floatingLabel }}</label>
     </div>
     <div class="fragment-right">
-      <ng-content select=".suffix"></ng-content>
+      <ng-container *ngIf="pending; else suffix">
+        <loader></loader>
+      </ng-container>
+      <ng-template #suffix>
+        <ng-content select=".suffix"></ng-content>
+      </ng-template>
     </div>
     <input #input [name]="name" [type]="type" [placeholder]="placeholder" [formControl]="control" [readonly]="readonly"
       [autocomplete]="autocomplete" (focus)="onFocus()" (blur)="onBlur()"

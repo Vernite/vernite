@@ -61,8 +61,13 @@ import utc from 'dayjs/plugin/utc';
 import localeData from 'dayjs/plugin/localeData';
 import objectSupport from 'dayjs/plugin/objectSupport';
 import formatParser from 'dayjs/plugin/customParseFormat';
+import { environment } from './environments/environment';
 
 dayjs.extend(utc);
 dayjs.extend(localeData);
 dayjs.extend(objectSupport);
 dayjs.extend(formatParser);
+
+if (!environment.production) {
+  (window as any).dayjs = dayjs;
+}

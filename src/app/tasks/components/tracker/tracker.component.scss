@@ -7,6 +7,7 @@
     width: 100px;
     margin-right: 1rem;
     color: var(--color-text);
+    white-space: nowrap;
   }
 
   .toggle {}
@@ -16,7 +17,7 @@
   position: relative;
   padding: 0.5rem 1.5rem;
   margin-top: 1rem;
-  background-color: var(--color-secondary-800);
+  background-color: var(--color-secondary-700);
   border-radius: var(--border-radius);
 
   &::before {
@@ -28,11 +29,8 @@
     transform: rotate(45deg);
   }
 
-  li {
-    display: flex;
-    height: 40px;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text);
+  ul {
+    max-height: 300px;
+    overflow-y: auto;
   }
 }

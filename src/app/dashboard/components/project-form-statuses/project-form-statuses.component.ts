@@ -136,7 +136,7 @@ export class ProjectFormStatusesComponent implements ProjectForm, OnInit {
       .pipe(
         untilDestroyed(this),
         tap((status) => {
-          this.statusList = this.statusList.map((s) => (s.id === status.id ? status : s));
+          this.statusList = this.statusList.map((s) => (s.ordinal === status.ordinal ? status : s));
         }),
       )
       .subscribe();

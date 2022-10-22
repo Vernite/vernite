@@ -54,6 +54,8 @@ export class InputComponent extends ControlAccessor implements AfterViewInit {
 
   @Input() allowResizeByError?: boolean;
 
+  @Input() pending?: boolean;
+
   // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() focus: EventEmitter<boolean> = new EventEmitter<boolean>();
 

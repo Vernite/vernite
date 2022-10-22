@@ -23,6 +23,7 @@ import { TrackerComponent } from './components/tracker/tracker.component';
 import { TimeTracksTotalPipe } from './pipes/time-tracks-total/time-tracks-total.pipe';
 import { TimeTrackTimerPipe } from './pipes/time-track-timer/time-track-timer.pipe';
 import { TimeTrackDurationPipe } from './pipes/time-track-duration/time-track-duration.pipe';
+import { TrackerEntryComponent } from './components/tracker/tracker-entry/tracker-entry.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule],
@@ -44,6 +45,7 @@ import { TimeTrackDurationPipe } from './pipes/time-track-duration/time-track-du
     InputIssueComponent,
     InputPullRequestComponent,
     TrackerComponent,
+    TrackerEntryComponent,
     TimeTracksTotalPipe,
     TimeTrackTimerPipe,
     TimeTrackDurationPipe,

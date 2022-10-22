@@ -85,4 +85,8 @@ export class EditProjectPage implements OnInit {
   public setStage(stage: ProjectFormStage) {
     this.stage = stage;
   }
+
+  public close() {
+    this.router.navigate(['/', this.workspaceId, this.projectId]);
+  }
 }
