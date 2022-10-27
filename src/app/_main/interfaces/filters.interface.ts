@@ -1,5 +1,7 @@
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
+// TODO: Rework filters interfaces
+
 export interface FilterBase {
   label: string;
   value: any;

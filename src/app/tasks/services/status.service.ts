@@ -4,8 +4,8 @@ import { combineLatest, filter, map, Observable } from 'rxjs';
 import { ApiService } from '@main/services/api/api.service';
 import { Status, StatusWithTasks } from '../interfaces/status.interface';
 import { TaskService } from './task.service';
-import { StatusDialog, StatusDialogData } from './../../dashboard/dialogs/status/status.dialog';
 import { DialogService } from '@main/services/dialog/dialog.service';
+import { StatusDialog, StatusDialogData } from '@dashboard/dialogs/status/status.dialog';
 
 @Injectable({
   providedIn: 'root',

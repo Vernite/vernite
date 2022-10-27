@@ -1,24 +1,24 @@
 import { ControlAccessor } from '@main/classes/control-accessor.class';
-import { GitPull } from '@dashboard/interfaces/git-integration.interface';
 import { ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { AbstractControl, NgControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
-import { GitIntegrationService } from '@dashboard/services/git-integration/git-integration.service';
 import { ValidationError } from '@main/interfaces/validation-error.interface';
 import { requiredValidator } from '@main/validators/required.validator';
+import { Task } from '@tasks/interfaces/task.interface';
+import { TaskService } from '@tasks/services/task.service';
 
 @Component({
-  selector: 'input-pull-request',
-  templateUrl: './input-pull-request.component.html',
+  selector: 'input-epic',
+  templateUrl: './input-epic.component.html',
 })
-export class InputPullRequestComponent
-  extends ControlAccessor<GitPull | 'DETACH' | 'CREATE' | null | ''>
+export class InputEpicComponent
+  extends ControlAccessor<Task['id'] | null | ''>
   implements OnDestroy
 {
   @Input() set projectId(value: number) {
     this._projectId = value;
     if (value) {
-      this.loadPullRequests();
+      this.loadEpics();
     }
   }
 
@@ -28,28 +28,23 @@ export class InputPullRequestComponent
 
   set isOpen(value: boolean) {
     if (value) this.control.setValue('');
-    else this.control.setValue('DETACH');
+    else this.control.setValue(null);
   }
 
   get isOpen() {
-    return !['DETACH', null].includes(this.control.value as string);
+    return this.control.value != null;
   }
 
   private _projectId: number = 0;
 
-  pulls$: Observable<GitPull[]> = of([]);
+  epics$: Observable<Task[]> = of([]);
 
-  constructor(
-    ngControl: NgControl,
-    private gitIntegrationService: GitIntegrationService,
-    cdRef: ChangeDetectorRef,
-  ) {
+  constructor(ngControl: NgControl, cdRef: ChangeDetectorRef, private taskService: TaskService) {
     super(ngControl, cdRef);
   }
 
-  loadPullRequests() {
-    const { projectId } = this;
-    this.pulls$ = this.gitIntegrationService.gitHubPullList(projectId);
+  loadEpics() {
+    this.epics$ = this.taskService.listEpics(this.projectId);
   }
 
   override validate(control: AbstractControl): ValidationError | null {

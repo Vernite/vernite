@@ -73,6 +73,9 @@ export class TaskDialog implements OnInit {
 
   public interactive$ = timeToInteraction();
 
+  /** @ignore */
+  TaskType = TaskType;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: TaskDialogData,
     private dialogRef: MatDialogRef<TaskDialog>,

@@ -59,6 +59,10 @@
       i18n-floatingLabel i18n-placeholder>
     </app-input-date-time>
 
+    <!-- Epic -->
+    <input-epic *ngIf="form.get('type').value !== TaskType.EPIC" formControlName="parentTaskId"
+      [projectId]="form.get('projectId').value || -1"></input-epic>
+
     <!-- GitHub issue integration -->
     <input-issue *ngIf="isGitHubIntegrationAvailable && form.get('projectId')?.value" formControlName="issue"
       [projectId]="form.get('projectId').value || -1"></input-issue>

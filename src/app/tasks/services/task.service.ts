@@ -36,10 +36,6 @@ import { Task } from '../interfaces/task.interface';
 export class TaskService {
   private lists = new Map<Project['id'], ReplaySubject<Task[]>>();
 
-  /**
-   * Default constructor with dependency injection.
-   * @param apiService ApiService
-   */
   constructor(
     private apiService: ApiService,
     private dialogService: DialogService,
@@ -279,6 +275,11 @@ export class TaskService {
     });
   }
 
+  /**
+   * List all task types for specific parent task
+   * @param parentTaskType parent task type to list task types for
+   * @returns observable with list of task types
+   */
   public listTaskTypes(parentTaskType?: TaskType) {
     const parentTaskTypeNormal = isNumber(parentTaskType) ? parentTaskType : -1;
     const desiredTaskTypes = TaskTypeHierarchy[parentTaskTypeNormal];
@@ -288,6 +289,17 @@ export class TaskService {
       desiredTaskTypes.map(
         (taskType) => taskTypesEntries.find(([_, value]) => value === taskType)!,
       ),
+    );
+  }
+
+  /**
+   * List all epics for specific project
+   * @param projectId project identifier to list epics from
+   * @returns observable with list of epics
+   */
+  public listEpics(projectId: number) {
+    return this.list(projectId).pipe(
+      map((tasks) => tasks.filter((task) => task.type === TaskType.EPIC)),
     );
   }
 }
