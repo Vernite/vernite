@@ -13,7 +13,7 @@ export class ButtonComponent {
   /**
    * Style variant of the button.
    */
-  @Input() variant: 'primary' | 'secondary' | 'important' = 'secondary';
+  @Input() variant: 'primary' | 'secondary' | 'important' | 'transparent' = 'secondary';
 
   /**
    * Button behavior in forms. If this property is set to `submit`, this button will be able to submit the

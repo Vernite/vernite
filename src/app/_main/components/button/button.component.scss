@@ -42,7 +42,6 @@ button {
   justify-content: center;
   padding: 0.8125rem 1.25rem;
   border-radius: var(--border-radius);
-  box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
   color: var(--color-text);
   outline: 0 !important;
   transition: background-color 0.2s ease;
@@ -50,6 +49,10 @@ button {
 
   >*:not(:last-child) {
     margin-right: 0.75rem;
+  }
+
+  &:not(.transparent) {
+    box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
   }
 
   &::before {
