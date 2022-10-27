@@ -12,7 +12,7 @@ import { RouterExtensionsService } from '@main/services/router-extensions/router
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TaskPriority } from '@tasks/enums/task-priority.enum';
-import { SubTaskType, TaskType } from '@tasks/enums/task-type.enum';
+import { TaskType } from '@tasks/enums/task-type.enum';
 import { Status } from '@tasks/interfaces/status.interface';
 import { StatusService } from '@tasks/services/status.service';
 import { isNil } from 'lodash-es';
@@ -20,6 +20,7 @@ import { distinctUntilChanged, map, Observable, pairwise } from 'rxjs';
 import { requiredValidator } from '../../../_main/validators/required.validator';
 import { Task } from '../../interfaces/task.interface';
 import { unixTimestamp } from '../../../_main/interfaces/date.interface';
+import { TaskService } from '@tasks/services/task.service';
 
 export enum TaskDialogVariant {
   CREATE = 'create',
@@ -31,7 +32,7 @@ export interface TaskDialogData {
   projectId?: number;
   variant: TaskDialogVariant;
   task?: Partial<Task>;
-  subtask?: boolean;
+  parentTask?: Task;
 }
 
 @UntilDestroy()
@@ -43,8 +44,7 @@ export interface TaskDialogData {
 export class TaskDialog implements OnInit {
   TaskDialogVariant = TaskDialogVariant;
 
-  public taskTypes = Enum.entries(TaskType);
-  public subTaskTypes = Enum.entries(SubTaskType);
+  public taskTypes$ = this.taskService.listTaskTypes(this.data.parentTask?.type);
   public taskPriorities = Object.values(TaskPriority);
 
   public statusList$!: Observable<Status[]>;
@@ -58,10 +58,7 @@ export class TaskDialog implements OnInit {
   public form = new FormGroup({
     id: new FormControl<number | null>(null),
     parentTaskId: new FormControl<number | null>(null),
-    type: new FormControl<TaskType | SubTaskType>(
-      this.data.subtask ? SubTaskType.SUBTASK : TaskType.TASK,
-      [requiredValidator()],
-    ),
+    type: new FormControl<TaskType>(this.taskTypes$.value[0][1], [requiredValidator()]),
     name: new FormControl<string>('', [requiredValidator()]),
     statusId: new FormControl<number | null>(null, [requiredValidator()]),
     projectId: new FormControl<number | null>(null, [requiredValidator()]),
@@ -83,10 +80,10 @@ export class TaskDialog implements OnInit {
     private workspaceService: WorkspaceService,
     private gitIntegrationService: GitIntegrationService,
     private routerExtensions: RouterExtensionsService,
+    private taskService: TaskService,
   ) {}
 
   ngOnInit() {
-    console.log('ngOnInit');
     this.loadParamsFromUrl();
 
     const { workspaceId, projectId, task } = this.data;
@@ -160,7 +157,6 @@ export class TaskDialog implements OnInit {
   }
 
   confirm() {
-    console.log();
     if (validateForm(this.form)) {
       this.dialogRef.close(this.form.value);
     }

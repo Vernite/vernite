@@ -1,18 +1,18 @@
 <h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.EDIT" i18n>Edit task: {{ data.task?.name }}</h1>
-<h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.CREATE && !data.subtask" i18n>Create new task</h1>
-<h1 mat-dialog-title *ngIf="data.subtask" i18n>Create new subtask</h1>
+<h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.CREATE && !data.parentTask" i18n>Create new task</h1>
+<h1 mat-dialog-title *ngIf="data.parentTask" i18n>Create new subtask</h1>
 <div mat-dialog-content>
   <form (submit)="confirm()" [formGroup]="form" autocomplete="off">
 
     <!-- Workspace -->
-    <app-select *ngIf="!data.subtask" formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
+    <app-select *ngIf="!data.parentTask" formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
       <app-option *ngFor="let workspace of workspaceList$ | async" [value]="workspace.id">{{ workspace.name }}
       </app-option>
       <app-empty-options i18n>There is no workspaces</app-empty-options>
     </app-select>
 
     <!-- Project -->
-    <ng-container *ngIf="!data.subtask && form.get('workspaceId')?.value">
+    <ng-container *ngIf="!data.parentTask && form.get('workspaceId')?.value">
       <app-select formControlName="projectId" floatingLabel="Project" i18n-floatingLabel>
         <app-option *ngFor="let project of projectList$ | async" [value]="project.id">{{project.name}}
         </app-option>
@@ -22,8 +22,7 @@
 
     <!-- Type field -->
     <app-select formControlName="type" floatingLabel="Type" i18n-floatingLabel>
-      <app-option *ngFor="let type of (data.subtask ? subTaskTypes : taskTypes)" [value]="type[1]"
-        [icon]="type[0] | taskTypeIcon">
+      <app-option *ngFor="let type of taskTypes$ | async" [value]="type[1]" [icon]="type[0] | taskTypeIcon">
         {{ type[1] | taskType }}
       </app-option>
     </app-select>

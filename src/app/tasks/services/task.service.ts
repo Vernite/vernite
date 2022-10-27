@@ -2,15 +2,20 @@ import { Injectable } from '@angular/core';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { MemberService } from '@dashboard/services/member/member.service';
+import { Enum } from '@main/classes/enum.class';
+import { Service } from '@main/decorators/service/service.decorator';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 import { Filter } from '@main/interfaces/filters.interface';
 import { applyFilters } from '@main/operators/apply-filters.operator';
 import { DialogOutlet, DialogService } from '@main/services/dialog/dialog.service';
 import { SnackbarService } from '@main/services/snackbar/snackbar.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
+import { TaskType, TaskTypeHierarchy } from '@tasks/enums/task-type.enum';
 import { Schedule } from '@tasks/interfaces/schedule.interface';
 import * as dayjs from 'dayjs';
+import { isNumber } from 'lodash-es';
 import {
+  BehaviorSubject,
   combineLatest,
   EMPTY,
   map,
@@ -24,6 +29,7 @@ import {
 import { ApiService } from '../../_main/services/api/api.service';
 import { Task } from '../interfaces/task.interface';
 
+@Service()
 @Injectable({
   providedIn: 'root',
 })
@@ -192,11 +198,11 @@ export class TaskService {
         {
           variant: TaskDialogVariant.CREATE,
           projectId: projectId,
-          subtask: true,
+          parentTask: parentTask,
           task: {
             parentTaskId: parentTask.id,
           },
-        },
+        } as TaskDialogData,
         DialogOutlet.CONTENT_RIGHT,
       )
       .afterClosed()
@@ -271,5 +277,17 @@ export class TaskService {
     return this.apiService.put(`/project/${projectId}/task/${taskId}`, {
       body: { statusId },
     });
+  }
+
+  public listTaskTypes(parentTaskType?: TaskType) {
+    const parentTaskTypeNormal = isNumber(parentTaskType) ? parentTaskType : -1;
+    const desiredTaskTypes = TaskTypeHierarchy[parentTaskTypeNormal];
+    const taskTypesEntries = Enum.entries(TaskType);
+
+    return new BehaviorSubject(
+      desiredTaskTypes.map(
+        (taskType) => taskTypesEntries.find(([_, value]) => value === taskType)!,
+      ),
+    );
   }
 }

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { SubTaskType, TaskType } from '@tasks/enums/task-type.enum';
+import { TaskType } from '@tasks/enums/task-type.enum';
 import * as Color from 'color';
 
 @Pipe({
@@ -10,7 +10,7 @@ export class TaskTypePipe implements PipeTransform {
   transform(value: any, type: 'color'): Color;
 
   transform(value: any, type: 'color' | 'name' | 'icon' = 'name'): string | Color {
-    switch (value as TaskType | SubTaskType) {
+    switch (value as TaskType) {
       // Task
       case TaskType.TASK:
         return {
@@ -44,7 +44,7 @@ export class TaskTypePipe implements PipeTransform {
         }[type];
 
       // Subtask
-      case SubTaskType.SUBTASK:
+      case TaskType.SUBTASK:
         return {
           name: $localize`Subtask`,
           color: Color.rgb(88, 183, 189),
