@@ -59,6 +59,7 @@ export class SettingsLocalizationPage {
   constructor() {}
 
   changeLanguage() {
+    localStorage.setItem('language', this.form.value.language);
     location.href = `https://workflow.adiantek.ovh/${this.form.value.language}/settings/localization`;
   }
 
