@@ -83,3 +83,14 @@ describe('Utils: has', () => {
     expect(Utils.has(obj, ['key1', 'key2'])).toBeFalsy();
   });
 });
+
+describe('Utils: isISODate', () => {
+  it('Should return true', () => {
+    expect(Utils.isISODate('2011-10-05T14:48:00.000Z')).toBeTrue();
+  });
+  it('Should return false', () => {
+    expect(Utils.isISODate({})).toBeFalse();
+    expect(Utils.isISODate('-')).toBeFalse();
+    expect(Utils.isISODate('2011-10-05')).toBeFalse();
+  });
+});

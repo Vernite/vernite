@@ -5,7 +5,7 @@ import { Project } from '@dashboard/interfaces/project.interface';
 import { faGripLines, faPlus, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Status } from '@tasks/interfaces/status.interface';
-import { StatusService } from '@tasks/services/status.service';
+import { StatusService } from '@tasks/services/status/status.service';
 import { isEqual } from 'lodash-es';
 import { map, of, switchMap, tap, Observable, forkJoin, defaultIfEmpty } from 'rxjs';
 

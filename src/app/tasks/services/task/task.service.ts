@@ -1,17 +1,22 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { MemberService } from '@dashboard/services/member/member.service';
 import { Enum } from '@main/classes/enum.class';
+import { Cache } from '@main/decorators/cache/cache.decorator';
 import { Service } from '@main/decorators/service/service.decorator';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 import { Filter } from '@main/interfaces/filters.interface';
+import { Errors } from '@main/interfaces/http-error.interface';
 import { applyFilters } from '@main/operators/apply-filters.operator';
+import { ApiService } from '@main/services/api/api.service';
+import { BaseService } from '@main/services/base/base.service';
 import { DialogOutlet, DialogService } from '@main/services/dialog/dialog.service';
 import { SnackbarService } from '@main/services/snackbar/snackbar.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '@tasks/dialogs/task/task.dialog';
 import { TaskType, TaskTypeHierarchy } from '@tasks/enums/task-type.enum';
 import { Schedule } from '@tasks/interfaces/schedule.interface';
+import { Task } from '@tasks/interfaces/task.interface';
 import * as dayjs from 'dayjs';
 import { isNumber } from 'lodash-es';
 import {
@@ -26,28 +31,41 @@ import {
   take,
   tap,
 } from 'rxjs';
-import { ApiService } from '../../_main/services/api/api.service';
-import { Task } from '../interfaces/task.interface';
 
 @Service()
 @Injectable({
   providedIn: 'root',
 })
-export class TaskService {
+export class TaskService extends BaseService<
+  Errors<'FORM_VALIDATION_ERROR' | 'PROJECT_NOT_FOUND'>
+> {
   private lists = new Map<Project['id'], ReplaySubject<Task[]>>();
 
+  protected override errorCodes = {
+    FORM_VALIDATION_ERROR: {
+      message: $localize`Form validation error`,
+    },
+    PROJECT_NOT_FOUND: {
+      message: $localize`Project not found`,
+    },
+  };
+
   constructor(
+    private injector: Injector,
     private apiService: ApiService,
     private dialogService: DialogService,
     private memberService: MemberService,
     private snackbarService: SnackbarService,
-  ) {}
+  ) {
+    super(injector);
+  }
 
   /**
    * Get list of tasks
    * @param projectId Project id needed to list all tasks
    * @returns Request observable with list of tasks
    */
+  @Cache()
   public list(projectId: number, filters?: Filter[]): Observable<Task[]> {
     let subject: ReplaySubject<Task[]>;
     if (this.lists.has(projectId)) {
@@ -55,9 +73,16 @@ export class TaskService {
     } else {
       subject = new ReplaySubject<Task[]>();
       this.lists.set(projectId, subject);
-      this.apiService.get(`/project/${projectId}/task`).subscribe((tasks) => {
-        subject.next(tasks);
-      });
+      this.apiService
+        .get<Task[]>(`/project/${projectId}/task`)
+        .pipe(
+          this.validate({
+            404: 'PROJECT_NOT_FOUND',
+          }),
+        )
+        .subscribe((tasks) => {
+          subject.next(tasks);
+        });
     }
 
     return subject.pipe(applyFilters(filters));
@@ -71,6 +96,10 @@ export class TaskService {
    */
   public create(projectId: number, task: Task): Observable<Task> {
     return this.apiService.post(`/project/${projectId}/task/`, { body: task }).pipe(
+      this.validate({
+        400: 'FORM_VALIDATION_ERROR',
+        404: 'PROJECT_NOT_FOUND',
+      }),
       tap(() => {
         this.snackbarService.show($localize`Task created successfully!`);
       }),
@@ -83,8 +112,12 @@ export class TaskService {
    * @param projectId Project id needed to update task
    * @returns Request observable with the updated task
    */
-  public update(projectId: number, task: Task): Observable<Task> {
+  public update(projectId: number, task: Partial<Task> & { id: number }): Observable<Task> {
     return this.apiService.put(`/project/${projectId}/task/${task.id}`, { body: task }).pipe(
+      this.validate({
+        400: 'FORM_VALIDATION_ERROR',
+        404: 'PROJECT_NOT_FOUND',
+      }),
       tap(() => {
         this.snackbarService.show($localize`Task updated successfully!`);
       }),
@@ -98,7 +131,11 @@ export class TaskService {
    * @returns Request observable
    */
   public delete(projectId: number, taskId: number): Observable<null> {
-    return this.apiService.delete(`/project/${projectId}/task/${taskId}`);
+    return this.apiService.delete(`/project/${projectId}/task/${taskId}`).pipe(
+      this.validate({
+        404: 'PROJECT_NOT_FOUND',
+      }),
+    );
   }
 
   /**
@@ -256,10 +293,8 @@ export class TaskService {
    * @param projectId project id needed to assign task
    * @returns Updated task object
    */
-  public assign(userId: number | null, taskId: number, projectId: number): Observable<Task> {
-    return this.apiService.put(`/project/${projectId}/task/${taskId}`, {
-      body: { assigneeId: userId },
-    });
+  public assign(assigneeId: number | null, taskId: number, projectId: number): Observable<Task> {
+    return this.update(projectId, { id: taskId, assigneeId });
   }
 
   /**
@@ -270,9 +305,7 @@ export class TaskService {
    * @returns Updated task object
    */
   public changeStatus(statusId: number, taskId: number, projectId: number): Observable<Task> {
-    return this.apiService.put(`/project/${projectId}/task/${taskId}`, {
-      body: { statusId },
-    });
+    return this.update(projectId, { id: taskId, statusId });
   }
 
   /**

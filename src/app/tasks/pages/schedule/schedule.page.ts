@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { ProjectService } from '@dashboard/services/project/project.service';
 import { Schedule } from '@tasks/interfaces/schedule.interface';
-import { TaskService } from '@tasks/services/task.service';
+import { TaskService } from '@tasks/services/task/task.service';
 import * as dayjs from 'dayjs';
 import { Observable } from 'rxjs';
 

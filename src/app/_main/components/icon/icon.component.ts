@@ -1,7 +1,7 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
-import { Utils } from '../../classes/utils.class';
 import { faQuestion, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { Utils } from '@main/classes/util/utils.class';
 
 /**
  * Icon component. Supports material icons and font-awesome icons.

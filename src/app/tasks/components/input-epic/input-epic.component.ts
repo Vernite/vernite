@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { ValidationError } from '@main/interfaces/validation-error.interface';
 import { requiredValidator } from '@main/validators/required.validator';
 import { Task } from '@tasks/interfaces/task.interface';
-import { TaskService } from '@tasks/services/task.service';
+import { TaskService } from '@tasks/services/task/task.service';
 
 @Component({
   selector: 'input-epic',

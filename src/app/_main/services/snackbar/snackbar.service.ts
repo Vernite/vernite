@@ -13,7 +13,7 @@ export class SnackbarService {
 
   public snackbars$ = new BehaviorSubject<Map<string, SnackbarData>>(new Map());
 
-  public show(message: string, color: 'gray' | 'green' = 'gray', duration: number = 4000) {
+  public show(message: string, color: SnackbarData['color'] = 'gray', duration: number = 4000) {
     const data = { message, duration, color };
     const uid = uuid();
 

@@ -14,13 +14,13 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TaskPriority } from '@tasks/enums/task-priority.enum';
 import { TaskType } from '@tasks/enums/task-type.enum';
 import { Status } from '@tasks/interfaces/status.interface';
-import { StatusService } from '@tasks/services/status.service';
 import { isNil } from 'lodash-es';
 import { distinctUntilChanged, map, Observable, pairwise } from 'rxjs';
 import { requiredValidator } from '../../../_main/validators/required.validator';
 import { Task } from '../../interfaces/task.interface';
 import { unixTimestamp } from '../../../_main/interfaces/date.interface';
-import { TaskService } from '@tasks/services/task.service';
+import { StatusService } from '@tasks/services/status/status.service';
+import { TaskService } from '@tasks/services/task/task.service';
 
 export enum TaskDialogVariant {
   CREATE = 'create',

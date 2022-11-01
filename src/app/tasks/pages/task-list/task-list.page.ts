@@ -19,9 +19,9 @@ import { Filter } from '@main/interfaces/filters.interface';
 import { DialogService } from '@main/services/dialog/dialog.service';
 import { Status } from '@tasks/interfaces/status.interface';
 import { Task } from '@tasks/interfaces/task.interface';
-import { StatusService } from '@tasks/services/status.service';
-import { TaskService } from '@tasks/services/task.service';
 import { map, Observable } from 'rxjs';
+import { TaskService } from '@tasks/services/task/task.service';
+import { StatusService } from '@tasks/services/status/status.service';
 
 @Component({
   selector: 'app-task-list',

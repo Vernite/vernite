@@ -65,10 +65,16 @@ export class Utils {
     return (char >= 'A' && char <= 'Z') || (char >= 'a' && char <= 'z');
   }
 
+  /**
+   * Checks if passed string is an ISO date string
+   * ex. 2011-10-05T14:48:00.000Z
+   * @param text
+   * @returns
+   */
   public static isISODate(text: any) {
-    if (!isString(text)) return;
+    if (!isString(text)) return false;
     if ((new Date(text) as any) !== 'Invalid Date' && !isNaN(new Date(text) as any)) {
-      if (text == new Date(text).toISOString()) {
+      if (text === new Date(text).toISOString()) {
         return true;
       } else {
         return false;

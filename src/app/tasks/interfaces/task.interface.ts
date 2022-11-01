@@ -81,7 +81,7 @@ export interface Task extends JSONParsable {
   /**
    * Optional user id who is assigned to task
    */
-  assigneeId?: number;
+  assigneeId?: number | null;
 
   /**
    * List of trackers for this task

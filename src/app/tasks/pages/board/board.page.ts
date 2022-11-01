@@ -13,13 +13,13 @@ import {
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import { PersistentMap } from '@main/classes/persistent-map.class';
+import { StatusService } from '@tasks/services/status/status.service';
+import { TaskService } from '@tasks/services/task/task.service';
 import { Observable, Subscription } from 'rxjs';
 import { DialogService } from '../../../_main/services/dialog/dialog.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '../../dialogs/task/task.dialog';
 import { StatusWithTasks } from '../../interfaces/status.interface';
 import { Task } from '../../interfaces/task.interface';
-import { StatusService } from '../../services/status.service';
-import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-board',

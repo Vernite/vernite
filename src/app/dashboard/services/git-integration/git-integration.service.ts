@@ -1,10 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { GitAccount, GitIntegration } from '@dashboard/interfaces/git-integration.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Service } from '@main/decorators/service/service.decorator';
 import { ApiService } from '@main/services/api/api.service';
 import { filter, interval, map, mergeMap, Observable, take } from 'rxjs';
 import { ProjectService } from '../project/project.service';
+import { Errors } from '@main/interfaces/http-error.interface';
+import { BaseService } from '@main/services/base/base.service';
+import { Cache } from '@main/decorators/cache/cache.decorator';
 
 /**
  * How to use Git integration service:
@@ -19,8 +22,36 @@ import { ProjectService } from '../project/project.service';
 @Injectable({
   providedIn: 'root',
 })
-export class GitIntegrationService {
-  constructor(private apiService: ApiService, private projectService: ProjectService) {}
+export class GitIntegrationService extends BaseService<
+  Errors<
+    | 'PROJECT_ALREADY_HAS_INTEGRATION'
+    | 'PROJECT_OR_INSTALLATION_NOT_FOUND'
+    | 'INSTALLATION_WITH_GIVEN_ID_NOT_FOUND'
+    | 'PROJECT_OR_INTEGRATION_NOT_FOUND'
+  >
+> {
+  constructor(
+    private injector: Injector,
+    private apiService: ApiService,
+    private projectService: ProjectService,
+  ) {
+    super(injector);
+  }
+
+  protected errorCodes = {
+    PROJECT_ALREADY_HAS_INTEGRATION: {
+      message: $localize`Project already has integration`,
+    },
+    PROJECT_OR_INSTALLATION_NOT_FOUND: {
+      message: $localize`Project or git installation not found`,
+    },
+    INSTALLATION_WITH_GIVEN_ID_NOT_FOUND: {
+      message: $localize`Installation with given id not found`,
+    },
+    PROJECT_OR_INTEGRATION_NOT_FOUND: {
+      message: $localize`Project or integration not found`,
+    },
+  };
 
   /**
    * Start GitHub integration process - opens the GitHub page in new window, to give user ability to choose witch account and repositories wants to give access to.
@@ -70,15 +101,23 @@ export class GitIntegrationService {
     projectId: number,
     repositoryName: string,
   ): Observable<{ id: number; name: string; gitHubIntegration: string }> {
-    return this.apiService.post(`/project/${projectId}/integration/github`, {
-      body: repositoryName,
-    });
+    return this.apiService
+      .post(`/project/${projectId}/integration/github`, {
+        body: repositoryName,
+      })
+      .pipe(
+        this.validate({
+          400: 'PROJECT_ALREADY_HAS_INTEGRATION',
+          404: 'PROJECT_OR_INSTALLATION_NOT_FOUND',
+        }),
+      );
   }
 
   /**
    * Get list of connected GitHub accounts
    * @returns List of connected GitHub accounts
    */
+  @Cache()
   public getConnectedGitHubAccounts(): Observable<GitAccount[]> {
     return this.apiService
       .get('/user/integration/github')
@@ -95,7 +134,11 @@ export class GitIntegrationService {
    * @returns object with link to open the GitHub page with application removal
    */
   public deleteConnectedGitHubAccount(gitHubAccountId: number): Observable<{ link: string }> {
-    return this.apiService.delete(`/user/integration/github/${gitHubAccountId}`);
+    return this.apiService.delete(`/user/integration/github/${gitHubAccountId}`).pipe(
+      this.validate({
+        404: 'INSTALLATION_WITH_GIVEN_ID_NOT_FOUND',
+      }),
+    );
   }
 
   /**
@@ -103,7 +146,11 @@ export class GitIntegrationService {
    * @param projectId Project id to remove integration from
    */
   public deleteGitHubIntegration(projectId: number): Observable<void> {
-    return this.apiService.delete(`/project/${projectId}/integration/github`);
+    return this.apiService.delete(`/project/${projectId}/integration/github`).pipe(
+      this.validate({
+        404: 'PROJECT_OR_INTEGRATION_NOT_FOUND',
+      }),
+    );
   }
 
   /**
@@ -121,7 +168,11 @@ export class GitIntegrationService {
    * @returns list of GitHub issues
    */
   public gitHubIssueList(projectId: number) {
-    return this.apiService.get(`/project/${projectId}/integration/git/issue`);
+    return this.apiService.get(`/project/${projectId}/integration/git/issue`).pipe(
+      this.validate({
+        404: 'PROJECT_OR_INTEGRATION_NOT_FOUND',
+      }),
+    );
   }
 
   /**
@@ -130,7 +181,11 @@ export class GitIntegrationService {
    * @returns list of GitHub pull requests
    */
   public gitHubPullList(projectId: number) {
-    return this.apiService.get(`/project/${projectId}/integration/git/pull`);
+    return this.apiService.get(`/project/${projectId}/integration/git/pull`).pipe(
+      this.validate({
+        404: 'PROJECT_OR_INTEGRATION_NOT_FOUND',
+      }),
+    );
   }
 
   /**
