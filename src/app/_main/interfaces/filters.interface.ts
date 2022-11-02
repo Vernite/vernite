@@ -41,3 +41,30 @@ export interface FilterSelect<T> extends FilterBase {
 export type Filter = FilterCheckbox<any> | FilterText | FilterNumber | FilterSelect<any>;
 
 export type FilterType = Filter['type'];
+
+// New filters system
+export enum DataFilterType {
+  FRONTEND = 'frontend',
+  BACKEND = 'backend',
+}
+
+export enum DataFilterControlType {
+  CHECKBOX = 'checkbox',
+  TEXT = 'text',
+  NUMBER = 'number',
+  SELECT = 'select',
+  DATE = 'date',
+}
+
+export interface DataFilter<T, V> {
+  type: DataFilterType;
+  field: string;
+  value: V;
+  apply?(list: T[]): T[];
+}
+
+export interface DataFilterDisplay<T, V> {
+  type: DataFilterControlType;
+  label: string;
+  dataFilter: DataFilter<T, V>;
+}

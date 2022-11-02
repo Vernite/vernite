@@ -10,20 +10,18 @@ export abstract class BaseService<T extends Errors<string>> {
   constructor(private _injector: Injector) {}
 
   protected handleErrorWithCode(err: HTTPError, code: T) {
-    const { message } = this.errorCodes[code];
-
     if (code) {
+      const { message } = this.errorCodes[code];
       this._snackbarService.show(message, 'red');
+    } else if (err.status === 503) {
+      this._snackbarService.show($localize`Service is currently unavailable`, 'red');
     }
   }
 
   protected validate<E>(codeMappings: { [key in number | string]: T }) {
     return catchError((err: HTTPError) => {
       const code = codeMappings[err.status || err.text];
-
-      if (code) {
-        this.handleErrorWithCode(err, code);
-      }
+      this.handleErrorWithCode(err, code);
 
       return throwError(() => err);
     }) as OperatorFunction<E, E>;

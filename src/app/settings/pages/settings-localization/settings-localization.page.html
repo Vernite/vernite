@@ -11,6 +11,11 @@
     <app-option *ngFor="let dateFormat of dateFormats" [value]="dateFormat.format">{{ dateFormat.example }}</app-option>
   </app-select>
 
+  <!-- Time format -->
+  <app-select formControlName="timeFormat" floatingLabel="Time format" class="full-width" i18n-floatingLabel>
+    <app-option *ngFor="let timeFormat of timeFormats" [value]="timeFormat.format">{{ timeFormat.example }}</app-option>
+  </app-select>
+
   <!-- Actions section -->
   <div class="actions">
     <app-button variant="primary" i18n>Save settings</app-button>

@@ -5,7 +5,6 @@ import { Project } from '@dashboard/interfaces/project.interface';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
 import { GitIntegrationService } from '@dashboard/services/git-integration/git-integration.service';
 import { WorkspaceService } from '@dashboard/services/workspace/workspace.service';
-import { Enum } from '@main/classes/enum.class';
 import { validateForm } from '@main/classes/form.class';
 import { timeToInteraction } from '@main/classes/time-to-interaction.class';
 import { RouterExtensionsService } from '@main/services/router-extensions/router-extensions.service';

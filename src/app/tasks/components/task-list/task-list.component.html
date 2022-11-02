@@ -1,0 +1,19 @@
+<div class="table w-full">
+
+  <!-- Header -->
+  <div class="header-row">
+    <div class="header-cell w-full">Title</div>
+    <div class="header-cell w-52">Status</div>
+    <div class="header-cell w-52">Assignee</div>
+    <div class="header-cell w-52">Time tracking</div>
+    <div class="header-cell w-52">Deadline</div>
+    <div class="header-cell action">
+      <!-- Actions -->
+    </div>
+  </div>
+
+  <!-- Body -->
+  <ng-container *ngFor="let task of tasks; trackBy: trackByTask">
+    <task-row [task]="task" [projectId]="projectId" [members]="members" [statusList]="statusList"></task-row>
+  </ng-container>
+</div>

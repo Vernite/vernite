@@ -64,6 +64,7 @@ import { TabComponent } from './components/tabs/tab/tab.component';
 import { InputColorComponent } from './components/input-color/input-color.component';
 import { ColorComponent } from './components/color/color.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ContrastColorPipe } from './pipes/contrast-color/contrast-color.pipe';
 
 /**
  * Main module configuration object
@@ -160,6 +161,7 @@ const ngModuleConfig = {
     InputColorComponent,
     ColorComponent,
     LoaderComponent,
+    ContrastColorPipe,
   ],
   providers: [
     /*=============================================

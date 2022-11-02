@@ -6,9 +6,8 @@ import { Enum } from '@main/classes/enum.class';
 import { Cache } from '@main/decorators/cache/cache.decorator';
 import { Service } from '@main/decorators/service/service.decorator';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
-import { Filter } from '@main/interfaces/filters.interface';
+import { DataFilter } from '@main/interfaces/filters.interface';
 import { Errors } from '@main/interfaces/http-error.interface';
-import { applyFilters } from '@main/operators/apply-filters.operator';
 import { ApiService } from '@main/services/api/api.service';
 import { BaseService } from '@main/services/base/base.service';
 import { DialogOutlet, DialogService } from '@main/services/dialog/dialog.service';
@@ -66,26 +65,15 @@ export class TaskService extends BaseService<
    * @returns Request observable with list of tasks
    */
   @Cache()
-  public list(projectId: number, filters?: Filter[]): Observable<Task[]> {
-    let subject: ReplaySubject<Task[]>;
-    if (this.lists.has(projectId)) {
-      subject = this.lists.get(projectId)!;
-    } else {
-      subject = new ReplaySubject<Task[]>();
-      this.lists.set(projectId, subject);
-      this.apiService
-        .get<Task[]>(`/project/${projectId}/task`)
-        .pipe(
-          this.validate({
-            404: 'PROJECT_NOT_FOUND',
-          }),
-        )
-        .subscribe((tasks) => {
-          subject.next(tasks);
-        });
-    }
-
-    return subject.pipe(applyFilters(filters));
+  public list(
+    projectId: number,
+    filters?: DataFilter<Task, any>[] | DataFilter<Task, any>,
+  ): Observable<Task[]> {
+    return this.apiService.get<Task[]>(`/project/${projectId}/task`, { filters }).pipe(
+      this.validate({
+        404: 'PROJECT_NOT_FOUND',
+      }),
+    );
   }
 
   /**

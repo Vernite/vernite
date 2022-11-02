@@ -8,10 +8,10 @@ export enum TaskType {
 }
 
 export const TaskTypeHierarchy = {
-  [-1]: [TaskType.TASK, TaskType.EPIC, TaskType.USER_STORY, TaskType.ISSUE],
+  [TaskType.NONE]: [TaskType.TASK, TaskType.EPIC, TaskType.USER_STORY, TaskType.ISSUE],
   [TaskType.TASK]: [TaskType.SUBTASK, TaskType.ISSUE],
   [TaskType.EPIC]: [TaskType.USER_STORY, TaskType.ISSUE, TaskType.TASK],
-  [TaskType.USER_STORY]: [TaskType.TASK, TaskType.ISSUE],
+  [TaskType.USER_STORY]: [TaskType.SUBTASK],
   [TaskType.ISSUE]: [TaskType.SUBTASK],
   [TaskType.SUBTASK]: [],
 } as { [key in TaskType]: TaskType[] };

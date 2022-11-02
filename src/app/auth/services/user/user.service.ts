@@ -18,8 +18,8 @@ export class UserService {
     };
   }
 
-  public update(modUser: ModifyUser): Observable<ModifyUser> {
-    return this.apiService.put(`/auth/edit`, { body: modUser });
+  public update(user: Partial<User>): Observable<ModifyUser> {
+    return this.apiService.put(`/auth/edit`, { body: user });
   }
 
   public getMyself(): Observable<User> {

@@ -1,17 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { requiredValidator } from '@main/validators/required.validator';
 import * as dayjs from 'dayjs';
+import { UserService } from '../../../auth/services/user/user.service';
+import { environment } from 'src/environments/environment';
+import { SnackbarService } from '@main/services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-settings-localization-page',
   templateUrl: './settings-localization.page.html',
   styleUrls: ['./settings-localization.page.scss'],
 })
-export class SettingsLocalizationPage {
+export class SettingsLocalizationPage implements OnInit {
   public form = new FormGroup({
     language: new FormControl('', requiredValidator()),
     dateFormat: new FormControl(''),
+    timeFormat: new FormControl(''),
   });
 
   // TODO: Move this section to a service
@@ -46,21 +50,34 @@ export class SettingsLocalizationPage {
     },
   ];
 
-  dateFormats = [
-    $localize`YYYY-MM-DD`,
-    $localize`DD-MM-YYYY`,
-    $localize`MM/DD/YYYY`,
-    $localize`DD.MM.YYYY`,
-  ].map((format) => ({
+  dateFormats = ['YYYY-MM-DD', 'DD-MM-YYYY', 'MM/DD/YYYY', 'DD.MM.YYYY'].map((format) => ({
     format,
     example: dayjs().format(format),
   }));
 
-  constructor() {}
+  timeFormats = ['HH:mm', 'hh:mm A', 'hh:mm a'].map((format) => ({
+    format,
+    example: dayjs().format(format),
+  }));
+
+  constructor(private userService: UserService, private snackbarService: SnackbarService) {}
+
+  ngOnInit() {
+    this.userService.getMyself().subscribe((user) => {
+      this.form.patchValue(user);
+    });
+  }
 
   changeLanguage() {
-    localStorage.setItem('language', this.form.value.language);
-    location.href = `https://workflow.adiantek.ovh/${this.form.value.language}/settings/localization`;
+    this.userService.update(this.form.value).subscribe(() => {
+      localStorage.setItem('language', this.form.value.language);
+
+      if (environment.production) {
+        location.href = `https://workflow.adiantek.ovh/${this.form.value.language}/settings/localization`;
+      } else {
+        this.snackbarService.show('Language changed (But nothing changes in dev mode)');
+      }
+    });
   }
 
   submit() {

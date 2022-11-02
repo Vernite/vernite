@@ -1,0 +1,96 @@
+.row {
+  cursor: pointer;
+
+  &.expanded {
+    .title>app-icon {
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.type {
+  min-width: 16px;
+  min-height: 16px;
+  margin-right: 1rem;
+  border-radius: 4px;
+}
+
+.title {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  padding-left: 0.5rem;
+
+  .id {
+    display: block;
+    margin-right: 1rem;
+    opacity: 0.5;
+  }
+
+  .property {
+    display: flex;
+    margin-left: 1rem;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    .check {
+      margin-left: 5px;
+      color: #2ecc71;
+    }
+  }
+
+  &>app-icon {
+    margin-right: 1rem;
+    opacity: 0.5;
+    transition: transform .2s ease;
+  }
+}
+
+.subtasks {
+  position: relative;
+  overflow: hidden;
+  max-height: 0;
+  padding-left: 4rem;
+  transition: max-height 0.4s ease;
+
+  ::ng-deep {
+    task-row {
+      position: relative;
+
+      &::before,
+      &::after {
+        position: absolute;
+        top: 1rem;
+        left: -2.5rem;
+        display: block;
+        content: '';
+        pointer-events: none;
+      }
+
+      &:last-child {
+        margin-bottom: 1rem;
+      }
+
+      &:not(:last-child)::before {
+        width: 2px;
+        height: calc(100% + 1rem);
+        background-color: var(--color-secondary-400);
+      }
+
+      &::after {
+        width: 29px;
+        height: 29px;
+        border: 2px solid var(--color-secondary-400);
+        border-top-width: 0;
+        border-right-width: 0;
+        border-bottom-left-radius: 50%;
+      }
+    }
+  }
+}

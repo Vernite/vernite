@@ -25,6 +25,9 @@ import { TimeTrackTimerPipe } from './pipes/time-track-timer/time-track-timer.pi
 import { TimeTrackDurationPipe } from './pipes/time-track-duration/time-track-duration.pipe';
 import { TrackerEntryComponent } from './components/tracker/tracker-entry/tracker-entry.component';
 import { InputEpicComponent } from './components/input-epic/input-epic.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
+import { TaskRowComponent } from './components/task-row/task-row.component';
+import { InputTaskParentComponent } from './components/input-task-parent/input-task-parent.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule],
@@ -45,12 +48,15 @@ import { InputEpicComponent } from './components/input-epic/input-epic.component
     InputTaskPropertyComponent,
     InputIssueComponent,
     InputPullRequestComponent,
+    InputTaskParentComponent,
     TrackerComponent,
     TrackerEntryComponent,
     TimeTracksTotalPipe,
     TimeTrackTimerPipe,
     TimeTrackDurationPipe,
     InputEpicComponent,
+    TaskListComponent,
+    TaskRowComponent,
   ],
 })
 export class TasksModule {}
