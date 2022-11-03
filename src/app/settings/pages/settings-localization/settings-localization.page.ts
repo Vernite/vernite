@@ -73,7 +73,7 @@ export class SettingsLocalizationPage implements OnInit {
       localStorage.setItem('language', this.form.value.language);
 
       if (environment.production) {
-        location.href = `https://workflow.adiantek.ovh/${this.form.value.language}/settings/localization`;
+        location.href = `https://vernite.dev/${this.form.value.language}/settings/localization`;
       } else {
         this.snackbarService.show('Language changed (But nothing changes in dev mode)');
       }

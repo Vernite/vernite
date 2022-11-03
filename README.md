@@ -1,7 +1,7 @@
 <h1 align="center">Vernite - Clean and powerful work management app.</h1>
 
 <p align="center">
-  <img src="https://workflow.adiantek.ovh/en-US/assets/metadata/logo_with_name.svg" alt="angular-logo" width="120px" height="80px"/>
+  <img src="https://vernite.dev/en-US/assets/metadata/logo_with_name.svg" alt="angular-logo" width="120px" height="80px"/>
   <br>
   <i>Vernite is a task management app with multiple independent modules to speed up work.
     <br>tasks / mail / messages</i>
@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://workflow.adiantek.ovh/pl-PL/"><strong>DEVELOPMENT SERVER</strong></a>
+  <a href="https://vernite.dev/pl-PL/"><strong>DEVELOPMENT SERVER</strong></a>
   <br>
 </p>
 
@@ -77,7 +77,7 @@ yarn docs:serve
 ```
 
 ## API Documentation and repository
-Endpoints documentation is shared using the Swagger library [here](https://workflow.adiantek.ovh/api/swagger-ui/index.html#/)](https://workflow.adiantek.ovh/api/swagger-ui/index.html#/). The repository is in the other GitHub account [here](https://github.com/SamPanDonte/workflow).
+Endpoints documentation is shared using the Swagger library [here](https://vernite.dev/api/swagger-ui/index.html#/)](https://vernite.dev/api/swagger-ui/index.html#/). The repository is in the other GitHub account [here](https://github.com/SamPanDonte/workflow).
 
 
 ## Recommended Versions

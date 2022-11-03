@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "https://workflow.adiantek.ovh",
+    "target": "https://vernite.dev",
     "secure": false,
     "changeOrigin": true
   }
