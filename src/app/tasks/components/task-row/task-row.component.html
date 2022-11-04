@@ -45,6 +45,11 @@
   <!-- Deadline cell -->
   <div class="cell w-52">{{ task.deadline | dateByPreferences | async }}</div>
 
+  <!-- Story points cell -->
+  <div class="cell w-52">
+    <pill>{{ task.storyPoints }}</pill>
+  </div>
+
   <!-- Actions cell -->
   <div class="cell action justify-center">
     <button mat-icon-button click-stop-propagation [matMenuTriggerFor]="menu" class="flex items-center">

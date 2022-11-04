@@ -68,6 +68,7 @@ export class TaskDialog implements OnInit {
     estimatedDate: new FormControl<unixTimestamp | null>(null),
     issue: new FormControl<GitIssue | 'CREATE' | 'DETACH' | null>(null),
     pull: new FormControl<GitPull | 'DETACH' | null>(null),
+    storyPoints: new FormControl<number | null>(null),
   });
 
   public interactive$ = timeToInteraction();

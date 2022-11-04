@@ -11,6 +11,7 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
+import { isString } from 'lodash-es';
 import { ControlAccessor } from '../../classes/control-accessor.class';
 
 /**
@@ -91,5 +92,19 @@ export class InputComponent extends ControlAccessor implements AfterViewInit {
   onBlur() {
     this.focused = false;
     this.focus.emit(false);
+  }
+
+  override writeValue(value: any): void {
+    super.writeValue(value);
+    this.autofilledByBrowser = false;
+  }
+
+  override parseValue(value: any) {
+    console.log(value);
+
+    if (this.type === 'number') {
+      return isString(value) ? parseFloat(value) : value;
+    }
+    return value;
   }
 }

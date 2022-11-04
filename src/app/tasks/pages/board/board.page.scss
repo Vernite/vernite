@@ -26,7 +26,7 @@ app-status-label {
   padding-left: 10px;
   margin-left: -1rem;
 
-  &:not(.collapsed) .task-title>app-icon {
+  &:not(.collapsed) .task-title>div>app-icon {
     transform: rotate(90deg);
   }
 
@@ -98,6 +98,7 @@ app-status-label {
   height: 100%;
   height: 40px;
   align-items: center;
+  justify-content: space-between;
   padding-left: 0.5rem;
 
   .task-id {
@@ -123,7 +124,7 @@ app-status-label {
     }
   }
 
-  &>app-icon {
+  &>div>app-icon {
     margin-right: 1rem;
     opacity: 0.5;
     transition: transform .2s ease;

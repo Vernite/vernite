@@ -92,4 +92,9 @@ export interface Task extends JSONParsable {
    * Epic attached to task
    */
   epic: Task | null;
+
+  /**
+   * Points to measure task complexity
+   */
+  storyPoints: number;
 }

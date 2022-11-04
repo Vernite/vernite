@@ -179,3 +179,17 @@ $height: 44px;
   font-size: 12px;
   line-height: 0.8rem;
 }
+
+/* --- DISABLE ARROW BUTTONS IN INPUT TYPE NUMBER ---  */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

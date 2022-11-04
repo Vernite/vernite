@@ -59,6 +59,11 @@
       i18n-floatingLabel i18n-placeholder>
     </app-input-date-time>
 
+    <!-- Story points -->
+    <app-input formControlName="storyPoints" floatingLabel="Story points" placeholder="Story points" type="number"
+      i18n-floatingLabel i18n-placeholder>
+    </app-input>
+
     <!-- Parent -->
     <input-task-parent *ngIf="![TaskType.EPIC, TaskType.USER_STORY, undefined].includes(form.get('type')?.value)"
       [projectId]="form.get('projectId').value || -1" formControlName="parentTaskId" [type]="form.get('type')?.value">
