@@ -58,5 +58,6 @@ import { InputTaskParentComponent } from './components/input-task-parent/input-t
     TaskListComponent,
     TaskRowComponent,
   ],
+  exports: [TaskTypePipe],
 })
 export class TasksModule {}

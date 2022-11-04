@@ -10,6 +10,7 @@ export interface User extends JSONParsable {
   avatar: string;
   dateFormat: string;
   timeFormat: string;
+  firstDayOfWeek: number;
 }
 
 export interface UserWithPrivileges extends JSONParsable {

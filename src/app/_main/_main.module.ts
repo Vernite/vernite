@@ -65,6 +65,8 @@ import { InputColorComponent } from './components/input-color/input-color.compon
 import { ColorComponent } from './components/color/color.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ContrastColorPipe } from './pipes/contrast-color/contrast-color.pipe';
+import { DateTimePickerComponent } from './components/input-date-time/date-time-picker/date-time-picker.component';
+import { TimePickerComponent } from './components/input-date-time/time-picker/time-picker.component';
 
 /**
  * Main module configuration object
@@ -149,6 +151,7 @@ const ngModuleConfig = {
     ViewContainerDirective,
     EmptyOptionsComponent,
     DatePickerComponent,
+    DateTimePickerComponent,
     MonthPipe,
     DayjsPipe,
     YearPipe,
@@ -162,6 +165,7 @@ const ngModuleConfig = {
     ColorComponent,
     LoaderComponent,
     ContrastColorPipe,
+    TimePickerComponent,
   ],
   providers: [
     /*=============================================
@@ -184,6 +188,7 @@ const ngModuleConfig = {
  * @example
  * ```js
  * import { MainModule } from '@app/main/main.module';
+import { TimePickerComponent } from './components/input-date-time/time-picker/time-picker.component';
  *
  * (@)NgModule({
  *   imports: [ ..., MainModule ],

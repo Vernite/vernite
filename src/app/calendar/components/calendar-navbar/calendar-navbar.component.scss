@@ -1,0 +1,16 @@
+.navbar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-secondary-400);
+
+  .group {
+    display: flex;
+    align-items: center;
+
+    &>*:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+}

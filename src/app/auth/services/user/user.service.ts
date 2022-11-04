@@ -14,7 +14,9 @@ export class UserService {
 
   public getUserDefaultPreferences() {
     return {
-      dateFormat: 'DD.MM.YYYY HH:mm',
+      dateFormat: 'DD.MM.YYYY',
+      timeFormat: 'HH:mm',
+      firstDayOfWeek: 1,
     };
   }
 

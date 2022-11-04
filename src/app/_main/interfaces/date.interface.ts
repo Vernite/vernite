@@ -6,7 +6,7 @@
 export type dateISOString = string;
 
 /**
- *  It is the number of seconds that have elapsed since the Unix epoch, excluding leap seconds. The Unix epoch is 00:00:00 UTC on 1 January 1970.
+ *  It is the number of milliseconds that have elapsed since the Unix epoch, excluding leap seconds. The Unix epoch is 00:00:00 UTC on 1 January 1970.
  *
  * For example: `1662158033`
  */

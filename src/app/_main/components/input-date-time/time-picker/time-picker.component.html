@@ -1,0 +1,21 @@
+<div class="time">
+  <div class="time-selector">
+    <button class="arrow-up" (click)="increaseHours()">
+      <app-icon [icon]="faChevronUp" size="1rem"></app-icon>
+    </button>
+    <input type="number" [value]="cursor | dayjsFormat:'HH'" (change)="onHourChange($event)" readonly>
+    <button class="arrow-down" (click)="decreaseHours()">
+      <app-icon [icon]="faChevronDown" size="1rem"></app-icon>
+    </button>
+  </div>
+  <span class="colon">:</span>
+  <div class="time-selector">
+    <button class="arrow-up" (click)="increaseMinutes()">
+      <app-icon [icon]="faChevronUp" size="1rem"></app-icon>
+    </button>
+    <input type="number" [value]="cursor | dayjsFormat:'mm'" (change)="onMinuteChange($event)" readonly>
+    <button class="arrow-down" (click)="decreaseMinutes()">
+      <app-icon [icon]="faChevronDown" size="1rem"></app-icon>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  color: var(--color-text);
+}
+
+.general {
+  display: flex;
+  width: 180px;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: var(--color-secondary-500);
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+
+  .header {
+    height: 78px;
+
+    .year {
+      opacity: 0.75;
+    }
+
+    .date {
+      font-size: 1.2rem;
+    }
+  }
+}

@@ -1,34 +1,3 @@
-<div class="general">
-  <div class="header" *ngIf="control.value | dayjs as date">
-    <div class="year">{{ date | year }}</div>
-    <div class="date">{{ date | dayjsFormat:'MMMM D' }}</div>
-    <div class="opacity-50">{{ date | dayOfWeek }}</div>
-  </div>
-  <div class="time">
-    <div class="time-selector">
-      <button class="arrow-up" (click)="increaseHours()">
-        <app-icon [icon]="faChevronUp" size="1rem"></app-icon>
-      </button>
-      <input type="number" [value]="cursor | dayjsFormat:'HH'" (change)="onHourChange($event)" readonly>
-      <button class="arrow-down" (click)="decreaseHours()">
-        <app-icon [icon]="faChevronDown" size="1rem"></app-icon>
-      </button>
-    </div>
-    <span class="colon">:</span>
-    <div class="time-selector">
-      <button class="arrow-up" (click)="increaseMinutes()">
-        <app-icon [icon]="faChevronUp" size="1rem"></app-icon>
-      </button>
-      <input type="number" [value]="cursor | dayjsFormat:'mm'" (change)="onMinuteChange($event)" readonly>
-      <button class="arrow-down" (click)="decreaseMinutes()">
-        <app-icon [icon]="faChevronDown" size="1rem"></app-icon>
-      </button>
-    </div>
-  </div>
-  <div class="time-actions">
-    <button (click)="now()" i18n>Now</button>
-  </div>
-</div>
 <div class="date">
   <div class="year-header">
     {{ cursor | dayjsFormat:'YYYY' }}
@@ -57,7 +26,7 @@
       </div>
     </div>
   </div>
-  <div class="date-actions">
+  <div *ngIf="!hideTodayButton" class="date-actions">
     <button (click)="today()" i18n>Today</button>
   </div>
 </div>

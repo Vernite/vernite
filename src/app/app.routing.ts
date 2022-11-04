@@ -23,6 +23,10 @@ const routes: Routes = [
         loadChildren: () => import('./emails/emails.module').then((m) => m.EmailsModule),
       },
       {
+        path: 'calendar',
+        loadChildren: () => import('./calendar/calendar.module').then((m) => m.CalendarModule),
+      },
+      {
         path: 'messages',
         loadChildren: () => import('./messages/messages.module').then((m) => m.MessagesModule),
       },

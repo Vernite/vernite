@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MockPage } from '@main/pages/mock/mock.page';
 import { BoardPage } from './pages/board/board.page';
 import { SchedulePage } from './pages/schedule/schedule.page';
 import { TaskListPage } from './pages/task-list/task-list.page';
@@ -28,10 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'calendar',
-    component: MockPage,
-    data: {
-      image: 'assets/mocks/calendar.svg',
-    },
+    loadChildren: () => import('../calendar/calendar.module').then((m) => m.CalendarModule),
   },
 ];
 

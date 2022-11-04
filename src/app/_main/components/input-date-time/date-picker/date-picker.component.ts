@@ -1,12 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import dayjs, { UnitType } from 'dayjs';
-import { DaysGrid, CalendarDay } from './date-picker.model';
-import {
-  faChevronUp,
-  faChevronDown,
-  faChevronLeft,
-  faChevronRight,
-} from '@fortawesome/free-solid-svg-icons';
+import { DaysGrid, CalendarDay } from '../date-picker.model';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { ControlAccessor } from '@main/classes/control-accessor.class';
 import { unixTimestamp } from '../../../interfaces/date.interface';
 
@@ -16,8 +11,8 @@ import { unixTimestamp } from '../../../interfaces/date.interface';
   styleUrls: ['./date-picker.component.scss'],
 })
 export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> implements OnInit {
-  // TODO: Read this from user settings
-  firstDayOfWeek = 1;
+  @Input() firstDayOfWeek = 1;
+  @Input() hideTodayButton = false;
 
   cursor = this.control.value ? dayjs(this.control.value) : dayjs();
   currentDate = dayjs();
@@ -28,8 +23,6 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
     ...dayjs.weekdaysShort().slice(0, this.firstDayOfWeek),
   ];
 
-  faChevronUp = faChevronUp;
-  faChevronDown = faChevronDown;
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
 
@@ -68,7 +61,9 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
   }
 
   previousMonth() {
+    console.log(this.cursor.format('YYYY-MM-DD'));
     this.cursor = this.cursor.subtract(1, 'month');
+    console.log(this.cursor.format('YYYY-MM-DD'));
     this.daysGrid = this.calculateDaysGrid();
   }
 
@@ -78,46 +73,10 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
   }
 
   today() {
-    const hours = this.cursor.hour();
-    const minutes = this.cursor.minute();
-
     this.cursor = dayjs();
-    this.cursor = this.cursor.set('hour', hours);
-    this.cursor = this.cursor.set('minute', minutes);
-    this.cursor = this.cursor.set('second', 0);
-
     this.daysGrid = this.calculateDaysGrid();
 
     this.control.setValue(this.cursor.valueOf());
-  }
-
-  now() {
-    const today = dayjs();
-
-    this.cursor = this.cursor.set('hour', today.hour());
-    this.cursor = this.cursor.set('minute', today.minute());
-
-    this.control.setValue(this.cursor.valueOf());
-  }
-
-  increaseMinutes() {
-    this.cursor = this.cursor.add(1, 'minute');
-    this.setControlProperties(['hour', 'minute'], [this.cursor.hour(), this.cursor.minute()]);
-  }
-
-  decreaseMinutes() {
-    this.cursor = this.cursor.subtract(1, 'minute');
-    this.setControlProperties(['hour', 'minute'], [this.cursor.hour(), this.cursor.minute()]);
-  }
-
-  increaseHours() {
-    this.cursor = this.cursor.add(1, 'hour');
-    this.setControlProperties(['hour', 'minute'], [this.cursor.hour(), this.cursor.minute()]);
-  }
-
-  decreaseHours() {
-    this.cursor = this.cursor.subtract(1, 'hour');
-    this.setControlProperties(['hour', 'minute'], [this.cursor.hour(), this.cursor.minute()]);
   }
 
   setControlProperties(propertyNames: UnitType[], values: number[]) {
@@ -126,16 +85,6 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
       value = value.set(propertyNames[i], values[i]);
     }
     this.control.setValue(value.valueOf());
-  }
-
-  onHourChange(event: Event) {
-    const value = (event.target as HTMLInputElement)?.valueAsNumber;
-    this.cursor = this.cursor.set('hour', value);
-  }
-
-  onMinuteChange(event: Event) {
-    const value = (event.target as HTMLInputElement)?.valueAsNumber;
-    this.cursor = this.cursor.set('minute', value);
   }
 
   selectDay(day: CalendarDay) {
@@ -160,6 +109,11 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
 
   override writeValue(value: unixTimestamp | null) {
     super.writeValue(value);
+
+    if (value && !dayjs(this.value).isSame(dayjs(this.previousValue))) {
+      console.log('new value', value);
+      this.cursor = dayjs(value);
+    }
     this.daysGrid = this.calculateDaysGrid();
   }
 }

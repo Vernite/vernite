@@ -1,0 +1,11 @@
+<nav class="navbar">
+  <div class="group">
+    <app-button (click)="today.emit()" i18n>Today</app-button>
+    <app-button variant="transparent" [icon]="faChevronLeft" matTooltip="Previous month" i18n-matTooltip
+      (click)="previousMonth.emit()"></app-button>
+    <app-button variant="transparent" [icon]="faChevronRight" matTooltip="Next month" i18n-matTooltip
+      (click)="nextMonth.emit()"></app-button>
+    <span class="text-lg">{{ date | dayjsFormat:'MMMM YYYY' }}</span>
+  </div>
+  <div class="group"></div>
+</nav>

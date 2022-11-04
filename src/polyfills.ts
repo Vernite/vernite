@@ -61,12 +61,16 @@ import utc from 'dayjs/plugin/utc';
 import localeData from 'dayjs/plugin/localeData';
 import objectSupport from 'dayjs/plugin/objectSupport';
 import formatParser from 'dayjs/plugin/customParseFormat';
+import isToday from 'dayjs/plugin/isToday';
+import isBetween from 'dayjs/plugin/isBetween';
 import { environment } from './environments/environment';
 
 dayjs.extend(utc);
 dayjs.extend(localeData);
 dayjs.extend(objectSupport);
 dayjs.extend(formatParser);
+dayjs.extend(isToday);
+dayjs.extend(isBetween);
 
 if (!environment.production) {
   (window as any).dayjs = dayjs;

@@ -10,6 +10,6 @@
   [cdkConnectedOverlayOpen]="(isPickerOpen$ | async) || false"
   [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'" [cdkConnectedOverlayHasBackdrop]="true">
   <div #overlay class="overlay">
-    <date-picker [formControl]="control"></date-picker>
+    <date-time-picker [formControl]="control"></date-time-picker>
   </div>
 </ng-template>

@@ -72,9 +72,16 @@ export class ControlAccessor<T = any>
     return this.control.value;
   }
 
+  public get previousValue(): T | undefined {
+    return this._previousValue;
+  }
+
   public get errors() {
     return this.control.errors;
   }
+
+  private _previousValue: T | undefined = undefined;
+  private _previousValueBuffer: T | undefined = undefined;
 
   /**
    * Accessor constructor to initialize component. Extended by child classes.
@@ -154,7 +161,8 @@ export class ControlAccessor<T = any>
    * @param value The new value for the element
    */
   writeValue(value: T): void {
-    // this.cdRef.markForCheck();
+    this._previousValue = this._previousValueBuffer;
+    this._previousValueBuffer = value;
   }
 
   /**
