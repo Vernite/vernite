@@ -30,6 +30,7 @@ export class ProjectFormGeneralComponent implements OnInit {
       notEmptyValidator(),
       maxLengthValidator(50),
     ]),
+    description: new FormControl<string>(''),
   });
 
   constructor(private workspaceService: WorkspaceService, private projectService: ProjectService) {}
