@@ -4,7 +4,7 @@ button mat-spinner,
 button app-icon {
   opacity: 1;
   transform: scale(1);
-  transition: opacity 0.2s;
+  transition: opacity 0.1s;
 }
 
 button mat-spinner.hide,
@@ -19,7 +19,7 @@ button .prefix {
   height: 24px;
   align-items: center;
   justify-content: center;
-  transition: width 0.2s, margin-right 0.2s;
+  transition: width 0.1s, margin-right 0.1s;
 
   >* {
     position: absolute;
@@ -36,6 +36,7 @@ button {
 
   position: relative;
   display: flex;
+  width: 100%;
   min-width: 64px;
   height: 38px;
   align-items: center;
@@ -44,11 +45,20 @@ button {
   border-radius: var(--border-radius);
   color: var(--color-text);
   outline: 0 !important;
-  transition: background-color 0.2s ease;
-  width: 100%;
+  transition: background-color 0.1s ease;
 
   >*:not(:last-child) {
     margin-right: 0.75rem;
+  }
+
+  &.icon-button {
+    width: 38px;
+    min-width: 38px;
+    padding: 0;
+
+    .prefix {
+      margin-right: 0;
+    }
   }
 
   &:not(.transparent) {
@@ -125,6 +135,22 @@ button {
 
     &:active {
       background-color: var(--color-button-important-background-active);
+    }
+  }
+
+  &.transparent {
+    background-color: transparent;
+
+    &::before {
+      border: 2px solid rgba(124, 170, 215, 0.2);
+    }
+
+    &:hover {
+      background-color: rgba(124, 170, 215, 0.2);
+    }
+
+    &:active {
+      background-color: rgba(124, 170, 215, 0.2);
     }
   }
 }

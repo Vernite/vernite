@@ -22,7 +22,7 @@
     "docs:serve": "concurrently -r -k \"yarn compodoc:serve -t\" \"start-storybook -p 6006\"",
     "docs:build": "yarn storybook:build",
     "docs:coverage": "yarn compodoc:build",
-    "i18n:extract": "ng extract-i18n --output-path=src/locales",
+    "i18n:extract": "ng extract-i18n --output-path=src/locales && node tools/clean-generated-xlf.js",
     "i18n:coverage": "node tools/i18n-report.mjs",
     "@-------- UTILITY SCRIPTS ----------": "",
     "compodoc:serve": "compodoc -p ./tsconfig.doc.json -e json -w -s",

@@ -79,7 +79,6 @@ const ngModuleConfig = {
     =============================================*/
     CommonModule,
     RouterModule,
-    ObserversModule,
   ],
   importExports: [
     /*=============================================
@@ -91,6 +90,7 @@ const ngModuleConfig = {
     DragDropModule,
     PlatformModule,
     OverlayModule,
+    ObserversModule,
 
     /*=============================================
       =              Material modules               =

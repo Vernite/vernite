@@ -1,45 +1,24 @@
-body {
-  height: 1500px;
-  background: #333;
-}
-
-html {
-  scrollbar-arrow-color: #000;
-  scrollbar-base-color: #646464;
-  scrollbar-dark-shadow-color: #646464;
-  scrollbar-face-color: #646464;
-  scrollbar-highlight-color: #646464;
-  scrollbar-shadow-color: #646464;
-  scrollbar-track-color: #000;
-}
-
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 3px;
-}
-
-::-webkit-scrollbar-button {
-  background-color: #666;
-}
-
-::-webkit-scrollbar-track {
-  background-color: #646464;
-}
-
-::-webkit-scrollbar-track-piece {
-  background-color: #000;
+  width: 14px;
+  height: 18px;
 }
 
 ::-webkit-scrollbar-thumb {
-  height: 50px;
-  background-color: #666;
-  border-radius: 3px;
+  height: 6px;
+  border: 4px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 7px;
+  -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.1),
+    inset 1px 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 ::-webkit-scrollbar-corner {
-  background-color: #646464;
-}
-
-::-webkit-resizer {
-  background-color: #666;
+  background-color: transparent;
 }
