@@ -51,7 +51,6 @@ export class TrackerEntryComponent implements OnInit {
 
       this._timeTrack = { ...this.timeTrack, ...value };
       if (this.form.valid) {
-        console.log('value saved');
         this.save();
       }
     });

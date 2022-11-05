@@ -37,7 +37,6 @@ export function stopLoader(loader: Loader) {
 
 export function withLoader(loader: Loader) {
   return <T = any>(source: Observable<T>) => {
-    console.log('DONE');
     return of(null).pipe(
       startLoader(loader),
       switchMap(() => source),

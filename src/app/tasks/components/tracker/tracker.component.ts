@@ -71,7 +71,6 @@ export class TrackerComponent {
   ) {}
 
   public openDetails() {
-    console.log(this.overlay);
     this.isOpen$.next(true);
     return;
 

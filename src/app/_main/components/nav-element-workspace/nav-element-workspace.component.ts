@@ -55,7 +55,7 @@ export class NavElementWorkspaceComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.showArrow$.next(Boolean(this.listElement?.nativeElement.children.length));
+      this.showArrow$.next(Boolean(this.listElement?.nativeElement?.children?.length));
     });
   }
 
@@ -121,9 +121,5 @@ export class NavElementWorkspaceComponent implements AfterViewInit {
       `vscode-insiders://vscode.git/clone?url=https://github.com/${project.gitHubIntegration}`,
       '_blank',
     );
-  }
-
-  onContentChanged(content: HTMLElement) {
-    console.log(content);
   }
 }

@@ -56,15 +56,9 @@ export class ProjectFormStatusesComponent implements ProjectForm, OnInit {
   }
 
   public save() {
-    console.log(this.project);
     if (!this.project) return of();
 
     return of(null).pipe(
-      tap(() => {
-        console.log('test');
-        console.log(this.statusList.filter((status) => !status.id));
-      }),
-
       // Save all new statuses
       switchMap(() =>
         forkJoin(
@@ -73,20 +67,6 @@ export class ProjectFormStatusesComponent implements ProjectForm, OnInit {
             .map((status) => this.statusService.create(this.project!.id, status)),
         ).pipe(defaultIfEmpty([])),
       ),
-
-      tap(() => {
-        console.log('test');
-        console.log(
-          this.statusList.filter(
-            (status) =>
-              status.id &&
-              !isEqual(
-                status,
-                this.currentStatusList.find((s) => s.id === status.id),
-              ),
-          ),
-        );
-      }),
 
       // Update all existing statuses
       switchMap(() =>

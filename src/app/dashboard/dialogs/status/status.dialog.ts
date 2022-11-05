@@ -44,7 +44,6 @@ export class StatusDialog implements OnInit {
 
   close() {
     if (validateForm(this.form)) {
-      console.log({ ...this.data.status });
       this.dialogRef.close({ ...this.data.status, ...this.form.value });
     }
   }

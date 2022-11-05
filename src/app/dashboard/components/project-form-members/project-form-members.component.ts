@@ -42,7 +42,6 @@ export class ProjectFormMembersComponent implements ProjectForm {
   }
 
   save() {
-    console.log(this.project);
     if (!this.project) return of(this.project!);
 
     return this.memberService

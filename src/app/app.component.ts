@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
+import { IconService } from '@main/services/icons/icon.service';
 
 /**
  * Main Component with basic layout and main router outlet
@@ -16,13 +15,10 @@ export class AppComponent {
    */
   public title = 'vernite';
 
-  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+  constructor(private iconService: IconService) {
+    this.iconService.init();
     document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.remove('preload');
     });
-    this.matIconRegistry.addSvgIcon(
-      'dashboard',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/dashboard.svg'),
-    );
   }
 }

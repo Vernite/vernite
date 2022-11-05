@@ -100,8 +100,6 @@ export class InputComponent extends ControlAccessor implements AfterViewInit {
   }
 
   override parseValue(value: any) {
-    console.log(value);
-
     if (this.type === 'number') {
       return isString(value) ? parseFloat(value) : value;
     }

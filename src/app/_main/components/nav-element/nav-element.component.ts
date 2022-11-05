@@ -32,9 +32,7 @@ export class NavElementComponent implements AfterViewInit {
       this.listElement.nativeElement.scrollHeight + 'px';
     this.active = true;
     setTimeout(() => {
-      console.log(this.listElement.nativeElement.style.maxHeight);
       this.listElement.nativeElement.style.maxHeight = 'none';
-      console.log(this.listElement.nativeElement.style.maxHeight);
     }, 500);
   }
   public closeNavElement() {

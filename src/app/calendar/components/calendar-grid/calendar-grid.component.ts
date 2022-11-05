@@ -37,8 +37,6 @@ export class CalendarGridComponent implements OnChanges {
   }
 
   private calculateGrid() {
-    console.log('calculateGrid');
-
     this.firstDay = this.date.startOf('month');
     this.lastDay = this.date.endOf('month');
 
@@ -60,8 +58,6 @@ export class CalendarGridComponent implements OnChanges {
   }
 
   private calculateTaskEvents() {
-    console.log('calculateTaskEvents');
-
     for (const task of this.tasks) {
       if (task.estimatedDate) {
         const day = dayjs(task.estimatedDate);

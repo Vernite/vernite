@@ -32,7 +32,6 @@ export class InputColorComponent extends ControlAccessor<color> {
 
     let changesFromInside = false;
     this.control.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
-      console.log('parsing from:', value);
       const color = Color(value);
       this.colorRGB = color.rgb().string();
     });
@@ -42,17 +41,14 @@ export class InputColorComponent extends ControlAccessor<color> {
         filter(() => !changesFromInside),
       )
       .subscribe((value) => {
-        console.log('parsing from:', value);
         const color = Color(value);
         this.colorRGB = color.rgb().string();
         this.userControl.setValue(color.toString(), { emitEvent: false });
       });
     this.userControl.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
-      console.log('parsing from userInput:', value);
       if (value) {
         try {
           const color = Color(value);
-          console.log(color);
           changesFromInside = true;
           this.control.setValue(color.rgbNumber());
           changesFromInside = false;

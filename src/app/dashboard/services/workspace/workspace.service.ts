@@ -13,7 +13,7 @@ import { Cache } from '@main/decorators/cache/cache.decorator';
   providedIn: 'root',
 })
 export class WorkspaceService extends BaseService<
-  Errors<'WORKSPACE_NOT_FOUND' | 'FORM_NOT_VALID'>
+  Errors<'WORKSPACE_NOT_FOUND' | 'FORM_NOT_VALID' | 'WORKSPACE_NOT_EMPTY'>
 > {
   protected override errorCodes = {
     WORKSPACE_NOT_FOUND: {
@@ -21,6 +21,9 @@ export class WorkspaceService extends BaseService<
     },
     FORM_NOT_VALID: {
       message: $localize`Some required fields in form are missing`,
+    },
+    WORKSPACE_NOT_EMPTY: {
+      message: $localize`Workspace is not empty`,
     },
   };
 
@@ -50,6 +53,7 @@ export class WorkspaceService extends BaseService<
   public delete(id: number): Observable<null> {
     return this.apiService.delete(`/workspace/${id}`).pipe(
       this.validate({
+        400: 'WORKSPACE_NOT_EMPTY',
         404: 'WORKSPACE_NOT_FOUND',
       }),
     );

@@ -65,7 +65,7 @@
           </div>
         </div>
       </li>
-      <li *ngIf="!workspace.projectsWithPrivileges.length" class="create-project bg-transparent">
+      <li *ngIf="!workspace.projectsWithPrivileges?.length" class="create-project bg-transparent">
         <app-button [icon]="faPlus" variant="transparent" [routerLink]="['/', workspace.id, 'create']" class="w-full"
           i18n>Create project</app-button>
       </li>

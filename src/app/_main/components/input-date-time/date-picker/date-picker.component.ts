@@ -61,9 +61,7 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
   }
 
   previousMonth() {
-    console.log(this.cursor.format('YYYY-MM-DD'));
     this.cursor = this.cursor.subtract(1, 'month');
-    console.log(this.cursor.format('YYYY-MM-DD'));
     this.daysGrid = this.calculateDaysGrid();
   }
 
@@ -111,7 +109,6 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
     super.writeValue(value);
 
     if (value && !dayjs(this.value).isSame(dayjs(this.previousValue))) {
-      console.log('new value', value);
       this.cursor = dayjs(value);
     }
     this.daysGrid = this.calculateDaysGrid();
