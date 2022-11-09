@@ -11,6 +11,7 @@
 .overlay {
   width: 300px;
   background-color: var(--color-secondary-600);
+  border-radius: var(--border-radius);
 
   .header {
     display: flex;

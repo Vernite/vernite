@@ -27,7 +27,7 @@ const routes: Routes = [
     component: SchedulePage,
   },
   {
-    path: 'task/:taskId',
+    path: 'tasks/:taskId',
     component: TaskPage,
   },
   {

@@ -7,6 +7,7 @@
 <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="isOpen">
   <div #overlay class="overlay">
     <div class="header">
+      <app-button variant="transparent" [icon]="faArrowUpRightFromSquare" (click)="openDetails()"></app-button>
       <app-button variant="transparent" [icon]="faClose" (click)="isOpen = false"></app-button>
     </div>
     <div class="content p-3">
