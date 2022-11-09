@@ -23,14 +23,22 @@
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
     "paths": {
+      // Assets directory
       "@assets/*": ["src/assets/*"],
+
+      // Modules directory
       "@main/*": ["src/app/_main/*"],
       "@auth/*": ["src/app/auth/*"],
       "@dashboard/*": ["src/app/dashboard/*"],
       "@emails/*": ["src/app/emails/*"],
       "@messages/*": ["src/app/messages/*"],
       "@tasks/*": ["src/app/tasks/*"],
+      "@calendar/*": ["src/app/calendar/*"],
+
+      // Utils directory
       "@components/*": ["src/app/_main/components/*"],
+
+      // Tests directory
       "@tests/*": ["src/tests/*"]
     },
     "typeRoots": ["./types"],

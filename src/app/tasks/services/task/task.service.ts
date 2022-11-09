@@ -1,6 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
-import { Project } from '@dashboard/interfaces/project.interface';
 import { MemberService } from '@dashboard/services/member/member.service';
 import { Enum } from '@main/classes/enum.class';
 import { Cache } from '@main/decorators/cache/cache.decorator';
@@ -25,7 +24,6 @@ import {
   map,
   Observable,
   of,
-  ReplaySubject,
   switchMap,
   take,
   tap,
@@ -36,16 +34,17 @@ import {
   providedIn: 'root',
 })
 export class TaskService extends BaseService<
-  Errors<'FORM_VALIDATION_ERROR' | 'PROJECT_NOT_FOUND'>
+  Errors<'FORM_VALIDATION_ERROR' | 'PROJECT_NOT_FOUND' | 'PROJECT_OR_TASK_NOT_FOUND'>
 > {
-  private lists = new Map<Project['id'], ReplaySubject<Task[]>>();
-
   protected override errorCodes = {
     FORM_VALIDATION_ERROR: {
       message: $localize`Form validation error`,
     },
     PROJECT_NOT_FOUND: {
       message: $localize`Project not found`,
+    },
+    PROJECT_OR_TASK_NOT_FOUND: {
+      message: $localize`Project or task not found`,
     },
   };
 
@@ -90,6 +89,14 @@ export class TaskService extends BaseService<
       }),
       tap(() => {
         this.snackbarService.show($localize`Task created successfully!`);
+      }),
+    );
+  }
+
+  public get(projectId: number, taskId: number): Observable<Task> {
+    return this.apiService.get<Task>(`/project/${projectId}/task/${taskId}`).pipe(
+      this.validate({
+        404: 'PROJECT_OR_TASK_NOT_FOUND',
       }),
     );
   }

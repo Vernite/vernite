@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Task } from '@tasks/interfaces/task.interface';
+import { Event } from '@calendar/interfaces/event.interface';
 import * as dayjs from 'dayjs';
 
 @Component({
@@ -11,7 +11,7 @@ export class CalendarComponent {
   @Input() date!: dayjs.Dayjs;
   @Output() dateChange = new EventEmitter<dayjs.Dayjs>();
 
-  @Input() tasks: Task[] = [];
+  @Input() events: Event[] = [];
 
   previousMonth() {
     this.date = this.date.subtract(1, 'month');

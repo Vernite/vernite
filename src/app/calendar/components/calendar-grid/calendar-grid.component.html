@@ -5,9 +5,6 @@
     <span>{{ day.date | dayjsFormat:'D' }}</span>
   </p>
   <div class="events">
-    <div class="task" *ngFor="let task of day.tasks"
-      [style.background-color]="(task.type | taskType:'color').rgb().toString()">
-      {{ task.name }}
-    </div>
+    <calendar-event [event]="event.data" *ngFor="let event of day.events"></calendar-event>
   </div>
 </div>

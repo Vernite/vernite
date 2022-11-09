@@ -28,6 +28,7 @@ import { InputEpicComponent } from './components/input-epic/input-epic.component
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskRowComponent } from './components/task-row/task-row.component';
 import { InputTaskParentComponent } from './components/input-task-parent/input-task-parent.component';
+import { TaskPage } from './pages/task/task.page';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule],
@@ -57,6 +58,7 @@ import { InputTaskParentComponent } from './components/input-task-parent/input-t
     InputEpicComponent,
     TaskListComponent,
     TaskRowComponent,
+    TaskPage,
   ],
   exports: [TaskTypePipe],
 })

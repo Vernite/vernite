@@ -8,6 +8,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { CalendarRoutingModule } from './calendar.routing';
 import { CalendarSidebarComponent } from './components/calendar-sidebar/calendar-sidebar.component';
 import { TasksModule } from '../tasks/tasks.module';
+import { EventTypePipe } from './pipes/event-type/event-type.pipe';
+import { CalendarEventComponent } from './components/calendar-event/calendar-event.component';
 
 @NgModule({
   imports: [CommonModule, MainModule, CalendarRoutingModule, TasksModule],
@@ -17,6 +19,8 @@ import { TasksModule } from '../tasks/tasks.module';
     CalendarNavbarComponent,
     CalendarSidebarComponent,
     CalendarComponent,
+    EventTypePipe,
+    CalendarEventComponent,
   ],
 })
 export class CalendarModule {}
