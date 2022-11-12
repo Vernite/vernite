@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ApiService } from '@main/services/api/api.service';
 import { Workspace } from '../../interfaces/workspace.interface';
 import { BaseService } from '@main/services/base/base.service';
@@ -79,7 +79,7 @@ export class WorkspaceService extends BaseService<
    */
   @Cache()
   public list(): Observable<Workspace[]> {
-    return this.apiService.get(`/workspace`);
+    return this.apiService.get(`/workspace`).pipe(this.validate());
   }
 
   /**
@@ -91,6 +91,25 @@ export class WorkspaceService extends BaseService<
     return this.apiService.post(`/workspace`, { body: workspace }).pipe(
       this.validate({
         400: 'FORM_NOT_VALID',
+      }),
+    );
+  }
+
+  /**
+   * Gets workspace object by project ID.
+   * @param projectId Project ID to find the workspace for
+   * @returns Observable that emits the workspace for the given project ID
+   */
+  public getWorkspaceByProjectId(projectId: number): Observable<Workspace> {
+    return this.list().pipe(
+      map((workspaces) => {
+        const workspace = workspaces.find((w) =>
+          w.projectsWithPrivileges.some((p) => p.project.id === projectId),
+        );
+        if (!workspace) {
+          throw new Error('Workspace not found');
+        }
+        return workspace;
       }),
     );
   }

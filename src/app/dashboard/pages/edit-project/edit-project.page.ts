@@ -16,7 +16,7 @@ import { ProjectFormStage } from '@dashboard/models/project-form-stage.enum';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-edit-project',
+  selector: 'edit-project-page',
   templateUrl: './edit-project.page.html',
 })
 export class EditProjectPage implements OnInit {
@@ -45,21 +45,16 @@ export class EditProjectPage implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
   ) {
-    const { workspaceId, projectId } = this.activatedRoute.snapshot.params;
+    const { projectId } = this.activatedRoute.snapshot.params;
 
-    this.workspaceId = Number(workspaceId);
     this.projectId = Number(projectId);
   }
 
   ngOnInit() {
-    this.workspace$ = this.workspaceService.get(this.workspaceId);
+    this.workspace$ = this.workspaceService.getWorkspaceByProjectId(this.projectId);
     this.project$ = this.projectService.get(this.projectId);
   }
 
-  /**
-   * Updates a workspace. Passes the form data to the workspace service. Then navigates to the workspace list if form was valid.
-   * Otherwise, displays an error message.
-   */
   /**
    * Creates a new project by saving the form data, saving dependent stages and then navigating to the project page.
    * Otherwise, displays an error message.
@@ -78,7 +73,7 @@ export class EditProjectPage implements OnInit {
         stopLoader(this.loader),
       ) as Observable<Project>
     ).subscribe((project) => {
-      this.router.navigate(['/', this.workspaceId, project.id]);
+      this.router.navigate(['/', 'projects', project.id]);
     });
   }
 
@@ -87,6 +82,6 @@ export class EditProjectPage implements OnInit {
   }
 
   public close() {
-    this.router.navigate(['/', this.workspaceId, this.projectId]);
+    this.router.navigate(['/', 'projects', this.projectId]);
   }
 }

@@ -20,7 +20,7 @@ export abstract class BaseService<T extends Errors<string>> {
     }
   }
 
-  protected validate<E>(codeMappings: { [key in number | string]: T }) {
+  protected validate<E>(codeMappings: { [key in number | string]: T } = {}) {
     return catchError((err: HTTPError) => {
       const code = codeMappings[err.status || err.text];
       this.handleErrorWithCode(err, code);

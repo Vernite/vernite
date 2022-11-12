@@ -81,12 +81,12 @@ export class CreateProjectMembersPage {
     this.createSubscription = this.projectService.create(this.form.value).subscribe((response) => {
       if (this.memberList) {
         this.memberService.add(this.memberList, [response.id]).subscribe(() => {
-          this.router.navigate([this.workspaceId]).then(() => {
+          this.router.navigate(['/', 'workspaces', this.workspaceId]).then(() => {
             window.location.reload();
           });
         });
       } else {
-        this.router.navigate([this.workspaceId]).then(() => {
+        this.router.navigate(['/', 'workspaces', this.workspaceId]).then(() => {
           window.location.reload();
         });
       }

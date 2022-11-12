@@ -5,24 +5,24 @@
       <h2 *ngIf="project" class="text-xl font-bold">{{title}} {{project.name}}</h2>
     </div>
     <ng-container *ngIf="project">
-      <a [routerLink]="['/', workspaceId, project.id, 'edit', 'general']" routerLinkActive="active">
+      <a [routerLink]="['/', project.id, 'edit', 'general']" routerLinkActive="active">
         <h2 i18n>General</h2>
       </a>
-      <a [routerLink]="['/', workspaceId, project.id, 'edit', 'members' ]" routerLinkActive="active">
+      <a [routerLink]="['/', project.id, 'edit', 'members' ]" routerLinkActive="active">
         <h2 i18n>Members</h2>
       </a>
-      <a [routerLink]="['/', workspaceId, project.id, 'edit', 'statuses' ]" routerLinkActive="active">
+      <a [routerLink]="['/', project.id, 'edit', 'statuses' ]" routerLinkActive="active">
         <h2 i18n>Statuses</h2>
       </a>
     </ng-container>
     <ng-container *ngIf="!project">
-      <a [routerLink]="['/', workspaceId, 'create', 'general' ]" routerLinkActive="active">
+      <a [routerLink]="['/', 'workspaces', workspaceId, 'projects', 'create', 'general' ]" routerLinkActive="active">
         <h2 i18n>General</h2>
       </a>
-      <a [routerLink]="['/', workspaceId, 'create', 'members' ]" routerLinkActive="active">
+      <a [routerLink]="['/', 'workspaces', workspaceId, 'projects', 'create', 'members' ]" routerLinkActive="active">
         <h2 i18n>Members</h2>
       </a>
-      <a [routerLink]="['/', workspaceId, 'create', 'statuses' ]" routerLinkActive="active">
+      <a [routerLink]="['/', 'workspaces', workspaceId, 'projects', 'create', 'statuses' ]" routerLinkActive="active">
         <h2 i18n>Statuses</h2>
       </a>
     </ng-container>

@@ -6,16 +6,16 @@
         <app-icon [icon]="faGithub"></app-icon>
       </a>
     </div>
-    <a [routerLink]="['/', workspaceId, project.id, 'board']" routerLinkActive="active">
+    <a [routerLink]="['/', 'projects', projectId, 'board']" routerLinkActive="active">
       <h2 i18n>Board</h2>
     </a>
-    <a [routerLink]="['/', workspaceId, project.id, 'list']" routerLinkActive="active">
+    <a [routerLink]="['/', 'projects', projectId, 'list']" routerLinkActive="active">
       <h2 i18n>List</h2>
     </a>
-    <a [routerLink]="['/', workspaceId, project.id, 'schedule']" routerLinkActive="active">
+    <a [routerLink]="['/', 'projects', projectId, 'schedule']" routerLinkActive="active">
       <h2 i18n>Schedule</h2>
     </a>
-    <a [routerLink]="['/', workspaceId, project.id, 'calendar']" routerLinkActive="active">
+    <a [routerLink]="['/', 'projects', projectId, 'calendar']" routerLinkActive="active">
       <h2 i18n>Calendar</h2>
     </a>
     <a routerLinkActive="active">
@@ -23,7 +23,7 @@
     </a>
   </div>
   <div class="options">
-    <div class="options-element" [routerLink]="['/', workspaceId, projectId, 'edit']">
+    <div class="options-element" [routerLink]="['/', 'projects', projectId, 'edit']">
       <app-icon [icon]="penToSquare" size="16px"></app-icon>
       <h2 i18n>Edit</h2>
     </div>

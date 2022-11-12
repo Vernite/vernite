@@ -81,7 +81,7 @@ export class CreateProjectPage {
         stopLoader(this.loader),
       ) as Observable<Project>
     ).subscribe((project) => {
-      this.router.navigate(['/', this.workspaceId, project.id]);
+      this.router.navigate(['/', 'projects', project.id]);
     });
   }
 
