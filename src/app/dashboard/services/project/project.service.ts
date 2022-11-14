@@ -8,6 +8,7 @@ import { Errors } from '@main/interfaces/http-error.interface';
 import { BaseService } from '@main/services/base/base.service';
 import { WorkspaceService } from '@dashboard/services/workspace/workspace.service';
 import { Cache } from '@main/decorators/cache/cache.decorator';
+import { unixTimestamp } from '@main/interfaces/date.interface';
 
 @Service()
 @Injectable({
@@ -106,5 +107,12 @@ export class ProjectService extends BaseService<
         }, []),
       ),
     );
+  }
+
+  @Cache()
+  public events(projectId: number, from: unixTimestamp, to: unixTimestamp): Observable<any> {
+    return this.apiService.get(`/project/${projectId}/events`, {
+      params: { from, to },
+    });
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '@auth/services/user/user.service';
 import { Event } from '@calendar/interfaces/event.interface';
+import { ProjectService } from '@dashboard/services/project/project.service';
 import { TaskService } from '@tasks/services/task/task.service';
 import dayjs from 'dayjs';
 import { Observable, of, startWith } from 'rxjs';
@@ -18,24 +19,30 @@ export class CalendarPage implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private taskService: TaskService,
+    private projectService: ProjectService,
     private userService: UserService,
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.data
-      .pipe(startWith(this.activatedRoute.snapshot.params))
-      .subscribe((params: { projectId?: string }) => {
-        const { projectId } = params;
+    this.activatedRoute.params.subscribe((params: { projectId?: string }) => {
+      const { projectId } = params;
 
-        if (projectId) {
-          this.projectId = parseInt(projectId);
-        } else {
-          this.events$ = this.userService.events(
-            this.date.startOf('month').valueOf(),
-            this.date.endOf('month').valueOf(),
-          );
-        }
-      });
+      console.log(params);
+
+      if (projectId) {
+        this.projectId = parseInt(projectId);
+
+        this.events$ = this.projectService.events(
+          this.projectId,
+          this.date.startOf('month').valueOf(),
+          this.date.endOf('month').valueOf(),
+        );
+      } else {
+        this.events$ = this.userService.events(
+          this.date.startOf('month').valueOf(),
+          this.date.endOf('month').valueOf(),
+        );
+      }
+    });
   }
 }
