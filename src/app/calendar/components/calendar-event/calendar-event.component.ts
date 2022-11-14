@@ -25,7 +25,7 @@ export class CalendarEventComponent {
   openDetails() {
     switch (this.event.type) {
       case EventType.MEETING:
-        this.router.navigate(['/meetings', this.event.relatedId]);
+        this.router.navigate(['/', 'meetings', this.event.relatedId]);
         break;
       case EventType.TASK_DEADLINE:
       case EventType.TASK_ESTIMATE:
@@ -38,8 +38,18 @@ export class CalendarEventComponent {
         ]);
         break;
       case EventType.SPRINT:
-        this.router.navigate(['/sprints', this.event.relatedId]);
+        this.router.navigate(['/', 'sprints', this.event.relatedId]);
         break;
     }
+  }
+
+  openOverlay() {
+    setTimeout(() => {
+      this.isOpen = true;
+    });
+  }
+
+  closeOverlay() {
+    this.isOpen = false;
   }
 }

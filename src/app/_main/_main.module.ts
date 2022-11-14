@@ -68,6 +68,7 @@ import { ContrastColorPipe } from './pipes/contrast-color/contrast-color.pipe';
 import { DateTimePickerComponent } from './components/input-date-time/date-time-picker/date-time-picker.component';
 import { TimePickerComponent } from './components/input-date-time/time-picker/time-picker.component';
 import { PillComponent } from './components/pill/pill.component';
+import { ClickOutsideDirective } from './directives/click-outside/click-outside.directive';
 
 /**
  * Main module configuration object
@@ -168,6 +169,7 @@ const ngModuleConfig = {
     ContrastColorPipe,
     TimePickerComponent,
     PillComponent,
+    ClickOutsideDirective,
   ],
   providers: [
     /*=============================================

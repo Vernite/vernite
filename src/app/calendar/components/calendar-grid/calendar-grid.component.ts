@@ -66,7 +66,15 @@ export class CalendarGridComponent implements OnChanges {
     this.days = days;
   }
 
+  private clearEvents() {
+    this.days.forEach((day) => {
+      day.events = [];
+    });
+  }
+
   private calculateEvents() {
+    this.clearEvents();
+
     const addToDate = (event: Event, day: dayjs.Dayjs) => {
       const index = this.days.findIndex((d) => d.date.isSame(day, 'day'));
 
