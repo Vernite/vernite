@@ -1,0 +1,46 @@
+<h1 mat-dialog-title *ngIf="data.variant === MeetingDialogVariant.EDIT" i18n>Edit meeting: {{ data.meeting?.name }}</h1>
+<h1 mat-dialog-title *ngIf="data.variant === MeetingDialogVariant.CREATE" i18n>Create new task</h1>
+<div mat-dialog-content>
+  <form (submit)="confirm()" [formGroup]="form" autocomplete="off">
+
+    <!-- Project -->
+    <ng-container *ngIf="!data.parentTask && form.get('workspaceId')?.value">
+      <app-select formControlName="projectId" floatingLabel="Project" i18n-floatingLabel>
+        <app-option *ngFor="let project of projectList$ | async" [value]="project.id">{{project.name}}
+        </app-option>
+        <app-empty-options i18n>Selected workspace is empty</app-empty-options>
+      </app-select>
+    </ng-container>
+
+    <!-- Name field -->
+    <app-input floatingLabel="Name" placeholder="New task" formControlName="name" i18n-floatingLabel i18n-placeholder>
+    </app-input>
+
+    <!-- Description field -->
+    <app-textarea floatingLabel="Description" placeholder="Sample description..." formControlName="description"
+      i18n-floatingLabel i18n-placeholder [rows]="10"></app-textarea>
+
+    <!-- Deadline -->
+    <app-input-date-time formControlName="deadline" floatingLabel="Deadline" placeholder="Choose a date"
+      i18n-floatingLabel i18n-placeholder>
+    </app-input-date-time>
+
+    <!-- Estimate time -->
+    <app-input-date-time formControlName="estimatedDate" floatingLabel="Estimated date" placeholder="Choose a date"
+      i18n-floatingLabel i18n-placeholder>
+    </app-input-date-time>
+
+    <!-- Story points -->
+    <app-input formControlName="storyPoints" floatingLabel="Story points" placeholder="Story points" type="number"
+      i18n-floatingLabel i18n-placeholder>
+    </app-input>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <app-button mat-button (click)="cancel()" i18n>Cancel</app-button>
+  <app-button *ngIf="data.variant === MeetingDialogVariant.CREATE" (click)="confirm()" variant="primary" i18n>Create
+  </app-button>
+  <app-button *ngIf="data.variant === MeetingDialogVariant.EDIT" (click)="confirm()" variant="primary" i18n>Save changes
+  </app-button>
+</div>

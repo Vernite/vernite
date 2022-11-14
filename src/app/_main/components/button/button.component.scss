@@ -1,5 +1,9 @@
 @import '../../../../styles/typography';
 
+:host {
+  display: block;
+}
+
 button mat-spinner,
 button app-icon {
   opacity: 1;

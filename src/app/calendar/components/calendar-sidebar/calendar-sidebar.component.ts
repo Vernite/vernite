@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@ngneat/reactive-forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import * as dayjs from 'dayjs';
+import { faPlus, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
 @UntilDestroy()
 @Component({
@@ -18,6 +19,12 @@ export class CalendarSidebarComponent implements OnInit {
 
   public cursor = new FormControl<dayjs.Dayjs>();
 
+  /** @ignore */
+  faPlus = faPlus;
+
+  /** @ignore */
+  faArrowUpRightFromSquare = faArrowUpRightFromSquare;
+
   constructor() {}
 
   ngOnInit() {
@@ -25,4 +32,8 @@ export class CalendarSidebarComponent implements OnInit {
       this.selectDate.emit(dayjs(value));
     });
   }
+
+  addMeeting() {}
+
+  export() {}
 }
