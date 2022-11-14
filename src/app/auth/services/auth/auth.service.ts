@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { tap } from 'rxjs';
 import { ApiService } from '@main/services/api/api.service';
 import { BaseService } from '@main/services/base/base.service';
-import { ErrorCodes, Errors } from '@main/interfaces/http-error.interface';
+import { Errors } from '@main/interfaces/http-error.interface';
 
 @Service()
 @Injectable({
@@ -54,7 +54,7 @@ export class AuthService extends BaseService<Errors<'INVALID_TOKEN'>> {
   }
 
   public logout() {
-    localStorage.removeItem('logged');
+    this.clearCache();
     return this.apiService.post(`/auth/logout`);
   }
 

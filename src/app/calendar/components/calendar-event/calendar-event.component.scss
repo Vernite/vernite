@@ -1,0 +1,26 @@
+.event {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--color-secondary-500);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.overlay {
+  width: 300px;
+  background-color: var(--color-secondary-600);
+  border-radius: var(--border-radius);
+
+  .header {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 1rem;
+  }
+
+  .content {
+    width: 100%;
+  }
+}

@@ -39,11 +39,11 @@ export class ProjectsListPage {
   }
 
   public editProject(project: Project) {
-    this.router.navigate(['/', this.workspaceId, project.id, 'edit']);
+    this.router.navigate(['/', 'projects', project.id, 'edit']);
   }
 
   public openProject(project: Project) {
-    this.router.navigate(['/', this.workspaceId, project.id]);
+    this.router.navigate(['/', 'projects', project.id]);
   }
 
   deleteProject(project: Project) {

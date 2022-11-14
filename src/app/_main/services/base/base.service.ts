@@ -13,12 +13,14 @@ export abstract class BaseService<T extends Errors<string>> {
     if (code) {
       const { message } = this.errorCodes[code];
       this._snackbarService.show(message, 'red');
+    } else if (err.status === 500) {
+      this._snackbarService.show($localize`Internal server error`, 'red');
     } else if (err.status === 503) {
       this._snackbarService.show($localize`Service is currently unavailable`, 'red');
     }
   }
 
-  protected validate<E>(codeMappings: { [key in number | string]: T }) {
+  protected validate<E>(codeMappings: { [key in number | string]: T } = {}) {
     return catchError((err: HTTPError) => {
       const code = codeMappings[err.status || err.text];
       this.handleErrorWithCode(err, code);

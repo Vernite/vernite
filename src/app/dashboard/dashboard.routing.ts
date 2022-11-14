@@ -36,33 +36,71 @@ const routes: Routes = [
       image: 'assets/mocks/dashboard.svg',
     },
   },
+
+  // Workspaces sub route
   {
-    path: 'create',
-    component: CreateWorkspacePage,
-  },
-  {
-    path: ':workspaceId',
+    path: 'workspaces',
     children: [
-      {
-        path: 'edit',
-        component: EditWorkspacePage,
-      },
       {
         path: '',
         pathMatch: 'full',
-        component: ProjectsListPage,
+        component: WorkspacesListPage,
       },
       {
         path: 'create',
-        component: CreateProjectPage,
+        component: CreateWorkspacePage,
       },
       {
-        path: ':projectId/edit',
-        component: EditProjectPage,
+        path: ':workspaceId',
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'projects',
+          },
+          {
+            path: 'edit',
+            component: EditWorkspacePage,
+          },
+          {
+            path: 'projects',
+            children: [
+              {
+                path: '',
+                pathMatch: 'full',
+                component: ProjectsListPage,
+              },
+              {
+                path: 'create',
+                component: CreateProjectPage,
+              },
+              {
+                path: ':projectId',
+                redirectTo: '/projects/:projectId',
+              },
+            ],
+          },
+        ],
       },
+    ],
+  },
+
+  // Projects sub route
+  {
+    path: 'projects',
+    children: [
       {
         path: ':projectId',
-        loadChildren: () => import('../tasks/tasks.module').then((m) => m.TasksModule),
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../tasks/tasks.module').then((m) => m.TasksModule),
+          },
+          {
+            path: 'edit',
+            component: EditProjectPage,
+          },
+        ],
       },
     ],
   },

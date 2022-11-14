@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Event } from '@calendar/interfaces/event.interface';
 import { Task } from '@tasks/interfaces/task.interface';
 import * as dayjs from 'dayjs';
 
@@ -9,11 +10,15 @@ import * as dayjs from 'dayjs';
 })
 export class CalendarGridComponent implements OnChanges {
   @Input() date!: dayjs.Dayjs;
-  @Input() tasks: Task[] = [];
+  @Input() events: Event[] = [];
 
   public days: {
     date: dayjs.Dayjs;
-    tasks: Task[];
+    events: {
+      date: dayjs.Dayjs;
+      type: 'start' | 'end';
+      data: Event;
+    }[];
   }[] = [];
   public firstDay: dayjs.Dayjs = dayjs();
   public lastDay: dayjs.Dayjs = dayjs();
@@ -26,13 +31,13 @@ export class CalendarGridComponent implements OnChanges {
     if (changes['date'] && !changes['date'].currentValue.isSame(changes['date'].previousValue)) {
       this.calculateGrid();
 
-      if (this.tasks.length) {
-        this.calculateTaskEvents();
+      if (this.events.length) {
+        this.calculateEvents();
       }
     }
 
-    if (changes['tasks']) {
-      this.calculateTaskEvents();
+    if (changes['events']) {
+      this.calculateEvents();
     }
   }
 
@@ -45,28 +50,60 @@ export class CalendarGridComponent implements OnChanges {
 
     const days: {
       date: dayjs.Dayjs;
-      tasks: Task[];
+      events: {
+        date: dayjs.Dayjs;
+        type: 'start' | 'end';
+        data: Event;
+      }[];
     }[] = [];
     let day = firstDay;
 
     while (day <= lastDay) {
-      days.push({ date: day, tasks: [] });
+      days.push({ date: day, events: [] });
       day = day.add(1, 'day');
     }
 
     this.days = days;
   }
 
-  private calculateTaskEvents() {
-    for (const task of this.tasks) {
-      if (task.estimatedDate) {
-        const day = dayjs(task.estimatedDate);
-        const index = this.days.findIndex((d) => d.date.isSame(day, 'day'));
+  private clearEvents() {
+    this.days.forEach((day) => {
+      day.events = [];
+    });
+  }
 
-        if (index !== -1) {
-          this.days[index].tasks.push(task);
-        }
+  private calculateEvents() {
+    this.clearEvents();
+
+    const addToDate = (event: Event, day: dayjs.Dayjs) => {
+      const index = this.days.findIndex((d) => d.date.isSame(day, 'day'));
+
+      if (index !== -1) {
+        this.days[index].events.push({
+          date: day,
+          type: 'start',
+          data: event,
+        });
+      }
+    };
+
+    for (const event of this.events) {
+      if (event.startDate) {
+        addToDate(event, dayjs(event.startDate));
+      }
+      if (event.endDate) {
+        addToDate(event, dayjs(event.endDate));
       }
     }
+
+    this.days.sort((a, b) => {
+      if (a.date.isBefore(b.date)) {
+        return -1;
+      }
+      if (a.date.isAfter(b.date)) {
+        return 1;
+      }
+      return 0;
+    });
   }
 }

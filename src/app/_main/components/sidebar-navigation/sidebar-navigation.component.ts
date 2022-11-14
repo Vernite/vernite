@@ -40,7 +40,7 @@ export class SidebarNavigationComponent {
   faPlus = faPlus;
 
   createWorkspace() {
-    this.router.navigate(['/', 'create']);
+    this.router.navigate(['/', 'workspaces', 'create']);
   }
 
   constructor(private workspaceService: WorkspaceService, private router: Router) {

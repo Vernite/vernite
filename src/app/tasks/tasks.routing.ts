@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BoardPage } from './pages/board/board.page';
 import { SchedulePage } from './pages/schedule/schedule.page';
 import { TaskListPage } from './pages/task-list/task-list.page';
+import { TaskPage } from './pages/task/task.page';
 
 /**
  * Tasks routes list
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'schedule',
     component: SchedulePage,
+  },
+  {
+    path: 'tasks/:taskId',
+    component: TaskPage,
   },
   {
     path: 'calendar',

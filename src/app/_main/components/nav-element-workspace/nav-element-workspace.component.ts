@@ -62,25 +62,25 @@ export class NavElementWorkspaceComponent implements AfterViewInit {
   routeToWorkspace() {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
-      .then(() => this.router.navigate(['/', this.workspace.id]));
+      .then(() => this.router.navigate(['/', 'workspaces', this.workspace.id]));
   }
 
   routeToProject(project: Project) {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
-      .then(() => this.router.navigate(['/', this.workspace.id, project.id]));
+      .then(() => this.router.navigate(['/', 'projects', project.id]));
   }
 
   createProject() {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
-      .then(() => this.router.navigate(['/', this.workspace.id, 'create']));
+      .then(() => this.router.navigate(['/', 'workspaces', this.workspace.id, 'create']));
   }
 
   editProject(project: Project) {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
-      .then(() => this.router.navigate(['/', this.workspace.id, project.id, 'edit']));
+      .then(() => this.router.navigate(['/', 'projects', project.id, 'edit']));
   }
 
   deleteProject(project: Project) {
@@ -94,7 +94,7 @@ export class NavElementWorkspaceComponent implements AfterViewInit {
   editWorkspace() {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
-      .then(() => this.router.navigate(['/', this.workspace.id, 'edit']));
+      .then(() => this.router.navigate(['/', 'workspaces', this.workspace.id, 'edit']));
   }
 
   deleteWorkspace() {
