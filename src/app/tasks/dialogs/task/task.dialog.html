@@ -12,20 +12,20 @@
     </app-select>
 
     <!-- Project -->
-    <ng-container *ngIf="!data.parentTask && form.get('workspaceId')?.value">
+    <!-- <ng-container *ngIf="!data.parentTask && form.get('workspaceId')?.value">
       <app-select formControlName="projectId" floatingLabel="Project" i18n-floatingLabel>
         <app-option *ngFor="let project of projectList$ | async" [value]="project.id">{{project.name}}
         </app-option>
         <app-empty-options i18n>Selected workspace is empty</app-empty-options>
       </app-select>
-    </ng-container>
+    </ng-container> -->
 
     <!-- Type field -->
-    <app-select formControlName="type" floatingLabel="Type" i18n-floatingLabel>
+    <!-- <app-select formControlName="type" floatingLabel="Type" i18n-floatingLabel>
       <app-option *ngFor="let type of taskTypes$ | async" [value]="type[1]" [icon]="type[0] | taskTypeIcon">
         {{ type[1] | taskType }}
       </app-option>
-    </app-select>
+    </app-select> -->
 
     <!-- Name field -->
     <app-input floatingLabel="Name" placeholder="New task" formControlName="name" i18n-floatingLabel i18n-placeholder>
@@ -36,18 +36,18 @@
       i18n-floatingLabel i18n-placeholder [rows]="10"></app-textarea>
 
     <!-- Status -->
-    <app-select formControlName="statusId" floatingLabel="Status" i18n-floatingLabel>
+    <!-- <app-select formControlName="statusId" floatingLabel="Status" i18n-floatingLabel>
       <app-option *ngFor="let status of statusList$ | async" [value]="status.id">
         {{ status.name }}
       </app-option>
       <app-empty-options i18n>This project doesn't have any status.</app-empty-options>
-    </app-select>
+    </app-select> -->
 
     <!-- Priorities -->
-    <app-select formControlName="priority" floatingLabel="Priority" i18n-floatingLabel>
+    <!-- <app-select formControlName="priority" floatingLabel="Priority" i18n-floatingLabel>
       <app-option *ngFor="let priority of taskPriorities" [value]="priority" [icon]="priority | taskPriorityIcon">{{
         priority | taskPriority }}</app-option>
-    </app-select>
+    </app-select> -->
 
     <!-- Deadline -->
     <app-input-date-time formControlName="deadline" floatingLabel="Deadline" placeholder="Choose a date"

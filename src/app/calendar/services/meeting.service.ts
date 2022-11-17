@@ -1,10 +1,19 @@
 import { ErrorCodes, Errors } from '@main/interfaces/http-error.interface';
 import { BaseService } from '@main/services/base/base.service';
-import { Injector } from '@angular/core';
+import { Injector, Injectable } from '@angular/core';
 import { ApiService } from '@main/services/api/api.service';
 import { Meeting } from '@calendar/interfaces/meeting.interface';
-import { Observable } from 'rxjs';
+import { Observable, switchMap, EMPTY } from 'rxjs';
+import { DialogService } from '@main/services/dialog/dialog.service';
+import { MeetingDialog, MeetingDialogVariant } from './../dialogs/meeting/meeting.dialog';
+import { Service } from '@main/decorators/service/service.decorator';
+import { Variant } from './../../_main/components/button/button.stories';
+import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 
+@Service()
+@Injectable({
+  providedIn: 'root',
+})
 export class MeetingService extends BaseService<
   Errors<'PROJECT_OR_MEETING_DOES_NOT_EXIST' | 'FORM_VALIDATION_ERROR'>
 > {
@@ -17,7 +26,11 @@ export class MeetingService extends BaseService<
     },
   };
 
-  constructor(private injector: Injector, private apiService: ApiService) {
+  constructor(
+    private injector: Injector,
+    private apiService: ApiService,
+    private dialogService: DialogService,
+  ) {
     super(injector);
   }
 
@@ -29,9 +42,9 @@ export class MeetingService extends BaseService<
     );
   }
 
-  public update(projectId: number, meetingId: number, meeting: Meeting): Observable<Meeting> {
+  public update(projectId: number, meeting: Meeting): Observable<Meeting> {
     return this.apiService
-      .put(`/project/${projectId}/meeting/${meetingId}`, { body: meeting })
+      .put(`/project/${projectId}/meeting/${meeting.id}`, { body: meeting })
       .pipe(
         this.validate({
           404: 'PROJECT_OR_MEETING_DOES_NOT_EXIST',
@@ -63,5 +76,55 @@ export class MeetingService extends BaseService<
         400: 'FORM_VALIDATION_ERROR',
       }),
     );
+  }
+
+  public openNewMeetingDialog(projectId: number): Observable<Meeting> {
+    return this.dialogService
+      .open(MeetingDialog, {
+        projectId,
+        variant: MeetingDialogVariant.CREATE,
+      })
+      .afterClosed()
+      .pipe(
+        switchMap((result) => {
+          if (!result) return EMPTY;
+
+          return this.create(projectId, result);
+        }),
+      );
+  }
+
+  public openEditMeetingDialog(projectId: number, meeting: Partial<Meeting>): Observable<Meeting> {
+    return this.dialogService
+      .open(MeetingDialog, {
+        projectId,
+        meeting,
+        variant: MeetingDialogVariant.EDIT,
+      })
+      .afterClosed()
+      .pipe(
+        switchMap((result) => {
+          if (!result) return EMPTY;
+
+          return this.update(projectId, result);
+        }),
+      );
+  }
+
+  public deleteWithConfirmation(projectId: number, meetingId: number) {
+    return this.dialogService
+      .confirm({
+        title: $localize`Delete meeting`,
+        message: $localize`Are you sure you want to delete this meeting? This action is irreversible`,
+        confirmText: $localize`Delete`,
+        cancelText: $localize`Cancel`,
+        variant: AlertDialogVariant.IMPORTANT,
+      })
+      .pipe(
+        switchMap((confirmed) => {
+          if (!confirmed) return EMPTY;
+          return this.delete(projectId, meetingId);
+        }),
+      );
   }
 }

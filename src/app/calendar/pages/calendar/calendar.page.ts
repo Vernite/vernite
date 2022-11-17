@@ -27,8 +27,6 @@ export class CalendarPage implements OnInit {
     this.activatedRoute.params.subscribe((params: { projectId?: string }) => {
       const { projectId } = params;
 
-      console.log(params);
-
       if (projectId) {
         this.projectId = parseInt(projectId);
 

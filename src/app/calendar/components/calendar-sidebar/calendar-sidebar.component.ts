@@ -3,6 +3,8 @@ import { FormControl } from '@ngneat/reactive-forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import * as dayjs from 'dayjs';
 import { faPlus, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { MeetingService } from '@calendar/services/meeting.service';
+import { ActivatedRoute } from '@angular/router';
 
 @UntilDestroy()
 @Component({
@@ -19,21 +21,34 @@ export class CalendarSidebarComponent implements OnInit {
 
   public cursor = new FormControl<dayjs.Dayjs>();
 
+  public projectId: number | null = null;
+
   /** @ignore */
   faPlus = faPlus;
 
   /** @ignore */
   faArrowUpRightFromSquare = faArrowUpRightFromSquare;
 
-  constructor() {}
+  constructor(private meetingService: MeetingService, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe((params: { projectId?: string }) => {
+      const { projectId } = params;
+      this.projectId = projectId ? parseInt(projectId) : null;
+    });
+
     this.cursor.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
       this.selectDate.emit(dayjs(value));
     });
   }
 
-  addMeeting() {}
+  openNewMeetingDialog() {
+    if (!this.projectId) return;
 
-  export() {}
+    this.meetingService.openNewMeetingDialog(this.projectId).subscribe(() => {
+      location.reload();
+    });
+  }
+
+  openExportDialog() {}
 }

@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { EventType } from '@calendar/enums/event-type.enum';
 import { Event } from '@calendar/interfaces/event.interface';
 import { Task } from '@tasks/interfaces/task.interface';
 import * as dayjs from 'dayjs';
@@ -91,7 +92,7 @@ export class CalendarGridComponent implements OnChanges {
       if (event.startDate) {
         addToDate(event, dayjs(event.startDate));
       }
-      if (event.endDate) {
+      if (event.endDate && event.type !== EventType.MEETING) {
         addToDate(event, dayjs(event.endDate));
       }
     }

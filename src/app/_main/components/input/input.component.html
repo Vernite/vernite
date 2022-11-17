@@ -21,6 +21,9 @@
     <input #input [name]="name" [type]="type" [placeholder]="placeholder" [formControl]="control" [readonly]="readonly"
       [autocomplete]="autocomplete" (focus)="onFocus()" (blur)="onBlur()"
       [style.padding-left]="(fragmentLeft.clientWidth + 16) + 'px'">
+    <div class="overlay">
+      <ng-content select=".overlay"></ng-content>
+    </div>
   </div>
   <div *ngIf="control.touched && control.invalid" class="error" [class.relative]="allowResizeByError">
     {{ control.errors | validationError }}

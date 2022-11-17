@@ -1,39 +1,45 @@
 <h1 mat-dialog-title *ngIf="data.variant === MeetingDialogVariant.EDIT" i18n>Edit meeting: {{ data.meeting?.name }}</h1>
-<h1 mat-dialog-title *ngIf="data.variant === MeetingDialogVariant.CREATE" i18n>Create new task</h1>
+<h1 mat-dialog-title *ngIf="data.variant === MeetingDialogVariant.CREATE" i18n>Create new meeting</h1>
 <div mat-dialog-content>
   <form (submit)="confirm()" [formGroup]="form" autocomplete="off">
 
     <!-- Project -->
-    <ng-container *ngIf="!data.parentTask && form.get('workspaceId')?.value">
-      <app-select formControlName="projectId" floatingLabel="Project" i18n-floatingLabel>
-        <app-option *ngFor="let project of projectList$ | async" [value]="project.id">{{project.name}}
-        </app-option>
-        <app-empty-options i18n>Selected workspace is empty</app-empty-options>
-      </app-select>
-    </ng-container>
+    <app-select formControlName="projectId" floatingLabel="Project" i18n-floatingLabel>
+      <app-option *ngFor="let project of projects$ | async" [value]="project.id">{{project.name}}
+      </app-option>
+      <app-empty-options i18n>Projects list is empty</app-empty-options>
+    </app-select>
 
     <!-- Name field -->
-    <app-input floatingLabel="Name" placeholder="New task" formControlName="name" i18n-floatingLabel i18n-placeholder>
+    <app-input floatingLabel="Name" placeholder="New meeting" formControlName="name" i18n-floatingLabel
+      i18n-placeholder>
     </app-input>
 
     <!-- Description field -->
     <app-textarea floatingLabel="Description" placeholder="Sample description..." formControlName="description"
-      i18n-floatingLabel i18n-placeholder [rows]="10"></app-textarea>
+      i18n-floatingLabel i18n-placeholder [rows]="4"></app-textarea>
 
-    <!-- Deadline -->
-    <app-input-date-time formControlName="deadline" floatingLabel="Deadline" placeholder="Choose a date"
-      i18n-floatingLabel i18n-placeholder>
-    </app-input-date-time>
-
-    <!-- Estimate time -->
-    <app-input-date-time formControlName="estimatedDate" floatingLabel="Estimated date" placeholder="Choose a date"
-      i18n-floatingLabel i18n-placeholder>
-    </app-input-date-time>
-
-    <!-- Story points -->
-    <app-input formControlName="storyPoints" floatingLabel="Story points" placeholder="Story points" type="number"
-      i18n-floatingLabel i18n-placeholder>
+    <!-- Location field -->
+    <app-input floatingLabel="Location" placeholder="Location" formControlName="location" i18n-floatingLabel
+      i18n-placeholder>
     </app-input>
+
+    <!-- Start date field -->
+    <app-input-date-time formControlName="startDate" floatingLabel="Start date" i18n-floatingLabel>
+    </app-input-date-time>
+
+    <!-- End date field -->
+    <app-input-date-time formControlName="endDate" floatingLabel="End date" i18n-floatingLabel>
+    </app-input-date-time>
+
+    <!-- Participants -->
+    <app-select *ngIf="data.projectId" formControlName="participantIds" [multiple]="true" floatingLabel="Participants"
+      i18n-floatingLabel>
+      <app-option *ngFor="let member of members$ | async" [value]="member.user.id" [checkmark]="true">
+        {{member.user.name}}
+      </app-option>
+      <app-empty-options i18n>Project members list is empty</app-empty-options>
+    </app-select>
 
   </form>
 </div>
