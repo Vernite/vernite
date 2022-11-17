@@ -14,7 +14,7 @@ import { TaskPriority } from '@tasks/enums/task-priority.enum';
 import { TaskType } from '@tasks/enums/task-type.enum';
 import { Status } from '@tasks/interfaces/status.interface';
 import { isNil } from 'lodash-es';
-import { distinctUntilChanged, map, Observable, pairwise } from 'rxjs';
+import { distinctUntilChanged, map, Observable, of, pairwise, switchMap } from 'rxjs';
 import { requiredValidator } from '../../../_main/validators/required.validator';
 import { Task } from '../../interfaces/task.interface';
 import { unixTimestamp } from '../../../_main/interfaces/date.interface';
@@ -87,36 +87,38 @@ export class TaskDialog implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadParamsFromUrl();
+    this.loadParamsFromUrl().subscribe(({ workspaceId, projectId }) => {
+      if (workspaceId) this.data.workspaceId = workspaceId;
+      if (projectId) this.data.projectId = projectId;
 
-    const { workspaceId, projectId, task } = this.data;
-    this.form.patchValue({ workspaceId, projectId });
-    if (task) {
-      this.form.patchValue(task);
-    }
+      this.form.patchValue({ workspaceId, projectId });
+      if (this.data.task) {
+        this.form.patchValue(this.data.task);
+      }
 
-    this.workspaceList$ = this.workspaceService.list();
+      this.workspaceList$ = this.workspaceService.list();
 
-    this.form
-      .get('workspaceId')
-      .valueChanges.pipe(pairwise(), untilDestroyed(this))
-      .subscribe(([oldWorkspaceId, newWorkspaceId]) => {
-        if (oldWorkspaceId !== newWorkspaceId) {
-          this.onWorkspaceIdChange.bind(this)(newWorkspaceId);
-        }
-      });
-    this.form
-      .get('projectId')
-      .valueChanges.pipe(distinctUntilChanged(), untilDestroyed(this))
-      .subscribe(this.onProjectIdChange.bind(this));
+      this.form
+        .get('workspaceId')
+        .valueChanges.pipe(pairwise(), untilDestroyed(this))
+        .subscribe(([oldWorkspaceId, newWorkspaceId]) => {
+          if (oldWorkspaceId !== newWorkspaceId) {
+            this.onWorkspaceIdChange.bind(this)(newWorkspaceId);
+          }
+        });
+      this.form
+        .get('projectId')
+        .valueChanges.pipe(distinctUntilChanged(), untilDestroyed(this))
+        .subscribe(this.onProjectIdChange.bind(this));
 
-    if (workspaceId) {
-      this.onWorkspaceIdChange(workspaceId);
-    }
+      if (workspaceId) {
+        this.onWorkspaceIdChange(workspaceId);
+      }
 
-    if (projectId) {
-      this.onProjectIdChange(projectId);
-    }
+      if (projectId) {
+        this.onProjectIdChange(projectId);
+      }
+    });
   }
 
   onWorkspaceIdChange(workspaceId: number | null) {
@@ -149,11 +151,37 @@ export class TaskDialog implements OnInit {
     });
   }
 
-  loadParamsFromUrl() {
-    const { workspaceId, projectId } = this.routerExtensions.snapshot.params;
+  loadParamsFromUrl(): Observable<{ workspaceId?: number; projectId?: number }> {
+    return (() => {
+      let { workspaceId, projectId } = this.routerExtensions.snapshot.params;
 
-    if (!isNil(workspaceId) && !this.data.workspaceId) this.data.workspaceId = Number(workspaceId);
-    if (!isNil(projectId) && !this.data.projectId) this.data.projectId = Number(projectId);
+      if (this.data.projectId) {
+        projectId = Number(this.data.projectId);
+      } else if (projectId) {
+        projectId = Number(projectId);
+      }
+
+      if (this.data.workspaceId) {
+        workspaceId = Number(this.data.workspaceId);
+      } else if (workspaceId) {
+        workspaceId = Number(workspaceId);
+      }
+
+      return of({ workspaceId, projectId });
+    })().pipe(
+      switchMap(({ workspaceId, projectId }) => {
+        if (projectId && !workspaceId) {
+          return this.workspaceService.getWorkspaceByProjectId(projectId).pipe(
+            map((workspace) => {
+              workspaceId = workspace.id;
+              return { workspaceId, projectId };
+            }),
+          );
+        } else {
+          return of({ workspaceId, projectId });
+        }
+      }),
+    );
   }
 
   confirm() {

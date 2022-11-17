@@ -8,6 +8,7 @@
   <div #overlay class="overlay" (clickOutside)="closeOverlay()">
     <div class="header">
       <app-button variant="transparent" [icon]="faArrowUpRightFromSquare" (click)="openDetails()"></app-button>
+      <app-button variant="transparent" [icon]="faPen" (click)="openEdit()"></app-button>
       <app-button variant="transparent" [icon]="faClose" (click)="isOpen = false"></app-button>
     </div>
     <div class="content p-3">
@@ -17,7 +18,7 @@
       <h3 class="text-lg opacity-50">
         {{ (event.startDate || event.endDate) | dayjsFormat:'dddd, D MMMM' }}
       </h3>
-      <p>
+      <p class="text-base">
         {{ event.description }}
       </p>
     </div>

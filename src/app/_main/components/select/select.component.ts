@@ -15,11 +15,11 @@ import { ControlAccessor } from '@main/classes/control-accessor.class';
 import { FormControl } from '@ngneat/reactive-forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { isEqual, isNil } from 'lodash-es';
-import { BehaviorSubject, filter, fromEvent, take } from 'rxjs';
+import { BehaviorSubject, filter, take, startWith, tap } from 'rxjs';
 import { InputComponent } from '../input/input.component';
 import { EmptyOptionsComponent } from './empty-options/empty-options.component';
 import { OptionComponent } from './option/option.component';
-import { SelectLabel } from './select-label.model';
+import { Selection } from './select-label.model';
 
 @UntilDestroy()
 @Component({
@@ -49,10 +49,13 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
    */
   @Input() allowResizeByError?: boolean;
 
-  isOpen$ = new BehaviorSubject<boolean>(false);
-  selected$ = new BehaviorSubject<SelectLabel>({
-    control: new FormControl(''),
-  });
+  @Input() multiple?: boolean;
+
+  isOpen: boolean = false;
+
+  selectedOptions$ = new BehaviorSubject<OptionComponent[]>([]);
+  _sub = this.selectedOptions$.pipe(untilDestroyed(this)).pipe(tap(console.log)).subscribe();
+  labelControl = new FormControl();
 
   /** @ignore */
   overlayMinWidth = 0;
@@ -64,25 +67,34 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     super(ngControl, cdRef);
   }
 
-  public open() {
+  public openOverlay() {
+    this.isOpen = true;
     this.overlayMinWidth = this.input.input.nativeElement.clientWidth;
-    setTimeout(() => {
-      fromEvent(document, 'click')
-        .pipe(
-          untilDestroyed(this),
-          filter((e) => !this.overlay?.nativeElement.contains(e.target as Node)),
-          take(1),
-        )
-        .subscribe(() => this.close());
-      this.isOpen$.next(true);
-    });
+  }
+
+  public closeOverlay() {
+    this.isOpen = false;
+  }
+
+  public toggleOverlay() {
+    if (this.isOpen) {
+      return this.closeOverlay();
+    }
+    return this.openOverlay();
   }
 
   public ngAfterViewInit(): void {
     this.loadOptions();
 
     this.control.valueChanges.subscribe(() => {
-      this.loadOptions();
+      console.log('Value changed');
+      this.clearSelection();
+
+      this.queryOptions?.forEach((option) => {
+        if (this.compare(option.value, this.control.value)) {
+          this.setAsSelected(option);
+        }
+      });
     });
 
     this.queryOptions?.changes.subscribe(() => {
@@ -90,64 +102,99 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     });
   }
 
-  public close() {
-    this.isOpen$.next(false);
-  }
-
-  public toggle() {
-    if (this.isOpen$.value) {
-      return this.close();
-    }
-    return this.open();
-  }
-
   private loadOptions() {
-    let activeOption = null;
+    console.log('Loading options');
+    this.clearSelection();
 
-    if (!this.queryOptions || this.queryOptions.length === 0) {
-      this.showEmptyOptions();
-      return;
-    } else {
-      this.hideEmptyOptions();
-    }
-
-    this.queryOptions.forEach((option, index) => {
+    this.queryOptions?.forEach((option) => {
       option.ref.nativeElement.addEventListener('click', () => {
-        this.select(this.queryOptions?.get(index)!);
+        this.onOptionClick(option);
       });
 
+      console.log(
+        'Comparing',
+        option.value,
+        this.control.value,
+        this.compare(option.value, this.control.value),
+      );
       if (this.compare(option.value, this.control.value)) {
-        activeOption = option;
+        this.setAsSelected(option);
       }
     });
-
-    this.setActiveOption(activeOption);
 
     this.cdRef.detectChanges();
   }
 
-  private setActiveOption(option: OptionComponent | null) {
-    const currentLabel = this.selected$.getValue();
-    currentLabel.control.setValue(option?.viewValue || '');
-    currentLabel.icon = option?.icon;
-    currentLabel.optionComponent = option || undefined;
-    this.selected$.next(currentLabel);
+  private clearSelection() {
+    if (this.queryOptions) {
+      for (const option of this.queryOptions.toArray()) {
+        console.log('Clearing selection', option);
+        option.selected = false;
+      }
+    }
+    this.selectedOptions$.next([]);
   }
 
-  private sameAsSelected(option: OptionComponent | null) {
-    return (
-      this.selected$.value.optionComponent === option ||
-      this.selected$.value.optionComponent?.value === option?.value
-    );
+  private setAsSelected(option: OptionComponent | OptionComponent[] | null) {
+    console.log('Setting as selected', option);
+    const currentlySelected = this.selectedOptions$.value;
+
+    const setOptionAsSelected = (option: OptionComponent) => {
+      option.selected = true;
+      currentlySelected.push(option);
+    };
+
+    if (Array.isArray(option)) {
+      option.forEach((option) => setOptionAsSelected(option));
+    } else if (option) {
+      setOptionAsSelected(option);
+    }
+
+    this.selectedOptions$.next(currentlySelected);
+    if (this.multiple) {
+      this.labelControl.setValue(' ');
+    } else if (option && !Array.isArray(option)) {
+      console.log('Setting label control value', option.viewValue);
+      this.labelControl.setValue(option.viewValue);
+    }
+    console.log('Selected options', this.selectedOptions$.value);
   }
 
-  public select(option: OptionComponent | null) {
-    this.close();
-    if (this.sameAsSelected(option)) return;
+  public select(option: OptionComponent) {
+    this.setAsSelected(option);
+    if (!this.multiple) {
+      this.control.setValue(this.selectedOptions$.value[0].value);
+    } else {
+      this.control.setValue(this.selectedOptions$.value.map((option) => option.value));
+    }
+    option.selected = true;
+  }
 
-    this.setActiveOption(option);
-    this.control.setValue(isNil(option?.value) ? null : option!.value);
-    if (option) option.selected = true;
+  public deselect(option: OptionComponent) {
+    console.log('Deselecting', option);
+    const currentlySelected = this.selectedOptions$.value;
+    const index = currentlySelected.findIndex((selectedOption) => option === selectedOption);
+
+    if (index > -1) {
+      currentlySelected.splice(index, 1);
+      option.selected = false;
+      this.selectedOptions$.next(currentlySelected);
+    }
+
+    this.control.setValue(this.selectedOptions$.value.map((option) => option.value));
+
+    console.log(currentlySelected.length);
+    if (currentlySelected.length === 0) {
+      this.labelControl.setValue('');
+    }
+  }
+
+  public toggleSelection(option: OptionComponent) {
+    if (option.selected) {
+      this.deselect(option);
+    } else {
+      this.select(option);
+    }
   }
 
   private compare(a: any, b: any) {
@@ -160,12 +207,28 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     }
   }
 
+  private onOptionClick(option: OptionComponent) {
+    if (this.multiple) {
+      this.toggleSelection(option);
+    } else {
+      this.select(option);
+    }
+
+    this.closeOverlay();
+  }
+
+  /**
+   * @deprecated
+   */
   private showEmptyOptions() {
     this.emptyOptions?.forEach((emptyOption) => {
       emptyOption.show();
     });
   }
 
+  /**
+   * @deprecated
+   */
   private hideEmptyOptions() {
     this.emptyOptions?.forEach((emptyOption) => {
       emptyOption.hide();
@@ -176,11 +239,11 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     if (!this.control) return;
 
     this.control.touch$.pipe(untilDestroyed(this)).subscribe(() => {
-      this.selected$.value.control.markAsTouched();
+      this.labelControl.markAsTouched();
     });
 
     this.control.errors$.pipe(untilDestroyed(this)).subscribe((errors) => {
-      this.selected$.value.control.setErrors(errors);
+      this.labelControl.setErrors(errors);
     });
   }
 }
