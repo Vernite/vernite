@@ -11,6 +11,7 @@ import { TasksModule } from '../tasks/tasks.module';
 import { EventTypePipe } from './pipes/event-type/event-type.pipe';
 import { CalendarEventComponent } from './components/calendar-event/calendar-event.component';
 import { MeetingDialog } from './dialogs/meeting/meeting.dialog';
+import { CalendarExportDialog } from './dialogs/calendar-export/calendar-export.dialog';
 
 @NgModule({
   imports: [CommonModule, MainModule, CalendarRoutingModule, TasksModule],
@@ -21,6 +22,7 @@ import { MeetingDialog } from './dialogs/meeting/meeting.dialog';
     CalendarSidebarComponent,
     CalendarComponent,
     EventTypePipe,
+    CalendarExportDialog,
     CalendarEventComponent,
     MeetingDialog,
   ],

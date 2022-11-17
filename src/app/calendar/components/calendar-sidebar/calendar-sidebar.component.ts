@@ -5,6 +5,7 @@ import * as dayjs from 'dayjs';
 import { faPlus, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { MeetingService } from '@calendar/services/meeting.service';
 import { ActivatedRoute } from '@angular/router';
+import { CalendarService } from '@calendar/services/calendar.service';
 
 @UntilDestroy()
 @Component({
@@ -29,7 +30,11 @@ export class CalendarSidebarComponent implements OnInit {
   /** @ignore */
   faArrowUpRightFromSquare = faArrowUpRightFromSquare;
 
-  constructor(private meetingService: MeetingService, private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private meetingService: MeetingService,
+    private activatedRoute: ActivatedRoute,
+    private calendarService: CalendarService,
+  ) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: { projectId?: string }) => {
@@ -43,12 +48,12 @@ export class CalendarSidebarComponent implements OnInit {
   }
 
   openNewMeetingDialog() {
-    if (!this.projectId) return;
-
-    this.meetingService.openNewMeetingDialog(this.projectId).subscribe(() => {
+    this.meetingService.openNewMeetingDialog(this.projectId || undefined).subscribe(() => {
       location.reload();
     });
   }
 
-  openExportDialog() {}
+  openExportDialog() {
+    this.calendarService.openSyncUrlDialog().subscribe();
+  }
 }

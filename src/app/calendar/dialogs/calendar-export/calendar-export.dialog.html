@@ -1,0 +1,14 @@
+<h1 mat-dialog-title i18n>Export calendar</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" autocomplete="off">
+
+    <!-- Url field -->
+    <app-input floatingLabel="Url" formControlName="url" [readonly]="true" [pending]="loader.pending"
+      i18n-floatingLabel>
+    </app-input>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <app-button mat-button (click)="close()" i18n>Close</app-button>
+</div>

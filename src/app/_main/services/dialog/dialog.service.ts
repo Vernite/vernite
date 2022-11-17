@@ -7,6 +7,7 @@ import { Service } from '@main/decorators/service/service.decorator';
 import { BehaviorSubject, filter } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 import { AlertDialog, AlertDialogData, AlertDialogVariant } from '../../dialogs/alert/alert.dialog';
+import { DialogOptions } from './dialog-options.interface';
 
 export enum DialogOutlet {
   CONTENT_RIGHT = 'CONTENT_RIGHT',
@@ -41,22 +42,22 @@ export class DialogService {
    * @param data Object to pass as data to the dialog
    * @returns Reference to the newly-opened dialog.
    */
-  open(component: any, data: any = {}, outlet?: DialogOutlet): MatDialogRef<any> | DialogRef {
+  open(component: any, data: any = {}, options?: DialogOptions): MatDialogRef<any> | DialogRef {
     let dialog: MatDialogRef<any> | DialogRef;
 
-    if (outlet) {
-      const outletComponent = this.outlets.get(outlet);
+    if (options?.outlet) {
+      const outletComponent = this.outlets.get(options.outlet);
 
       if (!outletComponent)
         throw new Error(
-          `${outlet} is not assigned to any dialog outlet component, you need to call registerOutlet()`,
+          `${options.outlet} is not assigned to any dialog outlet component, you need to call registerOutlet()`,
         );
 
       dialog = outletComponent.renderDialog(component, data);
     } else {
       dialog = this.matDialog.open(component, {
         data,
-        width: '400px',
+        width: options?.width || '400px',
       });
     }
 

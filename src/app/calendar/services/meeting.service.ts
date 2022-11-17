@@ -78,7 +78,7 @@ export class MeetingService extends BaseService<
     );
   }
 
-  public openNewMeetingDialog(projectId: number): Observable<Meeting> {
+  public openNewMeetingDialog(projectId?: number): Observable<Meeting> {
     return this.dialogService
       .open(MeetingDialog, {
         projectId,
@@ -89,7 +89,7 @@ export class MeetingService extends BaseService<
         switchMap((result) => {
           if (!result) return EMPTY;
 
-          return this.create(projectId, result);
+          return this.create(result.projectId, result);
         }),
       );
   }

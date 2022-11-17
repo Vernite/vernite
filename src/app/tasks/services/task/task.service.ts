@@ -174,7 +174,9 @@ export class TaskService extends BaseService<
           projectId,
           task,
         } as TaskDialogData,
-        DialogOutlet.CONTENT_RIGHT,
+        {
+          outlet: DialogOutlet.CONTENT_RIGHT,
+        },
       )
       .afterClosed()
       .pipe(
@@ -199,7 +201,9 @@ export class TaskService extends BaseService<
         {
           variant: TaskDialogVariant.CREATE,
         } as TaskDialogData,
-        DialogOutlet.CONTENT_RIGHT,
+        {
+          outlet: DialogOutlet.CONTENT_RIGHT,
+        },
       )
       .afterClosed()
       .pipe(
@@ -231,7 +235,9 @@ export class TaskService extends BaseService<
             parentTaskId: parentTask.id,
           },
         } as TaskDialogData,
-        DialogOutlet.CONTENT_RIGHT,
+        {
+          outlet: DialogOutlet.CONTENT_RIGHT,
+        },
       )
       .afterClosed()
       .pipe(

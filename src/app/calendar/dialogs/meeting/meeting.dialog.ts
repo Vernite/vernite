@@ -5,7 +5,7 @@ import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { unixTimestamp } from '@main/interfaces/date.interface';
 import { validateForm } from '@main/classes/form.class';
 import { ProjectService } from '@dashboard/services/project/project.service';
-import { map, of } from 'rxjs';
+import { map, of, tap } from 'rxjs';
 import { requiredValidator } from '@main/validators/required.validator';
 import { MemberService } from '@dashboard/services/member/member.service';
 import { UserService } from '@auth/services/user/user.service';
@@ -63,8 +63,9 @@ export class MeetingDialog implements OnInit {
       this.form.patchValue(initialValue);
 
       this.form.get('projectId').valueChanges.subscribe((projectId) => {
+        console.log('PROJECT_ID', projectId);
         if (projectId) {
-          this.members$ = this.memberService.list(projectId);
+          this.members$ = this.memberService.list(projectId).pipe(tap(console.log));
         } else {
           this.members$ = of([]);
         }

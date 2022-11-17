@@ -33,8 +33,8 @@
     </app-input-date-time>
 
     <!-- Participants -->
-    <app-select *ngIf="data.projectId" formControlName="participantIds" [multiple]="true" floatingLabel="Participants"
-      i18n-floatingLabel>
+    <app-select *ngIf="form.get('projectId').value" formControlName="participantIds" [multiple]="true"
+      floatingLabel="Participants" i18n-floatingLabel>
       <app-option *ngFor="let member of members$ | async" [value]="member.user.id" [checkmark]="true">
         {{member.user.name}}
       </app-option>
