@@ -31,6 +31,8 @@ import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskRowComponent } from './components/task-row/task-row.component';
 import { InputTaskParentComponent } from './components/input-task-parent/input-task-parent.component';
 import { TaskPage } from './pages/task/task.page';
+import { SprintPage } from './pages/sprint/sprint.page';
+import { BacklogPage } from './pages/backlog/backlog.page';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule],
@@ -63,6 +65,8 @@ import { TaskPage } from './pages/task/task.page';
     TaskListComponent,
     TaskRowComponent,
     TaskPage,
+    SprintPage,
+    BacklogPage,
   ],
   exports: [TaskTypePipe],
 })

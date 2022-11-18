@@ -1,14 +1,20 @@
 <section *ngIf="project">
-  <div class="tabs">
-    <a [routerLink]="['/', workspaceId, project.id, 'list']" routerLinkActive="active">
+  <div *ngIf="inSprint" class="tabs">
+    <a [routerLink]="['/', 'projects', projectId, 'sprints', sprintId, 'list']" routerLinkActive="active">
       <h2 i18n>List</h2>
     </a>
-    <a [routerLink]="['/', workspaceId, project.id, 'board']" routerLinkActive="active">
+    <a [routerLink]="['/', 'projects', projectId, 'sprints', sprintId, 'board']" routerLinkActive="active">
       <h2 i18n>Board</h2>
     </a>
-    <a [routerLink]="['/', workspaceId, project.id, 'schedule']" routerLinkActive="active">
-      <h2 i18n>Schedule</h2>
+  </div>
+  <div *ngIf="!inSprint" class="tabs">
+    <a [routerLink]="['/', 'projects', projectId, 'backlog', 'list']" routerLinkActive="active">
+      <h2 i18n>List</h2>
     </a>
+    <a [routerLink]="['/', 'projects', projectId, 'backlog', 'board']" routerLinkActive="active">
+      <h2 i18n>Board</h2>
+    </a>
+    <app-button (click)="openDialog()" i18n>Create New Sprint</app-button>
   </div>
   <div class="options">
     <div class="options-element">

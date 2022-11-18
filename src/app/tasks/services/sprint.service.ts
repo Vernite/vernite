@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import { EMPTY, map, Observable, switchMap } from 'rxjs';
 import { ApiService } from '@main/services/api/api.service';
 import { Sprint } from '../interfaces/sprint.interface';
-import { TaskService } from './task.service';
 import { DialogOutlet, DialogService } from '@main/services/dialog/dialog.service';
 import {
   SprintDialog,
@@ -14,11 +13,7 @@ import {
   providedIn: 'root',
 })
 export class SprintService {
-  constructor(
-    private apiService: ApiService,
-    private taskService: TaskService,
-    private dialogService: DialogService,
-  ) {}
+  constructor(private apiService: ApiService, private dialogService: DialogService) {}
 
   /**
    * Get list of statuses
@@ -75,7 +70,7 @@ export class SprintService {
    * @param sprint Sprint to update
    * @returns Observable with updated sprint, EMPTY otherwise (when user cancels the dialog)
    */
-  public openEditTaskDialog(projectId: number, sprint: Sprint): Observable<Sprint | null> {
+  public openEditSprintDialog(projectId: number, sprint: Sprint): Observable<Sprint | null> {
     return this.dialogService
       .open(
         SprintDialog,
@@ -84,7 +79,9 @@ export class SprintService {
           projectId,
           sprint,
         } as SprintDialogData,
-        DialogOutlet.CONTENT_RIGHT,
+        {
+          outlet: DialogOutlet.CONTENT_RIGHT,
+        },
       )
       .afterClosed()
       .pipe(
@@ -102,14 +99,16 @@ export class SprintService {
    * Opens dialog to create new sprint
    * @returns created sprint, EMPTY otherwise (when user cancels the dialog)
    */
-  public openCreateNewTaskDialog() {
+  public openCreateSprintDialog() {
     return this.dialogService
       .open(
         SprintDialog,
         {
           variant: SprintDialogVariant.CREATE,
         } as SprintDialogData,
-        DialogOutlet.CONTENT_RIGHT,
+        {
+          outlet: DialogOutlet.CONTENT_RIGHT,
+        },
       )
       .afterClosed()
       .pipe(
@@ -121,5 +120,11 @@ export class SprintService {
           }
         }),
       );
+  }
+
+  public getActiveSprint(projectId: number): Observable<Sprint | undefined> {
+    return this.list(projectId).pipe(
+      map((sprintList) => sprintList.find((sprint) => sprint.status === 'active')),
+    );
   }
 }

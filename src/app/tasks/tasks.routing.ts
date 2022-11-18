@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BacklogPage } from './pages/backlog/backlog.page';
 import { BoardPage } from './pages/board/board.page';
-import { SchedulePage } from './pages/schedule/schedule.page';
+import { SprintPage } from './pages/sprint/sprint.page';
 import { TaskListPage } from './pages/task-list/task-list.page';
 import { TaskPage } from './pages/task/task.page';
 
@@ -20,19 +21,36 @@ const routes: Routes = [
   },
   {
     path: 'backlog',
-    component: TaskListPage,
+    component: BacklogPage,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'list',
+      },
+      {
+        path: 'board',
+        component: BoardPage,
+      },
+      {
+        path: 'list',
+        component: TaskListPage,
+      },
+    ],
   },
   {
-    path: 'sprint/:sprintId/board',
-    component: BoardPage,
-  },
-  {
-    path: 'sprint/:sprintId/list',
-    component: TaskListPage,
-  },
-  {
-    path: 'sprint/:sprintId/schedule',
-    component: SchedulePage,
+    path: 'sprint',
+    component: SprintPage,
+    children: [
+      {
+        path: ':sprintId/board',
+        component: BoardPage,
+      },
+      {
+        path: ':sprintId/list',
+        component: TaskListPage,
+      },
+    ],
   },
   {
     path: 'tasks/:taskId',

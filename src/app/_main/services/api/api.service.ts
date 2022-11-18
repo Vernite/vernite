@@ -33,14 +33,16 @@ export class ApiService {
   public request<T = any>(method: string, url: string, options?: RequestOptions) {
     const params = this.getParamsFromFilters(options?.filters);
 
+    console.log(params);
+
     return this.httpClient.request<T>(method, this.apiURL + url, {
       responseType: 'json' as any,
       withCredentials: true,
       ...options,
-      params: {
-        ...(options?.params || {}),
-        ...(params || {}),
-      },
+      // params: {
+      //   ...(options?.params || {}),
+      //   ...(params || {}),
+      // },
     });
   }
 
@@ -97,6 +99,8 @@ export class ApiService {
   private getParamsFromFilters<T, V extends string | boolean | number>(
     filters?: DataFilter<T, V>[] | DataFilter<T, V>,
   ) {
+    console.log(filters);
+
     if (!filters) {
       return;
     }

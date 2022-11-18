@@ -6,14 +6,14 @@
         <app-icon [icon]="faGithub"></app-icon>
       </a>
     </div>
-    <a [routerLink]="['/', 'projects', projectId, 'sprint']" routerLinkActive="active">
+    <a [routerLink]="['/', 'projects', projectId, 'sprint', 1 , 'list']" routerLinkActive="active">
       <h2 i18n>Sprint</h2>
+    </a>
+    <a [routerLink]="['/', 'projects', projectId, 'backlog', 'list']" routerLinkActive="active">
+      <h2 i18n>Backlog</h2>
     </a>
     <a [routerLink]="['/', 'projects', projectId, 'calendar']" routerLinkActive="active">
       <h2 i18n>Calendar</h2>
-    </a>
-    <a [routerLink]="['/', 'projects', projectId, 'backlog']" routerLinkActive="active">
-      <h2 i18n>Backlog</h2>
     </a>
   </div>
   <div class="options">

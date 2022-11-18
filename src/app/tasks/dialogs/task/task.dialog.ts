@@ -19,6 +19,8 @@ import { Task } from '../../interfaces/task.interface';
 import { unixTimestamp } from '../../../_main/interfaces/date.interface';
 import { StatusService } from '@tasks/services/status/status.service';
 import { TaskService } from '@tasks/services/task/task.service';
+import { Sprint } from '@tasks/interfaces/sprint.interface';
+import { SprintService } from '@tasks/services/sprint.service';
 
 export enum TaskDialogVariant {
   CREATE = 'create',
@@ -50,6 +52,7 @@ export class TaskDialog implements OnInit {
   public projectList$!: Observable<Project[]>;
   public issueList$!: Observable<GitIssue[]>;
   public pullList$!: Observable<GitPull[]>;
+  public sprints$!: Observable<Sprint[]>;
 
   public isGitHubIntegrationAvailable: boolean = false;
 
@@ -68,6 +71,7 @@ export class TaskDialog implements OnInit {
     issue: new FormControl<GitIssue | 'CREATE' | 'DETACH' | null>(null),
     pull: new FormControl<GitPull | 'DETACH' | null>(null),
     storyPoints: new FormControl<number | null>(0),
+    sprintIds: new FormControl<number[]>([]),
   });
 
   public interactive$ = timeToInteraction();
@@ -83,6 +87,7 @@ export class TaskDialog implements OnInit {
     private gitIntegrationService: GitIntegrationService,
     private routerExtensions: RouterExtensionsService,
     private taskService: TaskService,
+    private sprintService: SprintService,
   ) {}
 
   ngOnInit() {
@@ -136,6 +141,7 @@ export class TaskDialog implements OnInit {
     if (!projectId) return;
 
     this.statusList$ = this.statusService.list(projectId);
+    this.sprints$ = this.sprintService.list(projectId);
 
     this.statusList$.pipe(untilDestroyed(this)).subscribe((statuses) => {
       const statusId = statuses.find((status) => status.begin)?.id;
