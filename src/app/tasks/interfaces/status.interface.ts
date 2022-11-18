@@ -9,7 +9,7 @@ export interface Status extends JSONParsable {
   /**
    * Status id (unique per database)
    */
-  id: number;
+  id?: number;
 
   /**
    * Status name (Header displayed in labels or on the top of the columns)
@@ -31,6 +31,8 @@ export interface Status extends JSONParsable {
    * the work on the task does not started yet.
    */
   begin: boolean;
+
+  ordinal: number;
 }
 
 /**

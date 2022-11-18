@@ -1,7 +1,7 @@
-<app-sidebar-navigation></app-sidebar-navigation>
+<app-sidebar-navigation *ngIf="!hideNavigation"></app-sidebar-navigation>
 
 <section>
-  <app-upper-navigation></app-upper-navigation>
+  <app-upper-navigation *ngIf="!hideNavigation"></app-upper-navigation>
 
   <app-snackbar-outlet></app-snackbar-outlet>
 
@@ -14,4 +14,4 @@
   </section>
 </section>
 
-<span class="version">{{ version }}</span>
+<!-- <span class="version">{{ version }}</span> -->

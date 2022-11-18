@@ -3,7 +3,11 @@ div.mat-menu-panel {
   background-color: var(--color-menu-background);
 
   button.mat-menu-item {
-    transition: background-color 0.2s;
+    transition: background-color 0.1s;
+
+    span {
+      font-family: var(--font-family);
+    }
 
     mat-icon.mat-icon,
     span {
@@ -15,6 +19,7 @@ div.mat-menu-panel {
     }
 
     &[disabled] {
+
       mat-icon.mat-icon,
       span {
         opacity: 0.5;

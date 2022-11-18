@@ -59,6 +59,16 @@ import { DialogService } from './services/dialog/dialog.service';
 import { LetDirective } from './directives/let/let.directive';
 import { ViewContainerDirective } from './directives/view-container/view-container.directive';
 import { FocusInitialDirective } from './directives/focus-initial/focus-initial.directive';
+import { TabsComponent } from './components/tabs/tabs.component';
+import { TabComponent } from './components/tabs/tab/tab.component';
+import { InputColorComponent } from './components/input-color/input-color.component';
+import { ColorComponent } from './components/color/color.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { ContrastColorPipe } from './pipes/contrast-color/contrast-color.pipe';
+import { DateTimePickerComponent } from './components/input-date-time/date-time-picker/date-time-picker.component';
+import { TimePickerComponent } from './components/input-date-time/time-picker/time-picker.component';
+import { PillComponent } from './components/pill/pill.component';
+import { ClickOutsideDirective } from './directives/click-outside/click-outside.directive';
 
 /**
  * Main module configuration object
@@ -70,7 +80,6 @@ const ngModuleConfig = {
     =============================================*/
     CommonModule,
     RouterModule,
-    ObserversModule,
   ],
   importExports: [
     /*=============================================
@@ -82,6 +91,7 @@ const ngModuleConfig = {
     DragDropModule,
     PlatformModule,
     OverlayModule,
+    ObserversModule,
 
     /*=============================================
       =              Material modules               =
@@ -143,6 +153,7 @@ const ngModuleConfig = {
     ViewContainerDirective,
     EmptyOptionsComponent,
     DatePickerComponent,
+    DateTimePickerComponent,
     MonthPipe,
     DayjsPipe,
     YearPipe,
@@ -150,6 +161,15 @@ const ngModuleConfig = {
     DayOfWeekPipe,
     DayjsPipe,
     DateByPreferencesPipe,
+    TabsComponent,
+    TabComponent,
+    InputColorComponent,
+    ColorComponent,
+    LoaderComponent,
+    ContrastColorPipe,
+    TimePickerComponent,
+    PillComponent,
+    ClickOutsideDirective,
   ],
   providers: [
     /*=============================================
@@ -172,6 +192,7 @@ const ngModuleConfig = {
  * @example
  * ```js
  * import { MainModule } from '@app/main/main.module';
+import { TimePickerComponent } from './components/input-date-time/time-picker/time-picker.component';
  *
  * (@)NgModule({
  *   imports: [ ..., MainModule ],

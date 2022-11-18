@@ -4,8 +4,8 @@ import { AuthService } from '@auth/services/auth/auth.service';
 import { WorkspaceService } from '@dashboard/services/workspace/workspace.service';
 import { faAngleDown, faCog, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '@main/services/dialog/dialog.service';
-import { TaskService } from '@tasks/services/task.service';
-import { fromEvent, map, skip, take } from 'rxjs';
+import { TaskService } from '@tasks/services/task/task.service';
+import { finalize, fromEvent, map, skip, take, catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-upper-navigation',
@@ -54,9 +54,18 @@ export class UpperNavigationComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout().subscribe(() => {
-      this.router.navigate(['/', 'auth', 'login']);
-    });
+    this.authService
+      .logout()
+      .pipe(
+        catchError(() => {
+          location.reload();
+          return throwError(() => new Error());
+        }),
+        finalize(() => {
+          this.router.navigate(['/', 'auth', 'login']);
+        }),
+      )
+      .subscribe();
   }
 
   public isButtonDisabled() {

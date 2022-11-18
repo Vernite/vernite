@@ -67,6 +67,7 @@ export class LoginPage implements OnInit {
     switch (error.status) {
       case 403:
         this.error = $localize`User is already logged`;
+        this.router.navigate(['/']);
         break;
       case 404:
         this.error = $localize`Wrong username or password`;

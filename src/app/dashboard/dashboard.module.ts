@@ -4,14 +4,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MainModule } from '../_main/_main.module';
 import { IntegrationModulesGridComponent } from './components/integration-modules-grid/integration-modules-grid.component';
 import { MemberListComponent } from './components/member-list/member-list.component';
+import { ProjectFormGeneralComponent } from './components/project-form-general/project-form-general.component';
+import { ProjectFormIntegrationsComponent } from './components/project-form-integrations/project-form-integrations.component';
+import { ProjectFormMembersComponent } from './components/project-form-members/project-form-members.component';
+import { ProjectFormStatusesComponent } from './components/project-form-statuses/project-form-statuses.component';
 import { ViewOptionsComponent } from './components/view-options/view-options.component';
 import { DashboardRoutingModule } from './dashboard.routing';
 import { AddMemberDialog } from './dialogs/add-member/add-member.dialog';
+import { StatusDialog } from './dialogs/status/status.dialog';
 import { IntegrationModulesModule } from './modules/integration-modules/integration-modules.module';
-import { CreateProjectMembersPage } from './pages/create-project-members/create-project-members.page';
 import { CreateProjectPage } from './pages/create-project/create-project.page';
 import { CreateWorkspacePage } from './pages/create-workspace/create-workspace.page';
-import { EditProjectMembersPage } from './pages/edit-project-members/edit-project-members.page';
 import { EditProjectPage } from './pages/edit-project/edit-project.page';
 import { EditWorkspacePage } from './pages/edit-workspace/edit-workspace.page';
 import { ProjectsListPage } from './pages/projects-list/projects-list.page';
@@ -31,14 +34,19 @@ import { GitIntegrationService } from './services/git-integration/git-integratio
     WorkspacesListPage,
     EditWorkspacePage,
     ProjectsListPage,
+
     CreateProjectPage,
+    ProjectFormGeneralComponent,
+    ProjectFormIntegrationsComponent,
+    ProjectFormMembersComponent,
+    ProjectFormStatusesComponent,
+
     EditProjectPage,
-    CreateProjectMembersPage,
-    EditProjectMembersPage,
     ViewOptionsComponent,
     MemberListComponent,
     AddMemberDialog,
     IntegrationModulesGridComponent,
+    StatusDialog,
   ],
   providers: [GitIntegrationService],
 })

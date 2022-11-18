@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { AuthService } from '@auth/services/auth/auth.service';
 import { UserService } from '@auth/services/user/user.service';
 import { requiredValidator } from '@main/validators/required.validator';
+import { SnackbarService } from '@main/services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-settings-account-page',
@@ -10,7 +11,11 @@ import { requiredValidator } from '@main/validators/required.validator';
   styleUrls: ['./settings-account.page.scss'],
 })
 export class SettingsAccountPage implements OnInit {
-  constructor(private userService: UserService, private authService: AuthService) {}
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+    private snackbarService: SnackbarService,
+  ) {}
 
   public form = new FormGroup({
     email: new FormControl('', requiredValidator()),
@@ -30,7 +35,9 @@ export class SettingsAccountPage implements OnInit {
     this.form.updateValueAndValidity();
     if (this.form.invalid) return;
 
-    this.userService.update(this.form.value).subscribe(() => {});
+    this.userService.update(this.form.value).subscribe(() => {
+      this.snackbarService.show($localize`Account updated successfully`);
+    });
   }
 
   resetPassword() {

@@ -81,15 +81,25 @@ export interface Task extends JSONParsable {
   /**
    * Optional user id who is assigned to task
    */
-  assigneeId?: number;
+  assigneeId?: number | null;
 
   /**
    * List of trackers for this task
    */
-  timeTracks?: TimeTrack[];
+  timeTracks: TimeTrack[];
 
   /**
    * Id of assigned sprint
    */
   sprintId?: number;
+
+  /**
+   * Epic attached to task
+   */
+  epic: Task | null;
+
+  /**
+   * Points to measure task complexity
+   */
+  storyPoints: number;
 }

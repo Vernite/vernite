@@ -1,10 +1,13 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { faCirclePlay, faCircleStop } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlay, faCircleStop, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Task } from '@tasks/interfaces/task.interface';
 import { BehaviorSubject, filter, fromEvent, interval, take, takeWhile } from 'rxjs';
 import { TrackerService } from '../../services/tracker/tracker.service';
 import { TimeTracksTotalPipe } from '../../pipes/time-tracks-total/time-tracks-total.pipe';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { TimeTrack } from './../../interfaces/time-track.interface';
+import { UserService } from '@auth/services/user/user.service';
+import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 
 @UntilDestroy()
 @Component({
@@ -14,24 +17,38 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   providers: [TimeTracksTotalPipe],
 })
 export class TrackerComponent {
-  @ViewChild('overlay') overlay!: ElementRef<HTMLElement>;
+  @ViewChild(CdkConnectedOverlay) overlay!: ElementRef<HTMLElement>;
 
   @Input() projectId!: number;
   @Input() set task(task: Task) {
     this._task = task;
-    this.enabled = (task.timeTracks && task.timeTracks?.some((track) => !track.endDate)) || false;
+    this.timeTracks = [
+      ...task.timeTracks.map((track) => ({ ...track, new: false })),
+      ...this.timeTracks.filter((track) => !track.id),
+    ];
     this.timer$.next(this.timeTracksTotal.transform(task.timeTracks, 'milliseconds'));
+    if ((task.timeTracks && task.timeTracks?.some((track) => !track.endDate)) || false) {
+      this.enable();
+    }
   }
   get task() {
     return this._task;
   }
   private _task!: Task;
 
+  public timeTracks: ({ new: boolean } & TimeTrack)[] = [];
+
   /** @ignore */
   faCircleStop = faCircleStop;
 
   /** @ignore */
   faCirclePlay = faCirclePlay;
+
+  /** @ignore */
+  faTrash = faTrash;
+
+  /** @ignore */
+  faPlus = faPlus;
 
   public enabled = false;
 
@@ -50,9 +67,13 @@ export class TrackerComponent {
   constructor(
     private trackerService: TrackerService,
     private timeTracksTotal: TimeTracksTotalPipe,
+    private userService: UserService,
   ) {}
 
   public openDetails() {
+    this.isOpen$.next(true);
+    return;
+
     setTimeout(() => {
       fromEvent(document, 'click')
         .pipe(
@@ -60,7 +81,6 @@ export class TrackerComponent {
           take(1),
         )
         .subscribe(() => this.closeDetails());
-      this.isOpen$.next(true);
     });
   }
 
@@ -107,5 +127,21 @@ export class TrackerComponent {
 
   private disable() {
     this.enabled = false;
+  }
+
+  public insertTimeTrack() {
+    this.userService.getMyself().subscribe((user) => {
+      this.timeTracks = [
+        ...this.timeTracks,
+        {
+          startDate: new Date().getTime(),
+          projectId: this.projectId,
+          taskId: this._task.id,
+          new: true,
+          userId: user.id,
+          edited: true,
+        },
+      ];
+    });
   }
 }

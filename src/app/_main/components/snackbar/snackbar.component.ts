@@ -33,6 +33,12 @@ export class SnackbarComponent implements OnInit {
         return 'var(--color-gray-500)';
       case 'green':
         return '#00b300';
+      case 'red':
+        return '#ff0000';
+      case 'yellow':
+        return '#ffff00';
+      default:
+        return 'var(--color-gray-500)';
     }
   }
 

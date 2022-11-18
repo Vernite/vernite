@@ -26,6 +26,8 @@ export class InputDateTimeComponent
 
   @Input() staticLabel?: string;
 
+  @Input() pending?: boolean;
+
   @ViewChild('overlay') overlay!: ElementRef<HTMLElement>;
   @ViewChild(DatePickerComponent) datePicker?: DatePickerComponent;
 
@@ -94,7 +96,7 @@ export class InputDateTimeComponent
 
   private format(value: unixTimestamp | null) {
     if (!value) return '';
-    return dayjs.unix(value).format(this.displayFormat);
+    return dayjs(value).format(this.displayFormat);
   }
 
   override writeValue(value: unixTimestamp | null): void {

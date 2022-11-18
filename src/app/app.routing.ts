@@ -11,6 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'landing-page',
+    // TODO: Move this to lazy loading module
     component: LandingPageComponent,
   },
   {
@@ -23,8 +24,16 @@ const routes: Routes = [
         loadChildren: () => import('./emails/emails.module').then((m) => m.EmailsModule),
       },
       {
+        path: 'calendar',
+        loadChildren: () => import('./calendar/calendar.module').then((m) => m.CalendarModule),
+      },
+      {
         path: 'messages',
         loadChildren: () => import('./messages/messages.module').then((m) => m.MessagesModule),
+      },
+      {
+        path: 'meetings',
+        loadChildren: () => import('./meetings/meetings.module').then((m) => m.MeetingsModule),
       },
       {
         path: '',

@@ -6,18 +6,18 @@
         <app-icon [icon]="faGithub"></app-icon>
       </a>
     </div>
-    <a [routerLink]="['/', workspaceId, project.id, 'sprint']" routerLinkActive="active">
+    <a [routerLink]="['/', 'projects', projectId, 'sprint']" routerLinkActive="active">
       <h2 i18n>Sprint</h2>
     </a>
-    <a [routerLink]="['/', workspaceId, project.id, 'calendar']" routerLinkActive="active">
+    <a [routerLink]="['/', 'projects', projectId, 'calendar']" routerLinkActive="active">
       <h2 i18n>Calendar</h2>
     </a>
-    <a [routerLink]="['/', workspaceId, project.id, 'backlog']" routerLinkActive="active">
+    <a [routerLink]="['/', 'projects', projectId, 'backlog']" routerLinkActive="active">
       <h2 i18n>Backlog</h2>
     </a>
   </div>
   <div class="options">
-    <div class="options-element" [routerLink]="['/', workspaceId, projectId, 'edit']">
+    <div class="options-element" [routerLink]="['/', 'projects', projectId, 'edit']">
       <app-icon [icon]="penToSquare" size="16px"></app-icon>
       <h2 i18n>Edit</h2>
     </div>

@@ -35,10 +35,11 @@ export class ErrorInterceptor implements HttpInterceptor {
         const error = this.constructError(e);
 
         if (error.status === 401) {
-          if (this._stoppedInterceptionProcess) return EMPTY;
           this.stopInterceptionProcess();
 
-          this.dialogService.closeAll();
+          if (!this._stoppedInterceptionProcess) {
+            this.dialogService.closeAll();
+          }
 
           // User is deleted
           if (error.message === 'user deleted') {
@@ -52,7 +53,10 @@ export class ErrorInterceptor implements HttpInterceptor {
             this.userService.clearCache();
 
             // If user was logged or was trying to login within one day, display session expired dialog
-            if (this.authService.getLastLoginTime().diff(dayjs(), 'day') < 1) {
+            if (
+              this.authService.getLastLoginTime().diff(dayjs(), 'day') < 1 &&
+              !this._stoppedInterceptionProcess
+            ) {
               this.dialogService.openErrorDialog($localize`Your session has expired.`);
             }
           }

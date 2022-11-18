@@ -60,7 +60,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: "-rltgoDzvO --delete"
           SOURCE: "./dist/vernite/"
-          REMOTE_HOST: '51.77.50.209'
+          REMOTE_HOST: '51.83.255.98'
           REMOTE_PORT: '2224'
           REMOTE_USER: 'frontend'
           TARGET: '/var/www/html'

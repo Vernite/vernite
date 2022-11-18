@@ -1,21 +1,38 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { map, Observable } from 'rxjs';
 import { ApiService } from '@main/services/api/api.service';
 import { Service } from '@main/decorators/service/service.decorator';
+import { BaseService } from '@main/services/base/base.service';
+import { Errors } from '@main/interfaces/http-error.interface';
+import { Cache } from '@main/decorators/cache/cache.decorator';
 
 @Service()
 @Injectable({
   providedIn: 'root',
 })
-export class MemberService {
-  constructor(private apiService: ApiService) {}
+export class MemberService extends BaseService<
+  Errors<'NOT_ENOUGH_PRIVILEGES' | 'PROJECT_NOT_FOUND'>
+> {
+  protected override errorCodes = {
+    NOT_ENOUGH_PRIVILEGES: {
+      message: $localize`You don't have enough privileges to do this`,
+    },
+    PROJECT_NOT_FOUND: {
+      message: $localize`Project not found`,
+    },
+  };
+
+  constructor(private injector: Injector, private apiService: ApiService) {
+    super(injector);
+  }
 
   /**
    * Lists members in given project
    * @param projectId project which are members from
    * @returns Request observable, which completes when request is finished
    */
+  @Cache()
   public list(projectId: number): Observable<ProjectMember[]> {
     return this.apiService.get(`/project/${projectId}/member`);
   }
@@ -27,7 +44,12 @@ export class MemberService {
    * @returns Request observable, which completes when request is finished
    */
   public remove(projectId: number, id: number[]): Observable<ProjectMember[]> {
-    return this.apiService.put(`/project/${projectId}/member`, { body: id });
+    return this.apiService.put(`/project/${projectId}/member`, { body: id }).pipe(
+      this.validate({
+        403: 'NOT_ENOUGH_PRIVILEGES',
+        404: 'PROJECT_NOT_FOUND',
+      }),
+    );
   }
 
   /**
@@ -37,7 +59,11 @@ export class MemberService {
    * @returns Request observable, which completes when request is finished
    */
   public leave(projectId: number): Observable<null> {
-    return this.apiService.delete(`/project/${projectId}/member`);
+    return this.apiService.delete(`/project/${projectId}/member`).pipe(
+      this.validate({
+        404: 'PROJECT_NOT_FOUND',
+      }),
+    );
   }
 
   /**

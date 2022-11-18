@@ -1,4 +1,3 @@
-/* tslint:disable:no-unused-variable */
 import { TasksModule } from '@tasks/tasks.module';
 import { Shallow } from 'shallow-render';
 

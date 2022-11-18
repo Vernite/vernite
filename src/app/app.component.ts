@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IconService } from '@main/services/icons/icon.service';
 
 /**
  * Main Component with basic layout and main router outlet
@@ -14,7 +15,8 @@ export class AppComponent {
    */
   public title = 'vernite';
 
-  constructor() {
+  constructor(private iconService: IconService) {
+    this.iconService.init();
     document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.remove('preload');
     });

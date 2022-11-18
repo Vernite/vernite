@@ -1,0 +1,26 @@
+<!-- Event -->
+<div class="event" cdkOverlayOrigin #trigger="cdkOverlayOrigin" (click)="openOverlay()">
+  {{ event.name }}
+</div>
+
+<!-- Overlay -->
+<ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="isOpen">
+  <div #overlay class="overlay" (clickOutside)="closeOverlay()">
+    <div class="header">
+      <app-button variant="transparent" [icon]="faArrowUpRightFromSquare" (click)="openDetails()"></app-button>
+      <app-button variant="transparent" [icon]="faPen" (click)="openEdit()"></app-button>
+      <app-button variant="transparent" [icon]="faClose" (click)="isOpen = false"></app-button>
+    </div>
+    <div class="content p-3">
+      <h2 class="text-xl">
+        {{ event.name }}
+      </h2>
+      <h3 class="text-lg opacity-50">
+        {{ (event.startDate || event.endDate) | dayjsFormat:'dddd, D MMMM' }}
+      </h3>
+      <p class="text-base">
+        {{ event.description }}
+      </p>
+    </div>
+  </div>
+</ng-template>

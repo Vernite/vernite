@@ -1,4 +1,5 @@
 import { HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
+import { DataFilter } from './filters.interface';
 import { JSONParsable, JSONPrimitive } from './json-parsable.interface';
 
 /**
@@ -54,4 +55,6 @@ export interface RequestOptions {
    * you need to add `{ withCredentials: true }` in your httpClient call.
    */
   withCredentials?: boolean;
+
+  filters?: DataFilter<any, any>[] | DataFilter<any, any>;
 }

@@ -65,12 +65,29 @@ export class IntegrationGitHubComponent implements OnInit, IntegrationComponent 
   }
 
   save() {
+    // Check if the form is valid and project was passed to the component
     if (!this.form.value.repository || !this.project) return of(null);
 
-    return this.gitIntegrationService.attachGitHubIntegration(
-      this.project.id,
-      this.form.value.repository,
-    );
+    // Check if something was changed
+    if (this.project.gitHubIntegration === this.form.value.repository) return of(null);
+
+    if (this.project.gitHubIntegration) {
+      // Detach integration if project already has an integration and add new one
+      return this.gitIntegrationService.deleteGitHubIntegration(this.project.id).pipe(
+        switchMap(() => {
+          return this.gitIntegrationService.attachGitHubIntegration(
+            this.project!.id,
+            this.form.value.repository,
+          );
+        }),
+      );
+    } else {
+      // Attach integration if project doesn't have an integration
+      return this.gitIntegrationService.attachGitHubIntegration(
+        this.project.id,
+        this.form.value.repository,
+      );
+    }
   }
 
   ngOnInit() {

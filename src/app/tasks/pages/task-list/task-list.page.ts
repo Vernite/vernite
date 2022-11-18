@@ -13,15 +13,13 @@ import {
   faCodePullRequest,
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
-import { ESet } from '@main/classes/e-set.class';
 import { Filters } from '@main/classes/filters.class';
 import { Filter } from '@main/interfaces/filters.interface';
-import { DialogService } from '@main/services/dialog/dialog.service';
 import { Status } from '@tasks/interfaces/status.interface';
 import { Task } from '@tasks/interfaces/task.interface';
-import { StatusService } from '@tasks/services/status.service';
-import { TaskService } from '@tasks/services/task.service';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { TaskService } from '@tasks/services/task/task.service';
+import { StatusService } from '@tasks/services/status/status.service';
 
 @Component({
   selector: 'app-task-list',
@@ -29,10 +27,19 @@ import { map, Observable } from 'rxjs';
   styleUrls: ['./task-list.page.scss'],
 })
 export class TaskListPage {
+  /** @ignore */
   faPlus = faPlus;
+
+  /** @ignore  */
   faChevronRight = faChevronRight;
+
+  /** @ignore */
   faCodeCommit = faCodeCommit;
+
+  /** @ignore */
   faCodePullRequest = faCodePullRequest;
+
+  /** @ignore */
   faCheck = faCheck;
 
   public projectId!: number;
@@ -40,103 +47,36 @@ export class TaskListPage {
   public taskList$!: Observable<Task[]>;
   public statusList$!: Observable<Status[]>;
   public project$!: Observable<Project>;
-  public members$!: Observable<Map<number, ProjectMember>>;
-  public assigneeControl = new FormControl(null);
+  public members$: Observable<Map<number, ProjectMember>>;
 
-  public statusList: Status[] = [];
+  public emptyMap = new Map();
 
   public filters: Filter[] = [];
   public filtersControl = new FormControl<Filter[]>();
-
-  isSubtasksRow = (i: number, row: Object) => row.hasOwnProperty('withSubtasks');
-  expandedSubtasks = new ESet();
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private taskService: TaskService,
     private statusService: StatusService,
     private projectService: ProjectService,
-    private dialogService: DialogService,
     private memberService: MemberService,
     private userService: UserService,
   ) {
-    const { workspaceId, projectId } = this.activatedRoute.snapshot.params;
+    const { projectId } = this.activatedRoute.snapshot.params;
 
     this.projectId = projectId;
-    this.project$ = this.projectService.get(projectId);
 
-    /**
-     * TODO: Use method from service
-     */
-    this.members$ = this.memberService.list(projectId).pipe(
-      map((members) =>
-        members.reduce((acc: Map<number, ProjectMember>, member: ProjectMember) => {
-          acc.set(member.user.id, member);
-          return acc;
-        }, new Map<number, ProjectMember>()),
-      ),
-    );
+    this.project$ = this.projectService.get(projectId);
+    this.members$ = this.memberService.map(projectId);
     this.taskList$ = this.taskService.list(projectId);
     this.statusList$ = this.statusService.list(projectId);
-    this.statusList$.subscribe((list) => {
-      this.statusList = list;
-    });
+
     this.userService.getMyself().subscribe((user) => {
       this.filters.push(Filters.ONLY_MY_TASKS(user.id));
     });
 
     this.filtersControl.valueChanges.subscribe((filters) => {
-      this.taskList$ = this.taskService.list(projectId, filters);
+      this.taskList$ = this.taskService.list(projectId);
     });
-  }
-
-  getStatus(statusId: number) {
-    return this.statusList.find((status) => status.id === statusId)?.name;
-  }
-
-  populateSubtasks(taskList: Task[]) {
-    const populatedTasks = [];
-    const tasks = taskList.filter((task) => !task.parentTaskId);
-
-    for (const task of tasks) {
-      populatedTasks.push(task);
-
-      if (task.subTasks && task.subTasks.length) {
-        populatedTasks.push({ ...task, withSubtasks: true });
-      }
-    }
-
-    return populatedTasks;
-  }
-
-  createSubtask(task: Task) {
-    this.taskService.openCreateSubtaskDialog(this.projectId, task).subscribe((task) => {
-      location.reload();
-    });
-  }
-
-  editTask(task: Task) {
-    this.taskService.openEditTaskDialog(this.projectId, task).subscribe(() => {
-      location.reload();
-    });
-  }
-
-  deleteTask(task: Task) {
-    this.taskService.deleteWithConfirmation(this.projectId, task).subscribe(() => {
-      location.reload();
-    });
-  }
-
-  /**
-   * TODO: Remove this function
-   *
-   * @deprecated
-   */
-  initAssigneeChanging() {
-    this.assigneeControl.valueChanges.subscribe((assignee) => {});
-  }
-
-  public getSubtasksContainerHeight(taskId: number, element: HTMLElement) {
-    return `${Number(this.expandedSubtasks.has(taskId)) * element.scrollHeight}px`;
   }
 }

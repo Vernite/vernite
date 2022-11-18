@@ -8,8 +8,9 @@ export interface User extends JSONParsable {
   username: string;
   password: string;
   avatar: string;
-  /** Not yet in API */
   dateFormat: string;
+  timeFormat: string;
+  firstDayOfWeek: number;
 }
 
 export interface UserWithPrivileges extends JSONParsable {

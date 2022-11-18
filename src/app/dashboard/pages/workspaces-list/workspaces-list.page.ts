@@ -73,10 +73,10 @@ export class WorkspacesListPage implements OnInit {
    * @param workspace Workspace to edit
    */
   editWorkspace(workspace: Workspace) {
-    this.router.navigate(['/', workspace.id, 'edit']);
+    this.router.navigate(['/', 'workspaces', workspace.id, 'edit']);
   }
 
   openWorkspace(workspace: Workspace) {
-    this.router.navigate(['/', workspace.id]);
+    this.router.navigate(['/', 'workspaces', workspace.id]);
   }
 }

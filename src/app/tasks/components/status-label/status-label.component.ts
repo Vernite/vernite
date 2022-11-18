@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@ang
 import { NgControl } from '@angular/forms';
 import { ControlAccessor } from '@main/classes/control-accessor.class';
 import { Status } from '@tasks/interfaces/status.interface';
-import { TaskService } from '@tasks/services/task.service';
+import { TaskService } from '@tasks/services/task/task.service';
 import { TestNgControl } from '@tests/helpers/ng-control-testing-provider.helper';
 import { BehaviorSubject, filter, fromEvent, take } from 'rxjs';
 
@@ -20,7 +20,7 @@ export class StatusLabelComponent extends ControlAccessor {
   @Input() set statuses(statuses: Status[]) {
     this.statuses$.next(statuses);
     this.statusMap = statuses.reduce((acc, status) => {
-      acc.set(status.id, status);
+      acc.set(status.id!, status);
       return acc;
     }, new Map<number, Status>());
   }
@@ -73,7 +73,7 @@ export class StatusLabelComponent extends ControlAccessor {
 
   public select(status: Status) {
     if (this.taskId && this.projectId)
-      this.taskService.changeStatus(status.id, this.taskId, this.projectId).subscribe(() => {
+      this.taskService.changeStatus(status.id!, this.taskId, this.projectId).subscribe(() => {
         this.close();
         location.reload();
       });

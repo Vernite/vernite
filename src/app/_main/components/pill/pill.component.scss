@@ -1,0 +1,8 @@
+@import '../../../../styles/typography';
+
+:host {
+  @include text-base;
+  padding: 0.25rem 1rem;
+  background-color: var(--color-secondary-800);
+  border-radius: 2rem;
+}

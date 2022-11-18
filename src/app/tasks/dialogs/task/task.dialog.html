@@ -1,32 +1,31 @@
 <h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.EDIT" i18n>Edit task: {{ data.task?.name }}</h1>
-<h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.CREATE && !data.subtask" i18n>Create new task</h1>
-<h1 mat-dialog-title *ngIf="data.subtask" i18n>Create new subtask</h1>
+<h1 mat-dialog-title *ngIf="data.variant === TaskDialogVariant.CREATE && !data.parentTask" i18n>Create new task</h1>
+<h1 mat-dialog-title *ngIf="data.parentTask" i18n>Create new subtask</h1>
 <div mat-dialog-content>
   <form (submit)="confirm()" [formGroup]="form" autocomplete="off">
 
     <!-- Workspace -->
-    <app-select *ngIf="!data.subtask" formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
+    <app-select *ngIf="!data.parentTask" formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
       <app-option *ngFor="let workspace of workspaceList$ | async" [value]="workspace.id">{{ workspace.name }}
       </app-option>
       <app-empty-options i18n>There is no workspaces</app-empty-options>
     </app-select>
 
     <!-- Project -->
-    <ng-container *ngIf="!data.subtask && form.get('workspaceId')?.value">
+    <!-- <ng-container *ngIf="!data.parentTask && form.get('workspaceId')?.value">
       <app-select formControlName="projectId" floatingLabel="Project" i18n-floatingLabel>
         <app-option *ngFor="let project of projectList$ | async" [value]="project.id">{{project.name}}
         </app-option>
         <app-empty-options i18n>Selected workspace is empty</app-empty-options>
       </app-select>
-    </ng-container>
+    </ng-container> -->
 
     <!-- Type field -->
-    <app-select formControlName="type" floatingLabel="Type" i18n-floatingLabel>
-      <app-option *ngFor="let type of (data.subtask ? subTaskTypes : taskTypes)" [value]="type[1]"
-        [icon]="type[0] | taskTypeIcon">
+    <!-- <app-select formControlName="type" floatingLabel="Type" i18n-floatingLabel>
+      <app-option *ngFor="let type of taskTypes$ | async" [value]="type[1]" [icon]="type[0] | taskTypeIcon">
         {{ type[1] | taskType }}
       </app-option>
-    </app-select>
+    </app-select> -->
 
     <!-- Name field -->
     <app-input floatingLabel="Name" placeholder="New task" formControlName="name" i18n-floatingLabel i18n-placeholder>
@@ -37,18 +36,18 @@
       i18n-floatingLabel i18n-placeholder [rows]="10"></app-textarea>
 
     <!-- Status -->
-    <app-select formControlName="statusId" floatingLabel="Status" i18n-floatingLabel>
+    <!-- <app-select formControlName="statusId" floatingLabel="Status" i18n-floatingLabel>
       <app-option *ngFor="let status of statusList$ | async" [value]="status.id">
         {{ status.name }}
       </app-option>
       <app-empty-options i18n>This project doesn't have any status.</app-empty-options>
-    </app-select>
+    </app-select> -->
 
     <!-- Priorities -->
-    <app-select formControlName="priority" floatingLabel="Priority" i18n-floatingLabel>
+    <!-- <app-select formControlName="priority" floatingLabel="Priority" i18n-floatingLabel>
       <app-option *ngFor="let priority of taskPriorities" [value]="priority" [icon]="priority | taskPriorityIcon">{{
         priority | taskPriority }}</app-option>
-    </app-select>
+    </app-select> -->
 
     <!-- Deadline -->
     <app-input-date-time formControlName="deadline" floatingLabel="Deadline" placeholder="Choose a date"
@@ -59,6 +58,20 @@
     <app-input-date-time formControlName="estimatedDate" floatingLabel="Estimated date" placeholder="Choose a date"
       i18n-floatingLabel i18n-placeholder>
     </app-input-date-time>
+
+    <!-- Story points -->
+    <app-input formControlName="storyPoints" floatingLabel="Story points" placeholder="Story points" type="number"
+      i18n-floatingLabel i18n-placeholder>
+    </app-input>
+
+    <!-- Parent -->
+    <input-task-parent *ngIf="![TaskType.EPIC, TaskType.USER_STORY, undefined].includes(form.get('type')?.value)"
+      [projectId]="form.get('projectId').value || -1" formControlName="parentTaskId" [type]="form.get('type')?.value">
+    </input-task-parent>
+
+    <!-- Epic -->
+    <!-- <input-epic *ngIf="form.get('type').value !== TaskType.EPIC" formControlName="parentTaskId"
+      [projectId]="form.get('projectId').value || -1"></input-epic> -->
 
     <!-- GitHub issue integration -->
     <input-issue *ngIf="isGitHubIntegrationAvailable && form.get('projectId')?.value" formControlName="issue"

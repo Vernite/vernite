@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Service } from '@main/decorators/service/service.decorator';
 import { environment } from 'src/environments/environment';
 import { RequestOptions } from '../../interfaces/request-options.interface';
+import { DataFilter, DataFilterType } from '@main/interfaces/filters.interface';
 
 /**
  * Service to access the API
@@ -17,7 +18,9 @@ export class ApiService {
    */
   private apiURL: string = environment.apiURL;
 
-  /** Default service constructor with `HttpClient` dependency */
+  /**
+   * Default service constructor with `HttpClient` dependency
+   */
   constructor(private httpClient: HttpClient) {}
 
   /**
@@ -28,10 +31,16 @@ export class ApiService {
    * @returns Request observable, which completes when request is finished
    */
   public request<T = any>(method: string, url: string, options?: RequestOptions) {
+    const params = this.getParamsFromFilters(options?.filters);
+
     return this.httpClient.request<T>(method, this.apiURL + url, {
       responseType: 'json' as any,
       withCredentials: true,
       ...options,
+      params: {
+        ...(options?.params || {}),
+        ...(params || {}),
+      },
     });
   }
 
@@ -83,5 +92,26 @@ export class ApiService {
    */
   public patch<T = any>(url: string, options?: RequestOptions) {
     return this.request<T>('PATCH', url, options);
+  }
+
+  private getParamsFromFilters<T, V extends string | boolean | number>(
+    filters?: DataFilter<T, V>[] | DataFilter<T, V>,
+  ) {
+    if (!filters) {
+      return;
+    }
+
+    const params: RequestOptions['params'] = {};
+
+    if (!Array.isArray(filters)) {
+      filters = [filters];
+    }
+    for (const filter of filters) {
+      if (filter.type == DataFilterType.BACKEND) {
+        params[filter.field] = filter.value;
+      }
+    }
+
+    return params;
   }
 }

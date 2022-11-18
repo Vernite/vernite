@@ -43,6 +43,6 @@ export class AddMemberDialog {
   }
 
   cancel() {
-    this.dialogRef.close(false);
+    this.dialogRef.close();
   }
 }

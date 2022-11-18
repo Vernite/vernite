@@ -12,8 +12,8 @@ export class TimeTrackDurationPipe implements PipeTransform {
   transform(value: TimeTrack | undefined): any {
     if (!value) return 0;
 
-    const start = dayjs.unix(value.startDate);
-    const end = value.endDate ? dayjs.unix(value.endDate) : dayjs();
+    const start = dayjs(value.startDate);
+    const end = value.endDate ? dayjs(value.endDate) : dayjs();
 
     const milliseconds = end.diff(start, 'milliseconds');
 

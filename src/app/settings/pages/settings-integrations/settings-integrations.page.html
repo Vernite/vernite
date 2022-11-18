@@ -2,7 +2,9 @@
 
 <!-- GitHub integrations list -->
 <ng-container>
-  <app-list-group label="GitHub" i18n-label></app-list-group>
+  <app-list-group label="GitHub" i18n-label>
+    <app-button [icon]="faPlus" class="suffix" variant="transparent" (click)="openGitHubIntegration()"></app-button>
+  </app-list-group>
   <div class="list">
     <app-integration-entry *ngFor="let o of gitHubAccounts$ | async" [label]="o.account.gitHubUsername"
       [integration]="o.account" (disconnect)="disconnect($event)" [suspended]="o.account.suspended"

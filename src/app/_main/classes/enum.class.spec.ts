@@ -83,9 +83,9 @@ describe('Enum class', () => {
     }
 
     expect(Enum.entries(TestEnum8)).toEqual([
-      ['One', 'one'],
-      ['Two', 'two'],
-      ['Three', 'three'],
+      ['One', 'one' as TestEnum8],
+      ['Two', 'two' as TestEnum8],
+      ['Three', 'three' as TestEnum8],
     ]);
   });
 });

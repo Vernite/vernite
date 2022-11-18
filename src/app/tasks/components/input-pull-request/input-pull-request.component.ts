@@ -1,6 +1,6 @@
 import { ControlAccessor } from '@main/classes/control-accessor.class';
 import { GitPull } from '@dashboard/interfaces/git-integration.interface';
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { AbstractControl, NgControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { GitIntegrationService } from '@dashboard/services/git-integration/git-integration.service';
@@ -11,9 +11,10 @@ import { requiredValidator } from '@main/validators/required.validator';
   selector: 'input-pull-request',
   templateUrl: './input-pull-request.component.html',
 })
-export class InputPullRequestComponent extends ControlAccessor<
-  GitPull | 'DETACH' | 'CREATE' | null | ''
-> {
+export class InputPullRequestComponent
+  extends ControlAccessor<GitPull | 'DETACH' | 'CREATE' | null | ''>
+  implements OnDestroy
+{
   @Input() set projectId(value: number) {
     this._projectId = value;
     if (value) {
@@ -58,5 +59,10 @@ export class InputPullRequestComponent extends ControlAccessor<
 
   override ngAfterControlInit(): void {
     this.cdRef.detectChanges();
+  }
+
+  override ngOnDestroy() {
+    super.ngOnDestroy();
+    this.control.setValue(null);
   }
 }

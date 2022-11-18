@@ -72,9 +72,17 @@ export class ControlAccessor<T = any>
     return this.control.value;
   }
 
+  public get previousValue(): T | undefined {
+    return this._previousValue;
+  }
+
   public get errors() {
     return this.control.errors;
   }
+
+  private _previousValue: T | undefined = undefined;
+  private _previousValueBuffer: T | undefined = undefined;
+  private _interceptedAlready: boolean = false;
 
   /**
    * Accessor constructor to initialize component. Extended by child classes.
@@ -141,7 +149,19 @@ export class ControlAccessor<T = any>
     this.control.addValidators((control: AbstractControl) => this.validate(control));
   }
 
+  private _interceptValueChange(control: AbstractControl) {
+    if (this._interceptedAlready) return;
+    this._interceptedAlready = true;
+    control.setValue(this.parseValue(control.value), {
+      emitModelToViewChange: false,
+      emitEvent: false,
+      emitViewToModelChange: false,
+    });
+    setTimeout(() => (this._interceptedAlready = false));
+  }
+
   validate(control: AbstractControl): null | ValidationError {
+    this._interceptValueChange(control);
     return null;
   }
 
@@ -154,7 +174,8 @@ export class ControlAccessor<T = any>
    * @param value The new value for the element
    */
   writeValue(value: T): void {
-    // this.cdRef.markForCheck();
+    this._previousValue = this._previousValueBuffer;
+    this._previousValueBuffer = value;
   }
 
   /**
@@ -178,6 +199,10 @@ export class ControlAccessor<T = any>
    */
   setDisabledState(isDisabled: boolean) {
     this.control.setDisable(isDisabled);
+  }
+
+  parseValue(value: any): T {
+    return value;
   }
 
   /** @ignore */

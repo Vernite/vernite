@@ -1,40 +1,32 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input } from '@angular/core';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { MemberService } from '@dashboard/services/member/member.service';
-import { Observable } from 'rxjs';
+import { isString } from 'lodash-es';
 
 @Component({
-  selector: 'app-member-list',
+  selector: 'member-list',
   templateUrl: './member-list.component.html',
   styleUrls: ['./member-list.component.scss'],
 })
-export class MemberListComponent implements OnInit {
-  public projectId!: number;
+export class MemberListComponent {
+  @Input() projectId?: number;
+  @Input() members: (ProjectMember | string)[] = [];
 
-  public memberList$!: Observable<ProjectMember[]>;
-
-  @Input()
-  addedMembers?: string[];
-
-  @Input()
-  type: 'create' | 'edit' = 'edit';
-
-  @Input()
-  memberList!: ProjectMember[];
-
-  constructor(private memberService: MemberService, private activatedRoute: ActivatedRoute) {
-    const { workspaceId, projectId } = this.activatedRoute.snapshot.params;
-    this.projectId = projectId;
-
-    this.memberList$ = this.memberService.list(projectId);
+  public get oldMembers(): ProjectMember[] {
+    return this.members.filter((m) => !isString(m)) as ProjectMember[];
   }
 
+  public get newMembers(): string[] {
+    return this.members.filter((m) => isString(m)) as string[];
+  }
+
+  constructor(private memberService: MemberService) {}
+
   deleteMember(id: number[]) {
+    if (!this.projectId) return;
+
     this.memberService.remove(this.projectId, id).subscribe(() => {
       location.reload();
     });
   }
-
-  ngOnInit() {}
 }

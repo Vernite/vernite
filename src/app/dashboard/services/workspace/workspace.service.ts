@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
-import { ServiceValidator } from '@main/decorators/service-validator.decorator';
-import { Observable, Subject } from 'rxjs';
+import { Injectable, Injector } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { ApiService } from '@main/services/api/api.service';
 import { Workspace } from '../../interfaces/workspace.interface';
+import { BaseService } from '@main/services/base/base.service';
+import { Errors } from '@main/interfaces/http-error.interface';
+import { Cache } from '@main/decorators/cache/cache.decorator';
 
 /**
  * Workspaces management service
@@ -10,22 +12,37 @@ import { Workspace } from '../../interfaces/workspace.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class WorkspaceService {
-  list$ = new Subject<Workspace[]>();
+export class WorkspaceService extends BaseService<
+  Errors<'WORKSPACE_NOT_FOUND' | 'FORM_NOT_VALID' | 'WORKSPACE_NOT_EMPTY'>
+> {
+  protected override errorCodes = {
+    WORKSPACE_NOT_FOUND: {
+      message: $localize`Workspace not found`,
+    },
+    FORM_NOT_VALID: {
+      message: $localize`Some required fields in form are missing`,
+    },
+    WORKSPACE_NOT_EMPTY: {
+      message: $localize`Workspace is not empty`,
+    },
+  };
 
-  /**
-   * Default constructor with `ApiService` dependency.
-   * @param apiService Api service
-   */
-  constructor(private apiService: ApiService) {}
+  constructor(private injector: Injector, private apiService: ApiService) {
+    super(injector);
+  }
 
   /**
    * Gets a workspace by its ID.
    * @param id identifier of the workspace to get from the API
    * @returns Request observable, which completes when request is finished
    */
+  @Cache()
   public get(id: number): Observable<Workspace> {
-    return this.apiService.get(`/workspace/${id}`);
+    return this.apiService.get(`/workspace/${id}`).pipe(
+      this.validate({
+        404: 'WORKSPACE_NOT_FOUND',
+      }),
+    );
   }
 
   /**
@@ -34,7 +51,12 @@ export class WorkspaceService {
    * @returns Request observable, which completes when request is finished
    */
   public delete(id: number): Observable<null> {
-    return this.apiService.delete(`/workspace/${id}`).pipe(this.validate('DELETE'));
+    return this.apiService.delete(`/workspace/${id}`).pipe(
+      this.validate({
+        400: 'WORKSPACE_NOT_EMPTY',
+        404: 'WORKSPACE_NOT_FOUND',
+      }),
+    );
   }
 
   /**
@@ -43,15 +65,21 @@ export class WorkspaceService {
    * @returns Request observable, which completes when request is finished
    */
   public update(workspace: Partial<Workspace>): Observable<Workspace> {
-    return this.apiService.put(`/workspace/${workspace.id}`, { body: workspace });
+    return this.apiService.put(`/workspace/${workspace.id}`, { body: workspace }).pipe(
+      this.validate({
+        400: 'FORM_NOT_VALID',
+        404: 'WORKSPACE_NOT_FOUND',
+      }),
+    );
   }
 
   /**
    * Lists all available workspaces.
    * @returns Request observable, which completes when request is finished
    */
+  @Cache()
   public list(): Observable<Workspace[]> {
-    return this.apiService.get(`/workspace`);
+    return this.apiService.get(`/workspace`).pipe(this.validate());
   }
 
   /**
@@ -60,16 +88,29 @@ export class WorkspaceService {
    * @returns Request observable, which completes when request is finished
    */
   public create(workspace: { name: string }): Observable<Workspace> {
-    return this.apiService.post(`/workspace`, { body: workspace });
+    return this.apiService.post(`/workspace`, { body: workspace }).pipe(
+      this.validate({
+        400: 'FORM_NOT_VALID',
+      }),
+    );
   }
 
-  @ServiceValidator({
-    DELETE: {
-      400: $localize`Workspace is not empty. Only empty workspaces can be deleted.`,
-    },
-    GET: {
-      404: $localize`Workspace with this ID does not exist.`,
-    },
-  })
-  private validate(_identifier: string): any {}
+  /**
+   * Gets workspace object by project ID.
+   * @param projectId Project ID to find the workspace for
+   * @returns Observable that emits the workspace for the given project ID
+   */
+  public getWorkspaceByProjectId(projectId: number): Observable<Workspace> {
+    return this.list().pipe(
+      map((workspaces) => {
+        const workspace = workspaces.find((w) =>
+          w.projectsWithPrivileges.some((p) => p.project.id === projectId),
+        );
+        if (!workspace) {
+          throw new Error('Workspace not found');
+        }
+        return workspace;
+      }),
+    );
+  }
 }

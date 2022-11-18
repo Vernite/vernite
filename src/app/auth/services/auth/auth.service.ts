@@ -1,15 +1,25 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Service } from '@main/decorators/service/service.decorator';
 import dayjs from 'dayjs';
 import { tap } from 'rxjs';
 import { ApiService } from '@main/services/api/api.service';
+import { BaseService } from '@main/services/base/base.service';
+import { Errors } from '@main/interfaces/http-error.interface';
 
 @Service()
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
-  constructor(private apiService: ApiService) {}
+export class AuthService extends BaseService<Errors<'INVALID_TOKEN'>> {
+  protected override errorCodes = {
+    INVALID_TOKEN: {
+      message: $localize`Invalid token`,
+    },
+  };
+
+  constructor(private injector: Injector, private apiService: ApiService) {
+    super(injector);
+  }
 
   public register({
     email,
@@ -40,11 +50,11 @@ export class AuthService {
   }) {
     return this.apiService
       .post(`/auth/login`, { body: { email, password, remember } })
-      .pipe(tap(() => localStorage.setItem('lastLoginTry', dayjs().unix().toString())));
+      .pipe(tap(() => localStorage.setItem('lastLoginTry', dayjs().valueOf().toString())));
   }
 
   public logout() {
-    localStorage.removeItem('logged');
+    this.clearCache();
     return this.apiService.post(`/auth/logout`);
   }
 
@@ -61,7 +71,12 @@ export class AuthService {
   }
 
   public deleteAccountConfirmation(token: string) {
-    return this.apiService.delete(`/auth/delete/confirm`, { body: { token } });
+    return this.apiService.delete(`/auth/delete/confirm`, { body: { token } }).pipe(
+      this.validate({
+        403: 'INVALID_TOKEN',
+        404: 'INVALID_TOKEN',
+      }),
+    );
   }
 
   public recoverAccount() {
@@ -81,6 +96,6 @@ export class AuthService {
   }
 
   public getLastLoginTime() {
-    return dayjs.unix(Number(localStorage.getItem('lastLoginTry') || 0));
+    return dayjs(Number(localStorage.getItem('lastLoginTry') || 0));
   }
 }

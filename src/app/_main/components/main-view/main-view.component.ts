@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogOutlet } from '@main/services/dialog/dialog.service';
 import { environment } from 'src/environments/environment';
+import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
+import { RouterExtensionsService } from '@main/services/router-extensions/router-extensions.service';
 
 @Component({
   selector: 'app-main-view',
@@ -12,7 +14,12 @@ export class MainViewComponent implements OnInit {
 
   public DialogOutlet = DialogOutlet;
 
-  constructor() {}
+  public hideNavigation = false;
 
-  ngOnInit() {}
+  constructor(private routerExtensions: RouterExtensionsService) {}
+
+  ngOnInit() {
+    const data = this.routerExtensions.snapshot.data;
+    this.hideNavigation = data.hideNavigation;
+  }
 }

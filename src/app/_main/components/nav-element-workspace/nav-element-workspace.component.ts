@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostBinding, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { BehaviorSubject } from 'rxjs';
 import { Project } from 'src/app/dashboard/interfaces/project.interface';
 import { Workspace } from 'src/app/dashboard/interfaces/workspace.interface';
@@ -14,19 +14,23 @@ import { DialogService } from '../../services/dialog/dialog.service';
   styleUrls: ['./nav-element-workspace.component.scss'],
 })
 export class NavElementWorkspaceComponent implements AfterViewInit {
-  @Input()
-  public routerLink?: string;
+  @Input() routerLink?: string;
 
-  @Input()
-  public workspace: Workspace = { id: -1 } as unknown as Workspace;
+  @Input() workspace: Workspace = {} as Workspace;
 
+  @Input() @HostBinding('class.collapsed') collapsed: boolean = false;
+
+  /** @ignore */
   faAngleDown = faAngleDown;
+
+  /** @ignore */
+  faPlus = faPlus;
+
   public activeWorkspace: boolean = false;
 
   public showArrow$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @ViewChild('elementList')
-  listElement?: ElementRef;
+  @ViewChild('elementList') listElement?: ElementRef<HTMLElement>;
 
   constructor(
     private workspaceService: WorkspaceService,
@@ -51,32 +55,32 @@ export class NavElementWorkspaceComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.showArrow$.next(Boolean(this.listElement?.nativeElement.children.length));
+      this.showArrow$.next(Boolean(this.listElement?.nativeElement?.children?.length));
     });
   }
 
   routeToWorkspace() {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
-      .then(() => this.router.navigate(['/', this.workspace.id]));
+      .then(() => this.router.navigate(['/', 'workspaces', this.workspace.id]));
   }
 
   routeToProject(project: Project) {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
-      .then(() => this.router.navigate(['/', this.workspace.id, project.id]));
+      .then(() => this.router.navigate(['/', 'projects', project.id]));
   }
 
   createProject() {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
-      .then(() => this.router.navigate(['/', this.workspace.id, 'create']));
+      .then(() => this.router.navigate(['/', 'workspaces', this.workspace.id, 'create']));
   }
 
   editProject(project: Project) {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
-      .then(() => this.router.navigate(['/', this.workspace.id, project.id, 'edit']));
+      .then(() => this.router.navigate(['/', 'projects', project.id, 'edit']));
   }
 
   deleteProject(project: Project) {
@@ -90,7 +94,7 @@ export class NavElementWorkspaceComponent implements AfterViewInit {
   editWorkspace() {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
-      .then(() => this.router.navigate(['/', this.workspace.id, 'edit']));
+      .then(() => this.router.navigate(['/', 'workspaces', this.workspace.id, 'edit']));
   }
 
   deleteWorkspace() {

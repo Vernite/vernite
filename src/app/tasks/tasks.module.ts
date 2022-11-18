@@ -25,6 +25,12 @@ import { TimeTracksTotalPipe } from './pipes/time-tracks-total/time-tracks-total
 import { TimeTrackTimerPipe } from './pipes/time-track-timer/time-track-timer.pipe';
 import { TimeTrackDurationPipe } from './pipes/time-track-duration/time-track-duration.pipe';
 import { TaskViewOptionsComponent } from './components/task-view-options/task-view-options.component';
+import { TrackerEntryComponent } from './components/tracker/tracker-entry/tracker-entry.component';
+import { InputEpicComponent } from './components/input-epic/input-epic.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
+import { TaskRowComponent } from './components/task-row/task-row.component';
+import { InputTaskParentComponent } from './components/input-task-parent/input-task-parent.component';
+import { TaskPage } from './pages/task/task.page';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule],
@@ -45,12 +51,19 @@ import { TaskViewOptionsComponent } from './components/task-view-options/task-vi
     InputTaskPropertyComponent,
     InputIssueComponent,
     InputPullRequestComponent,
+    InputTaskParentComponent,
     TrackerComponent,
+    TrackerEntryComponent,
     TimeTracksTotalPipe,
     TimeTrackTimerPipe,
     TimeTrackDurationPipe,
     TaskViewOptionsComponent,
     SprintDialog,
+    InputEpicComponent,
+    TaskListComponent,
+    TaskRowComponent,
+    TaskPage,
   ],
+  exports: [TaskTypePipe],
 })
 export class TasksModule {}

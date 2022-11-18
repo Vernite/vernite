@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MockPage } from '@main/pages/mock/mock.page';
 import { BoardPage } from './pages/board/board.page';
 import { SchedulePage } from './pages/schedule/schedule.page';
 import { TaskListPage } from './pages/task-list/task-list.page';
+import { TaskPage } from './pages/task/task.page';
 
 /**
  * Tasks routes list
@@ -35,11 +35,12 @@ const routes: Routes = [
     component: SchedulePage,
   },
   {
+    path: 'tasks/:taskId',
+    component: TaskPage,
+  },
+  {
     path: 'calendar',
-    component: MockPage,
-    data: {
-      image: 'assets/mocks/calendar.svg',
-    },
+    loadChildren: () => import('../calendar/calendar.module').then((m) => m.CalendarModule),
   },
 ];
 

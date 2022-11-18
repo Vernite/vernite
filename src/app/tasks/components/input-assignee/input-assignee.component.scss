@@ -33,7 +33,7 @@
   li {
     display: flex;
     align-items: center;
-    padding: 0.75rem 2rem;
+    padding: 0.5rem 2rem;
     color: var(--color-text);
 
     &:not(.line) {
@@ -96,6 +96,7 @@
       flex-direction: column;
 
       .username {
+        margin-top: -3px;
         opacity: 0.5;
       }
     }

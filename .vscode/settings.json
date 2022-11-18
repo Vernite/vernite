@@ -14,7 +14,7 @@
   "editor.formatOnSave": true,
 
   "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
 
   "stylelint.enable": true,
@@ -71,5 +71,5 @@
   /* ================== */
   /* ==== Spelling ==== */
   /* ================== */
-  "cSpell.words": ["compodoc", "devkit", "lcov", "ngneat", "tabuckner"]
+  "cSpell.words": ["compodoc", "devkit", "lcov", "ngneat", "tabuckner", "Vernite"]
 }

@@ -1,0 +1,9 @@
+.mat-column-grip,
+.mat-column-action {
+  min-width: 50px;
+  flex-grow: 0;
+
+  app-icon {
+    opacity: 0.2;
+  }
+}

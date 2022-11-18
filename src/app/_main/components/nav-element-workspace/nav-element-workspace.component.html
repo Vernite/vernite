@@ -1,12 +1,12 @@
 <section>
   <div class="workspace">
     <div class="element" (click)="toggleWorkspace()">
-      <ng-content></ng-content>
+      <div class="workspace-icon">{{ (workspace.name || '').substr(0, 2) }}</div>
+      <span class="text" #contentRef>
+        <ng-content></ng-content>
+      </span>
     </div>
     <div class="icons">
-      <div class="open-below" [class.hidden]="(showArrow$ | async) === false" (click)="toggleWorkspace()">
-        <app-icon [icon]="faAngleDown" size="16px" [class.active]="activeWorkspace"></app-icon>
-      </div>
       <div class="options">
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
           <mat-icon>more_vert</mat-icon>
@@ -26,12 +26,17 @@
           </button>
         </mat-menu>
       </div>
+      <div class="open-below" (click)="toggleWorkspace()">
+        <app-icon [icon]="faAngleDown" size="16px" [class.active]="activeWorkspace"></app-icon>
+      </div>
     </div>
   </div>
-  <div class="project" [class.active]="activeWorkspace">
+  <div class="project" [style.max-height]="activeWorkspace ? elementList.scrollHeight + 16 + 'px' : 0">
     <ul #elementList>
       <li *ngFor="let projectWithPriv of workspace.projectsWithPrivileges">
-        <div class="sub-element" (click)="routeToProject(projectWithPriv.project)">{{projectWithPriv.project.name}}</div>
+        <span class="project-short-name">{{ projectWithPriv.project.name.substr(0, 2) }}</span>
+        <div class="sub-element" (click)="routeToProject(projectWithPriv.project)">{{ projectWithPriv.project.name }}
+        </div>
         <div class="icons" [matMenuTriggerFor]="menu">
           <div class="options">
             <button mat-icon-button aria-label="Menu">
@@ -59,6 +64,10 @@
             </mat-menu>
           </div>
         </div>
+      </li>
+      <li *ngIf="!workspace.projectsWithPrivileges?.length" class="create-project bg-transparent">
+        <app-button [icon]="faPlus" variant="transparent" [routerLink]="['/', workspace.id, 'create']" class="w-full"
+          i18n>Create project</app-button>
       </li>
     </ul>
   </div>
