@@ -10,7 +10,7 @@ export interface RequestOptions {
   /**
    * Body to send with the request. Used int POST, PATH, PATCH, DELETE requests.
    */
-  body?: JSONParsable | JSONPrimitive | JSONPrimitive[];
+  body?: JSONParsable | JSONPrimitive | JSONPrimitive[] | FormData;
   /**
    * Headers to send with the request.
    */

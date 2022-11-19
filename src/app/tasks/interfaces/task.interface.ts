@@ -3,6 +3,7 @@ import { TaskType } from '@tasks/enums/task-type.enum';
 import { JSONParsable } from './../../_main/interfaces/json-parsable.interface';
 import { unixTimestamp } from '../../_main/interfaces/date.interface';
 import { TimeTrack } from './time-track.interface';
+import { TaskPriority } from '@tasks/enums/task-priority.enum';
 
 /**
  * Project task interface
@@ -44,7 +45,7 @@ export interface Task extends JSONParsable {
   workspaceId: number;
 
   /**
-   * Status id (unique per database)
+   * Status id
    */
   statusId?: number;
 
@@ -87,6 +88,13 @@ export interface Task extends JSONParsable {
    * List of trackers for this task
    */
   timeTracks: TimeTrack[];
+
+  /**
+   * Task priority
+   * @default TaskPriority.MEDIUM
+   * @see TaskPriority
+   */
+  priority: TaskPriority;
 
   /**
    * Epic attached to task

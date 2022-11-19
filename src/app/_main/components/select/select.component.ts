@@ -54,7 +54,6 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
   isOpen: boolean = false;
 
   selectedOptions$ = new BehaviorSubject<OptionComponent[]>([]);
-  _sub = this.selectedOptions$.pipe(untilDestroyed(this)).pipe(tap(console.log)).subscribe();
   labelControl = new FormControl();
 
   /** @ignore */
@@ -87,7 +86,6 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     this.loadOptions();
 
     this.control.valueChanges.subscribe(() => {
-      console.log('Value changed');
       this.clearSelection();
 
       this.queryOptions?.forEach((option) => {
@@ -103,7 +101,6 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
   }
 
   private loadOptions() {
-    console.log('Loading options');
     this.clearSelection();
 
     this.queryOptions?.forEach((option) => {
@@ -111,12 +108,6 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
         this.onOptionClick(option);
       });
 
-      console.log(
-        'Comparing',
-        option.value,
-        this.control.value,
-        this.compare(option.value, this.control.value),
-      );
       if (this.compare(option.value, this.control.value)) {
         this.setAsSelected(option);
       }
@@ -128,7 +119,6 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
   private clearSelection() {
     if (this.queryOptions) {
       for (const option of this.queryOptions.toArray()) {
-        console.log('Clearing selection', option);
         option.selected = false;
       }
     }
@@ -136,7 +126,6 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
   }
 
   private setAsSelected(option: OptionComponent | OptionComponent[] | null) {
-    console.log('Setting as selected', option);
     const currentlySelected = this.selectedOptions$.value;
 
     const setOptionAsSelected = (option: OptionComponent) => {
@@ -154,10 +143,8 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     if (this.multiple) {
       this.labelControl.setValue(' ');
     } else if (option && !Array.isArray(option)) {
-      console.log('Setting label control value', option.viewValue);
       this.labelControl.setValue(option.viewValue);
     }
-    console.log('Selected options', this.selectedOptions$.value);
   }
 
   public select(option: OptionComponent) {
@@ -171,7 +158,6 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
   }
 
   public deselect(option: OptionComponent) {
-    console.log('Deselecting', option);
     const currentlySelected = this.selectedOptions$.value;
     const index = currentlySelected.findIndex((selectedOption) => option === selectedOption);
 
@@ -183,7 +169,6 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
 
     this.control.setValue(this.selectedOptions$.value.map((option) => option.value));
 
-    console.log(currentlySelected.length);
     if (currentlySelected.length === 0) {
       this.labelControl.setValue('');
     }

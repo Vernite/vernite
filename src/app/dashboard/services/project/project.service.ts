@@ -115,4 +115,15 @@ export class ProjectService extends BaseService<
       params: { from, to },
     });
   }
+
+  public saveLogo(projectId: number, file: File): Observable<void> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.apiService.post(`/project/${projectId}/logo`, { body: formData });
+  }
+
+  public deleteLogo(projectId: number): Observable<void> {
+    return this.apiService.delete(`/project/${projectId}/logo`);
+  }
 }
