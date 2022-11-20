@@ -3,12 +3,12 @@ name: deploy
 on:
   push:
     branches: [master]
+    paths: ['proto/**']
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    paths: ['proto/**']
     steps:
 
       # Default first step do checkout the repository
