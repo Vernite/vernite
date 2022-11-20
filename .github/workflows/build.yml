@@ -17,6 +17,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
+          registry-url: https://npm.pkg.github.com/
       
       # Protoc installation
       - name: Install Protoc
@@ -67,12 +68,18 @@ jobs:
           --ts_out=dist/typescript
           --java_out=dist/java
 
+      # Deploy Typescript
       - name: Deploy TypeScript 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           branch: build-typescript
           folder: dist/typescript
+      
+      # Public package
+      - name: Publish package 📦
+        run: yarn publish --access public
 
+      # Deploy Java
       - name: Deploy Java 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
