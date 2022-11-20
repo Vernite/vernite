@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+message NewTaskNotification {
+  string name = 1;
+  string createdAt = 2;
+}
