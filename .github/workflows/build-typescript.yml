@@ -45,6 +45,10 @@ jobs:
         if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
         run: yarn install
 
+      # Create dist directory
+      - name: Create dist directory
+        run: mkdir dist
+
       # Build
       - name: Build Typescript libraries ⚙️
         run: >
