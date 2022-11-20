@@ -93,14 +93,11 @@ export class TaskService extends BaseService<
     );
   }
 
-  public sprint(
-    projectId: number,
-    filters?: DataFilter<Task, any>[] | DataFilter<Task, any>,
-  ): Observable<Task[]> {
+  public sprint(projectId: number, sprintId: number): Observable<Task[]> {
     const params = new HttpParams();
-    params.append('backlog', true);
+    params.append('sprintId', sprintId);
 
-    return this.apiService.get<Task[]>(`/project/${projectId}/task?backlog=true`).pipe(
+    return this.apiService.get<Task[]>(`/project/${projectId}/task?sprintId=${sprintId}`).pipe(
       this.validate({
         404: 'PROJECT_NOT_FOUND',
       }),

@@ -13,6 +13,7 @@ import { requiredValidator } from '../../../_main/validators/required.validator'
 import { unixTimestamp } from '../../../_main/interfaces/date.interface';
 import { Sprint } from '@tasks/interfaces/sprint.interface';
 import { ProjectService } from '@dashboard/services/project/project.service';
+import { SprintStatus } from '@tasks/enums/sprint-status.enum';
 
 export enum SprintDialogVariant {
   CREATE = 'create',
@@ -44,7 +45,8 @@ export class SprintDialog implements OnInit {
     description: new FormControl<string>(''),
     startDate: new FormControl<unixTimestamp | null>(null, [requiredValidator()]),
     finishDate: new FormControl<unixTimestamp | null>(null, [requiredValidator()]),
-    status: new FormControl<string>('CREATED'),
+    // TEST TEST TEST
+    status: new FormControl<SprintStatus>(this.data.sprint?.status || SprintStatus.ACTIVE),
   });
 
   public interactive$ = timeToInteraction();

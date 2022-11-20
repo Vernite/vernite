@@ -8,6 +8,7 @@ import {
   SprintDialogData,
   SprintDialogVariant,
 } from '@tasks/dialogs/sprint/sprint.dialog';
+import { SprintStatus } from '@tasks/enums/sprint-status.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -124,7 +125,7 @@ export class SprintService {
 
   public getActiveSprint(projectId: number): Observable<Sprint | undefined> {
     return this.list(projectId).pipe(
-      map((sprintList) => sprintList.find((sprint) => sprint.status === 'active')),
+      map((sprintList) => sprintList.find((sprint) => sprint.status === SprintStatus.ACTIVE)),
     );
   }
 }

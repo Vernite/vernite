@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ActiveSprintGuard } from './guard/active-sprint.guward';
 import { BacklogPage } from './pages/backlog/backlog.page';
 import { BoardPage } from './pages/board/board.page';
 import { SprintPage } from './pages/sprint/sprint.page';
@@ -14,10 +15,6 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: 'sprint',
-  },
-  {
-    path: 'sprint',
-    component: TaskListPage,
   },
   {
     path: 'backlog',
@@ -40,15 +37,24 @@ const routes: Routes = [
   },
   {
     path: 'sprint',
-    component: SprintPage,
     children: [
       {
-        path: ':sprintId/board',
-        component: BoardPage,
+        path: 'active',
+        canActivate: [ActiveSprintGuard],
       },
       {
-        path: ':sprintId/list',
-        component: TaskListPage,
+        path: ':sprintId',
+        component: SprintPage,
+        children: [
+          {
+            path: 'board',
+            component: BoardPage,
+          },
+          {
+            path: 'list',
+            component: TaskListPage,
+          },
+        ],
       },
     ],
   },
