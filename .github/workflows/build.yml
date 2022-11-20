@@ -96,4 +96,6 @@ jobs:
           yarn version --patch
           yarn publish --access public
           cd ../..
-          git push     
+          git push
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
