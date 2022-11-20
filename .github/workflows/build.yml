@@ -86,6 +86,7 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: https://npm.pkg.github.com/
+          always-auth: true
 
       # Public package
       - name: Publish package 📦
