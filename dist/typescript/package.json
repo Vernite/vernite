@@ -1,5 +1,5 @@
 {
-  "name": "protobuf",
+  "name": "@vernite/protobuf",
   "version": "1.0.2",
   "repository": "https://github.com/Vernite/protobuf",
   "publishConfig": {
