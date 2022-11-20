@@ -46,18 +46,6 @@ jobs:
         if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
         run: yarn install
 
-      # Create dist directory
-      - name: Create dist directory
-        run: mkdir dist
-
-      # Create typescript subdirectory
-      - name: Create typescript subdirectory
-        run: mkdir dist/typescript
-
-      # Create java subdirectory
-      - name: Create java subdirectory
-        run: mkdir dist/java
-
       # Build
       - name: Build proto libraries ⚙️
         run: >
@@ -77,7 +65,11 @@ jobs:
       
       # Public package
       - name: Publish package 📦
-        run: yarn publish --access public
+        run: |
+          cd dist/typescript
+          yarn version --no-git-tag-version --new-version ${{ github.ref_name }}
+          yarn publish --access public
+          cd ../..
 
       # Deploy Java
       - name: Deploy Java 🚀
