@@ -99,4 +99,4 @@ jobs:
           cd ../..
           git push
         env:
-          NODE_AUTH_TOKEN: ${{secrets.PAGES_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
