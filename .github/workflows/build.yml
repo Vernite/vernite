@@ -95,7 +95,7 @@ jobs:
           git config --global user.email 'version-bump@vernite.dev'
           cd dist/typescript
           yarn version --patch
-          yarn publish
+          yarn publish --verbose
           cd ../..
           git push
         env:
