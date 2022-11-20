@@ -3,10 +3,12 @@ name: deploy
 on:
   push:
     branches: [master]
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    paths: ['proto/**']
     steps:
 
       # Default first step do checkout the repository
@@ -62,14 +64,6 @@ jobs:
         with:
           branch: build-typescript
           folder: dist/typescript
-      
-      # Public package
-      - name: Publish package 📦
-        run: |
-          cd dist/typescript
-          yarn version --no-git-tag-version --new-version ${{ github.ref_name }}
-          yarn publish --access public
-          cd ../..
 
       # Deploy Java
       - name: Deploy Java 🚀
@@ -77,3 +71,29 @@ jobs:
         with:
           branch: build-java
           folder: dist/java
+
+  publish:
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    steps:
+
+      # Default first step do checkout the repository
+      - uses: actions/checkout@v3
+
+      # Node js installation
+      - name: Install Node.js version 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: https://npm.pkg.github.com/
+
+      # Public package
+      - name: Publish package 📦
+        run: |
+          git config --global user.name 'Vernite'
+          git config --global user.email 'version-bump@vernite.dev'
+          cd dist/typescript
+          yarn version --patch
+          yarn publish --access public
+          cd ../..
+          git push     
