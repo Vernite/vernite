@@ -49,17 +49,32 @@ jobs:
       - name: Create dist directory
         run: mkdir dist
 
+      # Create typescript subdirectory
+      - name: Create typescript subdirectory
+        run: mkdir dist/typescript
+
+      # Create java subdirectory
+      - name: Create java subdirectory
+        run: mkdir dist/java
+
       # Build
-      - name: Build Typescript libraries ⚙️
+      - name: Build proto libraries ⚙️
         run: >
           find ./proto -iname "*.proto" | xargs -L 1 -d '\n'
           protoc
           -I=./proto
           --plugin="protoc-gen-ts=./node_modules/.bin/protoc-gen-ts"
-          --ts_out=dist
+          --ts_out=dist/typescript
+          --java_out=dist/java
 
-      - name: Deploy to new branch 🚀
+      - name: Deploy TypeScript 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           branch: build-typescript
-          folder: dist
+          folder: dist/typescript
+
+      - name: Deploy Java 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+          branch: build-java
+          folder: dist/java
