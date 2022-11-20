@@ -94,4 +94,10 @@ export class MemberService extends BaseService<
       ),
     );
   }
+
+  public get(projectId: number, userId: number): Observable<ProjectMember> {
+    return this.list(projectId).pipe(
+      map((members) => members.find((member) => member.user.id === userId)!),
+    );
+  }
 }

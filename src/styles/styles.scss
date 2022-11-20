@@ -8,8 +8,6 @@
 @import 'typography';
 @import 'preload';
 
-@import 'scrollbar';
-
 // Themes imports
 @import 'themes/default.theme';
 @import 'themes/dark.theme';
@@ -28,12 +26,15 @@
 
 // Elements
 @import 'elements/table';
+@import 'elements/markdown';
+@import 'elements/scrollbar';
 
 // Tailwind dependencies imports
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+// Global styles
 html,
 body {
   height: 100%;

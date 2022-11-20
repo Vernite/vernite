@@ -57,6 +57,7 @@ export enum DataFilterControlType {
 }
 
 export interface DataFilter<T, V> {
+  identifier: string;
   type: DataFilterType;
   field: string;
   value: V;

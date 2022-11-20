@@ -47,7 +47,17 @@ export interface Task extends JSONParsable {
   /**
    * Status id
    */
-  statusId?: number;
+  statusId: number;
+
+  /**
+   * The id of the user who created the task
+   */
+  createdBy?: number;
+
+  /**
+   * Date of creation
+   */
+  createdAt?: unixTimestamp;
 
   /**
    * Parent task id
