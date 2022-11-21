@@ -3,4 +3,5 @@ syntax = "proto3";
 message NewTaskNotification {
   string name = 1;
   string createdAt = 2;
+  int32 taskId = 3;
 }
