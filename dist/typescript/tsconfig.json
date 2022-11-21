@@ -4,9 +4,8 @@
     "target": "es2017",
     "types": ["node"],
     "declaration": true,
-    "declarationMap": true,
-    "outDir": "dist"
+    "declarationMap": true
   },
-  "include": ["*/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
