@@ -63,6 +63,14 @@ jobs:
       - name: Print files structure
         run: find dist/ | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"
 
+      # Build TypeScript
+      - name: Build TypeScript
+        run: |
+          cd dist/typescript
+          yarn install
+          yarn tsc -p tsconfig.json
+          cd ../..
+
       # Deploy Typescript
       - name: Deploy TypeScript 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3

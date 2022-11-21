@@ -8,5 +8,8 @@
   "dependencies": {
     "@types/google-protobuf": "^3.15.6",
     "google-protobuf": "^3.21.2"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.3"
   }
 }
