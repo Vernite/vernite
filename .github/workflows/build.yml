@@ -58,6 +58,10 @@ jobs:
           --ts_out=dist/typescript
           --java_out=dist/java
 
+      # Print files structure
+      - name: Print files structure
+        run: find dist/ | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"
+
       # Deploy Typescript
       - name: Deploy TypeScript 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
