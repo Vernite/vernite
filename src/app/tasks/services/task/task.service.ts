@@ -126,7 +126,7 @@ export class TaskService extends BaseService<
    * @returns Request observable
    */
   public delete(projectId: number, taskId: number): Observable<null> {
-    return this.apiService.delete(`/project/${projectId}/task/${taskId}`).pipe(
+    return this.apiService.delete<null>(`/project/${projectId}/task/${taskId}`).pipe(
       this.validate({
         404: 'PROJECT_NOT_FOUND',
       }),

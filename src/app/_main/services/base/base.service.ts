@@ -2,10 +2,12 @@ import { ErrorCodes, HTTPError, Errors } from '@main/interfaces/http-error.inter
 import { catchError, throwError, OperatorFunction } from 'rxjs';
 import { Injector } from '@angular/core';
 import { SnackbarService } from '@main/services/snackbar/snackbar.service';
+import { ProtoService } from '../proto/proto.service';
 
 export abstract class BaseService<T extends Errors<string>> {
   protected abstract errorCodes: ErrorCodes<T>;
   private _snackbarService: SnackbarService = this._injector.get(SnackbarService);
+  private _protoService: ProtoService = this._injector.get(ProtoService);
 
   constructor(private _injector: Injector) {}
 

@@ -52,14 +52,15 @@
     "@ngneat/reactive-forms": "4.1.0",
     "@ngneat/until-destroy": "^9.2.1",
     "@tabuckner/material-dayjs-adapter": "^1.1.0",
+    "@vernite/protobuf": "https://github.com/Vernite/protobuf.git#build-typescript",
     "color": "^4.2.3",
     "concurrently": "^7.1.0",
     "dayjs": "^1.11.2",
     "emoji-js": "^3.7.0",
+    "google-protobuf": "^3.21.2",
     "highlight.js": "^11.5.1",
     "lodash-es": "^4.17.21",
     "marked": "^4.0.17",
-    "miragejs": "^0.1.43",
     "monaco-editor": "^0.33.0",
     "rxjs": "~7.5.0",
     "rxjs-observe": "^2.1.6",
@@ -145,6 +146,7 @@
     "typescript": "~4.5.2",
     "webpack": "^5.72.1",
     "webpack-bundle-analyzer": "^4.5.0",
-    "webpack-inject-plugin": "^1.5.5"
+    "webpack-inject-plugin": "^1.5.5",
+    "yarn-audit-fix": "^9.3.7"
   }
 }
