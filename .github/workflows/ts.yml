@@ -14,7 +14,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-          registry-url: https://npm.pkg.github.com/
+          registry-url: 'https://registry.npmjs.org'
       - name: Install Protoc
         uses: arduino/setup-protoc@v1
       - name: Cache node modules
@@ -36,13 +36,12 @@ jobs:
         run: yarn install
       - name: Build proto libraries ⚙️
         run: |
-          protoc -I=./proto --plugin="protoc-gen-ts=./node_modules/.bin/protoc-gen-ts" --ts_out="dist/typescript" proto/vernite.proto
+          protoc -I=./proto --plugin="protoc-gen-ts=./node_modules/.bin/protoc-gen-ts" --ts_out="dist/typescript" --ts_opt="explicit_override" proto/vernite.proto
       - name: Build TypeScript
         run: |
           cd dist/typescript
           yarn install
           yarn tsc -p tsconfig.json
-          cd ../..
       - name: Deploy TypeScript 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
