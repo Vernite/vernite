@@ -36,7 +36,7 @@ jobs:
         run: yarn install
       - name: Build proto libraries ⚙️
         run: |
-          protoc -I=./protc --plugin="protoc-gen-ts=./node_modules/.bin/protoc-gen-ts" --ts_out=dist/typescript --ts_opt=explicit_override
+          protoc -I=./proto --plugin="protoc-gen-ts=./node_modules/.bin/protoc-gen-ts" --ts_out=dist/typescript --ts_opt=explicit_override proto/vernite.proto
       - name: Build TypeScript
         run: |
           cd dist/typescript
