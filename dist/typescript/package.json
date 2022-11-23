@@ -1,6 +1,6 @@
 {
   "name": "@vernite/protobuf",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "repository": "https://github.com/Vernite/protobuf",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
