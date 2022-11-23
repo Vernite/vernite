@@ -5,6 +5,7 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
+  "main": "vernite.js",
   "dependencies": {
     "typescript": "^4.9.3",
     "google-protobuf": "^3.21.2"
