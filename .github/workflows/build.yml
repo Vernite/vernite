@@ -47,18 +47,21 @@ jobs:
       - name: Install dependencies
         if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
         run: yarn install
-
+        
       # Build
       - name: Build proto libraries ⚙️
         run: >
+          mkdir -p src/main
           find ./proto -iname "*.proto" | xargs -L 1 -d '\n'
           protoc
           -I=./proto
           --plugin="protoc-gen-ts=./node_modules/.bin/protoc-gen-ts"
           --ts_out=dist/typescript
           --ts_opt=explicit_override
-          --java_out=dist/java
+          --java_out=src/main
 
+      - name: Mvn
+        run: mvn package
       # Print files structure
       - name: Print files structure
         run: find dist/ | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"
