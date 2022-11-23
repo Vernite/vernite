@@ -87,11 +87,9 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     this.loadOptions();
 
     this.control.valueChanges.subscribe((value) => {
-      console.log('value:', value);
       this.clearSelection();
 
       this.queryOptions?.forEach((option) => {
-        console.log('compare:', option.value, value, this.compare(option.value, value));
         if (this.compare(option.value, value)) {
           this.setAsSelected(option);
         }
@@ -104,7 +102,6 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
   }
 
   private loadOptions() {
-    console.log('loadOptions');
     this.clearSelection();
 
     this.queryOptions?.forEach((option) => {
