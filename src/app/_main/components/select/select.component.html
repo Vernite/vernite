@@ -6,7 +6,7 @@
 
   <!-- Select input -->
   <app-input #input (click)="toggleOverlay()" type="text" [formControl]="labelControl" [readonly]="true"
-    [floatingLabel]="floatingLabel" [allowResizeByError]="allowResizeByError">
+    [floatingLabel]="floatingLabel" [allowResizeByError]="allowResizeByError" [pending]="pending">
     <!-- <app-icon class="prefix" *ngIf="selected.icon" size="1rem" [icon]="selected.icon"></app-icon> -->
     <app-icon class="suffix" [icon]="faChevronDown" size="0.75rem"></app-icon>
     <div *ngIf="multiple" class="overlay">

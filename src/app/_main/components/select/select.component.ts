@@ -14,12 +14,10 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { ControlAccessor } from '@main/classes/control-accessor.class';
 import { FormControl } from '@ngneat/reactive-forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { isEqual, isNil } from 'lodash-es';
-import { BehaviorSubject, filter, take, startWith, tap } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { InputComponent } from '../input/input.component';
 import { EmptyOptionsComponent } from './empty-options/empty-options.component';
 import { OptionComponent } from './option/option.component';
-import { Selection } from './select-label.model';
 
 @UntilDestroy()
 @Component({
@@ -39,8 +37,11 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
    */
   @Input() floatingLabel?: string;
 
+  @Input() pending = false;
+
   /**
    * @TODO: Add documentation
+   * @deprecated
    */
   @Input() comparer?: string;
 
@@ -85,11 +86,13 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
   public ngAfterViewInit(): void {
     this.loadOptions();
 
-    this.control.valueChanges.subscribe(() => {
+    this.control.valueChanges.subscribe((value) => {
+      console.log('value:', value);
       this.clearSelection();
 
       this.queryOptions?.forEach((option) => {
-        if (this.compare(option.value, this.control.value)) {
+        console.log('compare:', option.value, value, this.compare(option.value, value));
+        if (this.compare(option.value, value)) {
           this.setAsSelected(option);
         }
       });
@@ -101,6 +104,7 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
   }
 
   private loadOptions() {
+    console.log('loadOptions');
     this.clearSelection();
 
     this.queryOptions?.forEach((option) => {
@@ -154,7 +158,6 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     } else {
       this.control.setValue(this.selectedOptions$.value.map((option) => option.value));
     }
-    option.selected = true;
   }
 
   public deselect(option: OptionComponent) {
@@ -183,12 +186,12 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
   }
 
   private compare(a: any, b: any) {
-    const { comparer } = this;
-
-    if (comparer && a && b && (a[comparer] !== undefined || b[comparer] !== undefined)) {
-      return a[comparer] === b[comparer];
+    if (Array.isArray(a) && Array.isArray(b)) {
+      return a.every((a) => b.some((b) => a === b));
+    } else if (Array.isArray(b)) {
+      return b.some((b) => a === b);
     } else {
-      return a == b || isEqual(a, b);
+      return a === b;
     }
   }
 
@@ -196,6 +199,7 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     if (this.multiple) {
       this.toggleSelection(option);
     } else {
+      this.clearSelection();
       this.select(option);
     }
 
