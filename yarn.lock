@@ -4983,11 +4983,11 @@
     eslint-visitor-keys "^3.3.0"
 
 "@vernite/protobuf@https://github.com/Vernite/protobuf.git#build-typescript":
-  version "1.0.10"
-  resolved "https://github.com/Vernite/protobuf.git#3d49178340ec4953c405095c09d6848d82edc5e6"
+  version "1.0.12"
+  resolved "https://github.com/Vernite/protobuf.git#0c826442920432182562d6689aa2f3edfb75bf52"
   dependencies:
-    "@types/google-protobuf" "^3.15.6"
     google-protobuf "^3.21.2"
+    typescript "^4.9.3"
 
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
@@ -16853,6 +16853,11 @@ typescript@^4.0.3, typescript@^4.5.3, typescript@~4.5.2:
   version "4.5.5"
   resolved "https://registry.npmjs.org/typescript/-/typescript-4.5.5.tgz"
   integrity sha512-TCTIul70LyWe6IJWT8QSYeA54WQe8EjQFU4wY52Fasj5UKx88LNYKCgBEHcOMOrFF1rKGbD8v/xcNWVUq9SymA==
+
+typescript@^4.9.3:
+  version "4.9.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.3.tgz#3aea307c1746b8c384435d8ac36b8a2e580d85db"
+  integrity sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==
 
 ua-parser-js@^0.7.30:
   version "0.7.31"
