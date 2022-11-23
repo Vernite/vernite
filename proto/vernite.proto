@@ -5,9 +5,6 @@ package tutorial;
 option java_multiple_files = true;
 option java_package = "com.example.tutorial.protos";
 option java_outer_classname = "AddressBookProtos";
-option ts_out = "dist/typescript";
-option ts_opt = "explicit_override";
-
 
 message Person {
   string name = 1;
