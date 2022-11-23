@@ -34,6 +34,15 @@ jobs:
       - name: Install dependencies
         if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
         run: yarn install
+      - name: Build proto libraries ⚙️
+        run: >
+          mkdir -p src/main
+          find ./proto -iname "*.proto" | xargs -L 1 -d '\n'
+          protoc
+          -I=./proto
+          --plugin="protoc-gen-ts=./node_modules/.bin/protoc-gen-ts"
+          --ts_out=dist/typescript
+          --ts_opt=explicit_override
       - name: Build TypeScript
         run: |
           cd dist/typescript
