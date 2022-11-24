@@ -48,6 +48,7 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
+    "strictMetadataEmit": true,
     "strictTemplates": true
   },
   "include": ["src", "node_modules/cypress"],

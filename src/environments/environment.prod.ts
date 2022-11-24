@@ -7,4 +7,5 @@ export const environment = {
   apiURL: '/api',
   disableConsoleLog: false,
   version: app.version,
+  disableIntegrationRegistryCheck: false,
 };

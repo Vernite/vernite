@@ -27,4 +27,6 @@ export const environment = {
    * App version
    */
   version: app.version,
+
+  disableIntegrationRegistryCheck: false,
 };

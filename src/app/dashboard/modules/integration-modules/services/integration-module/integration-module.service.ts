@@ -5,6 +5,8 @@ import { BehaviorSubject } from 'rxjs';
 import { DialogService } from '@main/services/dialog/dialog.service';
 import { IntegrationModuleSelectDialog } from '@dashboard/modules/integration-modules/dialogs/integration-module-select/integration-module-select.dialog';
 import { IntegrationModuleSelectDialogData } from './../../dialogs/integration-module-select/integration-module-select.dialog';
+import { environment } from 'src/environments/environment';
+import { IntegrationModulesModule } from '../../integration-modules.module';
 
 @Service()
 @Injectable({
@@ -23,6 +25,12 @@ export class IntegrationModuleService {
     const _regVal = this.registry$.value;
     _regVal.push(entry);
     this.registry$.next(_regVal);
+
+    if (!environment.disableIntegrationRegistryCheck) {
+      if (!IntegrationModulesModule.integrationComponents.includes(entry.component)) {
+        console.error(entry.component.name, 'is not registered in IntegrationModulesModule');
+      }
+    }
   }
 
   public static unregister(entry: IntegrationModuleEntry) {
