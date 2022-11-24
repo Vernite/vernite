@@ -20,7 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   constructError(e: any) {
     return {
-      status: e?.status || -1,
+      status: e?.status || 0,
       message: e?.error?.message || '',
     };
   }

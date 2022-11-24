@@ -8,7 +8,7 @@ import { SnackbarData } from '../snackbar/snackbar.interface';
   styleUrls: ['./snackbar-outlet.component.scss'],
 })
 export class SnackbarOutletComponent {
-  public snackbars$ = this.snackbarService.snackbars$;
+  public snackbarsList$ = this.snackbarService.snackbarsList$;
 
   constructor(private snackbarService: SnackbarService) {}
 

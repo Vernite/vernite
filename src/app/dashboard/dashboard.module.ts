@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TasksModule } from '@tasks/tasks.module';
 import { MainModule } from '../_main/_main.module';
 import { IntegrationModulesGridComponent } from './components/integration-modules-grid/integration-modules-grid.component';
 import { MemberListComponent } from './components/member-list/member-list.component';
@@ -28,6 +29,7 @@ import { GitIntegrationService } from './services/git-integration/git-integratio
     ReactiveFormsModule,
     DashboardRoutingModule,
     IntegrationModulesModule,
+    TasksModule,
   ],
   declarations: [
     CreateWorkspacePage,

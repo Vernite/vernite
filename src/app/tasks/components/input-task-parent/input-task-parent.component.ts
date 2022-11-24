@@ -19,16 +19,16 @@ export class InputTaskParentComponent
   extends ControlAccessor<number | null | ''>
   implements OnDestroy
 {
-  @Input() set projectId(value: number) {
+  @Input() set projectId(value: number | null) {
     this._projectId = value;
-    if (!isNil(value)) {
+    if (!isNil(value) && !isNil(this._type)) {
       this.loadTasks();
     }
   }
 
   @Input() set type(value: TaskType | undefined) {
     this._type = value;
-    if (!isNil(value)) {
+    if (!isNil(value) && !isNil(this._projectId)) {
       this.loadTasks();
     }
   }
@@ -46,7 +46,7 @@ export class InputTaskParentComponent
     return this.control.value !== null;
   }
 
-  private _projectId: number = 0;
+  private _projectId: number | null = null;
   private _type?: TaskType;
 
   tasks$: Observable<Task[]> = of([]);
@@ -57,7 +57,7 @@ export class InputTaskParentComponent
 
   loadTasks() {
     const { projectId } = this;
-    this.tasks$ = this.taskService.list(projectId, TaskFilters.TYPES(this.getAvailableTypes()));
+    this.tasks$ = this.taskService.list(projectId!, TaskFilters.TYPES(this.getAvailableTypes()));
   }
 
   getAvailableTypes() {
