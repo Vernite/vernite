@@ -10,8 +10,6 @@
     "alexiv.vscode-angular2-files",
     "mikael.angular-beastcode",
     "christian-kohler.path-intellisense",
-    "coenraads.bracket-pair-colorizer-2",
-    "sanderledegen.angular-follow-selector",
     "roman-lo.vscode-ng-i18n-editor",
     "finico.angular-dx",
     "aaron-bond.better-comments",
@@ -22,6 +20,6 @@
     "stylelint.vscode-stylelint",
     "vunguyentuan.vscode-css-variables",
     "tobermory.es6-string-html",
-    "Gruntfuggly.todo-tree"
+    "gruntfuggly.todo-tree"
   ]
 }
