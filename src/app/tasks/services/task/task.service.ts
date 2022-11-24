@@ -315,6 +315,7 @@ export class TaskService extends BaseService<
    * @returns observable with list of task types
    */
   public listTaskTypes(parentTaskType?: TaskType) {
+    console.log('parentTaskType', parentTaskType);
     const parentTaskTypeNormal = isNumber(parentTaskType) ? parentTaskType : -1;
     const desiredTaskTypes = TaskTypeHierarchy[parentTaskTypeNormal];
     const taskTypesEntries = Enum.entries(TaskType);

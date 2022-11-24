@@ -81,6 +81,5 @@ export class InputTaskParentComponent
 
   override ngOnDestroy() {
     super.ngOnDestroy();
-    this.control.setValue(null);
   }
 }

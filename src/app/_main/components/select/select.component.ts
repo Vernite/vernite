@@ -52,6 +52,8 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
 
   @Input() multiple?: boolean;
 
+  @Input() readonly?: boolean;
+
   isOpen: boolean = false;
 
   selectedOptions$ = new BehaviorSubject<OptionComponent[]>([]);
@@ -77,6 +79,8 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
   }
 
   public toggleOverlay() {
+    if (this.readonly) return;
+
     if (this.isOpen) {
       return this.closeOverlay();
     }

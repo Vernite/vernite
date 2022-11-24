@@ -10,7 +10,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TaskPriority } from '@tasks/enums/task-priority.enum';
 import { TaskType } from '@tasks/enums/task-type.enum';
 import { Status } from '@tasks/interfaces/status.interface';
-import { Observable } from 'rxjs';
+import { Observable, EMPTY, tap, skip } from 'rxjs';
 import { requiredValidator } from '../../../_main/validators/required.validator';
 import { Task } from '../../interfaces/task.interface';
 import { unixTimestamp } from '../../../_main/interfaces/date.interface';
@@ -47,6 +47,10 @@ export class TaskDialog implements OnInit {
   /** Priorities list */
   public taskPriorities = Enum.values(TaskPriority);
 
+  public parentTask$ =
+    this.data.projectId && this.data.task?.parentTaskId
+      ? this.taskService.get(this.data.projectId, this.data.task?.parentTaskId)
+      : EMPTY;
   public projectList$ = this.projectService.list();
   public statusList$!: Observable<Status[]>;
   public issueList$!: Observable<GitIssue[]>;
@@ -93,25 +97,50 @@ export class TaskDialog implements OnInit {
   ngOnInit() {
     const { projectId } = this.routerExtensions.snapshot.params;
 
-    if (projectId) this.data.projectId = projectId;
+    if (projectId) this.data.projectId = Number(projectId);
 
     this.form.patchValue({
       ...this.data.task,
       projectId: this.data.projectId,
     });
 
-    if (projectId) this.onProjectIdChange(projectId);
+    if (this.data.projectId) this.onProjectIdChange(this.data.projectId);
 
     this.form
       .get('projectId')
-      ?.valueChanges.pipe(untilDestroyed(this))
+      ?.valueChanges.pipe(skip(1), untilDestroyed(this))
       .subscribe((projectId) => {
+        console.log('value changed');
         this.onProjectIdChange(projectId);
       });
+
+    this.form
+      .get('parentTaskId')
+      ?.valueChanges.pipe(untilDestroyed(this))
+      .subscribe((parentTaskId) => {
+        if (parentTaskId && this.form.get('projectId').value) {
+          this.parentTask$ = this.taskService.get(this.form.get('projectId').value!, parentTaskId);
+        } else {
+          this.parentTask$ = EMPTY;
+        }
+      });
+
+    console.log(this.form.get('parentTaskId').value, this.form.get('projectId').value);
+    if (this.form.get('parentTaskId').value && this.form.get('projectId').value) {
+      this.parentTask$ = this.taskService
+        .get(this.form.get('projectId').value!, this.form.get('parentTaskId').value!)
+        .pipe(
+          tap((parentTask) => {
+            this.taskTypes$ = this.taskService.listTaskTypes(parentTask.type);
+          }),
+        );
+      this.parentTask$.subscribe();
+    }
   }
 
   onProjectIdChange(projectId: number | null) {
     if (!projectId) return;
+    console.log('projectId change', projectId);
 
     this.statusList$ = this.statusService.list(projectId);
 
