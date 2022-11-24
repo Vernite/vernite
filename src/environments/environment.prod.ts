@@ -5,6 +5,6 @@ import app from '../../package.json';
 export const environment = {
   production: true,
   apiURL: '/api',
-  disableConsoleLog: true,
+  disableConsoleLog: false,
   version: app.version,
 };
