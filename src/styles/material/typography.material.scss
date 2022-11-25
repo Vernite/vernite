@@ -2,3 +2,7 @@ app-root *,
 body.mat-typography *:not(mat-icon):not(fa-icon) {
   font-family: var(--font-family);
 }
+
+.monaco-editor * {
+  font-family: Consolas, "Courier New", monospace;
+}

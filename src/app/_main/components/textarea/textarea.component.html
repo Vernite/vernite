@@ -3,7 +3,7 @@
     <button (click)="openEditor()" [class.active]="mode === 'editor'" type="button">Editor</button>
     <button (click)="openPreview()" [class.active]="mode === 'preview'" type="button">Preview</button>
   </section>
-  <div #input [class.hidden]="mode !== 'editor'"></div>
+  <div #input [class.hidden]="mode !== 'editor'" class="editor"></div>
   <div #output class="preview markdown-preview" [class.hidden]="mode !== 'preview'"></div>
   <section class="tools">
 
