@@ -55,6 +55,7 @@ export class AuthService extends BaseService<Errors<'INVALID_TOKEN'>> {
 
   public logout() {
     this.clearCache();
+    this.store.clear();
     return this.apiService.post(`/auth/logout`);
   }
 

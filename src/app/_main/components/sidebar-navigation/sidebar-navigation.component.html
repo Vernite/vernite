@@ -8,9 +8,16 @@
   [collapsed]="isCollapsed" i18n>Dashboard</app-nav-element>
 <app-nav-element [showOptions]="false" [icon]="faCalendarDay" routerLink="/calendar" routerLinkActive="active"
   [collapsed]="isCollapsed" i18n>Calendar</app-nav-element>
-<app-nav-element [showOptions]="false" [icon]="faMessage" routerLink="/messages" routerLinkActive="active"
-  [collapsed]="isCollapsed" i18n>Messages
-</app-nav-element>
+
+<sidebar-group [icon]="faMessage" [collapsed]="isCollapsed">
+  <span class="title" i18n>Messages</span>
+  <div class="content">
+    <sidebar-entry *ngFor="let channel of [1, 2, 3, 4]" [icon]="faHashtag" [collapsed]="isCollapsed">
+      <span>Channel {{ channel }}</span>
+    </sidebar-entry>
+  </div>
+</sidebar-group>
+
 
 <app-nav-element [showOptions]="true" [icon]="faLayerGroup" [collapsed]="isCollapsed">
   <div i18n>Workspaces</div>

@@ -6,6 +6,7 @@ import { WorkspaceService } from '@dashboard/services/workspace/workspace.servic
 import {
   faArrowRightArrowLeft,
   faCalendarDay,
+  faHashtag,
   faLayerGroup,
   faMessage,
   faPlus,
@@ -22,7 +23,7 @@ export class SidebarNavigationComponent {
   public workspaceList$?: Observable<Workspace[]>;
 
   @HostBinding('class.collapsed')
-  public isCollapsed = false;
+  public isCollapsed = true;
 
   /** @ignore */
   faArrowRightArrowLeft = faArrowRightArrowLeft;
@@ -38,6 +39,9 @@ export class SidebarNavigationComponent {
 
   /** @ignore */
   faPlus = faPlus;
+
+  /** @ignore */
+  faHashtag = faHashtag;
 
   createWorkspace() {
     this.router.navigate(['/', 'workspaces', 'create']);

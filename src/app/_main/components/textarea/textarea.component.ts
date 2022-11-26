@@ -113,8 +113,7 @@ export class TextareaComponent extends ControlAccessor implements OnInit, AfterV
       container.style.height = `${contentHeight}px`;
       try {
         _editor.layout();
-      } finally {
-      }
+      } catch (e) {}
     };
     _editor.onDidContentSizeChange(updateDimensions);
     _editor.getModel()?.onDidChangeContent(() => {

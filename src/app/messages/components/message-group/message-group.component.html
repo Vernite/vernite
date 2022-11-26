@@ -1,0 +1,17 @@
+<div class="avatar">
+
+</div>
+<div class="content">
+  <div class="title">
+    <div class="name text-xl">
+      <span>{{ isSelf ? 'You' : author.name }}</span>
+    </div>
+    <div class="date text-label">
+      <span>{{ messages[0].createdAt | dateByPreferences | async }}</span>
+    </div>
+  </div>
+  <div class="messages">
+    <message *ngFor="let message of messages" [content]="message.content" [timestamp]="message.createdAt"
+      [isSelf]="isSelf"></message>
+  </div>
+</div>

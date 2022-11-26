@@ -1,0 +1,17 @@
+<div class="left">
+  <app-icon *ngIf="icon" [icon]="icon" size="1rem"></app-icon>
+  <div class="title">
+    <ng-content></ng-content>
+  </div>
+</div>
+<div class="middle"></div>
+<div class="right">
+  <div class="options" *ngIf="showOptions">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <app-icon [icon]="faEllipsisV"></app-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <ng-content select="sidebar-entry-options"></ng-content>
+    </mat-menu>
+  </div>
+</div>

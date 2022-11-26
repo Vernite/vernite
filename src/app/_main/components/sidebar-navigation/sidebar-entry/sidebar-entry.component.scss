@@ -1,0 +1,69 @@
+:host {
+  display: flex;
+  height: 36px;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--border-radius);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color .1s ease, padding .2s ease;
+
+  &:hover {
+    background-color: var(--color-secondary-700);
+  }
+
+  &.collapsed {
+    width: 36px;
+    padding: 0.5rem 0.5rem;
+
+    .left {
+      flex-grow: 1;
+      justify-content: center;
+    }
+
+    .middle {
+      flex-grow: 0;
+    }
+
+    .title {
+      position: absolute;
+      z-index: 100;
+      top: 50%;
+      left: 1rem;
+      padding: 0.25rem 0.5rem;
+      opacity: 0;
+      transform: translateY(-50%);
+    }
+
+    &:hover {
+      .title {
+        left: 2rem;
+        padding: 0.25rem 0.5rem;
+        background-color: var(--color-secondary-800);
+        border-radius: var(--border-radius);
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.left {
+  position: relative;
+  display: flex;
+  flex-grow: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 0.67rem;
+  transition: flex-grow .2s ease;
+}
+
+.middle {
+  flex-grow: 1;
+  transition: flex-grow .2s ease;
+}
+
+.title ::ng-deep {
+  padding: 0.25rem;
+  opacity: 1;
+  transition: padding .3s ease, left .3s ease, opacity .3s ease;
+  white-space: nowrap;
+}

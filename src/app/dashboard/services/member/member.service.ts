@@ -5,7 +5,9 @@ import { ApiService } from '@main/services/api/api.service';
 import { Service } from '@main/decorators/service/service.decorator';
 import { BaseService } from '@main/services/base/base.service';
 import { Errors } from '@main/interfaces/http-error.interface';
-import { Cache } from '@main/decorators/cache/cache.decorator';
+import { useStore } from '@main/libs/store/operators/use-store.operator';
+import { ServiceMethodOptions } from '@main/services/base/service-method-options.interface';
+import { applyOptions } from '@main/operators/apply-options.operator';
 
 @Service()
 @Injectable({
@@ -32,9 +34,14 @@ export class MemberService extends BaseService<
    * @param projectId project which are members from
    * @returns Request observable, which completes when request is finished
    */
-  @Cache()
-  public list(projectId: number): Observable<ProjectMember[]> {
-    return this.apiService.get(`/project/${projectId}/member`);
+  public list(projectId: number, options?: ServiceMethodOptions): Observable<ProjectMember[]> {
+    return this.apiService
+      .get(`/project/${projectId}/member`)
+      .pipe(
+        this.validate(),
+        applyOptions(options),
+        useStore(this.store, ['project', projectId, 'members']),
+      );
   }
 
   /**

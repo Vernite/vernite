@@ -1,0 +1,12 @@
+<div class="container" [formGroup]="form">
+  <div *ngIf="user$ | async as user" class="messages">
+    <ng-container *ngFor="let conversationEntry of conversation; index as i">
+      <message-group [messages]="conversationEntry.messages" [author]="user" [isSelf]="i % 2 === 0"></message-group>
+    </ng-container>
+  </div>
+  <app-textarea formControlName="message">
+    <div class="grow flex justify-end">
+      <app-button variant="primary" icon="matSend" matTooltip="Send" i18n-matTooltip></app-button>
+    </div>
+  </app-textarea>
+</div>
