@@ -5,6 +5,7 @@ import { Sprint } from '@tasks/interfaces/sprint.interface';
 export class SprintFilters {
   public static STATUS(sprintStatus: SprintStatus): DataFilter<Sprint, SprintStatus> {
     return {
+      identifier: 'STATUS',
       type: DataFilterType.BACKEND,
       field: 'status',
       value: sprintStatus,
