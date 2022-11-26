@@ -10,7 +10,7 @@ import { Observable, of } from 'rxjs';
   templateUrl: './input-issue.component.html',
 })
 export class InputIssueComponent extends ControlAccessor<GitIssue | 'DETACH' | 'CREATE' | null> {
-  @Input() set projectId(value: number) {
+  @Input() set projectId(value: number | null) {
     this._projectId = value;
     if (value) {
       this.loadIssues();
@@ -30,7 +30,7 @@ export class InputIssueComponent extends ControlAccessor<GitIssue | 'DETACH' | '
     return !['DETACH', null].includes(this.control.value as string);
   }
 
-  private _projectId: number = 0;
+  private _projectId: number | null = null;
 
   issues$: Observable<GitIssue[]> = of([]);
 
@@ -44,6 +44,6 @@ export class InputIssueComponent extends ControlAccessor<GitIssue | 'DETACH' | '
 
   loadIssues() {
     const { projectId } = this;
-    this.issues$ = this.gitIntegrationService.gitHubIssueList(projectId);
+    this.issues$ = this.gitIntegrationService.gitHubIssueList(projectId!);
   }
 }

@@ -69,6 +69,8 @@ import { DateTimePickerComponent } from './components/input-date-time/date-time-
 import { TimePickerComponent } from './components/input-date-time/time-picker/time-picker.component';
 import { PillComponent } from './components/pill/pill.component';
 import { ClickOutsideDirective } from './directives/click-outside/click-outside.directive';
+import { InputFileComponent } from './components/input-file/input-file.component';
+import { MarkdownPipe } from './pipes/markdown/markdown.pipe';
 
 /**
  * Main module configuration object
@@ -170,6 +172,8 @@ const ngModuleConfig = {
     TimePickerComponent,
     PillComponent,
     ClickOutsideDirective,
+    InputFileComponent,
+    MarkdownPipe,
   ],
   providers: [
     /*=============================================

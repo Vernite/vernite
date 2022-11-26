@@ -66,7 +66,7 @@ export class StatusService extends BaseService<
    * @returns Request observable with the status
    */
   @Cache()
-  public get(projectId: number, statusId: number): Observable<Status[]> {
+  public get(projectId: number, statusId: number): Observable<Status> {
     return this.apiService.get(`/project/${projectId}/status/${statusId}`).pipe(
       this.validate({
         404: 'PROJECT_OR_STATUS_NOT_FOUND',

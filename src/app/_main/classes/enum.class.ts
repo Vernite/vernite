@@ -9,7 +9,7 @@ export class Enum {
    * @param enumType enum to test
    * @returns true or false based on whether enum has numeric values
    */
-  public static isNumeric(enumType: {}): enumType is { [key: string]: number } {
+  public static isNumeric(enumType: any): enumType is { [key: string]: number } {
     return Object.values(enumType).some((val) => isNumber(val));
   }
 
@@ -25,7 +25,7 @@ export class Enum {
    * Enum.keys(TestEnum) // ['One', 'Two', 'Three']
    * @returns array of enum keys
    */
-  public static keys<T>(enumType: T): Array<keyof T> {
+  public static keys<T extends object>(enumType: T): Array<keyof T> {
     return Object.keys(enumType).filter((k) => !Number(k) && k != '0') as (keyof T)[];
   }
 
@@ -41,7 +41,7 @@ export class Enum {
    * Enum.values(TestEnum) // [1, 2, 3]
    * @returns array of enum values
    */
-  public static values<T>(enumType: T): (string | number)[] {
+  public static values<T extends object>(enumType: T): (string | number)[] {
     if (!Enum.isNumeric(enumType)) {
       return Object.values(enumType);
     }
@@ -63,7 +63,7 @@ export class Enum {
    * Enum.entries(TestEnum) // [['One', 1], ['Two', 2], ['Three', 3]]
    * @returns array of enum entries
    */
-  public static entries<T>(enumType: T): [keyof T, T[keyof T]][] {
+  public static entries<T extends object>(enumType: T): [keyof T, T[keyof T]][] {
     if (!Enum.isNumeric(enumType)) {
       return Object.entries(enumType) as [keyof T, T[keyof T]][];
     }

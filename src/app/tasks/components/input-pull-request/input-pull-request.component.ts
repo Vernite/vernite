@@ -15,7 +15,7 @@ export class InputPullRequestComponent
   extends ControlAccessor<GitPull | 'DETACH' | 'CREATE' | null | ''>
   implements OnDestroy
 {
-  @Input() set projectId(value: number) {
+  @Input() set projectId(value: number | null) {
     this._projectId = value;
     if (value) {
       this.loadPullRequests();
@@ -35,7 +35,7 @@ export class InputPullRequestComponent
     return !['DETACH', null].includes(this.control.value as string);
   }
 
-  private _projectId: number = 0;
+  private _projectId: number | null = null;
 
   pulls$: Observable<GitPull[]> = of([]);
 
@@ -49,7 +49,7 @@ export class InputPullRequestComponent
 
   loadPullRequests() {
     const { projectId } = this;
-    this.pulls$ = this.gitIntegrationService.gitHubPullList(projectId);
+    this.pulls$ = this.gitIntegrationService.gitHubPullList(projectId!);
   }
 
   override validate(control: AbstractControl): ValidationError | null {

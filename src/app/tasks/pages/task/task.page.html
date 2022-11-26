@@ -1,0 +1,98 @@
+<div class="flex flex-col" *ngIf="task$ | async as task">
+
+  <h2 class="text-2xl">{{ task.name }}</h2>
+
+  <div class="flex gap-3 pt-3">
+    <app-button variant="secondary" [icon]="faPen" (click)="editTask()" i18n>Edit</app-button>
+    <app-button variant="secondary" [icon]="faTrash" (click)="deleteTask()" i18n>Delete</app-button>
+  </div>
+
+  <div class="flex">
+    <div class="grow">
+
+      <h4 class="text-lg font-bold mt-5" i18n>Details</h4>
+
+      <div class="flex">
+        <div class="flex grow">
+          <div class="flex flex-col">
+            <div class="text-base w-40 mt-2">
+              <span class="text-base font-bold" i18n>Type</span>:
+            </div>
+            <div class="text-base w-40 mt-2">
+              <span class="text-base font-bold" i18n>Priority</span>:
+            </div>
+          </div>
+          <div class="flex flex-col ml-5">
+            <span class="text-base mt-2">{{ task.type | taskType }}</span>
+            <span class="text-base mt-2">{{ task.priority | taskType }}</span>
+          </div>
+        </div>
+        <div class="flex grow">
+          <div class="flex flex-col">
+            <div class="text-base w-40 mt-2">
+              <span class="text-base font-bold" i18n>Status</span>:
+            </div>
+            <div class="text-base w-40 mt-2">
+              <span class="text-base font-bold" i18n>Deadline</span>:
+            </div>
+          </div>
+          <div class="flex flex-col ml-5">
+            <span class="text-base mt-2">{{ (status$ | async)?.name }}</span>
+            <span class="text-base mt-2">{{ (task.deadline | date: 'dd.MM.yyyy') || '-' }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex">
+        <div class="text-base w-40 mt-2">
+          <span class="text-base font-bold" i18n>Sprint</span>:
+        </div>
+        <span class="text-base ml-5 mt-2">{{ '-' }}</span>
+      </div>
+
+      <h4 class="text-lg font-bold mt-5" i18n>Description</h4>
+
+      <p class="markdown-preview" [innerHtml]="task.description | markdown"></p>
+    </div>
+
+    <div class="w-96">
+
+      <h4 class="text-lg font-bold mt-5" i18n>People</h4>
+
+      <div class="flex grow">
+        <div class="flex flex-col">
+          <div class="text-base w-40 mt-2">
+            <span class="text-base font-bold" i18n>Assignee</span>:
+          </div>
+          <div class="text-base w-40 mt-2">
+            <span class="text-base font-bold" i18n>Created by</span>:
+          </div>
+        </div>
+        <div class="flex flex-col ml-5">
+          <span class="text-base mt-2" *ngIf="assignee$ | async as assignee">{{ assignee.user.name }}&nbsp;{{
+            assignee.user.surname }}</span>
+          <span class="text-base mt-2" *ngIf="createdBy$ | async as createdBy">{{ createdBy.user.name }}&nbsp;{{
+            createdBy.user.surname }}</span>
+        </div>
+      </div>
+
+      <h4 class="text-lg font-bold mt-5" i18n>Dates</h4>
+
+      <div class="flex grow">
+        <div class="flex flex-col">
+          <div class="text-base w-40 mt-2">
+            <span class="text-base font-bold" i18n>Created</span>:
+          </div>
+          <div class="text-base w-40 mt-2">
+            <span class="text-base font-bold" i18n>Updated</span>:
+          </div>
+        </div>
+        <div class="flex flex-col ml-5">
+          <span class="text-base mt-2">{{ task.createdAt | dateByPreferences | async }}</span>
+          <span class="text-base mt-2">{{ '-' }}</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

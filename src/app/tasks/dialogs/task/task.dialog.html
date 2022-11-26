@@ -4,19 +4,13 @@
 <div mat-dialog-content>
   <form (submit)="confirm()" [formGroup]="form" autocomplete="off">
 
-    <!-- Workspace -->
-    <app-select *ngIf="!data.parentTask" formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
-      <app-option *ngFor="let workspace of workspaceList$ | async" [value]="workspace.id">{{ workspace.name }}
-      </app-option>
-      <app-empty-options i18n>There is no workspaces</app-empty-options>
-    </app-select>
-
     <!-- Project -->
-    <ng-container *ngIf="!data.parentTask && form.get('workspaceId')?.value">
-      <app-select formControlName="projectId" floatingLabel="Project" i18n-floatingLabel>
+    <ng-container *ngIf="!data.parentTask">
+      <app-select formControlName="projectId" floatingLabel="Project"
+        [readonly]="data.variant === TaskDialogVariant.EDIT" i18n-floatingLabel>
         <app-option *ngFor="let project of projectList$ | async" [value]="project.id">{{project.name}}
         </app-option>
-        <app-empty-options i18n>Selected workspace is empty</app-empty-options>
+        <app-empty-options i18n>Projects list is empty</app-empty-options>
       </app-select>
     </ng-container>
 
@@ -74,21 +68,25 @@
     </app-select>
 
     <!-- Parent -->
-    <input-task-parent *ngIf="![TaskType.EPIC, TaskType.USER_STORY, undefined].includes(form.get('type')?.value)"
-      [projectId]="form.get('projectId').value || -1" formControlName="parentTaskId" [type]="form.get('type')?.value">
+    <input-task-parent *ngIf="
+    ![TaskType.EPIC, TaskType.USER_STORY, TaskType.TASK, undefined].includes(form.get('type')?.value) &&
+    (parentTask$ | async)?.type !== TaskType.EPIC
+    " [projectId]="form.get('projectId').value" formControlName="parentTaskId" [type]="form.get('type').value">
     </input-task-parent>
 
     <!-- Epic -->
-    <!-- <input-epic *ngIf="form.get('type').value !== TaskType.EPIC" formControlName="parentTaskId"
-      [projectId]="form.get('projectId').value || -1"></input-epic> -->
+    <input-epic *ngIf="
+    form.get('type').value !== TaskType.EPIC &&
+    ([TaskType.EPIC, undefined].includes((parentTask$ | async)?.type || undefined))
+    " formControlName="parentTaskId" [projectId]="form.get('projectId').value"></input-epic>
 
     <!-- GitHub issue integration -->
     <input-issue *ngIf="isGitHubIntegrationAvailable && form.get('projectId')?.value" formControlName="issue"
-      [projectId]="form.get('projectId').value || -1"></input-issue>
+      [projectId]="form.get('projectId').value"></input-issue>
 
     <!-- Github pull request integration -->
     <input-pull-request *ngIf="isGitHubIntegrationAvailable && form.get('projectId')?.value" formControlName="pull"
-      [projectId]="form.get('projectId').value || -1"></input-pull-request>
+      [projectId]="form.get('projectId').value"></input-pull-request>
 
   </form>
 </div>

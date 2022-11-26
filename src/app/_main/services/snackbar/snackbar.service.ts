@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SnackbarData } from '@main/components/snackbar/snackbar.interface';
 import { Service } from '@main/decorators/service/service.decorator';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 
 @Service()
@@ -9,9 +9,8 @@ import { v4 as uuid } from 'uuid';
   providedIn: 'root',
 })
 export class SnackbarService {
-  constructor() {}
-
   public snackbars$ = new BehaviorSubject<Map<string, SnackbarData>>(new Map());
+  public snackbarsList$ = this.snackbars$.pipe(map((map) => Array.from(map.entries())));
 
   public show(message: string, color: SnackbarData['color'] = 'gray', duration: number = 4000) {
     const data = { message, duration, color };

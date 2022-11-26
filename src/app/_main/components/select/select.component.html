@@ -1,13 +1,15 @@
 <ng-container *ngIf="isControlInitialized">
-  <!-- <ng-container *ngLet="selectedOptions$ | async as selectedOptions"> -->
 
   <!-- Overlay origin -->
   <div class="trigger" #trigger="cdkOverlayOrigin" cdkOverlayOrigin></div>
 
   <!-- Select input -->
   <app-input #input (click)="toggleOverlay()" type="text" [formControl]="labelControl" [readonly]="true"
-    [floatingLabel]="floatingLabel" [allowResizeByError]="allowResizeByError">
-    <!-- <app-icon class="prefix" *ngIf="selected.icon" size="1rem" [icon]="selected.icon"></app-icon> -->
+    [floatingLabel]="floatingLabel" [allowResizeByError]="allowResizeByError" [pending]="pending">
+    <div class="prefix" *ngLet="selectedOptions$ | async as selectedOptions">
+      <app-icon class="prefix" *ngIf="!multiple && selectedOptions.length && selectedOptions[0].icon" size="1rem"
+        [icon]="selectedOptions[0].icon"></app-icon>
+    </div>
     <app-icon class="suffix" [icon]="faChevronDown" size="0.75rem"></app-icon>
     <div *ngIf="multiple" class="overlay">
       <pill *ngFor="let option of selectedOptions$ | async">{{ option.viewValue }}</pill>
@@ -21,7 +23,9 @@
     <div #overlay class="connected-overlay" (clickOutside)="closeOverlay()">
       <ng-content select="app-option"></ng-content>
     </div>
+    <div *ngIf="!queryOptions?.length">
+      <ng-content select="app-empty-options"></ng-content>
+    </div>
   </ng-template>
 
-  <!-- </ng-container> -->
 </ng-container>

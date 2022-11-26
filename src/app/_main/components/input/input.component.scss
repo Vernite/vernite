@@ -3,6 +3,10 @@
 :host {
   display: inline-block;
   width: 100%;
+
+  ::ng-deep {
+    color: var(--color-text);
+  }
 }
 
 .form-field {
