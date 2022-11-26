@@ -48,7 +48,7 @@ export class SprintPage implements OnInit {
       this.view = view;
     });
 
-    this.activatedRoute.params.subscribe(({ projectId, sprintId }) => {
+    this.activatedRoute.params.subscribe(({ projectId }) => {
       this.projectId = Number(projectId);
 
       this.project$ = this.projectService.get(projectId);
@@ -72,21 +72,13 @@ export class SprintPage implements OnInit {
   }
 
   revertSprint(sprint: Sprint) {
-    sprint = {
-      ...sprint,
-      status: SprintStatus.CREATED,
-    };
-    this.sprintService.update(this.projectId, sprint).subscribe(() => {
+    this.sprintService.revertWithConfirmation(this.projectId, sprint).subscribe(() => {
       location.reload();
     });
   }
 
   closeSprint(sprint: Sprint) {
-    sprint = {
-      ...sprint,
-      status: SprintStatus.CLOSED,
-    };
-    this.sprintService.update(this.projectId, sprint).subscribe(() => {
+    this.sprintService.closeWithConfirmation(this.projectId, sprint).subscribe(() => {
       location.reload();
     });
   }
