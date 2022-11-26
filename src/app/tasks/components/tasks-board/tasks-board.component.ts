@@ -2,8 +2,6 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
-import { MemberService } from '@dashboard/services/member/member.service';
-import { ProjectService } from '@dashboard/services/project/project.service';
 import {
   faCheck,
   faChevronRight,
@@ -12,7 +10,6 @@ import {
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import { PersistentMap } from '@main/classes/persistent-map.class';
-import { StatusService } from '@tasks/services/status/status.service';
 import { TaskService } from '@tasks/services/task/task.service';
 import { DialogService } from '../../../_main/services/dialog/dialog.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '../../dialogs/task/task.dialog';
@@ -50,12 +47,9 @@ export class BoardComponent {
   constructor(
     private activatedRoute: ActivatedRoute,
     private taskService: TaskService,
-    private statusService: StatusService,
     private dialogService: DialogService,
-    private projectService: ProjectService,
-    private memberService: MemberService,
   ) {
-    const { workspaceId, projectId } = this.activatedRoute.snapshot.params;
+    const { projectId } = this.activatedRoute.snapshot.params;
 
     this.projectId = projectId;
   }

@@ -56,7 +56,7 @@ export class SprintService {
    * @param projectId Project id needed to create status
    * @returns Request observable with the updated status
    */
-  public update(projectId: number, sprint: Sprint): Observable<Sprint> {
+  public update(projectId: number, sprint: Partial<Sprint & { id: number }>): Observable<Sprint> {
     return this.apiService.put(`/project/${projectId}/sprint/${sprint.id}`, { body: sprint });
   }
 
@@ -102,10 +102,54 @@ export class SprintService {
       );
   }
 
+  public revertWithConfirmation(projectId: number, sprint: Sprint): Observable<boolean | null> {
+    return this.dialogService
+      .confirm({
+        title: $localize`Revert active sprint "${sprint.name}"`,
+        message: $localize`Are you sure you want to revert this sprint "${sprint.name}"?`,
+        confirmText: $localize`Revert`,
+        cancelText: $localize`Cancel`,
+        variant: AlertDialogVariant.DEFAULT,
+      })
+      .pipe(
+        switchMap((confirmed) => {
+          if (confirmed) {
+            return this.update(projectId, { id: sprint.id, status: SprintStatus.CREATED }).pipe(
+              switchMap(() => of(true)),
+            );
+          } else {
+            return EMPTY;
+          }
+        }),
+      );
+  }
+
+  public closeWithConfirmation(projectId: number, sprint: Sprint): Observable<boolean | null> {
+    return this.dialogService
+      .confirm({
+        title: $localize`Close sprint "${sprint.name}"`,
+        message: $localize`Are you sure you want to close this sprint "${sprint.name}"?`,
+        confirmText: $localize`Close`,
+        cancelText: $localize`Cancel`,
+        variant: AlertDialogVariant.IMPORTANT,
+      })
+      .pipe(
+        switchMap((confirmed) => {
+          if (confirmed) {
+            return this.update(projectId, { id: sprint.id, status: SprintStatus.CLOSED }).pipe(
+              switchMap(() => of(true)),
+            );
+          } else {
+            return EMPTY;
+          }
+        }),
+      );
+  }
+
   public deleteWithConfirmation(projectId: number, sprint: Sprint): Observable<boolean | null> {
     return this.dialogService
       .confirm({
-        title: $localize`Delete task "${sprint.name}"`,
+        title: $localize`Delete sprint "${sprint.name}"`,
         message: $localize`Are you sure you want to delete this sprint "${sprint.name}"?`,
         confirmText: $localize`Delete`,
         cancelText: $localize`Cancel`,
