@@ -105,6 +105,11 @@ export interface Task extends JSONParsable {
   sprintId?: number;
 
   /**
+   * Archived ids of assigned sprint
+   */
+  archiveSprintIds?: number[];
+
+  /**
    * Task priority
    * @default TaskPriority.MEDIUM
    * @see TaskPriority

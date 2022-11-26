@@ -15,21 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'backlog',
-    children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'list',
-      },
-      {
-        path: 'board',
-        component: BacklogPage,
-      },
-      {
-        path: 'list',
-        component: BacklogPage,
-      },
-    ],
+    component: BacklogPage,
   },
   {
     path: 'sprint',
@@ -37,29 +23,11 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'list',
-      },
-      {
-        path: 'board',
-        component: SprintPage,
-      },
-      {
-        path: 'list',
         component: SprintPage,
       },
       {
         path: ':sprintId',
         component: SprintPage,
-        children: [
-          {
-            path: 'board',
-            component: SprintPage,
-          },
-          {
-            path: 'list',
-            component: SprintPage,
-          },
-        ],
       },
     ],
   },

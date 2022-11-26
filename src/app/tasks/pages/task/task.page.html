@@ -44,11 +44,24 @@
       </div>
       <div class="flex">
         <div class="text-base w-40 mt-2">
-          <span class="text-base font-bold" i18n>Sprint</span>:
+          <span class="text-base font-bold" i18n>Active Sprint</span>:
         </div>
-        <span class="text-base ml-5 mt-2">{{ '-' }}</span>
+        <span class="text-base ml-5 mt-2">{{(activeSprint$ | async)?.name || '-' }}</span>
       </div>
-
+      <div class="flex">
+        <div class="text-base w-40 mt-2">
+          <span class="text-base font-bold" i18n>Archived Sprints</span>:
+        </div>
+        <span class="text-base ml-5 mt-2">
+          <ng-container *ngFor="let archivedSprint of archivedSprints$ | async; index as i">
+            <ng-container *ngIf="i !== 0">, </ng-container>
+            {{archivedSprint.name}}
+          </ng-container>
+          <ng-container *ngIf="!((archivedSprints$ | async) || []).length">
+            {{ '-' }}
+          </ng-container>
+        </span>
+      </div>
       <h4 class="text-lg font-bold mt-5" i18n>Description</h4>
 
       <p class="markdown-preview" [innerHtml]="task.description | markdown"></p>

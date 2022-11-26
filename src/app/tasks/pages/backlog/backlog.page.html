@@ -1,17 +1,59 @@
 <app-task-view-options [project]="(project$ | async)!" [filters]="filters" [filtersControl]="filtersControl"></app-task-view-options>
 
-<ng-container *ngFor="let sprint of sprintListActive$ | async">
-  <h2 class="title text-xl font-bold">{{sprint.name}}</h2>
+<div class="w-full mb-10" *ngFor="let sprint of sprintListActive$ | async">
+  <div class="flex items-end gap-3 mb-2">
+    <h2 class="title text-xl font-bold">{{sprint.name}}</h2>
+    <app-button variant="secondary" (click)="closeSprint(sprint)" i18n>Close Sprint</app-button>
+    <div class="text-base">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="editSprint(sprint)">
+          <span i18n>Edit Sprint</span>
+        </button>
+        <button mat-menu-item (click)="revertSprint(sprint)">
+          <span i18n>Revert Sprint To Backlog</span>
+        </button>
+        <button mat-menu-item class="important" (click)="deleteSprint(sprint)">
+          <span i18n>Delete Sprint</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
   <task-list [tasks]="sprint.tasks" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
   [statusList]="(statusList$ | async) || []"></task-list>
-</ng-container>
+</div>
 
-<ng-container *ngFor="let sprint of sprintListCreated$ | async">
-  <h2 class="title text-xl font-bold">{{sprint.name}}</h2>
+<div class="w-full mb-10" *ngFor="let sprint of sprintListCreated$ | async">
+  <div class="flex items-end gap-3 mb-2">
+    <h2 class="title text-xl font-bold">{{sprint.name}}</h2>
+    <ng-container *ngIf="((sprintListActive$ | async) || []).length">
+      <app-button [disabled]="true" variant="primary" (click)="startSprint(sprint)" i18n>Start Sprint</app-button>
+    </ng-container>
+    <ng-container *ngIf="!((sprintListActive$ | async) || []).length">
+      <app-button variant="primary" (click)="startSprint(sprint)" i18n>Start Sprint</app-button>
+    </ng-container>
+    <div class="text-base">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="editSprint(sprint)">
+          <span i18n>Edit Sprint</span>
+        </button>
+        <button mat-menu-item class="important" (click)="deleteSprint(sprint)">
+          <span i18n>Delete Sprint</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
   <task-list [tasks]="sprint.tasks" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
   [statusList]="(statusList$ | async) || []"></task-list>
-</ng-container>
+</div>
 
-<h2 class="title text-xl font-bold">Backlog</h2>
-<task-list [tasks]="(taskList$ | async) || []" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
+<div class="w-full mb-10">
+  <h2 class="title text-xl font-bold" i18n>Backlog</h2>
+  <task-list [tasks]="(taskList$ | async) || []" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
   [statusList]="(statusList$ | async) || []"></task-list>
+</div>

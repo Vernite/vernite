@@ -45,8 +45,7 @@ export class SprintDialog implements OnInit {
     description: new FormControl<string>(''),
     startDate: new FormControl<unixTimestamp | null>(null, [requiredValidator()]),
     finishDate: new FormControl<unixTimestamp | null>(null, [requiredValidator()]),
-    // TEST TEST TEST
-    status: new FormControl<SprintStatus>(this.data.sprint?.status || SprintStatus.ACTIVE),
+    status: new FormControl<SprintStatus>(this.data.sprint?.status || SprintStatus.CREATED),
   });
 
   public interactive$ = timeToInteraction();

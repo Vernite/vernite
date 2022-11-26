@@ -10,7 +10,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TaskPriority } from '@tasks/enums/task-priority.enum';
 import { TaskType } from '@tasks/enums/task-type.enum';
 import { Status } from '@tasks/interfaces/status.interface';
-import { Observable, EMPTY, tap, skip } from 'rxjs';
+import { Observable, EMPTY, tap, pairwise, of } from 'rxjs';
 import { requiredValidator } from '../../../_main/validators/required.validator';
 import { Task } from '../../interfaces/task.interface';
 import { unixTimestamp } from '../../../_main/interfaces/date.interface';
@@ -22,6 +22,8 @@ import { ProjectService } from '@dashboard/services/project/project.service';
 import { Enum } from '@main/classes/enum.class';
 import { Loader } from '../../../_main/classes/loader/loader.class';
 import { withLoader } from '@main/operators/loader.operator';
+import { SprintStatus } from '@tasks/enums/sprint-status.enum';
+import { SprintFilters } from '@dashboard/filters/sprint.filters';
 
 export enum TaskDialogVariant {
   CREATE = 'create',
@@ -57,7 +59,9 @@ export class TaskDialog implements OnInit {
   public statusList$!: Observable<Status[]>;
   public issueList$!: Observable<GitIssue[]>;
   public pullList$!: Observable<GitPull[]>;
-  public sprints$!: Observable<Sprint[]>;
+
+  public sprintListActive$: Observable<Sprint[]> = of([]);
+  public sprintListCreated$: Observable<Sprint[]> = of([]);
 
   public isGitHubIntegrationAvailable: boolean = false;
 
@@ -75,7 +79,7 @@ export class TaskDialog implements OnInit {
     issue: new FormControl<GitIssue | 'CREATE' | 'DETACH' | null>(null),
     pull: new FormControl<GitPull | 'DETACH' | null>(null),
     storyPoints: new FormControl<number | null>(0),
-    sprintIds: new FormControl<number[]>([]),
+    sprintId: new FormControl<number | null>(null),
   });
 
   public interactive$ = timeToInteraction();
@@ -113,9 +117,10 @@ export class TaskDialog implements OnInit {
 
     this.form
       .get('projectId')
-      ?.valueChanges.pipe(skip(1), untilDestroyed(this))
-      .subscribe((projectId) => {
-        console.log('value changed');
+      ?.valueChanges.pipe(pairwise(), untilDestroyed(this))
+      .subscribe(([previousProjectId, projectId]) => {
+        if (previousProjectId === projectId) return;
+
         this.onProjectIdChange(projectId);
       });
 
@@ -130,7 +135,6 @@ export class TaskDialog implements OnInit {
         }
       });
 
-    console.log(this.form.get('parentTaskId').value, this.form.get('projectId').value);
     if (this.form.get('parentTaskId').value && this.form.get('projectId').value) {
       this.parentTask$ = this.taskService
         .get(this.form.get('projectId').value!, this.form.get('parentTaskId').value!)
@@ -145,10 +149,8 @@ export class TaskDialog implements OnInit {
 
   onProjectIdChange(projectId: number | null) {
     if (!projectId) return;
-    console.log('projectId change', projectId);
 
     this.statusList$ = this.statusService.list(projectId);
-    this.sprints$ = this.sprintService.list(projectId);
 
     this.statusList$
       .pipe(untilDestroyed(this), withLoader(this.statusListLoader))
@@ -159,6 +161,17 @@ export class TaskDialog implements OnInit {
 
         this.form.patchValue({ statusId });
       });
+
+    this.form.get('sprintId').setValue(null);
+
+    this.sprintListActive$ = this.sprintService.list(
+      projectId,
+      SprintFilters.STATUS(SprintStatus.ACTIVE),
+    );
+    this.sprintListCreated$ = this.sprintService.list(
+      projectId,
+      SprintFilters.STATUS(SprintStatus.CREATED),
+    );
 
     this.gitIntegrationService.hasGitHubIntegration(projectId).subscribe((value) => {
       this.isGitHubIntegrationAvailable = value;

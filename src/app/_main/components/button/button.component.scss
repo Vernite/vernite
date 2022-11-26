@@ -55,6 +55,10 @@ button {
     margin-right: 0.75rem;
   }
 
+  &:disabled {
+    opacity: 0.5;
+  }
+
   &.icon-button {
     width: 38px;
     min-width: 38px;

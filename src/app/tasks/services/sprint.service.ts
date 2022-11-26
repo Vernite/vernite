@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EMPTY, map, Observable, switchMap } from 'rxjs';
+import { EMPTY, map, Observable, switchMap, of } from 'rxjs';
 import { ApiService } from '@main/services/api/api.service';
 import { Sprint } from '../interfaces/sprint.interface';
 import { DialogOutlet, DialogService } from '@main/services/dialog/dialog.service';
@@ -10,6 +10,7 @@ import {
 } from '@tasks/dialogs/sprint/sprint.dialog';
 import { SprintStatus } from '@tasks/enums/sprint-status.enum';
 import { DataFilter } from '@main/interfaces/filters.interface';
+import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +36,7 @@ export class SprintService {
    * @param projectId Project id needed to get status
    * @returns Request observable with the status
    */
-  public get(projectId: number, sprintId: number): Observable<Sprint[]> {
+  public get(projectId: number, sprintId: number): Observable<Sprint> {
     return this.apiService.get(`/project/${projectId}/sprint/${sprintId}`);
   }
 
@@ -76,6 +77,7 @@ export class SprintService {
    * @returns Observable with updated sprint, EMPTY otherwise (when user cancels the dialog)
    */
   public openEditSprintDialog(projectId: number, sprint: Sprint): Observable<Sprint | null> {
+    console.log(projectId);
     return this.dialogService
       .open(
         SprintDialog,
@@ -93,6 +95,26 @@ export class SprintService {
         switchMap((updatedSprint: any) => {
           if (updatedSprint) {
             return this.update(projectId, updatedSprint);
+          } else {
+            return EMPTY;
+          }
+        }),
+      );
+  }
+
+  public deleteWithConfirmation(projectId: number, sprint: Sprint): Observable<boolean | null> {
+    return this.dialogService
+      .confirm({
+        title: $localize`Delete task "${sprint.name}"`,
+        message: $localize`Are you sure you want to delete this sprint "${sprint.name}"?`,
+        confirmText: $localize`Delete`,
+        cancelText: $localize`Cancel`,
+        variant: AlertDialogVariant.IMPORTANT,
+      })
+      .pipe(
+        switchMap((confirmed) => {
+          if (confirmed) {
+            return this.delete(projectId, sprint).pipe(switchMap(() => of(true)));
           } else {
             return EMPTY;
           }

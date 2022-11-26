@@ -46,7 +46,7 @@ export class BacklogPage implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(({ projectId }) => {
-      this.projectId = projectId;
+      this.projectId = Number(projectId);
 
       this.taskList$ = this.taskService.backlog(projectId, [TaskFilters.BACKLOG()]);
       this.project$ = this.projectService.get(projectId);
@@ -61,6 +61,48 @@ export class BacklogPage implements OnInit {
         projectId,
         SprintFilters.STATUS(SprintStatus.CREATED),
       );
+    });
+  }
+
+  startSprint(sprint: Sprint) {
+    sprint = {
+      ...sprint,
+      status: SprintStatus.ACTIVE,
+    };
+    this.sprintService.update(this.projectId, sprint).subscribe(() => {
+      location.reload();
+    });
+  }
+
+  revertSprint(sprint: Sprint) {
+    sprint = {
+      ...sprint,
+      status: SprintStatus.CREATED,
+    };
+    this.sprintService.update(this.projectId, sprint).subscribe(() => {
+      location.reload();
+    });
+  }
+
+  closeSprint(sprint: Sprint) {
+    sprint = {
+      ...sprint,
+      status: SprintStatus.CLOSED,
+    };
+    this.sprintService.update(this.projectId, sprint).subscribe(() => {
+      location.reload();
+    });
+  }
+
+  editSprint(sprint: Sprint) {
+    this.sprintService.openEditSprintDialog(this.projectId, sprint).subscribe(() => {
+      location.reload();
+    });
+  }
+
+  deleteSprint(sprint: Sprint) {
+    this.sprintService.deleteWithConfirmation(this.projectId, sprint).subscribe(() => {
+      location.reload();
     });
   }
 }

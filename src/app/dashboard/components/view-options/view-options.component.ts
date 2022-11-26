@@ -20,7 +20,7 @@ export class ViewOptionsComponent {
   project!: Project;
 
   @Input()
-  activeSprintId!: number;
+  activeSprintId?: number;
 
   constructor(private activatedRoute: ActivatedRoute) {
     const { workspaceId, projectId } = this.activatedRoute.snapshot.params;

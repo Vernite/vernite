@@ -32,6 +32,7 @@ import { TaskPage } from './pages/task/task.page';
 import { SprintPage } from './pages/sprint/sprint.page';
 import { BacklogPage } from './pages/backlog/backlog.page';
 import { TaskPipe } from './pipes/task/task.pipe';
+import { BoardComponent } from './components/tasks-board/tasks-board.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule],
@@ -57,6 +58,7 @@ import { TaskPipe } from './pipes/task/task.pipe';
     TimeTrackTimerPipe,
     TimeTrackDurationPipe,
     TaskViewOptionsComponent,
+    BoardComponent,
     SprintDialog,
     InputEpicComponent,
     TaskListComponent,
