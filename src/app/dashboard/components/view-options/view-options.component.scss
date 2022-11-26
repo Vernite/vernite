@@ -7,6 +7,7 @@
 section {
   position: relative;
   display: flex;
+  justify-content: space-between;
   margin-bottom: 1rem;
 
   .tabs {
@@ -17,12 +18,17 @@ section {
       align-items: center;
       padding: 10px;
       margin-right: 10px;
+
+      a {
+        padding: 0;
+        margin-left: 1rem;
+      }
     }
 
     a {
       position: relative;
       display: block;
-      padding: 10px;
+      padding: 10px 10px 15px 10px;
       margin-right: 10px;
       color: var(--color-neutral-300);
       cursor: pointer;
@@ -44,6 +50,43 @@ section {
           border-radius: var(--border-radius);
           content: '';
         }
+      }
+    }
+  }
+
+  .options {
+    display: flex;
+    height: 100%;
+    align-items: center;
+
+    .options-element {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      color: var(--color-neutral-300);
+      cursor: pointer;
+
+      app-icon {
+        display: flex;
+        align-items: center;
+        padding-right: 10px;
+      }
+
+      &:hover {
+        color: var(--color-text);
+      }
+
+      .overlay {
+        position: absolute;
+        z-index: 150;
+        right: 0;
+        bottom: 0;
+        width: 200px;
+        padding: 1rem;
+        background-color: var(--color-secondary-600);
+        border-radius: var(--border-radius);
+        transform: translateY(100%);
       }
     }
   }

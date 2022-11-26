@@ -1,8 +1,7 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
-import { Project } from '@dashboard/interfaces/project.interface';
 import { MemberService } from '@dashboard/services/member/member.service';
 import { ProjectService } from '@dashboard/services/project/project.service';
 import {
@@ -15,33 +14,38 @@ import {
 import { PersistentMap } from '@main/classes/persistent-map.class';
 import { StatusService } from '@tasks/services/status/status.service';
 import { TaskService } from '@tasks/services/task/task.service';
-import { Observable, Subscription } from 'rxjs';
 import { DialogService } from '../../../_main/services/dialog/dialog.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '../../dialogs/task/task.dialog';
 import { StatusWithTasks } from '../../interfaces/status.interface';
 import { Task } from '../../interfaces/task.interface';
 
 @Component({
-  selector: 'app-board',
-  templateUrl: './board.page.html',
-  styleUrls: ['./board.page.scss'],
+  selector: 'tasks-board',
+  templateUrl: './tasks-board.component.html',
+  styleUrls: ['./tasks-board.component.scss'],
 })
-export class BoardPage implements OnInit, OnDestroy {
+export class BoardComponent {
+  @Input() board: [string | Task, StatusWithTasks[]][] = [];
+  @Input() members!: Map<number, ProjectMember>;
+  @Input() projectId!: number;
+  @Input() statusList: StatusWithTasks[] = [];
+
+  /** @ignore */
   faPlus = faPlus;
+
+  /** @ignore */
   faChevronRight = faChevronRight;
+
+  /** @ignore */
   faCodeCommit = faCodeCommit;
+
+  /** @ignore */
   faCodePullRequest = faCodePullRequest;
+
+  /** @ignore */
   faCheck = faCheck;
 
   public taskMap = new PersistentMap<number | string, boolean>({ persistentKey: 'board' });
-  public projectId!: number;
-
-  public statusList$!: Observable<StatusWithTasks[]>;
-  public board$!: Observable<[Task | string, StatusWithTasks[]][]>;
-  public project$: Observable<Project>;
-  public members$: Observable<Map<number, ProjectMember>>;
-  public statusList: StatusWithTasks[] = [];
-  private statusListSubscription?: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -54,27 +58,10 @@ export class BoardPage implements OnInit, OnDestroy {
     const { workspaceId, projectId } = this.activatedRoute.snapshot.params;
 
     this.projectId = projectId;
-    this.project$ = this.projectService.get(projectId);
-    this.board$ = this.statusService.board(projectId);
-    this.statusList$ = this.statusService.listWithTasks(projectId);
-    this.statusListSubscription = this.statusList$.subscribe((statusList) => {
-      this.statusList = statusList;
-    });
-    this.members$ = this.memberService.map(projectId);
   }
 
   getTasksFromStatus(statusId: number) {
     return this.statusList.find((status) => status.id === statusId)?.tasks;
-  }
-
-  ngOnInit() {
-    this.statusList$.subscribe((statusList) => {
-      this.statusList = statusList;
-    });
-  }
-
-  ngOnDestroy() {
-    this.statusListSubscription?.unsubscribe();
   }
 
   drop(event: CdkDragDrop<Task[]>) {

@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { MainModule } from '@main/_main.module';
-import { ViewOptionsComponent } from './view-options.component';
+import { TaskViewOptionsComponent } from './task-view-options.component';
 
-describe('ViewOptionsComponent', () => {
-  let component: ViewOptionsComponent;
-  let fixture: ComponentFixture<ViewOptionsComponent>;
+describe('TaskViewOptionsComponent', () => {
+  let component: TaskViewOptionsComponent;
+  let fixture: ComponentFixture<TaskViewOptionsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [MainModule, RouterTestingModule],
-      declarations: [ViewOptionsComponent],
+      declarations: [TaskViewOptionsComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewOptionsComponent);
+    fixture = TestBed.createComponent(TaskViewOptionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

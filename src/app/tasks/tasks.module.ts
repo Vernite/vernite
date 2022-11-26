@@ -8,9 +8,8 @@ import { InputIssueComponent } from './components/input-issue/input-issue.compon
 import { InputPullRequestComponent } from './components/input-pull-request/input-pull-request.component';
 import { InputTaskPropertyComponent } from './components/input-task-property/input-task-property.component';
 import { StatusLabelComponent } from './components/status-label/status-label.component';
-import { ViewOptionsComponent } from './components/view-options/view-options.component';
 import { TaskDialog } from './dialogs/task/task.dialog';
-import { BoardPage } from './pages/board/board.page';
+import { SprintDialog } from './dialogs/sprint/sprint.dialog';
 import { SchedulePage } from './pages/schedule/schedule.page';
 import { TaskListPage } from './pages/task-list/task-list.page';
 import { StatusColorPipe } from './pipes/status-color.pipe';
@@ -23,18 +22,21 @@ import { TrackerComponent } from './components/tracker/tracker.component';
 import { TimeTracksTotalPipe } from './pipes/time-tracks-total/time-tracks-total.pipe';
 import { TimeTrackTimerPipe } from './pipes/time-track-timer/time-track-timer.pipe';
 import { TimeTrackDurationPipe } from './pipes/time-track-duration/time-track-duration.pipe';
+import { TaskViewOptionsComponent } from './components/task-view-options/task-view-options.component';
 import { TrackerEntryComponent } from './components/tracker/tracker-entry/tracker-entry.component';
 import { InputEpicComponent } from './components/input-epic/input-epic.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskRowComponent } from './components/task-row/task-row.component';
 import { InputTaskParentComponent } from './components/input-task-parent/input-task-parent.component';
 import { TaskPage } from './pages/task/task.page';
+import { SprintPage } from './pages/sprint/sprint.page';
+import { BacklogPage } from './pages/backlog/backlog.page';
 import { TaskPipe } from './pipes/task/task.pipe';
+import { BoardComponent } from './components/tasks-board/tasks-board.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule],
   declarations: [
-    BoardPage,
     BoardTaskComponent,
     TaskListPage,
     TaskDialog,
@@ -42,7 +44,6 @@ import { TaskPipe } from './pipes/task/task.pipe';
     TaskPriorityPipe,
     TaskPriorityIconPipe,
     TaskTypeIconPipe,
-    ViewOptionsComponent,
     SchedulePage,
     InputAssigneeComponent,
     StatusLabelComponent,
@@ -56,10 +57,15 @@ import { TaskPipe } from './pipes/task/task.pipe';
     TimeTracksTotalPipe,
     TimeTrackTimerPipe,
     TimeTrackDurationPipe,
+    TaskViewOptionsComponent,
+    BoardComponent,
+    SprintDialog,
     InputEpicComponent,
     TaskListComponent,
     TaskRowComponent,
     TaskPage,
+    SprintPage,
+    BacklogPage,
     TaskPipe,
   ],
   exports: [TaskTypePipe],

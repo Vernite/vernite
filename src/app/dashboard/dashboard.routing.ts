@@ -8,6 +8,7 @@ import { GithubIntegrationPage } from './pages/github-integration/github-integra
 import { ProjectsListPage } from './pages/projects-list/projects-list.page';
 import { WorkspacesListPage } from './pages/workspaces-list/workspaces-list.page';
 import { CreateProjectPage } from './pages/create-project/create-project.page';
+import { ProjectPage } from './pages/project/project.page';
 
 /**
  * Dashboard routes list
@@ -94,6 +95,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
+            component: ProjectPage,
             loadChildren: () => import('../tasks/tasks.module').then((m) => m.TasksModule),
           },
           {
