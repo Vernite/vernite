@@ -17,6 +17,7 @@ import { CreateProjectPage } from './pages/create-project/create-project.page';
 import { CreateWorkspacePage } from './pages/create-workspace/create-workspace.page';
 import { EditProjectPage } from './pages/edit-project/edit-project.page';
 import { EditWorkspacePage } from './pages/edit-workspace/edit-workspace.page';
+import { ProjectPage } from './pages/project/project.page';
 import { ProjectsListPage } from './pages/projects-list/projects-list.page';
 import { WorkspacesListPage } from './pages/workspaces-list/workspaces-list.page';
 import { GitIntegrationService } from './services/git-integration/git-integration.service';
@@ -34,7 +35,7 @@ import { GitIntegrationService } from './services/git-integration/git-integratio
     WorkspacesListPage,
     EditWorkspacePage,
     ProjectsListPage,
-
+    ProjectPage,
     CreateProjectPage,
     ProjectFormGeneralComponent,
     ProjectFormIntegrationsComponent,

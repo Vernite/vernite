@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from '@dashboard/interfaces/project.interface';
-import { faFilter, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-view-options',
@@ -10,7 +11,7 @@ import { faFilter, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 })
 export class ViewOptionsComponent {
   penToSquare = faPenToSquare;
-  filter = faFilter;
+  faGithub = faGithub;
 
   public workspaceId: number;
   public projectId: number;
@@ -19,7 +20,7 @@ export class ViewOptionsComponent {
   project!: Project;
 
   @Input()
-  title!: string;
+  activeSprintId!: number;
 
   constructor(private activatedRoute: ActivatedRoute) {
     const { workspaceId, projectId } = this.activatedRoute.snapshot.params;

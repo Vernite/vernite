@@ -1,5 +1,3 @@
-<app-view-options [project]="(project$ | async)!"></app-view-options>
-
 <app-task-view-options [project]="(project$ | async)!" [filters]="filters" [filtersControl]="filtersControl"></app-task-view-options>
 
 <task-list [tasks]="(taskList$ | async) || []" [members]="(members$ | async) || emptyMap" [projectId]="projectId"

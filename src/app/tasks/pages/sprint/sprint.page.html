@@ -1,6 +1,5 @@
-<app-view-options [project]="(project$ | async)!"></app-view-options>
-
 <app-task-view-options [project]="(project$ | async)!" [filters]="filters" [filtersControl]="filtersControl"></app-task-view-options>
 
-<task-list [tasks]="(taskList$ | async) || []" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
+<h2 class="title text-xl font-bold">{{(activeSprint$ | async )?.name}}</h2>
+<task-list [tasks]="(activeSprint$ | async)?.tasks || []" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
   [statusList]="(statusList$ | async) || []"></task-list>

@@ -9,6 +9,7 @@ import {
   SprintDialogVariant,
 } from '@tasks/dialogs/sprint/sprint.dialog';
 import { SprintStatus } from '@tasks/enums/sprint-status.enum';
+import { DataFilter } from '@main/interfaces/filters.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -21,8 +22,11 @@ export class SprintService {
    * @param projectId Project id needed to create status
    * @returns Request observable with list of statuses
    */
-  public list(projectId: number): Observable<Sprint[]> {
-    return this.apiService.get(`/project/${projectId}/sprint/`);
+  public list(
+    projectId: number,
+    filters?: DataFilter<Sprint, any>[] | DataFilter<Sprint, any>,
+  ): Observable<Sprint[]> {
+    return this.apiService.get(`/project/${projectId}/sprint/`, { filters });
   }
 
   /**

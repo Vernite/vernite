@@ -8,10 +8,8 @@ import { InputIssueComponent } from './components/input-issue/input-issue.compon
 import { InputPullRequestComponent } from './components/input-pull-request/input-pull-request.component';
 import { InputTaskPropertyComponent } from './components/input-task-property/input-task-property.component';
 import { StatusLabelComponent } from './components/status-label/status-label.component';
-import { ViewOptionsComponent } from './components/view-options/view-options.component';
 import { TaskDialog } from './dialogs/task/task.dialog';
 import { SprintDialog } from './dialogs/sprint/sprint.dialog';
-import { BoardPage } from './pages/board/board.page';
 import { SchedulePage } from './pages/schedule/schedule.page';
 import { TaskListPage } from './pages/task-list/task-list.page';
 import { StatusColorPipe } from './pipes/status-color.pipe';
@@ -37,7 +35,6 @@ import { BacklogPage } from './pages/backlog/backlog.page';
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule],
   declarations: [
-    BoardPage,
     BoardTaskComponent,
     TaskListPage,
     TaskDialog,
@@ -45,7 +42,6 @@ import { BacklogPage } from './pages/backlog/backlog.page';
     TaskPriorityPipe,
     TaskPriorityIconPipe,
     TaskTypeIconPipe,
-    ViewOptionsComponent,
     SchedulePage,
     InputAssigneeComponent,
     StatusLabelComponent,

@@ -22,9 +22,9 @@ import { StatusWithTasks } from '../../interfaces/status.interface';
 import { Task } from '../../interfaces/task.interface';
 
 @Component({
-  selector: 'app-board',
-  templateUrl: './board.page.html',
-  styleUrls: ['./board.page.scss'],
+  selector: 'app-tasks-board',
+  templateUrl: './tasks-board.component.html',
+  styleUrls: ['./tasks-board.component.scss'],
 })
 export class BoardPage implements OnInit, OnDestroy {
   faPlus = faPlus;

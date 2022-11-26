@@ -1,6 +1,17 @@
-<app-view-options [project]="(project$ | async)!"></app-view-options>
-
 <app-task-view-options [project]="(project$ | async)!" [filters]="filters" [filtersControl]="filtersControl"></app-task-view-options>
 
+<ng-container *ngFor="let sprint of sprintListActive$ | async">
+  <h2 class="title text-xl font-bold">{{sprint.name}}</h2>
+  <task-list [tasks]="sprint.tasks" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
+  [statusList]="(statusList$ | async) || []"></task-list>
+</ng-container>
+
+<ng-container *ngFor="let sprint of sprintListCreated$ | async">
+  <h2 class="title text-xl font-bold">{{sprint.name}}</h2>
+  <task-list [tasks]="sprint.tasks" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
+  [statusList]="(statusList$ | async) || []"></task-list>
+</ng-container>
+
+<h2 class="title text-xl font-bold">Backlog</h2>
 <task-list [tasks]="(taskList$ | async) || []" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
   [statusList]="(statusList$ | async) || []"></task-list>
