@@ -29,7 +29,7 @@ export class IconService {
   private addSvgIcon(iconName: string, url: string) {
     this.matIconRegistry.addSvgIcon(
       iconName,
-      this.domSanitizer.bypassSecurityTrustResourceUrl(url),
+      this.domSanitizer.bypassSecurityTrustResourceUrl(window.location.origin + '/pl-PL' + url),
     );
   }
 }
