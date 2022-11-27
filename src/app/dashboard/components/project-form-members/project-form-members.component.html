@@ -1,6 +1,8 @@
-<div class="button">
-  <app-button type="button" [icon]="faPlus" variant="primary" (click)="openAddMembersDialog()" i18n>Add member
+<div class="flex justify-between items-center">
+  <p class="text-xl" i18n>Project members</p>
+  <app-button type="button" [icon]="faPlus" variant="secondary" (click)="openAddMembersDialog()" i18n>Add member
   </app-button>
 </div>
 
-<member-list [members]="members.concat((existingMembers$ | async) || [], newMembers)"></member-list>
+<member-list [members]="members.concat(newMembers)" (remove)="removeMember($event)">
+</member-list>

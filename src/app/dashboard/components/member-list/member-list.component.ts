@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
-import { MemberService } from '@dashboard/services/member/member.service';
 import { isString } from 'lodash-es';
 
 @Component({
@@ -12,6 +11,8 @@ export class MemberListComponent {
   @Input() projectId?: number;
   @Input() members: (ProjectMember | string)[] = [];
 
+  @Output() remove = new EventEmitter<number | string>();
+
   public get oldMembers(): ProjectMember[] {
     return this.members.filter((m) => !isString(m)) as ProjectMember[];
   }
@@ -20,13 +21,9 @@ export class MemberListComponent {
     return this.members.filter((m) => isString(m)) as string[];
   }
 
-  constructor(private memberService: MemberService) {}
+  constructor() {}
 
-  deleteMember(id: number[]) {
-    if (!this.projectId) return;
-
-    this.memberService.remove(this.projectId, id).subscribe(() => {
-      location.reload();
-    });
+  deleteMember(idOrName: number | string) {
+    this.remove.emit(idOrName);
   }
 }
