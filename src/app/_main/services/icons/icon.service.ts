@@ -2,13 +2,18 @@ import { Injectable } from '@angular/core';
 import { Service } from '@main/decorators/service/service.decorator';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { RouterExtensionsService } from '../router-extensions/router-extensions.service';
 
 @Service()
 @Injectable({
   providedIn: 'root',
 })
 export class IconService {
-  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {}
+  constructor(
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
+    private routerExtensions: RouterExtensionsService,
+  ) {}
 
   init() {
     this.addSvgIcon('dashboard', '/assets/icons/dashboard.svg');
@@ -27,9 +32,16 @@ export class IconService {
   }
 
   private addSvgIcon(iconName: string, url: string) {
+    let language = this.routerExtensions.snapshot.language;
+    if (language) {
+      language = `/${language}`;
+    } else {
+      language = '';
+    }
+
     this.matIconRegistry.addSvgIcon(
       iconName,
-      this.domSanitizer.bypassSecurityTrustResourceUrl(window.location.origin + '/pl-PL' + url),
+      this.domSanitizer.bypassSecurityTrustResourceUrl(window.location.origin + language + url),
     );
   }
 }

@@ -1,4 +1,5 @@
-<app-task-view-options [project]="(project$ | async)!" [filters]="filters" [filtersControl]="filtersControl"></app-task-view-options>
+<app-task-view-options [project]="(project$ | async)!" [filters]="filters" [filtersControl]="filtersControl">
+</app-task-view-options>
 
 <div class="w-full mb-10" *ngFor="let sprint of sprintListActive$ | async">
   <div class="flex items-end gap-3 mb-2">
@@ -22,11 +23,12 @@
     </div>
   </div>
   <div>
-    <h2 class="text-base description">{{ (sprint.startDate | date: 'dd.MM.yyyy HH:mm') }} - {{ (sprint.finishDate | date: 'dd.MM.yyyy HH:mm') }}</h2>
-    <h2 class="text-base description">{{sprint.description}}</h2>
+    <h2 class="text-base description">{{ (sprint.startDate | date: 'dd.MM.yyyy HH:mm') }} - {{ (sprint.finishDate |
+      date: 'dd.MM.yyyy HH:mm') }}</h2>
+    <h2 class="text-base description markdown-preview" [innerHTML]="sprint.description | markdown"></h2>
   </div>
   <task-list [tasks]="sprint.tasks" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
-  [statusList]="(statusList$ | async) || []"></task-list>
+    [statusList]="(statusList$ | async) || []"></task-list>
 </div>
 
 <div class="w-full mb-10" *ngFor="let sprint of sprintListCreated$ | async">
@@ -53,15 +55,16 @@
     </div>
   </div>
   <div>
-    <h2 class="text-base description">{{ (sprint.startDate | date: 'dd.MM.yyyy HH:mm') }} - {{ (sprint.finishDate | date: 'dd.MM.yyyy HH:mm') }}</h2>
-    <h2 class="text-base description">{{sprint.description}}</h2>
+    <h2 class="text-base description">{{ (sprint.startDate | date: 'dd.MM.yyyy HH:mm') }} - {{ (sprint.finishDate |
+      date: 'dd.MM.yyyy HH:mm') }}</h2>
+    <h2 class="text-base description markdown-preview" [innerHTML]="sprint.description | markdown"></h2>
   </div>
   <task-list [tasks]="sprint.tasks" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
-  [statusList]="(statusList$ | async) || []"></task-list>
+    [statusList]="(statusList$ | async) || []"></task-list>
 </div>
 
 <div class="w-full mb-10">
   <h2 class="title text-xl font-bold" i18n>Backlog</h2>
   <task-list [tasks]="(taskList$ | async) || []" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
-  [statusList]="(statusList$ | async) || []"></task-list>
+    [statusList]="(statusList$ | async) || []"></task-list>
 </div>

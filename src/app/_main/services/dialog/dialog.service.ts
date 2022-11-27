@@ -8,6 +8,7 @@ import { BehaviorSubject, filter } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 import { AlertDialog, AlertDialogData, AlertDialogVariant } from '../../dialogs/alert/alert.dialog';
 import { DialogOptions } from './dialog-options.interface';
+import { Router } from '@angular/router';
 
 export enum DialogOutlet {
   CONTENT_RIGHT = 'CONTENT_RIGHT',
@@ -34,7 +35,7 @@ export class DialogService {
    * Default constructor with `MatDialog` dependency.
    * @param matDialog MatDialog instance
    */
-  constructor(private matDialog: MatDialog, private injector: Injector) {}
+  constructor(private matDialog: MatDialog, private injector: Injector, private router: Router) {}
 
   /**
    * Opens a modal dialog containing the given component.

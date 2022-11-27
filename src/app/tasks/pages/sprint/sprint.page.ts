@@ -45,7 +45,7 @@ export class SprintPage implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(({ view }) => {
-      this.view = view;
+      if (view) this.view = view;
     });
 
     this.activatedRoute.params.subscribe(({ projectId }) => {

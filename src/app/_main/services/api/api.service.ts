@@ -41,8 +41,6 @@ export class ApiService {
       params = params.appendAll(options.params);
     }
 
-    console.log(params);
-
     return this.httpClient.request<T>(method, this.apiURL + url, {
       responseType: 'json' as any,
       withCredentials: true,
@@ -104,8 +102,6 @@ export class ApiService {
   private getParamsFromFilters<T, V extends string | boolean | number>(
     filters?: DataFilter<T, V>[] | DataFilter<T, V>,
   ) {
-    console.log(filters);
-
     if (!filters) {
       return;
     }

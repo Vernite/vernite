@@ -67,7 +67,6 @@ export class MeetingDialog implements OnInit {
       this.form.patchValue(initialValue);
 
       this.form.get('projectId').valueChanges.subscribe((projectId) => {
-        console.log('PROJECT_ID', projectId);
         if (projectId) {
           this.members$ = this.memberService.list(projectId).pipe(withLoader(this.membersLoader));
           this.form.get('participantIds')?.setValue([user.id]);
