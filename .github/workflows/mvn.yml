@@ -16,4 +16,4 @@ jobs:
         run: |
           protoc -I=./proto --java_out="dist/java" proto/vernite.proto
       - name: Create dependency
-        run: mvn install
+        run: mvn site
