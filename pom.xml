@@ -78,8 +78,7 @@
         <configuration>
           <message>Creating site for ${project.version}</message>
           <repositoryName>protobuf</repositoryName>
-          <repositoryOwner>vernite</repositoryOwner>
-          <github.global.oauth2Token>${env.GITHUB_TOKEN}</github.global.oauth2Token>
+          <repositoryOwner>Vernite</repositoryOwner>
         </configuration>
         <executions>
           <execution>
