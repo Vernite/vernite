@@ -78,6 +78,7 @@
           <message>Creating site for ${project.version}</message>
           <repositoryName>protobuf</repositoryName>
           <repositoryOwner>vernite</repositoryOwner>
+          <github.global.server>github</github.global.server>
         </configuration>
         <executions>
           <execution>
