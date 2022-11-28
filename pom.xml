@@ -76,6 +76,8 @@
         <version>0.12</version>
         <configuration>
           <message>Creating site for ${project.version}</message>
+          <repositoryName>protobuf</repositoryName>
+          <repositoryOwner>vernite</repositoryOwner>
         </configuration>
         <executions>
           <execution>
