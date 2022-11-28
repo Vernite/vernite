@@ -79,6 +79,7 @@
           <repositoryName>protobuf</repositoryName>
           <repositoryOwner>vernite</repositoryOwner>
           <github.global.server>github</github.global.server>
+          <github.global.oauth2Token>${env.GITHUB_TOKEN}</github.global.oauth2Token>
         </configuration>
         <executions>
           <execution>

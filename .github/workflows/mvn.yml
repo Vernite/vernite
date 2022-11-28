@@ -17,3 +17,6 @@ jobs:
           protoc -I=./proto --java_out="dist/java" proto/vernite.proto
       - name: Create dependency
         run: mvn site
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
