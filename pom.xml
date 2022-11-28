@@ -79,6 +79,7 @@
           <message>Creating site for ${project.version}</message>
           <repositoryName>protobuf</repositoryName>
           <repositoryOwner>Vernite</repositoryOwner>
+<branch>refs/heads/build-java</branch>
         </configuration>
         <executions>
           <execution>
