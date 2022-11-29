@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Service } from '@main/decorators/service/service.decorator';
 import { environment } from 'src/environments/environment';
@@ -31,16 +31,21 @@ export class ApiService {
    * @returns Request observable, which completes when request is finished
    */
   public request<T = any>(method: string, url: string, options?: RequestOptions) {
-    const params = this.getParamsFromFilters(options?.filters);
+    let params = this.getParamsFromFilters(options?.filters) || new HttpParams();
+
+    if (options?.params instanceof HttpParams) {
+      for (const param of options.params.keys()) {
+        params = params.append(param, options.params.get(param)!);
+      }
+    } else if (options?.params) {
+      params = params.appendAll(options.params);
+    }
 
     return this.httpClient.request<T>(method, this.apiURL + url, {
       responseType: 'json' as any,
       withCredentials: true,
       ...options,
-      params: {
-        ...(options?.params || {}),
-        ...(params || {}),
-      },
+      params,
     });
   }
 
@@ -101,14 +106,14 @@ export class ApiService {
       return;
     }
 
-    const params: RequestOptions['params'] = {};
+    let params: RequestOptions['params'] = new HttpParams();
 
     if (!Array.isArray(filters)) {
       filters = [filters];
     }
     for (const filter of filters) {
       if (filter.type == DataFilterType.BACKEND) {
-        params[filter.field] = filter.value;
+        params = params.append(filter.field, filter.value);
       }
     }
 

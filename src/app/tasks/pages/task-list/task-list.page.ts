@@ -20,6 +20,7 @@ import { Task } from '@tasks/interfaces/task.interface';
 import { Observable } from 'rxjs';
 import { TaskService } from '@tasks/services/task/task.service';
 import { StatusService } from '@tasks/services/status/status.service';
+import { SprintService } from '@tasks/services/sprint.service';
 
 @Component({
   selector: 'app-task-list',
@@ -61,10 +62,18 @@ export class TaskListPage {
     private projectService: ProjectService,
     private memberService: MemberService,
     private userService: UserService,
+    private sprintService: SprintService,
   ) {
-    const { projectId } = this.activatedRoute.snapshot.params;
+    const { projectId, sprintId } = this.activatedRoute.snapshot.params;
 
     this.projectId = projectId;
+
+    if (sprintId) {
+      if (sprintId === 'active') {
+        this.sprintService.getActiveSprint(this.projectId).subscribe((activeSprint) => {});
+      } else if (sprintId) {
+      }
+    }
 
     this.project$ = this.projectService.get(projectId);
     this.members$ = this.memberService.map(projectId);

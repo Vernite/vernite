@@ -1,13 +1,16 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, Optional } from '@angular/core';
-import { AbstractControl, NgControl, Validator } from '@angular/forms';
+import { AbstractControl, NgControl, Validator, ValidatorFn } from '@angular/forms';
 import { ControlValueAccessor } from '@ngneat/reactive-forms';
 import { ValidationError } from '@main/interfaces/validation-error.interface';
 import { FormControl } from '@ngneat/reactive-forms';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { requiredValidator } from '../validators/required.validator';
 
 /**
  * A base class for creating custom control accessors like inputs, checkboxes, etc.
  */
+@UntilDestroy()
 @Component({
   template: '',
 })
@@ -56,14 +59,16 @@ export class ControlAccessor<T = any>
    *
    * @ignore
    */
-  private destroy$: Subject<null> = new Subject();
+  protected destroy$: Subject<null> = new Subject();
 
   /**
    * Observable that emits when the control is touched.
    *
    * @ignore
    */
-  private touched$: Subject<boolean> = new Subject();
+  protected touched$: Subject<boolean> = new Subject();
+
+  protected validators$ = new BehaviorSubject([] as ValidatorFn[]);
 
   /**
    * Get the value of the control.
@@ -80,9 +85,12 @@ export class ControlAccessor<T = any>
     return this.control.errors;
   }
 
+  protected displayControl: FormControl<any> | undefined;
+
   private _previousValue: T | undefined = undefined;
   private _previousValueBuffer: T | undefined = undefined;
   private _interceptedAlready: boolean = false;
+  private _displayControlInit: boolean = false;
 
   /**
    * Accessor constructor to initialize component. Extended by child classes.
@@ -109,6 +117,7 @@ export class ControlAccessor<T = any>
     const afterSetup = () => {
       this._checkIfIsRequired();
       this._initValidation();
+      this._initDisplayControl();
 
       this.ngAfterControlInit();
     };
@@ -136,8 +145,10 @@ export class ControlAccessor<T = any>
 
     for (const validator of (this.ngControl as any).control._rawValidators) {
       if (validator.name === 'required') {
-        this._required = true;
+        this.markAsRequired();
         break;
+      } else {
+        this.markAsOptional();
       }
     }
   }
@@ -147,6 +158,7 @@ export class ControlAccessor<T = any>
    */
   private _initValidation(): void {
     this.control.addValidators((control: AbstractControl) => this.validate(control));
+    this.validators$.next((this.ngControl as any).control._rawValidators);
   }
 
   private _interceptValueChange(control: AbstractControl) {
@@ -160,8 +172,30 @@ export class ControlAccessor<T = any>
     setTimeout(() => (this._interceptedAlready = false));
   }
 
+  private _initDisplayControl() {
+    if (this._displayControlInit || !this.displayControl) return;
+
+    this.control.errors$.pipe(untilDestroyed(this)).subscribe((errors) => {
+      this.displayControl?.setErrors(errors);
+    });
+    this.control.touch$.pipe(untilDestroyed(this)).subscribe((touched) => {
+      if (touched) {
+        this.displayControl?.markAsTouched();
+      } else {
+        this.displayControl?.markAsUntouched();
+      }
+    });
+    this.validators$.subscribe((validators) => {
+      if (validators.some((v) => v.name === 'required')) {
+        this.displayControl?.setValidators([requiredValidator()]);
+      }
+    });
+    this._displayControlInit = true;
+  }
+
   validate(control: AbstractControl): null | ValidationError {
     this._interceptValueChange(control);
+    this._checkForValidatorsChange();
     return null;
   }
 
@@ -204,6 +238,28 @@ export class ControlAccessor<T = any>
   parseValue(value: any): T {
     return value;
   }
+
+  markAsRequired() {
+    this._required = true;
+  }
+
+  markAsOptional() {
+    this._required = false;
+  }
+
+  _checkForValidatorsChange() {
+    const previousValidators = this.validators$.value;
+    const currentValidators = (this.ngControl as any).control._rawValidators;
+
+    if (
+      previousValidators.length !== currentValidators.length ||
+      !currentValidators.every((v: any, i: number) => v === previousValidators[i])
+    ) {
+      this.validators$.next(currentValidators);
+    }
+  }
+
+  onValidatorsChange() {}
 
   /** @ignore */
   ngOnDestroy(): void {

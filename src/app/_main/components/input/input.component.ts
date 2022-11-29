@@ -57,6 +57,8 @@ export class InputComponent extends ControlAccessor implements AfterViewInit {
 
   @Input() pending?: boolean;
 
+  @Input() align: 'left' | 'center' = 'left';
+
   // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() focus: EventEmitter<boolean> = new EventEmitter<boolean>();
 

@@ -39,7 +39,7 @@ export class InputDateTimeComponent
   // TODO: Load this from user settings
   displayFormat = 'DD.MM.YYYY HH:mm';
 
-  displayControl = new FormControl<string>(this.format(this.control?.value));
+  override displayControl = new FormControl<string>(this.format(this.control?.value));
 
   focused: boolean = false;
 
