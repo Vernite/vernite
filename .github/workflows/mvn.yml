@@ -23,8 +23,6 @@ jobs:
           protoc -I=./proto --java_out="dist/java" proto/vernite.proto
       - name: Create dependency
         run: mvn deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
           find protobuf-java/
           cd protobuf-java
