@@ -35,7 +35,7 @@ export class DialogService {
    * Default constructor with `MatDialog` dependency.
    * @param matDialog MatDialog instance
    */
-  constructor(private matDialog: MatDialog, private injector: Injector, private router: Router) {}
+  constructor(private matDialog: MatDialog, private injector: Injector) {}
 
   /**
    * Opens a modal dialog containing the given component.

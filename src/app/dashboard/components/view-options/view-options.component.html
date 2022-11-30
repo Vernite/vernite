@@ -1,25 +1,28 @@
 <section *ngIf="project">
-  <div class="tabs">
-    <div class="project-name">
+  <div class="flex items-center">
+    <div class="flex items-center">
+      <div *ngIf="project?.logo" class="logo" [style.background-image]="'url(' + project.logo?.url + ')'"></div>
       <h2 class="text-xl font-bold">{{project.name}}</h2>
       <a *ngIf="project.gitHubIntegration" href="https://github.com/{{ project.gitHubIntegration }}" target="blank">
         <app-icon [icon]="faGithub"></app-icon>
       </a>
     </div>
-    <a [routerLink]="['/', 'projects', projectId, 'sprint']" [queryParams]="{ view: 'list' }" routerLinkActive="active">
-      <h2 i18n>Sprint</h2>
-    </a>
-    <a [routerLink]="['/', 'projects', projectId, 'backlog']" [queryParams]="{ view: 'list' }" routerLinkActive="active">
-      <h2 i18n>Backlog</h2>
-    </a>
-    <a [routerLink]="['/', 'projects', projectId, 'calendar']" routerLinkActive="active">
-      <h2 i18n>Calendar</h2>
-    </a>
+    <tabs class="ml-3">
+      <tab [routerLink]="['/', 'projects', projectId, 'sprint']" [queryParams]="{ view: 'list' }"
+        routerLinkActive="active" i18n>
+        Sprint
+      </tab>
+      <tab [routerLink]="['/', 'projects', projectId, 'backlog']" [queryParams]="{ view: 'list' }"
+        routerLinkActive="active" i18n>
+        Backlog
+      </tab>
+      <tab [routerLink]="['/', 'projects', projectId, 'calendar']" routerLinkActive="active" i18n>
+        Calendar
+      </tab>
+    </tabs>
   </div>
   <div class="options">
-    <div class="options-element" [routerLink]="['/', 'projects', projectId, 'edit']">
-      <app-icon [icon]="penToSquare" size="16px"></app-icon>
-      <h2 i18n>Edit</h2>
-    </div>
+    <app-button variant="transparent" [icon]="penToSquare" [routerLink]="['/', 'projects', projectId, 'edit']" i18n>Edit
+    </app-button>
   </div>
 </section>
