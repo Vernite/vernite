@@ -17,7 +17,7 @@ jobs:
           path: protobuf-java
           ref: build-java
       - name: Install Protoc
-        uses: arduino/setup-protoc@v1
+        run: sudo apt-get install -y protobuf-compiler
       - name: Build proto libraries ⚙️
         run: |
           protoc -I=./proto --java_out="dist/java" proto/vernite.proto

@@ -16,7 +16,7 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
       - name: Install Protoc
-        uses: arduino/setup-protoc@v1
+        run: sudo apt-get install -y protobuf-compiler
       - name: Cache node modules
         id: cache-node-modules
         uses: actions/cache@v3
