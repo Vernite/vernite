@@ -23,7 +23,7 @@
     <repository>
       <id>vernite-protobuf</id>
       <name>Vernite protobuf repository</name>
-      <url>file://${user.home}/.m2/vernite-protobuf</url>
+      <url>file://${env.GITHUB_WORKSPACE}/protobuf-java</url>
     </repository>
   </distributionManagement>
   <dependencies>
