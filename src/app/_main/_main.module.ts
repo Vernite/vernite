@@ -73,6 +73,7 @@ import { ClickOutsideDirective } from './directives/click-outside/click-outside.
 import { InputFileComponent } from './components/input-file/input-file.component';
 import { MarkdownPipe } from './pipes/markdown/markdown.pipe';
 import { SidebarGroupComponent } from './components/sidebar-navigation/sidebar-group/sidebar-group.component';
+import { CollapsableDirective } from './directives/collapsable/collapsable.directive';
 
 /**
  * Main module configuration object
@@ -178,6 +179,7 @@ const ngModuleConfig = {
     ClickOutsideDirective,
     InputFileComponent,
     MarkdownPipe,
+    CollapsableDirective,
   ],
   providers: [
     /*=============================================

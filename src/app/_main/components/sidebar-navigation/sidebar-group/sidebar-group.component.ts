@@ -8,5 +8,5 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 })
 export class SidebarGroupComponent {
   @Input() icon?: IconDefinition | string;
-  @HostBinding('class.collapsed') @Input() collapsed = false;
+  @HostBinding('class.collapsed') @Input() collapsed = true;
 }

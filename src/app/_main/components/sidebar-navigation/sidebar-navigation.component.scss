@@ -1,6 +1,5 @@
 :host {
   display: flex;
-  width: 250px;
   height: 100%;
   flex-direction: column;
   flex-shrink: 0;
@@ -18,11 +17,11 @@
     .logo {
       display: none;
     }
-  }
-}
 
-.open-below {
-  overflow-y: auto;
+    .entries {
+      padding: 0;
+    }
+  }
 }
 
 .logo-section {
@@ -41,4 +40,9 @@
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
+}
+
+.entries {
+  padding: 0 0.25rem 0 0.75rem;
+  overflow-y: auto;
 }
