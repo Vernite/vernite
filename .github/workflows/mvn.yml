@@ -10,13 +10,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - run: mkdir ~/.m2/
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          path: ~/.m2/vernite-protobuf/
       - name: Install Protoc
         uses: arduino/setup-protoc@v1
       - name: Build proto libraries ⚙️
         run: |
           protoc -I=./proto --java_out="dist/java" proto/vernite.proto
       - name: Create dependency
-        run: mvn site
+        run: mvn deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

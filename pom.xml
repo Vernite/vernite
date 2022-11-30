@@ -19,7 +19,13 @@
     <maven.compiler.target>17</maven.compiler.target>
     <github.global.oauth2Token>${env.GITHUB_TOKEN}</github.global.oauth2Token>
   </properties>
-
+  <distributionManagement>
+    <repository>
+      <id>vernite-protobuf</id>
+      <name>Vernite protobuf repository</name>
+      <url>file://${user.home}/.m2/vernite-protobuf</url>
+    </repository>
+  </distributionManagement>
   <dependencies>
     <!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
     <dependency>
