@@ -15,6 +15,7 @@ jobs:
         with:
           fetch-depth: 0
           path: ~/.m2/vernite-protobuf/
+          ref: build-java
       - name: Install Protoc
         uses: arduino/setup-protoc@v1
       - name: Build proto libraries ⚙️
@@ -31,4 +32,4 @@ jobs:
           git config user.email github-actions@github.com
           git add .
           git commit -m "New version"
-          git push
+          git push -u origin build-java
