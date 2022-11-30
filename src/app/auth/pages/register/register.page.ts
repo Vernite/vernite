@@ -7,6 +7,8 @@ import { sameAsValidator } from '@main/validators/same-as.validator';
 import { catchError, EMPTY, Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { AuthService } from '@auth/services/auth/auth.service';
+import { Loader } from '../../../_main/classes/loader/loader.class';
+import { withLoader } from '../../../_main/operators/loader.operator';
 
 enum RegisterStage {
   IMPORTANT_DATA,
@@ -26,6 +28,7 @@ export class RegisterPage {
   RegisterStage = RegisterStage;
 
   public error?: string;
+  public loader = new Loader();
 
   /**
    * Form group for register.
@@ -76,9 +79,11 @@ export class RegisterPage {
     this.form.updateValueAndValidity();
 
     if (this.form.valid) {
+      this.error = undefined;
       this.registerSubscription = this.authService
         .register(this.form.value)
         .pipe(
+          withLoader(this.loader),
           catchError((e) => {
             this.handleError(e);
             return EMPTY;
@@ -101,6 +106,8 @@ export class RegisterPage {
             this.error = $localize`Username is already taken`;
         }
         break;
+      case 500:
+        this.error = $localize`Internal server error`;
     }
   }
 }

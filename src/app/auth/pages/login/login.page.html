@@ -25,7 +25,7 @@
           <app-checkbox formControlName="remember" i18n>Remember me</app-checkbox>
         </div>
 
-        <app-button variant="primary" i18n>Log in</app-button>
+        <app-button variant="primary" [pending]="loader.pending" i18n>Log in</app-button>
 
       </form>
     </section>
