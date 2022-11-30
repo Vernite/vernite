@@ -20,7 +20,7 @@ jobs:
         run: sudo apt-get install -y protobuf-compiler
       - name: Build proto libraries ⚙️
         run: |
-          protoc -I=./proto --java_out="dist/java" proto/vernite.proto
+          protoc --experimental_allow_proto3_optional -I=./proto --java_out="dist/java" proto/vernite.proto
       - name: Create dependency
         run: mvn deploy
         env:
