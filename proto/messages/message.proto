@@ -1,5 +1,0 @@
-syntax = "proto3";
-
-message NewTaskNotification {
-  string test = 1;
-}

@@ -1,52 +1,44 @@
 syntax = "proto3";
 
-package tutorial;
+package vernite;
 
 option java_multiple_files = true;
-option java_package = "com.example.tutorial.protos";
-option java_outer_classname = "AddressBookProtos";
+option java_package = "dev.vernite.protobuf.";
+option java_outer_classname = "VerniteProtobuf";
 
-message Person {
-  string name = 1;
-  int32 id = 2;
-  string email = 3;
+import "google/protobuf/any.proto";
 
-  enum PhoneType {
-    MOBILE = 0;
-    HOME = 1;
-    WORK = 2;
+message CommunicatorModel {
+  // Model representing a chat channel.
+  message Channel {
+    string id = 1; // ID of the channel.
+    optional string name = 2; // Name of channel. Present only if channel is not a DM.
+    string user = 3; // ID of user that the channel is a DM with. Present only if channel is a DM.
+    optional bool channel = 4; // Whether the channel is a DM. If true channel is not a DM.
+    optional string team = 5; // ID of team / server the channel is in. Might be absent if channel is a DM.
+    string provider = 6; // Service the channel is associated with.
   }
-
-  message PhoneNumber {
-    string number = 1;
-    PhoneType type = 2;
+  // Model representing a chat user.
+  message ChatUser {
+    string id = 1; // ID of the user.
+    optional string team = 2; // Team associated with the user. Might be absent.
+    string name = 3; // Name of the user.
+    string displayName = 4; // Display name of the user.
+    bool bot = 5; // Whether the user is a bot.
+    string avatar = 6; // Link to the user's avatar.
+    string provider = 7; // Service the user is associated with.
   }
-
-  repeated PhoneNumber phones = 4;
+  // Model representing a chat message.
+  message Message {
+    string id = 1; // ID of the message.
+    string user = 2; // ID of the user that sent the message.
+    string channel = 3; // ID of the channel the message was sent to.
+    string content = 4; // Content of the message.
+    string timestamp = 5; // Timestamp of the message.
+    string provider = 6; // Service that sent the message.
+  }
 }
 
-message AddressBook {
-  repeated Person people = 1;
-}
-
-
-message Author {
-    string name = 1;
-    string role = 2;
-}
-
-message Change {
-    Kind kind = 1;
-    string patch = 2;
-    repeated string tags = 3;
-    oneof name_or_id {
-        string name = 4;
-        string id = 5;
-    }
-    Author author = 6;
-}
-
-enum Kind {
-    UPDATED = 0;
-    DELETED = 1;
+message Packet {
+  google.protobuf.Any payload = 1;
 }

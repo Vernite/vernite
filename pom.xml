@@ -6,14 +6,13 @@
 
   <groupId>dev.vernite</groupId>
   <artifactId>protobuf</artifactId>
-  <version>1.0.13-SNAPSHOT</version>
+  <version>1.0.14-SNAPSHOT</version>
 
   <name>protobuf</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
   <properties>
-    <src.dir>dist/java</src.dir>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
@@ -36,6 +35,7 @@
   </dependencies>
 
   <build>
+    <sourceDirectory>dist/java</sourceDirectory>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
