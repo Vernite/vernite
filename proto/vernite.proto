@@ -12,16 +12,16 @@ message CommunicatorModel {
   // Model representing a chat channel.
   message Channel {
     string id = 1; // ID of the channel.
-    optional string name = 2; // Name of channel. Present only if channel is not a DM.
+    string name = 2; // Name of channel. Present only if channel is not a DM.
     string user = 3; // ID of user that the channel is a DM with. Present only if channel is a DM.
-    optional bool channel = 4; // Whether the channel is a DM. If true channel is not a DM.
-    optional string team = 5; // ID of team / server the channel is in. Might be absent if channel is a DM.
+    bool channel = 4; // Whether the channel is a DM. If true channel is not a DM.
+    string team = 5; // ID of team / server the channel is in. Might be absent if channel is a DM.
     string provider = 6; // Service the channel is associated with.
   }
   // Model representing a chat user.
   message ChatUser {
     string id = 1; // ID of the user.
-    optional string team = 2; // Team associated with the user. Might be absent.
+    string team = 2; // Team associated with the user. Might be absent.
     string name = 3; // Name of the user.
     string displayName = 4; // Display name of the user.
     bool bot = 5; // Whether the user is a bot.
