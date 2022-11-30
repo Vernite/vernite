@@ -9,6 +9,7 @@ export const FullscreenIframe = ({ src }) => {
       elem.style.margin = 0;
       elem.style.padding = 0;
       elem.style.maxWidth = '100%';
+      elem.style.backgroundColor = 'white';
     });
   }, 200);
   return <iframe src={src} style={{ width: '100%', height: '100%' }} />;

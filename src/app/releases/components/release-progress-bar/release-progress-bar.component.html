@@ -1,0 +1,27 @@
+<div class="bar" #trigger="cdkOverlayOrigin" cdkOverlayOrigin (mouseenter)="showDetails()" (mouseleave)="hideDetails()">
+  <ng-container *ngFor="let status of statusList | reverse">
+    <div [style.width]="progress[status.id].percentage + '%'"
+      [style.background-color]="progress[status.id].color | color:'hex'"></div>
+  </ng-container>
+</div>
+
+<div class="text-base">{{ finalPercentage }}%</div>
+
+<!-- Overlay -->
+<ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="detailsOpen"
+  [cdkConnectedOverlayPositions]="detailsPositionPairs">
+  <div class="overlay">
+    <div class="flex flex-col gap-2">
+      <div class="flex justify-between items-center">
+        <span class="text-label mr-5" i18n>All</span>
+        <pill variant="small" class="text-label w-10">{{ tasks.length }}</pill>
+      </div>
+      <hr class="my-1 opacity-20">
+      <div *ngFor="let status of statusList" class="flex justify-between items-center">
+        <span class="text-label mr-5">{{ status.name }}</span>
+        <pill variant="small" class="text-label w-10" [style.background-color]="progress[status.id].color | color:'hex'"
+          [class]="['text-' + (progress[status.id].color | contrastColor)]">{{ progress[status.id].total }}</pill>
+      </div>
+    </div>
+  </div>
+</ng-template>
