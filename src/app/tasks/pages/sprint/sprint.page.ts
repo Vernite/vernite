@@ -1,3 +1,4 @@
+import { TaskProtoService } from './../../services/task/task.proto.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TaskService } from '@tasks/services/task/task.service';
@@ -13,7 +14,9 @@ import { SprintService } from '@tasks/services/sprint.service';
 import { Sprint } from '@tasks/interfaces/sprint.interface';
 import { SprintStatus } from '@tasks/enums/sprint-status.enum';
 import { Task } from '@tasks/interfaces/task.interface';
+import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'sprint-page',
   templateUrl: './sprint.page.html',
@@ -41,6 +44,7 @@ export class SprintPage implements OnInit {
     private memberService: MemberService,
     private statusService: StatusService,
     private sprintService: SprintService,
+    private taskProtoService: TaskProtoService,
   ) {}
 
   ngOnInit() {
@@ -58,6 +62,14 @@ export class SprintPage implements OnInit {
       this.board$ = this.statusService.board(projectId);
 
       this.activeSprint$ = this.sprintService.getActiveSprint(projectId);
+    });
+
+    this.taskProtoService.TASKS.pipe(untilDestroyed(this)).subscribe((task) => {
+      if (task.projectId === this.projectId) {
+        this.board$ = this.statusService.board(this.projectId);
+        this.statusListWithTasks$ = this.statusService.listWithTasks(this.projectId);
+        this.activeSprint$ = this.sprintService.getActiveSprint(this.projectId);
+      }
     });
   }
 

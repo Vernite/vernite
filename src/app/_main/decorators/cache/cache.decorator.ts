@@ -19,6 +19,8 @@ export const DefaultCacheOptions = {
  */
 export function Cache(options?: CacheOptions): MethodDecorator {
   return function (target: any, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
+    options = { ...DefaultCacheOptions, ...options };
+
     const originalMethod = descriptor.value;
 
     descriptor.value = function (...args: any[]) {

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { tutorial } from '@vernite/protobuf';
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import { webSocket } from 'rxjs/webSocket';
 import {
   filter,
   from,
@@ -8,15 +7,17 @@ import {
   of,
   switchMap,
   Observable,
-  MonoTypeOperatorFunction,
   OperatorFunction,
-  Subject,
   share,
   finalize,
 } from 'rxjs';
 import { Message } from 'google-protobuf';
 import { Any } from 'google-protobuf/google/protobuf/any_pb.js';
+import { Service } from '../../decorators/service/service.decorator';
+import { vernite } from '@vernite/protobuf';
+import { isClass } from '@main/classes/util/is-class';
 
+@Service()
 @Injectable({
   providedIn: 'root',
 })
@@ -26,6 +27,17 @@ export class ProtoService {
     deserializer: (e: MessageEvent) => e,
     serializer: (value: any) => value,
   });
+
+  private static messageClasses = ProtoService.flatClassesMap('vernite', vernite);
+  private static packagesMap = ProtoService.flatPackagesMap('vernite', vernite);
+
+  constructor() {
+    this.subscribe<vernite.KeepAlive, typeof vernite.KeepAlive>(vernite.KeepAlive).subscribe(
+      (message) => {
+        this.next(message);
+      },
+    );
+  }
 
   protected isType<T extends Message, K extends typeof Message>(
     cls: K,
@@ -37,7 +49,7 @@ export class ProtoService {
 
   private serialize(value: Message) {
     const any = new Any();
-    any.pack(value.serializeBinary(), value.constructor.name);
+    any.pack(value.serializeBinary(), ProtoService.packagesMap.get(value.constructor.name)!);
     return of(any.serializeBinary());
   }
 
@@ -46,9 +58,11 @@ export class ProtoService {
       map((buffer: Uint8Array) => {
         const any = Any.deserializeBinary(buffer);
         const type = any.getTypeName();
+
         const message = any.unpack((bytes: Uint8Array) => {
-          return (tutorial as any)[type].deserializeBinary(bytes) as Message;
+          return ProtoService.messageClasses.get(type)!.deserializeBinary(bytes);
         }, type);
+
         return message!;
       }),
     );
@@ -64,9 +78,16 @@ export class ProtoService {
     return this._websocket$.pipe(switchMap(this.deserialize));
   }
 
-  protected subscribe<T extends Message, K extends typeof Message>(cls: K): Observable<T> {
+  public subscribe<T extends Message & { action?: vernite.BasicAction }, K extends typeof Message>(
+    cls: K,
+    action?: vernite.BasicAction,
+  ): Observable<T> {
     return this.socket().pipe(
       this.isType<T, K>(cls),
+      filter((message: T) => {
+        if (!action) return true;
+        return message.action === action;
+      }),
       finalize(() => {
         this.unsubscribe();
       }),
@@ -74,5 +95,39 @@ export class ProtoService {
     );
   }
 
-  protected unsubscribe() {}
+  protected unsubscribe() {
+    console.groupCollapsed('[SOCKET] UNSUBSCRIBE');
+    console.log('Closing socket');
+    console.groupEnd();
+  }
+
+  private static flatClassesMap(prefix: string, source: any): Map<string, typeof Message> {
+    let map = new Map<string, typeof Message>();
+    for (const [key, cls] of Object.entries(source)) {
+      if (isClass<typeof Message>(cls)) {
+        map.set(prefix + '.' + key, cls);
+        map = new Map([
+          ...map.entries(),
+          ...this.flatClassesMap(prefix + '.' + key, cls).entries(),
+        ]);
+      }
+    }
+
+    return map;
+  }
+
+  private static flatPackagesMap(prefix: string, source: any): Map<string, string> {
+    let map = new Map<string, string>();
+    for (const [key, cls] of Object.entries(source)) {
+      if (isClass<typeof Message>(cls)) {
+        map.set(key, prefix + '.' + key);
+        map = new Map([
+          ...map.entries(),
+          ...this.flatPackagesMap(key, prefix + '.' + key).entries(),
+        ]);
+      }
+    }
+
+    return map;
+  }
 }

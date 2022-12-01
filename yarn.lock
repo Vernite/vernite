@@ -4983,8 +4983,8 @@
     eslint-visitor-keys "^3.3.0"
 
 "@vernite/protobuf@https://github.com/Vernite/protobuf.git#build-typescript":
-  version "1.0.12"
-  resolved "https://github.com/Vernite/protobuf.git#0c826442920432182562d6689aa2f3edfb75bf52"
+  version "1.0.17"
+  resolved "https://github.com/Vernite/protobuf.git#db0be51383bd27e18a15496ed5b41c117de6722c"
   dependencies:
     google-protobuf "^3.21.2"
     typescript "^4.9.3"

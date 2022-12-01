@@ -122,6 +122,7 @@ export class TaskDialog implements OnInit {
         if (previousProjectId === projectId) return;
 
         this.onProjectIdChange(projectId);
+        this.form.get('sprintId').setValue(null);
       });
 
     this.form
@@ -150,6 +151,8 @@ export class TaskDialog implements OnInit {
   onProjectIdChange(projectId: number | null) {
     if (!projectId) return;
 
+    console.log('project id changed');
+
     this.statusList$ = this.statusService.list(projectId);
 
     this.statusList$
@@ -161,8 +164,6 @@ export class TaskDialog implements OnInit {
 
         this.form.patchValue({ statusId });
       });
-
-    this.form.get('sprintId').setValue(null);
 
     this.sprintListActive$ = this.sprintService.list(
       projectId,
