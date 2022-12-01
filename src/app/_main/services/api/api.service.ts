@@ -4,6 +4,7 @@ import { Service } from '@main/decorators/service/service.decorator';
 import { environment } from 'src/environments/environment';
 import { RequestOptions } from '../../interfaces/request-options.interface';
 import { DataFilter, DataFilterType } from '@main/interfaces/filters.interface';
+import { ProtoService } from '../proto/proto.service';
 
 /**
  * Service to access the API
@@ -21,7 +22,7 @@ export class ApiService {
   /**
    * Default service constructor with `HttpClient` dependency
    */
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private protoService: ProtoService) {}
 
   /**
    * Sends request to the API.
