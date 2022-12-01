@@ -3,10 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { Page } from '@main/decorators/page/page.decorator';
-import { DialogService } from '@main/services/dialog/dialog.service';
-import { ProjectService } from '@dashboard/services/project/project.service';
 import { Release } from '../../interfaces/release.interface';
 import { ReleaseService } from '../../services/release.service';
+import { StatusService } from '@tasks/services/status/status.service';
+import { Status } from '@tasks/interfaces/status.interface';
 
 /**
  * Releases list page component.
@@ -26,8 +26,7 @@ export class ReleasesListPage implements OnInit {
    */
   constructor(
     private releaseService: ReleaseService,
-    private projectService: ProjectService,
-    private dialogService: DialogService,
+    private statusService: StatusService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
   ) {}
@@ -41,12 +40,13 @@ export class ReleasesListPage implements OnInit {
    * Releases list observable to use in the template.
    */
   public releases$?: Observable<Release[]>;
-
+  public statusList$?: Observable<Status[]>;
   public projectId!: number;
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(({ projectId }) => {
       this.projectId = Number(projectId);
+      this.statusList$ = this.statusService.list(projectId);
       this.loadReleases(projectId);
     });
   }

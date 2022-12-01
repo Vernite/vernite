@@ -22,7 +22,9 @@
   <!-- Progress column -->
   <ng-container matColumnDef="progress">
     <th mat-header-cell *matHeaderCellDef i18n>Progress</th>
-    <td mat-cell *matCellDef="let row"> {{row.progress}} </td>
+    <td mat-cell *matCellDef="let row" class="pr-5">
+      <release-progress-bar class="max-w-xs" [tasks]="row.tasks" [statusList]="(statusList$ | async) || []"></release-progress-bar>
+    </td>
   </ng-container>
 
   <!-- Release Date column -->
