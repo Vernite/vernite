@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 })
 export class RouterExtensionsService {
   constructor(private router: Router) {}
+
   public get snapshot() {
     if (!this.router.routerState) return { params: {}, data: {} };
 
@@ -14,6 +15,19 @@ export class RouterExtensionsService {
       node = node.children[0];
     }
 
-    return { params: node.value.params, data: node.value.data };
+    return {
+      params: node.value.params,
+      data: node.value.data,
+      language: this.getLanguageFromUrl(),
+    };
+  }
+
+  private getLanguageFromUrl() {
+    const languagePredicate = location.pathname.split('/')[1];
+    if (/^.{2}-.{2}$/.test(languagePredicate)) {
+      return languagePredicate;
+    } else {
+      return null;
+    }
   }
 }

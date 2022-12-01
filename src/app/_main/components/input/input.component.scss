@@ -29,6 +29,13 @@
   }
 }
 
+.text-align-center {
+  input {
+    padding-left: 0;
+    text-align: center;
+  }
+}
+
 $padding-left: 0.5rem;
 $height: 44px;
 

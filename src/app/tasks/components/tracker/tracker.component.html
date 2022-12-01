@@ -18,7 +18,9 @@
         <tracker-entry [timeTrack]="timeTrack"></tracker-entry>
       </li>
       <li *ngIf="!timeTracks?.length" class="no-tracks">
-        <span i18n>Time in this task hasn't been tracked yet</span>
+        <app-card class="mb-3">
+          <div class="card-content" i18n>Time in this task hasn't been tracked yet</div>
+        </app-card>
       </li>
     </ul>
     <app-button [icon]="faPlus" class="w-full" (click)="insertTimeTrack()" i18n>Add new time track</app-button>

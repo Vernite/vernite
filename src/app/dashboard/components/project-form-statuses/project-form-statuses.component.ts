@@ -106,6 +106,7 @@ export class ProjectFormStatusesComponent implements ProjectForm, OnInit {
       .pipe(
         untilDestroyed(this),
         tap((status) => (this.statusList = [...this.statusList, status])),
+        tap(() => this.updateOrdinals()),
       )
       .subscribe();
   }

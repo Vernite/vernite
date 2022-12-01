@@ -6,6 +6,9 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import * as Color from 'color';
 import { filter } from 'rxjs';
 
+/**
+ * Color input component
+ */
 @UntilDestroy()
 @Component({
   selector: 'input-color',
@@ -53,7 +56,7 @@ export class InputColorComponent extends ControlAccessor<color> {
           this.control.setValue(color.rgbNumber());
           changesFromInside = false;
         } catch (e) {
-          // Unable to convert to color - give user an error
+          // TODO: Unable to convert to color - give user an error
         }
       }
     });

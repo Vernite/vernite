@@ -3,8 +3,7 @@ import { TaskType } from '@tasks/enums/task-type.enum';
 import { Task } from '@tasks/interfaces/task.interface';
 import { Enum } from './enum.class';
 
-/** @TODO: split this class into modules */
-
+/** @deprecated */
 export class Filters {
   public static ONLY_MY_TASKS(currentUserId: number): FilterCheckbox<{ assigneeId?: number }> {
     return {

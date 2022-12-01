@@ -5,7 +5,10 @@ import { exposeAllPossibilities } from '../component-content-decorator.helper';
 import { StoryPageConfig } from './story-page-config.class';
 import { StoryTemplate } from './story-template.class';
 import { StoryFn } from '@storybook/angular';
-import { componentTemplateDecorator } from '../functions/component-template-decorator.function';
+import {
+  componentTemplateDecorator,
+  wrapWithDiv,
+} from '../functions/component-template-decorator.function';
 
 export type Props<C> = Partial<C> & {
   formControl?: FormControl<any>;
@@ -99,7 +102,7 @@ export class Story<C> {
 
   public addTemplate(template: string) {
     this.mergeConfig({
-      decorators: [componentWrapperDecorator(() => template)],
+      decorators: [componentWrapperDecorator(() => wrapWithDiv(template))],
       parameters: {
         docs: {
           source: {
@@ -117,6 +120,7 @@ export class Story<C> {
       decorators: [
         componentTemplateDecorator(this.props, {
           selector: this._config.config.selector,
+          wrapWithDiv: true,
         }),
       ],
     });

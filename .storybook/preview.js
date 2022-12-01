@@ -17,7 +17,10 @@ export const parameters = {
       date: /Date$/,
     },
   },
-  docs: { inlineStories: true },
+  docs: {
+    inlineStories: true,
+    theme: themes.dark,
+  },
   darkMode: {
     dark: { ...themes.dark },
     light: { ...themes.normal }

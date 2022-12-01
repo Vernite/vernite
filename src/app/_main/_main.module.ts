@@ -68,11 +68,13 @@ import { ContrastColorPipe } from './pipes/contrast-color/contrast-color.pipe';
 import { DateTimePickerComponent } from './components/input-date-time/date-time-picker/date-time-picker.component';
 import { TimePickerComponent } from './components/input-date-time/time-picker/time-picker.component';
 import { SidebarEntryComponent } from './components/sidebar-navigation/sidebar-entry/sidebar-entry.component';
+import { ColorPipe } from './pipes/color/color.pipe';
 import { PillComponent } from './components/pill/pill.component';
 import { ClickOutsideDirective } from './directives/click-outside/click-outside.directive';
 import { InputFileComponent } from './components/input-file/input-file.component';
 import { MarkdownPipe } from './pipes/markdown/markdown.pipe';
 import { SidebarGroupComponent } from './components/sidebar-navigation/sidebar-group/sidebar-group.component';
+import { ReversePipe } from './pipes/reverse/reverse.pipe';
 
 /**
  * Main module configuration object
@@ -178,6 +180,8 @@ const ngModuleConfig = {
     ClickOutsideDirective,
     InputFileComponent,
     MarkdownPipe,
+    ReversePipe,
+    ColorPipe,
   ],
   providers: [
     /*=============================================

@@ -13,7 +13,7 @@ import { NgControl } from '@angular/forms';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { ControlAccessor } from '@main/classes/control-accessor.class';
 import { FormControl } from '@ngneat/reactive-forms';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { BehaviorSubject } from 'rxjs';
 import { InputComponent } from '../input/input.component';
 import { EmptyOptionsComponent } from './empty-options/empty-options.component';
@@ -57,7 +57,7 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
   isOpen: boolean = false;
 
   selectedOptions$ = new BehaviorSubject<OptionComponent[]>([]);
-  labelControl = new FormControl();
+  override displayControl = new FormControl();
 
   /** @ignore */
   overlayMinWidth = 0;
@@ -146,9 +146,9 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
 
     this.selectedOptions$.next(currentlySelected);
     if (this.multiple) {
-      this.labelControl.setValue(' ');
+      this.displayControl.setValue(' ');
     } else if (option && !Array.isArray(option)) {
-      this.labelControl.setValue(option.viewValue);
+      this.displayControl.setValue(option.viewValue);
     }
   }
 
@@ -174,7 +174,7 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     this.control.setValue(this.selectedOptions$.value.map((option) => option.value));
 
     if (currentlySelected.length === 0) {
-      this.labelControl.setValue('');
+      this.displayControl.setValue('');
     }
   }
 
@@ -225,15 +225,15 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     });
   }
 
-  override ngAfterControlInit(): void {
-    if (!this.control) return;
+  // override ngAfterControlInit(): void {
+  //   if (!this.control) return;
 
-    this.control.touch$.pipe(untilDestroyed(this)).subscribe(() => {
-      this.labelControl.markAsTouched();
-    });
+  //   this.control.touch$.pipe(untilDestroyed(this)).subscribe(() => {
+  //     this.displayControl.markAsTouched();
+  //   });
 
-    this.control.errors$.pipe(untilDestroyed(this)).subscribe((errors) => {
-      this.labelControl.setErrors(errors);
-    });
-  }
+  //   this.control.errors$.pipe(untilDestroyed(this)).subscribe((errors) => {
+  //     this.displayControl.setErrors(errors);
+  //   });
+  // }
 }

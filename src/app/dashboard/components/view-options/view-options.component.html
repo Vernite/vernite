@@ -1,30 +1,28 @@
-<section>
-  <div class="tabs">
-    <div class="project-name">
-      <h2 *ngIf="!project" class="text-xl font-bold">{{title}}</h2>
-      <h2 *ngIf="project" class="text-xl font-bold">{{title}} {{project.name}}</h2>
+<section *ngIf="project">
+  <div class="flex items-center">
+    <div class="flex items-center">
+      <div *ngIf="project?.logo" class="logo" [style.background-image]="'url(' + project.logo?.url + ')'"></div>
+      <h2 class="text-xl font-bold">{{project.name}}</h2>
+      <a *ngIf="project.gitHubIntegration" href="https://github.com/{{ project.gitHubIntegration }}" target="blank">
+        <app-icon [icon]="faGithub"></app-icon>
+      </a>
     </div>
-    <ng-container *ngIf="project">
-      <a [routerLink]="['/', project.id, 'edit', 'general']" routerLinkActive="active">
-        <h2 i18n>General</h2>
-      </a>
-      <a [routerLink]="['/', project.id, 'edit', 'members' ]" routerLinkActive="active">
-        <h2 i18n>Members</h2>
-      </a>
-      <a [routerLink]="['/', project.id, 'edit', 'statuses' ]" routerLinkActive="active">
-        <h2 i18n>Statuses</h2>
-      </a>
-    </ng-container>
-    <ng-container *ngIf="!project">
-      <a [routerLink]="['/', 'workspaces', workspaceId, 'projects', 'create', 'general' ]" routerLinkActive="active">
-        <h2 i18n>General</h2>
-      </a>
-      <a [routerLink]="['/', 'workspaces', workspaceId, 'projects', 'create', 'members' ]" routerLinkActive="active">
-        <h2 i18n>Members</h2>
-      </a>
-      <a [routerLink]="['/', 'workspaces', workspaceId, 'projects', 'create', 'statuses' ]" routerLinkActive="active">
-        <h2 i18n>Statuses</h2>
-      </a>
-    </ng-container>
+    <tabs class="ml-3">
+      <tab [routerLink]="['/', 'projects', projectId, 'sprint']" [queryParams]="{ view: 'list' }"
+        routerLinkActive="active" i18n>
+        Sprint
+      </tab>
+      <tab [routerLink]="['/', 'projects', projectId, 'backlog']" [queryParams]="{ view: 'list' }"
+        routerLinkActive="active" i18n>
+        Backlog
+      </tab>
+      <tab [routerLink]="['/', 'projects', projectId, 'calendar']" routerLinkActive="active" i18n>
+        Calendar
+      </tab>
+    </tabs>
+  </div>
+  <div class="options">
+    <app-button variant="transparent" [icon]="penToSquare" [routerLink]="['/', 'projects', projectId, 'edit']" i18n>Edit
+    </app-button>
   </div>
 </section>

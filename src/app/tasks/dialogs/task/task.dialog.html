@@ -58,6 +58,21 @@
       i18n-floatingLabel i18n-placeholder>
     </app-input>
 
+    <!-- Sprint -->
+    <app-select *ngIf="form.get('projectId').value" formControlName="sprintId" floatingLabel="Sprints"
+      i18n-floatingLabel>
+      <app-option [value]="null" [checkmark]="true">
+        -
+      </app-option>
+      <app-option *ngFor="let sprint of sprintListActive$ | async" [value]="sprint.id" [checkmark]="true">
+        {{sprint.name}}
+      </app-option>
+      <app-option *ngFor="let sprint of sprintListCreated$ | async" [value]="sprint.id" [checkmark]="true">
+        {{sprint.name}}
+      </app-option>
+      <app-empty-options i18n>Project sprints list is empty</app-empty-options>
+    </app-select>
+
     <!-- Parent -->
     <input-task-parent *ngIf="
     ![TaskType.EPIC, TaskType.USER_STORY, TaskType.TASK, undefined].includes(form.get('type')?.value) &&

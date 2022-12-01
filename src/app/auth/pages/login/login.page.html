@@ -17,7 +17,7 @@
           i18n-floatingLabel i18n-placeholder></app-input>
 
         <app-input formControlName="password" type="password" placeholder="●●●●●●●" floatingLabel="Password"
-          i18n-floatingLabel i18n-placeholder></app-input>
+          i18n-floatingLabel></app-input>
 
         <p class="text-base" i18n>Forgot your password? <a routerLink="/auth/password-reset">Reset password</a>.</p>
 
@@ -25,7 +25,7 @@
           <app-checkbox formControlName="remember" i18n>Remember me</app-checkbox>
         </div>
 
-        <app-button variant="primary" i18n>Log in</app-button>
+        <app-button variant="primary" [pending]="loader.pending" i18n>Log in</app-button>
 
       </form>
     </section>

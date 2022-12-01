@@ -1,10 +1,11 @@
 import { Injectable, Injector } from '@angular/core';
 import { Service } from '@main/decorators/service/service.decorator';
 import dayjs from 'dayjs';
-import { tap } from 'rxjs';
+import { tap, Observable } from 'rxjs';
 import { ApiService } from '@main/services/api/api.service';
 import { BaseService } from '@main/services/base/base.service';
 import { Errors } from '@main/interfaces/http-error.interface';
+import { User } from '../../interfaces/user.interface';
 
 @Service()
 @Injectable({
@@ -47,7 +48,7 @@ export class AuthService extends BaseService<Errors<'INVALID_TOKEN'>> {
     email: string;
     password: string;
     remember: boolean;
-  }) {
+  }): Observable<User> {
     return this.apiService
       .post(`/auth/login`, { body: { email, password, remember } })
       .pipe(tap(() => localStorage.setItem('lastLoginTry', dayjs().valueOf().toString())));

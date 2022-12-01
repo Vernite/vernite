@@ -16,6 +16,11 @@ export class ButtonComponent {
   @Input() variant: 'primary' | 'secondary' | 'important' | 'transparent' = 'secondary';
 
   /**
+   * Activeness variant of the button.
+   */
+  @Input() disabled: boolean = false;
+
+  /**
    * Button behavior in forms. If this property is set to `submit`, this button will be able to submit the
    * form (perform submit event on click). If set to `button`, only the specified `(click)` action will be
    * executed.

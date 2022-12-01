@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { ModifyUser, User } from '@auth/interfaces/user.interface';
+import { User } from '@auth/interfaces/user.interface';
 import { Event } from '@calendar/interfaces/event.interface';
 import { Cache } from '@main/decorators/cache/cache.decorator';
 import { ErrorCodes, Errors } from '@main/interfaces/http-error.interface';
@@ -33,7 +33,7 @@ export class UserService extends BaseService<Errors<any>> {
     };
   }
 
-  public update(user: Partial<User>): Observable<ModifyUser> {
+  public update(user: Partial<User>): Observable<User> {
     return this.apiService.put(`/auth/edit`, { body: user });
   }
 

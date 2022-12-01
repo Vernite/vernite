@@ -27,7 +27,7 @@ export const Variant = new Story({
   config,
   multiple: {
     prop: 'variant',
-    options: ['primary', 'secondary', 'important'],
+    options: ['primary', 'secondary', 'important', 'transparent'],
   },
   description: `To customize the general appearance you need to use the \`variant\` property with one of the specified values.
     If you will not specify variant, the button will appear with \`secondary\` styling.`,
