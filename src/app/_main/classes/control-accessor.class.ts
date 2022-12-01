@@ -32,10 +32,12 @@ export class ControlAccessor<T = any>
     return this._required;
   }
 
+  /** Name of the control */
   public get name() {
     return this.ngControl?.name?.toString() || '';
   }
 
+  /** Property to define if control is fully initialized */
   public get isControlInitialized() {
     return Boolean(this.ngControl?.control);
   }
@@ -68,28 +70,37 @@ export class ControlAccessor<T = any>
    */
   protected touched$: Subject<boolean> = new Subject();
 
+  /** validators list observable (triggered after every validators list change) */
   protected validators$ = new BehaviorSubject([] as ValidatorFn[]);
 
-  /**
-   * Get the value of the control.
-   */
+  /** Get the value of the control. */
   public get value(): T {
     return this.control.value;
   }
 
+  /** Previous value getter */
   public get previousValue(): T | undefined {
     return this._previousValue;
   }
 
+  /** Errors object getter */
   public get errors() {
     return this.control.errors;
   }
 
+  /** Control used to display data in other format than value stored in main control */
   protected displayControl: FormControl<any> | undefined;
 
+  /** @ignore */
   private _previousValue: T | undefined = undefined;
+
+  /** @ignore */
   private _previousValueBuffer: T | undefined = undefined;
+
+  /** @ignore */
   private _interceptedAlready: boolean = false;
+
+  /** @ignore */
   private _displayControlInit: boolean = false;
 
   /**
@@ -110,9 +121,7 @@ export class ControlAccessor<T = any>
     this._watchForInit();
   }
 
-  /**
-   * @ignore
-   */
+  /** @ignore */
   private _watchForInit() {
     const afterSetup = () => {
       this._checkIfIsRequired();
@@ -153,14 +162,13 @@ export class ControlAccessor<T = any>
     }
   }
 
-  /**
-   * @ignore
-   */
+  /** @ignore */
   private _initValidation(): void {
     this.control.addValidators((control: AbstractControl) => this.validate(control));
     this.validators$.next((this.ngControl as any).control._rawValidators);
   }
 
+  /** @ignore */
   private _interceptValueChange(control: AbstractControl) {
     if (this._interceptedAlready) return;
     this._interceptedAlready = true;
@@ -172,6 +180,7 @@ export class ControlAccessor<T = any>
     setTimeout(() => (this._interceptedAlready = false));
   }
 
+  /** @ignore */
   private _initDisplayControl() {
     if (this._displayControlInit || !this.displayControl) return;
 
@@ -235,18 +244,26 @@ export class ControlAccessor<T = any>
     this.control.setDisable(isDisabled);
   }
 
+  /**
+   * Method to parse value to the correct type.
+   * @param value value to parse
+   * @returns value parsed to correct type (defined in control class)
+   */
   parseValue(value: any): T {
     return value;
   }
 
+  /** mark field as required (add required flag) */
   markAsRequired() {
     this._required = true;
   }
 
+  /** mark field as optional (remove required flag) */
   markAsOptional() {
     this._required = false;
   }
 
+  /** @ignore */
   _checkForValidatorsChange() {
     const previousValidators = this.validators$.value;
     const currentValidators = (this.ngControl as any).control._rawValidators;
@@ -259,8 +276,6 @@ export class ControlAccessor<T = any>
     }
   }
 
-  onValidatorsChange() {}
-
   /** @ignore */
   ngOnDestroy(): void {
     this.destroy$.next(null);
@@ -268,5 +283,6 @@ export class ControlAccessor<T = any>
     this.touched$.complete();
   }
 
+  /** Method called after control initialization */
   ngAfterControlInit(): void {}
 }

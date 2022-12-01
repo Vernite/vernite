@@ -23,42 +23,34 @@ import { ControlAccessor } from '../../classes/control-accessor.class';
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent extends ControlAccessor implements AfterViewInit {
-  /**
-   * Type of the input
-   */
+  /** Type of the input */
   @Input() type: 'text' | 'number' | 'email' | 'password' = 'text';
 
-  /**
-   * Floating label text to display
-   */
+  /** Floating label text to display */
   @Input() floatingLabel?: string;
 
-  /**
-   * Static label text to display
-   */
+  /** Static label text to display */
   @Input() staticLabel?: string;
 
-  /**
-   * Input placeholder text
-   */
+  /** Input placeholder text */
   @Input() placeholder: string = '';
 
-  /**
-   * Hint to display beneath the input to provide additional information of how to use the input
-   */
+  /** Hint to display beneath the input to provide additional information of how to use the input */
   @Input() hint?: string;
 
-  /**
-   * Attribute to disable value edition without any visual changes
-   */
+  /** Attribute to disable value edition without any visual changes */
   @Input() readonly?: boolean;
 
+  /** Property to define if host should be resized if error is shown underneath */
   @Input() allowResizeByError?: boolean;
 
+  /** Property to display loader in input */
   @Input() pending?: boolean;
 
+  /** Text alignment in input */
   @Input() align: 'left' | 'center' = 'left';
 
+  /** focus event emitter */
   // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() focus: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -68,6 +60,7 @@ export class InputComponent extends ControlAccessor implements AfterViewInit {
   /** @ignore */
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
 
+  /** Boolean to define if value was autofilled by browser mechanisms */
   public autofilledByBrowser: boolean = false;
 
   constructor(

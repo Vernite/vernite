@@ -1,3 +1,4 @@
+/** Class to generate pseudorandom values (better than default built in random) */
 export class Random {
   private m_w = 123456789;
   private m_z = 987654321;

@@ -26,6 +26,7 @@
     "i18n:extract": "ng extract-i18n --output-path=src/locales && node tools/clean-generated-xlf.js",
     "i18n:coverage": "node tools/i18n-report.mjs",
     "@-------- UTILITY SCRIPTS ----------": "",
+    "compodoc:serve:html": "compodoc -p ./tsconfig.doc.json -w -s",
     "compodoc:serve": "compodoc -p ./tsconfig.doc.json -e json -w -s",
     "compodoc:build": "compodoc -p ./tsconfig.doc.json -e json -d .",
     "storybook:serve": "start-storybook -p 6006",
