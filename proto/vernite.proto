@@ -43,6 +43,12 @@ message CommunicatorModel {
   }
 }
 
+enum BasicAction {
+  ADDED = 0; // The object was added.
+  UPDATED = 1; // The object was updated.
+  REMOVED = 2; // The object was removed.
+}
+
 message Task {
   int64 id = 1; // ID of the task.
   string name = 2; // Name of the task.
@@ -59,6 +65,7 @@ message Task {
   int64 createdBy = 13; // ID of the user that created the task.
   int64 releaseId = 14; // ID of the release the task is in.
   int64 projectId = 15; // ID of the project the task is in.
+  BasicAction action = 16; // Action that was performed on the task.
 }
 
 message Packet {
