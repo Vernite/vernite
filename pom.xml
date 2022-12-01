@@ -6,7 +6,7 @@
 
   <groupId>dev.vernite</groupId>
   <artifactId>protobuf</artifactId>
-  <version>1.0.16-SNAPSHOT</version>
+  <version>1.0.17-SNAPSHOT</version>
 
   <name>protobuf</name>
   <!-- FIXME change it to the project's website -->
