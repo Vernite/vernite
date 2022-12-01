@@ -49,21 +49,22 @@ enum BasicAction {
   REMOVED = 2; // The object was removed.
 }
 
+// Ignored null fields
 message Task {
   int64 id = 1; // ID of the task.
   string name = 2; // Name of the task.
   string description = 3; // Description of the task.
   int64 createdAt = 4; // Timestamp of when the task was created.
   int32 type = 5; // Type of the task.
-  int64 deadline = 6; // Timestamp of when the task is due.
-  int64 estimatedDate = 7; // Timestamp of when the task is estimated to be completed.
+  // int64 deadline = 6; // Timestamp of when the task is due.
+  // int64 estimatedDate = 7; // Timestamp of when the task is estimated to be completed.
   string priority = 8; // Priority of the task.
   int64 statusId = 9; // Status of the task.
-  int64 sprintId = 10; // Sprint the task is in.
-  int64 assigneeId = 11; // ID of the user assigned to the task.
-  int64 parentTaskId = 12; // ID of the parent task.
+  // int64 sprintId = 10; // Sprint the task is in.
+  // int64 assigneeId = 11; // ID of the user assigned to the task.
+  // int64 parentTaskId = 12; // ID of the parent task.
   int64 createdBy = 13; // ID of the user that created the task.
-  int64 releaseId = 14; // ID of the release the task is in.
+  // int64 releaseId = 14; // ID of the release the task is in.
   int64 projectId = 15; // ID of the project the task is in.
   BasicAction action = 16; // Action that was performed on the task.
 }
