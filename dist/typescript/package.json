@@ -1,6 +1,6 @@
 {
   "name": "@vernite/protobuf",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "repository": "https://github.com/Vernite/protobuf",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
