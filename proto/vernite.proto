@@ -8,6 +8,10 @@ option java_outer_classname = "VerniteProtobuf";
 
 import "google/protobuf/any.proto";
 
+message KeepAlive {
+  int64 id = 1; // ID of the keep alive.
+}
+
 message CommunicatorModel {
   // Model representing a chat channel.
   message Channel {
@@ -34,9 +38,27 @@ message CommunicatorModel {
     string user = 2; // ID of the user that sent the message.
     string channel = 3; // ID of the channel the message was sent to.
     string content = 4; // Content of the message.
-    string timestamp = 5; // Timestamp of the message.
+    int64 timestamp = 5; // Timestamp of the message.
     string provider = 6; // Service that sent the message.
   }
+}
+
+message Task {
+  int64 id = 1; // ID of the task.
+  string name = 2; // Name of the task.
+  string description = 3; // Description of the task.
+  int64 createdAt = 4; // Timestamp of when the task was created.
+  int32 type = 5; // Type of the task.
+  int64 deadline = 6; // Timestamp of when the task is due.
+  int64 estimatedDate = 7; // Timestamp of when the task is estimated to be completed.
+  string priority = 8; // Priority of the task.
+  int64 statusId = 9; // Status of the task.
+  int64 sprintId = 10; // Sprint the task is in.
+  int64 assigneeId = 11; // ID of the user assigned to the task.
+  int64 parentTaskId = 12; // ID of the parent task.
+  int64 createdBy = 13; // ID of the user that created the task.
+  int64 releaseId = 14; // ID of the release the task is in.
+  int64 projectId = 15; // ID of the project the task is in.
 }
 
 message Packet {
