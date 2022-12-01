@@ -2,20 +2,28 @@
   display: flex;
   align-items: center;
 
-  .total span {
-    display: inline-block;
-    width: 100px;
+  .total {
+    padding: 0.25rem 0.5rem;
     margin-right: 1rem;
-    color: var(--color-text);
-    white-space: nowrap;
-  }
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s ease-in-out;
 
-  .toggle {}
+    &:hover {
+      background-color: var(--color-secondary-400);
+    }
+
+    span {
+      display: inline-block;
+      width: 100px;
+      color: var(--color-text);
+      white-space: nowrap;
+    }
+  }
 }
 
 .tracker-overlay {
   position: relative;
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 0.5rem;
   margin-top: 1rem;
   background-color: var(--color-secondary-700);
   border-radius: var(--border-radius);

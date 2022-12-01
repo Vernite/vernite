@@ -94,7 +94,7 @@ yarn docs:serve
 
 ## API Documentation and repository
 
-Endpoints documentation is shared using the Swagger library [here](https://vernite.dev/api/swagger-ui/index.html#/)](https://vernite.dev/api/swagger-ui/index.html#/). The repository is in the other GitHub account [here](https://github.com/SamPanDonte/workflow).
+Endpoints documentation is shared using the Swagger library [here](https://vernite.dev/api/swagger-ui/index.html#/). The repository is in the other GitHub account [here](https://github.com/SamPanDonte/workflow).
 
 ## Recommended Versions
 

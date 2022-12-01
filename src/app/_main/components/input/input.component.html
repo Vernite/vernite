@@ -1,4 +1,4 @@
-<div class="input-form-field" [class.required]="required"
+<div [ngClass]="['input-form-field', 'text-align-' + align]" [class.required]="required"
   [class.has-value]="![null, undefined, ''].includes(control.value) || autofilledByBrowser">
   <label *ngIf="staticLabel" class="static-label">{{ staticLabel }}</label>
   <div class="input-wrapper">
@@ -20,7 +20,7 @@
     </div>
     <input #input [name]="name" [type]="type" [placeholder]="placeholder" [formControl]="control" [readonly]="readonly"
       [autocomplete]="autocomplete" (focus)="onFocus()" (blur)="onBlur()"
-      [style.padding-left]="(fragmentLeft.clientWidth + 16) + 'px'">
+      [style.padding-left]="(align === 'left' ? fragmentLeft.clientWidth + 16 : 0) + 'px'">
     <div class="overlay">
       <ng-content select=".overlay"></ng-content>
     </div>

@@ -97,9 +97,7 @@ export class CalendarEventComponent {
   }
 
   openOverlay() {
-    setTimeout(() => {
-      this.isOpen = true;
-    });
+    this.isOpen = true;
   }
 
   closeOverlay() {

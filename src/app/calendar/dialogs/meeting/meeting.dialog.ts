@@ -1,14 +1,16 @@
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Meeting } from '@calendar/interfaces/meeting.interface';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { unixTimestamp } from '@main/interfaces/date.interface';
 import { validateForm } from '@main/classes/form.class';
 import { ProjectService } from '@dashboard/services/project/project.service';
-import { map, of, tap } from 'rxjs';
+import { of } from 'rxjs';
 import { requiredValidator } from '@main/validators/required.validator';
 import { MemberService } from '@dashboard/services/member/member.service';
 import { UserService } from '@auth/services/user/user.service';
+import { Loader } from '../../../_main/classes/loader/loader.class';
+import { withLoader } from '@main/operators/loader.operator';
 
 export enum MeetingDialogVariant {
   CREATE = 'create',
@@ -29,6 +31,8 @@ export interface MeetingDialogData {
 export class MeetingDialog implements OnInit {
   projects$ = this.projectService.list();
   members$ = this.data.projectId ? this.memberService.list(this.data.projectId) : of([]);
+
+  membersLoader = new Loader();
 
   /** @ignore */
   MeetingDialogVariant = MeetingDialogVariant;
@@ -63,11 +67,12 @@ export class MeetingDialog implements OnInit {
       this.form.patchValue(initialValue);
 
       this.form.get('projectId').valueChanges.subscribe((projectId) => {
-        console.log('PROJECT_ID', projectId);
         if (projectId) {
-          this.members$ = this.memberService.list(projectId).pipe(tap(console.log));
+          this.members$ = this.memberService.list(projectId).pipe(withLoader(this.membersLoader));
+          this.form.get('participantIds')?.setValue([user.id]);
         } else {
           this.members$ = of([]);
+          this.form.get('participantIds')?.setValue([]);
         }
       });
     });

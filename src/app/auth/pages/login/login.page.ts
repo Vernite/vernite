@@ -5,6 +5,8 @@ import { UserService } from '@auth/services/user/user.service';
 import { catchError, EMPTY, Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { AuthService } from '@auth/services/auth/auth.service';
+import { Loader } from '../../../_main/classes/loader/loader.class';
+import { withLoader } from '../../../_main/operators/loader.operator';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +22,7 @@ export class LoginPage implements OnInit {
 
   private loginSubscription?: Subscription;
   public error?: string;
+  public loader = new Loader();
 
   /**
    * Form group for login.
@@ -44,9 +47,11 @@ export class LoginPage implements OnInit {
     this.form.updateValueAndValidity();
 
     if (this.form.valid) {
+      this.error = undefined;
       this.loginSubscription = this.authService
         .login(this.form.value)
         .pipe(
+          withLoader(this.loader),
           catchError((e) => {
             this.handleError(e);
             return EMPTY;

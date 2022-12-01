@@ -3,6 +3,7 @@ import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { ControlAccessor } from '@main/classes/control-accessor.class';
 import dayjs, { UnitType } from 'dayjs';
 import { unixTimestamp } from '../../../interfaces/date.interface';
+import { interval, takeUntil, Subject } from 'rxjs';
 
 @Component({
   selector: 'time-picker',
@@ -12,8 +13,13 @@ import { unixTimestamp } from '../../../interfaces/date.interface';
 export class TimePickerComponent extends ControlAccessor<unixTimestamp | null> {
   cursor = this.control.value ? dayjs(this.control.value) : dayjs();
 
+  /** @ignore */
   faChevronUp = faChevronUp;
+
+  /** @ignore */
   faChevronDown = faChevronDown;
+
+  private _isKeyReleased$ = new Subject<null>();
 
   now() {
     const today = dayjs();
@@ -22,6 +28,19 @@ export class TimePickerComponent extends ControlAccessor<unixTimestamp | null> {
     this.cursor = this.cursor.set('minute', today.minute());
 
     this.control.setValue(this.cursor.valueOf());
+  }
+
+  onKeyDown(callback: () => void) {
+    callback.apply(this);
+    interval(200)
+      .pipe(takeUntil(this._isKeyReleased$), takeUntil(this.destroy$))
+      .subscribe(() => {
+        callback.apply(this);
+      });
+  }
+
+  onKeyUp() {
+    this._isKeyReleased$.next(null);
   }
 
   increaseMinutes() {
@@ -55,11 +74,13 @@ export class TimePickerComponent extends ControlAccessor<unixTimestamp | null> {
   onHourChange(event: Event) {
     const value = (event.target as HTMLInputElement)?.valueAsNumber;
     this.cursor = this.cursor.set('hour', value);
+    this.setControlProperties(['hour', 'minute'], [this.cursor.hour(), this.cursor.minute()]);
   }
 
   onMinuteChange(event: Event) {
     const value = (event.target as HTMLInputElement)?.valueAsNumber;
     this.cursor = this.cursor.set('minute', value);
+    this.setControlProperties(['hour', 'minute'], [this.cursor.hour(), this.cursor.minute()]);
   }
 
   override ngAfterControlInit(): void {

@@ -15,7 +15,7 @@ export class InputEpicComponent
   extends ControlAccessor<Task['id'] | null | ''>
   implements OnDestroy
 {
-  @Input() set projectId(value: number) {
+  @Input() set projectId(value: number | null) {
     this._projectId = value;
     if (value) {
       this.loadEpics();
@@ -35,7 +35,7 @@ export class InputEpicComponent
     return this.control.value != null;
   }
 
-  private _projectId: number = 0;
+  private _projectId: number | null = null;
 
   epics$: Observable<Task[]> = of([]);
 
@@ -44,7 +44,7 @@ export class InputEpicComponent
   }
 
   loadEpics() {
-    this.epics$ = this.taskService.listEpics(this.projectId);
+    this.epics$ = this.taskService.listEpics(this.projectId!);
   }
 
   override validate(control: AbstractControl): ValidationError | null {
@@ -58,6 +58,5 @@ export class InputEpicComponent
 
   override ngOnDestroy() {
     super.ngOnDestroy();
-    this.control.setValue(null);
   }
 }

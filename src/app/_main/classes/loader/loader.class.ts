@@ -9,6 +9,7 @@ export class Loader {
   private _pending: boolean = false;
   private _pendingStart?: Date;
   private _timeout?: any;
+  private _minTimeOfPending = 500;
 
   public message?: string;
 
@@ -44,10 +45,10 @@ export class Loader {
     const totalTimeOfPending = this._pendingStart?.getTime()
       ? new Date().getTime() - (this._pendingStart?.getTime() || 0)
       : 0;
-    if (totalTimeOfPending < 1000) {
+    if (totalTimeOfPending < this._minTimeOfPending) {
       setTimeout(() => {
         finish();
-      }, 1000 - totalTimeOfPending);
+      }, this._minTimeOfPending - totalTimeOfPending);
     } else {
       finish();
     }

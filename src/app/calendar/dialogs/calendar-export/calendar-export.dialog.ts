@@ -1,14 +1,6 @@
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
-import { Meeting } from '@calendar/interfaces/meeting.interface';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
-import { unixTimestamp } from '@main/interfaces/date.interface';
-import { validateForm } from '@main/classes/form.class';
-import { ProjectService } from '@dashboard/services/project/project.service';
-import { map, of } from 'rxjs';
-import { requiredValidator } from '@main/validators/required.validator';
-import { MemberService } from '@dashboard/services/member/member.service';
-import { UserService } from '@auth/services/user/user.service';
 import { CalendarService } from '@calendar/services/calendar.service';
 import { Loader } from '@main/classes/loader/loader.class';
 import { withLoader } from '@main/operators/loader.operator';
@@ -40,7 +32,6 @@ export class CalendarExportDialog implements OnInit {
       .getSyncUrl(this.data.projectId)
       .pipe(withLoader(this.loader))
       .subscribe((url) => {
-        console.log(url);
         this.form.patchValue({ url });
       });
   }

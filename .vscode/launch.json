@@ -7,7 +7,15 @@
       "type": "chrome",
       "request": "launch",
       "preLaunchTask": "npm: start",
-      "url": "http://localhost:4200/"
+      "url": "http://localhost:4200/",
+      "webRoot": "${workspaceFolder}",
+      "sourceMapPathOverrides": {
+        "webpack:/*": "${webRoot}/*",
+        "/./*": "${webRoot}/*",
+        "/src/*": "${webRoot}/*",
+        "/*": "*",
+        "/./~/*": "${webRoot}/node_modules/*"
+      }
     },
     {
       "name": "Unit tests (chrome)",
@@ -22,7 +30,7 @@
       },
       "restart": true,
       "sourceMaps": true,
-      "preLaunchTask": "npm: start:test:chrome"
+      "preLaunchTask": "npm: unit:serve:chrome"
     },
     {
       "name": "Unit tests (firefox)",
@@ -30,7 +38,13 @@
       "request": "attach",
       "port": 9222,
       "webRoot": "${workspaceFolder}",
-      "preLaunchTask": "npm: start:test:firefox"
+      "preLaunchTask": "npm: unit:serve:firefox"
+    },
+    {
+      "name": "Documentation server",
+      "type": "node",
+      "request": "launch",
+      "preLaunchTask": "npm: docs:serve"
     }
   ]
 }

@@ -7127,7 +7127,7 @@ commander@^9.0.0:
   resolved "https://registry.npmjs.org/commander/-/commander-9.0.0.tgz"
   integrity sha512-JJfP2saEKbQqvW+FI93OYUB4ByV5cizMpFMiiJI8xDbBvQvSkIk0VvQdn1CZ8mqAO8Loq2h0gYTYtDFUZUeERw==
 
-commander@^9.4.0:
+commander@^9.3.0, commander@^9.4.0:
   version "9.4.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-9.4.1.tgz#d1dd8f2ce6faf93147295c0df13c7c21141cfbdd"
   integrity sha512-5EEkTNyHNGFPD2H+c/dXXfQZYa/scCKasxWcXJaWnNJ99pnQN9Vnmqow+p+PlFPE63Q6mThaZws1T+HxfpgtPw==
@@ -8169,7 +8169,7 @@ ee-first@1.1.1:
   resolved "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
-ejs@^3.1.5:
+ejs@^3.1.5, ejs@~3.1.8:
   version "3.1.8"
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-3.1.8.tgz#758d32910c78047585c7ef1f92f9ee041c1c190b"
   integrity "sha1-dY0ykQx4BHWFx+8fkvnuBBwcGQs= sha512-/sXZeMlhS0ArkfX2Aw780gJzXSMPnKjtspYZv+f3NiKLlubezAHDU5+9xz6gd3/NhG3txQCo6xlglmTS+oTGEQ=="
@@ -11218,7 +11218,7 @@ iterate-value@^1.0.2:
 jake@^10.8.5:
   version "10.8.5"
   resolved "https://registry.yarnpkg.com/jake/-/jake-10.8.5.tgz#f2183d2c59382cb274226034543b9c03b8164c46"
-  integrity "sha1-8hg9LFk4LLJ0ImA0VDucA7gWTEY= sha512-sVpxYeuAhWt0OTWITwT98oyV0GsXyMlXCF+3L1SuafBVUIr/uILGRB+NqwkzhgXKvoJpDIpQvqkUALgdmQsQxw=="
+  integrity sha512-sVpxYeuAhWt0OTWITwT98oyV0GsXyMlXCF+3L1SuafBVUIr/uILGRB+NqwkzhgXKvoJpDIpQvqkUALgdmQsQxw==
   dependencies:
     async "^3.2.3"
     chalk "^4.0.2"
@@ -17960,6 +17960,15 @@ yarn-audit-fix@^9.3.7:
     semver "^7.3.7"
     synp "^1.9.10"
     tslib "^2.4.0"
+
+yarn-audit-html@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/yarn-audit-html/-/yarn-audit-html-4.0.0.tgz#dc04c9cf83e758fd6d9efad8c96df1fc8c4bf30c"
+  integrity sha512-PZW+M6b6BW4hBU6AuUnxFSOVOq6Gnrh+krBdzcX3OjWNqiDh8ovhiB6pTYEeR13jL8J9VXk/1POn2XljicWZNA==
+  dependencies:
+    commander "^9.3.0"
+    ejs "~3.1.8"
+    marked "^4.0.17"
 
 yauzl@^2.10.0:
   version "2.10.0"

@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '@auth/interfaces/user.interface';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Status } from '@tasks/interfaces/status.interface';
 import { Task } from '@tasks/interfaces/task.interface';
 import { TaskService } from '@tasks/services/task/task.service';
-import { EMPTY, Observable, tap, of } from 'rxjs';
+import { EMPTY, Observable, tap, of, map } from 'rxjs';
 import { StatusService } from './../../services/status/status.service';
-import { UserService } from './../../../auth/services/user/user.service';
 import { MemberService } from '@dashboard/services/member/member.service';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
+import { Sprint } from '@tasks/interfaces/sprint.interface';
+import { SprintService } from '@tasks/services/sprint.service';
+import { SprintFilters } from '@dashboard/filters/sprint.filters';
+import { SprintStatus } from '@tasks/enums/sprint-status.enum';
 
 @Component({
   selector: 'task-page',
@@ -21,6 +23,9 @@ export class TaskPage {
   public status$: Observable<Status> = EMPTY;
   public assignee$: Observable<ProjectMember | null> = EMPTY;
   public createdBy$: Observable<ProjectMember> = EMPTY;
+
+  public activeSprint$: Observable<Sprint> = EMPTY;
+  public archivedSprints$: Observable<Sprint[]> = EMPTY;
 
   private projectId: number = 0;
   private taskId: number = 0;
@@ -35,6 +40,7 @@ export class TaskPage {
     private activatedRoute: ActivatedRoute,
     private taskService: TaskService,
     private statusService: StatusService,
+    private sprintService: SprintService,
     private memberService: MemberService,
     private router: Router,
   ) {
@@ -56,6 +62,20 @@ export class TaskPage {
           : of(null),
       ),
       tap((task) => (this.createdBy$ = this.memberService.get(projectId, task.createdBy!))),
+      tap((task) => {
+        if (task.sprintId) {
+          this.activeSprint$ = this.sprintService.get(this.projectId, task.sprintId);
+        }
+        if (task.archiveSprintIds?.length) {
+          this.archivedSprints$ = this.sprintService
+            .list(this.projectId, SprintFilters.STATUS(SprintStatus.CLOSED))
+            .pipe(
+              map((sprints) =>
+                sprints.filter((sprint) => task.archiveSprintIds?.includes(sprint.id)),
+              ),
+            );
+        }
+      }),
     );
   }
 

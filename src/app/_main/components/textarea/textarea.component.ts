@@ -108,24 +108,21 @@ export class TextareaComponent extends ControlAccessor implements OnInit, AfterV
       theme: 'dark',
       wordBasedSuggestions: false,
     });
-    let ignoreEvent = false;
-    const updateHeight = () => {
+    const updateDimensions = () => {
       const contentHeight = Math.min(500, _editor.getContentHeight());
-      const containerWidth = Math.min(1000, container.scrollWidth);
-      container.style.width = `${containerWidth}px`;
       container.style.height = `${contentHeight}px`;
       try {
-        ignoreEvent = true;
-        _editor.layout({ width: containerWidth, height: contentHeight });
+        _editor.layout();
       } finally {
-        ignoreEvent = false;
       }
     };
-    _editor.onDidContentSizeChange(updateHeight);
+    _editor.onDidContentSizeChange(updateDimensions);
     _editor.getModel()?.onDidChangeContent(() => {
       this.control.setValue(_editor.getValue());
     });
-    updateHeight();
+    const observer = new ResizeObserver(updateDimensions);
+    observer.observe(container);
+    updateDimensions();
     this.editor = _editor;
   }
 

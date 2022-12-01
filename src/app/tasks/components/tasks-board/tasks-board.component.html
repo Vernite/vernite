@@ -1,13 +1,11 @@
-<app-view-options [project]="(project$ | async)!"></app-view-options>
-
 <div class="status-list-banner">
-  <div *ngFor="let status of statusList$ | async" class="status-banner">
+  <div *ngFor="let status of statusList" class="status-banner">
     {{ status.name }}
   </div>
 </div>
 
-<div *ngLet="(members$ | async)! as members" class="boards">
-  <div *ngFor="let board of board$ | async" class="board" [class.collapsed]="taskMap.get(idOf(board[0]))"
+<div class="boards">
+  <div *ngFor="let board of board" class="board" [class.collapsed]="taskMap.get(idOf(board[0]))"
     cdkDropListGroup>
     <div class="table">
       <div class="row" *ngLet="board[0] as task" (click)="toggle(board, columns)">

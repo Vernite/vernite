@@ -73,6 +73,12 @@ jobs:
           yarn badges:build
           yarn analyze:build
 
+      # Build audit report
+      - name: Audit report
+        run: |
+          mkdir -p documentation/audit
+          yarn audit:build
+
       # Copy coverage directory
       - name: Copy coverage directory
         run: cp -R coverage/vernite documentation/coverage

@@ -100,6 +100,16 @@ export interface Task extends JSONParsable {
   timeTracks: TimeTrack[];
 
   /**
+   * Id of assigned sprint
+   */
+  sprintId?: number;
+
+  /**
+   * Archived ids of assigned sprint
+   */
+  archiveSprintIds?: number[];
+
+  /**
    * Task priority
    * @default TaskPriority.MEDIUM
    * @see TaskPriority

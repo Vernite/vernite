@@ -1,8 +1,8 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { MemberService } from '@dashboard/services/member/member.service';
 import { Enum } from '@main/classes/enum.class';
-import { Cache } from '@main/decorators/cache/cache.decorator';
 import { Service } from '@main/decorators/service/service.decorator';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 import { DataFilter } from '@main/interfaces/filters.interface';
@@ -63,12 +63,41 @@ export class TaskService extends BaseService<
    * @param projectId Project id needed to list all tasks
    * @returns Request observable with list of tasks
    */
-  @Cache()
   public list(
     projectId: number,
     filters?: DataFilter<Task, any>[] | DataFilter<Task, any>,
   ): Observable<Task[]> {
     return this.apiService.get<Task[]>(`/project/${projectId}/task`, { filters }).pipe(
+      this.validate({
+        404: 'PROJECT_NOT_FOUND',
+      }),
+    );
+  }
+
+  /**
+   * Get list of tasks
+   * @param projectId Project id needed to list all tasks
+   * @returns Request observable with list of tasks
+   */
+  public backlog(
+    projectId: number,
+    filters?: DataFilter<Task, any>[] | DataFilter<Task, any>,
+  ): Observable<Task[]> {
+    const params = new HttpParams();
+    params.append('backlog', true);
+
+    return this.apiService.get<Task[]>(`/project/${projectId}/task?backlog=true`).pipe(
+      this.validate({
+        404: 'PROJECT_NOT_FOUND',
+      }),
+    );
+  }
+
+  public sprint(projectId: number, sprintId: number): Observable<Task[]> {
+    const params = new HttpParams();
+    params.append('sprintId', sprintId);
+
+    return this.apiService.get<Task[]>(`/project/${projectId}/task?sprintId=${sprintId}`).pipe(
       this.validate({
         404: 'PROJECT_NOT_FOUND',
       }),
@@ -315,6 +344,7 @@ export class TaskService extends BaseService<
    * @returns observable with list of task types
    */
   public listTaskTypes(parentTaskType?: TaskType) {
+    console.log('parentTaskType', parentTaskType);
     const parentTaskTypeNormal = isNumber(parentTaskType) ? parentTaskType : -1;
     const desiredTaskTypes = TaskTypeHierarchy[parentTaskTypeNormal];
     const taskTypesEntries = Enum.entries(TaskType);

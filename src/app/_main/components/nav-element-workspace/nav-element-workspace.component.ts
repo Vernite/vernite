@@ -74,7 +74,9 @@ export class NavElementWorkspaceComponent implements AfterViewInit {
   createProject() {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
-      .then(() => this.router.navigate(['/', 'workspaces', this.workspace.id, 'create']));
+      .then(() =>
+        this.router.navigate(['/', 'workspaces', this.workspace.id, 'projects', 'create']),
+      );
   }
 
   editProject(project: Project) {
