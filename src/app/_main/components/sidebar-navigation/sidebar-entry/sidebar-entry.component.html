@@ -1,17 +1,28 @@
-<div class="left">
-  <app-icon *ngIf="icon" [icon]="icon" size="1rem"></app-icon>
-  <div class="title">
-    <ng-content></ng-content>
+<div class="header-wrapper" [class.expandable]="expandable" [class.expanded]="expanded" [class.collapsed]="collapsed"
+  (click)="toggle()">
+  <div class="left">
+    <app-icon *ngIf="expandable" class="chevron" [icon]="faChevronRight" size="0.75rem"></app-icon>
+    <div *ngIf="textIcon && collapsed" class="text-icon">{{ shortText }}</div>
+    <div *ngIf="imageIcon && collapsed" class="image-icon">
+      <div [style.background-image]="'url(' + imageIcon + ')'"></div>
+    </div>
+    <app-icon *ngIf="icon" [icon]="icon" size="1rem"></app-icon>
+    <div #title [class.hidden]="collapsed" class="title">
+      <ng-content select=".header"></ng-content>
+    </div>
+  </div>
+  <div class="middle"></div>
+  <div class="right">
+    <div class="options" *ngIf="showOptions && !collapsed">
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="opacity-50" click-stop-propagation>
+        <app-icon [icon]="faEllipsisV"></app-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <ng-content select=".options"></ng-content>
+      </mat-menu>
+    </div>
   </div>
 </div>
-<div class="middle"></div>
-<div class="right">
-  <div class="options" *ngIf="showOptions">
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <app-icon [icon]="faEllipsisV"></app-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <ng-content select="sidebar-entry-options"></ng-content>
-    </mat-menu>
-  </div>
+<div class="overflow-hidden" collapsable [class.collapsed]="collapsed" [collapsed]="!expanded">
+  <ng-content select=".content"></ng-content>
 </div>

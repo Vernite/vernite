@@ -75,6 +75,7 @@ import { InputFileComponent } from './components/input-file/input-file.component
 import { MarkdownPipe } from './pipes/markdown/markdown.pipe';
 import { SidebarGroupComponent } from './components/sidebar-navigation/sidebar-group/sidebar-group.component';
 import { ReversePipe } from './pipes/reverse/reverse.pipe';
+import { CollapsableDirective } from './directives/collapsable/collapsable.directive';
 
 /**
  * Main module configuration object
@@ -182,6 +183,7 @@ const ngModuleConfig = {
     MarkdownPipe,
     ReversePipe,
     ColorPipe,
+    CollapsableDirective,
   ],
   providers: [
     /*=============================================

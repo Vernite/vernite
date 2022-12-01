@@ -4,40 +4,84 @@
     (click)="toggle()"></app-button>
 </section>
 
-<app-nav-element [showOptions]="false" icon="cuDashboard" routerLink="/dashboard" routerLinkActive="active"
-  [collapsed]="isCollapsed" i18n>Dashboard</app-nav-element>
-<app-nav-element [showOptions]="false" [icon]="faCalendarDay" routerLink="/calendar" routerLinkActive="active"
-  [collapsed]="isCollapsed" i18n>Calendar</app-nav-element>
+<div #entries class="entries">
+  <sidebar-entry icon="cuDashboard" routerLink="/dashboard" routerLinkActive="active" [collapsed]="isCollapsed">
+    <span class="header" i18n>Dashboard</span>
+  </sidebar-entry>
+  <sidebar-entry [icon]="faCalendarDay" routerLink="/calendar" routerLinkActive="active" [collapsed]="isCollapsed">
+    <span class="header" i18n>Calendar</span>
+  </sidebar-entry>
 
-<sidebar-group [icon]="faMessage" [collapsed]="isCollapsed">
-  <span class="title" i18n>Messages</span>
-  <div class="content">
-    <sidebar-entry *ngFor="let channel of [1, 2, 3, 4]" [icon]="faHashtag" [collapsed]="isCollapsed">
-      <span>Channel {{ channel }}</span>
-    </sidebar-entry>
-  </div>
-</sidebar-group>
+  <sidebar-entry [icon]="faMessage" [collapsed]="isCollapsed" [expandable]="true">
+    <span class="header" i18n>Messages</span>
+    <div class="content">
+      <sidebar-entry *ngFor="let channel of [1, 2, 3, 4]" [icon]="faServer" [collapsed]="isCollapsed"
+        [expandable]="true">
+        <span class="header">Server {{ channel }}</span>
+        <div class="content">
+          <sidebar-entry [icon]="faHashtag" [collapsed]="isCollapsed">
+            <span class="header">Channel {{ channel }}</span>
+          </sidebar-entry>
+          <sidebar-entry [icon]="faHashtag" [collapsed]="isCollapsed">
+            <span class="header">Channel {{ channel }}</span>
+          </sidebar-entry>
+          <sidebar-entry [icon]="faHashtag" [collapsed]="isCollapsed">
+            <span class="header">Channel {{ channel }}</span>
+          </sidebar-entry>
+        </div>
+      </sidebar-entry>
+    </div>
+  </sidebar-entry>
 
-
-<app-nav-element [showOptions]="true" [icon]="faLayerGroup" [collapsed]="isCollapsed">
-  <div i18n>Workspaces</div>
-  <div class="open-below">
-    <ul *ngIf="workspaceList$ | async as workspaceList">
-      <app-nav-element-workspace *ngFor="let workspace of workspaceList" [workspace]="workspace"
-        [collapsed]="isCollapsed">
-        {{workspace.name}}
-      </app-nav-element-workspace>
-      <li *ngIf="!workspaceList.length" class="bg-transparent p-3">
-        <app-button [icon]="faPlus" variant="transparent" [routerLink]="['/', 'create']">Create workspace</app-button>
-      </li>
-    </ul>
-  </div>
-  <div class="options">
-    <button mat-menu-item (click)="createWorkspace()">
-      <span i18n>Create workspace</span>
-    </button>
-    <button mat-menu-item routerLink="/">
-      <span i18n>Manage workspaces</span>
-    </button>
-  </div>
-</app-nav-element>
+  <sidebar-entry [icon]="faLayerGroup" [collapsed]="isCollapsed" [expandable]="true">
+    <span class="header" i18n>Workspaces</span>
+    <div class="content">
+      <sidebar-entry *ngFor="let workspace of workspaceList$ | async" [expandable]="true" [collapsed]="isCollapsed"
+        [textIcon]="true" [showOptions]="true">
+        <span class="header">{{ workspace.name }}</span>
+        <div class="content">
+          <sidebar-entry *ngFor="let projectWithPrivileges of workspace.projectsWithPrivileges"
+            [collapsed]="isCollapsed" [textIcon]="!projectWithPrivileges.project.logo"
+            [imageIcon]="projectWithPrivileges.project.logo?.url" [showOptions]="true"
+            [routerLink]="['/', 'projects', projectWithPrivileges.project.id]">
+            <span class="header">{{ projectWithPrivileges.project.name }}</span>
+            <ng-container class="options">
+              <button mat-menu-item *ngIf="projectWithPrivileges.project.gitHubIntegration"
+                (click)="openWithVSCode(projectWithPrivileges.project)">
+                <span i18n>Open in github.dev</span>
+              </button>
+              <button mat-menu-item *ngIf="projectWithPrivileges.project.gitHubIntegration"
+                (click)="openWithLocalVSCode(projectWithPrivileges.project)">
+                <span i18n>Open in Visual Studio Code</span>
+              </button>
+              <button mat-menu-item *ngIf="projectWithPrivileges.project.gitHubIntegration"
+                (click)="openWithLocalVSCodeInsiders(projectWithPrivileges.project)">
+                <span i18n>Open in Visual Studio Code Insiders</span>
+              </button>
+              <button mat-menu-item (click)="editProject(projectWithPrivileges.project)">
+                <span i18n>Edit project</span>
+              </button>
+              <button mat-menu-item class="important" (click)="deleteProject(projectWithPrivileges.project)">
+                <span i18n>Delete project</span>
+              </button>
+            </ng-container>
+          </sidebar-entry>
+        </div>
+        <ng-container class="options">
+          <button mat-menu-item (click)="createProject(workspace)">
+            <span i18n>Create project</span>
+          </button>
+          <button mat-menu-item (click)="routeToWorkspace(workspace)">
+            <span i18n>Manage projects</span>
+          </button>
+          <button mat-menu-item (click)="editWorkspace(workspace)">
+            <span i18n>Edit workspace</span>
+          </button>
+          <button mat-menu-item class="important" (click)="deleteWorkspace(workspace)">
+            <span i18n>Delete workspace</span>
+          </button>
+        </ng-container>
+      </sidebar-entry>
+    </div>
+  </sidebar-entry>
+</div>

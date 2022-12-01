@@ -1,6 +1,5 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/internal/Observable';
 import { Workspace } from 'src/app/dashboard/interfaces/workspace.interface';
 import { WorkspaceService } from '@dashboard/services/workspace/workspace.service';
 import {
@@ -10,7 +9,12 @@ import {
   faLayerGroup,
   faMessage,
   faPlus,
+  faServer,
 } from '@fortawesome/free-solid-svg-icons';
+import { Project } from '@dashboard/interfaces/project.interface';
+import { ProjectService } from './../../../dashboard/services/project/project.service';
+import { DialogService } from '@main/services/dialog/dialog.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar-navigation',
@@ -22,8 +26,19 @@ export class SidebarNavigationComponent {
 
   public workspaceList$?: Observable<Workspace[]>;
 
+  @ViewChild('entries') entries!: ElementRef<HTMLElement>;
+
   @HostBinding('class.collapsed')
-  public isCollapsed = true;
+  public isCollapsed = false;
+
+  @HostBinding('style.width')
+  public get width() {
+    const entries = this.entries?.nativeElement;
+    if (!entries) return this.isCollapsed ? '60px' : '280px';
+    return (
+      (this.isCollapsed ? (entries.scrollHeight > entries.clientHeight ? 70 : 60) : 280) + 'px'
+    );
+  }
 
   /** @ignore */
   faArrowRightArrowLeft = faArrowRightArrowLeft;
@@ -43,11 +58,19 @@ export class SidebarNavigationComponent {
   /** @ignore */
   faHashtag = faHashtag;
 
+  /** @ignore */
+  faServer = faServer;
+
   createWorkspace() {
     this.router.navigate(['/', 'workspaces', 'create']);
   }
 
-  constructor(private workspaceService: WorkspaceService, private router: Router) {
+  constructor(
+    private workspaceService: WorkspaceService,
+    private router: Router,
+    private projectService: ProjectService,
+    private dialogService: DialogService,
+  ) {
     this.workspaceList$ = this.workspaceService.list();
   }
 
@@ -65,5 +88,69 @@ export class SidebarNavigationComponent {
 
   expand() {
     this.isCollapsed = false;
+  }
+
+  routeToWorkspace(workspace: Workspace) {
+    this.router
+      .navigateByUrl('/', { skipLocationChange: true })
+      .then(() => this.router.navigate(['/', 'workspaces', workspace.id]));
+  }
+
+  routeToProject(project: Project) {
+    this.router
+      .navigateByUrl('/', { skipLocationChange: true })
+      .then(() => this.router.navigate(['/', 'projects', project.id]));
+  }
+
+  createProject(workspace: Workspace) {
+    this.router
+      .navigateByUrl('/', { skipLocationChange: true })
+      .then(() => this.router.navigate(['/', 'workspaces', workspace.id, 'projects', 'create']));
+  }
+
+  editProject(project: Project) {
+    this.router
+      .navigateByUrl('/', { skipLocationChange: true })
+      .then(() => this.router.navigate(['/', 'projects', project.id, 'edit']));
+  }
+
+  deleteProject(project: Project) {
+    this.dialogService.confirmProjectDelete(project).subscribe(() => {
+      this.projectService.delete(project.id).subscribe(() => {
+        window.location.reload();
+      });
+    });
+  }
+
+  editWorkspace(workspace: Workspace) {
+    this.router
+      .navigateByUrl('/', { skipLocationChange: true })
+      .then(() => this.router.navigate(['/', 'workspaces', workspace.id, 'edit']));
+  }
+
+  deleteWorkspace(workspace: Workspace) {
+    this.dialogService.confirmWorkspaceDelete(workspace).subscribe(() => {
+      this.workspaceService.delete(workspace.id).subscribe(() => {
+        window.location.reload();
+      });
+    });
+  }
+
+  openWithVSCode(project: Project) {
+    window.open(`https://github.dev/${project.gitHubIntegration}`, '_blank');
+  }
+
+  openWithLocalVSCode(project: Project) {
+    window.open(
+      `vscode://vscode.git/clone?url=https://github.com/${project.gitHubIntegration}`,
+      '_blank',
+    );
+  }
+
+  openWithLocalVSCodeInsiders(project: Project) {
+    window.open(
+      `vscode-insiders://vscode.git/clone?url=https://github.com/${project.gitHubIntegration}`,
+      '_blank',
+    );
   }
 }
