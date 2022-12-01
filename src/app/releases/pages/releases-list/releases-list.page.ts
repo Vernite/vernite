@@ -44,12 +44,9 @@ export class ReleasesListPage implements OnInit {
 
   public projectId!: number;
 
-  /**
-   * Lifecycle hook to load releases at the start of the page.
-   */
   ngOnInit() {
     this.activatedRoute.params.subscribe(({ projectId }) => {
-      this.projectId = projectId;
+      this.projectId = Number(projectId);
       this.loadReleases(projectId);
     });
   }
@@ -61,16 +58,26 @@ export class ReleasesListPage implements OnInit {
     this.releases$ = this.releaseService.list(projectId);
   }
 
-  createRelease(projectId: number) {}
-
   /**
-   * Navigates to the releases edit page.
+   * Open releases create dialog.
    */
-  editRelease(projectId: number, release: Release) {}
+  createRelease(projectId: number) {
+    this.releaseService.openCreateReleaseDialog(projectId).subscribe(() => {
+      window.location.reload();
+    });
+  }
 
   /**
-   * Shows an alert dialog to confirm the releases deletion and deletes the releases if confirmed.
-   * @param releases Releases to delete
+   * Open releases edit dialog.
+   */
+  editRelease(projectId: number, release: Release) {
+    this.releaseService.openEditReleaseDialog(projectId, release).subscribe(() => {
+      window.location.reload();
+    });
+  }
+
+  /**
+   * Delete release.
    */
   deleteRelease(projectId: number, release: Release) {
     this.releaseService.deleteWithConfirmation(projectId, release.id).subscribe(() => {
@@ -78,6 +85,9 @@ export class ReleasesListPage implements OnInit {
     });
   }
 
+  /**
+   * Open specific release.
+   */
   openRelease(projectId: number, release: Release) {
     this.router.navigate(['/', 'projects', projectId, 'releases', release.id]);
   }

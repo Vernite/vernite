@@ -1,7 +1,7 @@
 <!-- Page header -->
 <section class="flex justify-between items-center">
   <h2 class="text-xl font-bold" i18n>Releases</h2>
-  <app-button variant="primary" routerLink="/create" [icon]="faPlus" i18n>New Release</app-button>
+  <app-button variant="primary" (click)="createRelease(projectId)" [icon]="faPlus" i18n>Create Release</app-button>
 </section>
 
 <!-- Table -->
@@ -49,6 +49,6 @@
     </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="['name', 'statistics', 'lastUpdate', 'actions']"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['name', 'statistics', 'lastUpdate', 'actions'];"></tr>
+  <tr mat-header-row *matHeaderRowDef="['name', 'status', 'progress', 'releaseDate', 'actions']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['name', 'status', 'progress', 'releaseDate', 'actions'];"></tr>
 </table>

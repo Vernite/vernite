@@ -2,35 +2,38 @@ import { Cache } from '@main/decorators/cache/cache.decorator';
 import { Errors } from '@main/interfaces/http-error.interface';
 import { ApiService } from '@main/services/api/api.service';
 import { BaseService } from '@main/services/base/base.service';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable, switchMap } from 'rxjs';
 import { Injectable, Injector } from '@angular/core';
-import { DialogService } from '@main/services/dialog/dialog.service';
+import { DialogOutlet, DialogService } from '@main/services/dialog/dialog.service';
 import { Release } from '../interfaces/release.interface';
 import { TaskService } from '@tasks/services/task/task.service';
+import {
+  ReleaseDialog,
+  ReleaseDialogData,
+  ReleaseDialogVariant,
+} from '../dialog/release/release.dialog';
+import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReleaseService extends BaseService<
   Errors<
-    | 'PROJECT_NOT_FOUND'
-    | 'PROJECT_OR_STATUS_NOT_FOUND'
-    | 'FORM_VALIDATION_ERROR'
-    | 'STATUS_IS_NOT_EMPTY'
+    'PROJECT_NOT_FOUND' | 'PROJECT_OR_RELEASE_NOT_FOUND' | 'FORM_VALIDATION_ERROR' | 'CONFLICT'
   >
 > {
   protected override errorCodes = {
     PROJECT_NOT_FOUND: {
       message: $localize`Project not found`,
     },
-    PROJECT_OR_STATUS_NOT_FOUND: {
-      message: $localize`Project or status not found`,
+    PROJECT_OR_RELEASE_NOT_FOUND: {
+      message: $localize`Project or release not found`,
     },
     FORM_VALIDATION_ERROR: {
       message: $localize`Form validation error`,
     },
-    STATUS_IS_NOT_EMPTY: {
-      message: $localize`Status is not empty`,
+    CONFLICT: {
+      message: $localize`Conflict`,
     },
   };
 
@@ -43,105 +46,116 @@ export class ReleaseService extends BaseService<
     super(injector);
   }
 
-  /**
-   * Get list of statuses
-   * @param projectId Project id needed to create status
-   * @returns Request observable with list of statuses
-   */
   @Cache()
   public list(projectId: number): Observable<Release[]> {
     return this.apiService.get(`/project/${projectId}/release/`).pipe(
       this.validate({
         404: 'PROJECT_NOT_FOUND',
+        409: 'CONFLICT',
       }),
     );
   }
 
-  /**
-   * Get status information
-   * @param statusId Status id needed to get status information
-   * @param projectId Project id needed to get status
-   * @returns Request observable with the status
-   */
   @Cache()
   public get(projectId: number, releaseId: number): Observable<Release> {
     return this.apiService.get(`/project/${projectId}/release/${releaseId}`).pipe(
       this.validate({
-        404: 'PROJECT_OR_STATUS_NOT_FOUND',
+        404: 'PROJECT_OR_RELEASE_NOT_FOUND',
+        409: 'CONFLICT',
       }),
     );
   }
 
-  /**
-   * Creates new status
-   * @param status Status to create
-   * @param projectId Project id needed to create status
-   * @returns Request observable with the created status
-   */
   public create(projectId: number, release: Release): Observable<Release> {
     return this.apiService.post(`/project/${projectId}/release/`, { body: release }).pipe(
       this.validate({
         400: 'FORM_VALIDATION_ERROR',
         404: 'PROJECT_NOT_FOUND',
+        409: 'CONFLICT',
       }),
     );
   }
 
-  /**
-   * Updates status
-   * @param status Status to update
-   * @param projectId Project id needed to create status
-   * @returns Request observable with the updated status
-   */
   public update(projectId: number, release: Release): Observable<Release> {
     return this.apiService
       .put(`/project/${projectId}/release/${release.id}`, { body: release })
       .pipe(
         this.validate({
           400: 'FORM_VALIDATION_ERROR',
-          404: 'PROJECT_OR_STATUS_NOT_FOUND',
+          404: 'PROJECT_OR_RELEASE_NOT_FOUND',
+          409: 'CONFLICT',
         }),
       );
   }
 
-  /**
-   * Deletes status
-   * @param status Status id to delete
-   * @param projectId Project id needed to create status
-   * @returns Request observable
-   */
-  public deleteWithConfirmation(projectId: number, releaseId: number): Observable<null> {
+  public delete(projectId: number, releaseId: number): Observable<null> {
     return this.apiService.delete(`/project/${projectId}/release/${releaseId}`).pipe(
       this.validate({
-        400: 'STATUS_IS_NOT_EMPTY',
-        404: 'PROJECT_OR_STATUS_NOT_FOUND',
+        404: 'PROJECT_OR_RELEASE_NOT_FOUND',
+        409: 'CONFLICT',
       }),
     );
   }
 
-  // public openCreateNewStatusDialog(): Observable<Release> {
-  //   return this.dialogService
-  //     .open(ReleaseDialog, {
-  //       title: $localize`Create new status`,
-  //       confirmButtonText: $localize`Create`,
-  //     } as ReleaseDialogData)
-  //     .afterClosed()
-  //     .pipe(filter(Boolean));
-  // }
+  public deleteWithConfirmation(projectId: number, releaseId: number) {
+    return this.dialogService
+      .confirm({
+        title: $localize`Delete release`,
+        message: $localize`Are you sure you want to delete this release? This action is irreversible`,
+        confirmText: $localize`Delete`,
+        cancelText: $localize`Cancel`,
+        variant: AlertDialogVariant.IMPORTANT,
+      })
+      .pipe(
+        switchMap((confirmed) => {
+          if (!confirmed) return EMPTY;
+          return this.delete(projectId, releaseId);
+        }),
+      );
+  }
 
-  // /**
-  //  * Opens dialog to edit specific status
-  //  * @param status Status to update
-  //  * @returns Observable with updated status, EMPTY otherwise (when user cancels the dialog)
-  //  */
-  // public openEditStatusDialog(status: Release): Observable<Release> {
-  //   return this.dialogService
-  //     .open(ReleaseDialog, {
-  //       status,
-  //       title: $localize`Edit status`,
-  //       confirmButtonText: $localize`Update`,
-  //     } as ReleaseDialogData)
-  //     .afterClosed()
-  //     .pipe(filter(Boolean));
-  // }
+  public openCreateReleaseDialog(projectId: number): Observable<Release> {
+    return this.dialogService
+      .open(
+        ReleaseDialog,
+        {
+          projectId: projectId,
+          variant: ReleaseDialogVariant.CREATE,
+        } as ReleaseDialogData,
+        { outlet: DialogOutlet.CONTENT_RIGHT },
+      )
+      .afterClosed()
+      .pipe(
+        switchMap((release: any) => {
+          if (release) {
+            return this.create(projectId, release);
+          } else {
+            return EMPTY;
+          }
+        }),
+      );
+  }
+
+  public openEditReleaseDialog(projectId: number, release: Release): Observable<Release> {
+    return this.dialogService
+      .open(
+        ReleaseDialog,
+        {
+          projectId: projectId,
+          release: release,
+          variant: ReleaseDialogVariant.EDIT,
+        } as ReleaseDialogData,
+        { outlet: DialogOutlet.CONTENT_RIGHT },
+      )
+      .afterClosed()
+      .pipe(
+        switchMap((release: any) => {
+          if (release) {
+            return this.update(projectId, release);
+          } else {
+            return EMPTY;
+          }
+        }),
+      );
+  }
 }
