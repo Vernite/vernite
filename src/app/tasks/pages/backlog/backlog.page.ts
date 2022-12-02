@@ -15,7 +15,10 @@ import { SprintService } from '@tasks/services/sprint.service';
 import { Sprint } from '@tasks/interfaces/sprint.interface';
 import { SprintFilters } from '@dashboard/filters/sprint.filters';
 import { SprintStatus } from '@tasks/enums/sprint-status.enum';
+import { TaskProtoService } from '../../services/task/task.proto.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'backlog-page',
   templateUrl: './backlog.page.html',
@@ -42,13 +45,14 @@ export class BacklogPage implements OnInit {
     private memberService: MemberService,
     private statusService: StatusService,
     private sprintService: SprintService,
+    private taskProtoService: TaskProtoService,
   ) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(({ projectId }) => {
       this.projectId = Number(projectId);
 
-      this.taskList$ = this.taskService.backlog(projectId, [TaskFilters.BACKLOG()]);
+      this.taskList$ = this.taskService.list(projectId, [TaskFilters.BACKLOG()]);
       this.project$ = this.projectService.get(projectId);
       this.members$ = this.memberService.map(projectId);
       this.statusList$ = this.statusService.list(projectId);
@@ -61,6 +65,20 @@ export class BacklogPage implements OnInit {
         projectId,
         SprintFilters.STATUS(SprintStatus.CREATED),
       );
+
+      this.taskProtoService.TASKS.pipe(untilDestroyed(this)).subscribe((task) => {
+        if (task.projectId === this.projectId) {
+          this.taskList$ = this.taskService.list(projectId, [TaskFilters.BACKLOG()]);
+          this.sprintListActive$ = this.sprintService.list(
+            projectId,
+            SprintFilters.STATUS(SprintStatus.ACTIVE),
+          );
+          this.sprintListCreated$ = this.sprintService.list(
+            projectId,
+            SprintFilters.STATUS(SprintStatus.CREATED),
+          );
+        }
+      });
     });
   }
 
