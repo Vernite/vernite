@@ -16,6 +16,7 @@ import { Any } from 'google-protobuf/google/protobuf/any_pb.js';
 import { Service } from '../../decorators/service/service.decorator';
 import { vernite } from '@vernite/protobuf';
 import { isClass } from '@main/classes/util/is-class';
+import { environment } from '../../../../environments/environment';
 
 @Service()
 @Injectable({
@@ -23,7 +24,7 @@ import { isClass } from '@main/classes/util/is-class';
 })
 export class ProtoService {
   private _websocket$ = webSocket({
-    url: 'ws://localhost:4200/api/ws',
+    url: environment.websocketUrl,
     deserializer: (e: MessageEvent) => e,
     serializer: (value: any) => value,
   });

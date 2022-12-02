@@ -29,4 +29,6 @@ export const environment = {
   version: app.version,
 
   disableIntegrationRegistryCheck: false,
+
+  websocketUrl: 'ws://localhost:4200/api/ws',
 };

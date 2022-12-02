@@ -8,4 +8,5 @@ export const environment = {
   disableConsoleLog: false,
   version: app.version,
   disableIntegrationRegistryCheck: false,
+  websocketUrl: 'wss://vernite.dev/api/ws',
 };
