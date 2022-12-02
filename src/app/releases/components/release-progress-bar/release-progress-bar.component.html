@@ -19,8 +19,8 @@
       <hr class="my-1 opacity-20">
       <div *ngFor="let status of statusList" class="flex justify-between items-center">
         <span class="text-label mr-5">{{ status.name }}</span>
-        <pill variant="small" class="text-label w-10" [style.background-color]="progress[status.id].color | color:'hex'"
-          [class]="['text-' + (progress[status.id].color | contrastColor)]">{{ progress[status.id].total }}</pill>
+        <pill variant="small" class="text-label w-10" [style.background-color]="progress[status.id!].color | color:'hex'"
+          [class]="['text-' + (progress[status.id!].color | contrastColor)]">{{ progress[status.id!].total }}</pill>
       </div>
     </div>
   </div>
