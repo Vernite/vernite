@@ -23,14 +23,14 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root',
 })
 export class ProtoService {
-  private _websocket$ = webSocket({
+  protected _websocket$ = webSocket({
     url: environment.websocketUrl,
     deserializer: (e: MessageEvent) => e,
     serializer: (value: any) => value,
   });
 
-  private static messageClasses = ProtoService.flatClassesMap('vernite', vernite);
-  private static packagesMap = ProtoService.flatPackagesMap('vernite', vernite);
+  private messageClasses = this.flatClassesMap('vernite', vernite);
+  private packagesMap = this.flatPackagesMap('vernite', vernite);
 
   constructor() {
     this.subscribe<vernite.KeepAlive, typeof vernite.KeepAlive>(vernite.KeepAlive).subscribe(
@@ -50,7 +50,7 @@ export class ProtoService {
 
   private serialize(value: Message) {
     const any = new Any();
-    any.pack(value.serializeBinary(), ProtoService.packagesMap.get(value.constructor.name)!);
+    any.pack(value.serializeBinary(), this.packagesMap.get(value.constructor.name)!);
     return of(any.serializeBinary());
   }
 
@@ -61,7 +61,7 @@ export class ProtoService {
         const type = any.getTypeName();
 
         const message = any.unpack((bytes: Uint8Array) => {
-          return ProtoService.messageClasses.get(type)!.deserializeBinary(bytes);
+          return this.messageClasses.get(type)!.deserializeBinary(bytes);
         }, type);
 
         return message!;
@@ -102,7 +102,7 @@ export class ProtoService {
     console.groupEnd();
   }
 
-  private static flatClassesMap(prefix: string, source: any): Map<string, typeof Message> {
+  private flatClassesMap(prefix: string, source: any): Map<string, typeof Message> {
     let map = new Map<string, typeof Message>();
     for (const [key, cls] of Object.entries(source)) {
       if (isClass<typeof Message>(cls)) {
@@ -117,7 +117,7 @@ export class ProtoService {
     return map;
   }
 
-  private static flatPackagesMap(prefix: string, source: any): Map<string, string> {
+  private flatPackagesMap(prefix: string, source: any): Map<string, string> {
     let map = new Map<string, string>();
     for (const [key, cls] of Object.entries(source)) {
       if (isClass<typeof Message>(cls)) {

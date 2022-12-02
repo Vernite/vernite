@@ -42,15 +42,15 @@ describe('Service: Api', () => {
     testRequest.flush({ test: 'test' });
   });
 
-  // it('delete() - should send delete request', (done) => {
-  //   service.delete('/test').subscribe((response) => {
-  //     expect(response).toEqual({ test: 'test' });
-  //     done();
-  //   });
+  it('delete() - should send delete request', (done) => {
+    service.delete('/test').subscribe((response) => {
+      expect(response).toEqual({ test: 'test' });
+      done();
+    });
 
-  //   const testRequest = httpTestingController.expectOne('/api/test');
-  //   testRequest.flush({ test: 'test' });
-  // });
+    const testRequest = httpTestingController.expectOne('/api/test');
+    testRequest.flush({ test: 'test' });
+  });
 
   it('put() - should send put request', (done) => {
     service.put('/test', { body: 'test' }).subscribe((response) => {
