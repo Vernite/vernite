@@ -46,6 +46,7 @@ message CommunicatorModel {
     string channel = 1; // ID of the channel to send the message to.
     string content = 2; // Content of the message.
     string provider = 3; // Service to send the message to.
+    int64 integrationID = 4; // ID of the integration that sent the message.
   }
 }
 
