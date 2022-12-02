@@ -1,0 +1,162 @@
+:host {
+  display: block;
+
+  &.collapsed {
+    width: 60px;
+  }
+}
+
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  height: 42px;
+  padding: 0.5rem 0 0.5rem 2rem;
+  border-radius: var(--border-radius);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color .1s ease, padding .2s ease;
+  flex-wrap: nowrap;
+
+  &:hover {
+    background-color: var(--color-secondary-700);
+
+    .right {
+      opacity: 1;
+    }
+  }
+
+  &.collapsed {
+    width: 42px;
+    padding: 0.5rem 0.5rem;
+    margin-left: 0.5rem;
+
+    &.expandable {
+      padding: 0.5rem 0;
+
+      .left {
+        margin-left: -1.25rem;
+      }
+    }
+
+    .left {
+      flex-grow: 1;
+      justify-content: center;
+    }
+
+    .middle {
+      flex-grow: 0;
+    }
+
+    .title {
+      position: absolute;
+      top: 50%;
+      left: 2rem;
+      padding: 0.25rem 0.5rem;
+      opacity: 0;
+      transform: translateY(-50%);
+    }
+  }
+
+  &.expandable {
+    padding: 0.5rem 0 0.5rem 0.6rem;
+
+    &.expanded {
+      .chevron {
+        transform: rotate(90deg);
+      }
+    }
+  }
+}
+
+.left {
+  position: relative;
+  display: flex;
+  flex-grow: 0;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.67rem;
+  transition: flex-grow .2s ease;
+  overflow: hidden;
+  height: 100%;
+}
+
+.middle {
+  flex-grow: 1;
+  transition: flex-grow .2s ease;
+}
+
+.right {
+  opacity: 0;
+}
+
+.options {
+  display: flex;
+  align-items: center;
+}
+
+.title ::ng-deep {
+  padding: 0.25rem;
+  opacity: 1;
+  transition: padding .3s ease, left .3s ease, opacity .3s ease;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+
+  .header {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    width: 100%;
+  }
+}
+
+:host ::ng-deep .content {
+  padding-left: 0.5rem;
+}
+
+:host .collapsed ::ng-deep .content {
+  padding-left: 0;
+}
+
+.text-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 0.25rem;
+    background-color: white;
+    opacity: 0.2;
+    transition: opacity .2s ease;
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
+
+.image-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  &>* {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 0.25rem;
+    transform: translateX(-50%) translateY(-50%);
+    background-size: contain;
+  }
+}

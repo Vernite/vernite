@@ -1,0 +1,44 @@
+:host {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 1rem;
+
+  &.self {
+    flex-direction: row;
+
+    .title {
+      flex-direction: row;
+    }
+
+    .messages {
+      align-items: flex-start;
+    }
+  }
+}
+
+.avatar {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--color-secondary-500);
+  border-radius: var(--border-radius);
+}
+
+.title {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: baseline;
+  margin-bottom: 0.25rem;
+  color: var(--color-text);
+  gap: 1rem;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.name {
+  height: 27px;
+}

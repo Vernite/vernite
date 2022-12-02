@@ -31,6 +31,13 @@
     "node_modules": true
   },
 
+  /* ======================== */
+  /* ==== Material icons ==== */
+  /* ======================== */
+  "material-icon-theme.files.associations": {
+    "*.page.ts": "angular-resolver"
+  },
+
   /* ====================== */
   /* ==== Hidden files ==== */
   /* ====================== */

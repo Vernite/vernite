@@ -1,6 +1,7 @@
 <div class="bar" #trigger="cdkOverlayOrigin" cdkOverlayOrigin (mouseenter)="showDetails()" (mouseleave)="hideDetails()">
   <ng-container *ngFor="let status of statusList | reverse">
-    <div [style.width]="progress[status.id].percentage + '%'"
+    <div *ngIf="progress[status.id] && progress[status.id].percentage > 0"
+      [style.width]="progress[status.id].percentage + '%'"
       [style.background-color]="progress[status.id].color | color:'hex'"></div>
   </ng-container>
 </div>
@@ -19,7 +20,8 @@
       <hr class="my-1 opacity-20">
       <div *ngFor="let status of statusList" class="flex justify-between items-center">
         <span class="text-label mr-5">{{ status.name }}</span>
-        <pill variant="small" class="text-label w-10" [style.background-color]="progress[status.id!].color | color:'hex'"
+        <pill variant="small" class="text-label w-10"
+          [style.background-color]="progress[status.id!].color | color:'hex'"
           [class]="['text-' + (progress[status.id!].color | contrastColor)]">{{ progress[status.id!].total }}</pill>
       </div>
     </div>

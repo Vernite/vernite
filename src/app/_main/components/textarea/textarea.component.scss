@@ -41,6 +41,7 @@
 
 .tools {
   display: flex;
+  align-items: flex-end;
   padding: 1rem;
 
   .tool {
@@ -61,5 +62,5 @@
 }
 
 .editor {
-  width: min(100%, 1000px);
+  width: 100%;
 }

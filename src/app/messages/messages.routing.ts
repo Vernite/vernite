@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MockPage } from '@main/pages/mock/mock.page';
+import { ConversationPage } from './pages/conversation/conversation.page';
+import { MessengerSummaryPage } from './pages/messenger-summary/messenger-summary.page';
+import { MessengerPage } from './pages/messenger/messenger.page';
 
 /**
  * Messages routes list
@@ -8,11 +10,18 @@ import { MockPage } from '@main/pages/mock/mock.page';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    component: MockPage,
-    data: {
-      image: 'assets/mocks/messages.svg',
-    },
+    component: MessengerPage,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: MessengerSummaryPage,
+      },
+      {
+        path: ':integrationId/:channelId',
+        component: ConversationPage,
+      },
+    ],
   },
 ];
 

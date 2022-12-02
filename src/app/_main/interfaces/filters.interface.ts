@@ -61,7 +61,7 @@ export interface DataFilter<T, V> {
   type: DataFilterType;
   field: string;
   value: V;
-  apply?(list: T[]): T[];
+  apply(list: T[]): T[];
 }
 
 export interface DataFilterDisplay<T, V> {

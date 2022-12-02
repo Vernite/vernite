@@ -88,8 +88,9 @@ export class InputDateTimeComponent
   }
 
   onFocusStateChanged(state: boolean) {
+    this.focused = state;
+
     if (state) {
-      this.focused = state;
       this.openPicker();
     }
   }

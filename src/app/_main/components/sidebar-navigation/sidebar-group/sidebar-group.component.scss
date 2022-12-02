@@ -1,0 +1,38 @@
+:host {
+  &.collapsed {
+    background-color: var(--color-secondary-600);
+
+    .header ::ng-deep .title {
+      opacity: 0;
+    }
+
+    .content {
+      padding: 0.25rem 0.25rem;
+    }
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  color: var(--color-text);
+  font-weight: 600;
+  gap: 1.25rem;
+
+  ::ng-deep .title {
+    opacity: 1;
+    transition: opacity .2s ease;
+  }
+}
+
+.content {
+  padding: 0.25rem 1rem;
+  transition: padding .2s ease;
+
+  ::ng-deep .content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
