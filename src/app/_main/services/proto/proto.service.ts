@@ -77,7 +77,7 @@ export class ProtoService {
   }
 
   protected socket() {
-    return this._websocket$.pipe(switchMap(this.deserialize));
+    return this._websocket$.pipe(switchMap(this.deserialize.bind(this)));
   }
 
   public subscribe<T extends Message & { action?: vernite.BasicAction }, K extends typeof Message>(
