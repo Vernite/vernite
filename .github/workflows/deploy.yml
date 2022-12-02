@@ -46,8 +46,8 @@ jobs:
         run: yarn build
 
       # Run tests
-      - name: Unit tests
-        run: yarn unit:build
+      # - name: Unit tests
+      #   run: yarn unit:build
 
       # Copy default redirect page
       - name: Redirect page copy
