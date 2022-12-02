@@ -6,7 +6,7 @@
 
   <groupId>dev.vernite</groupId>
   <artifactId>protobuf</artifactId>
-  <version>1.0.17-SNAPSHOT</version>
+  <version>1.0.18-SNAPSHOT</version>
 
   <name>protobuf</name>
   <!-- FIXME change it to the project's website -->
@@ -29,7 +29,7 @@
     <dependency>
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-java</artifactId>
-        <version>3.21.9</version>
+        <version>3.21.10</version>
     </dependency>
   </dependencies>
 
