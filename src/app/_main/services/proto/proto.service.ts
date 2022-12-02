@@ -60,8 +60,9 @@ export class ProtoService {
         const any = Any.deserializeBinary(buffer);
         const type = any.getTypeName();
 
+        const messageClasses = this.messageClasses;
         const message = any.unpack((bytes: Uint8Array) => {
-          return this.messageClasses.get(type)!.deserializeBinary(bytes);
+          return messageClasses.get(type)!.deserializeBinary(bytes);
         }, type);
 
         return message!;
