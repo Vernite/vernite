@@ -24,6 +24,8 @@ import { Loader } from '../../../_main/classes/loader/loader.class';
 import { withLoader } from '@main/operators/loader.operator';
 import { SprintStatus } from '@tasks/enums/sprint-status.enum';
 import { SprintFilters } from '@dashboard/filters/sprint.filters';
+import { Release } from 'src/app/releases/interfaces/release.interface';
+import { ReleaseService } from 'src/app/releases/services/release.service';
 
 export enum TaskDialogVariant {
   CREATE = 'create',
@@ -62,6 +64,7 @@ export class TaskDialog implements OnInit {
 
   public sprintListActive$: Observable<Sprint[]> = of([]);
   public sprintListCreated$: Observable<Sprint[]> = of([]);
+  public releaseList$: Observable<Release[]> = of([]);
 
   public isGitHubIntegrationAvailable: boolean = false;
 
@@ -80,6 +83,7 @@ export class TaskDialog implements OnInit {
     pull: new FormControl<GitPull | 'DETACH' | null>(null),
     storyPoints: new FormControl<number | null>(0),
     sprintId: new FormControl<number | null>(null),
+    releaseId: new FormControl<number | null>(null),
   });
 
   public interactive$ = timeToInteraction();
@@ -101,6 +105,7 @@ export class TaskDialog implements OnInit {
     private taskService: TaskService,
     private sprintService: SprintService,
     private projectService: ProjectService,
+    private releaseService: ReleaseService,
   ) {}
 
   ngOnInit() {
@@ -161,6 +166,8 @@ export class TaskDialog implements OnInit {
 
         this.form.patchValue({ statusId });
       });
+
+    this.releaseList$ = this.releaseService.list(projectId);
 
     this.form.get('sprintId').setValue(null);
 

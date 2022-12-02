@@ -73,6 +73,18 @@
       <app-empty-options i18n>Project sprints list is empty</app-empty-options>
     </app-select>
 
+    <!-- Release -->
+    <app-select *ngIf="form.get('projectId').value" formControlName="releaseId"
+      floatingLabel="Release" i18n-floatingLabel>
+      <app-option [value]="null" [checkmark]="true">
+        -
+      </app-option>
+      <app-option *ngFor="let release of releaseList$ | async" [value]="release.id" [checkmark]="true">
+        {{release.name}}
+      </app-option>
+      <app-empty-options i18n>Project release list is empty</app-empty-options>
+    </app-select>
+
     <!-- Parent -->
     <input-task-parent *ngIf="
     ![TaskType.EPIC, TaskType.USER_STORY, TaskType.TASK, undefined].includes(form.get('type')?.value) &&

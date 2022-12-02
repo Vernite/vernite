@@ -105,6 +105,11 @@ export interface Task extends JSONParsable {
   sprintId?: number;
 
   /**
+   * Id of assigned release
+   */
+  releaseId?: number;
+
+  /**
    * Archived ids of assigned sprint
    */
   archiveSprintIds?: number[];
