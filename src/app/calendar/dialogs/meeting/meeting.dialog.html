@@ -4,7 +4,8 @@
   <form (submit)="confirm()" [formGroup]="form" autocomplete="off">
 
     <!-- Project -->
-    <app-select formControlName="projectId" floatingLabel="Project" i18n-floatingLabel>
+    <app-select formControlName="projectId" floatingLabel="Project"
+      [readonly]="data.variant === MeetingDialogVariant.EDIT" i18n-floatingLabel>
       <app-option *ngFor="let project of projects$ | async" [value]="project.id">{{project.name}}
       </app-option>
       <app-empty-options i18n>Projects list is empty</app-empty-options>
