@@ -4,6 +4,8 @@ import { GitIntegrationService } from '@dashboard/services/git-integration/git-i
 import { map, Observable, take } from 'rxjs';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { SlackIntegration } from '../../../messages/interfaces/slack-integration.interface';
+import { SlackService } from '@messages/services/slack/slack.service';
 
 interface GitAccountWithUsage {
   account: GitAccount;
@@ -18,14 +20,19 @@ interface GitAccountWithUsage {
 })
 export class SettingsIntegrationsPage implements OnInit {
   public gitHubAccounts$!: Observable<GitAccountWithUsage[]>;
+  public slackAccounts$!: Observable<SlackIntegration[]>;
 
   /** @ignore */
   faPlus = faPlus;
 
-  constructor(private gitIntegrationService: GitIntegrationService) {}
+  constructor(
+    private gitIntegrationService: GitIntegrationService,
+    private slackService: SlackService,
+  ) {}
 
   ngOnInit() {
     this.loadGitHubIntegration();
+    this.loadSlackIntegrations();
   }
 
   public openGitHubIntegration() {
@@ -45,7 +52,7 @@ export class SettingsIntegrationsPage implements OnInit {
     );
   }
 
-  public disconnect(account: GitAccount): void {
+  public disconnectGithubAccount(account: GitAccount): void {
     this.gitIntegrationService.deleteConnectedGitHubAccount(account.id).subscribe(({ link }) => {
       window.open(link, '_blank');
     });
@@ -55,5 +62,19 @@ export class SettingsIntegrationsPage implements OnInit {
     return this.gitIntegrationService
       .getGitHubAccountConnectedProjects(account)
       .pipe(map((projects) => projects.map((project: any) => project.name).join(', ')));
+  }
+
+  public openSlackIntegration() {
+    this.slackService.openIntegrationPage().pipe(untilDestroyed(this)).subscribe();
+  }
+
+  public loadSlackIntegrations() {
+    this.slackAccounts$ = this.slackService.getSlackIntegrations();
+  }
+
+  disconnectSlackAccount(account: SlackIntegration) {
+    this.slackService.deleteIntegration(account.id).subscribe(() => {
+      location.reload();
+    });
   }
 }

@@ -15,17 +15,11 @@
   <sidebar-entry [icon]="faMessage" [collapsed]="isCollapsed" [expandable]="true">
     <span class="header" i18n>Messages</span>
     <div class="content">
-      <sidebar-entry *ngFor="let channel of [1, 2, 3, 4]" [icon]="faServer" [collapsed]="isCollapsed"
+      <sidebar-entry *ngFor="let entry of channelList$ | async" [icon]="faServer" [collapsed]="isCollapsed"
         [expandable]="true">
-        <span class="header">Server {{ channel }}</span>
+        <span class="header">Server {{ entry.integration.teamName }}</span>
         <div class="content">
-          <sidebar-entry [icon]="faHashtag" [collapsed]="isCollapsed">
-            <span class="header">Channel {{ channel }}</span>
-          </sidebar-entry>
-          <sidebar-entry [icon]="faHashtag" [collapsed]="isCollapsed">
-            <span class="header">Channel {{ channel }}</span>
-          </sidebar-entry>
-          <sidebar-entry [icon]="faHashtag" [collapsed]="isCollapsed">
+          <sidebar-entry *ngFor="let channel of entry.channels" [icon]="faHashtag" [collapsed]="isCollapsed">
             <span class="header">Channel {{ channel }}</span>
           </sidebar-entry>
         </div>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostBinding, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Workspace } from 'src/app/dashboard/interfaces/workspace.interface';
 import { WorkspaceService } from '@dashboard/services/workspace/workspace.service';
@@ -14,17 +14,18 @@ import {
 import { Project } from '@dashboard/interfaces/project.interface';
 import { ProjectService } from './../../../dashboard/services/project/project.service';
 import { DialogService } from '@main/services/dialog/dialog.service';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, switchMap, map } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar-navigation',
   templateUrl: './sidebar-navigation.component.html',
   styleUrls: ['./sidebar-navigation.component.scss'],
 })
-export class SidebarNavigationComponent {
+export class SidebarNavigationComponent implements OnInit {
   @Input() public icon!: String;
 
   public workspaceList$?: Observable<Workspace[]>;
+  public channelList$?: Observable<SlackChannel[]>;
 
   @ViewChild('entries') entries!: ElementRef<HTMLElement>;
 
@@ -70,8 +71,21 @@ export class SidebarNavigationComponent {
     private router: Router,
     private projectService: ProjectService,
     private dialogService: DialogService,
-  ) {
+    private slackService: SlackIntegrationService,
+  ) {}
+
+  ngOnInit() {
     this.workspaceList$ = this.workspaceService.list();
+    this.channelList$ = this.slackService.getIntegrations().pipe(
+      switchMap((integrations) => {
+        return forkJoin(
+          integrations.map((integration) => this.slackService.getChannels(integration.id).pipe(map((channels => ({
+            integration,
+            channels
+          }))))),
+        )
+      });
+    );
   }
 
   toggle() {

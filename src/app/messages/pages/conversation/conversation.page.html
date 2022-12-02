@@ -1,6 +1,6 @@
 <div class="container" [formGroup]="form">
   <div *ngIf="user$ | async as user" class="messages">
-    <ng-container *ngFor="let conversationEntry of conversation; index as i">
+    <ng-container *ngFor="let conversationEntry of conversation$ | async; index as i">
       <message-group [messages]="conversationEntry.messages" [author]="user" [isSelf]="i % 2 === 0"></message-group>
     </ng-container>
   </div>

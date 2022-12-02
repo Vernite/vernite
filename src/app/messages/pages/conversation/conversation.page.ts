@@ -1,20 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SlackProtoService } from '@messages/services/slack/slack.proto.service';
 import { FormGroup, FormControl } from '@ngneat/reactive-forms';
 import dayjs from 'dayjs';
 import { UserService } from '../../../auth/services/user/user.service';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'conversation-page',
   templateUrl: './conversation.page.html',
   styleUrls: ['./conversation.page.scss'],
 })
-export class ConversationPage {
+export class ConversationPage implements OnInit {
   public user$ = this.userService.getMyself();
   public form = new FormGroup({
     message: new FormControl(''),
   });
 
-  public conversation = [
+  private channel!: string;
+
+  public conversation$ = of([
     {
       author: '...',
       messages: [
@@ -46,7 +51,27 @@ export class ConversationPage {
         },
       ],
     },
-  ];
+  ]);
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private slackProtoService: SlackProtoService,
+    private activatedRoute: ActivatedRoute,
+  ) {}
+
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(({ channel }) => {
+      this.channel = channel;
+    });
+  }
+
+  sendMessage() {
+    // const content = this.form.value.message;
+    // const channel = this.channel;
+    // this.slackProtoService.sendMessage(content, channel);
+    // this.conversation$.next([
+    //   ...this.conversation$.value,
+    //   {
+    // ])
+  }
 }

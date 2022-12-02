@@ -68,7 +68,7 @@ export class ProtoService {
     );
   }
 
-  private next(value: Message) {
+  public next(value: Message) {
     this.serialize(value).subscribe((data) => {
       this._websocket$.next(data as any);
     });
