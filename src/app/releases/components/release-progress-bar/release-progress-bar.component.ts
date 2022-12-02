@@ -15,41 +15,8 @@ export class ReleaseProgressBarComponent implements OnInit, OnChanges {
   /**
    * List of statuses used in the release
    */
-  @Input() statusList: (Partial<Status> & { tasks?: Task[] })[] = [
-    {
-      id: 3,
-      name: 'To do',
-      final: false,
-      begin: true,
-      color: new Color('#34495e').rgbNumber(),
-    },
-    {
-      id: 2,
-      name: 'In progress',
-      final: false,
-      begin: false,
-      color: new Color('#f39c12').rgbNumber(),
-    },
-    {
-      id: 1,
-      name: 'Done',
-      final: true,
-      begin: false,
-      color: new Color('#2ecc71').rgbNumber(),
-    },
-  ];
-
-  @Input() tasks: Partial<Task>[] = [
-    ...new Array(10).fill({
-      statusId: 1,
-    }),
-    ...new Array(5).fill({
-      statusId: 2,
-    }),
-    ...new Array(16).fill({
-      statusId: 3,
-    }),
-  ];
+  @Input() statusList!: Status[];
+  @Input() tasks!: Task[];
 
   public progress: {
     [statusId: number]: {
@@ -87,12 +54,25 @@ export class ReleaseProgressBarComponent implements OnInit, OnChanges {
   }
 
   private calculateProgress(allTasks: Partial<Task>[]) {
-    return mapValues(groupBy(this.tasks, 'statusId'), (tasks) => ({
+    const values = mapValues(groupBy(this.tasks, 'statusId'), (tasks) => ({
       total: tasks.length,
       percentage: (tasks.length / allTasks.length) * 100,
       color: new Color(this.statusList.find((status) => status.id === tasks[0].statusId)!.color),
       final: this.statusList.find((status) => status.id === tasks[0].statusId)!.final!,
     }));
+
+    for (const status of this.statusList) {
+      if (!values[status.id!]) {
+        values[status.id!] = {
+          total: 0,
+          percentage: 0,
+          color: new Color(status.color),
+          final: status.final,
+        };
+      }
+    }
+
+    return values;
   }
 
   private calculateFinalPercentage() {

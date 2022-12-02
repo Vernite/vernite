@@ -1,0 +1,56 @@
+<!-- Page header -->
+<section class="flex justify-between items-center">
+  <h2 class="text-xl font-bold" i18n>Releases</h2>
+  <app-button variant="primary" (click)="createRelease(projectId)" [icon]="faPlus" i18n>Create Release</app-button>
+</section>
+
+<!-- Table -->
+<table mat-table [dataSource]="(releases$ | async) || []">
+
+  <!-- Name column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef i18n>Name</th>
+    <td mat-cell *matCellDef="let row" (click)="openRelease(projectId, row)" class="clickable-cell"> {{ row.name }} </td>
+  </ng-container>
+
+  <!-- Status column -->
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef i18n>Status</th>
+    <td mat-cell *matCellDef="let row"> {{row.released}} </td>
+  </ng-container>
+
+  <!-- Progress column -->
+  <ng-container matColumnDef="progress">
+    <th mat-header-cell *matHeaderCellDef i18n>Progress</th>
+    <td mat-cell *matCellDef="let row" class="pr-5">
+      <release-progress-bar class="max-w-xs" [tasks]="row.tasks" [statusList]="(statusList$ | async) || []"></release-progress-bar>
+    </td>
+  </ng-container>
+
+  <!-- Release Date column -->
+  <ng-container matColumnDef="releaseDate">
+    <th mat-header-cell *matHeaderCellDef i18n>Release Date</th>
+    <td mat-cell *matCellDef="let row"> {{row.deadline | dateByPreferences | async}} </td>
+  </ng-container>
+
+  <!-- Actions column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef i18n></th>
+    <td mat-cell *matCellDef="let row" class="action-cell">
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="flex items-center">
+        <app-icon icon="matMoreVert"></app-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="editRelease(projectId, row)">
+          <span i18n>Edit release</span>
+        </button>
+        <button mat-menu-item class="important" (click)="deleteRelease(projectId, row)">
+          <span i18n>Delete release</span>
+        </button>
+      </mat-menu>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['name', 'status', 'progress', 'releaseDate', 'actions']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['name', 'status', 'progress', 'releaseDate', 'actions'];"></tr>
+</table>
