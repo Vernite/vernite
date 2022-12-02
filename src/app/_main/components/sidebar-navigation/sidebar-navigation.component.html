@@ -17,10 +17,11 @@
     <div class="content">
       <sidebar-entry *ngFor="let entry of channelList$ | async" [icon]="faServer" [collapsed]="isCollapsed"
         [expandable]="true">
-        <span class="header">Server {{ entry.integration.teamName }}</span>
+        <span class="header">{{ entry.integration.teamName }}</span>
         <div class="content">
-          <sidebar-entry *ngFor="let channel of entry.channels" [icon]="faHashtag" [collapsed]="isCollapsed">
-            <span class="header">Channel {{ channel }}</span>
+          <sidebar-entry *ngFor="let channel of entry.channels" [icon]="faHashtag" [collapsed]="isCollapsed"
+            [routerLink]="['/', 'messages', entry.integration.id, channel.id]">
+            <span class="header">{{ channel.name || channel.user.displayName || channel.user.name }}</span>
           </sidebar-entry>
         </div>
       </sidebar-entry>

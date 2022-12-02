@@ -17,4 +17,8 @@
   flex-grow: 1;
   gap: 1rem;
   overflow-y: auto;
+
+  &>*:last-child {
+    margin-bottom: 1rem;
+  }
 }

@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input } from '@angular/core';
-import { User } from '../../../auth/interfaces/user.interface';
 import { Message } from '../../interfaces/message.interface';
+import { SlackUser } from '../../interfaces/slack.interface';
 
 @Component({
   selector: 'message-group',
@@ -9,6 +9,6 @@ import { Message } from '../../interfaces/message.interface';
 })
 export class MessageGroupComponent {
   @Input() messages: Message[] = [];
-  @Input() author!: User;
+  @Input() author?: SlackUser | null;
   @HostBinding('class.self') @Input() isSelf: boolean = false;
 }

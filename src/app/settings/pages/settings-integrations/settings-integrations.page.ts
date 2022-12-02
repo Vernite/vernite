@@ -5,7 +5,7 @@ import { map, Observable, take } from 'rxjs';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SlackIntegration } from '../../../messages/interfaces/slack-integration.interface';
-import { SlackService } from '@messages/services/slack/slack.service';
+import { SlackIntegrationService } from '@messages/services/slack-integration.service';
 
 interface GitAccountWithUsage {
   account: GitAccount;
@@ -27,7 +27,7 @@ export class SettingsIntegrationsPage implements OnInit {
 
   constructor(
     private gitIntegrationService: GitIntegrationService,
-    private slackService: SlackService,
+    private slackService: SlackIntegrationService,
   ) {}
 
   ngOnInit() {
@@ -65,7 +65,7 @@ export class SettingsIntegrationsPage implements OnInit {
   }
 
   public openSlackIntegration() {
-    this.slackService.openIntegrationPage().pipe(untilDestroyed(this)).subscribe();
+    this.slackService.slackInstall().pipe(untilDestroyed(this)).subscribe();
   }
 
   public loadSlackIntegrations() {
@@ -73,7 +73,7 @@ export class SettingsIntegrationsPage implements OnInit {
   }
 
   disconnectSlackAccount(account: SlackIntegration) {
-    this.slackService.deleteIntegration(account.id).subscribe(() => {
+    this.slackService.deleteWithConfirmation(account.id).subscribe(() => {
       location.reload();
     });
   }

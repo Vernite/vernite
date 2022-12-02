@@ -23,7 +23,7 @@ import { isClass } from '@main/classes/util/is-class';
 })
 export class ProtoService {
   private _websocket$ = webSocket({
-    url: 'wss://vernite.dev/api/ws',
+    url: 'ws://localhost:4200/api/ws',
     deserializer: (e: MessageEvent) => e,
     serializer: (value: any) => value,
   });
@@ -123,7 +123,7 @@ export class ProtoService {
         map.set(key, prefix + '.' + key);
         map = new Map([
           ...map.entries(),
-          ...this.flatPackagesMap(key, prefix + '.' + key).entries(),
+          ...this.flatPackagesMap(prefix + '.' + key, cls).entries(),
         ]);
       }
     }

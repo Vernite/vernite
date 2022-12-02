@@ -8,6 +8,8 @@ import { DialogService } from '@main/services/dialog/dialog.service';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 import { MessageContainer } from '@messages/interfaces/message.interface';
 import { SlackChannel, SlackIntegration, SlackUser } from '@messages/interfaces/slack.interface';
+import { ProtoService } from '../../_main/services/proto/proto.service';
+import { vernite } from '@vernite/protobuf';
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +41,7 @@ export class SlackIntegrationService extends BaseService<
     private injector: Injector,
     private apiService: ApiService,
     private dialogService: DialogService,
+    private protoService: ProtoService,
   ) {
     super(injector);
   }
@@ -56,7 +59,7 @@ export class SlackIntegrationService extends BaseService<
   }
 
   @Cache()
-  public getSlackIntegrations(): Observable<SlackIntegration> {
+  public getSlackIntegrations(): Observable<SlackIntegration[]> {
     return this.apiService.get(`/user/integration/slack`).pipe(
       this.validate({
         400: 'FORM_VALIDATION_ERROR',
@@ -80,11 +83,11 @@ export class SlackIntegrationService extends BaseService<
   public getMessages(
     slackId: number,
     channelId: string,
-    cursor: string,
+    cursor?: string,
   ): Observable<MessageContainer> {
     return this.apiService
       .get(`/user/integration/slack/${slackId}/channel/${channelId}`, {
-        params: { cursor },
+        params: { ...(cursor ? { cursor } : {}) },
       })
       .pipe(
         this.validate({
@@ -96,13 +99,19 @@ export class SlackIntegrationService extends BaseService<
   }
 
   @Cache()
-  public getChannels(slackId: number): Observable<SlackChannel> {
+  public getChannels(slackId: number): Observable<SlackChannel[]> {
     return this.apiService.get(`/user/integration/slack/${slackId}/channel`).pipe(
       this.validate({
         400: 'FORM_VALIDATION_ERROR',
         404: 'INTEGRATION_NOT_FOUND',
         409: 'CONFLICT',
       }),
+    );
+  }
+
+  public getChannel(slackId: number, channelId: string): Observable<SlackChannel> {
+    return this.getChannels(slackId).pipe(
+      map((channels) => channels.find((channel) => channel.id === channelId)!),
     );
   }
 
@@ -131,5 +140,24 @@ export class SlackIntegrationService extends BaseService<
           return this.deleteSlackIntegration(slackId);
         }),
       );
+  }
+
+  public sendMessage(content: string, channelId: string, integrationId: number, provider: string) {
+    const messageObject = new vernite.CommunicatorModel.SendMessage({
+      content,
+      channel: channelId,
+      provider,
+      integrationID: integrationId,
+    });
+
+    this.protoService.next(messageObject);
+  }
+
+  public protoMessages(channelId: string): Observable<vernite.CommunicatorModel.Message> {
+    return this.protoService
+      .subscribe<vernite.CommunicatorModel.Message, typeof vernite.CommunicatorModel.Message>(
+        vernite.CommunicatorModel.Message,
+      )
+      .pipe(filter((message) => message.channel === channelId));
   }
 }

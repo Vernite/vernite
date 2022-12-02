@@ -18,7 +18,7 @@ const routes: Routes = [
         component: MessengerSummaryPage,
       },
       {
-        path: 'conversation/:conversationId',
+        path: ':integrationId/:channelId',
         component: ConversationPage,
       },
     ],
