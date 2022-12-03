@@ -18,9 +18,7 @@ export class NotificationService {
 
   public init() {
     this.protoService
-      .subscribe<vernite.CommunicatorModel.Message, typeof vernite.CommunicatorModel.Message>(
-        vernite.CommunicatorModel.Message,
-      )
+      .get<vernite.CommunicatorModel.Message>(vernite.CommunicatorModel.Message)
       .subscribe((message) => {
         this.snackbarService.show(message.channel + ':' + message.content);
       });

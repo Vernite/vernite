@@ -31,4 +31,6 @@ export const environment = {
   disableIntegrationRegistryCheck: false,
 
   websocketUrl: 'ws://localhost:4200/api/ws',
+
+  logSocketMessages: false,
 };

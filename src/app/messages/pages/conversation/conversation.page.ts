@@ -48,9 +48,11 @@ export class ConversationPage implements OnInit {
         )
         .subscribe(() => {
           setTimeout(() => {
+            if (!this.messages) return;
             this.messages.nativeElement.scrollTop = this.messages.nativeElement.scrollHeight;
           });
           setTimeout(() => {
+            if (!this.messages) return;
             this.messages.nativeElement.scrollTop = this.messages.nativeElement.scrollHeight;
           }, 2000);
         });

@@ -155,9 +155,7 @@ export class SlackIntegrationService extends BaseService<
 
   public protoMessages(channelId: string): Observable<vernite.CommunicatorModel.Message> {
     return this.protoService
-      .subscribe<vernite.CommunicatorModel.Message, typeof vernite.CommunicatorModel.Message>(
-        vernite.CommunicatorModel.Message,
-      )
+      .get<vernite.CommunicatorModel.Message>(vernite.CommunicatorModel.Message)
       .pipe(filter((message) => message.channel === channelId));
   }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommandService } from '@main/services/command/command.service';
 import { IconService } from '@main/services/icons/icon.service';
 import { NotificationService } from '@main/services/notification/notification.service';
 
@@ -16,7 +17,11 @@ export class AppComponent {
    */
   public title = 'vernite';
 
-  constructor(private iconService: IconService, private notificationService: NotificationService) {
+  constructor(
+    private iconService: IconService,
+    private notificationService: NotificationService,
+    private commandService: CommandService,
+  ) {
     // Initialize icons
     this.iconService.init();
 
@@ -27,5 +32,8 @@ export class AppComponent {
 
     // Initialize notifications
     this.notificationService.init();
+
+    // Initialize commands
+    this.commandService.init();
   }
 }

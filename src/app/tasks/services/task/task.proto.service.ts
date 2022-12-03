@@ -6,24 +6,22 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class TaskProtoService {
-  public readonly TASK_UPDATED = this.protoService.subscribe<vernite.Task, typeof vernite.Task>(
+  public readonly TASK_UPDATED = this.protoService.get<vernite.Task>(
     vernite.Task,
     vernite.BasicAction.UPDATED,
   );
 
-  public readonly TASK_ADDED = this.protoService.subscribe<vernite.Task, typeof vernite.Task>(
+  public readonly TASK_ADDED = this.protoService.get<vernite.Task>(
     vernite.Task,
     vernite.BasicAction.ADDED,
   );
 
-  public readonly TASK_REMOVED = this.protoService.subscribe<vernite.Task, typeof vernite.Task>(
+  public readonly TASK_REMOVED = this.protoService.get<vernite.Task>(
     vernite.Task,
     vernite.BasicAction.REMOVED,
   );
 
-  public readonly TASKS = this.protoService.subscribe<vernite.Task, typeof vernite.Task>(
-    vernite.Task,
-  );
+  public readonly TASKS = this.protoService.get<vernite.Task>(vernite.Task);
 
   constructor(private protoService: ProtoService) {}
 }
