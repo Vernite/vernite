@@ -2,7 +2,7 @@ import { Cache } from '@main/decorators/cache/cache.decorator';
 import { Errors } from '@main/interfaces/http-error.interface';
 import { ApiService } from '@main/services/api/api.service';
 import { BaseService } from '@main/services/base/base.service';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import { EMPTY, Observable, of, switchMap } from 'rxjs';
 import { Injectable, Injector } from '@angular/core';
 import { DialogOutlet, DialogService } from '@main/services/dialog/dialog.service';
 import { Release } from '../interfaces/release.interface';
@@ -88,6 +88,10 @@ export class ReleaseService extends BaseService<
       );
   }
 
+  public publish(projectId: number, release: Release): Observable<Release> {
+    return of(release);
+  }
+
   public delete(projectId: number, releaseId: number): Observable<null> {
     return this.apiService.delete(`/project/${projectId}/release/${releaseId}`).pipe(
       this.validate({
@@ -97,11 +101,11 @@ export class ReleaseService extends BaseService<
     );
   }
 
-  public deleteWithConfirmation(projectId: number, releaseId: number) {
+  public deleteWithConfirmation(projectId: number, release: Release) {
     return this.dialogService
       .confirm({
         title: $localize`Delete release`,
-        message: $localize`Are you sure you want to delete this release? This action is irreversible`,
+        message: $localize`Are you sure you want to delete release '${release.name}'? This action is irreversible`,
         confirmText: $localize`Delete`,
         cancelText: $localize`Cancel`,
         variant: AlertDialogVariant.IMPORTANT,
@@ -109,7 +113,7 @@ export class ReleaseService extends BaseService<
       .pipe(
         switchMap((confirmed) => {
           if (!confirmed) return EMPTY;
-          return this.delete(projectId, releaseId);
+          return this.delete(projectId, release.id);
         }),
       );
   }

@@ -80,7 +80,7 @@ export class ReleasesListPage implements OnInit {
    * Delete release.
    */
   deleteRelease(projectId: number, release: Release) {
-    this.releaseService.deleteWithConfirmation(projectId, release.id).subscribe(() => {
+    this.releaseService.deleteWithConfirmation(projectId, release).subscribe(() => {
       window.location.reload();
     });
   }
@@ -90,5 +90,11 @@ export class ReleasesListPage implements OnInit {
    */
   openRelease(projectId: number, release: Release) {
     this.router.navigate(['/', 'projects', projectId, 'releases', release.id]);
+  }
+
+  publishRelease(projectId: number, release: Release) {
+    this.releaseService.publish(this.projectId, release).subscribe(() => {
+      location.reload();
+    });
   }
 }

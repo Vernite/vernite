@@ -5,10 +5,12 @@ import { MainModule } from '../_main/_main.module';
 import { ReleasesRoutingModule } from './releases.routing';
 import { ReleasesListPage } from './pages/releases-list/releases-list.page';
 import { ReleaseDialog } from './dialog/release/release.dialog';
+import { ReleasePage } from './pages/release.page/release.page';
+import { TasksModule } from '@tasks/tasks.module';
 
 @NgModule({
-  imports: [MainModule, CommonModule, ReleasesRoutingModule],
-  declarations: [ReleaseProgressBarComponent, ReleasesListPage, ReleaseDialog],
+  imports: [MainModule, CommonModule, ReleasesRoutingModule, TasksModule],
+  declarations: [ReleaseProgressBarComponent, ReleasesListPage, ReleaseDialog, ReleasePage],
   exports: [],
 })
 export class ReleasesModule {}
