@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import dayjs from 'dayjs';
-import { MeetingService } from './../../services/meeting.service';
 
 @Component({
   selector: 'calendar-navbar',

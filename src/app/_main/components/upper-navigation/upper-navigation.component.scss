@@ -24,7 +24,13 @@ app-button {
   height: 62px;
 
   .profile {
-    width: 200px;
+    display: flex;
+
+    .myself {
+      display: flex;
+      align-items: center;
+      margin-right: 3rem;
+    }
 
     .open-below {
       position: absolute;
@@ -49,7 +55,7 @@ app-button {
 
 .options {
   position: absolute;
-  z-index: 2;
+  z-index: 100;
   top: 62px;
   right: 0;
   display: none;

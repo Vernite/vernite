@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogOutlet } from '@main/services/dialog/dialog.service';
 import { environment } from 'src/environments/environment';
-import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { RouterExtensionsService } from '@main/services/router-extensions/router-extensions.service';
 
 @Component({
