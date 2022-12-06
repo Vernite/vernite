@@ -79,6 +79,12 @@ jobs:
           mkdir -p documentation/audit
           yarn audit:build
 
+      # SonarQube scan
+      - uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
       # Copy coverage directory
       - name: Copy coverage directory
         run: cp -R coverage/vernite documentation/coverage
