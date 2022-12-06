@@ -130,7 +130,7 @@ export class StatusService extends BaseService<
 
   public listWithTasks(
     projectId: number,
-    filters: DataFilter<Task>[] | DataFilter<Task>,
+    filters?: DataFilter<Task>[] | DataFilter<Task>,
   ): Observable<StatusWithTasks[]> {
     return combineLatest([this.list(projectId), this.taskService.list(projectId, filters)]).pipe(
       map(([statuses, tasks]) => {
@@ -144,7 +144,7 @@ export class StatusService extends BaseService<
 
   public board(
     projectId: number,
-    filters: DataFilter<Task>[] | DataFilter<Task>,
+    filters?: DataFilter<Task>[] | DataFilter<Task>,
   ): Observable<[Task | string, StatusWithTasks[]][]> {
     return combineLatest([this.list(projectId), this.taskService.list(projectId, filters)]).pipe(
       map(([statuses, tasks]) => {
