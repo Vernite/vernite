@@ -225,6 +225,14 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     });
   }
 
+  override writeValue(value: any): void {
+    super.writeValue(value);
+
+    if (!value) {
+      this.displayControl.setValue('');
+    }
+  }
+
   // override ngAfterControlInit(): void {
   //   if (!this.control) return;
 

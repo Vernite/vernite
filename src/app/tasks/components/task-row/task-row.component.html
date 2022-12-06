@@ -32,9 +32,9 @@
 
   <!-- Assignee cell -->
   <div class="cell w-52">
-    <app-input-assignee [assignee]="task.assigneeId && members && members.get(task.assigneeId) || null"
-      [members]="members" [projectId]="projectId" [taskId]="task.id" click-stop-propagation>
-    </app-input-assignee>
+    <app-assignee [assignee]="task.assigneeId && members && members.get(task.assigneeId) || null" [members]="members"
+      [projectId]="projectId" [taskId]="task.id" click-stop-propagation>
+    </app-assignee>
   </div>
 
   <!-- Time tracking cell -->

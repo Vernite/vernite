@@ -10,12 +10,16 @@ export class OptionComponent {
   @Input() @HostBinding('value') value!: any;
   @Input() icon?: string | IconDefinition;
   @Input() checkmark?: boolean;
+  @Input() view?: string;
 
   selected = false;
 
   faCheck = faCheck;
 
   public get viewValue(): string {
+    if (this.view) return this.view;
+
+    // TODO: Optimize this with cache
     return this.ref.nativeElement.innerText;
   }
 

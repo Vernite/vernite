@@ -1,7 +1,7 @@
 import { TasksModule } from '@tasks/tasks.module';
 import { Shallow } from 'shallow-render';
 
-import { InputAssigneeComponent } from './input-assignee.component';
+import { InputAssigneeComponent } from './assignee.component';
 
 describe(InputAssigneeComponent.name, () => {
   let shallow: Shallow<InputAssigneeComponent>;

@@ -2,12 +2,19 @@ import { Cache } from '@main/decorators/cache/cache.decorator';
 import { Errors } from '@main/interfaces/http-error.interface';
 import { ApiService } from '@main/services/api/api.service';
 import { BaseService } from '@main/services/base/base.service';
-import { EMPTY, filter, interval, map, Observable, take, switchMap } from 'rxjs';
+import { EMPTY, filter, interval, map, Observable, take, switchMap, of, forkJoin } from 'rxjs';
 import { Injectable, Injector } from '@angular/core';
 import { DialogService } from '@main/services/dialog/dialog.service';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 import { MessageContainer } from '@messages/interfaces/message.interface';
-import { SlackChannel, SlackIntegration, SlackUser } from '@messages/interfaces/slack.interface';
+import {
+  SlackChannel,
+  SlackChannelWithUser,
+  SlackIntegration,
+  SlackIntegrationWithChannels,
+  SlackIntegrationWithChannelsAndUsers,
+  SlackUser,
+} from '@messages/interfaces/slack.interface';
 import { ProtoService } from '../../_main/services/proto/proto.service';
 import { vernite } from '@vernite/protobuf';
 
@@ -68,6 +75,42 @@ export class SlackIntegrationService extends BaseService<
     );
   }
 
+  public getSlackIntegrationsWithChannels(): Observable<SlackIntegrationWithChannels[]> {
+    return this.getSlackIntegrations().pipe(
+      switchMap((integrations) => {
+        return forkJoin(
+          integrations.map((integration) => {
+            return this.getChannels(integration.id).pipe(
+              map((channels) => ({
+                ...integration,
+                channels,
+              })),
+            );
+          }),
+        );
+      }),
+    );
+  }
+
+  public getSlackIntegrationsWithChannelsAndUsers(): Observable<
+    SlackIntegrationWithChannelsAndUsers[]
+  > {
+    return this.getSlackIntegrationsWithChannels().pipe(
+      switchMap((integrations) => {
+        return forkJoin(
+          integrations.map((integration) => {
+            return this.getChannelsWithUsers(integration.id).pipe(
+              map((channels) => ({
+                ...integration,
+                channels,
+              })),
+            );
+          }),
+        );
+      }),
+    );
+  }
+
   @Cache()
   public getUser(slackId: number, userId: string): Observable<SlackUser> {
     return this.apiService.get(`/user/integration/slack/${slackId}/user/${userId}`).pipe(
@@ -109,9 +152,45 @@ export class SlackIntegrationService extends BaseService<
     );
   }
 
+  public getChannelsWithUsers(slackId: number) {
+    return this.getChannels(slackId).pipe(
+      switchMap((channels) => {
+        return forkJoin(
+          channels.map((channel) => {
+            if (!channel.user) return of(channel as SlackChannelWithUser);
+
+            return this.getUser(slackId, channel.user).pipe(
+              map((user) => ({
+                ...channel,
+                user,
+              })),
+            );
+          }),
+        );
+      }),
+    );
+  }
+
   public getChannel(slackId: number, channelId: string): Observable<SlackChannel> {
+    // TODO: Move it to other endpoint for optimization
     return this.getChannels(slackId).pipe(
       map((channels) => channels.find((channel) => channel.id === channelId)!),
+    );
+  }
+
+  public getChannelWithUser(slackId: number, channelId: string): Observable<SlackChannelWithUser> {
+    return this.getChannel(slackId, channelId).pipe(
+      switchMap((channel) => {
+        if (!channel) return EMPTY;
+        if (!channel.user) return of(channel as SlackChannelWithUser);
+
+        return this.getUser(slackId, channelId).pipe(
+          map((user) => ({
+            ...channel,
+            user,
+          })),
+        );
+      }),
     );
   }
 

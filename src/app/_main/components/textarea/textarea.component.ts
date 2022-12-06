@@ -142,6 +142,11 @@ export class TextareaComponent extends ControlAccessor implements OnInit, AfterV
     this.mode = 'preview';
   }
 
+  override writeValue(value: any) {
+    this.editor?.setValue(value);
+    super.writeValue(value);
+  }
+
   applyUnderline() {
     this.editor?.executeSelectionEdits({
       before: '<u>',

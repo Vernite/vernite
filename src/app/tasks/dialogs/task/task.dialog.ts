@@ -26,6 +26,8 @@ import { SprintStatus } from '@tasks/enums/sprint-status.enum';
 import { SprintFilters } from '@dashboard/filters/sprint.filters';
 import { Release } from 'src/app/releases/interfaces/release.interface';
 import { ReleaseService } from 'src/app/releases/services/release.service';
+import { ProjectMember } from '../../../dashboard/interfaces/project-member.interface';
+import { MemberService } from '@dashboard/services/member/member.service';
 
 export enum TaskDialogVariant {
   CREATE = 'create',
@@ -65,6 +67,7 @@ export class TaskDialog implements OnInit {
   public sprintListActive$: Observable<Sprint[]> = of([]);
   public sprintListCreated$: Observable<Sprint[]> = of([]);
   public releaseList$: Observable<Release[]> = of([]);
+  public members$: Observable<ProjectMember[]> = of([]);
 
   public isGitHubIntegrationAvailable: boolean = false;
 
@@ -84,6 +87,7 @@ export class TaskDialog implements OnInit {
     storyPoints: new FormControl<number | null>(0),
     sprintId: new FormControl<number | null>(null),
     releaseId: new FormControl<number | null>(null),
+    assigneeId: new FormControl<number | null>(null),
   });
 
   public interactive$ = timeToInteraction();
@@ -106,6 +110,7 @@ export class TaskDialog implements OnInit {
     private sprintService: SprintService,
     private projectService: ProjectService,
     private releaseService: ReleaseService,
+    private memberService: MemberService,
   ) {}
 
   ngOnInit() {
@@ -174,6 +179,7 @@ export class TaskDialog implements OnInit {
       });
 
     this.releaseList$ = this.releaseService.list(projectId);
+    this.members$ = this.memberService.list(projectId);
 
     this.sprintListActive$ = this.sprintService.list(
       projectId,

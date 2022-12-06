@@ -9,6 +9,7 @@ import { Errors } from '@main/interfaces/http-error.interface';
 import { TaskService } from '../task/task.service';
 import { Status, StatusWithTasks } from '@tasks/interfaces/status.interface';
 import { Cache } from '@main/decorators/cache/cache.decorator';
+import { DataFilter } from '@main/interfaces/filters.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -127,8 +128,11 @@ export class StatusService extends BaseService<
     ];
   }
 
-  public listWithTasks(projectId: number): Observable<StatusWithTasks[]> {
-    return combineLatest([this.list(projectId), this.taskService.list(projectId)]).pipe(
+  public listWithTasks(
+    projectId: number,
+    filters: DataFilter<Task>[] | DataFilter<Task>,
+  ): Observable<StatusWithTasks[]> {
+    return combineLatest([this.list(projectId), this.taskService.list(projectId, filters)]).pipe(
       map(([statuses, tasks]) => {
         statuses.forEach((status) => {
           (status as StatusWithTasks).tasks = tasks.filter((task) => task.statusId === status.id);
@@ -138,8 +142,11 @@ export class StatusService extends BaseService<
     );
   }
 
-  public board(projectId: number): Observable<[Task | string, StatusWithTasks[]][]> {
-    return combineLatest([this.list(projectId), this.taskService.list(projectId)]).pipe(
+  public board(
+    projectId: number,
+    filters: DataFilter<Task>[] | DataFilter<Task>,
+  ): Observable<[Task | string, StatusWithTasks[]][]> {
+    return combineLatest([this.list(projectId), this.taskService.list(projectId, filters)]).pipe(
       map(([statuses, tasks]) => {
         const board: [Task | string, StatusWithTasks[]][] = [];
         const OTHER = ['OTHER', statuses.map((s) => ({ ...s, tasks: [] }))] as [

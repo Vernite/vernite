@@ -5,7 +5,8 @@ import * as Color from 'color';
   name: 'color',
 })
 export class ColorPipe implements PipeTransform {
-  transform(value: string | Color, type: 'hex' | 'rgb' | 'hsv'): any {
+  transform(value: string | Color | null, type: 'hex' | 'rgb' | 'hsv'): any {
+    if (!value) return null;
     if (typeof value === 'string') {
       value = Color(value);
     }

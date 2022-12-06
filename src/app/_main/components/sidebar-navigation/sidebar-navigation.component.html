@@ -15,12 +15,12 @@
   <sidebar-entry [icon]="faMessage" [collapsed]="isCollapsed" [expandable]="true">
     <span class="header" i18n>Messages</span>
     <div class="content">
-      <sidebar-entry *ngFor="let entry of channelList$ | async" [icon]="faServer" [collapsed]="isCollapsed"
+      <sidebar-entry *ngFor="let integration of slackIntegrations$ | async" [icon]="faServer" [collapsed]="isCollapsed"
         [expandable]="true">
-        <span class="header">{{ entry.integration.teamName }}</span>
+        <span class="header">{{ integration.teamName }}</span>
         <div class="content">
-          <sidebar-entry *ngFor="let channel of entry.channels" [icon]="faHashtag" [collapsed]="isCollapsed"
-            [routerLink]="['/', 'messages', entry.integration.id, channel.id]">
+          <sidebar-entry *ngFor="let channel of integration.channels" [icon]="channel.user ? faUser : faHashtag"
+            [collapsed]="isCollapsed" [routerLink]="['/', 'messages', integration.id, channel.id]">
             <span class="header">{{ channel.name || channel.user.displayName || channel.user.name }}</span>
           </sidebar-entry>
         </div>

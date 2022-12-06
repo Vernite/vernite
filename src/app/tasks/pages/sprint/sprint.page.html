@@ -1,4 +1,4 @@
-<app-task-view-options [project]="(project$ | async)!" [filters]="filters" [filtersControl]="filtersControl"></app-task-view-options>
+<app-task-view-options [project]="(project$ | async)!"></app-task-view-options>
 
 <ng-container *ngIf="activeSprint$ | async as activeSprint">
   <div class="flex items-end gap-3 mb-2">
@@ -22,15 +22,14 @@
     </div>
   </div>
   <ng-container *ngIf="view === 'list'">
-    <task-list [tasks]="activeSprint.tasks" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
-  [statusList]="(statusList$ | async) || []"></task-list>
+    <task-list [tasks]="(tasks$ | async) || []" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
+      [statusList]="(statusList$ | async) || []"></task-list>
   </ng-container>
   <ng-container *ngIf="view === 'board'">
     <tasks-board [members]="(members$ | async) || emptyMap" [projectId]="projectId"
-    [statusList]="(statusListWithTasks$ | async) || []" [board]="(board$ | async) || []"></tasks-board>
+      [statusList]="(statusListWithTasks$ | async) || []" [board]="(board$ | async) || []"></tasks-board>
   </ng-container>
 </ng-container>
 <ng-container *ngIf="(activeSprint$ | async) === undefined">
   <h1 class="w-full text-center text-xl" i18n>There is no active Sprint</h1>
 </ng-container>
-

@@ -43,6 +43,8 @@
         priority | taskPriority }}</app-option>
     </app-select>
 
+    <input-assignee formControlName="assigneeId" [members]="(members$ | async) || []"></input-assignee>
+
     <!-- Deadline -->
     <app-input-date-time formControlName="deadline" floatingLabel="Deadline" placeholder="Choose a date"
       i18n-floatingLabel i18n-placeholder>
@@ -74,8 +76,8 @@
     </app-select>
 
     <!-- Release -->
-    <app-select *ngIf="form.get('projectId').value" formControlName="releaseId"
-      floatingLabel="Release" i18n-floatingLabel>
+    <app-select *ngIf="form.get('projectId').value" formControlName="releaseId" floatingLabel="Release"
+      i18n-floatingLabel>
       <app-option [value]="null" [checkmark]="true">
         -
       </app-option>

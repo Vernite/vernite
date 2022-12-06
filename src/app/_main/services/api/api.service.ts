@@ -113,7 +113,9 @@ export class ApiService {
     }
     for (const filter of filters) {
       if (filter.type == DataFilterType.BACKEND) {
-        params = params.append(filter.field, filter.value);
+        if (filter.value !== undefined) {
+          params = params.append(filter.field, filter.value);
+        }
       }
     }
 

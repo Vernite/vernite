@@ -10,11 +10,17 @@ import { EMPTY, map } from 'rxjs';
 export class DateByPreferencesPipe implements PipeTransform {
   constructor(private userService: UserService) {}
 
-  transform(value: any): any {
+  transform(value: any, format: 'milliseconds' | 'seconds' = 'milliseconds'): any {
     if (value) {
-      return this.userService
-        .getDateFormat()
-        .pipe(map((dateFormat: string) => dayjs(value).format(dateFormat)));
+      if (format === 'milliseconds') {
+        return this.userService
+          .getDateFormat()
+          .pipe(map((dateFormat: string) => dayjs(value).format(dateFormat)));
+      } else if (format === 'seconds') {
+        return this.userService
+          .getDateFormat()
+          .pipe(map((dateFormat: string) => dayjs(value * 1000).format(dateFormat)));
+      }
     } else {
       return EMPTY;
     }

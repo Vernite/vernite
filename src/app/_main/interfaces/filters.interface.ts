@@ -56,7 +56,7 @@ export enum DataFilterControlType {
   DATE = 'date',
 }
 
-export interface DataFilter<T, V> {
+export interface DataFilter<T, V = any> {
   identifier: string;
   type: DataFilterType;
   field: string;
@@ -64,8 +64,18 @@ export interface DataFilter<T, V> {
   apply(list: T[]): T[];
 }
 
+export interface DataFilterWithView<T, V> extends DataFilter<T, V> {
+  view(...args: any): {
+    component: any;
+  };
+}
+
 export interface DataFilterDisplay<T, V> {
   type: DataFilterControlType;
   label: string;
   dataFilter: DataFilter<T, V>;
+}
+
+export interface DataFilterCheckbox<T> extends DataFilterDisplay<T, boolean> {
+  type: DataFilterControlType.CHECKBOX;
 }

@@ -1,107 +1,40 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { NgControl } from '@angular/forms';
-import { UserUtils } from '@dashboard/classes/user.class';
-import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
+import { Input, Component, ChangeDetectorRef, Optional } from '@angular/core';
 import { ControlAccessor } from '@main/classes/control-accessor.class';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { TaskService } from '@tasks/services/task/task.service';
-import { TestNgControl } from '@tests/helpers/ng-control-testing-provider.helper';
-import * as Color from 'color';
-import { BehaviorSubject, filter, fromEvent, take } from 'rxjs';
+import { ProjectMember } from '../../../dashboard/interfaces/project-member.interface';
+import { NgControl } from '@angular/forms';
+import { memoize } from 'lodash-es';
+import { faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 
-@UntilDestroy()
+/** Component to select assignee for the task. Used for example in task edit dialog and filters. */
 @Component({
-  selector: 'app-input-assignee',
+  selector: 'input-assignee',
   templateUrl: './input-assignee.component.html',
   styleUrls: ['./input-assignee.component.scss'],
-  providers: [{ provide: NgControl, useClass: TestNgControl }],
 })
 export class InputAssigneeComponent extends ControlAccessor {
-  @Input() set assignee(assignee: ProjectMember | null) {
-    this._assignee = assignee;
+  /** Members of the project */
+  @Input() members!: ProjectMember[];
 
-    if (assignee) {
-      this.assigneeColor = UserUtils.getColorById(assignee?.user.id);
-    } else {
-      this.assigneeColor = undefined;
-    }
-  }
-  public get assignee(): ProjectMember | null {
-    return this._assignee;
-  }
+  @Input() showUnassignedOption = true;
+  @Input() showAllOption = false;
 
-  @Input() set members(members: Map<number, ProjectMember> | ProjectMember[]) {
-    if (Array.isArray(members)) {
-      for (const member of members) {
-        (member as any).color = UserUtils.getColorById(member.user.id);
-      }
-      this.members$.next(members as any);
-    } else if (members) {
-      const membersArray = [...members.values()];
-      for (const member of membersArray) {
-        (member as any).color = UserUtils.getColorById(member.user.id);
-      }
-      this.members$.next(membersArray as any);
-    }
-  }
-  @Input() taskId?: number;
-  @Input() projectId?: number;
+  /** @ignore */
+  faUser = faUser;
 
-  @ViewChild('overlay') overlay!: ElementRef<HTMLElement>;
-
-  private _assignee: ProjectMember | null = null;
-
-  public members$ = new BehaviorSubject<(ProjectMember & { color: Color })[]>([] as any);
-  public readonly isOpen$ = new BehaviorSubject<boolean>(false);
-  public assigneeColor?: Color;
-
-  public set isOpen(val: boolean) {
-    this.isOpen$.next(val);
-  }
-
-  public get isOpen() {
-    return this.isOpen$.value;
-  }
+  /** @ignore */
+  faUsers = faUsers;
 
   constructor(
-    public override ngControl: NgControl,
-    private taskService: TaskService,
-    cdRef: ChangeDetectorRef,
+    @Optional() public override ngControl: NgControl,
+    protected override cdRef: ChangeDetectorRef,
   ) {
     super(ngControl, cdRef);
+
+    // this.memberById = memoize(this.memberById.bind(this));
   }
 
-  public open() {
-    setTimeout(() => {
-      fromEvent(document, 'click')
-        .pipe(
-          take(1),
-          untilDestroyed(this),
-          filter((e) => !this.overlay?.nativeElement.contains(e.target as Node)),
-        )
-        .subscribe(() => this.close());
-      this.isOpen$.next(true);
-    });
-  }
-
-  public close() {
-    this.isOpen$.next(false);
-  }
-
-  public toggle() {
-    if (this.isOpen) {
-      return this.close();
-    }
-    return this.open();
-  }
-
-  public select(member: ProjectMember | null) {
-    if (this.taskId && this.projectId)
-      this.taskService
-        .assign(member?.user.id || null, this.taskId, this.projectId)
-        .subscribe(() => {
-          this.close();
-          location.reload();
-        });
+  /** Searches for member in members list by id */
+  public memberById(id: number): ProjectMember | undefined {
+    return this.members.find((member) => member.user.id === id);
   }
 }

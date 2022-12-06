@@ -1,104 +1,34 @@
-@import '../../../../styles/typography';
-
-.assignee {
+.avatar-wrapper {
   display: flex;
-  width: 40px;
-  height: 40px;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-secondary-400);
+  margin-right: 1rem;
+}
+
+.avatar {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
-  color: var(--color-text);
-  cursor: pointer;
-  transition: background-color 0.4s ease;
+  font-weight: 600;
+}
 
-  &:not(.add) {
-    @include text-title;
+.prefix .avatar {
+  width: 1.5rem;
+  height: 1.5rem;
+}
 
-    background-color: var(--color-primary-500);
-  }
+.details {
+  display: flex;
+  flex-direction: column;
 
-  &:not(.add):hover {
-    background-color: var(--color-secondary-300);
+  .username {
+    opacity: 0.5;
   }
 }
 
-.members-overlay {
-  padding: 1rem;
-  padding: 0.5rem 0;
-  background-color: var(--color-secondary-600);
-  border-radius: var(--border-radius);
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
-
-  li {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 2rem;
-    color: var(--color-text);
-
-    &:not(.line) {
-      cursor: pointer;
-      transition: background-color 0.4s ease;
-
-      &:hover {
-        background-color: var(--color-secondary-500);
-      }
-    }
-
-    &.line {
-      position: relative;
-
-      &::before {
-        position: absolute;
-        top: calc(50% - 1px);
-        left: 10%;
-        width: 80%;
-        height: 1px;
-        background-color: var(--color-secondary-500);
-        content: '';
-      }
-    }
-
-    &.entry-remove {
-      span {
-        opacity: 0.75;
-      }
-    }
-
-    .avatar {
-      @include text-title;
-
-      display: flex;
-      width: 36px;
-      height: 36px;
-      align-items: center;
-      justify-content: center;
-      margin-right: 1rem;
-      border-radius: 50%;
-      color: var(--color-text);
-    }
-
-    .avatar-remove {
-      display: flex;
-      width: 36px;
-      height: 36px;
-      align-items: center;
-      justify-content: center;
-      margin-right: 1rem;
-      background-color: var(--color-secondary-400);
-      border-radius: 50%;
-      color: var(--color-text);
-      opacity: 0.5;
-    }
-
-    .details {
-      display: flex;
-      flex-direction: column;
-
-      .username {
-        margin-top: -3px;
-        opacity: 0.5;
-      }
-    }
-  }
+app-option ::ng-deep {
+  height: 56px;
 }
