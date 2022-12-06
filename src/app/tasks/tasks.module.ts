@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MainModule } from '../_main/_main.module';
 import { BoardTaskComponent } from './components/board-task/board-task.component';
-import { InputAssigneeComponent } from './components/input-assignee/input-assignee.component';
+import { AssigneeComponent } from './components/assignee/assignee.component';
 import { InputIssueComponent } from './components/input-issue/input-issue.component';
 import { InputPullRequestComponent } from './components/input-pull-request/input-pull-request.component';
 import { InputTaskPropertyComponent } from './components/input-task-property/input-task-property.component';
@@ -33,6 +33,8 @@ import { SprintPage } from './pages/sprint/sprint.page';
 import { BacklogPage } from './pages/backlog/backlog.page';
 import { TaskPipe } from './pipes/task/task.pipe';
 import { BoardComponent } from './components/tasks-board/tasks-board.component';
+import { InputAssigneeComponent } from './components/input-assignee/input-assignee.component';
+import { MemberColorPipe } from './pipes/member-color/member-color.pipe';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule],
@@ -45,7 +47,7 @@ import { BoardComponent } from './components/tasks-board/tasks-board.component';
     TaskPriorityIconPipe,
     TaskTypeIconPipe,
     SchedulePage,
-    InputAssigneeComponent,
+    AssigneeComponent,
     StatusLabelComponent,
     StatusColorPipe,
     InputTaskPropertyComponent,
@@ -67,7 +69,9 @@ import { BoardComponent } from './components/tasks-board/tasks-board.component';
     SprintPage,
     BacklogPage,
     TaskPipe,
+    InputAssigneeComponent,
+    MemberColorPipe,
   ],
-  exports: [TaskTypePipe, TaskListComponent],
+  exports: [TaskTypePipe, InputAssigneeComponent, TaskListComponent],
 })
 export class TasksModule {}

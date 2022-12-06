@@ -17,6 +17,7 @@ import { SprintFilters } from '@dashboard/filters/sprint.filters';
 import { SprintStatus } from '@tasks/enums/sprint-status.enum';
 import { TaskProtoService } from '../../services/task/task.proto.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { FilterChannel } from '@main/components/filters/filter-channel.model';
 
 @UntilDestroy()
 @Component({
@@ -27,8 +28,6 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 export class BacklogPage implements OnInit {
   public projectId!: number;
   public project$: Observable<Project> = of();
-  public filters = [];
-  public filtersControl = new FormControl();
 
   public taskList$: Observable<Task[]> = of([]);
   public statusList$: Observable<Status[]> = of([]);
@@ -37,6 +36,7 @@ export class BacklogPage implements OnInit {
   public emptyMap: Map<number, ProjectMember> = new Map();
 
   public members$?: Observable<Map<number, ProjectMember>> = of(this.emptyMap);
+  public filters$ = FilterChannel.TASKS;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -52,7 +52,7 @@ export class BacklogPage implements OnInit {
     this.activatedRoute.params.subscribe(({ projectId }) => {
       this.projectId = Number(projectId);
 
-      this.taskList$ = this.taskService.list(projectId, [TaskFilters.BACKLOG()]);
+      this.loadTasks();
       this.project$ = this.projectService.get(projectId);
       this.members$ = this.memberService.map(projectId);
       this.statusList$ = this.statusService.list(projectId);
@@ -68,7 +68,7 @@ export class BacklogPage implements OnInit {
 
       this.taskProtoService.TASKS.pipe(untilDestroyed(this)).subscribe((task) => {
         if (task.projectId === this.projectId) {
-          this.taskList$ = this.taskService.list(projectId, [TaskFilters.BACKLOG()]);
+          this.loadTasks();
           this.sprintListActive$ = this.sprintService.list(
             projectId,
             SprintFilters.STATUS(SprintStatus.ACTIVE),
@@ -80,6 +80,18 @@ export class BacklogPage implements OnInit {
         }
       });
     });
+
+    this.filters$.subscribe((val) => {
+      console.log('filters', val);
+      this.loadTasks();
+    });
+  }
+
+  loadTasks() {
+    this.taskList$ = this.taskService.list(this.projectId, [
+      TaskFilters.BACKLOG(),
+      ...this.filters$.value,
+    ]);
   }
 
   startSprint(sprint: Sprint) {

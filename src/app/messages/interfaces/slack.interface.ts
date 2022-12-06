@@ -19,10 +19,22 @@ export interface SlackChannel extends JSONParsable {
   provider: string;
 }
 
+export interface SlackChannelWithUser extends Omit<SlackChannel, 'user'> {
+  user?: SlackUser;
+}
+
 export interface SlackIntegration extends JSONParsable {
   id: number;
   installerUserId: string;
   teamName: string;
+}
+
+export interface SlackIntegrationWithChannels extends SlackIntegration {
+  channels: SlackChannel[];
+}
+
+export interface SlackIntegrationWithChannelsAndUsers extends SlackIntegration {
+  channels: SlackChannelWithUser[];
 }
 
 export interface SlackTree extends JSONParsable {

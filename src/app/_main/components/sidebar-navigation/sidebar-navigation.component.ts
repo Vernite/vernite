@@ -14,8 +14,9 @@ import {
 import { Project } from '@dashboard/interfaces/project.interface';
 import { ProjectService } from './../../../dashboard/services/project/project.service';
 import { DialogService } from '@main/services/dialog/dialog.service';
-import { Observable, forkJoin, switchMap, map, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { SlackIntegrationService } from '@messages/services/slack-integration.service';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar-navigation',
@@ -26,7 +27,7 @@ export class SidebarNavigationComponent implements OnInit {
   @Input() public icon!: String;
 
   public workspaceList$?: Observable<Workspace[]>;
-  public channelList$?: Observable<any>;
+  public slackIntegrations$?: Observable<any>;
 
   @ViewChild('entries') entries!: ElementRef<HTMLElement>;
 
@@ -63,6 +64,9 @@ export class SidebarNavigationComponent implements OnInit {
   /** @ignore */
   faServer = faServer;
 
+  /* @ignore */
+  faUser = faUser;
+
   createWorkspace() {
     this.router.navigate(['/', 'workspaces', 'create']);
   }
@@ -77,46 +81,11 @@ export class SidebarNavigationComponent implements OnInit {
 
   ngOnInit() {
     this.workspaceList$ = this.workspaceService.list();
+    this.slackIntegrations$ = this.slackService.getSlackIntegrationsWithChannelsAndUsers();
 
-    const channelsWithUser = (integrationId: number) => {
-      return this.slackService.getChannels(integrationId).pipe(
-        switchMap((channels) => {
-          return forkJoin(
-            channels.map((channel) => {
-              return (<any>(
-                (channel.user
-                  ? this.slackService.getUser(integrationId, channel.user)
-                  : of(channel.user || null))
-              )).pipe(
-                map((user) => {
-                  return {
-                    ...channel,
-                    user,
-                  };
-                }),
-              );
-            }),
-          );
-        }),
-      );
-    };
-
-    this.channelList$ = this.slackService.getSlackIntegrations().pipe(
-      switchMap((integrations) => {
-        return forkJoin(
-          integrations.map((integration) => {
-            return channelsWithUser(integration.id).pipe(
-              map((channels) => {
-                return {
-                  integration,
-                  channels,
-                };
-              }),
-            );
-          }),
-        );
-      }),
-    );
+    this.slackIntegrations$.subscribe((data) => {
+      console.log(data);
+    });
   }
 
   toggle() {

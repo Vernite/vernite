@@ -1,2 +1,2 @@
-<div [innerHTML]="content | markdown" [matTooltip]="(timestamp | dateByPreferences | async) || ''" [class.self]="isSelf"
-  class="markdown-preview"></div>
+<div [innerHTML]="content | markdown" [matTooltip]="(timestamp | dateByPreferences:'seconds' | async) || ''"
+  [class.self]="isSelf" class="markdown-preview"></div>

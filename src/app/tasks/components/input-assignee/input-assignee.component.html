@@ -1,25 +1,35 @@
-<!-- This button triggers the overlay and is it's origin -->
-<button (click)="toggle()" type="button" class="assignee" [class.add]="!assignee" cdkOverlayOrigin
-  #trigger="cdkOverlayOrigin" [style.background-color]="assigneeColor?.rgb()?.string()"
-  matTooltip="{{ assignee?.user?.name }} {{ assignee?.user?.surname }}">
-  {{ assignee ? assignee.user.name[0] : '+' }}
-</button>
-
-<ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger"
-  [cdkConnectedOverlayOpen]="(isOpen$ | async) || false"
-  [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'" [cdkConnectedOverlayHasBackdrop]="true">
-  <ul #overlay class="members-overlay">
-    <li *ngFor="let member of members$ | async" (click)="select(member)">
-      <div class="avatar" [style.background-color]="member.color?.rgb()?.string()">{{ member.user.name[0] }}</div>
-      <div class="details">
-        <span class="full-name">{{ member.user.name }} {{ member.user.surname }}</span>
-        <span class="username">@{{ member.user.username }}</span>
-      </div>
-    </li>
-    <li class="line"></li>
-    <li class="entry-remove" (click)="select(null)">
-      <div class="avatar-remove">-</div>
-      <span i18n>Remove assignee</span>
-    </li>
-  </ul>
-</ng-template>
+<app-select [formControl]="control" floatingLabel="Assignee" i18n-floatingLabel>
+  <div class="prefix" *ngIf="control.value && control.value !== 'all'">
+    <div class="avatar" [style.background-color]="control.value | memberColor | color:'rgb'">
+      {{ memberById(control.value) ? memberById(control.value)?.user?.name?.[0] : '' }}
+    </div>
+  </div>
+  <app-option *ngIf="showAllOption" [value]="'all'" view="All" i18n-view>
+    <div class="avatar-wrapper">
+      <div class="avatar">-</div>
+    </div>
+    <div class="details">
+      <span i18n>All</span>
+    </div>
+  </app-option>
+  <app-option *ngIf="showUnassignedOption" [value]="null" view="Unassigned" i18n-view>
+    <div class="avatar-wrapper">
+      <div class="avatar">-</div>
+    </div>
+    <div class="details">
+      <span i18n>Unassigned</span>
+    </div>
+  </app-option>
+  <app-option *ngFor="let member of members" [value]="member.user.id"
+    [view]="member.user.name + ' ' + member.user.surname">
+    <div class="avatar-wrapper">
+      <div class="avatar" aria-hidden="true" [style.background-color]="member | memberColor | color:'rgb'">{{
+        member.user.name[0] }}</div>
+    </div>
+    <div class="details">
+      <span class="full-name">{{ member.user.name }} {{ member.user.surname }}</span>
+      <span class="username">@{{ member.user.username }}</span>
+    </div>
+  </app-option>
+  <app-empty-options i18n>Project has no members</app-empty-options>
+</app-select>

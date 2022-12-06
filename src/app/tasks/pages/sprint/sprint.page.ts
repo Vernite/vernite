@@ -15,6 +15,8 @@ import { Sprint } from '@tasks/interfaces/sprint.interface';
 import { SprintStatus } from '@tasks/enums/sprint-status.enum';
 import { Task } from '@tasks/interfaces/task.interface';
 import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
+import { FilterChannel } from '@main/components/filters/filter-channel.model';
+import { TaskFilters } from '@tasks/filters/task.filters';
 
 @UntilDestroy()
 @Component({
@@ -25,8 +27,7 @@ import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
 export class SprintPage implements OnInit {
   public projectId!: number;
   public project$: Observable<Project> = of();
-  public filters = [];
-  public filtersControl = new FormControl();
+  public filters$ = FilterChannel.TASKS;
   public view: 'list' | 'board' = 'list';
 
   public statusList$: Observable<Status[]> = of([]);
@@ -36,6 +37,7 @@ export class SprintPage implements OnInit {
   public emptyMap: Map<number, ProjectMember> = new Map();
 
   public members$?: Observable<Map<number, ProjectMember>> = of(this.emptyMap);
+  public tasks$: Observable<Task[]> = of([]);
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -58,29 +60,50 @@ export class SprintPage implements OnInit {
       this.project$ = this.projectService.get(projectId);
       this.members$ = this.memberService.map(projectId);
       this.statusList$ = this.statusService.list(projectId);
-      this.statusListWithTasks$ = this.statusService.listWithTasks(projectId);
-      this.board$ = this.statusService.board(projectId);
 
-      this.activeSprint$ = this.sprintService.getActiveSprint(projectId);
+      this.loadTasks();
     });
 
     this.taskProtoService.TASKS.pipe(untilDestroyed(this)).subscribe((task) => {
       if (task.projectId === this.projectId) {
-        this.board$ = this.statusService.board(this.projectId);
-        this.statusListWithTasks$ = this.statusService.listWithTasks(this.projectId);
-        this.activeSprint$ = this.sprintService.getActiveSprint(this.projectId);
+        this.loadTasks();
+      }
+    });
+
+    this.filters$.pipe(untilDestroyed(this)).subscribe(() => {
+      this.loadTasks();
+    });
+  }
+
+  loadTasks() {
+    this.activeSprint$ = this.sprintService.getActiveSprint(this.projectId);
+    this.activeSprint$.subscribe((sprint) => {
+      if (sprint) {
+        this.statusListWithTasks$ = this.statusService.listWithTasks(this.projectId, [
+          TaskFilters.SPRINT_ID(sprint.id),
+          ...this.filters$.value,
+        ]);
+        this.board$ = this.statusService.board(this.projectId, [
+          TaskFilters.SPRINT_ID(sprint.id),
+          ...this.filters$.value,
+        ]);
+        this.tasks$ = this.taskService.list(this.projectId, [
+          TaskFilters.SPRINT_ID(sprint.id),
+          ...this.filters$.value,
+        ]);
       }
     });
   }
 
   startSprint(sprint: Sprint) {
-    sprint = {
-      ...sprint,
-      status: SprintStatus.ACTIVE,
-    };
-    this.sprintService.update(this.projectId, sprint).subscribe(() => {
-      location.reload();
-    });
+    this.sprintService
+      .update(this.projectId, {
+        id: sprint.id,
+        status: SprintStatus.ACTIVE,
+      })
+      .subscribe(() => {
+        location.reload();
+      });
   }
 
   revertSprint(sprint: Sprint) {
