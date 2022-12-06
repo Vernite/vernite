@@ -48,7 +48,7 @@ export class ReleaseService extends BaseService<
 
   @Cache()
   public list(projectId: number): Observable<Release[]> {
-    return this.apiService.get(`/project/${projectId}/release/`).pipe(
+    return this.apiService.get(`/project/${projectId}/release`).pipe(
       this.validate({
         404: 'PROJECT_NOT_FOUND',
         409: 'CONFLICT',
@@ -67,7 +67,7 @@ export class ReleaseService extends BaseService<
   }
 
   public create(projectId: number, release: Release): Observable<Release> {
-    return this.apiService.post(`/project/${projectId}/release/`, { body: release }).pipe(
+    return this.apiService.post(`/project/${projectId}/release`, { body: release }).pipe(
       this.validate({
         400: 'FORM_VALIDATION_ERROR',
         404: 'PROJECT_NOT_FOUND',

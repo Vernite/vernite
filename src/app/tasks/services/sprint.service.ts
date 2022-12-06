@@ -27,7 +27,7 @@ export class SprintService {
     projectId: number,
     filters?: DataFilter<Sprint, any>[] | DataFilter<Sprint, any>,
   ): Observable<Sprint[]> {
-    return this.apiService.get(`/project/${projectId}/sprint/`, { filters });
+    return this.apiService.get(`/project/${projectId}/sprint`, { filters });
   }
 
   /**
@@ -47,7 +47,7 @@ export class SprintService {
    * @returns Request observable with the created status
    */
   public create(projectId: number, sprint: Sprint): Observable<Sprint> {
-    return this.apiService.post(`/project/${projectId}/sprint/`, { body: sprint });
+    return this.apiService.post(`/project/${projectId}/sprint`, { body: sprint });
   }
 
   /**
