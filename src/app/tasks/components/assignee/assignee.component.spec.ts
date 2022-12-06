@@ -1,13 +1,13 @@
 import { TasksModule } from '@tasks/tasks.module';
 import { Shallow } from 'shallow-render';
 
-import { InputAssigneeComponent } from './assignee.component';
+import { AssigneeComponent } from './assignee.component';
 
-describe(InputAssigneeComponent.name, () => {
-  let shallow: Shallow<InputAssigneeComponent>;
+describe(AssigneeComponent.name, () => {
+  let shallow: Shallow<AssigneeComponent>;
 
   beforeEach(() => {
-    shallow = new Shallow(InputAssigneeComponent, TasksModule);
+    shallow = new Shallow(AssigneeComponent, TasksModule);
   });
 
   it('should create', async () => {
