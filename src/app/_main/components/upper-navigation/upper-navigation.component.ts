@@ -1,11 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '@auth/interfaces/user.interface';
 import { AuthService } from '@auth/services/auth/auth.service';
+import { UserService } from '@auth/services/user/user.service';
 import { WorkspaceService } from '@dashboard/services/workspace/workspace.service';
 import { faAngleDown, faCog, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '@main/services/dialog/dialog.service';
 import { TaskService } from '@tasks/services/task/task.service';
-import { finalize, fromEvent, map, skip, take, catchError, throwError } from 'rxjs';
+import { finalize, fromEvent, map, skip, take, catchError, throwError, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-upper-navigation',
@@ -13,11 +15,24 @@ import { finalize, fromEvent, map, skip, take, catchError, throwError } from 'rx
   styleUrls: ['./upper-navigation.component.scss'],
 })
 export class UpperNavigationComponent implements OnInit {
+  @ViewChild('openBelow') openBelow!: ElementRef<HTMLElement>;
+
+  faAngleDown = faAngleDown;
+  faUser = faUser;
+  faCog = faCog;
+  faSignOut = faSignOut;
+
+  public active: boolean = false;
+  public _isButtonDisabled = true;
+
+  public myself$?: Observable<User>;
+
   constructor(
     private dialogService: DialogService,
     private taskService: TaskService,
     private workspaceService: WorkspaceService,
     private authService: AuthService,
+    private userService: UserService,
     private router: Router,
   ) {}
 
@@ -35,17 +50,9 @@ export class UpperNavigationComponent implements OnInit {
         }
       }),
     );
+
+    this.myself$ = this.userService.getMyself();
   }
-
-  @ViewChild('openBelow') openBelow!: ElementRef<HTMLElement>;
-
-  faAngleDown = faAngleDown;
-  faUser = faUser;
-  faCog = faCog;
-  faSignOut = faSignOut;
-
-  public active: boolean = false;
-  public _isButtonDisabled = true;
 
   createNewTask() {
     this.taskService.openCreateNewTaskDialog().subscribe(() => {
@@ -71,6 +78,7 @@ export class UpperNavigationComponent implements OnInit {
   public isButtonDisabled() {
     return this._isButtonDisabled;
   }
+
   public openProfile() {
     this.active = true;
     fromEvent(document, 'click')
@@ -83,6 +91,7 @@ export class UpperNavigationComponent implements OnInit {
   public closeProfile() {
     this.active = false;
   }
+
   public toggleProfile() {
     if (!this.active) {
       this.openProfile();

@@ -4,8 +4,10 @@
 <section class="flex-end-position">
   <fa-icon></fa-icon>
   <div class="profile">
-    <div class="avatar"></div>
-    <div class="name"></div>
+    <div class="myself" *ngIf="myself$ | async as myself">
+      <div class="avatar"></div>
+      <div class="name">{{myself.name}} {{myself.surname}}</div>
+    </div>
     <div #openBelow class="open-below" (click)="toggleProfile()" [class.active]="active">
       <app-icon [icon]="faAngleDown" size="16px"></app-icon>
     </div>

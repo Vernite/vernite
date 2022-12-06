@@ -68,6 +68,6 @@ import { BoardComponent } from './components/tasks-board/tasks-board.component';
     BacklogPage,
     TaskPipe,
   ],
-  exports: [TaskTypePipe],
+  exports: [TaskTypePipe, TaskListComponent],
 })
 export class TasksModule {}
