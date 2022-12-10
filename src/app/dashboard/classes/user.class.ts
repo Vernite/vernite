@@ -1,7 +1,15 @@
 import { Random } from '@main/classes/random.class';
 import * as Color from 'color';
 
+/**
+ * User utils class.
+ *
+ * TODO: Move this functions to user service.
+ */
 export class UserUtils {
+  /**
+   * Gets the color by user id.
+   */
   public static getColorById(id: number): Color {
     const random = new Random(id);
     const randomNumber = random.random();

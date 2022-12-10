@@ -1,4 +1,4 @@
-name: deploy
+name: deploy-prod
 
 on:
   push:
@@ -44,7 +44,7 @@ jobs:
 
       # Build
       - name: Build ⚙️
-        run: yarn build
+        run: yarn build:prod
 
       # Run tests
       - name: Unit tests
@@ -64,7 +64,7 @@ jobs:
           REMOTE_HOST: '51.83.255.98'
           REMOTE_PORT: '2224'
           REMOTE_USER: 'frontend'
-          TARGET: '/var/www/html'
+          TARGET: '/var/www/html/prod'
           EXCLUDE: "/dist/, /node_modules/"
 
       # Build documentation and badges
@@ -81,14 +81,15 @@ jobs:
           yarn audit:build
 
       # SonarQube scan
-      - uses: sonarsource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      # - uses: sonarsource/sonarqube-scan-action@master
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       # Copy coverage directory
       - name: Copy coverage directory
         run: cp -R coverage/vernite documentation/coverage
+
 
       # Deploy documentation to Github pages
       - name: Deploy documentation 📄
@@ -96,3 +97,15 @@ jobs:
         with:
           branch: gh-pages
           folder: documentation
+          target-folder: prod
+          clean-exclude: dev/
+
+      # Deploy documentation index to Github pages
+      - name: Deploy docs-pages
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+          branch: gh-pages
+          folder: docs-pages
+          clean-exclude: |
+            dev/
+            prod/

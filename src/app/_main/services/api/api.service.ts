@@ -33,6 +33,10 @@ export class ApiService {
   public request<T = any>(method: string, url: string, options?: RequestOptions) {
     let params = this.getParamsFromFilters(options?.filters) || new HttpParams();
 
+    if (url.endsWith('/')) {
+      console.warn(`URL ${url} ends with slash. This is not recommended.`);
+    }
+
     if (options?.params instanceof HttpParams) {
       for (const param of options.params.keys()) {
         params = params.append(param, options.params.get(param)!);

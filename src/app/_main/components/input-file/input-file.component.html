@@ -1,7 +1,8 @@
 <app-input type="text" [formControl]="labelControl" [staticLabel]="staticLabel" [floatingLabel]="floatingLabel"
   [readonly]="true" (click)="onClick()">
   <span class="suffix flex items-center pointer-events-auto">
-    <app-button variant="transparent" class="mr-3" [icon]="faClose" (click)="$event.stopPropagation(); clear()">
+    <app-button variant="transparent" class="mr-3" [icon]="faClose" (click)="$event.stopPropagation(); clear()"
+      type="button">
       <span i18n>Remove file</span>
     </app-button>
     <app-icon [icon]="faFile" size="16px"></app-icon>

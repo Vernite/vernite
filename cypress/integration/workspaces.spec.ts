@@ -4,7 +4,7 @@ describe('Workspaces tests', () => {
   beforeEach(() => {
     cy.logout();
     cy.login(auth.email, auth.password);
-    cy.visit('/');
+    cy.visit('/workspaces');
   });
 
   it('Should be able to create a new workspace', () => {

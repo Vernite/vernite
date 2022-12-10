@@ -12,6 +12,7 @@ import { Loader } from '@main/classes/loader/loader.class';
 import { setLoaderMessage, startLoader, stopLoader } from '@main/operators/loader.operator';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable, of, switchMap, tap } from 'rxjs';
+import { validateForm } from '../../../_main/classes/form.class';
 
 @UntilDestroy()
 @Component({
@@ -62,6 +63,8 @@ export class CreateProjectPage {
    * Otherwise, displays an error message.
    */
   public submitCreate(): void {
+    if (validateForm(this.projectFormGeneral.form) === false) return;
+
     (
       of(null).pipe(
         startLoader(this.loader, $localize`Saving project...`),

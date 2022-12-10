@@ -5,7 +5,7 @@ import app from '../../package.json';
 export const environment = {
   production: true,
   apiURL: '/api',
-  disableConsoleLog: false,
+  disableConsoleLog: true,
   version: app.version,
   disableIntegrationRegistryCheck: false,
   websocketUrl: 'wss://vernite.dev/api/ws',

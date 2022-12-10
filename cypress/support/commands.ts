@@ -32,12 +32,15 @@ function requestWithAuth(
 }
 
 function login(email: string, password: string) {
-  cy.request({
-    method: 'POST',
-    url: '/api/auth/login',
-    body: { email, password },
-  }).then(() => {
-    localStorage.setItem('logged', 'true');
+  cy.session([email, password, Math.random()], () => {
+    cy.request({
+      method: 'POST',
+      url: '/api/auth/login',
+      body: { email, password },
+    }).then(() => {
+      localStorage.setItem('logged', 'true');
+    });
+    cy.wait(2000);
   });
 }
 
