@@ -30,7 +30,13 @@ export const environment = {
 
   disableIntegrationRegistryCheck: false,
 
+  /**
+   * Url to the websocket server.
+   */
   websocketUrl: 'ws://localhost:4200/api/ws',
 
+  /**
+   * Whether to log socket messages (can also be enabled with console command in runtime).
+   */
   logSocketMessages: false,
 };

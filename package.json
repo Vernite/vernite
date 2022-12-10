@@ -7,7 +7,9 @@
     "@-------- MAIN SCRIPTS ----------": "",
     "start": "yarn serve",
     "serve": "ng serve",
-    "build": "ng build --stats-json",
+    "build": "yarn print \"You need to choose configuration: 'dev', 'prod' and type command like 'yarn build:dev'\" --color=yellow",
+    "build:prod": "ng build --stats-json --configuration=prod",
+    "build:dev": "ng build --stats-json --configuration=dev",
     "lint": "ng lint",
     "analyze:serve": "webpack-bundle-analyzer dist/vernite/en-US/stats.json",
     "analyze:build": "yarn analyze:serve -m static -O -r documentation/report/index.html",
@@ -31,7 +33,8 @@
     "compodoc:build": "compodoc -p ./tsconfig.doc.json -e json -d .",
     "storybook:serve": "start-storybook -p 6006",
     "storybook:build": "yarn compodoc:build && build-storybook -o documentation",
-    "badges:build": "node tools/badge-generator.js"
+    "badges:build": "node tools/badge-generator.js",
+    "print": "node tools/print.mjs"
   },
   "private": true,
   "dependencies": {

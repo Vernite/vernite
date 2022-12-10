@@ -1,0 +1,111 @@
+name: deploy-dev
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      # Default first step do checkout the repository
+      - uses: actions/checkout@v3
+
+      # Node js installation
+      - name: Install Node.js version 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+
+      # Cache node modules
+      - name: Cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules-yarn
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      # Install yarn
+      - name: Install yarn
+        run: npm i -g yarn
+
+      # Install dependencies
+      - name: Install dependencies
+        if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
+        run: yarn install
+
+      # Build
+      - name: Build ⚙️
+        run: yarn build:prod
+
+      # Run tests
+      - name: Unit tests
+        run: yarn unit:build
+
+      # Copy default redirect page
+      - name: Redirect page copy
+        run: cp src/redirect.html dist/vernite/index.html
+
+      # Deploy to the server using rsync
+      - name: Deploy app 🚀
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "./dist/vernite/"
+          REMOTE_HOST: '51.83.255.98'
+          REMOTE_PORT: '2224'
+          REMOTE_USER: 'frontend'
+          TARGET: '/var/www/html/prod'
+          EXCLUDE: "/dist/, /node_modules/"
+
+      # Build documentation and badges
+      - name: Documentation
+        run: |
+          yarn docs:build
+          yarn badges:build
+          yarn analyze:build
+
+      # Build audit report
+      - name: Audit report
+        run: |
+          mkdir -p documentation/audit
+          yarn audit:build
+
+      # SonarQube scan
+      # - uses: sonarsource/sonarqube-scan-action@master
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      # Copy coverage directory
+      - name: Copy coverage directory
+        run: cp -R coverage/vernite documentation/coverage
+
+
+      # Deploy documentation to Github pages
+      - name: Deploy documentation 📄
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+          branch: gh-pages
+          folder: documentation
+          target-folder: prod
+          clean-exclude: dev/
+
+      # Deploy documentation index to Github pages
+      - name: Deploy docs-pages
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+          branch: gh-pages
+          folder: docs-pages
+          clean-exclude: |
+            dev/
+            prod/
