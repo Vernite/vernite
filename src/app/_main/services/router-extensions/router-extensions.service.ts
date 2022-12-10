@@ -19,6 +19,7 @@ export class RouterExtensionsService {
       params: node.value.params,
       data: node.value.data,
       language: this.getLanguageFromUrl(),
+      baseHref: this.getBaseHref(),
     };
   }
 
@@ -29,5 +30,10 @@ export class RouterExtensionsService {
     } else {
       return null;
     }
+  }
+
+  private getBaseHref() {
+    console.log(document.getElementsByTagName('base')[0]);
+    return document.getElementsByTagName('base')[0].href;
   }
 }

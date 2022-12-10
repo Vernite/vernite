@@ -29,6 +29,7 @@ module.exports = {
         sourceLoaderOptions: {
           injectStoryParameters: false,
         },
+        transcludeMarkdown: true,
       },
     },
   ],
