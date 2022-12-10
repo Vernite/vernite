@@ -4,10 +4,10 @@ import app from '../../package.json';
  */
 export const environment = {
   production: true,
-  apiURL: '/dev/api',
+  apiURL: '/api',
   disableConsoleLog: false,
   version: app.version,
   disableIntegrationRegistryCheck: false,
-  websocketUrl: 'wss://vernite.dev/dev/api/ws',
+  websocketUrl: 'wss://insiders.vernite.dev/api/ws',
   logSocketMessages: false,
 };
