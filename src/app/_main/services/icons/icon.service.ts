@@ -34,7 +34,6 @@ export class IconService {
   }
 
   private addSvgIcon(iconName: string, url: string) {
-    // let baseHref = this.routerExtensions.snapshot.baseHref;
     const baseHref = this.baseHref || '/';
 
     console.log(baseHref);
