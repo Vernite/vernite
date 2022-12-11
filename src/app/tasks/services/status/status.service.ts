@@ -53,7 +53,7 @@ export class StatusService extends BaseService<
    */
   @Cache()
   public list(projectId: number): Observable<Status[]> {
-    return this.apiService.get(`/project/${projectId}/status/`).pipe(
+    return this.apiService.get(`/project/${projectId}/status`).pipe(
       this.validate({
         404: 'PROJECT_NOT_FOUND',
       }),
@@ -82,7 +82,7 @@ export class StatusService extends BaseService<
    * @returns Request observable with the created status
    */
   public create(projectId: number, status: Status): Observable<Status> {
-    return this.apiService.post(`/project/${projectId}/status/`, { body: status }).pipe(
+    return this.apiService.post(`/project/${projectId}/status`, { body: status }).pipe(
       this.validate({
         400: 'FORM_VALIDATION_ERROR',
         404: 'PROJECT_NOT_FOUND',
