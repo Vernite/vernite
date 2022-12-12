@@ -53,6 +53,10 @@ jobs:
       - name: E2E tests
         run: yarn e2e:build
 
+      # Combine tests
+      - name: Combine tests
+        run: yarn lcov-result-merger 'coverage/**/lcov.info' coverage/lcov.info --prepend-path-fix
+
       # Copy default redirect page
       - name: Redirect page copy
         run: cp src/redirect.html dist/vernite/index.html
@@ -88,7 +92,7 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage/vernite/lcov.info
+          file: ./coverage/lcov.info
           flags: unittests
           name: unittests
           fail_ci_if_error: true
