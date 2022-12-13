@@ -1,10 +1,10 @@
-name: Build application
+name: Prepare environment
 
 on:
   workflow_call:
 
 jobs:
-  deploy:
+  prepare-environment:
     runs-on: ubuntu-latest
 
     steps:
@@ -40,3 +40,10 @@ jobs:
       - name: Install dependencies
         if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
         run: yarn install
+
+      # Upload artifact
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: source
+          retention-days: 1
