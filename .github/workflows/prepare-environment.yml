@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       # Default first step do checkout the repository
       - uses: actions/checkout@v3
 
