@@ -1,6 +1,7 @@
 name: Prepare environment
 
 on:
+  workflow_dispatch:
   workflow_call:
 
 jobs:
@@ -45,5 +46,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: source
+          name: environment
           retention-days: 1

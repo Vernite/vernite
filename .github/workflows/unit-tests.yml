@@ -1,8 +1,6 @@
 name: Unit Tests
 
 on:
-  push:
-    branches: [master, dev]
   workflow_dispatch:
   workflow_call:
 
@@ -11,10 +9,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - uses: ./.github/workflows/prepare-environment.yml
+      # Download artifacts
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: environment
 
       # Run unit tests
       - name: Unit tests

@@ -1,15 +1,13 @@
 name: E2E Tests
 
 on:
-  push:
-    branches: [master, dev]
   workflow_dispatch:
   workflow_call:
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node12.18.3-chrome87-ff82
+    container: cypress/browsers:node16.16.0-chrome107-ff107-edge
     steps:
       - name: Checkout
         uses: actions/checkout@v2
