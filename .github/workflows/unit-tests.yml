@@ -9,11 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Download artifacts
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: environment
+      # Default first step do checkout the repository
+      - uses: actions/checkout@v3
 
       # Run unit tests
       - name: Unit tests

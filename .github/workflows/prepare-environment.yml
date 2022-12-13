@@ -41,10 +41,3 @@ jobs:
         if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
         run: yarn install
 
-      # Upload artifact
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: environment
-          path: .
-          retention-days: 1
