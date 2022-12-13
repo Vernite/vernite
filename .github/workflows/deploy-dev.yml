@@ -9,7 +9,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-
       # Default first step do checkout the repository
       - uses: actions/checkout@v3
 
@@ -39,7 +38,7 @@ jobs:
 
       # Install dependencies
       - name: Install dependencies
-        if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
+        # if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
         run: yarn install
 
       # Build
@@ -59,13 +58,17 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: "./dist/vernite/"
+          ARGS: '-rltgoDzvO --delete'
+          SOURCE: './dist/vernite/'
           REMOTE_HOST: '51.83.255.98'
           REMOTE_PORT: '2224'
           REMOTE_USER: 'frontend'
           TARGET: '/var/www/html/dev'
-          EXCLUDE: "/dist/, /node_modules/"
+          EXCLUDE: '/dist/, /node_modules/'
+
+      # Run e2e tests
+      - name: E2E tests
+        run: yarn e2e:build
 
       # Build documentation and badges
       - name: Documentation
@@ -88,7 +91,9 @@ jobs:
 
       # Copy coverage directory
       - name: Copy coverage directory
-        run: cp -R coverage/vernite documentation/coverage
+        run: |
+          cp -R coverage/vernite documentation/coverage-unit
+          cp -R coverage/e2e documentation/coverage-e2e
 
       # Deploy documentation to Github pages, TODO: add a condition to deploy different version of documentations
       - name: Deploy documentation 📄

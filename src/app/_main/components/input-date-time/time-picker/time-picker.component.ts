@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { ControlAccessor } from '@main/classes/control-accessor.class';
+import { ControlAccessor } from '@main/classes/control-accessor/control-accessor.class';
 import dayjs, { UnitType } from 'dayjs';
 import { unixTimestamp } from '../../../interfaces/date.interface';
 import { interval, takeUntil, Subject } from 'rxjs';

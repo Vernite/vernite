@@ -11,7 +11,6 @@ import { StatusLabelComponent } from './components/status-label/status-label.com
 import { TaskDialog } from './dialogs/task/task.dialog';
 import { SprintDialog } from './dialogs/sprint/sprint.dialog';
 import { SchedulePage } from './pages/schedule/schedule.page';
-import { TaskListPage } from './pages/task-list/task-list.page';
 import { StatusColorPipe } from './pipes/status-color.pipe';
 import { TaskPriorityIconPipe } from './pipes/task-priority-icon.pipe';
 import { TaskPriorityPipe } from './pipes/task-priority.pipe';
@@ -40,7 +39,6 @@ import { MemberColorPipe } from './pipes/member-color/member-color.pipe';
   imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule],
   declarations: [
     BoardTaskComponent,
-    TaskListPage,
     TaskDialog,
     TaskTypePipe,
     TaskPriorityPipe,

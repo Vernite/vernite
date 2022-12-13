@@ -1,5 +1,5 @@
 import { Component, Input, ElementRef, ViewChild, ChangeDetectorRef, OnInit } from '@angular/core';
-import { ControlAccessor } from '@main/classes/control-accessor.class';
+import { ControlAccessor } from '@main/classes/control-accessor/control-accessor.class';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { BehaviorSubject, fromEvent, take, filter } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';

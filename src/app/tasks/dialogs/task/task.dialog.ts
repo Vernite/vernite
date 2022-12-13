@@ -19,7 +19,7 @@ import { TaskService } from '@tasks/services/task/task.service';
 import { Sprint } from '@tasks/interfaces/sprint.interface';
 import { SprintService } from '@tasks/services/sprint.service';
 import { ProjectService } from '@dashboard/services/project/project.service';
-import { Enum } from '@main/classes/enum.class';
+import { Enum } from '@main/classes/enum/enum.class';
 import { Loader } from '../../../_main/classes/loader/loader.class';
 import { withLoader } from '@main/operators/loader.operator';
 import { SprintStatus } from '@tasks/enums/sprint-status.enum';

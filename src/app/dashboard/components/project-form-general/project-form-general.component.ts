@@ -11,7 +11,7 @@ import { Project } from './../../interfaces/project.interface';
 import { ProjectService } from '@dashboard/services/project/project.service';
 import { omit } from 'lodash-es';
 import { ApiFile } from '@main/interfaces/api-file.interface';
-import { isApiFile } from '@main/classes/is-api-file.class';
+import { isApiFile } from '@main/util/is-api-file/is-api-file.util';
 
 @UntilDestroy()
 @Component({

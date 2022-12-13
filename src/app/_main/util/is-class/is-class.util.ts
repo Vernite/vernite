@@ -1,7 +1,5 @@
-import { Message } from 'google-protobuf';
-
 // is "class" or "function"?
-export function isClass<T extends typeof Message = any>(obj: any): obj is T {
+export function isClass<T>(obj: any): obj is T {
   // if not a function, return false.
   if (typeof obj !== 'function') return false;
 

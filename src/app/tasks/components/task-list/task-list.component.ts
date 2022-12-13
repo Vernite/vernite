@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Status } from '@tasks/interfaces/status.interface';
 import { Task } from '@tasks/interfaces/task.interface';
 import { ProjectMember } from '../../../dashboard/interfaces/project-member.interface';
-import { ESet } from '../../../_main/classes/e-set.class';
+import { ESet } from '../../../_main/classes/e-set/e-set.class';
 
 @Component({
   selector: 'task-list',

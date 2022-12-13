@@ -3,7 +3,7 @@ import { Shallow } from 'shallow-render';
 
 import { AssigneeComponent } from './assignee.component';
 
-describe(AssigneeComponent.name, () => {
+describe('AssigneeComponent', () => {
   let shallow: Shallow<AssigneeComponent>;
 
   beforeEach(() => {

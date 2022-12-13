@@ -4,7 +4,7 @@
   <img src="https://vernite.dev/en-US/assets/metadata/logo_with_name.svg" alt="angular-logo" width="120px" height="80px"/>
   <br>
   <i>Vernite is a task management app with multiple independent modules to speed up work.
-    <br>tasks / mail / messages</i>
+    <br>tasks / calendar / messages</i>
   <br>
 </p>
 
@@ -18,6 +18,9 @@
   <img src="https://vernite.github.io/frontend/prod/assets/badges/badge-tests-result.svg" />
   <img src="https://vernite.github.io/frontend/prod/assets/badges/badge-coverage.svg" />
   <img src="https://vernite.github.io/frontend/prod/assets/badges/badge-documentation.svg" />
+  <a href="https://codecov.io/gh/Vernite/frontend" >
+    <img src="https://codecov.io/gh/Vernite/frontend/branch/master/graph/badge.svg?token=QC0TRNLPL0"/>
+  </a>
 </p>
 
 <hr>

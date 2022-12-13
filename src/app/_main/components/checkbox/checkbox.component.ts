@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ControlAccessor } from '@main/classes/control-accessor.class';
+import { ControlAccessor } from '@main/classes/control-accessor/control-accessor.class';
 
 /**
  * Checkbox component

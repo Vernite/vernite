@@ -9,7 +9,7 @@ import {
   faCodePullRequest,
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
-import { PersistentMap } from '@main/classes/persistent-map.class';
+import { PersistentMap } from '@main/classes/persistent-map/persistent-map.class';
 import { TaskService } from '@tasks/services/task/task.service';
 import { DialogService } from '../../../_main/services/dialog/dialog.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '../../dialogs/task/task.dialog';

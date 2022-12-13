@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { ControlAccessor } from '@main/classes/control-accessor.class';
+import { ControlAccessor } from '@main/classes/control-accessor/control-accessor.class';
 import { Status } from '@tasks/interfaces/status.interface';
 import { TaskService } from '@tasks/services/task/task.service';
 import { TestNgControl } from '@tests/helpers/ng-control-testing-provider.helper';

@@ -1,5 +1,5 @@
-import { TestNgControl } from '../../../tests/helpers/ng-control-testing-provider.helper';
-import { emailValidator } from '../validators/email.validator';
+import { TestNgControl } from '../../../../tests/helpers/ng-control-testing-provider.helper';
+import { emailValidator } from '../../validators/email.validator';
 import { ControlAccessor } from './control-accessor.class';
 import { ChangeDetectorRef } from '@angular/core';
 

@@ -5,7 +5,7 @@ import { ValidationError } from '@main/interfaces/validation-error.interface';
 import { FormControl } from '@ngneat/reactive-forms';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { requiredValidator } from '../validators/required.validator';
+import { requiredValidator } from '../../validators/required.validator';
 
 /**
  * A base class for creating custom control accessors like inputs, checkboxes, etc.

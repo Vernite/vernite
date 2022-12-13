@@ -10,6 +10,8 @@ import { APP_BASE_HREF } from '@angular/common';
   providedIn: 'root',
 })
 export class IconService {
+  private iconsPath = '';
+
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
@@ -18,6 +20,8 @@ export class IconService {
   ) {}
 
   init() {
+    this.iconsPath = this.buildIconsPath();
+
     this.addSvgIcon('dashboard', 'assets/icons/dashboard.svg');
 
     this.addSvgIcon('epic', 'assets/icons/epic.svg');
@@ -34,14 +38,22 @@ export class IconService {
   }
 
   private addSvgIcon(iconName: string, url: string) {
-    const baseHref = this.baseHref || '/';
-
-    console.log(baseHref);
-    console.log(window.location.origin + baseHref + url);
-
     this.matIconRegistry.addSvgIcon(
       iconName,
-      this.domSanitizer.bypassSecurityTrustResourceUrl(window.location.origin + baseHref + url),
+      this.domSanitizer.bypassSecurityTrustResourceUrl(this.iconsPath + url),
     );
+  }
+
+  private buildIconsPath() {
+    const baseHref = this.baseHref || '/';
+    const language: string | null = this.routerExtensions.snapshot.language as string | null;
+
+    let finalPath = window.location.origin + baseHref;
+
+    if (language && !baseHref.includes(language)) {
+      finalPath += language + '/';
+    }
+
+    return finalPath;
   }
 }

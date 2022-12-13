@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { ControlAccessor } from '@main/classes/control-accessor.class';
+import { ControlAccessor } from '@main/classes/control-accessor/control-accessor.class';
 import { DataFilter } from '@main/interfaces/filters.interface';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { FilterControls } from './filter-entry.type';

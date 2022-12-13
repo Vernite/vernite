@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { faClose, faFile } from '@fortawesome/free-solid-svg-icons';
-import { ControlAccessor } from '@main/classes/control-accessor.class';
+import { ControlAccessor } from '@main/classes/control-accessor/control-accessor.class';
 import { FormControl } from '@ngneat/reactive-forms';
 
 @Component({

@@ -25,24 +25,6 @@ export class ColorUtils {
     return /^hsva\((\d{1,3}), (\d{1,3}), (\d{1,3}), (\d{1,3})\)$/i.test(color);
   }
 
-  public static colorFromString(color: string): Color {
-    if (ColorUtils.isHex(color)) {
-      return Color(color);
-    } else if (ColorUtils.isHexA(color)) {
-      return Color(color);
-    } else if (ColorUtils.isRgb(color)) {
-      return Color(color);
-    } else if (ColorUtils.isRgba(color)) {
-      return Color(color);
-    } else if (ColorUtils.isHsv(color)) {
-      return Color(color);
-    } else if (ColorUtils.isHsva(color)) {
-      return Color(color);
-    } else {
-      return Color(color);
-    }
-  }
-
   public static colorToBytes(color: Color): number {
     return color.rgbNumber();
   }

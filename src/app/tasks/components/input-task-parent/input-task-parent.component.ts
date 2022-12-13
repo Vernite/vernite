@@ -1,4 +1,4 @@
-import { ControlAccessor } from '@main/classes/control-accessor.class';
+import { ControlAccessor } from '@main/classes/control-accessor/control-accessor.class';
 import { ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { AbstractControl, NgControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';

@@ -25,8 +25,10 @@ export class RouterExtensionsService {
 
   private getLanguageFromUrl() {
     const languagePredicate = location.pathname.split('/')[1];
+
+    if (!languagePredicate) return null;
     if (/^.{2}-.{2}$/.test(languagePredicate)) {
-      return languagePredicate;
+      return languagePredicate!;
     } else {
       return null;
     }

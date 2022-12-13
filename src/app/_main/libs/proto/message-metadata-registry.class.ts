@@ -1,4 +1,4 @@
-import { isClass } from '@main/classes/util/is-class';
+import { isClass } from '@main/util/is-class/is-class.util';
 import { vernite } from '@vernite/protobuf';
 import { Message } from 'google-protobuf';
 import { MessageMetadata } from './message-metadata.class';

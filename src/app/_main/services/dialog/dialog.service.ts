@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
-import { DialogRef } from '@main/classes/dialog-ref.class';
+import { DialogRef } from '@main/classes/dialog-ref/dialog-ref.class';
 import { Service } from '@main/decorators/service/service.decorator';
 import { BehaviorSubject, filter } from 'rxjs';
 import { v4 as uuid } from 'uuid';

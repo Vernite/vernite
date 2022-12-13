@@ -1,4 +1,4 @@
-import { Random } from '@main/classes/random.class';
+import { Random } from '@main/classes/random/random.class';
 import * as Color from 'color';
 
 /**

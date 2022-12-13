@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import dayjs, { UnitType } from 'dayjs';
 import { DaysGrid, CalendarDay } from '../date-picker.model';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { ControlAccessor } from '@main/classes/control-accessor.class';
+import { ControlAccessor } from '@main/classes/control-accessor/control-accessor.class';
 import { unixTimestamp } from '../../../interfaces/date.interface';
 
 @Component({

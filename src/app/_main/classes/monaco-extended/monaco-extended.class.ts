@@ -4,13 +4,6 @@ type MonacoEditor = monaco.editor.IStandaloneCodeEditor;
 type Selection = monaco.Selection;
 type EditOperation = monaco.editor.IIdentifiedSingleEditOperation;
 
-interface SelectionEditOperation {
-  before?: string;
-  after?: string;
-  beforeEachLine?: string;
-  afterEachLine?: string;
-}
-
 export class MonacoExtended {
   public static insertTextAt(
     editor: MonacoEditor,

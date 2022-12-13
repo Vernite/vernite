@@ -1,6 +1,6 @@
 import { Component, HostBinding, Injector, Input, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogRef } from '@main/classes/dialog-ref.class';
+import { DialogRef } from '@main/classes/dialog-ref/dialog-ref.class';
 import { ViewContainerDirective } from '@main/directives/view-container/view-container.directive';
 import { DialogOutlet, DialogService } from '@main/services/dialog/dialog.service';
 import { take } from 'rxjs';
