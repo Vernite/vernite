@@ -1,0 +1,22 @@
+name: Unit Tests
+
+on:
+  push:
+    branches: [master, dev]
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  prepare-environment:
+    uses: ./.github/workflows/prepare-environment.yml
+
+  run-tests:
+    needs: [prepare-environment]
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Run unit tests
+      - name: Unit tests
+        run: yarn unit:build

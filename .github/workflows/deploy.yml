@@ -1,0 +1,31 @@
+name: Deploy to vernite server
+
+on:
+  workflow_call:
+    inputs:
+      directory:
+        required: true
+        type: string
+    secrets:
+      SSH_PRIVATE_KEY:
+        required: true
+
+jobs:
+  deploy:
+    # needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Deploy to server using rsync
+      - name: Deploy app 🚀
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "./dist/vernite/"
+          REMOTE_HOST: '51.83.255.98'
+          REMOTE_PORT: '2224'
+          REMOTE_USER: 'frontend'
+          TARGET: '/var/www/html/${{ inputs.directory }}'
+          EXCLUDE: "/dist/, /node_modules/"

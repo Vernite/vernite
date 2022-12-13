@@ -1,0 +1,19 @@
+name: Build application
+
+on:
+  workflow_call:
+    inputs:
+      configuration:
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    # need: [environment]
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Build
+      - name: Build ⚙️
+        run: yarn build:${{ inputs.configuration }}
