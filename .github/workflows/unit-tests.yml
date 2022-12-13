@@ -10,7 +10,7 @@ jobs:
 
     steps:
       # Default first step do checkout the repository
-      - uses: actions/checkout@v3
+      - uses: ./.github/workflows/prepare-environment.yml
 
       # Run unit tests
       - name: Unit tests
