@@ -93,7 +93,7 @@ jobs:
       - name: Copy coverage directory
         run: |
           cp -R coverage/vernite documentation/coverage-unit
-          cp -R coverage/e2e documentation/coverage-e2e
+          cp -R coverage/vernite-e2e documentation/coverage-e2e
 
       # Deploy documentation to Github pages, TODO: add a condition to deploy different version of documentations
       - name: Deploy documentation 📄
