@@ -35,7 +35,7 @@ jobs:
     needs: [build]
     uses: ./.github/workflows/deploy.yml
     with:
-      directory: dev
+      configuration: dev
     secrets:
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
