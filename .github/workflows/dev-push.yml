@@ -42,3 +42,5 @@ jobs:
   build-storybook:
     needs: [prepare-environment]
     uses: ./.github/workflows/storybook.yml
+    with:
+      configuration: dev
