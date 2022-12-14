@@ -111,7 +111,7 @@ export class TaskService extends BaseService<
    * @returns Request observable with the created task
    */
   public create(projectId: number, task: Task): Observable<Task> {
-    return this.apiService.post(`/project/${projectId}/task/`, { body: task }).pipe(
+    return this.apiService.post(`/project/${projectId}/task`, { body: task }).pipe(
       this.validate({
         400: 'FORM_VALIDATION_ERROR',
         404: 'PROJECT_NOT_FOUND',
