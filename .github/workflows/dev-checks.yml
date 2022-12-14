@@ -15,10 +15,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-  prepare-environment:
-    needs: checkout
-    uses: ./.github/workflows/prepare-environment.yml
-
   unit-tests:
     needs: prepare-environment
     uses: ./.github/workflows/unit-tests.yml
