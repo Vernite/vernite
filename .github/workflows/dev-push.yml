@@ -44,3 +44,7 @@ jobs:
     uses: ./.github/workflows/storybook.yml
     with:
       configuration: dev
+
+  badges:
+    needs: [unit-tests, build-storybook]
+    uses: ./.github/workflows/badges.yml
