@@ -16,13 +16,25 @@ jobs:
         uses: actions/checkout@v2
 
   prepare-environment:
-    needs: checkout
+    needs: [checkout]
+    name: Prepare environment
     uses: ./.github/workflows/prepare-environment.yml
 
   unit-tests:
-    needs: prepare-environment
+    needs: [prepare-environment]
+    name: Unit tests
     uses: ./.github/workflows/unit-tests.yml
 
   e2e-tests:
-    needs: prepare-environment
+    needs: [prepare-environment]
+    name: E2E tests
     uses: ./.github/workflows/e2e-tests.yml
+
+  deploy:
+    needs: [unit-tests]
+    name: Deploy to vernite server
+    uses: ./.github/workflows/deploy.yml
+    with:
+      directory: dev
+    secrets:
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
