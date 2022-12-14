@@ -1,19 +1,18 @@
-name: Unit Tests
+name: Prepare environment
 
 on:
   workflow_dispatch:
   workflow_call:
 
 jobs:
-  run-tests:
+  prepare-environment:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repository
-      - name: Checkout
-        uses: actions/checkout@v3
+      # Default first step do checkout the repository
+      - uses: actions/checkout@v3
 
-      # Install Node.js version 16.x
+      # Node js installation
       - name: Install Node.js version 16.x
         uses: actions/setup-node@v3
         with:
@@ -28,17 +27,17 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      # Install yarn
       - name: Install yarn
         run: npm i -g yarn
 
-      # Run unit tests
-      - name: Unit tests
-        run: yarn unit:build
-
-      # Upload artifacts
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: unit-tests
-          path: coverage/vernite
+      # Install dependencies
+      - name: Install dependencies
+        if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
+        run: yarn install
 

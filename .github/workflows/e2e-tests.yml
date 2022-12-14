@@ -15,7 +15,7 @@ jobs:
         uses: cypress-io/github-action@v4 # use the explicit version number
         with:
           # Specify Browser since container image is compile with Firefox
-          browser: chrome
+          browser: firefox
 
 
   # deploy:
