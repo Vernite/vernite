@@ -42,7 +42,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: unit-tests
-          path: coverage/vernite
+          path: coverage
 
       # Build badges
       - name: Badges build
