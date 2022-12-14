@@ -1,10 +1,14 @@
 on:
   workflow_dispatch:
   workflow_call:
+    inputs:
+      configuration:
+        required: true
+        type: string
 
 jobs:
-  run-tests:
-    name: Unit tests
+  build-storybook:
+    name: Build storybook
     runs-on: ubuntu-latest
 
     steps:
@@ -30,14 +34,16 @@ jobs:
       - name: Install yarn
         run: npm i -g yarn
 
-      # Run unit tests
-      - name: Unit tests
-        run: yarn unit:build
+      # Build docs
+      - name: Docs build
+        run: |
+          yarn docs:build:${{ inputs.configuration }}
+          yarn badges:build
 
       # Upload artifacts
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: unit-tests
-          path: coverage/vernite
+          name: documentation
+          path: documentation
 

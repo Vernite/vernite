@@ -38,3 +38,7 @@ jobs:
       directory: dev
     secrets:
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+  build-storybook:
+    needs: [prepare-environment]
+    uses: ./.github/workflows/storybook.yml

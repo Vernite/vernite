@@ -1,11 +1,10 @@
-name: E2E Tests
-
 on:
   workflow_dispatch:
   workflow_call:
 
 jobs:
   cypress-run:
+    name: E2E Tests
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.16.0-chrome107-ff107-edge
     steps:

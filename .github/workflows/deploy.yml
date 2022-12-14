@@ -3,7 +3,7 @@ name: Deploy to vernite server
 on:
   workflow_call:
     inputs:
-      directory:
+      configuration:
         required: true
         type: string
     secrets:
@@ -16,6 +16,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout repository
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Download artifacts
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: build-${{ inputs.configuration }}
+          path: dist
 
       # Deploy to server using rsync
       - name: Deploy app 🚀
@@ -27,5 +37,5 @@ jobs:
           REMOTE_HOST: '51.83.255.98'
           REMOTE_PORT: '2224'
           REMOTE_USER: 'frontend'
-          TARGET: '/var/www/html/${{ inputs.directory }}'
+          TARGET: '/var/www/html/${{ inputs.configuration }}'
           EXCLUDE: "/dist/, /node_modules/"
