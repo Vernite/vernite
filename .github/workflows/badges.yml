@@ -1,10 +1,6 @@
 on:
   workflow_dispatch:
   workflow_call:
-    inputs:
-      configuration:
-        required: true
-        type: string
 
 jobs:
   build-badges:
