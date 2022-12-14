@@ -7,8 +7,8 @@ on:
         type: string
 
 jobs:
-  build-storybook:
-    name: Build storybook
+  build-badges:
+    name: Build badges
     runs-on: ubuntu-latest
 
     steps:
@@ -34,16 +34,21 @@ jobs:
       - name: Install yarn
         run: npm i -g yarn
 
-      # Build docs
-      - name: Docs build
-        run: yarn docs:build:${{ inputs.configuration }}
+      # Download artifacts
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: documentation
+          path: documentation
+
+      # Build badges
+      - name: Badges build
+        run: yarn badges:build
 
       # Upload artifacts
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: documentation
-          path: |
-            documentation
-            documentation.json
+          name: badges
+          path: badges
 

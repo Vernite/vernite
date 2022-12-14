@@ -4,6 +4,7 @@ on:
 
 jobs:
   prepare-environment:
+    name: Prepare environment
     runs-on: ubuntu-latest
 
     steps:
