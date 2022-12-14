@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Prepare environment
-        uses: ./.github/workflows/prepare-environment.yml
+        uses: ./.github/workflows/prepare-environment
 
   unit-tests:
     needs: prepare-environment
