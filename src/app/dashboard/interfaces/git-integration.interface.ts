@@ -8,7 +8,7 @@ export interface GitRepository extends JSONParsable {
 
 export interface GitIntegration extends JSONParsable {
   link: string;
-  gitRepositories: GitRepository[];
+  repositories: GitRepository[];
 }
 
 export interface GitIssue extends JSONParsable {
@@ -22,8 +22,8 @@ export interface GitIssue extends JSONParsable {
 
 export interface GitAccount extends JSONParsable {
   id: number;
-  gitHubUsername: string;
-  suspended: boolean;
+  login: string;
+  avatarUrl: string;
 }
 
 export interface GitPull extends JSONParsable {

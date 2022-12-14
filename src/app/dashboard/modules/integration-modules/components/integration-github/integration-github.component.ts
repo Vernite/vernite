@@ -60,7 +60,7 @@ export class IntegrationGitHubComponent implements OnInit, IntegrationComponent 
         stopLoader(this.loader),
       )
       .subscribe((integration) => {
-        this.repositories = integration.gitRepositories;
+        this.repositories = integration.repositories;
       });
   }
 

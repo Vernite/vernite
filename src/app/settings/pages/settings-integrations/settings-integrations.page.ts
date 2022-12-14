@@ -36,7 +36,9 @@ export class SettingsIntegrationsPage implements OnInit {
   }
 
   public openGitHubIntegration() {
-    this.gitIntegrationService.startGitHubIntegration().pipe(untilDestroyed(this)).subscribe();
+    const win = window.open('api/user/integration/git/github/authorize', '_blank');
+
+    if (!win) throw new Error('This browser does not support window.open');
   }
 
   public loadGitHubIntegration(): void {

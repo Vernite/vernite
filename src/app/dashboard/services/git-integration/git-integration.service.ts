@@ -59,7 +59,7 @@ export class GitIntegrationService extends BaseService<
    * @returns Observable<boolean> true if the opened window with GitHub integration was closed
    */
   public startGitHubIntegration(): Observable<boolean> {
-    return this.apiService.get('/user/integration/github/repository').pipe(
+    return this.apiService.get('/user/integration/git/github/repository').pipe(
       map((response: any) => response.link),
       mergeMap((url) => {
         const win = window.open(url, '_blank');
@@ -80,7 +80,7 @@ export class GitIntegrationService extends BaseService<
    * @param installationId Installation id returned by GitHub in redirect link
    */
   public postGitHubIntegration(installationId: string): Observable<void> {
-    return this.apiService.post(`/user/integration/github`, {
+    return this.apiService.post(`/user/integration/git/github`, {
       params: { installationId },
     });
   }
@@ -89,7 +89,7 @@ export class GitIntegrationService extends BaseService<
    * Get GitHub integration object with repositories list
    */
   public getGitHubIntegration(): Observable<GitIntegration> {
-    return this.apiService.get('/user/integration/github/repository');
+    return this.apiService.get('/user/integration/git/github/repository');
   }
 
   /**
@@ -102,8 +102,8 @@ export class GitIntegrationService extends BaseService<
     repositoryName: string,
   ): Observable<{ id: number; name: string; gitHubIntegration: string }> {
     return this.apiService
-      .post(`/project/${projectId}/integration/github`, {
-        body: repositoryName,
+      .post(`/project/${projectId}/integration/git/github`, {
+        body: { fullName: repositoryName }, // TODO: send whole repository object
       })
       .pipe(
         this.validate({
@@ -120,10 +120,10 @@ export class GitIntegrationService extends BaseService<
   @Cache()
   public getConnectedGitHubAccounts(): Observable<GitAccount[]> {
     return this.apiService
-      .get('/user/integration/github')
+      .get('/user/integration/git/github')
       .pipe(
         map((accounts: GitAccount[]) =>
-          accounts.map((account) => ({ ...account, gitHubUsername: `@${account.gitHubUsername}` })),
+          accounts.map((account) => ({ ...account, gitHubUsername: `@${account.login}` })),
         ),
       );
   }
@@ -134,7 +134,7 @@ export class GitIntegrationService extends BaseService<
    * @returns object with link to open the GitHub page with application removal
    */
   public deleteConnectedGitHubAccount(gitHubAccountId: number): Observable<{ link: string }> {
-    return this.apiService.delete(`/user/integration/github/${gitHubAccountId}`).pipe(
+    return this.apiService.delete(`/user/integration/git/github/${gitHubAccountId}`).pipe(
       this.validate({
         404: 'INSTALLATION_WITH_GIVEN_ID_NOT_FOUND',
       }),
@@ -146,7 +146,7 @@ export class GitIntegrationService extends BaseService<
    * @param projectId Project id to remove integration from
    */
   public deleteGitHubIntegration(projectId: number): Observable<void> {
-    return this.apiService.delete(`/project/${projectId}/integration/github`).pipe(
+    return this.apiService.delete(`/project/${projectId}/integration/git/github`).pipe(
       this.validate({
         404: 'PROJECT_OR_INTEGRATION_NOT_FOUND',
       }),
@@ -196,7 +196,7 @@ export class GitIntegrationService extends BaseService<
    * @returns true if the repository is owned by the account
    */
   public isOwnerOfRepository(repositoryName: string, account: GitAccount): boolean {
-    const preparedUsername = account.gitHubUsername.replace('@', '');
+    const preparedUsername = account.login.replace('@', '');
     return Boolean(repositoryName.match(new RegExp('^' + preparedUsername + '/*')));
   }
 
