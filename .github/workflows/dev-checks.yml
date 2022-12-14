@@ -17,12 +17,27 @@ jobs:
 
   prepare-environment:
     needs: checkout
-    uses: ./.github/workflows/prepare-environment.yml
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare environment
+        uses: ./.github/workflows/prepare-environment.yml
 
   unit-tests:
     needs: prepare-environment
-    uses: ./.github/workflows/unit-tests.yml
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare environment
+        uses: ./.github/workflows/prepare-environment.yml
+
+      - name: Unit tests
+        uses: ./.github/workflows/unit-tests.yml
 
   e2e-tests:
     needs: prepare-environment
-    uses: ./.github/workflows/e2e-tests.yml
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare environment
+        uses: ./.github/workflows/prepare-environment.yml
+
+      - name: E2E tests
+        uses: ./.github/workflows/e2e-tests.yml
