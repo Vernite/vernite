@@ -37,6 +37,13 @@ jobs:
           name: documentation
           path: documentation
 
+      # Download artifacts
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: unit-tests
+          path: coverage/vernite
+
       # Build badges
       - name: Badges build
         run: yarn badges:build

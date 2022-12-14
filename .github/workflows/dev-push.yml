@@ -48,3 +48,10 @@ jobs:
   badges:
     needs: [unit-tests, build-storybook]
     uses: ./.github/workflows/badges.yml
+
+  sonar:
+    needs: [build]
+    uses: ./.github/workflows/sonar.yml
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}

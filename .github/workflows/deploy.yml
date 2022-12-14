@@ -27,6 +27,10 @@ jobs:
           name: build-${{ inputs.configuration }}
           path: dist
 
+      # Copy default redirect page
+      - name: Redirect page copy
+        run: cp src/redirect.html dist/vernite/index.html
+
       # Deploy to server using rsync
       - name: Deploy app 🚀
         uses: easingthemes/ssh-deploy@main

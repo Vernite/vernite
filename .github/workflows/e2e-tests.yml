@@ -6,6 +6,7 @@ jobs:
   cypress-run:
     name: E2E Tests
     runs-on: ubuntu-latest
+    continue-on-error: true
     container: cypress/browsers:node16.16.0-chrome107-ff107-edge
     steps:
       # Install NPM dependencies, cache them correctly
