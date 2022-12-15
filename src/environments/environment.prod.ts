@@ -10,4 +10,5 @@ export const environment = {
   disableIntegrationRegistryCheck: false,
   websocketUrl: 'wss://vernite.dev/api/ws',
   logSocketMessages: false,
+  captchaSiteKey: '6LcUZ8gfAAAAAGpAZpXpV1K8NO_7-rSCPD-tGtR9',
 };

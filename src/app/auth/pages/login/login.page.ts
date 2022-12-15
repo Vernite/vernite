@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { Router } from '@angular/router';
 import { UserService } from '@auth/services/user/user.service';
-import { catchError, EMPTY, Subscription } from 'rxjs';
+import { catchError, EMPTY, of, Subscription, switchMap, take } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { AuthService } from '@auth/services/auth/auth.service';
 import { Loader } from '../../../_main/classes/loader/loader.class';
-import { withLoader } from '../../../_main/operators/loader.operator';
+import { startLoader, stopLoader } from '../../../_main/operators/loader.operator';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-login',
@@ -18,15 +19,14 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private router: Router,
+    private recaptchaV3Service: ReCaptchaV3Service,
   ) {}
 
   private loginSubscription?: Subscription;
   public error?: string;
   public loader = new Loader();
 
-  /**
-   * Form group for login.
-   */
+  /** Form group for login. */
   public form = new FormGroup({
     email: new FormControl('', [requiredValidator()], []),
     password: new FormControl('', [requiredValidator()], []),
@@ -48,10 +48,13 @@ export class LoginPage implements OnInit {
 
     if (this.form.valid) {
       this.error = undefined;
-      this.loginSubscription = this.authService
-        .login(this.form.value)
+
+      of(null)
         .pipe(
-          withLoader(this.loader),
+          startLoader(this.loader),
+          switchMap(() => this.recaptchaV3Service.execute('login').pipe(take(1))),
+          switchMap((captcha: string) => this.authService.login({ ...this.form.value, captcha })),
+          stopLoader(this.loader),
           catchError((e) => {
             this.handleError(e);
             return EMPTY;
@@ -77,6 +80,9 @@ export class LoginPage implements OnInit {
       case 404:
         this.error = $localize`Wrong username or password`;
         break;
+      case 400:
+      case 500:
+        this.error = $localize`Internal server error`;
     }
   }
 }

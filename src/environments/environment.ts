@@ -39,4 +39,6 @@ export const environment = {
    * Whether to log socket messages (can also be enabled with console command in runtime).
    */
   logSocketMessages: false,
+
+  captchaSiteKey: '6LcUZ8gfAAAAAGpAZpXpV1K8NO_7-rSCPD-tGtR9',
 };

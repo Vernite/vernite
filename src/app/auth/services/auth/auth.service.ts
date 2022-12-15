@@ -28,15 +28,17 @@ export class AuthService extends BaseService<Errors<'INVALID_TOKEN'>> {
     name,
     surname,
     username,
+    captcha,
   }: {
     email: string;
     password: string;
     name: string;
     surname: string;
     username: string;
+    captcha: string;
   }) {
     return this.apiService.post(`/auth/register`, {
-      body: { email, password, name, surname, username },
+      body: { email, password, name, surname, username, captcha },
     });
   }
 
@@ -44,13 +46,15 @@ export class AuthService extends BaseService<Errors<'INVALID_TOKEN'>> {
     email,
     password,
     remember,
+    captcha,
   }: {
     email: string;
     password: string;
     remember: boolean;
+    captcha: string;
   }): Observable<User> {
     return this.apiService
-      .post(`/auth/login`, { body: { email, password, remember } })
+      .post(`/auth/login`, { body: { email, password, remember, captcha } })
       .pipe(tap(() => localStorage.setItem('lastLoginTry', dayjs().valueOf().toString())));
   }
 
