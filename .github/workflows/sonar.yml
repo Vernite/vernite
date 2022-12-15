@@ -1,5 +1,9 @@
 on:
   workflow_call:
+    inputs:
+      configuration:
+        required: true
+        type: string
     secrets:
       SONAR_TOKEN:
         required: true

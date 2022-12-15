@@ -52,6 +52,8 @@ jobs:
   sonar:
     needs: [build]
     uses: ./.github/workflows/sonar.yml
+    with:
+      configuration: dev
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
