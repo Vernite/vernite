@@ -26,6 +26,13 @@ jobs:
           name: build-${{ inputs.configuration }}
           path: dist
 
+      # Download artifacts (coverage)
+      - name: Download artifacts (coverage)
+        uses: actions/download-artifact@v2
+        with:
+          name: unit-tests
+          path: coverage
+
       # SonarQube scan
       - uses: sonarsource/sonarqube-scan-action@master
         env:

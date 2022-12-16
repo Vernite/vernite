@@ -50,7 +50,7 @@ jobs:
     uses: ./.github/workflows/badges.yml
 
   sonar:
-    needs: [build]
+    needs: [build, unit-tests]
     uses: ./.github/workflows/sonar.yml
     with:
       configuration: dev
