@@ -11,7 +11,7 @@ on:
         required: true
 
 jobs:
-  deploy:
+  sonar:
     runs-on: ubuntu-latest
 
     steps:

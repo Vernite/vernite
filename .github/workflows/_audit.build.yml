@@ -1,0 +1,43 @@
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  audit-build:
+    name: Audit build
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Install Node.js version 16.x
+      - name: Install Node.js version 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+
+      # Cache node modules
+      - name: Cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules-yarn
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Install yarn
+        run: npm i -g yarn
+
+      # Run audit build
+      - name: Audit build
+        run: yarn audit:build
+
+      # Upload artifacts
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: audit-report
+          path: documentation/audit
+

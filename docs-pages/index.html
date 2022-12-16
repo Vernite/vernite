@@ -1,35 +1,24 @@
 <!DOCTYPE html>
 
 <head>
-  <style>
-    body {
-      background-color: #161B2C;
-      color: white;
-      font-family: Montserrat, sans-serif;
-      padding: 1rem 2rem;
-    }
-
-    ul {
-      list-style-type: none;
-      padding-left: 1rem;
-    }
-
-    li {
-      margin-top: 10px;
-    }
-
-    a {
-      color: white;
-      position: relative;
-    }
-  </style>
+  <script type="text/javascript">
+    fetch('https://api.github.com/repos/vernite/frontend/contents/?ref=gh-pages')
+      .then(data => data.json())
+      .then(() => {
+        const list = document.createElement('ul');
+        document.body.appendChild(list);
+        data.forEach(item => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = '#';
+          a.innerText = item.name;
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+      });
+  </script>
 </head>
 
 <body>
-  <h1>Vernite - frontend documentation</h1>
-  <p>Here you can find the documentation for the project.</p>
-  <ul>
-    <li><a href="https://vernite.github.io/frontend/prod/">&gt; Production version</a></li>
-    <li><a href="https://vernite.github.io/frontend/dev/">&gt; Development version</a></li>
-  </ul>
+
 </body>

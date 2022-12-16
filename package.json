@@ -1,6 +1,6 @@
 {
   "name": "vernite",
-  "version": "0.0.14",
+  "version": "1.0.0",
   "scripts": {
     "@------ WORKFLOW SCRIPTS --------": "",
     "postinstall": "husky install",
