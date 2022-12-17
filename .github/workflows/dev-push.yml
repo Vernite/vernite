@@ -65,5 +65,7 @@ jobs:
   docs:
     needs: [build-storybook, unit-tests, audit, badges]
     uses: ./.github/workflows/_docs.deploy.yml
+    with:
+      configuration: dev
     secrets:
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
