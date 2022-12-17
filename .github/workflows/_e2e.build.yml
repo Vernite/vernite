@@ -9,13 +9,23 @@ jobs:
     continue-on-error: true
     container: cypress/browsers:node16.16.0-chrome107-ff107-edge
     steps:
-      # Install NPM dependencies, cache them correctly
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules-yarn
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Install yarn
+        run: npm i -g yarn
       # and run all Cypress tests
       - name: Cypress run
-        uses: cypress-io/github-action@v4 # use the explicit version number
-        with:
-          # Specify Browser since container image is compile with Firefox
-          browser: firefox
+        run: |
+          yarn e2e:build
+          yarn e2e:coverage
 
 
   # deploy:

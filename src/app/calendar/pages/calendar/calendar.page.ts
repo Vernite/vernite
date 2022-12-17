@@ -3,9 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from '@auth/services/user/user.service';
 import { Event } from '@calendar/interfaces/event.interface';
 import { ProjectService } from '@dashboard/services/project/project.service';
-import { TaskService } from '@tasks/services/task/task.service';
 import dayjs from 'dayjs';
-import { Observable, of, startWith } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'calendar-page',
