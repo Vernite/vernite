@@ -17,5 +17,6 @@ import { MessageGroupComponent } from './components/message-group/message-group.
     MessageComponent,
     MessageGroupComponent,
   ],
+  exports: [MessageComponent],
 })
 export class MessagesModule {}

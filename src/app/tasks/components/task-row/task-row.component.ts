@@ -9,6 +9,7 @@ import {
 import { Status } from '@tasks/interfaces/status.interface';
 import { Task } from '@tasks/interfaces/task.interface';
 import { TaskService } from '@tasks/services/task/task.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'task-row',
@@ -39,7 +40,7 @@ export class TaskRowComponent implements AfterViewInit {
   /** @ignore */
   faCheck = faCheck;
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, private router: Router) {}
 
   ngAfterViewInit() {
     this.subtasksMaxHeight = this.subtasks?.nativeElement.scrollHeight || 0;
@@ -75,5 +76,9 @@ export class TaskRowComponent implements AfterViewInit {
 
   deleteTask(task: Task) {
     this.taskService.deleteWithConfirmation(this.projectId, task).subscribe();
+  }
+
+  openDetails(task: Task) {
+    this.router.navigate(['projects', this.projectId, 'tasks', task.id]);
   }
 }

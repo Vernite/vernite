@@ -27,8 +27,8 @@ export class TaskPage {
   public activeSprint$: Observable<Sprint> = EMPTY;
   public archivedSprints$: Observable<Sprint[]> = EMPTY;
 
-  private projectId: number = 0;
-  private taskId: number = 0;
+  public projectId: number = 0;
+  public taskId: number = 0;
 
   /** @ignore */
   faPen = faPen;
@@ -53,6 +53,12 @@ export class TaskPage {
     });
   }
 
+  /**
+   * Load task data into view
+   * @TODO: Refactor this method
+   * @param projectId Id of the project
+   * @param taskId Id of the task
+   */
   loadTask(projectId: number, taskId: number) {
     this.task$ = this.taskService.get(projectId, taskId).pipe(
       tap((task) => (this.status$ = this.statusService.get(projectId, task.statusId!))),

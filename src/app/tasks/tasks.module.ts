@@ -34,9 +34,11 @@ import { TaskPipe } from './pipes/task/task.pipe';
 import { BoardComponent } from './components/tasks-board/tasks-board.component';
 import { InputAssigneeComponent } from './components/input-assignee/input-assignee.component';
 import { MemberColorPipe } from './pipes/member-color/member-color.pipe';
+import { MessagesModule } from '../messages/messages.module';
+import { TaskCommentsComponent } from './components/task-comments/task-comments.component';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule],
+  imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule, MessagesModule],
   declarations: [
     BoardTaskComponent,
     TaskDialog,
@@ -69,6 +71,7 @@ import { MemberColorPipe } from './pipes/member-color/member-color.pipe';
     TaskPipe,
     InputAssigneeComponent,
     MemberColorPipe,
+    TaskCommentsComponent,
   ],
   exports: [TaskTypePipe, InputAssigneeComponent, TaskListComponent],
 })
