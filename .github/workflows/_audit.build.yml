@@ -30,6 +30,10 @@ jobs:
       - name: Install yarn
         run: npm i -g yarn
 
+      # Create audit directory
+      - name: Create audit directory
+        run: mkdir -p documentation/audit
+
       # Run audit build
       - name: Audit build
         run: yarn audit:build
