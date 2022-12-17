@@ -60,7 +60,7 @@ jobs:
 
   audit:
     needs: [prepare-environment]
-    uses: ./.github/workflows/_audit.yml
+    uses: ./.github/workflows/_audit.build.yml
 
   docs:
     needs: [build-storybook, unit-tests, audit, badges]
