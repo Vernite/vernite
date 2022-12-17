@@ -76,6 +76,7 @@ import { MarkdownPipe } from './pipes/markdown/markdown.pipe';
 import { SidebarGroupComponent } from './components/sidebar-navigation/sidebar-group/sidebar-group.component';
 import { ReversePipe } from './pipes/reverse/reverse.pipe';
 import { CollapsableDirective } from './directives/collapsable/collapsable.directive';
+import { ResizeModule } from './modules/resize/resize.module';
 
 /**
  * Main module configuration object
@@ -118,6 +119,7 @@ const ngModuleConfig = {
     MatTabsModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    ResizeModule,
 
     /*=============================================
       =              External modules               =

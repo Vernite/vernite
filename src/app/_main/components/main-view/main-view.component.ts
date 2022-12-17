@@ -15,6 +15,8 @@ export class MainViewComponent implements OnInit {
 
   public hideNavigation = false;
 
+  public sidebarWidth = 250;
+
   constructor(private routerExtensions: RouterExtensionsService) {}
 
   ngOnInit() {

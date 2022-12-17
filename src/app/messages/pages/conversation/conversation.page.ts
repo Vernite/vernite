@@ -76,6 +76,8 @@ export class ConversationPage implements OnInit {
         this.integrationId,
         channel.provider,
       );
+
+      this.form.reset();
     });
   }
 

@@ -1,0 +1,15 @@
+:host {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  cursor: w-resize;
+
+  &:hover {
+    border-right: 4px solid rgba(0, 0, 0, 0.1);
+  }
+}

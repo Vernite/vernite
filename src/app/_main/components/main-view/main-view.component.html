@@ -1,4 +1,5 @@
-<app-sidebar-navigation *ngIf="!hideNavigation"></app-sidebar-navigation>
+<app-sidebar-navigation *ngIf="!hideNavigation" resize [width]="sidebarWidth">
+</app-sidebar-navigation>
 
 <section>
   <app-upper-navigation *ngIf="!hideNavigation"></app-upper-navigation>

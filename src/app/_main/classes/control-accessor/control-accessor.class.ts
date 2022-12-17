@@ -217,6 +217,8 @@ export class ControlAccessor<T = any>
    * @param value The new value for the element
    */
   writeValue(value: T): void {
+    console.log(this.previousValue, value);
+
     this._previousValue = this._previousValueBuffer;
     this._previousValueBuffer = value;
   }

@@ -12,7 +12,7 @@
     <span class="header" i18n>Calendar</span>
   </sidebar-entry>
 
-  <sidebar-entry [icon]="faMessage" [collapsed]="isCollapsed" [expandable]="true">
+  <sidebar-entry [icon]="faMessage" [collapsed]="isCollapsed" [expandable]="(slackIntegrations$ | async)?.length">
     <span class="header" i18n>Messages</span>
     <div class="content">
       <sidebar-entry *ngFor="let integration of slackIntegrations$ | async" [icon]="faServer" [collapsed]="isCollapsed"
