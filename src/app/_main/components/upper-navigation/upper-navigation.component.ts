@@ -7,7 +7,7 @@ import { WorkspaceService } from '@dashboard/services/workspace/workspace.servic
 import { faAngleDown, faCog, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '@main/services/dialog/dialog.service';
 import { TaskService } from '@tasks/services/task/task.service';
-import { finalize, fromEvent, map, skip, take, catchError, throwError, Observable } from 'rxjs';
+import { finalize, fromEvent, map, skip, take, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-upper-navigation',
@@ -64,10 +64,6 @@ export class UpperNavigationComponent implements OnInit {
     this.authService
       .logout()
       .pipe(
-        catchError(() => {
-          location.reload();
-          return throwError(() => new Error());
-        }),
         finalize(() => {
           this.router.navigate(['/', 'auth', 'login']);
         }),

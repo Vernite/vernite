@@ -1,4 +1,13 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  ViewChild,
+  HostBinding,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 /**
@@ -9,7 +18,7 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
 })
-export class ButtonComponent {
+export class ButtonComponent implements OnChanges {
   /**
    * Style variant of the button.
    */
@@ -42,6 +51,8 @@ export class ButtonComponent {
    */
   @ViewChild('btn') elementRef!: ElementRef<HTMLButtonElement>;
 
+  @HostBinding('style.pointer-events') pointerEvents = 'auto';
+
   /**
    * Focus the native button element.
    */
@@ -49,5 +60,23 @@ export class ButtonComponent {
     setTimeout(() => {
       this.elementRef.nativeElement.focus();
     }, 200);
+  }
+
+  @HostListener('click', ['$event'])
+  onClick(event: MouseEvent) {
+    if (this.disabled) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['disabled']) {
+      if (this.disabled) {
+        this.pointerEvents = 'none';
+      } else {
+        this.pointerEvents = 'auto';
+      }
+    }
   }
 }
