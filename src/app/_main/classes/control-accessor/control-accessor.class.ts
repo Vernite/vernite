@@ -114,7 +114,9 @@ export class ControlAccessor<T = any>
     @Optional() public ngControl: NgControl,
     protected cdRef: ChangeDetectorRef,
   ) {
-    this.ngControl.valueAccessor = this;
+    if (this.ngControl) {
+      this.ngControl.valueAccessor = this;
+    }
   }
 
   ngOnInit() {
@@ -217,8 +219,6 @@ export class ControlAccessor<T = any>
    * @param value The new value for the element
    */
   writeValue(value: T): void {
-    console.log(this.previousValue, value);
-
     this._previousValue = this._previousValueBuffer;
     this._previousValueBuffer = value;
   }

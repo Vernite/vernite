@@ -61,7 +61,13 @@ export class AuthService extends BaseService<Errors<'INVALID_TOKEN'>> {
   public logout() {
     this.clearCache();
     this.store.clear();
-    return this.apiService.post(`/auth/logout`);
+    return this.apiService.post(`/auth/logout`).pipe(
+      tap(() => {
+        this.clearCache();
+        this.store.clear();
+        document.cookie = '';
+      }),
+    );
   }
 
   public resetPassword({ email }: { email: string }) {
