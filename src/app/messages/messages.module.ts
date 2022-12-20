@@ -8,6 +8,7 @@ import { MainModule } from '@main/_main.module';
 import { MessageComponent } from './components/message/message.component';
 import { MessageGroupComponent } from './components/message-group/message-group.component';
 
+/** Communication module with all messaging tools and pages */
 @NgModule({
   imports: [CommonModule, MainModule, MessagesRoutingModule],
   declarations: [

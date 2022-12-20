@@ -1,20 +1,21 @@
 import { FormControl } from '@ngneat/reactive-forms';
-import { componentWrapperDecorator } from '@storybook/angular';
+import { componentWrapperDecorator, StoryFn } from '@storybook/angular';
 import { merge, omit } from 'lodash-es';
 import { exposeAllPossibilities } from '../component-content-decorator.helper';
 import { StoryPageConfig } from './story-page-config.class';
 import { StoryTemplate } from './story-template.class';
-import { StoryFn } from '@storybook/angular';
 import {
   componentTemplateDecorator,
   wrapWithDiv,
 } from '../functions/component-template-decorator.function';
 
+/** Components props type */
 export type Props<C> = Partial<C> & {
   formControl?: FormControl<any>;
   content?: string;
 };
 
+/** Component docs story configuration interface */
 export interface StoryConfig<C> {
   config: StoryPageConfig;
   template: StoryTemplate<C>;
@@ -28,6 +29,7 @@ export interface StoryConfig<C> {
   html?: string;
 }
 
+/** Component documentation story */
 export class Story<C> {
   private _config: StoryConfig<C>;
   private _story: StoryFn<C>;
@@ -64,10 +66,12 @@ export class Story<C> {
     }
   }
 
+  /** Merge custom story config to default config */
   public mergeConfig(config: any) {
     merge(this._story, config);
   }
 
+  /** Add description to story */
   public addDescription(description: string) {
     this.mergeConfig({
       parameters: {
@@ -80,12 +84,14 @@ export class Story<C> {
     });
   }
 
+  /** Add custom component props to story */
   public addProps(props: Props<C>) {
     this.mergeConfig({
       args: omit(props, ['content']),
     });
   }
 
+  /** Add custom code snippet to component story */
   public addCode(code: string) {
     this.mergeConfig({
       parameters: {
@@ -100,6 +106,7 @@ export class Story<C> {
     });
   }
 
+  /** Add custom component template */
   public addTemplate(template: string) {
     this.mergeConfig({
       decorators: [componentWrapperDecorator(() => wrapWithDiv(template))],
@@ -115,6 +122,7 @@ export class Story<C> {
     });
   }
 
+  /** Configure default template string */
   public addDefaultTemplate() {
     this.mergeConfig({
       decorators: [
@@ -126,10 +134,12 @@ export class Story<C> {
     });
   }
 
+  /** Get component props */
   public get props() {
     return merge({}, this._config.props, this._config.template.props);
   }
 
+  /** Get story (used in storybook) */
   public story() {
     return this._story;
   }

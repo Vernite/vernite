@@ -18,6 +18,7 @@ import {
 import { ProtoService } from '../../_main/services/proto/proto.service';
 import { vernite } from '@vernite/protobuf';
 
+/** Slack integration service to manage channels and send/receive messages */
 @Injectable({
   providedIn: 'root',
 })
@@ -53,6 +54,7 @@ export class SlackIntegrationService extends BaseService<
     super(injector);
   }
 
+  /** Open slack installation page in new tab */
   public slackInstall(): Observable<boolean> {
     const win = window.open('/api/integration/slack/install', '_blank');
 
@@ -65,6 +67,7 @@ export class SlackIntegrationService extends BaseService<
     );
   }
 
+  /** Get user slack integrations list */
   @Cache()
   public getSlackIntegrations(): Observable<SlackIntegration[]> {
     return this.apiService.get(`/user/integration/slack`).pipe(
@@ -75,6 +78,8 @@ export class SlackIntegrationService extends BaseService<
     );
   }
 
+  /** Get slack integration channels list (grouped by installations) */
+  @Cache()
   public getSlackIntegrationsWithChannels(): Observable<SlackIntegrationWithChannels[]> {
     return this.getSlackIntegrations().pipe(
       switchMap((integrations) => {
@@ -92,6 +97,8 @@ export class SlackIntegrationService extends BaseService<
     );
   }
 
+  /** Get slack integration channels list (grouped by installations and joined with users) */
+  @Cache()
   public getSlackIntegrationsWithChannelsAndUsers(): Observable<
     SlackIntegrationWithChannelsAndUsers[]
   > {
@@ -111,6 +118,11 @@ export class SlackIntegrationService extends BaseService<
     );
   }
 
+  /**
+   * Get slack user by integration id and user id
+   * @param slackId Slack integration id
+   * @param userId Slack user id
+   */
   @Cache()
   public getUser(slackId: number, userId: string): Observable<SlackUser> {
     return this.apiService.get(`/user/integration/slack/${slackId}/user/${userId}`).pipe(
@@ -122,6 +134,13 @@ export class SlackIntegrationService extends BaseService<
     );
   }
 
+  /**
+   * Get messages from slack channel
+   * @param slackId Slack integration id
+   * @param channelId Slack channel id
+   * @param cursor Cursor for pagination
+   * @returns Observable with messages container
+   */
   @Cache()
   public getMessages(
     slackId: number,
@@ -141,6 +160,11 @@ export class SlackIntegrationService extends BaseService<
       );
   }
 
+  /**
+   * Send message to slack channel
+   * @param slackId Slack integration id
+   * @returns Observable with list of slack channels
+   */
   @Cache()
   public getChannels(slackId: number): Observable<SlackChannel[]> {
     return this.apiService.get(`/user/integration/slack/${slackId}/channel`).pipe(
@@ -152,6 +176,11 @@ export class SlackIntegrationService extends BaseService<
     );
   }
 
+  /**
+   * List all channels with users
+   * @param slackId Slack integration id
+   * @returns list of slack channels joined with users
+   */
   public getChannelsWithUsers(slackId: number) {
     return this.getChannels(slackId).pipe(
       switchMap((channels) => {
@@ -171,6 +200,12 @@ export class SlackIntegrationService extends BaseService<
     );
   }
 
+  /**
+   * Get slack channel details by integration id and channel id
+   * @param slackId Slack integration id
+   * @param channelId Slack channel id
+   * @returns Observable with slack channel
+   */
   public getChannel(slackId: number, channelId: string): Observable<SlackChannel> {
     // TODO: Move it to other endpoint for optimization
     return this.getChannels(slackId).pipe(
@@ -178,6 +213,12 @@ export class SlackIntegrationService extends BaseService<
     );
   }
 
+  /**
+   * Get slack channel details (joined with user) by integration id and channel id
+   * @param slackId Slack integration id
+   * @param channelId Slack channel id
+   * @returns Observable with slack channel joined with user
+   */
   public getChannelWithUser(slackId: number, channelId: string): Observable<SlackChannelWithUser> {
     return this.getChannel(slackId, channelId).pipe(
       switchMap((channel) => {
@@ -194,6 +235,11 @@ export class SlackIntegrationService extends BaseService<
     );
   }
 
+  /**
+   * Detach slack integration from user account
+   * @param slackId Slack integration id
+   * @returns empty observable when the action is successful
+   */
   public deleteSlackIntegration(slackId: number): Observable<void> {
     return this.apiService.delete(`/user/integration/slack/${slackId}`).pipe(
       this.validate({
@@ -204,6 +250,10 @@ export class SlackIntegrationService extends BaseService<
     );
   }
 
+  /**
+   * Delete slack integration with confirmation dialog
+   * @param slackId Slack integration id
+   */
   public deleteWithConfirmation(slackId: number) {
     return this.dialogService
       .confirm({
@@ -221,6 +271,13 @@ export class SlackIntegrationService extends BaseService<
       );
   }
 
+  /**
+   * Send message to slack channel
+   * @param content Message content
+   * @param channelId Slack channel id
+   * @param integrationId Slack integration id
+   * @param provider Integration provider (in this case it's always `slack`)
+   */
   public sendMessage(content: string, channelId: string, integrationId: number, provider: string) {
     const messageObject = new vernite.CommunicatorModel.SendMessage({
       content,
@@ -232,6 +289,11 @@ export class SlackIntegrationService extends BaseService<
     this.protoService.next(messageObject);
   }
 
+  /**
+   * Get messages from slack channel (using protobuf channel)
+   * @param channelId Slack channel id
+   * @returns observable with messages from slack channel
+   */
   public protoMessages(channelId: string): Observable<vernite.CommunicatorModel.Message> {
     return this.protoService
       .get<vernite.CommunicatorModel.Message>(vernite.CommunicatorModel.Message)

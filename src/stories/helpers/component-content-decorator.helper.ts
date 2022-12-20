@@ -1,16 +1,19 @@
 import { ArgTypes, componentWrapperDecorator, Story } from '@storybook/angular';
 import { wrapWithDiv } from './functions/component-template-decorator.function';
 
+/** Insert content into component template */
 const setContent = (template: string, content: string) => {
   return template.replace(/(?<=(<[^/]*))>.?<(?=\/)/g, `>${content}<`);
 };
 
+/** Decorator to insert content into component template */
 export const componentContentDecorator = (content: string) => {
   return componentWrapperDecorator((story) => {
     return setContent(story, content);
   });
 };
 
+/** Decorator to build template with all possible values of specific property */
 export const exposeAllPossibilities = <C = any>(
   story: Story<C>,
   selector: string,
