@@ -9,6 +9,9 @@ import { TimeTrack } from './../../interfaces/time-track.interface';
 import { UserService } from '@auth/services/user/user.service';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 
+/**
+ * Tracker component to track time spent on task
+ */
 @UntilDestroy()
 @Component({
   selector: 'tracker',
@@ -17,9 +20,16 @@ import { CdkConnectedOverlay } from '@angular/cdk/overlay';
   providers: [TimeTracksTotalPipe],
 })
 export class TrackerComponent implements OnInit {
+  /** Tracker overlay reference */
   @ViewChild(CdkConnectedOverlay) overlay!: ElementRef<HTMLElement>;
 
+  /** Id of the project */
   @Input() projectId!: number;
+
+  /**
+   * Task to track time on
+   * @TODO move this to ngOnChanges and remove private variable
+   */
   @Input() set task(task: Task) {
     this._task = task;
     this.timeTracks = [
@@ -34,8 +44,11 @@ export class TrackerComponent implements OnInit {
   get task() {
     return this._task;
   }
+
+  /** Task to track time on */
   private _task!: Task;
 
+  /** List of time tracks attached to this task */
   public timeTracks: ({ new: boolean } & TimeTrack)[] = [];
 
   /** @ignore */
@@ -50,17 +63,24 @@ export class TrackerComponent implements OnInit {
   /** @ignore */
   faPlus = faPlus;
 
+  /** tracker is in enabled state */
   public enabled = false;
 
+  /** overlay is open state */
   public readonly isOpen$ = new BehaviorSubject<boolean>(false);
 
+  /** Timer value */
   public readonly timer$ = new BehaviorSubject<number>(0);
+
+  /** Interval observable */
   private interval$: Observable<number> = interval(1000);
 
+  /** Set overlay open state */
   public set isOpen(val: boolean) {
     this.isOpen$.next(val);
   }
 
+  /** Get overlay open state */
   public get isOpen() {
     return this.isOpen$.value;
   }
@@ -82,14 +102,17 @@ export class TrackerComponent implements OnInit {
       });
   }
 
+  /** Open overlay */
   public openDetails() {
     this.isOpen$.next(true);
   }
 
+  /** Close overlay */
   public closeDetails() {
     this.isOpen$.next(false);
   }
 
+  /** Toggle overlay */
   public toggleDetails() {
     if (this.isOpen) {
       return this.closeDetails();
@@ -97,16 +120,19 @@ export class TrackerComponent implements OnInit {
     return this.openDetails();
   }
 
+  /** Stop tracking time */
   public stop() {
     this.trackerService.stop(this.projectId, this._task.id).subscribe();
     this.disable();
   }
 
+  /** Start tracking time */
   public start() {
     this.trackerService.start(this.projectId, this._task.id).subscribe();
     this.enable();
   }
 
+  /** Toggle tracking time */
   public toggle() {
     if (this.enabled) {
       return this.stop();
@@ -114,14 +140,17 @@ export class TrackerComponent implements OnInit {
     return this.start();
   }
 
+  /** Enable time track */
   private enable() {
     this.enabled = true;
   }
 
+  /** disable time track */
   private disable() {
     this.enabled = false;
   }
 
+  /** Insert new time track entry */
   public insertTimeTrack() {
     this.userService.getMyself().subscribe((user) => {
       this.timeTracks = [

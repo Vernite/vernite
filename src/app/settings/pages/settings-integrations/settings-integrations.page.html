@@ -6,9 +6,8 @@
     <app-button [icon]="faPlus" class="suffix" variant="transparent" (click)="openGitHubIntegration()"></app-button>
   </app-list-group>
   <div class="list">
-    <app-integration-entry *ngFor="let o of gitHubAccounts$ | async" [label]="o.account.gitHubUsername"
-      [integration]="o.account" (disconnect)="disconnectGithubAccount($event)" [suspended]="o.account.suspended"
-      [description]="o.usage | async" i18n-label>
+    <app-integration-entry *ngFor="let o of gitHubAccounts$ | async" [label]="o.account.login" [integration]="o.account"
+      (disconnect)="disconnectGithubAccount($event)" [description]="o.usage | async" i18n-label>
     </app-integration-entry>
   </div>
 </ng-container>

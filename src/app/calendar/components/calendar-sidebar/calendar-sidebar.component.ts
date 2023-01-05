@@ -7,6 +7,9 @@ import { MeetingService } from '@calendar/services/meeting.service';
 import { ActivatedRoute } from '@angular/router';
 import { CalendarService } from '@calendar/services/calendar.service';
 
+/**
+ * Sidebar component to display calendar
+ */
 @UntilDestroy()
 @Component({
   selector: 'calendar-sidebar',
@@ -14,14 +17,18 @@ import { CalendarService } from '@calendar/services/calendar.service';
   styleUrls: ['./calendar-sidebar.component.scss'],
 })
 export class CalendarSidebarComponent implements OnInit {
+  /** Date to display */
   @Input() set date(date: dayjs.Dayjs) {
     this.cursor.setValue(date);
   }
 
+  /** Event emitter to emit selected date */
   @Output() selectDate = new EventEmitter<dayjs.Dayjs>();
 
+  /** Form control for cursor */
   public cursor = new FormControl<dayjs.Dayjs>();
 
+  /** Id of the project */
   public projectId: number | null = null;
 
   /** @ignore */
@@ -47,12 +54,14 @@ export class CalendarSidebarComponent implements OnInit {
     });
   }
 
+  /** Open new meeting dialog */
   openNewMeetingDialog() {
     this.meetingService.openNewMeetingDialog(this.projectId || undefined).subscribe(() => {
       location.reload();
     });
   }
 
+  /** Open export dialog */
   openExportDialog() {
     this.calendarService.openSyncUrlDialog().subscribe();
   }

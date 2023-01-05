@@ -6,19 +6,26 @@ import { UserService } from '../../../auth/services/user/user.service';
 import { environment } from 'src/environments/environment';
 import { SnackbarService } from '@main/services/snackbar/snackbar.service';
 
+/**
+ * Component to display localization settings
+ */
 @Component({
   selector: 'app-settings-localization-page',
   templateUrl: './settings-localization.page.html',
   styleUrls: ['./settings-localization.page.scss'],
 })
 export class SettingsLocalizationPage implements OnInit {
+  /** Form to change localization settings */
   public form = new FormGroup({
     language: new FormControl('', requiredValidator()),
     dateFormat: new FormControl(''),
     timeFormat: new FormControl(''),
   });
 
-  // TODO: Move this section to a service
+  /**
+   * List of available languages
+   * @TODO Move this list to service
+   */
   languages = [
     {
       code: 'de-DE',
@@ -50,11 +57,19 @@ export class SettingsLocalizationPage implements OnInit {
     },
   ];
 
+  /**
+   * Available date formats
+   * @TODO Move this list to service
+   */
   dateFormats = ['YYYY-MM-DD', 'DD-MM-YYYY', 'MM/DD/YYYY', 'DD.MM.YYYY'].map((format) => ({
     format,
     example: dayjs().format(format),
   }));
 
+  /**
+   * Available time formats
+   * @TODO Move this list to service
+   */
   timeFormats = ['HH:mm', 'hh:mm A', 'hh:mm a'].map((format) => ({
     format,
     example: dayjs().format(format),
@@ -68,6 +83,7 @@ export class SettingsLocalizationPage implements OnInit {
     });
   }
 
+  /** Refresh application language based on value filled in form */
   changeLanguage() {
     this.userService.update(this.form.value).subscribe(() => {
       localStorage.setItem('language', this.form.value.language);
@@ -80,6 +96,7 @@ export class SettingsLocalizationPage implements OnInit {
     });
   }
 
+  /** Submit form */
   submit() {
     this.changeLanguage();
   }

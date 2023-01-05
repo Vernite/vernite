@@ -15,12 +15,19 @@ import { IntegrationModuleEntry } from '@main/interfaces/integration-module.inte
 import { IntegrationComponent } from '@dashboard/modules/integration-modules/interfaces/integration-component.interface';
 import { defaultIfEmpty, forkJoin, of, switchMap } from 'rxjs';
 
+/**
+ * Integration modules grid component
+ */
 @Component({
   selector: 'integration-modules-grid',
   templateUrl: './integration-modules-grid.component.html',
   styleUrls: ['./integration-modules-grid.component.scss'],
 })
 export class IntegrationModulesGridComponent implements OnInit, AfterViewInit {
+  /**
+   * Project to edit
+   * @TODO Move to ngOnChanges
+   */
   @Input() set project(project: Project | undefined) {
     this._project = project;
     for (const module of this.selectedModules.values()) {
@@ -30,12 +37,19 @@ export class IntegrationModulesGridComponent implements OnInit, AfterViewInit {
   get project(): Project | undefined {
     return this._project;
   }
+  /** Project to edit */
   private _project?: Project;
 
+  /** Grid element reference */
   @ViewChild('grid', { read: ViewContainerRef }) grid!: ViewContainerRef;
 
+  /** Map of selected integration modules */
   public selectedModules = new Map<string, ComponentRef<IntegrationComponent>>();
+
+  /** List of integrated modules */
   public integratedModules: IntegrationModuleEntry[] = [];
+
+  /** List of modules to integrate */
   public modulesToIntegrate: IntegrationModuleEntry[] = [];
 
   /** @ignore */
@@ -64,6 +78,7 @@ export class IntegrationModulesGridComponent implements OnInit, AfterViewInit {
     this.createModuleComponents(this.integratedModules);
   }
 
+  /** Open integration module select dialog */
   openIntegrationModuleSelectDialog() {
     this.integrationModuleService
       .openIntegrationModuleSelectDialog({
@@ -78,6 +93,10 @@ export class IntegrationModulesGridComponent implements OnInit, AfterViewInit {
       });
   }
 
+  /**
+   * Create integration module components
+   * @param modules List of modules to create
+   */
   createModuleComponents(modules: IntegrationModuleEntry[]) {
     // Add all new selected integration modules
     for (const module of modules) {
@@ -98,6 +117,9 @@ export class IntegrationModulesGridComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /**
+   * Save all integration modules
+   */
   saveAll() {
     const modules = [...this.selectedModules.values()];
     const modulesToDetach = this.integratedModules.filter((m) => !this.selectedModules.has(m.id));

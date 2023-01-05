@@ -2,6 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { TaskType } from '@tasks/enums/task-type.enum';
 import * as Color from 'color';
 
+/**
+ * Pipe to get task type name, icon or color base on type
+ */
 @Pipe({
   name: 'taskType',
 })

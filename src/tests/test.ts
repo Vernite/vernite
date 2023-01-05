@@ -8,7 +8,7 @@ import {
 } from '@angular/platform-browser-dynamic/testing';
 
 /**
- * Context builder form karma tests
+ * Context builder for karma tests
  */
 declare const require: {
   context(

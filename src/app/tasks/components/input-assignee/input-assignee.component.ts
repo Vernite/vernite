@@ -1,5 +1,5 @@
 import { Input, Component, ChangeDetectorRef, Optional } from '@angular/core';
-import { ControlAccessor } from '@main/classes/control-accessor.class';
+import { ControlAccessor } from '@main/classes/control-accessor/control-accessor.class';
 import { ProjectMember } from '../../../dashboard/interfaces/project-member.interface';
 import { NgControl } from '@angular/forms';
 import { memoize } from 'lodash-es';

@@ -3,8 +3,6 @@
  */
 export function Service() {
   return function decorator(target: any) {
-    // if (environment.production) return;
-
     setTimeout(() => {
       const WINDOW = window as any;
       const ngRef = WINDOW.ngRef;

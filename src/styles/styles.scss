@@ -28,6 +28,7 @@
 @import 'elements/table';
 @import 'elements/markdown';
 @import 'elements/scrollbar';
+@import 'elements/resize';
 
 // Tailwind dependencies imports
 @tailwind base;
@@ -43,4 +44,8 @@ body {
 
 body {
   margin: 0;
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
 }

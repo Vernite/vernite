@@ -5,6 +5,9 @@ import { UserService } from '@auth/services/user/user.service';
 import { requiredValidator } from '@main/validators/required.validator';
 import { SnackbarService } from '@main/services/snackbar/snackbar.service';
 
+/**
+ * Settings account page component
+ */
 @Component({
   selector: 'app-settings-account-page',
   templateUrl: './settings-account.page.html',
@@ -17,6 +20,7 @@ export class SettingsAccountPage implements OnInit {
     private snackbarService: SnackbarService,
   ) {}
 
+  /** Form to edit account data */
   public form = new FormGroup({
     email: new FormControl('', requiredValidator()),
     name: new FormControl('', requiredValidator()),
@@ -30,6 +34,9 @@ export class SettingsAccountPage implements OnInit {
     });
   }
 
+  /**
+   * Submit form to update account data
+   */
   submit() {
     this.form.markAllAsTouched();
     this.form.updateValueAndValidity();
@@ -40,6 +47,10 @@ export class SettingsAccountPage implements OnInit {
     });
   }
 
+  /**
+   * Reset password
+   * @TODO Add confirmation dialog
+   */
   resetPassword() {
     const email = this.form.get('email').value;
 
@@ -48,9 +59,12 @@ export class SettingsAccountPage implements OnInit {
     });
   }
 
+  /**
+   * Delete account
+   * @TODO Add confirmation dialog
+   */
   deleteAccountMailCheck() {
     this.authService.deleteAccount().subscribe(() => {
-      // TODO: dodac popup czy na pewno zgadzamy sie na usuniecie konta, jesli tak to infomracja ze zostal wyslany link na maila dezaktywujacy konto i ze ma mozliwosc jego przywrocenia do 7 dni
       this.authService.logout().subscribe();
     });
   }

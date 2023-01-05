@@ -2,6 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Status } from '@tasks/interfaces/status.interface';
 import Color from 'color';
 
+/**
+ * Pipe to get color of task status
+ */
 @Pipe({
   name: 'statusColor',
 })

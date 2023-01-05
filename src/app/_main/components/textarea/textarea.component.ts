@@ -1,6 +1,6 @@
 import { Monaco } from './../../libs/monaco/monaco.lib';
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { ControlAccessor } from '@main/classes/control-accessor.class';
+import { ControlAccessor } from '@main/classes/control-accessor/control-accessor.class';
 import { editor } from 'monaco-editor';
 // eslint-disable-next-line unused-imports/no-unused-imports
 import { marked, Renderer } from 'marked';
@@ -143,8 +143,12 @@ export class TextareaComponent extends ControlAccessor implements OnInit, AfterV
   }
 
   override writeValue(value: any) {
-    this.editor?.setValue(value);
     super.writeValue(value);
+
+    if (this.previousValue !== value) {
+      console.log(this.previousValue, value, this.previousValue !== value);
+      this.editor?.getModel()?.setValue(value || '');
+    }
   }
 
   applyUnderline() {

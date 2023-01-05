@@ -7,6 +7,9 @@ import { UserService } from '@auth/services/user/user.service';
 import dayjs from 'dayjs';
 import { AuthService } from '@auth/services/auth/auth.service';
 
+/**
+ * Error interceptor
+ */
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(
@@ -16,8 +19,16 @@ export class ErrorInterceptor implements HttpInterceptor {
     private authService: AuthService,
   ) {}
 
+  /**
+   * Flag to stop interception process
+   */
   private _stoppedInterceptionProcess = false;
 
+  /**
+   * Construct error object from raw error object
+   * @param e Raw error object
+   * @returns Error object
+   */
   constructError(e: any) {
     return {
       status: e?.status || 0,
@@ -25,6 +36,9 @@ export class ErrorInterceptor implements HttpInterceptor {
     };
   }
 
+  /**
+   * Stop interception process
+   */
   stopInterceptionProcess() {
     this._stoppedInterceptionProcess = true;
   }

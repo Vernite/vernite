@@ -11,11 +11,9 @@ import { StatusLabelComponent } from './components/status-label/status-label.com
 import { TaskDialog } from './dialogs/task/task.dialog';
 import { SprintDialog } from './dialogs/sprint/sprint.dialog';
 import { SchedulePage } from './pages/schedule/schedule.page';
-import { TaskListPage } from './pages/task-list/task-list.page';
 import { StatusColorPipe } from './pipes/status-color.pipe';
 import { TaskPriorityIconPipe } from './pipes/task-priority-icon.pipe';
 import { TaskPriorityPipe } from './pipes/task-priority.pipe';
-import { TaskTypeIconPipe } from './pipes/task-type-icon.pipe';
 import { TaskTypePipe } from './pipes/task-type.pipe';
 import { TasksRoutingModule } from './tasks.routing';
 import { TrackerComponent } from './components/tracker/tracker.component';
@@ -35,17 +33,17 @@ import { TaskPipe } from './pipes/task/task.pipe';
 import { BoardComponent } from './components/tasks-board/tasks-board.component';
 import { InputAssigneeComponent } from './components/input-assignee/input-assignee.component';
 import { MemberColorPipe } from './pipes/member-color/member-color.pipe';
+import { MessagesModule } from '../messages/messages.module';
+import { TaskCommentsComponent } from './components/task-comments/task-comments.component';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule],
+  imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule, MessagesModule],
   declarations: [
     BoardTaskComponent,
-    TaskListPage,
     TaskDialog,
     TaskTypePipe,
     TaskPriorityPipe,
     TaskPriorityIconPipe,
-    TaskTypeIconPipe,
     SchedulePage,
     AssigneeComponent,
     StatusLabelComponent,
@@ -71,6 +69,7 @@ import { MemberColorPipe } from './pipes/member-color/member-color.pipe';
     TaskPipe,
     InputAssigneeComponent,
     MemberColorPipe,
+    TaskCommentsComponent,
   ],
   exports: [TaskTypePipe, InputAssigneeComponent, TaskListComponent],
 })

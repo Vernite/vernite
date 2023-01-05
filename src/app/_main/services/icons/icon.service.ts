@@ -5,11 +5,17 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { RouterExtensionsService } from '../router-extensions/router-extensions.service';
 import { APP_BASE_HREF } from '@angular/common';
 
+/**
+ * Icon service - to register custom icons
+ */
 @Service()
 @Injectable({
   providedIn: 'root',
 })
 export class IconService {
+  /** Icons path */
+  private iconsPath = '';
+
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
@@ -17,7 +23,12 @@ export class IconService {
     @Optional() @Inject(APP_BASE_HREF) private baseHref: string,
   ) {}
 
+  /**
+   * Init icon service by registering custom icons
+   */
   init() {
+    this.iconsPath = this.buildIconsPath();
+
     this.addSvgIcon('dashboard', 'assets/icons/dashboard.svg');
 
     this.addSvgIcon('epic', 'assets/icons/epic.svg');
@@ -33,15 +44,32 @@ export class IconService {
     this.addSvgIcon('priority_lowest', 'assets/icons/priority_lowest.svg');
   }
 
+  /**
+   * Add svg icon to registry
+   * @param iconName icon name to save in registry
+   * @param url icon url
+   */
   private addSvgIcon(iconName: string, url: string) {
-    const baseHref = this.baseHref || '/';
-
-    console.log(baseHref);
-    console.log(window.location.origin + baseHref + url);
-
     this.matIconRegistry.addSvgIcon(
       iconName,
-      this.domSanitizer.bypassSecurityTrustResourceUrl(window.location.origin + baseHref + url),
+      this.domSanitizer.bypassSecurityTrustResourceUrl(this.iconsPath + url),
     );
+  }
+
+  /**
+   * Build icons path from baseHref and language
+   * @returns icons path
+   */
+  private buildIconsPath() {
+    const baseHref = this.baseHref || '/';
+    const language: string | null = this.routerExtensions.snapshot.language as string | null;
+
+    let finalPath = window.location.origin + baseHref;
+
+    if (language && !baseHref.includes(language)) {
+      finalPath += language + '/';
+    }
+
+    return finalPath;
   }
 }

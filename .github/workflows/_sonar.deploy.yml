@@ -1,0 +1,40 @@
+on:
+  workflow_call:
+    inputs:
+      configuration:
+        required: true
+        type: string
+    secrets:
+      SONAR_TOKEN:
+        required: true
+      SONAR_HOST_URL:
+        required: true
+
+jobs:
+  sonar:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Download artifacts
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: build-${{ inputs.configuration }}
+          path: dist
+
+      # Download artifacts (coverage)
+      - name: Download artifacts (coverage)
+        uses: actions/download-artifact@v2
+        with:
+          name: unit-tests
+          path: coverage
+
+      # SonarQube scan
+      - uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}

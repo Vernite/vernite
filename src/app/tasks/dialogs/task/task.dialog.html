@@ -16,7 +16,7 @@
 
     <!-- Type field -->
     <app-select formControlName="type" floatingLabel="Type" i18n-floatingLabel>
-      <app-option *ngFor="let type of taskTypes$ | async" [value]="type[1]" [icon]="type[0] | taskTypeIcon">
+      <app-option *ngFor="let type of taskTypes$ | async" [value]="type[1]" [icon]="type[0] | taskType:'icon'">
         {{ type[1] | taskType }}
       </app-option>
     </app-select>

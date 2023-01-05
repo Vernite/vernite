@@ -15,17 +15,26 @@ import { Sprint } from '@tasks/interfaces/sprint.interface';
 import { ProjectService } from '@dashboard/services/project/project.service';
 import { SprintStatus } from '@tasks/enums/sprint-status.enum';
 
+/**
+ * Sprint dialog variant: create or edit
+ * @TODO replace as something like SimpleDialogVariant
+ */
 export enum SprintDialogVariant {
   CREATE = 'create',
   EDIT = 'edit',
 }
 
+/** Sprint dialog data to pass to the component on creation */
 export interface SprintDialogData {
+  /** Project ID */
   projectId?: number;
+  /** Sprint dialog variant */
   variant: SprintDialogVariant;
+  /** Sprint to edit */
   sprint?: Partial<Sprint>;
 }
 
+/** Sprint editing or creation dialog */
 @UntilDestroy()
 @Component({
   selector: 'sprint-dialog',
@@ -33,11 +42,16 @@ export interface SprintDialogData {
   styleUrls: ['./sprint.dialog.scss'],
 })
 export class SprintDialog implements OnInit {
+  /** @ignore */
   SprintDialogVariant = SprintDialogVariant;
 
+  /** list of workspaces observable */
   public workspaceList$!: Observable<Workspace[]>;
+
+  /** list of projects observable */
   public projectList$: Observable<Project[]> = this.projectService.list();
 
+  /** Sprint editing or creation form */
   public form = new FormGroup({
     id: new FormControl<number | null>(null),
     name: new FormControl<string>('', [requiredValidator()]),
@@ -48,6 +62,7 @@ export class SprintDialog implements OnInit {
     status: new FormControl<SprintStatus>(this.data.sprint?.status || SprintStatus.CREATED),
   });
 
+  /** Observable to check if page is currently interactive */
   public interactive$ = timeToInteraction();
 
   constructor(
@@ -67,18 +82,23 @@ export class SprintDialog implements OnInit {
     }
   }
 
+  /**
+   * Load params from url
+   */
   loadParamsFromUrl() {
     const { projectId } = this.routerExtensions.snapshot.params;
 
     if (!isNil(projectId) && !this.data.projectId) this.data.projectId = Number(projectId);
   }
 
+  /** Dialog confirm action */
   confirm() {
     if (validateForm(this.form)) {
       this.dialogRef.close(this.form.value);
     }
   }
 
+  /** Dialog cancel action */
   cancel() {
     this.dialogRef.close(false);
   }

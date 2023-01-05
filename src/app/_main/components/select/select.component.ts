@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { ControlAccessor } from '@main/classes/control-accessor.class';
+import { ControlAccessor } from '@main/classes/control-accessor/control-accessor.class';
 import { FormControl } from '@ngneat/reactive-forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { BehaviorSubject } from 'rxjs';
@@ -19,6 +19,9 @@ import { InputComponent } from '../input/input.component';
 import { EmptyOptionsComponent } from './empty-options/empty-options.component';
 import { OptionComponent } from './option/option.component';
 
+/**
+ * Select component
+ */
 @UntilDestroy()
 @Component({
   selector: 'app-select',
@@ -27,36 +30,42 @@ import { OptionComponent } from './option/option.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectComponent extends ControlAccessor implements AfterViewInit {
+  /** input element reference */
   @ViewChild('input') input!: InputComponent;
+
+  /** overlay element reference */
   @ViewChild('overlay') overlay!: ElementRef<HTMLElement>;
+
+  /** @ignore */
   @ContentChildren(OptionComponent) queryOptions?: QueryList<OptionComponent>;
+
+  /** @ignore */
   @ContentChildren(EmptyOptionsComponent) emptyOptions?: QueryList<EmptyOptionsComponent>;
 
-  /**
-   * Floating label text to display
-   */
+  /** Floating label text to display */
   @Input() floatingLabel?: string;
 
+  /** Determine if input is pending */
   @Input() pending = false;
 
-  /**
-   * @TODO: Add documentation
-   * @deprecated
-   */
+  /** Comparer property */
   @Input() comparer?: string;
 
-  /**
-   * @TODO: Add documentation
-   */
+  /** Flag to allow element to be resized by error message */
   @Input() allowResizeByError?: boolean;
 
+  /** Flag to allow multiple selection */
   @Input() multiple?: boolean;
 
+  /** Flag to mark input to be readonly */
   @Input() readonly?: boolean;
 
+  /** if select is open */
   isOpen: boolean = false;
 
+  /** Selected options list */
   selectedOptions$ = new BehaviorSubject<OptionComponent[]>([]);
+
   override displayControl = new FormControl();
 
   /** @ignore */
@@ -69,15 +78,24 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     super(ngControl, cdRef);
   }
 
+  /**
+   * Open select overlay
+   */
   public openOverlay() {
     this.isOpen = true;
     this.overlayMinWidth = this.input.input.nativeElement.clientWidth;
   }
 
+  /**
+   * Close select overlay
+   */
   public closeOverlay() {
     this.isOpen = false;
   }
 
+  /**
+   * Toggle select overlay
+   */
   public toggleOverlay() {
     if (this.readonly) return;
 
@@ -105,6 +123,9 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     });
   }
 
+  /**
+   * Load select options
+   */
   private loadOptions() {
     this.clearSelection();
 
@@ -121,6 +142,9 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     this.cdRef.detectChanges();
   }
 
+  /**
+   * Clear selection from input
+   */
   private clearSelection() {
     if (this.queryOptions) {
       for (const option of this.queryOptions.toArray()) {
@@ -130,6 +154,10 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     this.selectedOptions$.next([]);
   }
 
+  /**
+   * Mark option as selected
+   * @param option Option to select
+   */
   private setAsSelected(option: OptionComponent | OptionComponent[] | null) {
     const currentlySelected = this.selectedOptions$.value;
 
@@ -152,6 +180,10 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     }
   }
 
+  /**
+   * Select option from overlay
+   * @param option Option to select
+   */
   public select(option: OptionComponent) {
     this.setAsSelected(option);
     if (!this.multiple) {
@@ -161,6 +193,10 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     }
   }
 
+  /**
+   * Deselect option from overlay
+   * @param option Option to deselect
+   */
   public deselect(option: OptionComponent) {
     const currentlySelected = this.selectedOptions$.value;
     const index = currentlySelected.findIndex((selectedOption) => option === selectedOption);
@@ -178,6 +214,10 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     }
   }
 
+  /**
+   * Toggle option selection
+   * @param option Option to toggle selection
+   */
   public toggleSelection(option: OptionComponent) {
     if (option.selected) {
       this.deselect(option);
@@ -186,6 +226,12 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     }
   }
 
+  /**
+   * Compare two elements
+   * @param a Element to compare
+   * @param b Element to compare with
+   * @returns True if elements are equal, false otherwise
+   */
   private compare(a: any, b: any) {
     if (Array.isArray(a) && Array.isArray(b)) {
       return a.every((a) => b.some((b) => a === b));
@@ -196,6 +242,10 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
     }
   }
 
+  /**
+   * On option click event listener]
+   * @param option option that was clicked
+   */
   private onOptionClick(option: OptionComponent) {
     if (this.multiple) {
       this.toggleSelection(option);
@@ -232,16 +282,4 @@ export class SelectComponent extends ControlAccessor implements AfterViewInit {
       this.displayControl.setValue('');
     }
   }
-
-  // override ngAfterControlInit(): void {
-  //   if (!this.control) return;
-
-  //   this.control.touch$.pipe(untilDestroyed(this)).subscribe(() => {
-  //     this.displayControl.markAsTouched();
-  //   });
-
-  //   this.control.errors$.pipe(untilDestroyed(this)).subscribe((errors) => {
-  //     this.displayControl.setErrors(errors);
-  //   });
-  // }
 }

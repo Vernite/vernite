@@ -12,6 +12,9 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 import { Release } from '../../interfaces/release.interface';
 import { ReleaseService } from '../../services/release.service';
 
+/**
+ * Release page component
+ */
 @UntilDestroy()
 @Component({
   selector: 'release-page',
@@ -19,20 +22,34 @@ import { ReleaseService } from '../../services/release.service';
   styleUrls: ['./release.page.scss'],
 })
 export class ReleasePage implements OnInit {
+  /** Project ID */
   public projectId!: number;
+
+  /** Project object */
   public project$: Observable<Project> = of();
 
+  /** Release ID */
   public releaseId!: number;
+
+  /** Release object */
   public release$: Observable<Release | undefined> = of();
 
+  /** List of filters */
   public filters = [];
+
+  /** Filters form control */
   public filtersControl = new FormControl();
 
+  /** List of statuses */
   public statusList$: Observable<Status[]> = of([]);
+
+  /** List of statuses with tasks */
   public statusListWithTasks$: Observable<StatusWithTasks[]> = of([]);
 
+  /** Empty Map of members as a replacement for empty list of project members during loading */
   public emptyMap: Map<number, ProjectMember> = new Map();
 
+  /** Map of members */
   public members$?: Observable<Map<number, ProjectMember>> = of(this.emptyMap);
 
   constructor(
@@ -56,18 +73,30 @@ export class ReleasePage implements OnInit {
     });
   }
 
+  /**
+   * Change release status to `published`
+   * @param release Release to publish
+   */
   publishRelease(release: Release) {
     this.releaseService.publish(this.projectId, release).subscribe(() => {
       location.reload();
     });
   }
 
+  /**
+   * Open release edit dialog
+   * @param release Release to edit
+   */
   editRelease(release: Release) {
     this.releaseService.openEditReleaseDialog(this.projectId, release).subscribe(() => {
       location.reload();
     });
   }
 
+  /**
+   * Open release delete dialog
+   * @param release Release to delete
+   */
   deleteRelease(release: Release) {
     this.releaseService.deleteWithConfirmation(this.projectId, release).subscribe(() => {
       location.reload();

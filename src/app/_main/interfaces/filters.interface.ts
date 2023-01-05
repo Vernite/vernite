@@ -1,53 +1,14 @@
-import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-
-// TODO: Rework filters interfaces
-
-export interface FilterBase {
-  label: string;
-  value: any;
-  apply(list: any[]): any[];
-}
-
-export interface FilterCheckbox<T = boolean> extends FilterBase {
-  type: 'checkbox';
-  options: {
-    1: T | null;
-    0: T | null;
-  };
-  value: 1 | 0;
-  apply(list: any[]): any[];
-}
-
-export interface FilterText extends FilterBase {
-  type: 'text';
-  value: string;
-}
-
-export interface FilterNumber extends FilterBase {
-  type: 'number';
-  value: number;
-}
-
-export interface FilterSelect<T> extends FilterBase {
-  type: 'select';
-  options: {
-    label: string;
-    value: T;
-    icon?: IconDefinition | string;
-  }[];
-  value: T | null;
-}
-
-export type Filter = FilterCheckbox<any> | FilterText | FilterNumber | FilterSelect<any>;
-
-export type FilterType = Filter['type'];
-
-// New filters system
+/**
+ * Data filter type
+ */
 export enum DataFilterType {
   FRONTEND = 'frontend',
   BACKEND = 'backend',
 }
 
+/**
+ * Data filter control type
+ */
 export enum DataFilterControlType {
   CHECKBOX = 'checkbox',
   TEXT = 'text',
@@ -56,26 +17,48 @@ export enum DataFilterControlType {
   DATE = 'date',
 }
 
+/**
+ * Data filter interface
+ */
 export interface DataFilter<T, V = any> {
+  /** Filter identifier */
   identifier: string;
+  /** Filter type */
   type: DataFilterType;
+  /** Filter field */
   field: string;
+  /** Filter value */
   value: V;
+  /** Filter apply function */
   apply(list: T[]): T[];
 }
 
+/**
+ * Data filter with view interface
+ * Probably not needed (Draft)
+ */
 export interface DataFilterWithView<T, V> extends DataFilter<T, V> {
+  /** Filter view */
   view(...args: any): {
     component: any;
   };
 }
 
+/**
+ * Data filter display interface
+ */
 export interface DataFilterDisplay<T, V> {
+  /** User control type */
   type: DataFilterControlType;
+  /** User control label */
   label: string;
+  /** User control data filter */
   dataFilter: DataFilter<T, V>;
 }
 
+/**
+ * Data filter checkbox interface
+ */
 export interface DataFilterCheckbox<T> extends DataFilterDisplay<T, boolean> {
   type: DataFilterControlType.CHECKBOX;
 }

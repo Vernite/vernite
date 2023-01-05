@@ -13,22 +13,38 @@ import { SprintService } from '@tasks/services/sprint.service';
 import { SprintFilters } from '@dashboard/filters/sprint.filters';
 import { SprintStatus } from '@tasks/enums/sprint-status.enum';
 
+/**
+ * Task page component to display task details in separated route
+ */
 @Component({
   selector: 'task-page',
   templateUrl: './task.page.html',
   styleUrls: ['./task.page.scss'],
 })
 export class TaskPage {
+  /** Task to display */
   public task$: Observable<Task> = EMPTY;
+
+  /** Task status */
   public status$: Observable<Status> = EMPTY;
+
+  /** Task assignee */
   public assignee$: Observable<ProjectMember | null> = EMPTY;
+
+  /** Task creator */
   public createdBy$: Observable<ProjectMember> = EMPTY;
 
+  /** Active sprint */
   public activeSprint$: Observable<Sprint> = EMPTY;
+
+  /** Archived sprints */
   public archivedSprints$: Observable<Sprint[]> = EMPTY;
 
-  private projectId: number = 0;
-  private taskId: number = 0;
+  /** Id of the project */
+  public projectId: number = 0;
+
+  /** Id of the task */
+  public taskId: number = 0;
 
   /** @ignore */
   faPen = faPen;
@@ -53,6 +69,12 @@ export class TaskPage {
     });
   }
 
+  /**
+   * Load task data into view
+   * @TODO Refactor this method
+   * @param projectId Id of the project
+   * @param taskId Id of the task
+   */
   loadTask(projectId: number, taskId: number) {
     this.task$ = this.taskService.get(projectId, taskId).pipe(
       tap((task) => (this.status$ = this.statusService.get(projectId, task.statusId!))),
@@ -79,6 +101,9 @@ export class TaskPage {
     );
   }
 
+  /**
+   * Deletes the task stored in the task$ observable with confirmation.
+   */
   deleteTask() {
     this.task$.subscribe((task) => {
       this.taskService.deleteWithConfirmation(task.projectId, task).subscribe(() => {
@@ -87,6 +112,9 @@ export class TaskPage {
     });
   }
 
+  /**
+   * Opens a dialog to edit the task stored in the task$ observable.
+   */
   editTask() {
     this.task$.subscribe((task) => {
       this.taskService.openEditTaskDialog(task.projectId, task).subscribe(() => {

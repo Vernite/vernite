@@ -2,6 +2,9 @@ import { ServiceMethodOptions } from '@main/services/base/service-method-options
 import { Observable } from 'rxjs';
 import { withLoader } from './loader.operator';
 
+/**
+ * Apply options operator function
+ */
 export function applyOptions(options?: ServiceMethodOptions) {
   return <T = any>(source: Observable<T>) => {
     if (!options) return source;

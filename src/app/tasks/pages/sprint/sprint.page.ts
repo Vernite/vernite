@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TaskService } from '@tasks/services/task/task.service';
 import { Observable, of } from 'rxjs';
-import { FormControl } from '@ngneat/reactive-forms';
 import { ProjectService } from '@dashboard/services/project/project.service';
 import { MemberService } from '@dashboard/services/member/member.service';
 import { Project } from '@dashboard/interfaces/project.interface';
@@ -18,6 +17,7 @@ import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
 import { FilterChannel } from '@main/components/filters/filter-channel.model';
 import { TaskFilters } from '@tasks/filters/task.filters';
 
+/** SCRUM Sprint details page */
 @UntilDestroy()
 @Component({
   selector: 'sprint-page',
@@ -25,18 +25,37 @@ import { TaskFilters } from '@tasks/filters/task.filters';
   styleUrls: ['./sprint.page.scss'],
 })
 export class SprintPage implements OnInit {
+  /** Associated sprint id */
   public projectId!: number;
+
+  /** Associated project observable */
   public project$: Observable<Project> = of();
+
+  /** Associated filters channel observable */
   public filters$ = FilterChannel.TASKS;
+
+  /** Current sprint view */
   public view: 'list' | 'board' = 'list';
 
+  /** Status list */
   public statusList$: Observable<Status[]> = of([]);
+
+  /** Status list with tasks */
   public statusListWithTasks$: Observable<StatusWithTasks[]> = of([]);
+
+  /** Sprint tasks in board structure */
   public board$: Observable<[string | Task, StatusWithTasks[]][]> = of([]);
+
+  /** Active sprint details */
   public activeSprint$: Observable<Sprint | undefined> = of();
+
+  /** Empty members map */
   public emptyMap: Map<number, ProjectMember> = new Map();
 
+  /** Members map */
   public members$?: Observable<Map<number, ProjectMember>> = of(this.emptyMap);
+
+  /** Sprint tasks list */
   public tasks$: Observable<Task[]> = of([]);
 
   constructor(
@@ -75,6 +94,9 @@ export class SprintPage implements OnInit {
     });
   }
 
+  /**
+   * Load tasks
+   */
   loadTasks() {
     this.activeSprint$ = this.sprintService.getActiveSprint(this.projectId);
     this.activeSprint$.subscribe((sprint) => {
@@ -95,6 +117,10 @@ export class SprintPage implements OnInit {
     });
   }
 
+  /**
+   * Start sprint
+   * @param sprint Sprint to start
+   */
   startSprint(sprint: Sprint) {
     this.sprintService
       .update(this.projectId, {
@@ -106,24 +132,40 @@ export class SprintPage implements OnInit {
       });
   }
 
+  /**
+   * Revert sprint
+   * @param sprint Sprint to revert
+   */
   revertSprint(sprint: Sprint) {
     this.sprintService.revertWithConfirmation(this.projectId, sprint).subscribe(() => {
       location.reload();
     });
   }
 
+  /**
+   * Close sprint
+   * @param sprint Sprint to close
+   */
   closeSprint(sprint: Sprint) {
     this.sprintService.closeWithConfirmation(this.projectId, sprint).subscribe(() => {
       location.reload();
     });
   }
 
+  /**
+   * Open sprint edit dialog
+   * @param sprint Sprint to edit
+   */
   editSprint(sprint: Sprint) {
     this.sprintService.openEditSprintDialog(this.projectId, sprint).subscribe(() => {
       location.reload();
     });
   }
 
+  /**
+   * Delete sprint
+   * @param sprint Sprint to delete
+   */
   deleteSprint(sprint: Sprint) {
     this.sprintService.deleteWithConfirmation(this.projectId, sprint).subscribe(() => {
       location.reload();

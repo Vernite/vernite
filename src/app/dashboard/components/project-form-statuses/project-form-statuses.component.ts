@@ -9,6 +9,9 @@ import { StatusService } from '@tasks/services/status/status.service';
 import { isEqual } from 'lodash-es';
 import { map, of, switchMap, tap, Observable, forkJoin, defaultIfEmpty } from 'rxjs';
 
+/**
+ * Project statuses form
+ */
 @UntilDestroy()
 @Component({
   selector: 'project-form-statuses',
@@ -16,11 +19,16 @@ import { map, of, switchMap, tap, Observable, forkJoin, defaultIfEmpty } from 'r
   styleUrls: ['./project-form-statuses.component.scss'],
 })
 export class ProjectFormStatusesComponent implements ProjectForm, OnInit {
+  /** Project object */
   @Input() project?: Project;
 
+  /** @ignore */
   public displayedColumns = ['name', 'begin', 'final', 'color', 'grip', 'action'];
 
+  /** Status list */
   public statusList: Status[] = [];
+
+  /** Current status list (before save) */
   public currentStatusList: Status[] = [];
 
   /** @ignore */
@@ -55,6 +63,7 @@ export class ProjectFormStatusesComponent implements ProjectForm, OnInit {
     }
   }
 
+  /** Save all status changes */
   public save() {
     if (!this.project) return of();
 
@@ -88,18 +97,21 @@ export class ProjectFormStatusesComponent implements ProjectForm, OnInit {
     ) as Observable<Project>;
   }
 
+  /** on status drop event (after dragging) - update statuses ordinals */
   public drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.statusList, event.previousIndex, event.currentIndex);
     this.statusList = [...this.statusList];
     this.updateOrdinals();
   }
 
+  /** Update statuses ordinals */
   public updateOrdinals() {
     for (const [index, status] of this.statusList.entries()) {
       status.ordinal = index;
     }
   }
 
+  /** Open new status creation dialog */
   public createNewStatus() {
     this.statusService
       .openCreateNewStatusDialog()
@@ -111,6 +123,7 @@ export class ProjectFormStatusesComponent implements ProjectForm, OnInit {
       .subscribe();
   }
 
+  /** Open edit status dialog */
   public editStatus(status: Status) {
     this.statusService
       .openEditStatusDialog(status)

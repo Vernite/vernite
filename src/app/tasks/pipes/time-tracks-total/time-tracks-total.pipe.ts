@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { TimeTrack } from '../../interfaces/time-track.interface';
 
+/**
+ * Pipe to calculate total time of time tracks
+ */
 @Pipe({
   name: 'timeTracksTotal',
 })

@@ -35,12 +35,10 @@ const getTestsResults = () => {
   return Number(testsResults.summary.failed) > 0 ? 0 : 100;
 };
 
-if (!existsSync('./documentation')) mkdirSync('./documentation');
-if (!existsSync('./documentation/assets')) mkdirSync('./documentation/assets');
-if (!existsSync('./documentation/assets/badges')) mkdirSync('./documentation/assets/badges');
+if (!existsSync('./badges')) mkdirSync('./badges');
 
 writeFileSync(
-  './documentation/assets/badges/badge-coverage.svg',
+  './badges/badge-coverage.svg',
   makeBadge({
     label: 'coverage',
     color: colorFromCoverage(getTestsCoverage()),
@@ -49,7 +47,7 @@ writeFileSync(
 );
 
 writeFileSync(
-  './documentation/assets/badges/badge-documentation.svg',
+  './badges/badge-documentation.svg',
   makeBadge({
     label: 'documentation',
     color: colorFromCoverage(getDocumentationCoverage()),
@@ -58,7 +56,7 @@ writeFileSync(
 );
 
 writeFileSync(
-  './documentation/assets/badges/badge-tests-result.svg',
+  './badges/badge-tests-result.svg',
   makeBadge({
     label: 'tests',
     color: colorFromCoverage(getTestsResults()),

@@ -4,15 +4,22 @@ import { Event } from '@calendar/interfaces/event.interface';
 import { Task } from '@tasks/interfaces/task.interface';
 import * as dayjs from 'dayjs';
 
+/**
+ * Calendar grid component to display calendar
+ */
 @Component({
   selector: 'calendar-grid',
   templateUrl: './calendar-grid.component.html',
   styleUrls: ['./calendar-grid.component.scss'],
 })
 export class CalendarGridComponent implements OnChanges {
+  /** Date to display */
   @Input() date!: dayjs.Dayjs;
+
+  /** Events to display */
   @Input() events: Event[] = [];
 
+  /** List of days to display */
   public days: {
     date: dayjs.Dayjs;
     events: {
@@ -21,11 +28,17 @@ export class CalendarGridComponent implements OnChanges {
       data: Event;
     }[];
   }[] = [];
+
+  /** firstDay of the month */
   public firstDay: dayjs.Dayjs = dayjs();
+
+  /** lastDay of the month */
   public lastDay: dayjs.Dayjs = dayjs();
 
+  /** Map of tasks by date */
   public tasksByDate = new Map<number, Task[]>();
 
+  /** List of weekdays */
   public weekdaysShort = dayjs.weekdaysShort();
 
   ngOnChanges(changes: SimpleChanges) {
@@ -42,6 +55,7 @@ export class CalendarGridComponent implements OnChanges {
     }
   }
 
+  /** Calculate grid */
   private calculateGrid() {
     this.firstDay = this.date.startOf('month');
     this.lastDay = this.date.endOf('month');
@@ -67,12 +81,14 @@ export class CalendarGridComponent implements OnChanges {
     this.days = days;
   }
 
+  /** Clear events */
   private clearEvents() {
     this.days.forEach((day) => {
       day.events = [];
     });
   }
 
+  /** Calculate events */
   private calculateEvents() {
     this.clearEvents();
 

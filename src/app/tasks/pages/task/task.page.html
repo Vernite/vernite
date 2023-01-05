@@ -64,7 +64,11 @@
       </div>
       <h4 class="text-lg font-bold mt-5" i18n>Description</h4>
 
-      <p class="markdown-preview" [innerHtml]="task.description | markdown"></p>
+      <p class="text-base markdown-preview" [innerHtml]="task.description | markdown"></p>
+      <span *ngIf="!task.description" class="text-base">-</span>
+
+      <h4 class="text-lg font-bold mt-5" i18n>Comments</h4>
+      <task-comments [projectId]="projectId" [taskId]="taskId"></task-comments>
     </div>
 
     <div class="w-96">

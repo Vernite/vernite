@@ -1,0 +1,57 @@
+name: Prod checks
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+  prepare-environment:
+    needs: [checkout]
+    uses: ./.github/workflows/prepare-environment.yml
+
+  unit-tests:
+    needs: [prepare-environment]
+    uses: ./.github/workflows/unit-tests.yml
+
+  e2e-tests:
+    needs: [prepare-environment]
+    uses: ./.github/workflows/e2e-tests.yml
+
+  build:
+    needs: [unit-tests]
+    uses: ./.github/workflows/build.yml
+    with:
+      configuration: prod
+
+  deploy:
+    needs: [build]
+    uses: ./.github/workflows/deploy.yml
+    with:
+      configuration: prod
+    secrets:
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+  # build-storybook:
+  #   needs: [prepare-environment]
+  #   uses: ./.github/workflows/storybook.yml
+  #   with:
+  #     configuration: dev
+
+  # badges:
+  #   needs: [unit-tests, build-storybook]
+  #   uses: ./.github/workflows/badges.yml
+
+  # sonar:
+  #   needs: [build]
+  #   uses: ./.github/workflows/sonar.yml
+  #   secrets:
+  #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}

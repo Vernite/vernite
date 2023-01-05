@@ -1,3 +1,6 @@
+/**
+ * Emoji sequence aliases to replace in markdown preview
+ */
 export const EMOJI_SEQUENCE_ALIASES = {
   ':-)': '🙂',
   ':)': '🙂',
@@ -18,6 +21,9 @@ export const EMOJI_SEQUENCE_ALIASES = {
   '8-)': '😎',
 };
 
+/**
+ * Emoji sequence regex to replace in markdown preview
+ */
 export const EMOJI_SEQUENCE_REGEX = new RegExp(
   '^(' +
     Object.keys(EMOJI_SEQUENCE_ALIASES)

@@ -6,9 +6,10 @@ import {
   faAdd,
 } from '@fortawesome/free-solid-svg-icons';
 
-const none = null;
-const icons = { none, faQuestion, faPenToSquare, faTrashArrowUp, faAdd };
+/** icons dictionary to use in icon select */
+const icons = { none: null, faQuestion, faPenToSquare, faTrashArrowUp, faAdd };
 
+/** Icon select to use in interactive interaction */
 export const DOCS_ICON_SELECT = {
   control: {
     type: 'select',
@@ -17,22 +18,26 @@ export const DOCS_ICON_SELECT = {
   mapping: icons,
 };
 
+/** Documentation readonly property decorator */
 export const DOCS_READONLY = {
   control: false,
 };
 
+/** Documentation remove property decorator (to not display in properties table - actually use @ignore) */
 export const DOCS_REMOVE = {
   table: {
     disable: true,
   },
 };
 
+/** Documentation control property decorator */
 export const DOCS_CONTROL = (controlType: ControlType) => ({
   control: {
     type: controlType,
   },
 });
 
+/** Documentation getter property decorator */
 export const DOCS_GETTER = (description: string) => ({
   control: {
     type: false,
@@ -43,13 +48,14 @@ export const DOCS_GETTER = (description: string) => ({
   description,
 });
 
-// Simple controls
+/** Documentation select property decorator */
 export const DOCS_SELECT = {
   control: {
     type: 'select',
   },
 };
 
+/** Documentation ControlAccessor component properties preset */
 export const DOCS_PRESET_CONTROL_ACCESSOR = {
   ngControl: DOCS_READONLY,
   required: {

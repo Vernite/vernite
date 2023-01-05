@@ -2,7 +2,7 @@ import { HttpParams } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { MemberService } from '@dashboard/services/member/member.service';
-import { Enum } from '@main/classes/enum.class';
+import { Enum } from '@main/classes/enum/enum.class';
 import { Service } from '@main/decorators/service/service.decorator';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 import { DataFilter } from '@main/interfaces/filters.interface';
@@ -111,7 +111,7 @@ export class TaskService extends BaseService<
    * @returns Request observable with the created task
    */
   public create(projectId: number, task: Task): Observable<Task> {
-    return this.apiService.post(`/project/${projectId}/task/`, { body: task }).pipe(
+    return this.apiService.post(`/project/${projectId}/task`, { body: task }).pipe(
       this.validate({
         400: 'FORM_VALIDATION_ERROR',
         404: 'PROJECT_NOT_FOUND',

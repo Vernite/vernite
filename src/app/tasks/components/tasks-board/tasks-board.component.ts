@@ -9,22 +9,32 @@ import {
   faCodePullRequest,
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
-import { PersistentMap } from '@main/classes/persistent-map.class';
+import { PersistentMap } from '@main/classes/persistent-map/persistent-map.class';
 import { TaskService } from '@tasks/services/task/task.service';
 import { DialogService } from '../../../_main/services/dialog/dialog.service';
 import { TaskDialog, TaskDialogData, TaskDialogVariant } from '../../dialogs/task/task.dialog';
 import { StatusWithTasks } from '../../interfaces/status.interface';
 import { Task } from '../../interfaces/task.interface';
 
+/**
+ * Board component to display tasks in columns
+ */
 @Component({
   selector: 'tasks-board',
   templateUrl: './tasks-board.component.html',
   styleUrls: ['./tasks-board.component.scss'],
 })
 export class BoardComponent {
+  /** Board interface to display */
   @Input() board: [string | Task, StatusWithTasks[]][] = [];
+
+  /** List of members */
   @Input() members!: Map<number, ProjectMember>;
+
+  /** Id of the project */
   @Input() projectId!: number;
+
+  /** List of statuses */
   @Input() statusList: StatusWithTasks[] = [];
 
   /** @ignore */
@@ -42,6 +52,7 @@ export class BoardComponent {
   /** @ignore */
   faCheck = faCheck;
 
+  /** Map used to determine if user expanded certain task and remember it */
   public taskMap = new PersistentMap<number | string, boolean>({ persistentKey: 'board' });
 
   constructor(
@@ -54,10 +65,12 @@ export class BoardComponent {
     this.projectId = projectId;
   }
 
+  /** Get list of tasks from status */
   getTasksFromStatus(statusId: number) {
     return this.statusList.find((status) => status.id === statusId)?.tasks;
   }
 
+  /** On task drop method */
   drop(event: CdkDragDrop<Task[]>) {
     const previousStatusIndex = Number(
       event.previousContainer.element.nativeElement.dataset['index'],
@@ -103,6 +116,7 @@ export class BoardComponent {
     }
   }
 
+  /** Open create task dialog */
   openNewTaskDialog() {
     this.dialogService
       .open(TaskDialog, {
@@ -119,14 +133,17 @@ export class BoardComponent {
       });
   }
 
+  /** Get id of task (from task format or string format) */
   idOf(o: Task | string) {
     return (o as any).id || o;
   }
 
+  /** Calculates column container height based of expanded state and size of the content */
   getColumnsContainerHeight(mapKey: string | number, element: HTMLElement) {
     return `${Number(!this.taskMap.get(mapKey)) * element.scrollHeight + 16}px`;
   }
 
+  /** Toggle expanded state of the column */
   toggle(board: [Task | string, StatusWithTasks[]], element: HTMLElement) {
     element.style.maxHeight = this.getColumnsContainerHeight(this.idOf(board[0]), element);
     this.taskMap.set(this.idOf(board[0]), !this.taskMap.get(this.idOf(board[0])) || false);

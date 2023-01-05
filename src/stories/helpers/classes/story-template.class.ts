@@ -1,6 +1,7 @@
 import { merge } from 'lodash-es';
 import { Props } from './story.class';
 
+/** Template class to create storybook templates */
 export class StoryTemplate<C> {
   private _args: Props<C>;
 
@@ -9,10 +10,12 @@ export class StoryTemplate<C> {
     this._args = merge({}, controlObject, args);
   }
 
+  /** Get template props */
   public get props() {
     return this._args;
   }
 
+  /** Get template function */
   public template() {
     return ((args: C) => ({
       props: merge({}, args),

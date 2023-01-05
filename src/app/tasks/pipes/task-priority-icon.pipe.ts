@@ -1,5 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+/**
+ * Pipe to get icon name for task priority
+ */
 @Pipe({
   name: 'taskPriorityIcon',
 })

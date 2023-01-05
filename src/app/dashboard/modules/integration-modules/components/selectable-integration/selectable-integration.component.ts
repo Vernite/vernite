@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faCircle } from '@fortawesome/free-regular-svg-icons';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
-import { ControlAccessor } from '@main/classes/control-accessor.class';
+import { ControlAccessor } from '@main/classes/control-accessor/control-accessor.class';
 
 @Component({
   selector: 'selectable-integration',

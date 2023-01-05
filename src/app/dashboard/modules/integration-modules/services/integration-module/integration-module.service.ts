@@ -9,17 +9,23 @@ import { IntegrationGitHubComponent } from '../../components/integration-github/
 import { environment } from '../../../../../../environments/environment';
 import { IntegrationComponent } from '../../interfaces/integration-component.interface';
 
+/**
+ * Integration module service (to manage integration modules in project integrations list)
+ */
 @Service()
 @Injectable({
   providedIn: 'root',
 })
 export class IntegrationModuleService {
+  /** List of integration components */
   public static readonly integrationComponents: Type<IntegrationComponent>[] = [
     IntegrationGitHubComponent,
   ];
 
+  /** Registry of integration modules */
   public static readonly registry$ = new BehaviorSubject<IntegrationModuleEntry[]>([]);
 
+  /** Registry of integration modules */
   public get registry$() {
     return IntegrationModuleService.registry$;
   }
@@ -30,6 +36,10 @@ export class IntegrationModuleService {
     });
   }
 
+  /**
+   * Register integration module
+   * @param entry Integration module entry
+   */
   public static register(entry: IntegrationModuleEntry) {
     const _regVal = this.registry$.value;
     _regVal.push(entry);
@@ -42,11 +52,20 @@ export class IntegrationModuleService {
     }
   }
 
+  /**
+   * Unregister integration module (remove from registry)
+   * @param entry Integration module entry
+   */
   public static unregister(entry: IntegrationModuleEntry) {
     const _regVal = this.registry$.value;
     this.registry$.next(_regVal.filter(({ id }) => id !== entry.id));
   }
 
+  /**
+   * Open integration module select dialog
+   * @param data Data to pass to integration module select dialog
+   * @returns dialog reference
+   */
   public openIntegrationModuleSelectDialog(data: IntegrationModuleSelectDialogData) {
     return this.dialogService.open(IntegrationModuleSelectDialog, data);
   }

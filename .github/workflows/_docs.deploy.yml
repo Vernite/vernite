@@ -1,0 +1,63 @@
+name: Deploy docs to GitHub Pages
+
+on:
+  workflow_call:
+    inputs:
+      configuration:
+        required: true
+        type: string
+    secrets:
+      SSH_PRIVATE_KEY:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Download artifacts (storybook)
+      - name: Download artifacts (storybook)
+        uses: actions/download-artifact@v2
+        with:
+          name: documentation
+          path: ./
+
+      # Download artifacts (coverage)
+      - name: Download artifacts (coverage)
+        uses: actions/download-artifact@v2
+        with:
+          name: unit-tests
+          path: documentation/coverage
+
+      # Download artifacts (audit report)
+      - name: Download artifacts (coverage)
+        uses: actions/download-artifact@v2
+        with:
+          name: audit-report
+          path: documentation/audit
+
+      # Get app version from package.json
+      - name: Get app version
+        id: get_version
+        run: echo VERSION=$(node -p -e "require('./package.json').version") >> $GITHUB_ENV
+
+      # Deploy documentation to Github pages
+      - name: Deploy documentation 📄
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+          branch: gh-pages
+          folder: documentation
+          target-folder: ${{ env.VERSION }}
+          clean: false
+
+      # Deploy documentation index to Github pages
+      - name: Deploy docs-pages
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+          branch: gh-pages
+          folder: docs-pages
+          clean: false

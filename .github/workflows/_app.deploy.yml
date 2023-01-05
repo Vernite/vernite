@@ -1,0 +1,45 @@
+name: Deploy to vernite server
+
+on:
+  workflow_call:
+    inputs:
+      configuration:
+        required: true
+        type: string
+    secrets:
+      SSH_PRIVATE_KEY:
+        required: true
+
+jobs:
+  deploy:
+    # needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Download artifacts
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: build-${{ inputs.configuration }}
+          path: dist
+
+      # Copy default redirect page
+      - name: Redirect page copy
+        run: cp src/redirect.html dist/vernite/index.html
+
+      # Deploy to server using rsync
+      - name: Deploy app 🚀
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "./dist/vernite/"
+          REMOTE_HOST: '51.83.255.98'
+          REMOTE_PORT: '2224'
+          REMOTE_USER: 'frontend'
+          TARGET: '/var/www/html/${{ inputs.configuration }}'
+          EXCLUDE: "/dist/, /node_modules/"

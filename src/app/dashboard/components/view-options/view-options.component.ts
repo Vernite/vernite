@@ -12,7 +12,6 @@ import { MemberService } from '@dashboard/services/member/member.service';
 import { StatusService } from '@tasks/services/status/status.service';
 import { Status } from '../../../tasks/interfaces/status.interface';
 import { TaskFilters } from '../../../tasks/filters/task.filters';
-import { FilterControls } from '@main/components/filters/filter-entry.type';
 import { FilterChannel } from '@main/components/filters/filter-channel.model';
 
 /** Project tabs component to allow navigate over the project */
@@ -37,16 +36,22 @@ export class ViewOptionsComponent implements OnInit {
   /** Observable of the active project */
   public project$: Observable<Project> = EMPTY;
 
+  /** Project members */
   public projectMembers$: Observable<ProjectMember[]> = EMPTY;
+
+  /** Project members map */
   public statusList$: Observable<Status[]> = EMPTY;
 
+  /** Is filters overlay open */
   isFiltersOpen = false;
 
+  /** Filters form control */
   filtersControl = new FormControl();
 
   /** @ignore */
   FilterChannel = FilterChannel;
 
+  /** Available positions for filters overlay */
   public filtersPositionPairs: ConnectedPosition[] = [
     {
       originX: 'end',
@@ -56,6 +61,7 @@ export class ViewOptionsComponent implements OnInit {
     },
   ];
 
+  /** Filters to add to list */
   public filters = {
     ASSIGNEE_ID: {
       dataFilter: TaskFilters.ASSIGNEE_ID,

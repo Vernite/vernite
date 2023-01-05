@@ -6,14 +6,22 @@ import { Sprint } from '@tasks/interfaces/sprint.interface';
 import { SprintService } from '@tasks/services/sprint.service';
 import { Observable, EMPTY } from 'rxjs';
 
+/**
+ * Project page component
+ */
 @Component({
   selector: 'project-page',
   templateUrl: './project.page.html',
   styleUrls: ['./project.page.scss'],
 })
 export class ProjectPage implements OnInit {
+  /** Project ID */
   projectId!: number;
+
+  /** Project object */
   project$: Observable<Project | undefined> = EMPTY;
+
+  /** Active sprint object */
   activeSprint$: Observable<Sprint | undefined> = EMPTY;
 
   constructor(

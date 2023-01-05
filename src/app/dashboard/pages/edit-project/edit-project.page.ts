@@ -14,29 +14,47 @@ import { ProjectFormStatusesComponent } from '@dashboard/components/project-form
 import { ProjectFormIntegrationsComponent } from '@dashboard/components/project-form-integrations/project-form-integrations.component';
 import { ProjectFormStage } from '@dashboard/models/project-form-stage.enum';
 
+/**
+ * Edit project page component
+ */
 @UntilDestroy()
 @Component({
   selector: 'edit-project-page',
   templateUrl: './edit-project.page.html',
 })
 export class EditProjectPage implements OnInit {
+  /** Project general form reference */
   @ViewChild(ProjectFormGeneralComponent) projectFormGeneral!: ProjectFormGeneralComponent;
+
+  /** Project members form reference */
   @ViewChild(ProjectFormMembersComponent) projectFormMembers!: ProjectFormMembersComponent;
+
+  /** Project statuses form reference */
   @ViewChild(ProjectFormStatusesComponent) projectFormStatuses!: ProjectFormStatusesComponent;
+
+  /** Project integrations form reference */
   @ViewChild(ProjectFormIntegrationsComponent)
   projectFormIntegrations!: ProjectFormIntegrationsComponent;
 
   /** @ignore */
   ProjectFormStage = ProjectFormStage;
 
+  /** Current project edition stage */
   public stage: ProjectFormStage = ProjectFormStage.GENERAL;
 
+  /** Current project */
   public project$!: Observable<Project>;
+
+  /** Current workspace */
   public workspace$!: Observable<Workspace>;
 
+  /** Current workspace id */
   public workspaceId!: number;
+
+  /** Current project id */
   public projectId!: number;
 
+  /** Loader */
   public loader = new Loader();
 
   constructor(
@@ -56,7 +74,7 @@ export class EditProjectPage implements OnInit {
   }
 
   /**
-   * Creates a new project by saving the form data, saving dependent stages and then navigating to the project page.
+   * Edits project by saving the form data, saving dependent stages and then navigating to the project page.
    * Otherwise, displays an error message.
    */
   public submitUpdate(): void {
@@ -77,10 +95,17 @@ export class EditProjectPage implements OnInit {
     });
   }
 
+  /**
+   * Sets the current project form stage
+   * @param stage project form stage
+   */
   public setStage(stage: ProjectFormStage) {
     this.stage = stage;
   }
 
+  /**
+   * Goes back to project page
+   */
   public close() {
     this.router.navigate(['/', 'projects', this.projectId]);
   }

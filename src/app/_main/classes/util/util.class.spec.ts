@@ -17,29 +17,6 @@ describe('Utils: regexIndexOf', () => {
   });
 });
 
-describe('Utils: snakeCase', () => {
-  it('Should return snake_case for snake_case', () => {
-    const snakeCase = 'snake_case';
-    const expected = 'snake_case';
-    const actual = Utils.snakeCase(snakeCase);
-    expect(actual).toEqual(expected);
-  });
-
-  it('Should return snake_case for SnakeCase', () => {
-    const snakeCase = 'SnakeCase';
-    const expected = 'snake_case';
-    const actual = Utils.snakeCase(snakeCase);
-    expect(actual).toEqual(expected);
-  });
-
-  it('Should return snake_case for snakeCase', () => {
-    const snakeCase = 'snakeCase';
-    const expected = 'snake_case';
-    const actual = Utils.snakeCase(snakeCase);
-    expect(actual).toEqual(expected);
-  });
-});
-
 describe('Utils: isLetter', () => {
   const shouldReturnTrueFor = (char: string) => {
     it(`Should return true for ${char}`, () => {

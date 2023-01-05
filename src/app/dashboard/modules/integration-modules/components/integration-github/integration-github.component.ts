@@ -12,6 +12,9 @@ import { map, of, switchMap } from 'rxjs';
 import { Loader } from '@main/classes/loader/loader.class';
 import { startLoader, stopLoader } from './../../../../../_main/operators/loader.operator';
 
+/**
+ * GitHub integration component
+ */
 @IntegrationModule({
   title: 'GitHub',
   description: 'Create GitHub issues simultaneously, connect pull requests with tasks.',
@@ -31,27 +34,44 @@ import { startLoader, stopLoader } from './../../../../../_main/operators/loader
   styleUrls: ['./integration-github.component.scss'],
 })
 export class IntegrationGitHubComponent implements OnInit, IntegrationComponent {
+  /** Project */
   @Input() project?: Project;
 
+  /** List of GitHub repositories */
   repositories: GitRepository[] = [];
 
-  public faGlobe = faGlobe;
-  public faLock = faLock;
+  /** @ignore */
+  faGlobe = faGlobe;
 
+  /** @ignore */
+  faLock = faLock;
+
+  /** Integration action loader */
   public loader = new Loader();
 
-  constructor(private gitIntegrationService: GitIntegrationService) {}
-
+  /** GitHub integration form to select repository to connect with */
   public form = new FormGroup({
     repository: new FormControl<string>(undefined, [requiredValidator()]),
   });
 
+  constructor(private gitIntegrationService: GitIntegrationService) {}
+
+  ngOnInit() {
+    this.loadRepositories();
+
+    if (this.project) {
+      this.form.get('repository').setValue(this.project.gitHubIntegration);
+    }
+  }
+
+  /** Open GitHub integration in new tab */
   connectToGithub() {
     this.gitIntegrationService.startGitHubIntegration().subscribe(() => {
       this.loadRepositories();
     });
   }
 
+  /** Load repositories from GitHub */
   loadRepositories() {
     of(null)
       .pipe(
@@ -60,10 +80,11 @@ export class IntegrationGitHubComponent implements OnInit, IntegrationComponent 
         stopLoader(this.loader),
       )
       .subscribe((integration) => {
-        this.repositories = integration.gitRepositories;
+        this.repositories = integration.repositories;
       });
   }
 
+  /** Save GitHub integration */
   save() {
     // Check if the form is valid and project was passed to the component
     if (!this.form.value.repository || !this.project) return of(null);
@@ -87,14 +108,6 @@ export class IntegrationGitHubComponent implements OnInit, IntegrationComponent 
         this.project.id,
         this.form.value.repository,
       );
-    }
-  }
-
-  ngOnInit() {
-    this.loadRepositories();
-
-    if (this.project) {
-      this.form.get('repository').setValue(this.project.gitHubIntegration);
     }
   }
 }

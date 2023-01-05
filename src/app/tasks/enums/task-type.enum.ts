@@ -1,3 +1,4 @@
+/** Task type */
 export enum TaskType {
   NONE = -1,
   TASK = 0,
@@ -7,6 +8,10 @@ export enum TaskType {
   SUBTASK = 4,
 }
 
+/**
+ * Task type hierarchy (what task types can be nested in other task types)
+ * TODO: Move this to task service
+ */
 export const TaskTypeHierarchy = {
   [TaskType.NONE]: [TaskType.TASK, TaskType.EPIC, TaskType.USER_STORY, TaskType.ISSUE],
   [TaskType.TASK]: [TaskType.SUBTASK, TaskType.ISSUE],

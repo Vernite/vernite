@@ -1,20 +1,31 @@
 import { environment } from 'src/environments/environment';
 import { LoaderOptions } from './loader-options.interface';
 
+/** Loader class to show progress spinner to the user */
 export class Loader {
+  /** Information about pending status - if loader should be visible */
   public get pending() {
     return this._pending;
   }
 
-  private _pending: boolean = false;
-  private _pendingStart?: Date;
-  private _timeout?: any;
-  private _minTimeOfPending = 500;
-
+  /** Message assigned to loader */
   public message?: string;
+
+  /** @ignore */
+  private _pending: boolean = false;
+
+  /** @ignore */
+  private _pendingStart?: Date;
+
+  /** @ignore */
+  private _timeout?: any;
+
+  /** @ignore */
+  private _minTimeOfPending = 500;
 
   constructor(private options: LoaderOptions = {}) {}
 
+  /** Marks loader as pending - changes pending status */
   public markAsPending() {
     if (this._pending) return;
 

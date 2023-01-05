@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { isString } from 'lodash-es';
-import { ControlAccessor } from '../../classes/control-accessor.class';
+import { ControlAccessor } from '../../classes/control-accessor/control-accessor.class';
 
 /**
  * Default text input component

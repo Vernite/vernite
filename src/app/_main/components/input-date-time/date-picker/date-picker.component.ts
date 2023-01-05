@@ -2,32 +2,53 @@ import { Component, Input, OnInit } from '@angular/core';
 import dayjs, { UnitType } from 'dayjs';
 import { DaysGrid, CalendarDay } from '../date-picker.model';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { ControlAccessor } from '@main/classes/control-accessor.class';
+import { ControlAccessor } from '@main/classes/control-accessor/control-accessor.class';
 import { unixTimestamp } from '../../../interfaces/date.interface';
 
+/**
+ * Date picker component
+ */
 @Component({
   selector: 'date-picker',
   templateUrl: './date-picker.component.html',
   styleUrls: ['./date-picker.component.scss'],
 })
 export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> implements OnInit {
+  /**
+   * First day of week
+   */
   @Input() firstDayOfWeek = 1;
+
+  /**
+   * Flag to hide today button
+   */
   @Input() hideTodayButton = false;
 
+  /** Current date cursor */
   cursor = this.control.value ? dayjs(this.control.value) : dayjs();
+
+  /** todays date */
   currentDate = dayjs();
 
+  /** Month names */
   monthNames = dayjs.months();
+
+  /** Weekday names */
   weekdaysShort = [
     ...dayjs.weekdaysShort().slice(this.firstDayOfWeek),
     ...dayjs.weekdaysShort().slice(0, this.firstDayOfWeek),
   ];
 
+  /** @ignore */
   faChevronLeft = faChevronLeft;
+
+  /** @ignore */
   faChevronRight = faChevronRight;
 
+  /** Days grid */
   daysGrid = this.calculateDaysGrid();
 
+  /** Calculate days grid */
   private calculateDaysGrid() {
     let pointer = (() => {
       const date = this.cursor.startOf('month');
@@ -60,16 +81,25 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
     return daysGrid;
   }
 
+  /**
+   * Move to previous month
+   */
   previousMonth() {
     this.cursor = this.cursor.subtract(1, 'month');
     this.daysGrid = this.calculateDaysGrid();
   }
 
+  /**
+   * Move to next month
+   */
   nextMonth() {
     this.cursor = this.cursor.add(1, 'month');
     this.daysGrid = this.calculateDaysGrid();
   }
 
+  /**
+   * Move to today and select it
+   */
   today() {
     this.cursor = dayjs();
     this.daysGrid = this.calculateDaysGrid();
@@ -77,6 +107,11 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
     this.control.setValue(this.cursor.valueOf());
   }
 
+  /**
+   * Set control properties
+   * @param propertyNames unit types
+   * @param values values
+   */
   setControlProperties(propertyNames: UnitType[], values: number[]) {
     let value = dayjs(this.control.value || 0);
     for (let i = 0; i < Math.min(propertyNames.length, values.length); i++) {
@@ -85,6 +120,10 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
     this.control.setValue(value.valueOf());
   }
 
+  /**
+   * Select day
+   * @param day day to select
+   */
   selectDay(day: CalendarDay) {
     if (day.isFromPreviousMonth) {
       this.cursor = this.cursor.subtract(1, 'month');

@@ -1,6 +1,9 @@
 import { PipeTransform, Pipe } from '@angular/core';
 import { TaskService } from '@tasks/services/task/task.service';
 
+/**
+ * Pipe to get task by id
+ */
 @Pipe({
   name: 'task',
 })

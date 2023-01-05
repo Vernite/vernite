@@ -1,6 +1,6 @@
 {
   "name": "vernite",
-  "version": "0.0.14",
+  "version": "1.0.0-beta-1",
   "scripts": {
     "@------ WORKFLOW SCRIPTS --------": "",
     "postinstall": "husky install",
@@ -13,7 +13,7 @@
     "lint": "ng lint",
     "analyze:serve": "webpack-bundle-analyzer dist/vernite/en-US/stats.json",
     "analyze:build": "yarn analyze:serve -m static -O -r documentation/report/index.html",
-    "unit:serve": "yarn unit:serve:firefox",
+    "unit:serve": "yarn print \"You need to choose browser: 'firefox', 'chrome' and type command like 'yarn unit:serve:chrome'\" --color=yellow",
     "unit:serve:firefox": "concurrently -r -k \"http-server --port=9877 ./coverage/vernite\" \"ng test\"",
     "unit:serve:chrome": "concurrently -r -k \"http-server --port=9877 ./coverage/vernite\" \"ng test --browsers=Chrome\"",
     "unit:build": "ng test --watch=false --code-coverage --browsers=ChromeHeadless",
@@ -69,6 +69,7 @@
     "lodash-es": "^4.17.21",
     "marked": "^4.0.17",
     "monaco-editor": "^0.33.0",
+    "ng-recaptcha": "9.0.0",
     "rxjs": "~7.5.0",
     "rxjs-observe": "^2.1.6",
     "tslib": "^2.3.0",

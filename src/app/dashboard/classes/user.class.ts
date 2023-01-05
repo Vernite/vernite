@@ -1,4 +1,4 @@
-import { Random } from '@main/classes/random.class';
+import { Random } from '@main/classes/random/random.class';
 import * as Color from 'color';
 
 /**
@@ -18,6 +18,7 @@ export class UserUtils {
   }
 
   /**
+   * Gets the color by username.
    * @unsupported
    */
   public static getColorByUsername(username: string): Color {

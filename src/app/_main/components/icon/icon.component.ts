@@ -2,6 +2,7 @@ import { Component, HostBinding, Input } from '@angular/core';
 import { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
 import { faQuestion, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { Utils } from '@main/classes/util/utils.class';
+import { snakeCase } from 'lodash-es';
 
 /**
  * Icon component. Supports material icons and font-awesome icons.
@@ -111,6 +112,6 @@ export class IconComponent {
    * for `ShoppingCart` this function will return `shopping_cart`
    */
   public get snakeCaseName(): IconName {
-    return Utils.snakeCase(this.name) as IconName;
+    return snakeCase(this.name) as IconName;
   }
 }

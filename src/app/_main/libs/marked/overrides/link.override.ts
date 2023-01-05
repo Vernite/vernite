@@ -1,5 +1,10 @@
 import { Renderer } from 'marked';
 
+/**
+ * Override link renderer to open external links in new tab
+ * @param renderer marked editor renderer
+ * @returns marked editor renderer
+ */
 export function linkOverride(renderer: Renderer) {
   const linkRenderer = renderer.link;
   renderer.link = (href, title, text) => {
