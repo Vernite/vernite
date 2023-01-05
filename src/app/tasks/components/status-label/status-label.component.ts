@@ -6,6 +6,9 @@ import { TaskService } from '@tasks/services/task/task.service';
 import { TestNgControl } from '@tests/helpers/ng-control-testing-provider.helper';
 import { BehaviorSubject, filter, fromEvent, take } from 'rxjs';
 
+/**
+ * Status label component
+ */
 @Component({
   selector: 'app-status-label',
   templateUrl: './status-label.component.html',
@@ -13,10 +16,15 @@ import { BehaviorSubject, filter, fromEvent, take } from 'rxjs';
   providers: [{ provide: NgControl, useClass: TestNgControl }],
 })
 export class StatusLabelComponent extends ControlAccessor {
+  /** Status label variant */
   @Input() variant: 'default' | 'small' = 'default';
+  /** Project id */
   @Input() projectId!: number;
+  /** Status id */
   @Input() statusId!: number;
+  /** Task id */
   @Input() taskId?: number;
+  /** Status list */
   @Input() set statuses(statuses: Status[]) {
     this.statuses$.next(statuses);
     this.statusMap = statuses.reduce((acc, status) => {
@@ -25,6 +33,7 @@ export class StatusLabelComponent extends ControlAccessor {
     }, new Map<number, Status>());
   }
 
+  /** Status map */
   statusMap = new Map<number, Status>();
 
   constructor(

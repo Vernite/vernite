@@ -9,6 +9,9 @@ import { Observable, map } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { unixTimestamp } from '../../../_main/interfaces/date.interface';
 
+/**
+ * User service
+ */
 @Injectable({
   providedIn: 'root',
 })
@@ -23,6 +26,10 @@ export class UserService extends BaseService<Errors<any>> {
     super(injector);
   }
 
+  /**
+   * Get default user preferences
+   * @returns default user preferences
+   */
   public getUserDefaultPreferences() {
     return {
       dateFormat: 'DD.MM.YYYY',
@@ -31,10 +38,19 @@ export class UserService extends BaseService<Errors<any>> {
     };
   }
 
+  /**
+   * Update user
+   * @param user user
+   * @returns updated user
+   */
   public update(user: Partial<User>): Observable<User> {
     return this.apiService.put(`/auth/edit`, { body: user });
   }
 
+  /**
+   * Get user
+   * @returns user
+   */
   @Cache({ interval: Number.POSITIVE_INFINITY })
   public getMyself(): Observable<User> {
     return this.apiService
@@ -42,19 +58,35 @@ export class UserService extends BaseService<Errors<any>> {
       .pipe(map((user) => Object.assign({}, this.getUserDefaultPreferences(), user)));
   }
 
+  /**
+   * Get user's date format
+   * @returns user's date format
+   */
   @Cache({ interval: Number.POSITIVE_INFINITY })
   public getDateFormat(): Observable<string> {
     return this.getMyself().pipe(map((user: User) => user.dateFormat));
   }
 
+  /**
+   * Clear cache
+   */
   public clearCache(): void {
     this.authService.clearCache();
   }
 
+  /**
+   * Check if user is logged in local storage
+   */
   public isLocallyLogged(): boolean {
     return Boolean(localStorage.getItem('logged'));
   }
 
+  /**
+   * Get user's events
+   * @param from start date
+   * @param to end date
+   * @returns user's events between dates
+   */
   @Cache()
   public events(from: unixTimestamp, to: unixTimestamp): Observable<Event[]> {
     return this.apiService

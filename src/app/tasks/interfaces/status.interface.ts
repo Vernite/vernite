@@ -32,6 +32,11 @@ export interface Status extends JSONParsable {
    */
   begin: boolean;
 
+  /**
+   * Status ordinal (used to determine the order of the status in the list)
+   * The lower the number, the higher the status is in the list
+   * (e.g. 0 is the highest, 1 is the second highest, etc.)
+   */
   ordinal: number;
 }
 
@@ -39,5 +44,8 @@ export interface Status extends JSONParsable {
  * Status with task interface - status column with tasks
  */
 export interface StatusWithTasks extends Status {
+  /**
+   * List of tasks in the status
+   */
   tasks: Task[];
 }

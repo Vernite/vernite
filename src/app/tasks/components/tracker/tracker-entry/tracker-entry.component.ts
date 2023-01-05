@@ -11,6 +11,7 @@ import { unixTimestamp } from '@main/interfaces/date.interface';
 import { pairwise } from 'rxjs';
 import { debounce } from 'lodash-es';
 
+/** Tracker entry component to display and edit time track */
 @UntilDestroy()
 @Component({
   selector: 'tracker-entry',
@@ -18,6 +19,7 @@ import { debounce } from 'lodash-es';
   styleUrls: ['./tracker-entry.component.scss'],
 })
 export class TrackerEntryComponent implements OnInit {
+  /** Time track to display and edit */
   @Input() set timeTrack(timeTrack: { new: boolean } & TimeTrack) {
     this._timeTrack = timeTrack;
     this.form.patchValue(timeTrack);
@@ -26,6 +28,7 @@ export class TrackerEntryComponent implements OnInit {
     return this._timeTrack;
   }
 
+  /** Entry display property */
   @HostBinding('style.display') display = 'block';
 
   public readonly form = new FormGroup({
@@ -33,9 +36,13 @@ export class TrackerEntryComponent implements OnInit {
     endDate: new FormControl<unixTimestamp>(undefined, [requiredValidator()]),
   });
 
+  /** Deleting loader */
   public readonly deleteLoader = new Loader();
+
+  /** Saving loader */
   public readonly saveLoader = new Loader();
 
+  /** Time track to display and edit */
   private _timeTrack!: { new: boolean } & TimeTrack;
 
   /** @ignore */
@@ -56,6 +63,7 @@ export class TrackerEntryComponent implements OnInit {
     });
   }
 
+  /** Delete time track */
   delete() {
     if (!this.timeTrack.id) {
       this.display = 'none';
@@ -70,6 +78,7 @@ export class TrackerEntryComponent implements OnInit {
       });
   }
 
+  /** Save time track */
   save() {
     if (this.timeTrack.new) {
       this.trackerService

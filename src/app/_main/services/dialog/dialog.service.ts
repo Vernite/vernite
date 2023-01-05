@@ -8,8 +8,8 @@ import { BehaviorSubject, filter } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 import { AlertDialog, AlertDialogData, AlertDialogVariant } from '../../dialogs/alert/alert.dialog';
 import { DialogOptions } from './dialog-options.interface';
-import { Router } from '@angular/router';
 
+/** Dialog outlet types enum */
 export enum DialogOutlet {
   CONTENT_RIGHT = 'CONTENT_RIGHT',
 }
@@ -22,19 +22,22 @@ export enum DialogOutlet {
   providedIn: 'root',
 })
 export class DialogService {
+  /** dialogs map */
   private dialogsMap = new Map();
+
+  /** Dialogs observable registry */
   private dialogs$ = new BehaviorSubject<Map<number, MatDialogRef<unknown, any> | DialogRef>>(
     this.dialogsMap,
   );
+
+  /** Dialog outlets map */
   private outlets = new Map<DialogOutlet, any>();
 
+  /** True if any dialog is open (visible by user). */
   public get isAnyDialogOpen() {
     return this.dialogs$.getValue().size > 0;
   }
-  /**
-   * Default constructor with `MatDialog` dependency.
-   * @param matDialog MatDialog instance
-   */
+
   constructor(private matDialog: MatDialog, private injector: Injector) {}
 
   /**
@@ -75,12 +78,20 @@ export class DialogService {
     return dialog;
   }
 
+  /**
+   * Close all opened dialogs
+   */
   closeAll() {
     this.dialogsMap.forEach((dialog) => {
       dialog.close();
     });
   }
 
+  /**
+   * Register outlet slot in the dialog service
+   * @param outlet outlet to register
+   * @param component Component to register as outlet
+   */
   registerOutlet(outlet: DialogOutlet, component: any) {
     this.outlets.set(outlet, component);
   }
@@ -115,6 +126,7 @@ export class DialogService {
     return this.alert(data);
   }
 
+  /** @TODO Move to project service */
   confirmProjectDelete(project: Project) {
     return this.confirm({
       title: $localize`Delete project "${project.name}"`,
@@ -125,6 +137,7 @@ export class DialogService {
     });
   }
 
+  /** @TODO Move to workspace service */
   confirmWorkspaceDelete(workspace: Workspace) {
     return this.confirm({
       title: $localize`Delete workspace "${workspace.name}"`,

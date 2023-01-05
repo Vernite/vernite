@@ -9,6 +9,9 @@ import { Loader } from '../../../_main/classes/loader/loader.class';
 import { startLoader, stopLoader } from '../../../_main/operators/loader.operator';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 
+/**
+ * Login page component
+ */
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -22,8 +25,19 @@ export class LoginPage implements OnInit {
     private recaptchaV3Service: ReCaptchaV3Service,
   ) {}
 
+  /**
+   * Login subscription
+   */
   private loginSubscription?: Subscription;
+
+  /**
+   * Login error
+   */
   public error?: string;
+
+  /**
+   * Loader
+   */
   public loader = new Loader();
 
   /** Form group for login. */
@@ -40,6 +54,9 @@ export class LoginPage implements OnInit {
     });
   }
 
+  /**
+   * Login
+   */
   login() {
     if (this.loginSubscription && !this.loginSubscription.closed) return;
 
@@ -71,6 +88,10 @@ export class LoginPage implements OnInit {
     }
   }
 
+  /**
+   * Handle login error
+   * @param error Error
+   */
   handleError(error: any) {
     switch (error.status) {
       case 403:

@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+/**
+ * Mock page - display image
+ */
 @Component({
   selector: 'app-mock',
   templateUrl: './mock.page.html',
   styleUrls: ['./mock.page.scss'],
 })
 export class MockPage implements OnInit {
-  constructor(private activatedRoute: ActivatedRoute) {}
-
+  /**
+   * Image to display
+   */
   public image: string = '';
+
+  constructor(private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(({ image }) => {

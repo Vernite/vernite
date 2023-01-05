@@ -2,12 +2,15 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { PipeTransform, Pipe } from '@angular/core';
 import { marked, Renderer } from 'marked';
 import { Marked } from '@main/libs/marked/marked.lib';
-import hljs from 'highlight.js';
 
+/**
+ * Markdown pipe - display markdown
+ */
 @Pipe({
   name: 'markdown',
 })
 export class MarkdownPipe implements PipeTransform {
+  /** Markdown renderer */
   private renderer: Renderer<any>;
 
   constructor(private sanitizer: DomSanitizer) {
@@ -15,8 +18,13 @@ export class MarkdownPipe implements PipeTransform {
     this.renderer = Marked.getRenderer();
   }
 
+  /**
+   * Display markdown
+   * @param value - markdown to display
+   * @returns markdown
+   */
   transform(value: string): SafeHtml {
-    const innerHTML = marked.parse(value || '', { renderer: this.renderer });
+    // const innerHTML = marked.parse(value || '', { renderer: this.renderer });
     // TODO: Add hljs to the marked options (https://marked.js.org/using_advanced)
     // this.output.nativeElement
     //   .querySelectorAll<HTMLElement>('pre code')

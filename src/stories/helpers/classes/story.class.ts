@@ -11,21 +11,36 @@ import {
 
 /** Components props type */
 export type Props<C> = Partial<C> & {
+  /**
+   * Form control to use in the component
+   */
   formControl?: FormControl<any>;
+  /**
+   * Content to use in the component (injected as <ng-content>)
+   */
   content?: string;
 };
 
 /** Component docs story configuration interface */
 export interface StoryConfig<C> {
+  /** Story page configuration */
   config: StoryPageConfig;
+  /** Story template */
   template: StoryTemplate<C>;
+  /** Story description */
   description?: string;
+  /** Story multiple props */
   multiple?: {
+    /** prop name */
     prop: string;
+    /** prop options */
     options: any[];
   };
+  /** Custom props to add to component */
   props?: Props<C>;
+  /** Custom code snippet */
   code?: string;
+  /** Custom template */
   html?: string;
 }
 

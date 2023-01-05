@@ -8,23 +8,36 @@ import { SlackIntegrationService } from '@messages/services/slack-integration.se
 import { SlackChannel } from '../../interfaces/slack.interface';
 import { memoize } from 'lodash-es';
 
+/**
+ * Conversation page component
+ */
 @Component({
   selector: 'conversation-page',
   templateUrl: './conversation.page.html',
   styleUrls: ['./conversation.page.scss'],
 })
 export class ConversationPage implements OnInit {
+  /** User, the conversation is with */
   public user$ = this.userService.getMyself();
+
+  /** Message form group */
   public form = new FormGroup({
     message: new FormControl(''),
   });
 
+  /** Id of the integration */
   private integrationId!: number;
+
+  /** Id of the channel */
   private channelId!: string;
 
+  /** Conversation object */
   public conversation$ = new BehaviorSubject<Message[]>([]);
+
+  /** Channel object */
   public channel$: Observable<SlackChannel> = EMPTY;
 
+  /** Messages element */
   @ViewChild('messages') messages!: ElementRef<HTMLElement>;
 
   constructor(
@@ -68,6 +81,9 @@ export class ConversationPage implements OnInit {
     });
   }
 
+  /**
+   * Send message
+   */
   sendMessage() {
     this.channel$.subscribe((channel) => {
       this.slackIntegrationService.sendMessage(
@@ -81,10 +97,21 @@ export class ConversationPage implements OnInit {
     });
   }
 
+  /**
+   * Get user by id
+   * @param userId id of the user
+   * @returns user object
+   */
   getUser(userId: string) {
     return this.slackIntegrationService.getUser(this.integrationId, userId).pipe(shareReplay(1));
   }
 
+  /**
+   * Track by message
+   * @param index array index of the message
+   * @param message message object
+   * @returns unique message identifier
+   */
   trackByMessage(index: number, message: Message) {
     return message.id;
   }

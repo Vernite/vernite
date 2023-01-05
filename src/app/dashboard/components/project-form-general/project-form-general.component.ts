@@ -13,6 +13,9 @@ import { omit } from 'lodash-es';
 import { ApiFile } from '@main/interfaces/api-file.interface';
 import { isApiFile } from '@main/util/is-api-file/is-api-file.util';
 
+/**
+ * Project form general component
+ */
 @UntilDestroy()
 @Component({
   selector: 'project-form-general',
@@ -20,12 +23,19 @@ import { isApiFile } from '@main/util/is-api-file/is-api-file.util';
   styleUrls: ['./project-form-general.component.scss'],
 })
 export class ProjectFormGeneralComponent implements OnInit {
+  /** Project to edit */
   @Input() project?: Project;
+
+  /** Workspace to edit */
   @Input() workspace?: Workspace;
 
+  /** Workspace list */
   public workspaces$: Observable<Workspace[]> = this.workspaceService.list();
+
+  /** Workspace */
   public workspace$!: Observable<Workspace>;
 
+  /** Project form */
   public form = new FormGroup({
     workspaceId: new FormControl<number>(0, [requiredValidator()]),
     name: new FormControl<string>('', [
@@ -43,6 +53,9 @@ export class ProjectFormGeneralComponent implements OnInit {
     this.form.patchValue({ ...this.project, workspaceId: this.workspace?.id });
   }
 
+  /**
+   * Save project
+   */
   saveForm() {
     if (this.project) {
       return this.projectService.update({
@@ -54,6 +67,10 @@ export class ProjectFormGeneralComponent implements OnInit {
     }
   }
 
+  /**
+   * Save logo in project
+   * @param project Project to edit
+   */
   saveLogo(project: Project) {
     const logo = this.form.value.logo;
 
@@ -66,6 +83,9 @@ export class ProjectFormGeneralComponent implements OnInit {
     }
   }
 
+  /**
+   * Save project form changes
+   */
   save() {
     return this.saveForm().pipe(switchMap((project) => this.saveLogo(project)));
   }

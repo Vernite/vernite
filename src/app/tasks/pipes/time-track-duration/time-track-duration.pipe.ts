@@ -3,6 +3,9 @@ import dayjs from 'dayjs';
 import { TimeTrack } from '../../interfaces/time-track.interface';
 import { TimeTrackTimerPipe } from '../time-track-timer/time-track-timer.pipe';
 
+/**
+ * Pipe to calculate duration of single time track entry
+ */
 @Pipe({
   name: 'timeTrackDuration',
 })

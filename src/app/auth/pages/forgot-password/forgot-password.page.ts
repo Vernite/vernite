@@ -6,6 +6,9 @@ import { requiredValidator } from '@main/validators/required.validator';
 import { Subscription } from 'rxjs';
 import { AuthService } from '@auth/services/auth/auth.service';
 
+/**
+ * Forgot password page component
+ */
 @Component({
   selector: 'app-forgot-page',
   templateUrl: './forgot-password.page.html',
@@ -14,8 +17,13 @@ import { AuthService } from '@auth/services/auth/auth.service';
 export class ForgotPasswordPage {
   constructor(private authService: AuthService, private router: Router) {}
 
+  /** @ignore */
   faAngleDown = faAngleDown;
 
+  /**
+   * Password reset subscription
+   * @TODO Replace with loader.
+   */
   private resetSubscription?: Subscription;
 
   /**
@@ -25,6 +33,9 @@ export class ForgotPasswordPage {
     email: new FormControl('', [requiredValidator()], []),
   });
 
+  /**
+   * Reset password
+   */
   resetPassword() {
     if (this.resetSubscription && !this.resetSubscription.closed) return;
 

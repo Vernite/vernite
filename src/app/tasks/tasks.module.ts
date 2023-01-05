@@ -14,7 +14,6 @@ import { SchedulePage } from './pages/schedule/schedule.page';
 import { StatusColorPipe } from './pipes/status-color.pipe';
 import { TaskPriorityIconPipe } from './pipes/task-priority-icon.pipe';
 import { TaskPriorityPipe } from './pipes/task-priority.pipe';
-import { TaskTypeIconPipe } from './pipes/task-type-icon.pipe';
 import { TaskTypePipe } from './pipes/task-type.pipe';
 import { TasksRoutingModule } from './tasks.routing';
 import { TrackerComponent } from './components/tracker/tracker.component';
@@ -45,7 +44,6 @@ import { TaskCommentsComponent } from './components/task-comments/task-comments.
     TaskTypePipe,
     TaskPriorityPipe,
     TaskPriorityIconPipe,
-    TaskTypeIconPipe,
     SchedulePage,
     AssigneeComponent,
     StatusLabelComponent,

@@ -29,19 +29,29 @@ import { ReleaseService } from 'src/app/releases/services/release.service';
 import { ProjectMember } from '../../../dashboard/interfaces/project-member.interface';
 import { MemberService } from '@dashboard/services/member/member.service';
 
+/** Task dialog variant: create or edit */
 export enum TaskDialogVariant {
   CREATE = 'create',
   EDIT = 'edit',
 }
 
+/** Task dialog data to pass to the component on creation */
 export interface TaskDialogData {
+  /** Workspace id */
   workspaceId: number;
+  /** Project id */
   projectId?: number;
+  /** Task dialog variant */
   variant: TaskDialogVariant;
+  /** Task to edit */
   task?: Partial<Task>;
+  /** Parent task of the edited task */
   parentTask?: Task;
 }
 
+/**
+ * Task dialog component to create or edit task
+ */
 @UntilDestroy()
 @Component({
   selector: 'app-task-dialog',
@@ -55,22 +65,40 @@ export class TaskDialog implements OnInit {
   /** Priorities list */
   public taskPriorities = Enum.values(TaskPriority);
 
+  /** Observable with current task parent */
   public parentTask$ =
     this.data.projectId && this.data.task?.parentTaskId
       ? this.taskService.get(this.data.projectId, this.data.task?.parentTaskId)
       : EMPTY;
+
+  /** Projects list observable */
   public projectList$ = this.projectService.list();
+
+  /** Statuses list observable */
   public statusList$!: Observable<Status[]>;
+
+  /** GitHub issues observable */
   public issueList$!: Observable<GitIssue[]>;
+
+  /** GitHub pull requests observable */
   public pullList$!: Observable<GitPull[]>;
 
+  /** Observable with list of all active sprints */
   public sprintListActive$: Observable<Sprint[]> = of([]);
+
+  /** Observable with list of all created sprints */
   public sprintListCreated$: Observable<Sprint[]> = of([]);
+
+  /** Observable with list of all releases */
   public releaseList$: Observable<Release[]> = of([]);
+
+  /** Observable with list of all project members */
   public members$: Observable<ProjectMember[]> = of([]);
 
+  /** Flag to check if GitHub integration is available for the current project */
   public isGitHubIntegrationAvailable: boolean = false;
 
+  /** Task editing or creation form */
   public form = new FormGroup({
     id: new FormControl<number | null>(null),
     parentTaskId: new FormControl<number | null>(null),
@@ -90,8 +118,10 @@ export class TaskDialog implements OnInit {
     assigneeId: new FormControl<number | null>(null),
   });
 
+  /** Observable to check if page is currently interactive */
   public interactive$ = timeToInteraction();
 
+  /** List of statuses loader */
   public statusListLoader = new Loader();
 
   /** @ignore */
@@ -161,6 +191,7 @@ export class TaskDialog implements OnInit {
     }
   }
 
+  /** Function called on every projectId change */
   onProjectIdChange(projectId: number | null) {
     if (!projectId) return;
 
@@ -200,12 +231,14 @@ export class TaskDialog implements OnInit {
     });
   }
 
+  /** Dialog confirm action */
   confirm() {
     if (validateForm(this.form)) {
       this.dialogRef.close(this.form.value);
     }
   }
 
+  /** Dialog cancel action */
   cancel() {
     this.dialogRef.close(false);
   }

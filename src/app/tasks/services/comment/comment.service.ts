@@ -5,6 +5,7 @@ import { Errors } from '../../../_main/interfaces/http-error.interface';
 import { ApiService } from '../../../_main/services/api/api.service';
 import { Comment } from '@tasks/interfaces/comment.interface';
 
+/** Service to integrate tasks comments with API */
 @Service()
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,12 @@ export class CommentService extends BaseService<Errors<'PROJECT_OR_TASK_NOT_FOUN
     super(injector);
   }
 
+  /**
+   * List comments
+   * @param projectId project id
+   * @param taskId task id
+   * @returns comments list
+   */
   public list(projectId: number, taskId: number) {
     return this.apiService.get<Comment[]>(`/project/${projectId}/task/${taskId}/comment`).pipe(
       this.validate({
@@ -28,6 +35,13 @@ export class CommentService extends BaseService<Errors<'PROJECT_OR_TASK_NOT_FOUN
     );
   }
 
+  /**
+   * Get comment
+   * @param projectId project id
+   * @param taskId task id
+   * @param commentId comment id
+   * @returns comment
+   */
   public get(projectId: number, taskId: number, commentId: number) {
     return this.apiService
       .get<Comment>(`/project/${projectId}/task/${taskId}/comment/${commentId}`)
@@ -38,6 +52,13 @@ export class CommentService extends BaseService<Errors<'PROJECT_OR_TASK_NOT_FOUN
       );
   }
 
+  /**
+   * Create comment
+   * @param projectId project id
+   * @param taskId task id
+   * @param data comment data
+   * @returns comment
+   */
   public create(projectId: number, taskId: number, data: { content: string }) {
     return this.apiService
       .post<Comment>(`/project/${projectId}/task/${taskId}/comment`, { body: data })
@@ -48,6 +69,13 @@ export class CommentService extends BaseService<Errors<'PROJECT_OR_TASK_NOT_FOUN
       );
   }
 
+  /**
+   * Update comment
+   * @param projectId project id
+   * @param taskId task id
+   * @param comment comment
+   * @returns comment
+   */
   public update(projectId: number, taskId: number, comment: Comment) {
     return this.apiService
       .put<Comment>(`/project/${projectId}/task/${taskId}/comment/${comment.id}`, { body: comment })
@@ -58,6 +86,13 @@ export class CommentService extends BaseService<Errors<'PROJECT_OR_TASK_NOT_FOUN
       );
   }
 
+  /**
+   * Delete comment
+   * @param projectId project id
+   * @param taskId task id
+   * @param commentId comment id
+   * @returns delete response observable
+   */
   public delete(projectId: number, taskId: number, commentId: number) {
     return this.apiService.delete(`/project/${projectId}/task/${taskId}/comment/${commentId}`).pipe(
       this.validate({

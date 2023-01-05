@@ -9,11 +9,15 @@ import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { ProjectForm } from '@dashboard/interfaces/project-form.interface';
 import { isString } from 'lodash-es';
 
+/**
+ * Project members form component
+ */
 @Component({
   selector: 'project-form-members',
   templateUrl: './project-form-members.component.html',
 })
 export class ProjectFormMembersComponent implements OnInit, ProjectForm {
+  /** Project to edit */
   @Input() set project(project: Project | undefined) {
     this._project = project;
     this.existingMembers$ = project ? this.memberService.list(project.id) : of([]);
@@ -21,15 +25,22 @@ export class ProjectFormMembersComponent implements OnInit, ProjectForm {
   get project() {
     return this._project;
   }
+  /** Project to edit */
   private _project: Project | undefined;
 
   /** @ignore */
   faPlus = faPlus;
 
+  /** Members to add to project */
   public members: (ProjectMember | string)[] = [];
+
+  /** Members to add to project */
   public newMembers: string[] = [];
+
+  /** Members to remove from project */
   public membersToRemove: number[] = [];
 
+  /** Members already existing in the project */
   public existingMembers$: Observable<ProjectMember[]> = of([]);
 
   constructor(private dialogService: DialogService, private memberService: MemberService) {}
@@ -52,6 +63,10 @@ export class ProjectFormMembersComponent implements OnInit, ProjectForm {
       });
   }
 
+  /**
+   * Remove member from project
+   * @param idOrName Member id or name
+   */
   removeMember(idOrName: number | string) {
     if (isString(idOrName)) {
       this.newMembers = this.newMembers.filter((m) => m !== idOrName);

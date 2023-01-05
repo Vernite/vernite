@@ -18,6 +18,7 @@ export class UserUtils {
   }
 
   /**
+   * Gets the color by username.
    * @unsupported
    */
   public static getColorByUsername(username: string): Color {

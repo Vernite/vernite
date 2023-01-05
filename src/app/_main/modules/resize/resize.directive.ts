@@ -9,13 +9,19 @@ import {
 import { ResizeHandleComponent } from './resize-handle.component';
 import { HostBinding } from '@angular/core';
 
+/**
+ * Directive to resize an element.
+ */
 @Directive({
   selector: '[resize]',
 })
 export class ResizeDirective implements OnInit {
-  oldX = 0;
-  isGrabbing = false;
-  oldTransition: string = 'none';
+  /** width before grabbing */
+  private oldX = 0;
+  /** is grabbing */
+  private isGrabbing = false;
+  /** previous transition property value */
+  private oldTransition: string = 'none';
 
   @HostBinding('style.width.px') @Input() width!: number;
 
@@ -33,6 +39,10 @@ export class ResizeDirective implements OnInit {
     }
   }
 
+  /**
+   * Mouse move event handler
+   * @param event mouse event object
+   */
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
     if (!this.isGrabbing) {
@@ -46,6 +56,10 @@ export class ResizeDirective implements OnInit {
     event.stopImmediatePropagation();
   }
 
+  /**
+   * Mouse up event handler
+   * @param event mouse event object
+   */
   @HostListener('document:mouseup', ['$event'])
   onMouseUp() {
     this.isGrabbing = false;
@@ -53,6 +67,10 @@ export class ResizeDirective implements OnInit {
     localStorage.setItem('resize', this.width.toString());
   }
 
+  /**
+   * Mouse down event handler
+   * @param event mouse event object
+   */
   @HostListener('mousedown', ['$event'])
   onMouseDown(event: MouseEvent) {
     if ((event.target as HTMLElement).tagName !== 'RESIZE-HANDLE') {
@@ -64,15 +82,25 @@ export class ResizeDirective implements OnInit {
     this.disableAnimations();
   }
 
+  /**
+   * Disable animations
+   */
   disableAnimations() {
     this.oldTransition = this.elementRef.nativeElement.style.transition;
     this.elementRef.nativeElement.style.transition = 'none';
   }
 
+  /**
+   * Enable animations
+   */
   enableAnimations() {
     this.elementRef.nativeElement.style.transition = this.oldTransition;
   }
 
+  /**
+   * Create resize handle
+   * @param side side of the handle
+   */
   createResizeHandle(side: 'right') {
     const componentRef = this.viewContainerRef.createComponent(ResizeHandleComponent);
     componentRef.instance.side = side;

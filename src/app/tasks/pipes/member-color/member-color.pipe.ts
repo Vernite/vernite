@@ -3,6 +3,9 @@ import { UserUtils } from '@dashboard/classes/user.class';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import Color from 'color';
 
+/**
+ * Pipe to get color of project member
+ */
 @Pipe({
   name: 'memberColor',
 })

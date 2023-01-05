@@ -14,24 +14,37 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable, of, switchMap, tap } from 'rxjs';
 import { validateForm } from '../../../_main/classes/form.class';
 
+/**
+ * Create project page component
+ */
 @UntilDestroy()
 @Component({
   templateUrl: './create-project.page.html',
 })
 export class CreateProjectPage {
+  /** Project general form reference */
   @ViewChild(ProjectFormGeneralComponent) projectFormGeneral!: ProjectFormGeneralComponent;
+
+  /** Project members form reference */
   @ViewChild(ProjectFormMembersComponent) projectFormMembers!: ProjectFormMembersComponent;
+
+  /** Project statuses form reference */
   @ViewChild(ProjectFormStatusesComponent) projectFormStatuses!: ProjectFormStatusesComponent;
+
+  /** Project integrations form reference */
   @ViewChild(ProjectFormIntegrationsComponent)
   projectFormIntegrations!: ProjectFormIntegrationsComponent;
 
+  /** Loader */
   public loader = new Loader();
 
   /** @ignore */
   ProjectFormStage = ProjectFormStage;
 
+  /** Current project edition stage */
   public stage: ProjectFormStage = ProjectFormStage.GENERAL;
 
+  /** Project form stages */
   public stages = [
     ProjectFormStage.GENERAL,
     ProjectFormStage.MEMBERS,
@@ -39,9 +52,13 @@ export class CreateProjectPage {
     ProjectFormStage.INTEGRATIONS,
   ];
 
+  /** Current project */
   public project?: Project;
 
+  /** Current workspace id */
   workspaceId?: number;
+
+  /** Current workspace */
   workspace$: Observable<Workspace> = of({} as Workspace);
 
   constructor(
@@ -88,10 +105,17 @@ export class CreateProjectPage {
     });
   }
 
+  /**
+   * Sets the current project form stage
+   * @param stage Stage
+   */
   public setStage(stage: ProjectFormStage) {
     this.stage = stage;
   }
 
+  /**
+   * Sets the current project form stage to the next one
+   */
   public nextStage() {
     const index = this.stages.findIndex((s) => s === this.stage);
     if (index >= 0 && index < this.stages.length - 1) {
@@ -99,6 +123,9 @@ export class CreateProjectPage {
     }
   }
 
+  /**
+   * Sets the current project form stage to the previous one
+   */
   public previousStage() {
     const index = this.stages.findIndex((s) => s === this.stage);
     if (index > 0 && index < this.stages.length) {

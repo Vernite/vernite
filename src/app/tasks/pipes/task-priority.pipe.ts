@@ -1,5 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+/**
+ * Pipe to get localized task priority name
+ */
 @Pipe({
   name: 'taskPriority',
 })

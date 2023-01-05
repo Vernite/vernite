@@ -2,10 +2,17 @@ import { EMOJI_SEQUENCE_REGEX } from '@main/libs/emoji/emoji-sequence.aliases';
 import { Emoji } from '@main/libs/emoji/emoji.lib';
 import { marked } from 'marked';
 
+/**
+ * Emoji token
+ */
 interface EmojiToken {
+  /** Token type */
   type: 'emoji';
+  /** Text to consume from the source */
   raw: string;
+  /** Emoji name */
   emoji: string;
+  /** Emoji type */
   emojiType: 'sequence' | 'colon';
 }
 

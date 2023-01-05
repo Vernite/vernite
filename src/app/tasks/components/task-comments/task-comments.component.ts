@@ -5,17 +5,25 @@ import { requiredValidator } from '../../../_main/validators/required.validator'
 import { EMPTY, Observable } from 'rxjs';
 import { Comment } from '../../interfaces/comment.interface';
 
+/**
+ * Component to display comments for task
+ */
 @Component({
   selector: 'task-comments',
   templateUrl: './task-comments.component.html',
   styleUrls: ['./task-comments.component.scss'],
 })
 export class TaskCommentsComponent implements OnInit {
+  /** Id of the project */
   @Input() projectId!: number;
+
+  /** Id of the task */
   @Input() taskId!: number;
 
+  /** List of comments */
   public comments$: Observable<Comment[]> = EMPTY;
 
+  /** Form to create new comment */
   public form = new FormGroup({
     content: new FormControl('', [requiredValidator()]),
   });
@@ -26,6 +34,9 @@ export class TaskCommentsComponent implements OnInit {
     this.comments$ = this.commentService.list(this.projectId, this.taskId);
   }
 
+  /**
+   * Send comment
+   */
   sendComment() {
     if (this.form.valid) {
       this.commentService.create(this.projectId, this.taskId, this.form.value).subscribe(() => {

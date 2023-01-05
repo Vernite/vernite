@@ -4,17 +4,25 @@ import { Injector } from '@angular/core';
 import { SnackbarService } from '@main/services/snackbar/snackbar.service';
 import { StoreService } from '../store/store.service';
 
+/** Base service class to provide methods with error validation */
 export abstract class BaseService<T extends Errors<string>> {
+  /** Error codes dictionary */
   protected abstract errorCodes: ErrorCodes<T>;
+
+  /** @ignore Service with methods to display snackbars on the screen */
   private _snackbarService: SnackbarService = this._injector.get(SnackbarService);
+
+  /** @ignore Application storage provider service */
   private _storeService: StoreService = this._injector.get(StoreService);
 
+  /** Application storage attached to this service */
   protected get store() {
     return this._storeService.store;
   }
 
   constructor(private _injector: Injector) {}
 
+  /** Handle error code - display proper message in snackbar */
   protected handleErrorWithCode(err: HTTPError, code: T) {
     if (code) {
       const { message } = this.errorCodes[code];
@@ -26,6 +34,7 @@ export abstract class BaseService<T extends Errors<string>> {
     }
   }
 
+  /** Validation operator function (uses provided errorCodes dictionary) */
   protected validate<E>(codeMappings: { [key in number | string]: T } = {}) {
     return catchError((err: HTTPError) => {
       const code = codeMappings[err.status || err.text];

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth/services/auth/auth.service';
 
+/**
+ * Delete account page component
+ */
 @Component({
   selector: 'app-delete-account.page',
   templateUrl: './delete-account.page.html',
@@ -19,6 +22,10 @@ export class DeleteAccountPage implements OnInit {
     this.deleteAccount(token);
   }
 
+  /**
+   * Delete account
+   * @param token - token to delete account
+   */
   deleteAccount(token: string) {
     if (token) {
       this.authService.deleteAccountConfirmation(token).subscribe(() => {});

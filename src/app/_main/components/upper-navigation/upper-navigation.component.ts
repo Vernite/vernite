@@ -5,30 +5,43 @@ import { AuthService } from '@auth/services/auth/auth.service';
 import { UserService } from '@auth/services/user/user.service';
 import { WorkspaceService } from '@dashboard/services/workspace/workspace.service';
 import { faAngleDown, faCog, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons';
-import { DialogService } from '@main/services/dialog/dialog.service';
 import { TaskService } from '@tasks/services/task/task.service';
 import { finalize, fromEvent, map, skip, take, Observable } from 'rxjs';
 
+/**
+ * Upper navigation component
+ */
 @Component({
   selector: 'app-upper-navigation',
   templateUrl: './upper-navigation.component.html',
   styleUrls: ['./upper-navigation.component.scss'],
 })
 export class UpperNavigationComponent implements OnInit {
+  /** Open below element reference */
   @ViewChild('openBelow') openBelow!: ElementRef<HTMLElement>;
 
+  /** @ignore */
   faAngleDown = faAngleDown;
+
+  /** @ignore */
   faUser = faUser;
+
+  /** @ignore */
   faCog = faCog;
+
+  /** @ignore */
   faSignOut = faSignOut;
 
+  /** is open below active */
   public active: boolean = false;
-  public _isButtonDisabled = true;
 
+  /** is button disabled */
+  private _isButtonDisabled = true;
+
+  /** user observable */
   public myself$?: Observable<User>;
 
   constructor(
-    private dialogService: DialogService,
     private taskService: TaskService,
     private workspaceService: WorkspaceService,
     private authService: AuthService,
@@ -54,12 +67,14 @@ export class UpperNavigationComponent implements OnInit {
     this.myself$ = this.userService.getMyself();
   }
 
+  /** Open new task dialog */
   createNewTask() {
     this.taskService.openCreateNewTaskDialog().subscribe(() => {
       location.reload();
     });
   }
 
+  /** Logout */
   logout() {
     this.authService
       .logout()
@@ -71,10 +86,14 @@ export class UpperNavigationComponent implements OnInit {
       .subscribe();
   }
 
+  /** Is button disabled */
   public isButtonDisabled() {
     return this._isButtonDisabled;
   }
 
+  /**
+   * Open profile
+   */
   public openProfile() {
     this.active = true;
     fromEvent(document, 'click')
@@ -84,10 +103,16 @@ export class UpperNavigationComponent implements OnInit {
       });
   }
 
+  /**
+   * Close profile
+   */
   public closeProfile() {
     this.active = false;
   }
 
+  /**
+   * Toggle profile
+   */
   public toggleProfile() {
     if (!this.active) {
       this.openProfile();

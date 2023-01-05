@@ -9,6 +9,9 @@ import { MeetingDialog, MeetingDialogVariant } from './../dialogs/meeting/meetin
 import { Service } from '@main/decorators/service/service.decorator';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 
+/**
+ * Meeting service
+ */
 @Service()
 @Injectable({
   providedIn: 'root',
@@ -33,6 +36,12 @@ export class MeetingService extends BaseService<
     super(injector);
   }
 
+  /**
+   * Get meeting
+   * @param projectId project id
+   * @param meetingId meeting id
+   * @returns meeting
+   */
   public get(projectId: number, meetingId: number): Observable<Meeting> {
     return this.apiService.get(`/project/${projectId}/meeting/${meetingId}`).pipe(
       this.validate({
@@ -41,6 +50,12 @@ export class MeetingService extends BaseService<
     );
   }
 
+  /**
+   * Create meeting
+   * @param projectId project id
+   * @param meeting meeting
+   * @returns meeting
+   */
   public update(projectId: number, meeting: Meeting): Observable<Meeting> {
     return this.apiService
       .put(`/project/${projectId}/meeting/${meeting.id}`, { body: meeting })
@@ -52,6 +67,12 @@ export class MeetingService extends BaseService<
       );
   }
 
+  /**
+   * Delete meeting
+   * @param projectId project id
+   * @param meetingId meeting id
+   * @returns delete response observable
+   */
   public delete(projectId: number, meetingId: number): Observable<void> {
     return this.apiService.delete(`/project/${projectId}/meeting/${meetingId}`).pipe(
       this.validate({
@@ -60,6 +81,11 @@ export class MeetingService extends BaseService<
     );
   }
 
+  /**
+   * List meetings
+   * @param projectId project id
+   * @returns meetings
+   */
   public list(projectId: number): Observable<Meeting[]> {
     return this.apiService.get(`/project/${projectId}/meeting`).pipe(
       this.validate({
@@ -68,6 +94,12 @@ export class MeetingService extends BaseService<
     );
   }
 
+  /**
+   * Create meeting
+   * @param projectId project id
+   * @param meeting meeting
+   * @returns meeting
+   */
   public create(projectId: number, meeting: Meeting): Observable<Meeting> {
     return this.apiService.post(`/project/${projectId}/meeting`, { body: meeting }).pipe(
       this.validate({
@@ -77,6 +109,11 @@ export class MeetingService extends BaseService<
     );
   }
 
+  /**
+   * Open new meeting dialog
+   * @param projectId project id
+   * @returns meeting
+   */
   public openNewMeetingDialog(projectId?: number): Observable<Meeting> {
     return this.dialogService
       .open(MeetingDialog, {
@@ -93,6 +130,12 @@ export class MeetingService extends BaseService<
       );
   }
 
+  /**
+   * Open edit meeting dialog
+   * @param projectId project id
+   * @param meeting meeting
+   * @returns meeting
+   */
   public openEditMeetingDialog(projectId: number, meeting: Partial<Meeting>): Observable<Meeting> {
     return this.dialogService
       .open(MeetingDialog, {
@@ -110,6 +153,12 @@ export class MeetingService extends BaseService<
       );
   }
 
+  /**
+   * Delete meeting with confirmation
+   * @param projectId project id
+   * @param meetingId meeting id
+   * @returns delete response observable
+   */
   public deleteWithConfirmation(projectId: number, meetingId: number) {
     return this.dialogService
       .confirm({
@@ -122,6 +171,7 @@ export class MeetingService extends BaseService<
       .pipe(
         switchMap((confirmed) => {
           if (!confirmed) return EMPTY;
+
           return this.delete(projectId, meetingId);
         }),
       );

@@ -12,14 +12,19 @@ import { MeetingService } from '@calendar/services/meeting.service';
 import { switchMap, tap } from 'rxjs';
 import { TaskService } from './../../../tasks/services/task/task.service';
 
+/**
+ * Calendar event component to display event
+ */
 @Component({
   selector: 'calendar-event',
   templateUrl: './calendar-event.component.html',
   styleUrls: ['./calendar-event.component.scss'],
 })
 export class CalendarEventComponent {
+  /** Event to display */
   @Input() event!: Event;
 
+  /** Is event overlay open */
   public isOpen = false;
 
   /** @ignore */
@@ -40,6 +45,9 @@ export class CalendarEventComponent {
     private taskService: TaskService,
   ) {}
 
+  /**
+   * Open event details
+   */
   openDetails() {
     switch (this.event.type) {
       case EventType.MEETING:
@@ -61,6 +69,9 @@ export class CalendarEventComponent {
     }
   }
 
+  /**
+   * Open edit event dialog
+   */
   openEdit() {
     switch (this.event.type) {
       case EventType.MEETING:
@@ -96,10 +107,16 @@ export class CalendarEventComponent {
     }
   }
 
+  /**
+   * Open event overlay
+   */
   openOverlay() {
     this.isOpen = true;
   }
 
+  /**
+   * Close event overlay
+   */
   closeOverlay() {
     this.isOpen = false;
   }

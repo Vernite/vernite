@@ -1,10 +1,23 @@
 import * as monaco from 'monaco-editor';
 
+/** Monaco editor */
 type MonacoEditor = monaco.editor.IStandaloneCodeEditor;
+
+/** Monaco text selection */
 type Selection = monaco.Selection;
+
+/** Monaco edit operation */
 type EditOperation = monaco.editor.IIdentifiedSingleEditOperation;
 
+/** Monaco extended class */
 export class MonacoExtended {
+  /**
+   * Insert text at position
+   * @param editor Monaco editor
+   * @param lineNumber Start line number
+   * @param column Start column
+   * @param text Text to insert
+   */
   public static insertTextAt(
     editor: MonacoEditor,
     lineNumber: number,
@@ -24,6 +37,11 @@ export class MonacoExtended {
     ]);
   }
 
+  /**
+   * Execute edits
+   * @param editor Monaco editor
+   * @param edits Edits
+   */
   public static executeEdits(editor: MonacoEditor, edits: EditOperation[]) {
     for (const edit of edits) {
       if (edit.range?.startColumn && !edit.range?.endColumn)
@@ -34,6 +52,14 @@ export class MonacoExtended {
     return editor.executeEdits('', edits);
   }
 
+  /**
+   * Remove text at position
+   * @param editor Monaco editor
+   * @param startLineNumber Start line number
+   * @param startColumn Start column
+   * @param endLineNumber End line number
+   * @param endColumn End column
+   */
   public static removeTextAt(
     editor: MonacoEditor,
     startLineNumber: number,
@@ -54,6 +80,12 @@ export class MonacoExtended {
     ]);
   }
 
+  /**
+   * Insert text before selection
+   * @param editor Monaco editor
+   * @param selection Monaco selection
+   * @param text Text to insert
+   */
   public static insertTextBeforeSelection(
     editor: MonacoEditor,
     selection: Selection,
@@ -62,10 +94,23 @@ export class MonacoExtended {
     MonacoExtended.insertTextAt(editor, selection.startLineNumber, selection.startColumn, text);
   }
 
+  /**
+   * Insert text after selection
+   * @param editor Monaco editor
+   * @param selection Monaco selection
+   * @param text Text to insert
+   */
   public static insertTextAfterSelection(editor: MonacoEditor, selection: Selection, text: string) {
     MonacoExtended.insertTextAt(editor, selection.endLineNumber, selection.endColumn, text);
   }
 
+  /**
+   * Remove text before and after selection
+   * @param editor Monaco editor
+   * @param selections Monaco selections
+   * @param beforeSelectionText Text to insert before selection
+   * @param afterSelectionText Text to insert after selection
+   */
   public static insertTextBeforeAndAfterEachSelection(
     editor: MonacoEditor,
     selections: Selection[],
@@ -100,6 +145,13 @@ export class MonacoExtended {
     editor.executeEdits('', edits);
   }
 
+  /**
+   * Remove text before and after selection
+   * @param editor Monaco editor
+   * @param selections Monaco selections
+   * @param beforeSelectionText Text to remove before selection
+   * @param afterSelectionText Text to remove after selection
+   */
   public static removeTextBeforeAndAfterEachSelection(
     editor: MonacoEditor,
     selections: Selection[],
@@ -144,6 +196,13 @@ export class MonacoExtended {
     editor.executeEdits('', edits);
   }
 
+  /**
+   * Check if selection start with text
+   * @param editor Monaco editor
+   * @param selection Monaco selection
+   * @param text Text to check
+   * @returns True if selection start with text
+   */
   public static selectionStartWith(editor: MonacoEditor, selection: Selection, text: string) {
     const selectedValue = editor
       .getModel()
@@ -151,6 +210,13 @@ export class MonacoExtended {
     return selectedValue?.startsWith(text);
   }
 
+  /**
+   * Check if selection end with text
+   * @param editor Monaco editor
+   * @param selection Monaco selection
+   * @param text Text to check
+   * @returns True if selection end with text
+   */
   public static selectionEndsWith(editor: MonacoEditor, selection: Selection, text: string) {
     const selectedValue = editor
       .getModel()
@@ -158,6 +224,12 @@ export class MonacoExtended {
     return selectedValue?.endsWith(text);
   }
 
+  /**
+   * Toggle text before and after selection
+   * @param editor Monaco editor
+   * @param beforeSelectionText text before selection
+   * @param afterSelectionText text after selection
+   */
   public static toggleEndAndStartOfEachSelection(
     editor: MonacoEditor,
     beforeSelectionText: string,

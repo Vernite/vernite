@@ -5,6 +5,9 @@ import { ProtoService } from '../proto/proto.service';
 import { vernite } from '@vernite/protobuf';
 import { SnackbarService } from '../snackbar/snackbar.service';
 
+/**
+ * Notification service
+ */
 @Service()
 @Injectable({
   providedIn: 'root',
@@ -16,6 +19,9 @@ export class NotificationService {
     private snackbarService: SnackbarService,
   ) {}
 
+  /**
+   * Init notification service
+   */
   public init() {
     this.protoService
       .get<vernite.CommunicatorModel.Message>(vernite.CommunicatorModel.Message)

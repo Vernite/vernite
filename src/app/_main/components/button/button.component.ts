@@ -1,7 +1,6 @@
 import {
   Component,
   ElementRef,
-  HostListener,
   Input,
   ViewChild,
   HostBinding,
@@ -62,17 +61,9 @@ export class ButtonComponent implements OnChanges {
     }, 200);
   }
 
-  @HostListener('click', ['$event'])
-  onClick(event: MouseEvent) {
-    if (this.disabled) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-  }
-
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['disabled']) {
-      if (this.disabled) {
+    if (changes['disabled'] || changes['pending']) {
+      if (this.disabled || this.pending) {
         this.pointerEvents = 'none';
       } else {
         this.pointerEvents = 'auto';

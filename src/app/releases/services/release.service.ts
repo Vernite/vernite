@@ -14,6 +14,9 @@ import {
 } from '../dialog/release/release.dialog';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 
+/**
+ * Release service
+ */
 @Injectable({
   providedIn: 'root',
 })
@@ -46,6 +49,11 @@ export class ReleaseService extends BaseService<
     super(injector);
   }
 
+  /**
+   * Releases list
+   * @param projectId project id
+   * @returns releases list
+   */
   @Cache()
   public list(projectId: number): Observable<Release[]> {
     return this.apiService.get(`/project/${projectId}/release`).pipe(
@@ -56,6 +64,12 @@ export class ReleaseService extends BaseService<
     );
   }
 
+  /**
+   * Get release
+   * @param projectId project id
+   * @param releaseId release id
+   * @returns release
+   */
   @Cache()
   public get(projectId: number, releaseId: number): Observable<Release> {
     return this.apiService.get(`/project/${projectId}/release/${releaseId}`).pipe(
@@ -66,6 +80,12 @@ export class ReleaseService extends BaseService<
     );
   }
 
+  /**
+   * Create release
+   * @param projectId project id
+   * @param release release
+   * @returns release
+   */
   public create(projectId: number, release: Release): Observable<Release> {
     return this.apiService.post(`/project/${projectId}/release`, { body: release }).pipe(
       this.validate({
@@ -76,6 +96,12 @@ export class ReleaseService extends BaseService<
     );
   }
 
+  /**
+   * Update release
+   * @param projectId project id
+   * @param release release
+   * @returns release
+   */
   public update(projectId: number, release: Release): Observable<Release> {
     return this.apiService
       .put(`/project/${projectId}/release/${release.id}`, { body: release })
@@ -88,11 +114,24 @@ export class ReleaseService extends BaseService<
       );
   }
 
+  /**
+   * Publish release
+   * @TODO implement
+   * @param projectId project id
+   * @param release release
+   * @returns release
+   */
   public publish(projectId: number, release: Release): Observable<Release> {
     return of(release);
   }
 
-  public delete(projectId: number, releaseId: number): Observable<null> {
+  /**
+   * Delete release
+   * @param projectId project id
+   * @param releaseId release id
+   * @returns delete response observable
+   */
+  public delete(projectId: number, releaseId: number): Observable<void> {
     return this.apiService.delete(`/project/${projectId}/release/${releaseId}`).pipe(
       this.validate({
         404: 'PROJECT_OR_RELEASE_NOT_FOUND',
@@ -101,7 +140,13 @@ export class ReleaseService extends BaseService<
     );
   }
 
-  public deleteWithConfirmation(projectId: number, release: Release) {
+  /**
+   * Delete release with confirmation
+   * @param projectId project id
+   * @param release release
+   * @returns delete response observable
+   */
+  public deleteWithConfirmation(projectId: number, release: Release): Observable<void> {
     return this.dialogService
       .confirm({
         title: $localize`Delete release`,
@@ -118,6 +163,11 @@ export class ReleaseService extends BaseService<
       );
   }
 
+  /**
+   * Open create release dialog
+   * @param projectId project id
+   * @returns release observable
+   */
   public openCreateReleaseDialog(projectId: number): Observable<Release> {
     return this.dialogService
       .open(
@@ -140,6 +190,12 @@ export class ReleaseService extends BaseService<
       );
   }
 
+  /**
+   * Open edit release dialog
+   * @param projectId project id
+   * @param release release
+   * @returns release observable
+   */
   public openEditReleaseDialog(projectId: number, release: Release): Observable<Release> {
     return this.dialogService
       .open(

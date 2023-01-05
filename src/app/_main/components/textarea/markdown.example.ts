@@ -1,3 +1,4 @@
+/** Markdown example syntax */
 export const markdownExample = `
 ---
 __Advertisement :)__

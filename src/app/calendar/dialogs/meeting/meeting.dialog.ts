@@ -12,31 +12,42 @@ import { UserService } from '@auth/services/user/user.service';
 import { Loader } from '../../../_main/classes/loader/loader.class';
 import { withLoader } from '@main/operators/loader.operator';
 
+/** Meeting dialog variant */
 export enum MeetingDialogVariant {
   CREATE = 'create',
   EDIT = 'edit',
 }
 
+/** Meeting dialog data */
 export interface MeetingDialogData {
+  /** Project ID */
   projectId?: number;
+  /** Meeting to edit */
   meeting?: Partial<Meeting>;
+  /** Meeting dialog variant */
   variant: MeetingDialogVariant;
 }
 
+/** Meeting dialog component */
 @Component({
   selector: 'meeting-dialog',
   templateUrl: './meeting.dialog.html',
   styleUrls: ['./meeting.dialog.scss'],
 })
 export class MeetingDialog implements OnInit {
+  /** Project object */
   projects$ = this.projectService.list();
+
+  /** Project members */
   members$ = this.data.projectId ? this.memberService.list(this.data.projectId) : of([]);
 
+  /** Project members loader */
   membersLoader = new Loader();
 
   /** @ignore */
   MeetingDialogVariant = MeetingDialogVariant;
 
+  /** Meeting dialog form */
   public form = new FormGroup({
     id: new FormControl<number | null>(null),
     projectId: new FormControl<number | null>(null, [requiredValidator()]),
@@ -78,10 +89,12 @@ export class MeetingDialog implements OnInit {
     });
   }
 
+  /** Close dialog */
   cancel() {
     this.dialogRef.close();
   }
 
+  /** Confirm dialog */
   confirm() {
     if (validateForm(this.form)) {
       this.dialogRef.close(this.form.value);

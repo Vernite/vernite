@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+/**
+ * Messenger summary page component
+ */
 @Component({
   selector: 'messenger-summary-page',
   templateUrl: './messenger-summary.page.html',

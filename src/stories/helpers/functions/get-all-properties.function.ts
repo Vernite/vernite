@@ -1,3 +1,4 @@
+/** Get all properties/attributes of an object */
 export function getAllProperties(obj: any) {
   // Recursively get properties up [[Prototype]] chain
   function loop(obj: any): string[] {

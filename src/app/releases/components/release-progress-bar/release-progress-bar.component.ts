@@ -16,21 +16,35 @@ export class ReleaseProgressBarComponent implements OnInit, OnChanges {
    * List of statuses used in the release
    */
   @Input() statusList!: Status[];
+
+  /**
+   * List of tasks in the release
+   */
   @Input() tasks!: Task[];
 
+  /**
+   * Progress of the release
+   */
   public progress: {
     [statusId: number]: {
+      /** Total numbers of tasks */
       total: number;
+      /** Percentage of tasks */
       percentage: number;
+      /** Color of the status */
       color: Color;
+      /** Is the status final */
       final: boolean;
     };
   } = {};
 
+  /** Final release percentage */
   public finalPercentage = 0;
 
+  /** Is details overlay open */
   public detailsOpen = false;
 
+  /** Available positions for details overlay */
   public detailsPositionPairs: ConnectedPosition[] = [
     {
       originX: 'end',
@@ -53,6 +67,11 @@ export class ReleaseProgressBarComponent implements OnInit, OnChanges {
     }
   }
 
+  /**
+   * Calculate progress of the release
+   * @param allTasks All tasks in the release
+   * @returns Progress of the release
+   */
   private calculateProgress(allTasks: Partial<Task>[]) {
     const values = mapValues(groupBy(this.tasks, 'statusId'), (tasks) => ({
       total: tasks.length,
@@ -75,6 +94,10 @@ export class ReleaseProgressBarComponent implements OnInit, OnChanges {
     return values;
   }
 
+  /**
+   * Calculate final percentage of the release
+   * @returns Final percentage of the release
+   */
   private calculateFinalPercentage() {
     return Math.round(
       Object.values(this.progress)

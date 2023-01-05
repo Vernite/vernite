@@ -11,11 +11,17 @@ import { Loader } from '../../../_main/classes/loader/loader.class';
 import { startLoader, stopLoader } from '../../../_main/operators/loader.operator';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 
+/**
+ * Register stages
+ */
 enum RegisterStage {
   IMPORTANT_DATA,
   PERSONAL_DATA,
 }
 
+/**
+ * Register page component
+ */
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -28,11 +34,19 @@ export class RegisterPage {
     private recaptchaV3Service: ReCaptchaV3Service,
   ) {}
 
+  /** Register subscription */
   private registerSubscription?: Subscription;
+
+  /** Current register stage */
   public stage?: RegisterStage = RegisterStage.IMPORTANT_DATA;
+
+  /** @ignore */
   RegisterStage = RegisterStage;
 
+  /** Register error */
   public error?: string;
+
+  /** Loader */
   public loader = new Loader();
 
   /**
@@ -52,6 +66,9 @@ export class RegisterPage {
     agreements: new FormControl('', [requiredValidator()]),
   });
 
+  /**
+   * Next register stage
+   */
   nextStage() {
     // TODO: Think something about this stages and validation
     let formFields: ['email', 'password', 'repeatPassword', 'agreements'] = [
@@ -73,10 +90,16 @@ export class RegisterPage {
     }
   }
 
+  /**
+   * Previous register stage
+   */
   previousStage() {
     this.stage = RegisterStage.IMPORTANT_DATA;
   }
 
+  /**
+   * Register
+   */
   register() {
     if (this.registerSubscription && !this.registerSubscription.closed) return;
 
@@ -102,6 +125,10 @@ export class RegisterPage {
     }
   }
 
+  /**
+   * Handle registration error
+   * @param error Error
+   */
   handleError(error: any) {
     switch (error.status) {
       case 422:

@@ -1,6 +1,12 @@
 import { Observable } from 'rxjs';
 
-/** @deprecated */
+/**
+ * Catch response operator function - observe some observable and:
+ * - catch response with given message
+ * @param message message to catch
+ * @param action action to perform
+ * @deprecated use catchError instead
+ */
 export function catchResponse(message: string, action: (res?: any) => void) {
   return <T = any>(source: Observable<T>) => {
     const match = (response: any) => {

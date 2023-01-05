@@ -10,6 +10,9 @@ import dayjs from 'dayjs';
 import { KeyboardKey } from '@main/interfaces/keyboard-key.interface';
 import { DatePickerComponent } from './date-picker/date-picker.component';
 
+/**
+ * Input date time component
+ */
 @UntilDestroy()
 @Component({
   selector: 'app-input-date-time',
@@ -20,27 +23,39 @@ export class InputDateTimeComponent
   extends ControlAccessor<unixTimestamp | null>
   implements OnInit
 {
+  /** Placeholder */
   @Input() placeholder: string = '';
 
+  /** Floating label */
   @Input() floatingLabel?: string;
 
+  /** Static label visible above input */
   @Input() staticLabel?: string;
 
+  /** Is input pending */
   @Input() pending?: boolean;
 
+  /** Overlay element reference */
   @ViewChild('overlay') overlay!: ElementRef<HTMLElement>;
+
+  /** Date picker component reference */
   @ViewChild(DatePickerComponent) datePicker?: DatePickerComponent;
 
   /** @ignore */
   faCalendar = faCalendar;
 
+  /** Is date picker open */
   isPickerOpen$ = new BehaviorSubject<boolean>(false);
 
-  // TODO: Load this from user settings
+  /**
+   * Date display format
+   * @TODO Load this from user settings
+   */
   displayFormat = 'DD.MM.YYYY HH:mm';
 
   override displayControl = new FormControl<string>(this.format(this.control?.value));
 
+  /** If element is focused */
   focused: boolean = false;
 
   constructor(private elementRef: ElementRef, cdRef: ChangeDetectorRef, ngControl: NgControl) {
@@ -61,6 +76,10 @@ export class InputDateTimeComponent
       });
   }
 
+  /**
+   * Wait for click outside of element
+   * @param fn Function to call when click outside of element
+   */
   waitForClickOutside(fn: () => void) {
     fromEvent(document, 'mousedown')
       .pipe(
@@ -76,6 +95,9 @@ export class InputDateTimeComponent
       .subscribe(() => fn());
   }
 
+  /**
+   * Open date picker
+   */
   openPicker() {
     this.isPickerOpen$.next(true);
     setTimeout(() => {
@@ -83,10 +105,17 @@ export class InputDateTimeComponent
     }, 100);
   }
 
+  /**
+   * Close date picker
+   */
   closePicker() {
     this.isPickerOpen$.next(false);
   }
 
+  /**
+   * On focus state changed
+   * @param state If element is focused
+   */
   onFocusStateChanged(state: boolean) {
     this.focused = state;
 
@@ -95,6 +124,11 @@ export class InputDateTimeComponent
     }
   }
 
+  /**
+   * Format date to specific format
+   * @param value Date to format
+   * @returns Formatted date
+   */
   private format(value: unixTimestamp | null) {
     if (!value) return '';
     return dayjs(value).format(this.displayFormat);

@@ -2,10 +2,19 @@ import { Pipe, PipeTransform } from '@angular/core';
 import * as Color from 'color';
 import { EventType } from '../../enums/event-type.enum';
 
+/**
+ * Event type pipe
+ */
 @Pipe({
   name: 'eventType',
 })
 export class EventTypePipe implements PipeTransform {
+  /**
+   * Get color of the event by type
+   * @param value Event type
+   * @param type type of value to return
+   * @returns Color of event type
+   */
   transform(value: EventType, type: 'color'): Color {
     switch (value) {
       // Meeting

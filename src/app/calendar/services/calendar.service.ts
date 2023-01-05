@@ -1,4 +1,4 @@
-import { ErrorCodes, Errors } from '@main/interfaces/http-error.interface';
+import { Errors } from '@main/interfaces/http-error.interface';
 import { BaseService } from '@main/services/base/base.service';
 import { Injector, Injectable } from '@angular/core';
 import { Service } from '@main/decorators/service/service.decorator';
@@ -7,6 +7,9 @@ import { ApiService } from '@main/services/api/api.service';
 import { DialogService } from '@main/services/dialog/dialog.service';
 import { CalendarExportDialog } from '@calendar/dialogs/calendar-export/calendar-export.dialog';
 
+/**
+ * Calendar service
+ */
 @Service()
 @Injectable({
   providedIn: 'root',
@@ -22,6 +25,11 @@ export class CalendarService extends BaseService<Errors<any>> {
     super(injector);
   }
 
+  /**
+   * Get calendar sync url
+   * @param projectId project id
+   * @returns sync url
+   */
   public getSyncUrl(projectId?: number): Observable<string> {
     return (() => {
       if (projectId) {
@@ -32,6 +40,11 @@ export class CalendarService extends BaseService<Errors<any>> {
     })().pipe(this.validate());
   }
 
+  /**
+   * Open sync url dialog
+   * @param projectId project id
+   * @returns sync url
+   */
   public openSyncUrlDialog(projectId?: number) {
     return this.dialogService
       .open(

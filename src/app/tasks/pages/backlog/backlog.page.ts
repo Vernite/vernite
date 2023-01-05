@@ -4,7 +4,6 @@ import { TaskService } from '@tasks/services/task/task.service';
 import { TaskFilters } from '@tasks/filters/task.filters';
 import { Observable, of } from 'rxjs';
 import { Task } from '@tasks/interfaces/task.interface';
-import { FormControl } from '@ngneat/reactive-forms';
 import { ProjectService } from '@dashboard/services/project/project.service';
 import { MemberService } from '@dashboard/services/member/member.service';
 import { Project } from '@dashboard/interfaces/project.interface';
@@ -19,6 +18,7 @@ import { TaskProtoService } from '../../services/task/task.proto.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FilterChannel } from '@main/components/filters/filter-channel.model';
 
+/** Sprint backlog page component - to show list of all tasks not attached to any sprint */
 @UntilDestroy()
 @Component({
   selector: 'backlog-page',
@@ -26,16 +26,31 @@ import { FilterChannel } from '@main/components/filters/filter-channel.model';
   styleUrls: ['./backlog.page.scss'],
 })
 export class BacklogPage implements OnInit {
+  /** Id of the project user is in */
   public projectId!: number;
+
+  /** Observable of the project user is in */
   public project$: Observable<Project> = of();
 
+  /** Observable of the tasks list */
   public taskList$: Observable<Task[]> = of([]);
+
+  /** Observable of the statuses list */
   public statusList$: Observable<Status[]> = of([]);
+
+  /** Observable of the sprints list (status active) */
   public sprintListActive$: Observable<Sprint[]> = of([]);
+
+  /** Observable of the sprints list (status created) */
   public sprintListCreated$: Observable<Sprint[]> = of([]);
+
+  /** Empty map to use as a fallback */
   public emptyMap: Map<number, ProjectMember> = new Map();
 
+  /** Observable of the members of the project */
   public members$?: Observable<Map<number, ProjectMember>> = of(this.emptyMap);
+
+  /** Observable of the tasks filter channel */
   public filters$ = FilterChannel.TASKS;
 
   constructor(
@@ -87,6 +102,7 @@ export class BacklogPage implements OnInit {
     });
   }
 
+  /** Load tasks into view */
   loadTasks() {
     this.taskList$ = this.taskService.list(this.projectId, [
       TaskFilters.BACKLOG(),
@@ -94,6 +110,7 @@ export class BacklogPage implements OnInit {
     ]);
   }
 
+  /** Start selected sprint (try to set status ACTIVE) */
   startSprint(sprint: Sprint) {
     sprint = {
       ...sprint,
@@ -104,24 +121,28 @@ export class BacklogPage implements OnInit {
     });
   }
 
+  /** Revert selected sprint (try to set status CREATED) */
   revertSprint(sprint: Sprint) {
     this.sprintService.revertWithConfirmation(this.projectId, sprint).subscribe(() => {
       location.reload();
     });
   }
 
+  /** Close selected sprint (try to set status CLOSED) */
   closeSprint(sprint: Sprint) {
     this.sprintService.closeWithConfirmation(this.projectId, sprint).subscribe(() => {
       location.reload();
     });
   }
 
+  /** Open dialog to edit selected sprint */
   editSprint(sprint: Sprint) {
     this.sprintService.openEditSprintDialog(this.projectId, sprint).subscribe(() => {
       location.reload();
     });
   }
 
+  /** Open dialog to delete sprint */
   deleteSprint(sprint: Sprint) {
     this.sprintService.deleteWithConfirmation(this.projectId, sprint).subscribe(() => {
       location.reload();

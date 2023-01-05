@@ -1,43 +1,53 @@
 import { Component, Input } from '@angular/core';
 import { ProjectMember } from '@dashboard/interfaces/project-member.interface';
 import { faCheck, faCodeCommit, faCodePullRequest } from '@fortawesome/free-solid-svg-icons';
-import { DialogService } from '@main/services/dialog/dialog.service';
 import { TaskService } from '@tasks/services/task/task.service';
 import { Task } from '../../interfaces/task.interface';
 
+/**
+ * Component to display task in board
+ */
 @Component({
   selector: 'app-board-task',
   templateUrl: './board-task.component.html',
   styleUrls: ['./board-task.component.scss'],
 })
 export class BoardTaskComponent {
-  @Input()
-  public task!: Task;
+  /** Task to display */
+  @Input() public task!: Task;
 
-  @Input()
-  public projectId!: number;
+  /** Id of the project */
+  @Input() public projectId!: number;
 
-  @Input()
-  public members: Map<number, ProjectMember> = new Map();
+  /** List of project members */
+  @Input() public members: Map<number, ProjectMember> = new Map();
 
+  /** @ignore */
   faCodeCommit = faCodeCommit;
+
+  /** @ignore */
   faCodePullRequest = faCodePullRequest;
+
+  /** @ignore */
   faCheck = faCheck;
 
-  constructor(private dialogService: DialogService, private taskService: TaskService) {}
+  constructor(private taskService: TaskService) {}
 
+  /** Open delete task dialog */
   delete() {
     this.taskService.deleteWithConfirmation(this.projectId, this.task).subscribe(() => {
       location.reload();
     });
   }
 
+  /** Open edit task dialog */
   edit() {
     this.taskService.openEditTaskDialog(this.projectId, this.task).subscribe(() => {
       location.reload();
     });
   }
 
+  /** Open create subtask dialog */
   createSubtask() {
     this.taskService.openCreateSubtaskDialog(this.projectId, this.task).subscribe((task) => {
       if (!task) return;

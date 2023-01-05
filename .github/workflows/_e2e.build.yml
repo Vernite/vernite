@@ -28,6 +28,14 @@ jobs:
           yarn e2e:build
           yarn e2e:coverage
 
+      # Upload artifacts
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: e2e-tests
+          path: coverage
+
+
 
   # deploy:
   #   runs-on: ubuntu-latest

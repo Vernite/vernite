@@ -4,29 +4,34 @@ import { SnackbarService } from '@main/services/snackbar/snackbar.service';
 import { uniqueId } from 'lodash-es';
 import { SnackbarData } from './snackbar.interface';
 
+/**
+ * Snackbar component
+ */
 @Component({
   selector: 'app-snackbar',
   templateUrl: './snackbar.component.html',
   styleUrls: ['./snackbar.component.scss'],
 })
 export class SnackbarComponent implements OnInit {
+  /** @ignore */
   faClose = faClose;
 
-  @Input()
-  public uid: string = uniqueId();
+  /** Snackbar uid */
+  @Input() public uid: string = uniqueId();
 
-  @Input()
-  public message!: SnackbarData['message'];
+  /** Snackbar message */
+  @Input() public message!: SnackbarData['message'];
 
-  @Input()
-  public duration: SnackbarData['duration'] = 4000;
+  /** Snackbar duration */
+  @Input() public duration: SnackbarData['duration'] = 4000;
 
-  @Input()
-  public color: SnackbarData['color'] = 'gray';
+  /** Snackbar color */
+  @Input() public color: SnackbarData['color'] = 'gray';
 
-  @HostBinding('style.animation-name')
-  public animationName: string = 'open';
+  /** Animation name */
+  @HostBinding('style.animation-name') public animationName: string = 'open';
 
+  /** Convert color name to css color */
   public get colorStyle(): string {
     switch (this.color) {
       case 'gray':
@@ -50,6 +55,7 @@ export class SnackbarComponent implements OnInit {
     }, this.duration);
   }
 
+  /** Close snackbar */
   close() {
     this.setAnimationName('close');
     setTimeout(() => {
@@ -57,6 +63,7 @@ export class SnackbarComponent implements OnInit {
     }, 1000);
   }
 
+  /** Set animation name */
   setAnimationName(name: string) {
     this.animationName = name;
   }

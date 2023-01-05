@@ -1,8 +1,14 @@
 import { snakeCase } from 'lodash-es';
 import { CursorStateComputer, EditOperation, Editor, Selection } from '../typings';
 
+/**
+ * Composed operations to modify selections
+ */
 export type SelectionEditOperation = { [key in SelectionEditOperationType]: string };
 
+/**
+ * Selection edit operation type
+ */
 export enum SelectionEditOperationType {
   before = 'BEFORE',
   after = 'AFTER',
@@ -10,6 +16,9 @@ export enum SelectionEditOperationType {
   afterEachLine = 'AFTER_EACH_LINE',
 }
 
+/**
+ * Selection edit operation order
+ */
 export const SelectionEditOperationOrder = {
   before: 1,
   after: 4,
@@ -17,6 +26,9 @@ export const SelectionEditOperationOrder = {
   afterEachLine: 3,
 };
 
+/**
+ * Selection edit operation converter to convert internal operations to monaco operations
+ */
 const SelectionEditOperationConverter: {
   [key in SelectionEditOperationType]: (
     editor: Editor,
@@ -105,7 +117,14 @@ const SelectionEditOperationConverter: {
   },
 };
 
+/**
+ * Selection edit plugin
+ */
 export class SelectionEditPlugin {
+  /**
+   * Initialize plugin
+   * @param prototype Monaco editor prototype
+   */
   public static init(prototype: any) {
     prototype.getSelectionEdits = function (edits: SelectionEditOperation) {
       return SelectionEditPlugin.getSelectionEdits.bind(this)(edits);
@@ -119,6 +138,11 @@ export class SelectionEditPlugin {
     };
   }
 
+  /**
+   * Get selection edits
+   * @param edits Selection edits operations to perform
+   * @returns Edit operations
+   */
   public static getSelectionEdits(edits: SelectionEditOperation): EditOperation[] {
     const editor: Editor = this as any;
     const selections = editor.getSelections();
@@ -148,6 +172,11 @@ export class SelectionEditPlugin {
     return _edits;
   }
 
+  /**
+   * Execute selection edits
+   * @param edits Selection edits operations to perform
+   * @param endCursorState Cursor state after edits
+   */
   public static executeSelectionEdits(
     edits: SelectionEditOperation,
     endCursorState?: CursorStateComputer | Selection[],

@@ -6,14 +6,22 @@ import { ProjectService } from '@dashboard/services/project/project.service';
 import dayjs from 'dayjs';
 import { Observable, of } from 'rxjs';
 
+/**
+ * Calendar page component
+ */
 @Component({
   selector: 'calendar-page',
   templateUrl: './calendar.page.html',
   styleUrls: ['./calendar.page.scss'],
 })
 export class CalendarPage implements OnInit {
+  /** Project id */
   public projectId: number | null = null;
+
+  /** Date to display */
   public date = dayjs();
+
+  /** Events to display */
   public events$: Observable<Event[]> = of([]);
 
   constructor(

@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostBinding, Input, ViewChild, OnInit } from '@angular/core';
+import { Component, ElementRef, HostBinding, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Workspace } from 'src/app/dashboard/interfaces/workspace.interface';
 import { WorkspaceService } from '@dashboard/services/workspace/workspace.service';
@@ -24,16 +24,19 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./sidebar-navigation.component.scss'],
 })
 export class SidebarNavigationComponent implements OnInit {
-  @Input() public icon!: String;
-
+  /** Workspaces list */
   public workspaceList$?: Observable<Workspace[]>;
+
+  /** Slack integrations list */
   public slackIntegrations$?: Observable<any>;
 
+  /** sidebar navigation entries container reference */
   @ViewChild('entries') entries!: ElementRef<HTMLElement>;
 
-  @HostBinding('class.collapsed')
-  public isCollapsed = false;
+  /** is collapsed */
+  @HostBinding('class.collapsed') public isCollapsed = false;
 
+  /** Width */
   @HostBinding('style.width')
   public get width() {
     const entries = this.entries?.nativeElement;
@@ -64,7 +67,7 @@ export class SidebarNavigationComponent implements OnInit {
   /** @ignore */
   faServer = faServer;
 
-  /* @ignore */
+  /** @ignore */
   faUser = faUser;
 
   createWorkspace() {
@@ -88,6 +91,9 @@ export class SidebarNavigationComponent implements OnInit {
     });
   }
 
+  /**
+   * Toggle sidebar navigation collapsed state
+   */
   toggle() {
     if (this.isCollapsed) {
       this.expand();
@@ -96,38 +102,64 @@ export class SidebarNavigationComponent implements OnInit {
     }
   }
 
+  /**
+   * Collapse sidebar navigation
+   */
   collapse() {
     this.isCollapsed = true;
   }
 
+  /**
+   * Expand sidebar navigation
+   */
   expand() {
     this.isCollapsed = false;
   }
 
+  /**
+   * Route to workspace
+   * @param workspace workspace to open
+   */
   routeToWorkspace(workspace: Workspace) {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
       .then(() => this.router.navigate(['/', 'workspaces', workspace.id]));
   }
 
+  /**
+   * Route to project
+   * @param project project to open
+   */
   routeToProject(project: Project) {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
       .then(() => this.router.navigate(['/', 'projects', project.id]));
   }
 
+  /**
+   * Route to create project
+   * @param workspace workspace to create project in
+   */
   createProject(workspace: Workspace) {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
       .then(() => this.router.navigate(['/', 'workspaces', workspace.id, 'projects', 'create']));
   }
 
+  /**
+   * Route to edit project
+   * @param project project to edit
+   */
   editProject(project: Project) {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
       .then(() => this.router.navigate(['/', 'projects', project.id, 'edit']));
   }
 
+  /**
+   * Open delete project dialog
+   * @param project project to delete
+   */
   deleteProject(project: Project) {
     this.dialogService.confirmProjectDelete(project).subscribe(() => {
       this.projectService.delete(project.id).subscribe(() => {
@@ -136,12 +168,20 @@ export class SidebarNavigationComponent implements OnInit {
     });
   }
 
+  /**
+   * Route to edit workspace
+   * @param workspace workspace to edit
+   */
   editWorkspace(workspace: Workspace) {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
       .then(() => this.router.navigate(['/', 'workspaces', workspace.id, 'edit']));
   }
 
+  /**
+   * Open delete workspace dialog
+   * @param workspace workspace to delete
+   */
   deleteWorkspace(workspace: Workspace) {
     this.dialogService.confirmWorkspaceDelete(workspace).subscribe(() => {
       this.workspaceService.delete(workspace.id).subscribe(() => {
@@ -150,10 +190,18 @@ export class SidebarNavigationComponent implements OnInit {
     });
   }
 
+  /**
+   * Open project with VSCode
+   * @param project project to open
+   */
   openWithVSCode(project: Project) {
     window.open(`https://github.dev/${project.gitHubIntegration}`, '_blank');
   }
 
+  /**
+   * Open project with local VSCode
+   * @param project project to open
+   */
   openWithLocalVSCode(project: Project) {
     window.open(
       `vscode://vscode.git/clone?url=https://github.com/${project.gitHubIntegration}`,
@@ -161,6 +209,10 @@ export class SidebarNavigationComponent implements OnInit {
     );
   }
 
+  /**
+   * Open project with local VSCode Insiders
+   * @param project project to open
+   */
   openWithLocalVSCodeInsiders(project: Project) {
     window.open(
       `vscode-insiders://vscode.git/clone?url=https://github.com/${project.gitHubIntegration}`,

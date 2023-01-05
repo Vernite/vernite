@@ -1,4 +1,4 @@
-// is "class" or "function"?
+/** Utility function to check if object is a class. */
 export function isClass<T>(obj: any): obj is T {
   // if not a function, return false.
   if (typeof obj !== 'function') return false;

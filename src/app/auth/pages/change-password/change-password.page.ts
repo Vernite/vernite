@@ -7,25 +7,24 @@ import { sameAsValidator } from '@main/validators/same-as.validator';
 import { Subscription } from 'rxjs';
 import { AuthService } from '@auth/services/auth/auth.service';
 
+/**
+ * Change password page component
+ */
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.page.html',
   styleUrls: ['./change-password.page.scss'],
 })
 export class ChangePasswordPage implements OnInit {
+  /**
+   * Token from query params.
+   */
   private token?: string;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-  ) {}
-
-  ngOnInit() {
-    const { token } = this.activatedRoute.snapshot.queryParams;
-    this.token = token;
-  }
-
+  /**
+   * Reset subscription subscription.
+   * @TODO Replace with loader.
+   */
   private resetSubscription?: Subscription;
 
   /**
@@ -44,6 +43,20 @@ export class ChangePasswordPage implements OnInit {
     ),
   });
 
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+  ) {}
+
+  ngOnInit() {
+    const { token } = this.activatedRoute.snapshot.queryParams;
+    this.token = token;
+  }
+
+  /**
+   * Save new password
+   */
   setNewPassword() {
     if (this.resetSubscription && !this.resetSubscription.closed) return;
 

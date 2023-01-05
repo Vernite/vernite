@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
+/**
+ * Router extensions service (to improve router snapshot)
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class RouterExtensionsService {
   constructor(private router: Router) {}
 
+  /**
+   * Get router snapshot
+   */
   public get snapshot() {
     if (!this.router.routerState) return { params: {}, data: {} };
 
@@ -23,6 +29,10 @@ export class RouterExtensionsService {
     };
   }
 
+  /**
+   * Get language from url
+   * @returns language from url
+   */
   private getLanguageFromUrl() {
     const languagePredicate = location.pathname.split('/')[1];
 
@@ -34,6 +44,10 @@ export class RouterExtensionsService {
     }
   }
 
+  /**
+   * Get base href
+   * @returns base href
+   */
   private getBaseHref() {
     console.log(document.getElementsByTagName('base')[0]);
     return document.getElementsByTagName('base')[0].href;
