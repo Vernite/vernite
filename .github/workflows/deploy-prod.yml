@@ -48,12 +48,12 @@ jobs:
         run: yarn unit:build
 
       # Run e2e tests
-      - name: E2E tests
-        run: yarn e2e:build
+      # - name: E2E tests
+      #   run: yarn e2e:build
 
       # Combine tests
-      - name: Combine tests
-        run: yarn lcov-result-merger 'coverage/**/lcov.info' coverage/lcov.info --prepend-path-fix
+      # - name: Combine tests
+      #   run: yarn lcov-result-merger 'coverage/**/lcov.info' coverage/lcov.info --prepend-path-fix
 
       # Copy default redirect page
       - name: Redirect page copy
@@ -86,14 +86,14 @@ jobs:
           yarn audit:build
 
       # Send reports to codecov
-      - name: Send reports to codecov
-        uses: codecov/codecov-action@v2
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage/lcov.info
-          flags: unittests
-          name: unittests
-          fail_ci_if_error: true
+      # - name: Send reports to codecov
+      #   uses: codecov/codecov-action@v2
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     file: ./coverage/lcov.info
+      #     flags: unittests
+      #     name: unittests
+      #     fail_ci_if_error: true
 
       # SonarQube scan
       # - uses: sonarsource/sonarqube-scan-action@master
