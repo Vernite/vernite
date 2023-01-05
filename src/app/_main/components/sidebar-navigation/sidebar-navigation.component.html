@@ -28,8 +28,16 @@
     </div>
   </sidebar-entry>
 
-  <sidebar-entry [icon]="faLayerGroup" [collapsed]="isCollapsed" [expandable]="true">
+  <sidebar-entry [icon]="faLayerGroup" [collapsed]="isCollapsed" [expandable]="true" [showOptions]="true">
     <span class="header" i18n>Workspaces</span>
+    <ng-container class="options">
+      <button mat-menu-item routerLink="/workspaces">
+        <span i18n>Manage workspaces</span>
+      </button>
+      <button mat-menu-item routerLink="/workspaces/create">
+        <span i18n>Create new workspace</span>
+      </button>
+    </ng-container>
     <div class="content">
       <sidebar-entry *ngFor="let workspace of workspaceList$ | async" [expandable]="true" [collapsed]="isCollapsed"
         [textIcon]="true" [showOptions]="true">

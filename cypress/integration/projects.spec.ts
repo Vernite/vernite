@@ -44,8 +44,4 @@ describe('Projects tests', () => {
     cy.get('.mat-dialog-container').contains('button', 'Delete').click();
     cy.contains('Test project - renamed').should('not.exist');
   });
-
-  after(() => {
-    cy.deleteAllProjectsAndWorkspaces();
-  });
 });
