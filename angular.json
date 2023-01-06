@@ -127,7 +127,13 @@
               "vendorChunk": true,
               "customWebpackConfig": {
                 "path": "./cypress/coverage.webpack.ts"
-              }
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"

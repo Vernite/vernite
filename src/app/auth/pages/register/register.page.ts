@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { emailValidator } from '@main/validators/email.validator';
 import { passwordValidator } from '@main/validators/password.validator';
 import { sameAsValidator } from '@main/validators/same-as.validator';
-import { catchError, EMPTY, Subscription, of, switchMap, take } from 'rxjs';
+import { catchError, EMPTY, Subscription, of, switchMap } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { AuthService } from '@auth/services/auth/auth.service';
 import { Loader } from '../../../_main/classes/loader/loader.class';
@@ -111,8 +111,7 @@ export class RegisterPage {
       this.registerSubscription = of(null)
         .pipe(
           startLoader(this.loader),
-          switchMap(() => this.recaptchaV3Service.execute('register').pipe(take(1))),
-          switchMap((captcha) => this.authService.register({ ...this.form.value, captcha })),
+          switchMap(() => this.authService.register(this.form.value)),
           stopLoader(this.loader),
           catchError((e) => {
             this.handleError(e);

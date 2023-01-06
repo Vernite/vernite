@@ -88,17 +88,23 @@ export class TaskRowComponent implements AfterViewInit {
 
   /** Open edit task dialog */
   editTask(task: Task) {
-    this.taskService.openEditTaskDialog(this.projectId, task).subscribe();
+    this.taskService.openEditTaskDialog(this.projectId, task).subscribe(() => {
+      location.reload();
+    });
   }
 
   /** Open create subtask dialog */
   createSubtask(task: Task) {
-    this.taskService.openCreateSubtaskDialog(this.projectId, task).subscribe();
+    this.taskService.openCreateSubtaskDialog(this.projectId, task).subscribe(() => {
+      location.reload();
+    });
   }
 
   /** Open delete task dialog */
   deleteTask(task: Task) {
-    this.taskService.deleteWithConfirmation(this.projectId, task).subscribe();
+    this.taskService.deleteWithConfirmation(this.projectId, task).subscribe(() => {
+      location.reload();
+    });
   }
 
   /** Redirect to task details */

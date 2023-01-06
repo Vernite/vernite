@@ -1,11 +1,12 @@
 import { Injectable, Injector } from '@angular/core';
 import { Service } from '@main/decorators/service/service.decorator';
 import dayjs from 'dayjs';
-import { tap, Observable } from 'rxjs';
+import { tap, Observable, switchMap } from 'rxjs';
 import { ApiService } from '@main/services/api/api.service';
 import { BaseService } from '@main/services/base/base.service';
 import { Errors } from '@main/interfaces/http-error.interface';
 import { User } from '../../interfaces/user.interface';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 /**
  * Authentication service
@@ -21,7 +22,11 @@ export class AuthService extends BaseService<Errors<'INVALID_TOKEN'>> {
     },
   };
 
-  constructor(private injector: Injector, private apiService: ApiService) {
+  constructor(
+    private injector: Injector,
+    private apiService: ApiService,
+    private recaptchaV3Service: ReCaptchaV3Service,
+  ) {
     super(injector);
   }
 
@@ -36,18 +41,20 @@ export class AuthService extends BaseService<Errors<'INVALID_TOKEN'>> {
     name,
     surname,
     username,
-    captcha,
   }: {
     email: string;
     password: string;
     name: string;
     surname: string;
     username: string;
-    captcha: string;
   }) {
-    return this.apiService.post(`/auth/register`, {
-      body: { email, password, name, surname, username, captcha },
-    });
+    return this.recaptchaV3Service.execute('register').pipe(
+      switchMap((captcha) =>
+        this.apiService.post(`/auth/register`, {
+          body: { email, password, name, surname, username, captcha },
+        }),
+      ),
+    );
   }
 
   /**
@@ -59,16 +66,17 @@ export class AuthService extends BaseService<Errors<'INVALID_TOKEN'>> {
     email,
     password,
     remember,
-    captcha,
   }: {
     email: string;
     password: string;
     remember: boolean;
-    captcha: string;
   }): Observable<User> {
-    return this.apiService
-      .post(`/auth/login`, { body: { email, password, remember, captcha } })
-      .pipe(tap(() => localStorage.setItem('lastLoginTry', dayjs().valueOf().toString())));
+    return this.recaptchaV3Service.execute('login').pipe(
+      switchMap((captcha) =>
+        this.apiService.post(`/auth/login`, { body: { email, password, remember, captcha } }),
+      ),
+      tap(() => localStorage.setItem('lastLoginTry', dayjs().valueOf().toString())),
+    );
   }
 
   /**

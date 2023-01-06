@@ -1,13 +1,18 @@
-declare namespace Cypress {
-  interface Chainable<Subject = any> {
-    login(email: string, password: string): typeof login;
-    logout(): typeof logout;
-    createWorkspace(name: string): typeof createWorkspace;
-    createProject(name: string): typeof createProject;
-    deleteProject(id: number): typeof deleteProject;
-    deleteWorkspace(id: number): typeof deleteWorkspace;
-    deleteAllProjectsAndWorkspaces(): typeof deleteAllProjectsAndWorkspaces;
-    clearUser(email: string, password: string): typeof clearUser;
+import { AuthService } from '../../src/app/auth/services/auth/auth.service';
+
+declare global {
+  namespace Cypress {
+    // eslint-disable-next-line unused-imports/no-unused-vars
+    interface Chainable<Subject = any> {
+      login(email: string, password: string): typeof login;
+      logout(): typeof logout;
+      createWorkspace(name: string): typeof createWorkspace;
+      createProject(name: string): typeof createProject;
+      deleteProject(id: number): typeof deleteProject;
+      deleteWorkspace(id: number): typeof deleteWorkspace;
+      deleteAllProjectsAndWorkspaces(): typeof deleteAllProjectsAndWorkspaces;
+      clearUser(email: string, password: string): typeof clearUser;
+    }
   }
 }
 
@@ -33,12 +38,11 @@ function requestWithAuth(
 
 function login(email: string, password: string) {
   cy.session([email, password, Math.random()], () => {
-    cy.request({
-      method: 'POST',
-      url: '/api/auth/login',
-      body: { email, password },
-    }).then(() => {
-      localStorage.setItem('logged', 'true');
+    cy.visit('/login');
+    cy.window().then((win) => {
+      const SERVICES = (win as any)['SERVICES'];
+      const authService = SERVICES.AuthService as AuthService;
+      authService.login({ email, password, remember: true }).subscribe();
     });
     cy.wait(2000);
   });
@@ -56,7 +60,7 @@ function logout() {
       headers: {
         Cookie: 'session=' + cookieValue,
       },
-    }).then((res) => {
+    }).then(() => {
       cy.clearCookies();
       cy.clearLocalStorage();
     });
