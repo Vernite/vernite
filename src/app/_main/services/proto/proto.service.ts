@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { webSocket } from 'rxjs/webSocket';
+import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
 import {
   filter,
   from,
@@ -17,6 +17,7 @@ import { Service } from '../../decorators/service/service.decorator';
 import { vernite } from '@vernite/protobuf';
 import { environment } from '../../../../environments/environment';
 import { MessageMetadataRegistry } from '@main/libs/proto/message-metadata-registry.class';
+import { Subject } from 'rxjs';
 
 /**
  * Proto service (for real time communication using websocket)
@@ -27,20 +28,61 @@ import { MessageMetadataRegistry } from '@main/libs/proto/message-metadata-regis
 })
 export class ProtoService {
   /** Websocket observable */
-  protected _websocket$ = webSocket({
-    url: environment.websocketUrl,
-    deserializer: (e: MessageEvent) => e,
-    serializer: (value: any) => value,
-  });
+  protected _websocket$?: WebSocketSubject<MessageEvent<any>>;
+
+  /** Internal socket as middleware between websocket and subscribing subjects */
+  protected _internalSocket$ = new Subject<MessageEvent<any>>();
 
   /** Message metadata registry (used for storing meta for message types/classes) */
   private messageMetadataRegistry = new MessageMetadataRegistry();
 
   constructor() {
+    this.startSendingKeepAliveMessage();
+    this.startLoggingMessages();
+  }
+
+  /** Connect to websocket and pipe output from websocket to internal socket */
+  public connect() {
+    if (this.isConnectionOpen()) return;
+
+    this._websocket$ = this.constructWebsocket();
+
+    this._websocket$.subscribe((message) => {
+      this._internalSocket$.next(message);
+    });
+  }
+
+  /** disconnect from websocket */
+  public disconnect() {
+    this._websocket$?.complete();
+    this._websocket$ = undefined;
+  }
+
+  /**
+   * Create websocket connection
+   * @returns websocket observable
+   */
+  protected constructWebsocket() {
+    return webSocket({
+      url: environment.websocketUrl,
+      deserializer: (e: MessageEvent) => e,
+      serializer: (value: any) => value,
+    });
+  }
+
+  /**
+   * Start sending KeepAlive messages to websocket
+   */
+  protected startSendingKeepAliveMessage() {
     this.get<vernite.KeepAlive>(vernite.KeepAlive).subscribe((message) => {
       this.next(message);
     });
+  }
 
+  /**
+   * Start logging websocket messages to console
+   */
+  protected startLoggingMessages() {
     this.get().subscribe((message) => {
       this.logMessage(message);
     });
@@ -84,18 +126,36 @@ export class ProtoService {
   }
 
   /**
+   * Check if connection is closed
+   * @returns true if connection does not exist or is closed, false otherwise
+   */
+  public isConnectionClosed(): boolean {
+    return Boolean(!this._websocket$ || this._websocket$?.closed);
+  }
+
+  /**
+   * Check if connection is open
+   * @returns true if connection exists and is open, false otherwise
+   */
+  public isConnectionOpen(): boolean {
+    return Boolean(this._websocket$ && !this._websocket$.closed);
+  }
+
+  /**
    * Send message over websocket
    * @param value value to send over websocket
    */
   public next(value: Message) {
+    if (this.isConnectionClosed()) return;
+
     this.serialize(value).subscribe((data) => {
-      this._websocket$.next(data as any);
+      this._websocket$!.next(data as any);
     });
   }
 
   /** Websocket observable */
   protected socket() {
-    return this._websocket$.pipe(switchMap(this.deserialize.bind(this)));
+    return this._internalSocket$.pipe(switchMap(this.deserialize.bind(this)));
   }
 
   /**

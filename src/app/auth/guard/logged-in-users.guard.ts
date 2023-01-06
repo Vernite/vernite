@@ -14,7 +14,7 @@ export class LoggedInUsersGuard implements CanActivate {
    * @returns true if user is logged in, false otherwise
    */
   canActivate() {
-    if (this.authService.isLoggedIn()) {
+    if (this.authService.isLocallyLoggedIn()) {
       return true;
     } else {
       this.router.navigate(['/auth/login']);

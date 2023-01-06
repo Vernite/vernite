@@ -68,7 +68,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
             // If user was logged or was trying to login within one day, display session expired dialog
             if (
-              this.authService.getLastLoginTime().diff(dayjs(), 'day') < 1 &&
+              this.authService.getLastLoginTryTime().diff(dayjs(), 'day') < 1 &&
               !this._stoppedInterceptionProcess
             ) {
               this.dialogService.openErrorDialog($localize`Your session has expired.`);

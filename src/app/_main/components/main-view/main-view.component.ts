@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DialogOutlet } from '@main/services/dialog/dialog.service';
 import { environment } from 'src/environments/environment';
 import { RouterExtensionsService } from '@main/services/router-extensions/router-extensions.service';
+import { AuthService } from '../../../auth/services/auth/auth.service';
+import { ProtoService } from '../../services/proto/proto.service';
 
 /**
  * Main view component
@@ -24,10 +26,20 @@ export class MainViewComponent implements OnInit {
   /** sidebar width */
   public sidebarWidth = 250;
 
-  constructor(private routerExtensions: RouterExtensionsService) {}
+  constructor(
+    private routerExtensions: RouterExtensionsService,
+    private protoService: ProtoService,
+    private authService: AuthService,
+  ) {}
 
   ngOnInit() {
     const data = this.routerExtensions.snapshot.data;
     this.hideNavigation = data.hideNavigation;
+
+    this.authService.isLoggedIn().subscribe((isLoggedIn: boolean) => {
+      if (!isLoggedIn) return;
+
+      this.protoService.connect();
+    });
   }
 }

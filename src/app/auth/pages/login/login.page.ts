@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { Router } from '@angular/router';
-import { UserService } from '@auth/services/user/user.service';
 import { catchError, EMPTY, of, Subscription, switchMap } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { AuthService } from '@auth/services/auth/auth.service';
@@ -17,11 +16,7 @@ import { startLoader, stopLoader } from '../../../_main/operators/loader.operato
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  constructor(
-    private authService: AuthService,
-    private userService: UserService,
-    private router: Router,
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   /**
    * Login subscription
@@ -46,7 +41,9 @@ export class LoginPage implements OnInit {
   });
 
   ngOnInit() {
-    this.userService.getMyself().subscribe(() => {
+    this.authService.isLoggedIn().subscribe((isLoggedIn: boolean) => {
+      if (!isLoggedIn) return;
+
       localStorage.setItem('logged', 'true');
       this.router.navigate(['/']);
     });
@@ -78,7 +75,6 @@ export class LoginPage implements OnInit {
           if (response.deleted) {
             this.router.navigate(['/auth/restore-account']);
           } else {
-            localStorage.setItem('logged', 'true');
             this.router.navigate(['/']);
           }
         });
