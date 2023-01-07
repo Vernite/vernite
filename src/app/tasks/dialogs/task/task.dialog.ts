@@ -195,8 +195,6 @@ export class TaskDialog implements OnInit {
   onProjectIdChange(projectId: number | null) {
     if (!projectId) return;
 
-    console.log('project id changed');
-
     this.statusList$ = this.statusService.list(projectId);
     this.statusList$
       .pipe(untilDestroyed(this), withLoader(this.statusListLoader))

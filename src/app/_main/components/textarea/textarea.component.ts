@@ -146,7 +146,6 @@ export class TextareaComponent extends ControlAccessor implements OnInit, AfterV
     super.writeValue(value);
 
     if (this.previousValue !== value) {
-      console.log(this.previousValue, value, this.previousValue !== value);
       this.editor?.getModel()?.setValue(value || '');
     }
   }

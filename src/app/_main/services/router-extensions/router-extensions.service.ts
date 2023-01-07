@@ -49,7 +49,6 @@ export class RouterExtensionsService {
    * @returns base href
    */
   private getBaseHref() {
-    console.log(document.getElementsByTagName('base')[0]);
     return document.getElementsByTagName('base')[0].href;
   }
 }

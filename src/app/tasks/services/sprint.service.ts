@@ -77,7 +77,6 @@ export class SprintService {
    * @returns Observable with updated sprint, EMPTY otherwise (when user cancels the dialog)
    */
   public openEditSprintDialog(projectId: number, sprint: Sprint): Observable<Sprint | null> {
-    console.log(projectId);
     return this.dialogService
       .open(
         SprintDialog,

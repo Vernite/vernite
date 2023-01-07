@@ -10,11 +10,8 @@
   color: var(--color-text);
 }
 
-app-button {
-  align-items: center;
-  justify-content: center;
-  padding: 10px 20px;
-  margin: 0;
+.new-task {
+  margin: 10px 20px;
 }
 
 .flex-end-position {
@@ -26,15 +23,35 @@ app-button {
   .profile {
     display: flex;
 
+    .actions {
+      display: flex;
+      height: 100%;
+      align-items: center;
+
+      .notification {
+        margin-right: 1rem;
+      }
+
+      .bug-reporter {
+        margin-right: 1rem;
+      }
+    }
+
     .myself {
       display: flex;
+      height: 100%;
       align-items: center;
-      margin-right: 3rem;
+
+      .avatar {
+        margin-right: 1rem;
+      }
+
+      .name {
+        padding: 10px;
+      }
     }
 
     .open-below {
-      position: absolute;
-      right: 0;
       display: flex;
       height: 100%;
       align-items: center;

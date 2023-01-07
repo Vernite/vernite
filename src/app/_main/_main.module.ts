@@ -78,6 +78,7 @@ import { SidebarGroupComponent } from './components/sidebar-navigation/sidebar-g
 import { ReversePipe } from './pipes/reverse/reverse.pipe';
 import { CollapsableDirective } from './directives/collapsable/collapsable.directive';
 import { ResizeModule } from './modules/resize/resize.module';
+import { ReportBugDialog } from './dialogs/report-bug/report-bug.dialog';
 
 /**
  * Main module configuration object
@@ -188,6 +189,7 @@ const ngModuleConfig = {
     ReversePipe,
     ColorPipe,
     CollapsableDirective,
+    ReportBugDialog,
   ],
   providers: [
     /*=============================================
