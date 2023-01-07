@@ -9,6 +9,7 @@ import { ProjectMember } from '../../../dashboard/interfaces/project-member.inte
 @Component({
   selector: 'task-list',
   templateUrl: './task-list.component.html',
+  styleUrls: ['./task-list.component.scss'],
 })
 export class TaskListComponent {
   /** Tasks to display */

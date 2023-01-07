@@ -1,4 +1,4 @@
-<div class="table w-full">
+<div class="custom-table w-full grow flex flex-col">
 
   <!-- Header -->
   <div class="header-row">
@@ -14,7 +14,8 @@
   </div>
 
   <!-- Body -->
-  <ng-container *ngFor="let task of tasks; trackBy: trackByTask">
-    <task-row [task]="task" [projectId]="projectId" [members]="members" [statusList]="statusList"></task-row>
-  </ng-container>
+  <cdk-virtual-scroll-viewport itemSize="50" class="grow">
+    <task-row *cdkVirtualFor="let task of tasks; trackBy: trackByTask" [task]="task" [projectId]="projectId"
+      [members]="members" [statusList]="statusList"></task-row>
+  </cdk-virtual-scroll-viewport>
 </div>

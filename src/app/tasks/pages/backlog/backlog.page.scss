@@ -1,3 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
 .title {
   margin-bottom: 0.5rem;
 
@@ -5,6 +11,7 @@
     margin-top: 2rem;
   }
 }
+
 .description {
   margin-top: 0;
   margin-bottom: 0.5rem;
