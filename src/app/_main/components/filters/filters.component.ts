@@ -27,7 +27,6 @@ export class FiltersComponent {
    */
   public save() {
     const filters = Object.values(this.filtersGroup).map((filter) => {
-      console.log(filter.control.value);
       const dataFilter = filter.dataFilter(filter.control.value);
 
       return {

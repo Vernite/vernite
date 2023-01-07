@@ -85,10 +85,6 @@ export class SidebarNavigationComponent implements OnInit {
   ngOnInit() {
     this.workspaceList$ = this.workspaceService.list();
     this.slackIntegrations$ = this.slackService.getSlackIntegrationsWithChannelsAndUsers();
-
-    this.slackIntegrations$.subscribe((data) => {
-      console.log(data);
-    });
   }
 
   /**

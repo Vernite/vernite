@@ -31,12 +31,6 @@ function createChannel<T>(
     });
 
     channel.onmessage = (event: MessageEvent<any>) => {
-      console.log(
-        'got message',
-        event.data.map(({ identifier, value }: any) => {
-          return filtersClass[identifier](value) as DataFilter<any, any>;
-        }),
-      );
       observer.next(
         event.data.map(({ identifier, value }: any) => {
           return filtersClass[identifier](value) as DataFilter<any, any>;

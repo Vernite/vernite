@@ -96,8 +96,7 @@ export class BacklogPage implements OnInit {
       });
     });
 
-    this.filters$.subscribe((val) => {
-      console.log('filters', val);
+    this.filters$.subscribe(() => {
       this.loadTasks();
     });
   }

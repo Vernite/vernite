@@ -4,7 +4,8 @@ import { User } from '@auth/interfaces/user.interface';
 import { AuthService } from '@auth/services/auth/auth.service';
 import { UserService } from '@auth/services/user/user.service';
 import { WorkspaceService } from '@dashboard/services/workspace/workspace.service';
-import { faAngleDown, faCog, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faCog, faSignOut, faUser, faBug } from '@fortawesome/free-solid-svg-icons';
+import { ReportService } from '@main/services/reports/report.service';
 import { TaskService } from '@tasks/services/task/task.service';
 import { finalize, fromEvent, map, skip, take, Observable } from 'rxjs';
 
@@ -32,6 +33,9 @@ export class UpperNavigationComponent implements OnInit {
   /** @ignore */
   faSignOut = faSignOut;
 
+  /** @ignore */
+  faBug = faBug;
+
   /** is open below active */
   public active: boolean = false;
 
@@ -46,6 +50,7 @@ export class UpperNavigationComponent implements OnInit {
     private workspaceService: WorkspaceService,
     private authService: AuthService,
     private userService: UserService,
+    private reportService: ReportService,
     private router: Router,
   ) {}
 
@@ -92,7 +97,7 @@ export class UpperNavigationComponent implements OnInit {
   }
 
   /**
-   * Open profile
+   * Open profile options
    */
   public openProfile() {
     this.active = true;
@@ -104,14 +109,14 @@ export class UpperNavigationComponent implements OnInit {
   }
 
   /**
-   * Close profile
+   * Close profile options
    */
   public closeProfile() {
     this.active = false;
   }
 
   /**
-   * Toggle profile
+   * Toggle profile options
    */
   public toggleProfile() {
     if (!this.active) {
@@ -119,5 +124,12 @@ export class UpperNavigationComponent implements OnInit {
     } else {
       this.closeProfile();
     }
+  }
+
+  /**
+   * Open bug report dialog
+   */
+  public reportBug() {
+    this.reportService.openBugReportDialog().subscribe();
   }
 }
