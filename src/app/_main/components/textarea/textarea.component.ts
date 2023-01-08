@@ -1,8 +1,5 @@
-import { Monaco } from './../../libs/monaco/monaco.lib';
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ElementRef, OnInit, Component, Input, ViewChild } from '@angular/core';
 import { ControlAccessor } from '@main/classes/control-accessor/control-accessor.class';
-import { editor } from 'monaco-editor';
-// eslint-disable-next-line unused-imports/no-unused-imports
 import { marked, Renderer } from 'marked';
 import hljs from 'highlight.js';
 import {
@@ -18,6 +15,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Marked } from '@main/libs/marked/marked.lib';
 import './textarea.theme';
+import { SelectionEditPlugin } from '../../libs/monaco/plugins/selection-edit.plugin';
 
 @Component({
   selector: 'app-textarea',
@@ -56,8 +54,23 @@ export class TextareaComponent extends ControlAccessor implements OnInit, AfterV
 
   public mode: 'editor' | 'preview' = 'editor';
 
-  /** @ignore */
-  private editor: editor.IStandaloneCodeEditor | null = null;
+  public editorOptions = {
+    language: 'markdown',
+    scrollBeyondLastLine: false,
+    wordWrap: 'on',
+    wrappingStrategy: 'advanced',
+    minimap: {
+      enabled: false,
+    },
+    overviewRulerLanes: 0,
+    theme: 'vs-dark',
+    wordBasedSuggestions: false,
+  };
+
+  private editor: any;
+
+  /** Monaco editor theme */
+  private theme: any;
 
   /** @ignore */
   faCode = faCode;
@@ -89,40 +102,29 @@ export class TextareaComponent extends ControlAccessor implements OnInit, AfterV
   override ngOnInit(): void {
     super.ngOnInit();
     Marked.init();
-    Monaco.init();
     hljs.configure({ languages: [] });
   }
 
-  ngAfterViewInit(): void {
-    const container = this.input.nativeElement;
-    const _editor = editor.create(container, {
-      value: this.control.value || '',
-      language: 'markdown',
-      scrollBeyondLastLine: false,
-      wordWrap: 'on',
-      wrappingStrategy: 'advanced',
-      minimap: {
-        enabled: false,
-      },
-      overviewRulerLanes: 0,
-      theme: 'dark',
-      wordBasedSuggestions: false,
-    });
-    const updateDimensions = () => {
-      const contentHeight = Math.min(500, _editor.getContentHeight());
-      container.style.height = `${contentHeight}px`;
-      try {
-        _editor.layout();
-      } catch (e) {}
-    };
-    _editor.onDidContentSizeChange(updateDimensions);
-    _editor.getModel()?.onDidChangeContent(() => {
-      this.control.setValue(_editor.getValue());
-    });
-    const observer = new ResizeObserver(updateDimensions);
-    observer.observe(container);
-    updateDimensions();
-    this.editor = _editor;
+  ngAfterViewInit(): void {}
+
+  onEditorInit(editor: any) {
+    this.editor = editor;
+
+    if (!this.theme) {
+      SelectionEditPlugin.init(editor.__proto__);
+      (window as any).monaco.editor.defineTheme('dark', {
+        base: 'vs-dark',
+        inherit: true,
+        rules: [],
+        colors: {
+          'editor.background': '#364053',
+        },
+      });
+
+      this.theme = true;
+    }
+
+    editor.updateOptions({ theme: 'dark' });
   }
 
   openEditor() {
@@ -132,7 +134,7 @@ export class TextareaComponent extends ControlAccessor implements OnInit, AfterV
   openPreview() {
     const { renderer } = this;
 
-    this.output.nativeElement.innerHTML = marked.parse(this.editor?.getValue() || '', { renderer });
+    this.output.nativeElement.innerHTML = marked.parse(this.control.value || '', { renderer });
     this.output.nativeElement
       .querySelectorAll<HTMLElement>('pre code')
       .forEach((c: HTMLElement) => {
@@ -144,10 +146,6 @@ export class TextareaComponent extends ControlAccessor implements OnInit, AfterV
 
   override writeValue(value: any) {
     super.writeValue(value);
-
-    if (this.previousValue !== value) {
-      this.editor?.getModel()?.setValue(value || '');
-    }
   }
 
   applyUnderline() {

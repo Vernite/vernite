@@ -1,10 +1,3 @@
-import * as monaco from 'monaco-editor';
+// const monaco = (window as any).monaco;
 
-export default monaco.editor.defineTheme('dark', {
-  base: 'vs-dark',
-  inherit: true,
-  rules: [],
-  colors: {
-    'editor.background': '#364053',
-  },
-});
+// export default

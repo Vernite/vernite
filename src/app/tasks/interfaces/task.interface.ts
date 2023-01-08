@@ -130,4 +130,9 @@ export interface Task extends JSONParsable {
    * Points to measure task complexity
    */
   storyPoints: number;
+
+  /**
+   * Date of last update
+   */
+  lastUpdated?: unixTimestamp;
 }

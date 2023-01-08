@@ -1,21 +1,22 @@
-<div class="custom-table w-full grow flex flex-col">
-
-  <!-- Header -->
-  <div class="header-row">
-    <div class="header-cell w-full">Title</div>
-    <div class="header-cell w-52">Status</div>
-    <div class="header-cell w-52">Assignee</div>
-    <div class="header-cell w-52">Time tracking</div>
-    <div class="header-cell w-52">Deadline</div>
-    <div class="header-cell w-52">Story points</div>
-    <div class="header-cell action">
-      <!-- Actions -->
+<div class="custom-table w-full grow flex-1">
+  <cdk-virtual-scroll-viewport #scrollViewport itemSize="50" class="grow">
+    <!-- Header -->
+    <div class="header-row sticky" [style.top]="inverseOfTranslation">
+      <div class="header-cell w-full">Title</div>
+      <div class="header-cell w-52">Status</div>
+      <div class="header-cell w-52">Assignee</div>
+      <div class="header-cell w-52">Time tracking</div>
+      <div class="header-cell w-52">Deadline</div>
+      <div class="header-cell w-52">Story points</div>
+      <div class="header-cell action">
+        <!-- Actions -->
+      </div>
     </div>
-  </div>
 
-  <!-- Body -->
-  <cdk-virtual-scroll-viewport itemSize="50" class="grow">
-    <task-row *cdkVirtualFor="let task of tasks; trackBy: trackByTask" [task]="task" [projectId]="projectId"
-      [members]="members" [statusList]="statusList"></task-row>
+    <!-- Body -->
+    <div class="body">
+      <task-row *cdkVirtualFor="let task of tasks; trackBy: trackByTask" [task]="task" [projectId]="projectId"
+        [members]="members" [statusList]="statusList"></task-row>
+    </div>
   </cdk-virtual-scroll-viewport>
 </div>

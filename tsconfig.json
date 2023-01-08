@@ -18,10 +18,15 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2017",
+    "target": "es2020",
     "module": "esnext",
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
     "paths": {
       // Assets directory
       "@assets/*": ["src/assets/*"],
@@ -30,7 +35,6 @@
       "@main/*": ["src/app/_main/*"],
       "@auth/*": ["src/app/auth/*"],
       "@dashboard/*": ["src/app/dashboard/*"],
-      "@emails/*": ["src/app/emails/*"],
       "@messages/*": ["src/app/messages/*"],
       "@tasks/*": ["src/app/tasks/*"],
       "@calendar/*": ["src/app/calendar/*"],

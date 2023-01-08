@@ -6,14 +6,11 @@ export function Service() {
     setTimeout(() => {
       const WINDOW = window as any;
       const ngRef = WINDOW.ngRef;
-
       if (!ngRef) return;
-
       if (!WINDOW.SERVICES) {
         WINDOW.SERVICES = {};
       }
-
-      WINDOW.SERVICES[target.name] = ngRef.get(target);
+      WINDOW.SERVICES[target.name] = ngRef.injector.get(target);
     });
   };
 }

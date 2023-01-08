@@ -3,7 +3,8 @@
     <button (click)="openEditor()" [class.active]="mode === 'editor'" type="button">Editor</button>
     <button (click)="openPreview()" [class.active]="mode === 'preview'" type="button">Preview</button>
   </section>
-  <div #input [class.hidden]="mode !== 'editor'" class="editor"></div>
+  <ngx-monaco-editor (onInit)="onEditorInit($event)" [class.hidden]="mode !== 'editor'" [options]="editorOptions"
+    [formControl]="control"></ngx-monaco-editor>
   <div #output class="preview markdown-preview" [class.hidden]="mode !== 'preview'"></div>
   <section class="tools">
 

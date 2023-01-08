@@ -3,3 +3,8 @@
   flex-direction: column;
   flex-grow: 1;
 }
+
+.header-row {
+  z-index: 2;
+  background-color: var(--color-secondary-700);
+}

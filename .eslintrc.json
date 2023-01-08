@@ -14,23 +14,23 @@
         "plugin:prettier/recommended",
         "plugin:storybook/recommended"
       ],
-      "plugins": ["unused-imports", "@ngneat/reactive-forms"],
+      "plugins": ["@ngneat/reactive-forms"],
       "rules": {
         "@angular-eslint/no-empty-lifecycle-method": "warn",
         "comma-dangle": ["error", "always-multiline"],
         "@typescript-eslint/comma-dangle": ["error", "only-multiline"],
         "storybook/prefer-pascal-case": "off",
         "no-unused-vars": "off",
-        "unused-imports/no-unused-imports": "error",
-        "unused-imports/no-unused-vars": [
-          "warn",
-          {
-            "vars": "all",
-            "varsIgnorePattern": "^_",
-            "args": "after-used",
-            "argsIgnorePattern": "^_"
-          }
-        ],
+        // "unused-imports/no-unused-imports": "error",
+        // "unused-imports/no-unused-vars": [
+        //   "warn",
+        //   {
+        //     "vars": "all",
+        //     "varsIgnorePattern": "^_",
+        //     "args": "after-used",
+        //     "argsIgnorePattern": "^_"
+        //   }
+        // ],
         "@ngneat/reactive-forms/no-angular-forms-imports": "error"
       }
     },

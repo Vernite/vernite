@@ -80,6 +80,7 @@ import { ReversePipe } from './pipes/reverse/reverse.pipe';
 import { CollapsableDirective } from './directives/collapsable/collapsable.directive';
 import { ResizeModule } from './modules/resize/resize.module';
 import { ReportBugDialog } from './dialogs/report-bug/report-bug.dialog';
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 
 /**
  * Main module configuration object
@@ -91,6 +92,7 @@ const ngModuleConfig = {
     =============================================*/
     CommonModule,
     RouterModule,
+    MonacoEditorModule.forRoot(),
   ],
   importExports: [
     /*=============================================
