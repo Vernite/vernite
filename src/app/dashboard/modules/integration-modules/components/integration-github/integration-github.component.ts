@@ -8,7 +8,7 @@ import { IntegrationComponent } from '../../interfaces/integration-component.int
 import { Project } from '@dashboard/interfaces/project.interface';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faGlobe, faLock } from '@fortawesome/free-solid-svg-icons';
-import { map, of, switchMap } from 'rxjs';
+import { map, of, switchMap, shareReplay } from 'rxjs';
 import { Loader } from '@main/classes/loader/loader.class';
 import { startLoader, stopLoader } from './../../../../../_main/operators/loader.operator';
 
@@ -54,6 +54,10 @@ export class IntegrationGitHubComponent implements OnInit, IntegrationComponent 
     repository: new FormControl<string>(undefined, [requiredValidator()]),
   });
 
+  public gitHubAccounts$ = this.gitIntegrationService
+    .getConnectedGitHubAccounts()
+    .pipe(shareReplay(1));
+
   constructor(private gitIntegrationService: GitIntegrationService) {}
 
   ngOnInit() {
@@ -62,11 +66,22 @@ export class IntegrationGitHubComponent implements OnInit, IntegrationComponent 
     if (this.project) {
       this.form.get('repository').setValue(this.project.gitHubIntegration);
     }
+
+    this.gitIntegrationService.getGitHubIntegration();
   }
 
   /** Open GitHub integration in new tab */
-  connectToGithub() {
+  manageRepositories() {
     this.gitIntegrationService.startGitHubIntegration().subscribe(() => {
+      this.loadRepositories();
+    });
+  }
+
+  connectGitHubAccount() {
+    this.gitIntegrationService.connectGitHubAccount().subscribe(() => {
+      this.gitHubAccounts$ = this.gitIntegrationService
+        .getConnectedGitHubAccounts()
+        .pipe(shareReplay(1));
       this.loadRepositories();
     });
   }

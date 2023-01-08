@@ -12,11 +12,13 @@ import { Cache } from '@main/decorators/cache/cache.decorator';
 /**
  * How to use Git integration service:
  *
- * 1. Run method `startGitHubIntegration()` to start the integration process and open the browser to the GitHub login page.
+ * 1. Run method `startGitHubIntegration()` to start the integration process and open the browser to the GitHub
+ * login page.
  *
- * 2. Run method `postGitHubIntegration(installationId: string)` after receiving `installationId` to finalize integration
- * process.
+ * 2. Run method `postGitHubIntegration(installationId: string)` after receiving `installationId` to finalize
+ * integration process.
  *
+ * @TODO change docs after last GitHub rework
  */
 @Service()
 @Injectable({
@@ -54,7 +56,8 @@ export class GitIntegrationService extends BaseService<
   };
 
   /**
-   * Start GitHub integration process - opens the GitHub page in new window, to give user ability to choose witch account and repositories wants to give access to.
+   * Start GitHub integration process - opens the GitHub page in new window, to give user ability to choose
+   * what account and repositories wants to give access to.
    * @example this.gitHubIntegrationService.startGitHubIntegration()
    * @returns Observable<boolean> true if the opened window with GitHub integration was closed
    */
@@ -85,10 +88,24 @@ export class GitIntegrationService extends BaseService<
     });
   }
 
+  public connectGitHubAccount() {
+    const win = window.open('/api/user/integration/git/github/authorize', '_blank');
+
+    if (!win) throw new Error('This browser does not support window.open');
+
+    return interval(100).pipe(
+      map(() => win.closed),
+      filter((closed) => closed),
+      take(1),
+    );
+  }
+
   /**
    * Get GitHub integration object with repositories list
    */
+  @Cache()
   public getGitHubIntegration(): Observable<GitIntegration> {
+    console.log('function call');
     return this.apiService.get('/user/integration/git/github/repository');
   }
 
@@ -133,7 +150,7 @@ export class GitIntegrationService extends BaseService<
    * @param gitHubAccountId GitHub account id
    * @returns object with link to open the GitHub page with application removal
    */
-  public deleteConnectedGitHubAccount(gitHubAccountId: number): Observable<{ link: string }> {
+  public deleteConnectedGitHubAccount(gitHubAccountId: number): Observable<void> {
     return this.apiService.delete(`/user/integration/git/github/${gitHubAccountId}`).pipe(
       this.validate({
         404: 'INSTALLATION_WITH_GIVEN_ID_NOT_FOUND',
