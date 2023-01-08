@@ -1,19 +1,9 @@
 <tabs>
-  <div class="prefix" i18n>
-    Edit project
-  </div>
-  <tab (click)="setStage(ProjectFormStage.GENERAL)" [class.active]="stage === ProjectFormStage.GENERAL" i18n>
-    General
-  </tab>
-  <tab (click)="setStage(ProjectFormStage.MEMBERS)" [class.active]="stage === ProjectFormStage.MEMBERS" i18n>
-    Members
-  </tab>
-  <tab (click)="setStage(ProjectFormStage.STATUSES)" [class.active]="stage === ProjectFormStage.STATUSES" i18n>
-    Statuses
-  </tab>
-  <tab (click)="setStage(ProjectFormStage.INTEGRATIONS)" [class.active]="stage === ProjectFormStage.INTEGRATIONS" i18n>
-    Integrations
-  </tab>
+  <div class="prefix" i18n>Edit project</div>
+  <tab (click)="setStage(ProjectFormStage.GENERAL)" [class.active]="stage === ProjectFormStage.GENERAL" i18n>General</tab>
+  <tab (click)="setStage(ProjectFormStage.MEMBERS)" [class.active]="stage === ProjectFormStage.MEMBERS" i18n>Members</tab>
+  <tab (click)="setStage(ProjectFormStage.STATUSES)" [class.active]="stage === ProjectFormStage.STATUSES" i18n>Statuses</tab>
+  <tab (click)="setStage(ProjectFormStage.INTEGRATIONS)" [class.active]="stage === ProjectFormStage.INTEGRATIONS" i18n>Integrations</tab>
 </tabs>
 
 <ng-container *ngIf="workspace$ | async as workspace">

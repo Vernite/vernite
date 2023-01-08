@@ -112,8 +112,6 @@
 </div>
 <div mat-dialog-actions>
   <app-button mat-button (click)="cancel()" i18n>Cancel</app-button>
-  <app-button *ngIf="data.variant === TaskDialogVariant.CREATE" (click)="confirm()" variant="primary" i18n>Create
-  </app-button>
-  <app-button *ngIf="data.variant === TaskDialogVariant.EDIT" (click)="confirm()" variant="primary" i18n>Save changes
-  </app-button>
+  <app-button *ngIf="data.variant === TaskDialogVariant.CREATE" (click)="confirm()" variant="primary" i18n>Create</app-button>
+  <app-button *ngIf="data.variant === TaskDialogVariant.EDIT" (click)="confirm()" variant="primary" i18n>Save changes</app-button>
 </div>

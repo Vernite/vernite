@@ -204,10 +204,10 @@
       </trans-unit>
       <trans-unit id="5674286808255988565" datatype="html">
         <source>Create</source>
-        <target state="signed-off">Dodaj</target>
+        <target state="translated">Utwórz</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="sourcefile">src/app/tasks/services/status/status.service.ts</context>
+          <context context-type="linenumber">207</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7000649363168371045" datatype="html">
@@ -906,14 +906,6 @@
           <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2955808527230122938" datatype="html">
-        <source>Bayer</source>
-        <target state="translated">Kowalski</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">27</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="3212364621904068858" datatype="html">
         <source>John98</source>
         <target state="translated">Jan98</target>
@@ -1031,8 +1023,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="3521243892251427711" datatype="html">
-        <source>Edit workspace: <x id="INTERPOLATION" equiv-text="{{ workspace$ | async }}"/></source>
-        <target state="translated">Edytuj przestrzeń pracy "<x id="INTERPOLATION" equiv-text="{{ workspace$ | async }}"/>"</target>
+        <source>Edit workspace: <x id="INTERPOLATION" equiv-text="{{ (workspace$ | async)?.name }}"/></source>
+        <target state="translated">Edytuj przestrzeń pracy "<x id="INTERPOLATION" equiv-text="{{ (workspace$ | async)?.name }}"/>"</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/pages/edit-workspace/edit-workspace.page.html</context>
           <context context-type="linenumber">2</context>
@@ -1044,14 +1036,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/services/workspace.service.ts</context>
           <context context-type="linenumber">68</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1263703513734435128" datatype="html">
-        <source>Are you sure you want to delete this task &quot;<x id="PH" equiv-text="task.name"/>&quot;?</source>
-        <target state="translated">Czy na pewno chcesz usunąć zadanie "<x id="PH" equiv-text="task.name"/>"?</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/services/task.service.ts</context>
-          <context context-type="linenumber">110</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4162618798623345902" datatype="html">
@@ -1072,7 +1056,7 @@
       </trans-unit>
       <trans-unit id="2732752787737094710" datatype="html">
         <source>Localization</source>
-        <target state="translated">Język</target>
+        <target state="translated">Lokalizowanie</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/pages/settings-localization/settings-localization.page.html</context>
           <context context-type="linenumber">1</context>
@@ -1164,7 +1148,7 @@
       </trans-unit>
       <trans-unit id="5556964859629628625" datatype="html">
         <source>It&apos;s highly recommended to change the password every 30 days. It will increase your account security.</source>
-        <target state="translated">Zaleca się zmianę hasła co ok. 30 dni. Może to pomóc zwiększyć bezpieczeńśtwo Twojego konta.</target>
+        <target state="translated">Zaleca się zmianę hasła co ok. 30 dni. Może to pomóc zwiększyć bezpieczeństwo Twojego konta.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
           <context context-type="linenumber">32</context>
@@ -1382,26 +1366,6 @@
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4956922566012252777" datatype="html">
-        <source>name@example.com</source>
-        <target state="translated">nazwa@przyklad.pl</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/auth/pages/forgot-password/forgot-password.page.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/auth/pages/login/login.page.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">17</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/dashboard/dialogs/add-member/add-member.dialog.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="3345100339948313641" datatype="html">
         <source>Email or Username</source>
         <target state="translated">Email lub nazwa użytkownika</target>
@@ -1504,18 +1468,14 @@
       </trans-unit>
       <trans-unit id="5739298932347687314" datatype="html">
         <source>Create subtask</source>
-        <target state="translated">Stwórz podzadanie</target>
+        <target state="translated">Dodaj podzadanie</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/board-task/board-task.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
-          <context context-type="linenumber">72</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/pages/task-list/task-list.page.html</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="sourcefile">src/app/tasks/components/task-row/task-row.component.html</context>
+          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8483169873038215121" datatype="html">
@@ -1552,10 +1512,22 @@
       </trans-unit>
       <trans-unit id="6830089790008082791" datatype="html">
         <source>Create</source>
-        <target state="translated">Stwórz</target>
+        <target state="translated">Utwórz</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/dialogs/meeting/meeting.dialog.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/dialog/release/release.dialog.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/sprint/sprint.dialog.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">116</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3108168000666137165" datatype="html">
@@ -1604,6 +1576,1579 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/services/task.service.ts</context>
           <context context-type="linenumber">87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6849725902312323996" datatype="html">
+        <source>Reset filters</source>
+        <target state="translated">Wyczyść filtry</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/filters/filters.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6281284727431074654" datatype="html">
+        <source>Remove file</source>
+        <target state="translated">Usuń plik</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/input-file/input-file.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9065887916153944142" datatype="html">
+        <source>New task</source>
+        <target state="translated">Nowe zadanie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/upper-navigation/upper-navigation.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7080486612606778476" datatype="html">
+        <source>Bug report</source>
+        <target state="translated">Raport błędów</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/upper-navigation/upper-navigation.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6490688569532630280" datatype="html">
+        <source>Send</source>
+        <target state="translated">Wyślij</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/dialogs/report-bug/report-bug.dialog.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/messages/pages/conversation/conversation.page.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-comments/task-comments.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7827603911106005173" datatype="html">
+        <source>Delete meeting</source>
+        <target state="translated">Usuń spotkanie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/services/meeting.service.ts</context>
+          <context context-type="linenumber">165</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4710181303574246931" datatype="html">
+        <source>Delete slack integration</source>
+        <target state="translated">Usuń integrację ze slackiem</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/messages/services/slack-integration.service.ts</context>
+          <context context-type="linenumber">260</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2392488717875840729" datatype="html">
+        <source>User</source>
+        <target state="translated">Użytkownik</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/components/audit-log-entry/audit-log-entry.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="648849625426447400" datatype="html">
+        <source>Delete release</source>
+        <target state="translated">Usuń wydanie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/pages/release.page/release.page.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/pages/releases-list/releases-list.page.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/services/release.service.ts</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3845222466357890991" datatype="html">
+        <source>Form validation error</source>
+        <target state="translated">Błąd walidacji danych formularza</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/services/reports/report.service.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/services/meeting.service.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/services/project/project.service.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/messages/services/slack-integration.service.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/services/release.service.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/status/status.service.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/task/task.service.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7066262734839473614" datatype="html">
+        <source>This field cannot consist of only spaces</source>
+        <target state="translated">To pole nie może składać się z samych spacji.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/validators/not-empty.validator.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8586908745456864217" datatype="html">
+        <source>Previous month</source>
+        <target state="translated">Poprzedni miesiąc</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/components/calendar-navbar/calendar-navbar.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3628374603023447227" datatype="html">
+        <source>Next month</source>
+        <target state="translated">Następny miesiąc</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/components/calendar-navbar/calendar-navbar.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6516754524455528377" datatype="html">
+        <source>New meeting</source>
+        <target state="translated">Nowe spotkanie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/components/calendar-sidebar/calendar-sidebar.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/dialogs/meeting/meeting.dialog.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6328943491200318160" datatype="html">
+        <source>Export calendar</source>
+        <target state="translated">Eksportuj kalendarz</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/components/calendar-sidebar/calendar-sidebar.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/dialogs/calendar-export/calendar-export.dialog.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8308045076391224954" datatype="html">
+        <source>Url</source>
+        <target state="translated">Adres url</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/dialogs/calendar-export/calendar-export.dialog.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="488758790006406292" datatype="html">
+        <source>Edit meeting: <x id="INTERPOLATION" equiv-text="{{ data.meeting?.name }}"/></source>
+        <target state="translated">Edytuj spotkanie: <x id="INTERPOLATION" equiv-text="{{ data.meeting?.name }}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/dialogs/meeting/meeting.dialog.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8861528610831520428" datatype="html">
+        <source>Create new meeting</source>
+        <target state="translated">Dodaj nowe spotkanie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/dialogs/meeting/meeting.dialog.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3938795839663161352" datatype="html">
+        <source>Projects list is empty</source>
+        <target state="translated">Lista projektów jest pusta</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/dialogs/meeting/meeting.dialog.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="471816275243265264" datatype="html">
+        <source>Location</source>
+        <target state="translated">Lokalizacja</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/dialogs/meeting/meeting.dialog.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/dialogs/meeting/meeting.dialog.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3481736869685494304" datatype="html">
+        <source>Participants</source>
+        <target state="translated">Uczestnicy</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/dialogs/meeting/meeting.dialog.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="126074860850048964" datatype="html">
+        <source>End date</source>
+        <target state="translated">Data zakończenia</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/dialogs/meeting/meeting.dialog.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/tracker/tracker-entry/tracker-entry.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="888341446683346521" datatype="html">
+        <source>Start date</source>
+        <target state="translated">Data rozpoczęcia</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/dialogs/meeting/meeting.dialog.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/tracker/tracker-entry/tracker-entry.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/sprint/sprint.dialog.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1636786543326426257" datatype="html">
+        <source>Project members list is empty</source>
+        <target state="translated">Lista członków projektu jest pusta</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/dialogs/meeting/meeting.dialog.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7802230368554032210" datatype="html">
+        <source>Project or meeting does not exist</source>
+        <target state="translated">Projekt lub spotkanie nie istnieją</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/services/meeting.service.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2697626611804615439" datatype="html">
+        <source>Members to add</source>
+        <target state="translated">Lista osób do dodania</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/member-list/member-list.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9039695923970651393" datatype="html">
+        <source>Project members</source>
+        <target state="translated">Członkowie projektu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/project-form-members/project-form-members.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3719880724102444779" datatype="html">
+        <source>Add member</source>
+        <target state="translated">Dodaj osobę</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/project-form-members/project-form-members.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8270981294157415859" datatype="html">
+        <source>Project statuses</source>
+        <target state="translated">Statusy projektu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/project-form-statuses/project-form-statuses.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7501446796268924288" datatype="html">
+        <source>Begin</source>
+        <target state="translated">Początkowy</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/project-form-statuses/project-form-statuses.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9136120462844981239" datatype="html">
+        <source>Final</source>
+        <target state="translated">Końcowy</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/project-form-statuses/project-form-statuses.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1089483749452026915" datatype="html">
+        <source>Edit status</source>
+        <target state="translated">Edytuj status</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/project-form-statuses/project-form-statuses.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/status/status.service.ts</context>
+          <context context-type="linenumber">192</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3309177967835549878" datatype="html">
+        <source>Color</source>
+        <target state="translated">Kolor</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/project-form-statuses/project-form-statuses.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4969671688314081342" datatype="html">
+        <source>Remove status</source>
+        <target state="translated">Usuń status</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/project-form-statuses/project-form-statuses.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5179548294080016805" datatype="html">
+        <source>Calendar</source>
+        <target state="translated">Kalendarz</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/view-options/view-options.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4716101983183526938" datatype="html">
+        <source>Sprint</source>
+        <target state="translated">Sprint</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/view-options/view-options.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2409078062655081027" datatype="html">
+        <source>Backlog</source>
+        <target state="translated">Backlog</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/view-options/view-options.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8197921676324803850" datatype="html">
+        <source>About</source>
+        <target state="translated">Szczegóły</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/view-options/view-options.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2933653493313408661" datatype="html">
+        <source>Delete Slack integration</source>
+        <target state="translated">Usuń integrację ze Slackiem</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/messages/services/slack-integration.service.ts</context>
+          <context context-type="linenumber">260</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4845784944036899032" datatype="html">
+        <source>Are you sure you want to delete this Slack integration? This action is irreversible.</source>
+        <target state="translated">Czy jesteś pewien, że chcesz usunąć tą integrację ze Slackiem? Ta czynność jest nieodwracalna.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/messages/services/slack-integration.service.ts</context>
+          <context context-type="linenumber">261</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6222783490221982219" datatype="html">
+        <source>Delete sprint</source>
+        <target state="translated">Usuń sprint</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/backlog/backlog.page.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/backlog/backlog.page.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/sprint/sprint.page.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8457270933467563127" datatype="html">
+        <source>Delete sprint &quot;<x id="PH" equiv-text="sprint.name"/>&quot;</source>
+        <target state="translated">Usuń sprint  "<x id="PH" equiv-text="sprint.name"/>"</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/sprint.service.ts</context>
+          <context context-type="linenumber">153</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2618973182777958337" datatype="html">
+        <source>Delete time track</source>
+        <target state="translated">Usuń pomiar czasu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/tracker/tracker.service.ts</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6225016572392175541" datatype="html">
+        <source>Are you sure you want to delete this time track? This action is irreversible.</source>
+        <target state="translated">Czy jesteś pewien, że chcesz usunąć pomiar czasu? Ta czynność jest nieodwracalna.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/tracker/tracker.service.ts</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8718854749095227473" datatype="html">
+        <source>Create new project</source>
+        <target state="translated">Dodaj nowy projekt</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/create-project/create-project.page.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3499960932870564312" datatype="html">
+        <source>Create new release</source>
+        <target state="translated">Dodaj nowe wydanie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/dialog/release/release.dialog.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1958514322274127060" datatype="html">
+        <source>Create release</source>
+        <target state="translated">Dodaj wydanie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/pages/releases-list/releases-list.page.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8049862029751381656" datatype="html">
+        <source>Create new status</source>
+        <target state="translated">Dodaj nowy status</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/status/status.service.ts</context>
+          <context context-type="linenumber">206</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1619463761766515264" datatype="html">
+        <source>Create new sprint</source>
+        <target state="translated">Dodaj nowy sprint</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-view-options/task-view-options.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/sprint/sprint.dialog.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7448808151142843482" datatype="html">
+        <source>Created by</source>
+        <target state="translated">Utworzone przez</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task/task.page.html</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4207916966377787111" datatype="html">
+        <source>Created</source>
+        <target state="translated">Utworzono</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task/task.page.html</context>
+          <context context-type="linenumber">102</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2435285395809270454" datatype="html">
+        <source>Create new issue</source>
+        <target state="translated">Dodaj nowe issue</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/input-issue/input-issue.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5635448074596611529" datatype="html">
+        <source>Are you sure you want to delete task &quot;<x id="PH" equiv-text="task.name"/>&quot;? this action is irreversible.</source>
+        <target state="translated">Czy jesteś pewien, że chcesz usunąć zadanie "<x id="PH" equiv-text="task.name"/>"? Ta czynność jest nieodwracalna.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/task/task.service.ts</context>
+          <context context-type="linenumber">175</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3646992774227679056" datatype="html">
+        <source>Are you sure you want to delete release &quot;<x id="PH" equiv-text="release.name"/>&quot;? This action is irreversible.</source>
+        <target state="translated">Czy jesteś pewien, że chcesz usunąć wydanie "<x id="PH" equiv-text="release.name"/>"? Ta czynność jest nieodwracalna.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/services/release.service.ts</context>
+          <context context-type="linenumber">153</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1744259016708043576" datatype="html">
+        <source>Are you sure you want to delete meeting &quot;<x id="PH" equiv-text="meeting.name"/>&quot;? This action is irreversible.</source>
+        <target state="translated">Czy jesteś pewien, że chcesz usunąć spotkanie "<x id="PH" equiv-text="meeting.name"/>"? Ta czynność jest nieodwracalna.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/calendar/services/meeting.service.ts</context>
+          <context context-type="linenumber">166</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7448937777223838490" datatype="html">
+        <source>Are you sure you want to delete sprint &quot;<x id="PH" equiv-text="sprint.name"/>&quot;? This action is irreversible.</source>
+        <target state="translated">Czy jesteś pewien, że chcesz usunąć sprint"<x id="PH" equiv-text="sprint.name"/>"? Ta czynność jest nieodwracalna.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/sprint.service.ts</context>
+          <context context-type="linenumber">154</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="710127565656702255" datatype="html">
+        <source>Delete your account permanently. All not shared owned projects will also be deleted. This action is reversible in period of 7 days - you need to log in to your account in this time to revert your account deletion.</source>
+        <target state="translated">Usuń swoje konto na stałe. Wszystkie projekty, które nie są dzielone z innymi również zostaną usunięte. Ta czynność jest możliwa do odwrócenia w czasie 7 dni od jej dokonania - wystarczy zalogować się przez ten okres czasu, żeby przywrócić usunięte konto.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3924628298775653801" datatype="html">
+        <source>Edit release: <x id="INTERPOLATION" equiv-text="{{ data.release?.name }}"/></source>
+        <target state="translated">Edytuj wydanie "<x id="INTERPOLATION" equiv-text="{{ data.release?.name }}"/>"</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/dialog/release/release.dialog.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1215716265314961495" datatype="html">
+        <source>Edit release</source>
+        <target state="translated">Edytuj wydanie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/pages/release.page/release.page.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/pages/releases-list/releases-list.page.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8489936081929092317" datatype="html">
+        <source>Edit sprint: <x id="INTERPOLATION" equiv-text="{{ data.sprint?.name }}"/></source>
+        <target state="translated">Edytuj sprint "<x id="INTERPOLATION" equiv-text="{{ data.sprint?.name }}"/>"</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/sprint/sprint.dialog.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8124076252558546675" datatype="html">
+        <source>Edit sprint</source>
+        <target state="translated">Edytuj sprint</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/backlog/backlog.page.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/backlog/backlog.page.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/sprint/sprint.page.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7113499429942611780" datatype="html">
+        <source>Create new project</source>
+        <target state="translated">Dodaj nowy projekt</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/create-project/create-project.page.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3022654594737618538" datatype="html">
+        <source>Saving project...</source>
+        <target state="translated">Zapisywanie projektu...</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/create-project/create-project.page.ts</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/edit-project/edit-project.page.ts</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8928931063819565678" datatype="html">
+        <source>Saving project members...</source>
+        <target state="translated">Zapisywanie członków projektu...</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/create-project/create-project.page.ts</context>
+          <context context-type="linenumber">95</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/edit-project/edit-project.page.ts</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8699192273165460966" datatype="html">
+        <source>Saving project statuses...</source>
+        <target state="translated">Zapisywanie statusów projektu...</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/create-project/create-project.page.ts</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/edit-project/edit-project.page.ts</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2222229951878791306" datatype="html">
+        <source>Project or task not found</source>
+        <target state="translated">Nie znaleziono projektu lub zadania</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/comment/comment.service.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/task/task.service.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4975738431401026197" datatype="html">
+        <source>Revert active sprint &quot;<x id="PH" equiv-text="sprint.name"/>&quot;</source>
+        <target state="translated">Przywróć aktywny sprint  "<x id="PH" equiv-text="sprint.name"/>"</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/sprint.service.ts</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7828808805120058354" datatype="html">
+        <source>Revert</source>
+        <target state="translated">Przywróć</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/sprint.service.ts</context>
+          <context context-type="linenumber">111</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="812749155608094450" datatype="html">
+        <source>Close sprint &quot;<x id="PH" equiv-text="sprint.name"/>&quot;</source>
+        <target state="translated">Zakończ sprint  "<x id="PH" equiv-text="sprint.name"/>"</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/sprint.service.ts</context>
+          <context context-type="linenumber">131</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="529937771281515763" datatype="html">
+        <source>Project or status not found</source>
+        <target state="translated">Nie znaleziono projektu lub statusu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/status/status.service.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5895519905257682028" datatype="html">
+        <source>Are you sure you want to revert sprint &quot;<x id="PH" equiv-text="sprint.name"/>&quot;?</source>
+        <target state="translated">Czy jesteś pewien, że chcesz przywrócić sprint  "<x id="PH" equiv-text="sprint.name"/>"?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/sprint.service.ts</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8724607456811744366" datatype="html">
+        <source>Are you sure you want to close sprint &quot;<x id="PH" equiv-text="sprint.name"/>&quot;?</source>
+        <target state="translated">Czy jesteś pewien, że chcesz zakończyć sprint  "<x id="PH" equiv-text="sprint.name"/>"?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/sprint.service.ts</context>
+          <context context-type="linenumber">132</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4495149870967772924" datatype="html">
+        <source>Status is not empty</source>
+        <target state="translated">Status nie jest pusty</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/status/status.service.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5168008278809915722" datatype="html">
+        <source>Statuses</source>
+        <target state="translated">Statusy</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/create-project/create-project.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/edit-project/edit-project.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7288016339683595142" datatype="html">
+        <source>This project doesn&apos;t have any status.</source>
+        <target state="translated">Ten projekt nie posiada żadnych statusów.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="292323656451119653" datatype="html">
+        <source>Workspace is not empty</source>
+        <target state="translated">Przestrzeń pracy nie jest pusta</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/services/workspace/workspace.service.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3683103336289845964" datatype="html">
+        <source>Workspace not found</source>
+        <target state="translated">Nie znaleziono przestrzeni pracy</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/services/project/project.service.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/services/workspace/workspace.service.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7288968562251572007" datatype="html">
+        <source>Selected workspace is empty</source>
+        <target state="translated">Wybrana przestrzeń pracy jest pusta</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/dialog/release/release.dialog.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/sprint/sprint.dialog.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7683897013916001054" datatype="html">
+        <source>Project sprints list is empty</source>
+        <target state="translated">Lista sprintów w projekcie jest pusta</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1728270913046038027" datatype="html">
+        <source>Project release list is empty</source>
+        <target state="translated">Lista wydań w projekcie jest pusta</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3008594727529951705" datatype="html">
+        <source>Project or release not found</source>
+        <target state="translated">Nie znaleziono projektu lub wydania</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/services/release.service.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2374414766904447041" datatype="html">
+        <source>Project not found</source>
+        <target state="translated">Nie znaleziono projektu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/services/member/member.service.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/services/project/project.service.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/services/release.service.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/status/status.service.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/task/task.service.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5868921033003410202" datatype="html">
+        <source>Project or integration not found</source>
+        <target state="translated">Nie znaleziono projektu lub integracji</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/services/git-integration/git-integration.service.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7198089768989212743" datatype="html">
+        <source>Project already has integration</source>
+        <target state="translated">Projekt już posiada integrację</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/services/git-integration/git-integration.service.ts</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="555215276027903637" datatype="html">
+        <source>Add new time track</source>
+        <target state="translated">Dodaj nowy pomiar czasu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/tracker/tracker.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6032103762513704849" datatype="html">
+        <source>Time format</source>
+        <target state="translated">Format czasu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-localization/settings-localization.page.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2048317133098299860" datatype="html">
+        <source>Publish release</source>
+        <target state="translated">Opublikuj wydanie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/pages/release.page/release.page.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/pages/releases-list/releases-list.page.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2969854625018722346" datatype="html">
+        <source>Integration not found</source>
+        <target state="translated">Nie znaleziono integracji</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/messages/services/slack-integration.service.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1726363342938046830" datatype="html">
+        <source>About</source>
+        <target state="translated">Szczegóły</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/view-options/view-options.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8508552938611649591" datatype="html">
+        <source>Sprint</source>
+        <target state="translated">Sprint</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/view-options/view-options.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4587452935087847438" datatype="html">
+        <source>Releases</source>
+        <target state="translated">Wydania</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/components/view-options/view-options.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/pages/releases-list/releases-list.page.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9011959596901584887" datatype="html">
+        <source>Color</source>
+        <target state="translated">Kolor</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/dialogs/status/status.dialog.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1254814153740654241" datatype="html">
+        <source>Begin</source>
+        <target state="translated">Początkowy</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/dialogs/status/status.dialog.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4609200447119745819" datatype="html">
+        <source>Final</source>
+        <target state="translated">Końcowy</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/dialogs/status/status.dialog.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3047269031397718226" datatype="html">
+        <source>Integration or channel not found</source>
+        <target state="translated">Nie znaleziono integracji lub kanału</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/messages/services/slack-integration.service.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1854404901870953155" datatype="html">
+        <source>Pull requests not found in this repository</source>
+        <target state="translated">Nie znaleziono 'pull requests' w tym repozytorium</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/input-pull-request/input-pull-request.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2988385081973314277" datatype="html">
+        <source>Epics not found in this project</source>
+        <target state="translated">Nie znaleziono epików w tym projekcie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/input-epic/input-epic.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7177053457496605275" datatype="html">
+        <source>workspace</source>
+        <target state="translated">przestrzeń pracy</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-property/task-property.pipe.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8062057306648002908" datatype="html">
+        <source>project</source>
+        <target state="translated">projekt</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-property/task-property.pipe.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4916921936270602862" datatype="html">
+        <source>Select one or more integration modules to integrate your project with external services.</source>
+        <target state="translated">Wybierz jeden lub więcej modułów integracji, żeby zintegrować swój projekt z zewnętrznymi serwisami.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/modules/integration-modules/dialogs/integration-module-select/integration-module-select.dialog.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1698690321600756797" datatype="html">
+        <source>Parent task</source>
+        <target state="translated">Zadanie nadrzędne</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/input-task-parent/input-task-parent.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/input-task-parent/input-task-parent.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5013484751944717595" datatype="html">
+        <source>There are no matching tasks</source>
+        <target state="translated">Nie znaleziono pasujących zadań</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/input-task-parent/input-task-parent.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7441432423506491035" datatype="html">
+        <source>Time in this task hasn&apos;t been tracked yet</source>
+        <target state="translated">To zadanie nie posiada jeszcze żadnego pomiaru czasu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/tracker/tracker.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3336682057311020015" datatype="html">
+        <source>status</source>
+        <target state="translated">status</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/pipes/audit-log-project-entries/audit-log-project-entries.pipe.ts</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-property/task-property.pipe.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6777974573583289938" datatype="html">
+        <source>description</source>
+        <target state="translated">opis</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/pipes/audit-log-project-entries/audit-log-project-entries.pipe.ts</context>
+          <context context-type="linenumber">120</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-property/task-property.pipe.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3436764882054516506" datatype="html">
+        <source>added</source>
+        <target state="translated">dodał</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/components/audit-log-entry/audit-log-entry.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5873012413476626725" datatype="html">
+        <source>removed</source>
+        <target state="translated">usunął</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/components/audit-log-entry/audit-log-entry.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1790106018092279624" datatype="html">
+        <source>changed</source>
+        <target state="translated">zmienił</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/components/audit-log-entry/audit-log-entry.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="588230151780724018" datatype="html">
+        <source>deleted</source>
+        <target state="translated">usunął</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/pipes/audit-log-project-entries/audit-log-project-entries.pipe.ts</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5460881514602921001" datatype="html">
+        <source>created</source>
+        <target state="translated">dodał</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/pipes/audit-log-project-entries/audit-log-project-entries.pipe.ts</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2847261689301738134" datatype="html">
+        <source>updated</source>
+        <target state="translated">zmienił</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/pipes/audit-log-project-entries/audit-log-project-entries.pipe.ts</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="23518581647153834" datatype="html">
+        <source>from</source>
+        <target state="translated">z</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/components/audit-log-entry/audit-log-entry.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3207050836358092212" datatype="html">
+        <source>to</source>
+        <target state="translated">na</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/components/audit-log-entry/audit-log-entry.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3325180562659478330" datatype="html">
+        <source>name</source>
+        <target state="translated">nazwę</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/pipes/audit-log-project-entries/audit-log-project-entries.pipe.ts</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-property/task-property.pipe.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3571377974793640030" datatype="html">
+        <source>priority</source>
+        <target state="translated">priorytet</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/pipes/audit-log-project-entries/audit-log-project-entries.pipe.ts</context>
+          <context context-type="linenumber">126</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-property/task-property.pipe.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6537904131139019667" datatype="html">
+        <source>type</source>
+        <target state="translated">typ</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/pipes/audit-log-project-entries/audit-log-project-entries.pipe.ts</context>
+          <context context-type="linenumber">132</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-property/task-property.pipe.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="248355614476686779" datatype="html">
+        <source>assignee</source>
+        <target state="translated">osobę przypisaną</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/pipes/audit-log-project-entries/audit-log-project-entries.pipe.ts</context>
+          <context context-type="linenumber">150</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-property/task-property.pipe.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7893521235243357800" datatype="html">
+        <source>sprint</source>
+        <target state="translated">sprint</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/pipes/audit-log-project-entries/audit-log-project-entries.pipe.ts</context>
+          <context context-type="linenumber">160</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-property/task-property.pipe.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7976749064532784420" datatype="html">
+        <source>deadline</source>
+        <target state="translated">termin</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/pipes/audit-log-project-entries/audit-log-project-entries.pipe.ts</context>
+          <context context-type="linenumber">144</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-property/task-property.pipe.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2676272630411669256" datatype="html">
+        <source>estimated date</source>
+        <target state="translated">planowany termin wykonania</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/pipes/audit-log-project-entries/audit-log-project-entries.pipe.ts</context>
+          <context context-type="linenumber">138</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-property/task-property.pipe.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7238645691627834742" datatype="html">
+        <source>Story points</source>
+        <target state="translated">Story points</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8240670056668489067" datatype="html">
+        <source>story points</source>
+        <target state="translated">story points</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/pipes/audit-log-project-entries/audit-log-project-entries.pipe.ts</context>
+          <context context-type="linenumber">170</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-property/task-property.pipe.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5779341115787231384" datatype="html">
+        <source>Internal server error</source>
+        <target state="translated">Błąd wewnętrzny serwera</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/services/base/base.service.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/login/login.page.ts</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register/register.page.ts</context>
+          <context context-type="linenumber">144</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8518230167267272936" datatype="html">
+        <source>Service is currently unavailable</source>
+        <target state="translated">Serwis jest tymczasowo niedostępny</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/services/base/base.service.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6916315678173453185" datatype="html">
+        <source>Invalid token</source>
+        <target state="translated">Niepoprawny token</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/services/auth/auth.service.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3807699453257291879" datatype="html">
+        <source>Comments</source>
+        <target state="translated">Komentarze</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task/task.page.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="739880801667335279" datatype="html">
+        <source>Dates</source>
+        <target state="translated">Daty</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task/task.page.html</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5874794238234631522" datatype="html">
+        <source>People</source>
+        <target state="translated">Ludzie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task/task.page.html</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4056604918627780493" datatype="html">
+        <source>Archived Sprints</source>
+        <target state="translated">Zarchiwizowane sprinty</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task/task.page.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="282295396324895469" datatype="html">
+        <source>Active Sprint</source>
+        <target state="translated">Aktywny sprint</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task/task.page.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5028777105388019087" datatype="html">
+        <source>Details</source>
+        <target state="translated">Szczegóły</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task/task.page.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3167655614715346069" datatype="html">
+        <source>There is no active sprint</source>
+        <target state="translated">Nie ma aktywnego sprintu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/sprint/sprint.page.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4736230876233607867" datatype="html">
+        <source>Start sprint</source>
+        <target state="translated">Rozpocznij sprint</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/backlog/backlog.page.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/backlog/backlog.page.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8192716842755213536" datatype="html">
+        <source>Revert sprint to backlog</source>
+        <target state="translated">Cofnij sprint do backlogu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/backlog/backlog.page.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/sprint/sprint.page.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5585522336488939370" datatype="html">
+        <source>Close sprint</source>
+        <target state="translated">Zakończ sprint</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/backlog/backlog.page.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/sprint/sprint.page.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4347094825344030699" datatype="html">
+        <source>Sprints</source>
+        <target state="translated">Sprinty</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6731794304539436055" datatype="html">
+        <source>Active sprint</source>
+        <target state="translated">Aktywny sprint</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task/task.page.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7015412462794769703" datatype="html">
+        <source>Archived sprints</source>
+        <target state="translated">Zarchiwizowane sprinty</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task/task.page.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5342432350421167093" datatype="html">
+        <source>First name</source>
+        <target state="translated">Imię</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <note priority="1" from="description">first name of a person</note>
+      </trans-unit>
+      <trans-unit id="3586674587150281199" datatype="html">
+        <source>Last name</source>
+        <target state="translated">Nazwisko</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4050233389596468993" datatype="html">
+        <source>Integration modules selection</source>
+        <target state="translated">Wybór modułów integracji</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/modules/integration-modules/dialogs/integration-module-select/integration-module-select.dialog.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="275256825767144151" datatype="html">
+        <source>Configure Repositories</source>
+        <target state="translated">Skonfiguruj repozytoria</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/modules/integration-modules/components/integration-github/integration-github.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4432453543479709872" datatype="html">
+        <source>Some required fields in form are missing</source>
+        <target state="translated">Brakuje uzupełnienia niektórych wymaganych pól w formularzu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/services/workspace/workspace.service.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3770101785257414216" datatype="html">
+        <source>Conflict</source>
+        <target state="translated">Konflikt</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/messages/services/slack-integration.service.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/services/release.service.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1616102757855967475" datatype="html">
+        <source>All</source>
+        <target state="translated">Wszystko</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/components/release-progress-bar/release-progress-bar.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/input-assignee/input-assignee.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/input-assignee/input-assignee.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4386830340730244417" datatype="html">
+        <source>Release</source>
+        <target state="translated">Wydanie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2437533037087698487" datatype="html">
+        <source>Release date</source>
+        <target state="translated">Data wydania</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/pages/releases-list/releases-list.page.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="723305924372771226" datatype="html">
+        <source>test@example.com</source>
+        <target state="translated">testowy@mail.com</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2082740537345398835" datatype="html">
+        <source>Smith</source>
+        <target state="translated">Kowalski</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8421745144953625898" datatype="html">
+        <source>Account updated successfully</source>
+        <target state="translated">Konto zaktualizowane pomyślnie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3419681791450150574" datatype="html">
+        <source>Progress</source>
+        <target state="translated">Postęp</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/pages/releases-list/releases-list.page.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7130095836143532477" datatype="html">
+        <source>Slack</source>
+        <target state="translated">Slack</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-integrations/settings-integrations.page.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3671067820781514348" datatype="html">
+        <source>Cannot revoke session</source>
+        <target state="translated">Nie można unieważnić sesji</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/services/sessions.service.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2778913900547914602" datatype="html">
+        <source>GitHub issue</source>
+        <target state="translated">GitHub issue</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/input-issue/input-issue.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-row/task-row.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/tasks-board/tasks-board.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4814285799071780083" datatype="html">
+        <source>Remove</source>
+        <target state="translated">Usuń</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/integration-entry/integration-entry.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8224724288725812333" datatype="html">
+        <source>Assignee</source>
+        <target state="translated">Osoba przypisana</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/input-assignee/input-assignee.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task/task.page.html</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8406787523492971076" datatype="html">
+        <source>Unassigned</source>
+        <target state="translated">Nieprzypisany</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/input-assignee/input-assignee.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/input-assignee/input-assignee.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3044141660640131996" datatype="html">
+        <source>GitHub pull request</source>
+        <target state="translated">GitHub pull request</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/input-pull-request/input-pull-request.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-row/task-row.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-row/task-row.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/tasks-board/tasks-board.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/tasks-board/tasks-board.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6750058174402929867" datatype="html">
+        <source>Pull request</source>
+        <target state="translated">Pull request</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/input-pull-request/input-pull-request.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4021752662928002901" datatype="html">
+        <source>Update</source>
+        <target state="translated">Zaktualizuj</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/services/status/status.service.ts</context>
+          <context context-type="linenumber">193</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7239750919884229270" datatype="html">
+        <source>Updated</source>
+        <target state="translated">Zaktualizowano</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task/task.page.html</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7136888919962092730" datatype="html">
+        <source>Changelog</source>
+        <target state="translated">Historia zmian</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/project-about/project-about.page.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="348946312685853359" datatype="html">
+        <source>time tracks</source>
+        <target state="translated">pomiary czasu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-property/task-property.pipe.ts</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
     </body>

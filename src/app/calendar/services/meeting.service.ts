@@ -169,7 +169,7 @@ export class MeetingService extends BaseService<
     return this.dialogService
       .confirm({
         title: $localize`Delete meeting`,
-        message: $localize`Are you sure you want to delete this meeting? This action is irreversible`,
+        message: $localize`Are you sure you want to delete meeting "${meeting.name}"? This action is irreversible.`,
         confirmText: $localize`Delete`,
         cancelText: $localize`Cancel`,
         variant: AlertDialogVariant.IMPORTANT,

@@ -20,7 +20,7 @@
       i18n-floatingLabel i18n-placeholder [rows]="10"></app-textarea>
 
     <!-- Start date -->
-    <app-input-date-time formControlName="deadline" floatingLabel="Released Date" placeholder="Choose a date"
+    <app-input-date-time formControlName="deadline" floatingLabel="Release date" placeholder="Choose a date"
       i18n-floatingLabel i18n-placeholder>
     </app-input-date-time>
 
@@ -28,8 +28,6 @@
 </div>
 <div mat-dialog-actions>
   <app-button mat-button (click)="cancel()" i18n>Cancel</app-button>
-  <app-button *ngIf="data.variant === ReleaseDialogVariant.CREATE" (click)="confirm()" variant="primary" i18n>Create
-  </app-button>
-  <app-button *ngIf="data.variant === ReleaseDialogVariant.EDIT" (click)="confirm()" variant="primary" i18n>Save changes
-  </app-button>
+  <app-button *ngIf="data.variant === ReleaseDialogVariant.CREATE" (click)="confirm()" variant="primary" i18n>Create</app-button>
+  <app-button *ngIf="data.variant === ReleaseDialogVariant.EDIT" (click)="confirm()" variant="primary" i18n>Save changes</app-button>
 </div>

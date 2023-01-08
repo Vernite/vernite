@@ -44,13 +44,13 @@
       </div>
       <div class="flex">
         <div class="text-base w-40 mt-2">
-          <span class="text-base font-bold" i18n>Active Sprint</span>:
+          <span class="text-base font-bold" i18n>Active sprint</span>:
         </div>
         <span class="text-base ml-5 mt-2">{{(activeSprint$ | async)?.name || '-' }}</span>
       </div>
       <div class="flex">
         <div class="text-base w-40 mt-2">
-          <span class="text-base font-bold" i18n>Archived Sprints</span>:
+          <span class="text-base font-bold" i18n>Archived sprints</span>:
         </div>
         <span class="text-base ml-5 mt-2">
           <ng-container *ngFor="let archivedSprint of archivedSprints$ | async; index as i">

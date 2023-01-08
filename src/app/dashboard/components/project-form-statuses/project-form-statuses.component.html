@@ -8,13 +8,13 @@
 
     <!-- Name column -->
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef i18n> Name </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef i18n>Name</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
 
     <!-- Begin column -->
     <ng-container matColumnDef="begin">
-      <mat-header-cell *matHeaderCellDef i18n> Begin </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef i18n>Begin</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <ng-container *ngTemplateOutlet="mark; context: { value: element.begin }"></ng-container>
       </mat-cell>
@@ -22,7 +22,7 @@
 
     <!-- Final column -->
     <ng-container matColumnDef="final">
-      <mat-header-cell *matHeaderCellDef i18n> Final </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef i18n>Final</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <ng-container *ngTemplateOutlet="mark; context: { value: element.final }"></ng-container>
       </mat-cell>
@@ -30,7 +30,7 @@
 
     <!-- Color column -->
     <ng-container matColumnDef="color">
-      <mat-header-cell *matHeaderCellDef i18n> Color </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef i18n>Color</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <color [color]="element.color"></color>
       </mat-cell>
