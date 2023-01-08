@@ -3,17 +3,19 @@
 
   <app-card>
     <div class="card-content">
-      <ng-container *ngIf="repositories.length">
-        <p i18n>You are already connected to at least one GitHub account, so you can choose repository to connect to the
-          project or configure GitHub accounts and repositories.</p>
+      <!-- If GitHub account does not exist show Connect to GitHub button -->
+      <ng-container *ngIf="((gitHubAccounts$ | async) || []).length === 0">
+        <p i18n>You are not connected to any GitHub account. You need to connect to GitHub first.</p>
       </ng-container>
-      <ng-container *ngIf="!repositories.length">
-        <p i18n>You don't have any connected GitHub accounts or any authorized repositories. You need to configure
-          GitHub first.</p>
+      <ng-container *ngIf="((gitHubAccounts$ | async) || []).length! > 0">
+        <p i18n>Note: You need to authorize repositories to be able to use them in your integrations.</p>
       </ng-container>
     </div>
     <div class="card-actions flex justify-end">
-      <app-button (click)='connectToGithub()' type='button' variant="secondary" i18n>Configure Repositories</app-button>
+      <app-button *ngIf="((gitHubAccounts$ | async) || []).length === 0" (click)="connectGitHubAccount()" type="button"
+        variant="secondary" i18n>Connect GitHub account</app-button>
+      <app-button *ngIf="((gitHubAccounts$ | async) || []).length! > 0" (click)="manageRepositories()" type="button"
+        variant="secondary" i18n>Configure Repositories</app-button>
     </div>
   </app-card>
 

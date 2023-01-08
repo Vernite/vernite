@@ -53,9 +53,9 @@ export class SettingsIntegrationsPage implements OnInit {
 
   /** Open GitHub integration window */
   public openGitHubIntegration() {
-    const win = window.open('/api/user/integration/git/github/authorize', '_blank');
-
-    if (!win) throw new Error('This browser does not support window.open');
+    this.gitIntegrationService.connectGitHubAccount().subscribe(() => {
+      location.reload();
+    });
   }
 
   /** Load GitHub accounts */
@@ -74,8 +74,8 @@ export class SettingsIntegrationsPage implements OnInit {
 
   /** Disconnect GitHub account */
   public disconnectGithubAccount(account: GitAccount): void {
-    this.gitIntegrationService.deleteConnectedGitHubAccount(account.id).subscribe(({ link }) => {
-      window.open(link, '_blank');
+    this.gitIntegrationService.deleteConnectedGitHubAccount(account.id).subscribe(() => {
+      location.reload();
     });
   }
 
