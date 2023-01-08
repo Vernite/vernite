@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const messageFile = '../src/locales/messages.xlf';
+const messageFile = './src/locales/messages.xlf';
 
 const content = fs.readFileSync(messageFile, 'utf8');
 

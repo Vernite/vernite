@@ -8,7 +8,7 @@
     "start": "yarn serve",
     "serve": "ng serve",
     "build": "yarn print \"You need to choose configuration: 'dev', 'prod' and type command like 'yarn build:dev'\" --color=yellow",
-    "build:prod": "ng build --stats-json --configuration=prod",
+    "build:prod": "ng build --stats-json --configuration=production",
     "build:dev": "ng build --stats-json --configuration=dev",
     "lint": "ng lint",
     "analyze:serve": "webpack-bundle-analyzer dist/vernite/en-US/stats.json",
