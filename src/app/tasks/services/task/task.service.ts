@@ -168,7 +168,10 @@ export class TaskService extends BaseService<
    * @param task Task to delete
    * @returns Observable with true if task was deleted, EMPTY otherwise (when user cancels the dialog)
    */
-  public deleteWithConfirmation(projectId: number, task: Task): Observable<boolean | null> {
+  public deleteWithConfirmation(
+    projectId: number,
+    task: { id: number; name: string },
+  ): Observable<boolean | null> {
     return this.dialogService
       .confirm({
         title: $localize`Delete task "${task.name}"`,

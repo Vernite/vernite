@@ -1,4 +1,4 @@
-import { Observable, shareReplay } from 'rxjs';
+import { Observable, share, shareReplay } from 'rxjs';
 
 /**
  * Options to modify caching behavior
@@ -11,7 +11,7 @@ export interface CacheOptions {
  * Default options to modify caching behavior
  */
 export const DefaultCacheOptions = {
-  interval: 1000 * 2,
+  interval: 1000 * 5,
 };
 
 /**
@@ -32,7 +32,7 @@ export function Cache(options?: CacheOptions): MethodDecorator {
       }
 
       const result = originalMethod.apply(this, args) as Observable<any>;
-      target[cacheKey] = result.pipe(shareReplay(1));
+      target[cacheKey] = result.pipe(share(), shareReplay(1));
 
       if (options && options.interval) {
         setTimeout(() => {

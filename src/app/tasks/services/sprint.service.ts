@@ -68,7 +68,7 @@ export class SprintService {
    * @param projectId Project id needed to create status
    * @returns Request observable
    */
-  public delete(projectId: number, sprint: Sprint): Observable<null> {
+  public delete(projectId: number, sprint: { id: number }): Observable<null> {
     return this.apiService.delete(`/project/${projectId}/sprint/${sprint.id}`);
   }
 
@@ -147,7 +147,10 @@ export class SprintService {
       );
   }
 
-  public deleteWithConfirmation(projectId: number, sprint: Sprint): Observable<boolean | null> {
+  public deleteWithConfirmation(
+    projectId: number,
+    sprint: { id: number; name: string },
+  ): Observable<boolean | null> {
     return this.dialogService
       .confirm({
         title: $localize`Delete sprint "${sprint.name}"`,

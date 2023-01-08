@@ -159,7 +159,13 @@ export class MeetingService extends BaseService<
    * @param meetingId meeting id
    * @returns delete response observable
    */
-  public deleteWithConfirmation(projectId: number, meeting: Meeting) {
+  public deleteWithConfirmation(
+    projectId: number,
+    meeting: {
+      id: number;
+      name: string;
+    },
+  ) {
     return this.dialogService
       .confirm({
         title: $localize`Delete meeting`,

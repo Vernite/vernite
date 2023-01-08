@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 import { MeetingService } from '@calendar/services/meeting.service';
 import { switchMap, tap } from 'rxjs';
 import { TaskService } from './../../../tasks/services/task/task.service';
+import { Meeting } from '../../interfaces/meeting.interface';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { SprintService } from '../../../tasks/services/sprint.service';
 
 /**
  * Calendar event component to display event
@@ -39,10 +42,14 @@ export class CalendarEventComponent {
   /** @ignore */
   faPen = faPen;
 
+  /** @ignore */
+  faTrash = faTrash;
+
   constructor(
     private router: Router,
     private meetingService: MeetingService,
     private taskService: TaskService,
+    private sprintService: SprintService,
   ) {}
 
   /**
@@ -103,6 +110,56 @@ export class CalendarEventComponent {
             if (task) {
               location.reload();
             }
+          });
+        break;
+      case EventType.SPRINT:
+        this.sprintService
+          .get(this.event.projectId, this.event.relatedId)
+          .pipe(
+            tap(() => this.closeOverlay()),
+            switchMap((sprint) => {
+              return this.sprintService.openEditSprintDialog(this.event.projectId, sprint);
+            }),
+          )
+          .subscribe((sprint) => {
+            if (sprint) {
+              location.reload();
+            }
+          });
+    }
+  }
+
+  delete() {
+    switch (this.event.type) {
+      case EventType.MEETING:
+        this.meetingService
+          .deleteWithConfirmation(this.event.projectId, {
+            id: this.event.relatedId,
+            name: this.event.name,
+          } as any as Meeting)
+          .subscribe(() => {
+            location.reload();
+          });
+        break;
+      case EventType.TASK_DEADLINE:
+      case EventType.TASK_ESTIMATE:
+        this.taskService
+          .deleteWithConfirmation(this.event.projectId, {
+            id: this.event.relatedId,
+            name: this.event.name,
+          })
+          .subscribe(() => {
+            location.reload();
+          });
+        break;
+      case EventType.SPRINT:
+        this.sprintService
+          .deleteWithConfirmation(this.event.projectId, {
+            id: this.event.relatedId,
+            name: this.event.name,
+          })
+          .subscribe(() => {
+            location.reload();
           });
     }
   }
