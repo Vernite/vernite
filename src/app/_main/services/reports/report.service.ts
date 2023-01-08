@@ -50,7 +50,13 @@ export class ReportService extends BaseService<Errors<'FORM_VALIDATION_ERROR'>> 
    */
   public openBugReportDialog(): Observable<ReportBug> {
     return this.dialogService
-      .open(ReportBugDialog, {})
+      .open(
+        ReportBugDialog,
+        {},
+        {
+          width: '600px',
+        },
+      )
       .afterClosed()
       .pipe(
         switchMap((result) => {
