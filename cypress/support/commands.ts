@@ -21,7 +21,7 @@ function requestWithAuth(
   fn?: (response: any) => void,
 ) {
   cy.getCookie('session').then((cookie) => {
-    const cookieValue = cookie?.value;
+    const cookieValue = cookie && cookie.value;
 
     cy.request({
       method,
@@ -31,7 +31,7 @@ function requestWithAuth(
         Cookie: 'session=' + cookieValue,
       },
     }).then((res) => {
-      fn?.(res);
+      fn && fn(res);
     });
   });
 }
@@ -50,7 +50,7 @@ function login(email: string, password: string) {
 
 function logout() {
   cy.getCookie('session').then((cookie) => {
-    const cookieValue = cookie?.value;
+    const cookieValue = cookie && cookie.value;
 
     if (!cookieValue) return;
 
