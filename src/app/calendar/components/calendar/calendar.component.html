@@ -1,6 +1,6 @@
-<calendar-navbar [date]="date" (previousMonth)="previousMonth()" (nextMonth)="nextMonth()" (today)="today()">
-</calendar-navbar>
+<calendar-sidebar [date]="date" (selectDate)="select($event)"></calendar-sidebar>
 <div class="wrapper">
-  <calendar-sidebar [date]="date" (selectDate)="select($event)"></calendar-sidebar>
+  <calendar-navbar [date]="date" (previousMonth)="previousMonth()" (nextMonth)="nextMonth()" (today)="today()">
+  </calendar-navbar>
   <calendar-grid [date]="date" [events]="events"></calendar-grid>
 </div>

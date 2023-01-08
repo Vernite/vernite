@@ -1,9 +1,7 @@
 <nav class="sidebar">
   <date-picker [formControl]="cursor" [hideTodayButton]="true"></date-picker>
   <div class="p-3">
-    <app-button variant="primary" [icon]="faPlus" (click)="openNewMeetingDialog()" class="w-full">Nowe spotkanie
-    </app-button>
-    <app-button [icon]="faArrowUpRightFromSquare" (click)="openExportDialog()" class="w-full mt-3">Eksportuj kalendarz
-    </app-button>
+    <app-button variant="primary" [icon]="faPlus" (click)="openNewMeetingDialog()" class="w-full" i18n>New meeting</app-button>
+    <app-button [icon]="faArrowUpRightFromSquare" (click)="openExportDialog()" class="w-full mt-3" i18n>Export calendar</app-button>
   </div>
 </nav>

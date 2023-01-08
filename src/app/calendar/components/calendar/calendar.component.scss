@@ -1,7 +1,6 @@
 :host {
   display: flex;
   height: 100%;
-  flex-direction: column;
   border-right: 1px solid var(--color-secondary-400);
 }
 
@@ -9,5 +8,6 @@
   display: flex;
   overflow: auto;
   height: 100%;
+  flex-direction: column;
   flex-grow: 1;
 }
