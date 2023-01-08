@@ -10,13 +10,13 @@ describe('Workspaces tests', () => {
   it('Should be able to create a new workspace', () => {
     cy.contains('New workspace').click();
     cy.get('input[name=name]').type('Test workspace');
-    cy.get('button[type=submit]').dblclick();
+    cy.contains('button[type=submit]', 'Save').dblclick();
     cy.contains('Test workspace');
   });
 
   it('Should not be able to create a new workspace without name', () => {
     cy.contains('New workspace').click();
-    cy.get('button[type=submit]').click();
+    cy.contains('button[type=submit]', 'Save').click();
     cy.contains('is required');
   });
 
@@ -24,7 +24,7 @@ describe('Workspaces tests', () => {
     cy.contains('tr', 'Test workspace').find('.mat-menu-trigger').click();
     cy.contains('Edit').click();
     cy.get('input[name=name]').clear().type('Test workspace - renamed');
-    cy.get('button[type=submit]').click();
+    cy.contains('button[type=submit]', 'Save').click();
     cy.contains('Test workspace - renamed');
   });
 
