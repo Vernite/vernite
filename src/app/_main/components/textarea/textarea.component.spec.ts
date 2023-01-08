@@ -1,32 +1,21 @@
-/* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TextareaComponent } from './textarea.component';
-import { NgControl, ReactiveFormsModule } from '@angular/forms';
-import { ValidationErrorPipe } from '@main/pipes/validation-error/validation-error.pipe';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgControl } from '@angular/forms';
+import { Shallow } from 'shallow-render';
+import { MainModule } from '../../_main.module';
+import { TestNgControl } from '../../../../tests/helpers/ng-control-testing-provider.helper';
 
 describe('TextareaComponent', () => {
-  let component: TextareaComponent;
-  let fixture: ComponentFixture<TextareaComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule],
-      declarations: [TextareaComponent, ValidationErrorPipe],
-      providers: [NgControl],
-    }).compileComponents();
-  }));
+  let shallow: Shallow<TextareaComponent>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TextareaComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    shallow = new Shallow(TextareaComponent, MainModule).provide({
+      provide: NgControl,
+      useClass: TestNgControl,
+    });
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should create', async () => {
+    const { instance } = await shallow.render();
+    expect(instance).toBeTruthy();
   });
 });

@@ -2,6 +2,9 @@
 
 import 'zone.js/testing';
 import { getTestBed } from '@angular/core/testing';
+import { Shallow } from 'shallow-render';
+import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting,
@@ -23,6 +26,8 @@ declare const require: {
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+
+Shallow.alwaysReplaceModule(RouterModule, RouterTestingModule);
 
 // Then we find all the tests.
 /** Context for searching for tests */

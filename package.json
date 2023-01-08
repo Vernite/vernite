@@ -146,7 +146,7 @@
     "nyc": "^15.1.0",
     "postcss": "^8.4.12",
     "prettier": "^2.6.0",
-    "shallow-render": "^13.0.1",
+    "shallow-render": "14.2.2",
     "storybook-dark-mode": "^1.1.0",
     "storybook-tailwind-dark-mode": "^1.0.15",
     "stylelint": "^14.6.0",
