@@ -107,7 +107,7 @@ export class SprintService {
     return this.dialogService
       .confirm({
         title: $localize`Revert active sprint "${sprint.name}"`,
-        message: $localize`Are you sure you want to revert this sprint "${sprint.name}"?`,
+        message: $localize`Are you sure you want to revert sprint "${sprint.name}"?`,
         confirmText: $localize`Revert`,
         cancelText: $localize`Cancel`,
         variant: AlertDialogVariant.DEFAULT,
@@ -129,7 +129,7 @@ export class SprintService {
     return this.dialogService
       .confirm({
         title: $localize`Close sprint "${sprint.name}"`,
-        message: $localize`Are you sure you want to close this sprint "${sprint.name}"?`,
+        message: $localize`Are you sure you want to close sprint "${sprint.name}"?`,
         confirmText: $localize`Close`,
         cancelText: $localize`Cancel`,
         variant: AlertDialogVariant.IMPORTANT,
@@ -151,7 +151,7 @@ export class SprintService {
     return this.dialogService
       .confirm({
         title: $localize`Delete sprint "${sprint.name}"`,
-        message: $localize`Are you sure you want to delete this sprint "${sprint.name}"?`,
+        message: $localize`Are you sure you want to delete sprint "${sprint.name}"? This action is irreversible.`,
         confirmText: $localize`Delete`,
         cancelText: $localize`Cancel`,
         variant: AlertDialogVariant.IMPORTANT,

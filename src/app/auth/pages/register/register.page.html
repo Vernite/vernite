@@ -14,7 +14,7 @@
         </div>
 
         <ng-container *ngIf="stage===RegisterStage.IMPORTANT_DATA">
-          <app-input formControlName="email" type="email" placeholder="name@example.com" floatingLabel="Email"
+          <app-input formControlName="email" type="email" placeholder="test@example.com" floatingLabel="Email"
             i18n-floatingLabel i18n-placeholder></app-input>
 
           <app-input formControlName="password" type="password" placeholder="●●●●●●●" floatingLabel="Password"
@@ -32,10 +32,10 @@
           <app-button variant="primary" type="button" (click)="nextStage()" i18n>Next</app-button>
         </ng-container>
         <ng-container *ngIf="stage===RegisterStage.PERSONAL_DATA">
-          <app-input formControlName="name" type="text" placeholder="John" floatingLabel="Name"
+          <app-input formControlName="name" type="text" placeholder="John" floatingLabel="First name"
             i18n-floatingLabel="first name of a person" i18n-placeholder></app-input>
 
-          <app-input formControlName="surname" type="text" placeholder="Bayer" floatingLabel="Surname"
+          <app-input formControlName="surname" type="text" placeholder="Smith" floatingLabel="Last name"
             i18n-floatingLabel i18n-placeholder></app-input>
 
           <app-input formControlName="username" type="text" placeholder="John98" floatingLabel="Username"

@@ -251,14 +251,14 @@ export class SlackIntegrationService extends BaseService<
   }
 
   /**
-   * Delete slack integration with confirmation dialog
+   * Delete Slack integration with confirmation dialog
    * @param slackId Slack integration id
    */
   public deleteWithConfirmation(slackId: number) {
     return this.dialogService
       .confirm({
-        title: $localize`Delete slack integration`,
-        message: $localize`Are you sure you want to delete this slack integration? This action is irreversible`,
+        title: $localize`Delete Slack integration`,
+        message: $localize`Are you sure you want to delete this Slack integration? This action is irreversible.`,
         confirmText: $localize`Delete`,
         cancelText: $localize`Cancel`,
         variant: AlertDialogVariant.IMPORTANT,

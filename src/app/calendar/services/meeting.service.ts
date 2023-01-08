@@ -159,11 +159,11 @@ export class MeetingService extends BaseService<
    * @param meetingId meeting id
    * @returns delete response observable
    */
-  public deleteWithConfirmation(projectId: number, meetingId: number) {
+  public deleteWithConfirmation(projectId: number, meeting: Meeting) {
     return this.dialogService
       .confirm({
         title: $localize`Delete meeting`,
-        message: $localize`Are you sure you want to delete this meeting? This action is irreversible`,
+        message: $localize`Are you sure you want to delete meeting "${meeting.name}"? This action is irreversible.`,
         confirmText: $localize`Delete`,
         cancelText: $localize`Cancel`,
         variant: AlertDialogVariant.IMPORTANT,
@@ -172,7 +172,7 @@ export class MeetingService extends BaseService<
         switchMap((confirmed) => {
           if (!confirmed) return EMPTY;
 
-          return this.delete(projectId, meetingId);
+          return this.delete(projectId, meeting.id);
         }),
       );
   }

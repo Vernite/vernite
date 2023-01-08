@@ -71,7 +71,7 @@ export class TrackerService {
     return this.dialogService
       .confirm({
         title: $localize`Delete time track`,
-        message: $localize`Are you sure you want to delete this time track? This action is irreversible`,
+        message: $localize`Are you sure you want to delete this time track? This action is irreversible.`,
         confirmText: $localize`Delete`,
         cancelText: $localize`Cancel`,
         variant: AlertDialogVariant.IMPORTANT,

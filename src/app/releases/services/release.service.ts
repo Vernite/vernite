@@ -150,7 +150,7 @@ export class ReleaseService extends BaseService<
     return this.dialogService
       .confirm({
         title: $localize`Delete release`,
-        message: $localize`Are you sure you want to delete release '${release.name}'? This action is irreversible`,
+        message: $localize`Are you sure you want to delete release "${release.name}"? This action is irreversible.`,
         confirmText: $localize`Delete`,
         cancelText: $localize`Cancel`,
         variant: AlertDialogVariant.IMPORTANT,

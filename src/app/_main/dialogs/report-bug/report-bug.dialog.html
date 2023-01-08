@@ -1,14 +1,14 @@
-<h1 mat-dialog-title i18n>Report Bug</h1>
+<h1 mat-dialog-title i18n>Bug report</h1>
 <div mat-dialog-content>
   <form (submit)="send()" [formGroup]="form" autocomplete="off">
 
     <!-- Title field -->
-    <app-input floatingLabel="Title" placeholder="Visual problem with icon" formControlName="title" i18n-floatingLabel
+    <app-input floatingLabel="Title" formControlName="title" i18n-floatingLabel
       i18n-placeholder>
     </app-input>
 
     <!-- Description field -->
-    <app-textarea floatingLabel="Description" placeholder="Icon in in the sidebar navigation in dashboard option is missing." formControlName="description"
+    <app-textarea floatingLabel="Description" formControlName="description"
       i18n-floatingLabel i18n-placeholder [rows]="4"></app-textarea>
 
   </form>

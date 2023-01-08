@@ -141,7 +141,7 @@ export class DialogService {
   confirmWorkspaceDelete(workspace: Workspace) {
     return this.confirm({
       title: $localize`Delete workspace "${workspace.name}"`,
-      message: $localize`Are you sure you want to delete this workspace "${workspace.name}"?`,
+      message: $localize`Are you sure you want to delete workspace "${workspace.name}"?`,
       confirmText: $localize`Delete`,
       cancelText: $localize`Cancel`,
       variant: AlertDialogVariant.IMPORTANT,

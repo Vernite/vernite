@@ -1,17 +1,17 @@
 <ng-container *ngIf="release$ | async as release">
   <div class="flex items-center gap-3 mb-2">
     <h2 class="title text-xl font-bold">{{release.name}}</h2>
-    <app-button variant="secondary" (click)="publishRelease(release)" i18n>Publish Release</app-button>
+    <app-button variant="secondary" (click)="publishRelease(release)" i18n>Publish release</app-button>
     <div class="text-base">
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="editRelease(release)">
-          <span i18n>Edit Release</span>
+          <span i18n>Edit release</span>
         </button>
         <button mat-menu-item class="important" (click)="deleteRelease(release)">
-          <span i18n>Delete Release</span>
+          <span i18n>Delete release</span>
         </button>
       </mat-menu>
     </div>

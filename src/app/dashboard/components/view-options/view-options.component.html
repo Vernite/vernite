@@ -9,31 +9,18 @@
       </a>
     </div>
     <tabs class="ml-3">
-      <tab [routerLink]="['/', 'projects', projectId, 'about']" routerLinkActive="active" i18n>
-        About
-      </tab>
+      <tab [routerLink]="['/', 'projects', projectId, 'about']" routerLinkActive="active" i18n>About</tab>
       <tab [routerLink]="['/', 'projects', projectId, 'sprint']" [queryParams]="{ view: 'list' }"
-        routerLinkActive="active" i18n>
-        Sprint
-      </tab>
+        routerLinkActive="active" i18n>Sprint</tab>
       <tab [routerLink]="['/', 'projects', projectId, 'backlog']" [queryParams]="{ view: 'list' }"
-        routerLinkActive="active" i18n>
-        Backlog
-      </tab>
-      <tab [routerLink]="['/', 'projects', projectId, 'calendar']" routerLinkActive="active" i18n>
-        Calendar
-      </tab>
-      <tab [routerLink]="['/', 'projects', projectId, 'releases']" routerLinkActive="active" i18n>
-        Releases
-      </tab>
+        routerLinkActive="active" i18n>Backlog</tab>
+      <tab [routerLink]="['/', 'projects', projectId, 'calendar']" routerLinkActive="active" i18n>Calendar</tab>
+      <tab [routerLink]="['/', 'projects', projectId, 'releases']" routerLinkActive="active" i18n>Releases</tab>
     </tabs>
   </div>
   <div class="options">
-    <app-button variant="transparent" [icon]="faFilter" (click)="isFiltersOpen = !isFiltersOpen" i18n>Filters
-    </app-button>
-    <app-button variant="transparent" [icon]="faPenToSquare" [routerLink]="['/', 'projects', projectId, 'edit']" i18n>
-      Edit
-    </app-button>
+    <app-button variant="transparent" [icon]="faFilter" (click)="isFiltersOpen = !isFiltersOpen" i18n>Filters</app-button>
+    <app-button variant="transparent" [icon]="faPenToSquare" [routerLink]="['/', 'projects', projectId, 'edit']" i18n>Edit</app-button>
   </div>
 
   <!-- Filters overlay -->

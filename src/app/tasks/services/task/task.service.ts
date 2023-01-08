@@ -172,7 +172,7 @@ export class TaskService extends BaseService<
     return this.dialogService
       .confirm({
         title: $localize`Delete task "${task.name}"`,
-        message: $localize`Are you sure you want to delete this task "${task.name}"?`,
+        message: $localize`Are you sure you want to delete task "${task.name}"? this action is irreversible.`,
         confirmText: $localize`Delete`,
         cancelText: $localize`Cancel`,
         variant: AlertDialogVariant.IMPORTANT,

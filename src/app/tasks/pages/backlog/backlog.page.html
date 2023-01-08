@@ -4,20 +4,20 @@
 <div class="w-full mb-10 grow" *ngFor="let sprint of sprintListActive$ | async">
   <div class="flex items-end gap-3 mb-2">
     <h2 class="title text-xl font-bold">{{sprint.name}}</h2>
-    <app-button variant="secondary" (click)="closeSprint(sprint)" i18n>Close Sprint</app-button>
+    <app-button variant="secondary" (click)="closeSprint(sprint)" i18n>Close sprint</app-button>
     <div class="text-base">
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="editSprint(sprint)">
-          <span i18n>Edit Sprint</span>
+          <span i18n>Edit sprint</span>
         </button>
         <button mat-menu-item (click)="revertSprint(sprint)">
-          <span i18n>Revert Sprint To Backlog</span>
+          <span i18n>Revert sprint to backlog</span>
         </button>
         <button mat-menu-item class="important" (click)="deleteSprint(sprint)">
-          <span i18n>Delete Sprint</span>
+          <span i18n>Delete sprint</span>
         </button>
       </mat-menu>
     </div>
@@ -35,10 +35,10 @@
   <div class="flex items-end gap-3 mb-2">
     <h2 class="title text-xl font-bold">{{sprint.name}}</h2>
     <ng-container *ngIf="((sprintListActive$ | async) || []).length">
-      <app-button [disabled]="true" variant="primary" (click)="startSprint(sprint)" i18n>Start Sprint</app-button>
+      <app-button [disabled]="true" variant="primary" (click)="startSprint(sprint)" i18n>Start sprint</app-button>
     </ng-container>
     <ng-container *ngIf="!((sprintListActive$ | async) || []).length">
-      <app-button variant="primary" (click)="startSprint(sprint)" i18n>Start Sprint</app-button>
+      <app-button variant="primary" (click)="startSprint(sprint)" i18n>Start sprint</app-button>
     </ng-container>
     <div class="text-base">
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
@@ -46,10 +46,10 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="editSprint(sprint)">
-          <span i18n>Edit Sprint</span>
+          <span i18n>Edit sprint</span>
         </button>
         <button mat-menu-item class="important" (click)="deleteSprint(sprint)">
-          <span i18n>Delete Sprint</span>
+          <span i18n>Delete sprint</span>
         </button>
       </mat-menu>
     </div>
