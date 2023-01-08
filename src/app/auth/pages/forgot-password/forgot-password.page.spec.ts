@@ -8,6 +8,8 @@ import { IconComponent } from '@main/components/icon/icon.component';
 import { MainModule } from '@main/_main.module';
 import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service } from 'ng-recaptcha';
+import { environment } from 'src/environments/environment';
 
 describe('ForgotPasswordComponent', () => {
   let component: ForgotPasswordPage;
@@ -17,7 +19,11 @@ describe('ForgotPasswordComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, MainModule, BrowserAnimationsModule, ReactiveFormsModule],
       declarations: [ForgotPasswordPage, ButtonComponent, IconComponent],
-      providers: [NgControl],
+      providers: [
+        NgControl,
+        { provide: RECAPTCHA_V3_SITE_KEY, useValue: environment.captchaSiteKey },
+        { provide: ReCaptchaV3Service, useClass: ReCaptchaV3Service },
+      ],
     }).compileComponents();
   }));
 

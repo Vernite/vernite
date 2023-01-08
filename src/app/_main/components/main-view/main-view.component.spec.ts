@@ -14,6 +14,8 @@ import { UpperNavigationComponent } from '../upper-navigation/upper-navigation.c
 import { SnackbarOutletComponent } from '../snackbar-outlet/snackbar-outlet.component';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgControl } from '@angular/forms';
+import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service } from 'ng-recaptcha';
+import { environment } from 'src/environments/environment';
 
 describe('MainViewComponent', () => {
   let component: MainViewComponent;
@@ -42,6 +44,8 @@ describe('MainViewComponent', () => {
         NgControl,
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} },
+        { provide: RECAPTCHA_V3_SITE_KEY, useValue: environment.captchaSiteKey },
+        { provide: ReCaptchaV3Service, useClass: ReCaptchaV3Service },
       ],
     }).compileComponents();
   }));

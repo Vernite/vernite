@@ -3,6 +3,7 @@ import { ObserversModule } from '@angular/cdk/observers';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PlatformModule } from '@angular/cdk/platform';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ScrollingModule as ExperimentalScrollingModule } from '@angular/cdk-experimental/scrolling';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Injector, NgModule } from '@angular/core';
@@ -103,6 +104,7 @@ const ngModuleConfig = {
     OverlayModule,
     ObserversModule,
     ScrollingModule,
+    ExperimentalScrollingModule,
 
     /*=============================================
       =              Material modules               =

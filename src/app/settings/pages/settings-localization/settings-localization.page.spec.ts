@@ -5,6 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainModule } from '@main/_main.module';
 
 import { SettingsLocalizationPage } from './settings-localization.page';
+import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service } from 'ng-recaptcha';
+import { environment } from 'src/environments/environment';
 
 describe('SettingsLocalizationPage', () => {
   let component: SettingsLocalizationPage;
@@ -14,7 +16,11 @@ describe('SettingsLocalizationPage', () => {
     TestBed.configureTestingModule({
       imports: [MainModule, BrowserAnimationsModule, ReactiveFormsModule],
       declarations: [SettingsLocalizationPage],
-      providers: [NgControl],
+      providers: [
+        NgControl,
+        { provide: RECAPTCHA_V3_SITE_KEY, useValue: environment.captchaSiteKey },
+        { provide: ReCaptchaV3Service, useClass: ReCaptchaV3Service },
+      ],
     }).compileComponents();
   }));
 

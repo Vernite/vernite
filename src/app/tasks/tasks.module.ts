@@ -35,9 +35,18 @@ import { InputAssigneeComponent } from './components/input-assignee/input-assign
 import { MemberColorPipe } from './pipes/member-color/member-color.pipe';
 import { MessagesModule } from '../messages/messages.module';
 import { TaskCommentsComponent } from './components/task-comments/task-comments.component';
+import { ProjectAboutPage } from './pages/project-about/project-about.page';
+import { AuditLogModule } from '@main/modules/audit-log/audit-log.module';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, MainModule, TasksRoutingModule, MessagesModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MainModule,
+    TasksRoutingModule,
+    MessagesModule,
+    AuditLogModule,
+  ],
   declarations: [
     BoardTaskComponent,
     TaskDialog,
@@ -70,6 +79,7 @@ import { TaskCommentsComponent } from './components/task-comments/task-comments.
     InputAssigneeComponent,
     MemberColorPipe,
     TaskCommentsComponent,
+    ProjectAboutPage,
   ],
   exports: [TaskTypePipe, InputAssigneeComponent, TaskListComponent],
 })

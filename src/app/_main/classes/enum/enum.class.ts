@@ -72,4 +72,14 @@ export class Enum {
       .filter((e) => isNumber(e[1]))
       .map((e) => [e[0], Number(e[1])]) as any as [keyof T, T[keyof T]][];
   }
+
+  /**
+   * Function to get enum key by value.
+   * @param enumType enum to get key from
+   * @param value value to get key for
+   * @returns key of the enum
+   */
+  public static keyByValue<T extends object>(enumType: T, value: T[keyof T]): keyof T | undefined {
+    return Enum.entries(enumType).find((e) => e[1] === value)?.[0];
+  }
 }
