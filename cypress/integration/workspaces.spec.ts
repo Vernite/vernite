@@ -17,7 +17,7 @@ describe('Workspaces tests', () => {
   });
 
   it('Should not be able to create a new workspace without name', () => {
-    cy.contains('New workspace').click();
+    cy.contains('button[type=submit]', 'New workspace').click();
     cy.contains('button[type=submit]', 'Save').click();
     cy.contains('is required');
   });

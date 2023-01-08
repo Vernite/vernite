@@ -23,7 +23,7 @@ describe('Projects tests', () => {
 
   it('Should not be able to create a new project without name', () => {
     cy.contains('td', 'test workspace').click();
-    cy.contains('New project').click();
+    cy.contains('button[type=submit]', 'New project').click();
     cy.wait(2000);
     cy.contains('button', 'Create project').click();
     cy.contains('is required');
