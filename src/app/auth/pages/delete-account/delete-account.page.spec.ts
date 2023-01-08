@@ -7,6 +7,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ButtonComponent } from '@main/components/button/button.component';
 import { MainModule } from '@main/_main.module';
 import { DeleteAccountPage } from './delete-account.page';
+import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service } from 'ng-recaptcha';
+import { environment } from 'src/environments/environment';
 
 describe('DeleteAccountPage', () => {
   let component: DeleteAccountPage;
@@ -16,7 +18,11 @@ describe('DeleteAccountPage', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, BrowserAnimationsModule, ReactiveFormsModule, MainModule],
       declarations: [DeleteAccountPage, ButtonComponent],
-      providers: [NgControl],
+      providers: [
+        NgControl,
+        { provide: RECAPTCHA_V3_SITE_KEY, useValue: environment.captchaSiteKey },
+        { provide: ReCaptchaV3Service, useClass: ReCaptchaV3Service },
+      ],
     }).compileComponents();
   }));
 

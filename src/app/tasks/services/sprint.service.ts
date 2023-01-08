@@ -11,6 +11,7 @@ import {
 import { SprintStatus } from '@tasks/enums/sprint-status.enum';
 import { DataFilter } from '@main/interfaces/filters.interface';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
+import { Cache } from '@main/decorators/cache/cache.decorator';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,7 @@ export class SprintService {
    * @param projectId Project id needed to create status
    * @returns Request observable with list of statuses
    */
+  @Cache()
   public list(
     projectId: number,
     filters?: DataFilter<Sprint, any>[] | DataFilter<Sprint, any>,

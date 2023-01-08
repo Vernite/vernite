@@ -14,6 +14,11 @@ export interface Project extends JSONParsable {
   name: string;
 
   /**
+   * The project's description.
+   */
+  description: string;
+
+  /**
    * GitHub repository name
    * @example
    * "SamPanDonte/untitled"

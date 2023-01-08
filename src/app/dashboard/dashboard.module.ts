@@ -43,7 +43,6 @@ import { GitIntegrationService } from './services/git-integration/git-integratio
     ProjectFormIntegrationsComponent,
     ProjectFormMembersComponent,
     ProjectFormStatusesComponent,
-
     EditProjectPage,
     ViewOptionsComponent,
     MemberListComponent,

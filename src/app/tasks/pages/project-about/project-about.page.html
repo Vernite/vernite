@@ -1,0 +1,16 @@
+<div class="changelog text-base mt-10 mb-1" i18n>Description</div>
+<hr class="opacity-50">
+<div class="description markdown-preview pt-3" [innerHTML]="((project$ | async)?.description || '') | markdown"></div>
+
+<div class="changelog text-base mt-10 mb-1" i18n>Members</div>
+<hr class="opacity-50">
+<div class="flex gap-4 text-white py-3 items-stretch">
+  <ng-container *ngFor="let member of members$ | async; index as i">
+    <hr *ngIf="i > 0" class="h-full border-l">
+    <span>{{ member.user.name }} {{ member.user.surname }}</span>
+  </ng-container>
+</div>
+
+<div class="changelog text-base mt-10 mb-1" i18n>Changelog</div>
+<hr class="opacity-50">
+<audit-log class="grow" [auditLogs]="(auditLog$ | async) || []"></audit-log>

@@ -79,8 +79,10 @@
   /* ==== Spelling ==== */
   /* ================== */
   "cSpell.words": [
+    "auditlog",
     "compodoc",
     "devkit",
+    "Donte",
     "lcov",
     "ngneat",
     "protobuf",

@@ -10,7 +10,9 @@ import { TaskService } from '../task/task.service';
 import { Status, StatusWithTasks } from '@tasks/interfaces/status.interface';
 import { Cache } from '@main/decorators/cache/cache.decorator';
 import { DataFilter } from '@main/interfaces/filters.interface';
+import { Service } from '../../../_main/decorators/service/service.decorator';
 
+@Service()
 @Injectable({
   providedIn: 'root',
 })
@@ -44,6 +46,7 @@ export class StatusService extends BaseService<
     private dialogService: DialogService,
   ) {
     super(injector);
+    console.log('StatusService constructor');
   }
 
   /**
@@ -51,8 +54,9 @@ export class StatusService extends BaseService<
    * @param projectId Project id needed to create status
    * @returns Request observable with list of statuses
    */
-  @Cache()
+  @Cache({ interval: Number.POSITIVE_INFINITY })
   public list(projectId: number): Observable<Status[]> {
+    console.log('function call');
     return this.apiService.get(`/project/${projectId}/status`).pipe(
       this.validate({
         404: 'PROJECT_NOT_FOUND',
@@ -66,7 +70,7 @@ export class StatusService extends BaseService<
    * @param projectId Project id needed to get status
    * @returns Request observable with the status
    */
-  @Cache()
+  @Cache({ interval: Number.POSITIVE_INFINITY })
   public get(projectId: number, statusId: number): Observable<Status> {
     return this.apiService.get(`/project/${projectId}/status/${statusId}`).pipe(
       this.validate({

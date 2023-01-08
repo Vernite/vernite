@@ -6,6 +6,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MainModule } from '@main/_main.module';
 
 import { RestoreAccountPage } from './restore-account.page';
+import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service } from 'ng-recaptcha';
+import { environment } from 'src/environments/environment';
 
 describe('RestoreAccountPage', () => {
   let component: RestoreAccountPage;
@@ -15,6 +17,10 @@ describe('RestoreAccountPage', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, MainModule, ReactiveFormsModule, BrowserAnimationsModule],
       declarations: [RestoreAccountPage],
+      providers: [
+        { provide: RECAPTCHA_V3_SITE_KEY, useValue: environment.captchaSiteKey },
+        { provide: ReCaptchaV3Service, useClass: ReCaptchaV3Service },
+      ],
     }).compileComponents();
   }));
 

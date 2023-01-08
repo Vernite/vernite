@@ -12,6 +12,7 @@ import { ProjectService } from '@dashboard/services/project/project.service';
 import { omit } from 'lodash-es';
 import { ApiFile } from '@main/interfaces/api-file.interface';
 import { isApiFile } from '@main/util/is-api-file/is-api-file.util';
+import { ProjectForm } from '../../interfaces/project-form.interface';
 
 /**
  * Project form general component
@@ -22,7 +23,7 @@ import { isApiFile } from '@main/util/is-api-file/is-api-file.util';
   templateUrl: './project-form-general.component.html',
   styleUrls: ['./project-form-general.component.scss'],
 })
-export class ProjectFormGeneralComponent implements OnInit {
+export class ProjectFormGeneralComponent implements OnInit, ProjectForm {
   /** Project to edit */
   @Input() project?: Project;
 
@@ -37,7 +38,7 @@ export class ProjectFormGeneralComponent implements OnInit {
 
   /** Project form */
   public form = new FormGroup({
-    workspaceId: new FormControl<number>(0, [requiredValidator()]),
+    workspaceId: new FormControl<number>(undefined, [requiredValidator({ full: true })]),
     name: new FormControl<string>('', [
       requiredValidator(),
       notEmptyValidator(),

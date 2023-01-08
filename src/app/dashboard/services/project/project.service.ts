@@ -9,6 +9,8 @@ import { BaseService } from '@main/services/base/base.service';
 import { WorkspaceService } from '@dashboard/services/workspace/workspace.service';
 import { Cache } from '@main/decorators/cache/cache.decorator';
 import { unixTimestamp } from '@main/interfaces/date.interface';
+import { AuditLog } from '../../../_main/modules/audit-log/interfaces/audit-log.interface';
+import { Task } from '@tasks/interfaces/task.interface';
 
 @Service()
 @Injectable({
@@ -109,6 +111,13 @@ export class ProjectService extends BaseService<
     );
   }
 
+  /**
+   * List all events for a project
+   * @param projectId id of the project to get events from
+   * @param from starting date
+   * @param to ending date
+   * @returns Observable with list of all events
+   */
   @Cache()
   public events(projectId: number, from: unixTimestamp, to: unixTimestamp): Observable<any> {
     return this.apiService.get(`/project/${projectId}/events`, {
@@ -116,6 +125,12 @@ export class ProjectService extends BaseService<
     });
   }
 
+  /**
+   * Save logo for a project
+   * @param projectId id of the project to save logo for
+   * @param file file to save as logo
+   * @returns empty request observable
+   */
   public saveLogo(projectId: number, file: File): Observable<void> {
     const formData = new FormData();
     formData.append('file', file);
@@ -123,7 +138,28 @@ export class ProjectService extends BaseService<
     return this.apiService.post(`/project/${projectId}/logo`, { body: formData });
   }
 
+  /**
+   * Delete logo for a project
+   * @param projectId id of the project to delete logo for
+   * @returns empty request observable
+   */
   public deleteLogo(projectId: number): Observable<void> {
     return this.apiService.delete(`/project/${projectId}/logo`);
+  }
+
+  /**
+   * Get audit log for a project (changes history)
+   * @param projectId id of the project to get audit log for
+   * @returns Observable with audit log
+   */
+  public auditLog(projectId: number): Observable<AuditLog<Task>[]> {
+    return this.apiService.get<AuditLog<Task>[]>(`/project/${projectId}/auditlog`).pipe(
+      map((auditLogs) =>
+        auditLogs.map((log) => ({
+          ...log,
+          projectId,
+        })),
+      ),
+    );
   }
 }

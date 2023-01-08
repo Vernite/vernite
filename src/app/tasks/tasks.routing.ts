@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BacklogPage } from './pages/backlog/backlog.page';
 import { SprintPage } from './pages/sprint/sprint.page';
 import { TaskPage } from './pages/task/task.page';
+import { ProjectAboutPage } from './pages/project-about/project-about.page';
 
 /**
  * Tasks routes list
@@ -12,6 +13,10 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: 'sprint',
+  },
+  {
+    path: 'about',
+    component: ProjectAboutPage,
   },
   {
     path: 'backlog',

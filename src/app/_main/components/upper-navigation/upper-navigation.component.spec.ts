@@ -6,6 +6,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { MatDialogTestingProvider } from '@tests/helpers/mat-dialog-testing-provider.helper';
 import { UpperNavigationComponent } from './upper-navigation.component';
+import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service } from 'ng-recaptcha';
+import { environment } from '../../../../environments/environment';
 
 describe('UpperNavigationComponent', () => {
   let component: UpperNavigationComponent;
@@ -15,7 +17,11 @@ describe('UpperNavigationComponent', () => {
     TestBed.configureTestingModule({
       imports: [MatDialogModule, HttpClientModule, RouterTestingModule],
       declarations: [UpperNavigationComponent],
-      providers: [...MatDialogTestingProvider],
+      providers: [
+        ...MatDialogTestingProvider,
+        { provide: RECAPTCHA_V3_SITE_KEY, useValue: environment.captchaSiteKey },
+        { provide: ReCaptchaV3Service, useClass: ReCaptchaV3Service },
+      ],
     }).compileComponents();
   }));
 

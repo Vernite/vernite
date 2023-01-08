@@ -1,0 +1,4 @@
+<cdk-virtual-scroll-viewport autosize class="grow">
+  <audit-log-entry *cdkVirtualFor="let auditLog of auditLogs; trackBy: trackByAuditLog"
+    [auditLog]="auditLog"></audit-log-entry>
+</cdk-virtual-scroll-viewport>
