@@ -3,11 +3,21 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoggedInUsersGuard } from './auth/guard/logged-in-users.guard';
 import { LandingPageComponent } from './landing-page/landing-page/landing-page.component';
 import { MainViewComponent } from './_main/components/main-view/main-view.component';
+import { TermsAndConditionsPage } from './_main/pages/terms-and-conditions/terms-and-conditions.page';
+import { PrivacyPolicyPage } from './_main/pages/privacy-policy/privacy-policy.page';
 
 const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
+    path: 'terms-and-conditions',
+    component: TermsAndConditionsPage,
+  },
+  {
+    path: 'privacy-policy',
+    component: PrivacyPolicyPage,
   },
   {
     path: 'landing-page',

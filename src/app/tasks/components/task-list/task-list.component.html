@@ -15,7 +15,7 @@
 
     <!-- Body -->
     <div class="body">
-      <task-row *cdkVirtualFor="let task of tasks; trackBy: trackByTask" [task]="task" [projectId]="projectId"
+      <task-row *cdkVirtualFor="let task of tasks; virtualTrackBy: trackByTask" [task]="task" [projectId]="projectId"
         [members]="members" [statusList]="statusList"></task-row>
     </div>
   </cdk-virtual-scroll-viewport>
