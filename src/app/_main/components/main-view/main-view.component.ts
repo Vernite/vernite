@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { RouterExtensionsService } from '@main/services/router-extensions/router-extensions.service';
 import { AuthService } from '../../../auth/services/auth/auth.service';
 import { ProtoService } from '../../services/proto/proto.service';
+import { UserService } from '../../../auth/services/user/user.service';
 
 /**
  * Main view component
@@ -30,6 +31,7 @@ export class MainViewComponent implements OnInit {
     private routerExtensions: RouterExtensionsService,
     private protoService: ProtoService,
     private authService: AuthService,
+    private userService: UserService,
   ) {}
 
   ngOnInit() {
@@ -40,6 +42,7 @@ export class MainViewComponent implements OnInit {
       if (!isLoggedIn) return;
 
       this.protoService.connect();
+      this.userService.loadLocale();
     });
   }
 }

@@ -69,6 +69,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { ContrastColorPipe } from './pipes/contrast-color/contrast-color.pipe';
 import { DateTimePickerComponent } from './components/input-date-time/date-time-picker/date-time-picker.component';
 import { TimePickerComponent } from './components/input-date-time/time-picker/time-picker.component';
+import { DateTimeByPreferencesPipe } from './pipes/date-time-by-preferences/date-time-by-preferences.pipe';
 import { SidebarEntryComponent } from './components/sidebar-navigation/sidebar-entry/sidebar-entry.component';
 import { ColorPipe } from './pipes/color/color.pipe';
 import { PillComponent } from './components/pill/pill.component';
@@ -179,6 +180,7 @@ const ngModuleConfig = {
     DayOfWeekPipe,
     DayjsPipe,
     DateByPreferencesPipe,
+    DateTimeByPreferencesPipe,
     TabsComponent,
     TabComponent,
     InputColorComponent,

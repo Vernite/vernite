@@ -33,7 +33,7 @@ export class RouterExtensionsService {
    * Get language from url
    * @returns language from url
    */
-  private getLanguageFromUrl() {
+  public getLanguageFromUrl() {
     const languagePredicate = location.pathname.split('/')[1];
 
     if (!languagePredicate) return null;
@@ -50,5 +50,15 @@ export class RouterExtensionsService {
    */
   private getBaseHref() {
     return document.getElementsByTagName('base')[0].href;
+  }
+
+  public reloadWithLanguage(language: string) {
+    if (this.getLanguageFromUrl() === language) return;
+    if (this.getLanguageFromUrl() === null) location.reload();
+    else {
+      const splittedLocation = location.pathname.split('/');
+      splittedLocation[1] = language;
+      location.pathname = splittedLocation.join('/');
+    }
   }
 }

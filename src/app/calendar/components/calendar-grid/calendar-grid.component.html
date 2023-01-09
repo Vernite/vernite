@@ -1,6 +1,6 @@
 <div *ngFor="let weekdayShort of weekdaysShort" class="cell week-name-cell">{{ weekdayShort }}</div>
 <div *ngFor="let day of days" class="cell" [class.today]="day.date.isToday()"
-  [class.current-month]="day.date.isBetween(firstDay, lastDay)">
+  [class.current-month]="day.date.isBetween(firstDay, lastDay, 'day', '[]')">
   <p class="day">
     <span>{{ day.date | dayjsFormat:'D' }}</span>
   </p>

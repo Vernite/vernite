@@ -46,12 +46,19 @@ export interface User extends JSONParsable {
   dateFormat: string;
 
   /**
+   * User language.
+   */
+  language: string;
+
+  /**
    * Time format used by user.
+   * @Note This feature is not implemented in API yet.
    */
   timeFormat: string;
 
   /**
    * User first day of week.
+   * @Note This feature is not implemented in API yet.
    */
   firstDayOfWeek: number;
 

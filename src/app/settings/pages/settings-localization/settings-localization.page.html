@@ -16,6 +16,12 @@
     <app-option *ngFor="let timeFormat of timeFormats" [value]="timeFormat.format">{{ timeFormat.example }}</app-option>
   </app-select>
 
+  <!-- First day of week -->
+  <app-select formControlName="firstDayOfWeek" floatingLabel="First day of week" class="full-width" i18n-floatingLabel>
+    <app-option [value]="0" i18n>Sunday</app-option>
+    <app-option [value]="1" i18n>Monday</app-option>
+  </app-select>
+
   <!-- Actions section -->
   <div class="actions">
     <app-button variant="primary" i18n>Save settings</app-button>

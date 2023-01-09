@@ -20,6 +20,7 @@ export class SettingsLocalizationPage implements OnInit {
     language: new FormControl('', requiredValidator()),
     dateFormat: new FormControl(''),
     timeFormat: new FormControl(''),
+    firstDayOfWeek: new FormControl(0),
   });
 
   /**

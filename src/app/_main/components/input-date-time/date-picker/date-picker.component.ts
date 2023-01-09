@@ -4,6 +4,7 @@ import { DaysGrid, CalendarDay } from '../date-picker.model';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { ControlAccessor } from '@main/classes/control-accessor/control-accessor.class';
 import { unixTimestamp } from '../../../interfaces/date.interface';
+import { weekdaysShort } from '@main/libs/localization/weekdays.localization.lib';
 
 /**
  * Date picker component
@@ -17,7 +18,7 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
   /**
    * First day of week
    */
-  @Input() firstDayOfWeek = 1;
+  @Input() firstDayOfWeek = dayjs.localeData().firstDayOfWeek();
 
   /**
    * Flag to hide today button
@@ -34,10 +35,7 @@ export class DatePickerComponent extends ControlAccessor<unixTimestamp | null> i
   monthNames = dayjs.months();
 
   /** Weekday names */
-  weekdaysShort = [
-    ...dayjs.weekdaysShort().slice(this.firstDayOfWeek),
-    ...dayjs.weekdaysShort().slice(0, this.firstDayOfWeek),
-  ];
+  weekdaysShort = weekdaysShort();
 
   /** @ignore */
   faChevronLeft = faChevronLeft;

@@ -3,6 +3,7 @@ import { EventType } from '@calendar/enums/event-type.enum';
 import { Event } from '@calendar/interfaces/event.interface';
 import { Task } from '@tasks/interfaces/task.interface';
 import * as dayjs from 'dayjs';
+import { weekdaysShort } from '@main/libs/localization/weekdays.localization.lib';
 
 /**
  * Calendar grid component to display calendar
@@ -39,7 +40,7 @@ export class CalendarGridComponent implements OnChanges {
   public tasksByDate = new Map<number, Task[]>();
 
   /** List of weekdays */
-  public weekdaysShort = dayjs.weekdaysShort();
+  public weekdaysShort = weekdaysShort();
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['date'] && !changes['date'].currentValue.isSame(changes['date'].previousValue)) {

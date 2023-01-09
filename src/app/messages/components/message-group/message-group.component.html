@@ -7,7 +7,7 @@
       <span>{{ author?.displayName || author?.name }}</span>
     </div>
     <div class="date text-label">
-      <span>{{ messages[0].timestamp | dateByPreferences:'seconds' | async }}</span>
+      <span>{{ messages[0].timestamp | dateTimeByPreferences:'seconds' | async }}</span>
     </div>
   </div>
   <div class="messages">
