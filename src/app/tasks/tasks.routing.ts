@@ -13,7 +13,8 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'sprint',
+    canActivate: [ActiveSprintExistGuard],
+    children: [],
   },
   {
     path: 'about',
@@ -29,8 +30,7 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        canActivate: [ActiveSprintExistGuard],
-        children: [],
+        component: SprintPage,
       },
       {
         path: ':sprintId',

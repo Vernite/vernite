@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { SprintService } from '../services/sprint.service';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class ActiveSprintExistGuard implements CanActivate {
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    _: RouterStateSnapshot,
+    state: RouterStateSnapshot,
   ): Observable<boolean> | Promise<boolean> | boolean {
     const projectId = Number(route.paramMap.get('projectId'));
 
