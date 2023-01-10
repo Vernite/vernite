@@ -8,6 +8,8 @@ import { faAngleDown, faCog, faSignOut, faUser, faBug } from '@fortawesome/free-
 import { ReportService } from '@main/services/reports/report.service';
 import { TaskService } from '@tasks/services/task/task.service';
 import { finalize, fromEvent, map, skip, take, Observable } from 'rxjs';
+import { ManualService } from '../../services/manual/manual.service';
+import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons';
 
 /**
  * Upper navigation component
@@ -36,6 +38,9 @@ export class UpperNavigationComponent implements OnInit {
   /** @ignore */
   faBug = faBug;
 
+  /** @ignore */
+  faCircleQuestion = faCircleQuestion;
+
   /** is open below active */
   public active: boolean = false;
 
@@ -52,6 +57,7 @@ export class UpperNavigationComponent implements OnInit {
     private userService: UserService,
     private reportService: ReportService,
     private router: Router,
+    private manualService: ManualService,
   ) {}
 
   ngOnInit() {
@@ -131,5 +137,12 @@ export class UpperNavigationComponent implements OnInit {
    */
   public reportBug() {
     this.reportService.openBugReportDialog().subscribe();
+  }
+
+  /**
+   * Open manual guide tab
+   */
+  public openManualGuide() {
+    this.manualService.open();
   }
 }

@@ -4,6 +4,7 @@ import { DialogRef } from '@main/classes/dialog-ref/dialog-ref.class';
 import { ViewContainerDirective } from '@main/directives/view-container/view-container.directive';
 import { DialogOutlet, DialogService } from '@main/services/dialog/dialog.service';
 import { take } from 'rxjs';
+import { DialogOptions } from '../../services/dialog/dialog-options.interface';
 
 /**
  * Dialog outlet component. Outlet to specify in what container alert can be displayed
@@ -35,7 +36,7 @@ export class DialogOutletComponent {
    * @param data dialog data to send to dialog
    * @returns reference to dialog
    */
-  renderDialog(component: any, data: any): DialogRef {
+  renderDialog(component: any, data: any, options: DialogOptions): DialogRef {
     const dialogRef = new DialogRef();
     const injector = this.createInjector(data, dialogRef);
 
@@ -46,7 +47,7 @@ export class DialogOutletComponent {
         this.clearComponent();
       });
 
-    this.loadComponent(component, injector);
+    this.loadComponent(component, options, injector);
     return dialogRef;
   }
 
@@ -55,12 +56,12 @@ export class DialogOutletComponent {
    * @param component dialog component
    * @param injector injector to use for dialog
    */
-  private loadComponent(component: any, injector: Injector) {
+  private loadComponent(component: any, options: DialogOptions, injector: Injector) {
     const viewContainerRef = this.host.viewContainerRef;
     viewContainerRef.clear();
     viewContainerRef.createComponent(component, { injector });
 
-    this.show();
+    this.show(options);
   }
 
   /**
@@ -93,8 +94,8 @@ export class DialogOutletComponent {
   /**
    * Show the outlet
    */
-  private show() {
-    this.width = '450px';
+  private show(options: DialogOptions) {
+    this.width = options.width || '450px';
   }
 
   /**

@@ -69,6 +69,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { ContrastColorPipe } from './pipes/contrast-color/contrast-color.pipe';
 import { DateTimePickerComponent } from './components/input-date-time/date-time-picker/date-time-picker.component';
 import { TimePickerComponent } from './components/input-date-time/time-picker/time-picker.component';
+import { ManualDialog } from './dialogs/manual/manual.dialog';
 import { PrivacyPolicyPage } from './pages/privacy-policy/privacy-policy.page';
 import { TermsAndConditionsPage } from './pages/terms-and-conditions/terms-and-conditions.page';
 import { DateTimeByPreferencesPipe } from './pipes/date-time-by-preferences/date-time-by-preferences.pipe';
@@ -200,6 +201,7 @@ const ngModuleConfig = {
     ReportBugDialog,
     TermsAndConditionsPage,
     PrivacyPolicyPage,
+    ManualDialog,
   ],
   providers: [
     /*=============================================
