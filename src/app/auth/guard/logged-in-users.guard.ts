@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '@auth/services/auth/auth.service';
 
 /**
@@ -13,7 +13,17 @@ export class LoggedInUsersGuard implements CanActivate {
    * Check if user is logged in
    * @returns true if user is logged in, false otherwise
    */
-  canActivate() {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    console.log(state.url);
+    if (
+      state.url == '/' ||
+      state.url == '/about' ||
+      state.url == '/docs' ||
+      state.url == '/changelog'
+    ) {
+      return true;
+    }
+
     if (this.authService.isLocallyLoggedIn()) {
       return true;
     } else {

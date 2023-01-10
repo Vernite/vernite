@@ -73,7 +73,7 @@ export class EditWorkspacePage {
     if (this.form.invalid) return;
 
     this.updateSubscription = this.workspaceService.update(this.form.value).subscribe(() => {
-      this.router.navigate(['/']).then(() => {
+      this.router.navigate(['/workspaces']).then(() => {
         window.location.reload();
       });
     });
