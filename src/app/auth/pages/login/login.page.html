@@ -5,8 +5,8 @@
       <form [formGroup]="form" (submit)="login()">
         <div>
           <h2 class="text-xl font-bold" i18n>Login to system</h2>
-          <p class="text-base" i18n>This is a secure site. Please enter your login information to enter or <a
-              routerLink="/auth/register">click here</a> to register.</p>
+          <p class="text-base" i18n>Please enter your email and password to log in. If you don't have an account, you can create one by clicking <a
+              routerLink="/auth/register">register</a>.</p>
         </div>
 
         <div *ngIf="error" class="error-box">

@@ -356,6 +356,10 @@
           <context context-type="sourcefile">src/app/_main/dialogs/report-bug/report-bug.dialog.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-list/task-list.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="4902817035128594900" datatype="html">
         <source>Description</source>
@@ -878,7 +882,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5373727393387841282" datatype="html">
@@ -889,7 +893,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4099895221156718403" datatype="html">
@@ -917,9 +921,9 @@
           <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="554611068951376473" datatype="html">
-        <source>If you are going to revive your account, you can log in to your account <x id="START_LINK" ctype="x-a" equiv-text="&lt;a
-            routerLink=&quot;/auth/login&quot;&gt;"/>click here to log in<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+      <trans-unit id="106522060698138765" datatype="html">
+        <source>Your account has been deleted. If you would like to restore it, please <x id="START_LINK" ctype="x-a" equiv-text="&lt;a
+            routerLink=&quot;/auth/login&quot;&gt;"/>log in<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> within the next 7 days. After that, restoration will no longer be possible.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/delete-account/delete-account.page.html</context>
           <context context-type="linenumber">7,8</context>
@@ -951,7 +955,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dialogs/add-member/add-member.dialog.html</context>
@@ -970,7 +974,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/components/member-list/member-list.component.html</context>
@@ -988,9 +992,9 @@
           <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8968050172452408179" datatype="html">
-        <source>This is a secure site. Please enter your login information to enter or <x id="START_LINK" ctype="x-a" equiv-text="&lt;a
-              routerLink=&quot;/auth/register&quot;&gt;"/>click here<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> to register.</source>
+      <trans-unit id="8506198471323086608" datatype="html">
+        <source>Please enter your email and password to log in. If you don&apos;t have an account, you can create one by clicking <x id="START_LINK" ctype="x-a" equiv-text="&lt;a
+              routerLink=&quot;/auth/register&quot;&gt;"/>register<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/login/login.page.html</context>
           <context context-type="linenumber">8,9</context>
@@ -1142,35 +1146,35 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">44</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1850014256995864128" datatype="html">
-        <source>This is a secure site. Please enter your register information or if you have an account already, <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/auth/login&quot;&gt;"/>click here<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> to login.</source>
+      <trans-unit id="97834353916767673" datatype="html">
+        <source>Please fill out the form below to create a new account. All fields are required. Already have an account? Please <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/auth/login&quot;&gt;"/>click here<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> to log in.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">8,9</context>
+          <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5884018920794115604" datatype="html">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>I agree to the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/terms-and-conditions&quot; target=&quot;_blank&quot; click-stop-propagation&gt;"/>Terms and Conditions<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and <x id="START_LINK_1" equiv-text="&lt;a routerLink=&quot;/privacy-policy&quot; target=&quot;_blank&quot; click-stop-propagation&gt;"/>Privacy Policy<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">28,32</context>
+          <context context-type="linenumber">27,28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3885497195825665706" datatype="html">
         <source>Next</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6987388674475678589" datatype="html">
         <source>John</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
@@ -1181,7 +1185,7 @@
         <source>First name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/components/member-list/member-list.component.html</context>
@@ -1197,7 +1201,7 @@
         <source>Smith</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
@@ -1208,7 +1212,7 @@
         <source>Last name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/components/member-list/member-list.component.html</context>
@@ -1223,7 +1227,7 @@
         <source>John98</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/pages/settings-account/settings-account.page.html</context>
@@ -1234,7 +1238,7 @@
         <source>Username</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">40</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/components/member-list/member-list.component.html</context>
@@ -1249,7 +1253,7 @@
         <source>Back</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1797594492746328723" datatype="html">
@@ -1773,15 +1777,15 @@
           <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7152796299173926576" datatype="html">
-        <source>You are not connected to any GitHub account. You need to connect to GitHub first.</source>
+      <trans-unit id="8944823571116480777" datatype="html">
+        <source>In order to proceed, you&apos;ll need to connect your GitHub account first.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/modules/integration-modules/components/integration-github/integration-github.component.html</context>
           <context context-type="linenumber">8,9</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3954301185930797306" datatype="html">
-        <source>Note: You need to authorize repositories to be able to use them in your integrations.</source>
+      <trans-unit id="6243584873278926248" datatype="html">
+        <source>Note: To use your repositories in our integrations, you&apos;ll need to authorize them first.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/modules/integration-modules/components/integration-github/integration-github.component.html</context>
           <context context-type="linenumber">11,12</context>
@@ -2039,8 +2043,8 @@
           <context context-type="linenumber">54</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="904998890091694142" datatype="html">
-        <source>You don&apos;t have enough privileges to do this</source>
+      <trans-unit id="800249765269957621" datatype="html">
+        <source>I&apos;m sorry, but it looks like you don&apos;t have the necessary permissions to perform this action.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/services/member/member.service.ts</context>
           <context context-type="linenumber">22</context>
@@ -2323,6 +2327,10 @@
           <context context-type="linenumber">19,20</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-list/task-list.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
           <context context-type="linenumber">33</context>
         </context-group>
@@ -2568,6 +2576,10 @@
           <context context-type="linenumber">1</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-list/task-list.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/pages/task/task.page.html</context>
           <context context-type="linenumber">81,82</context>
         </context-group>
@@ -2691,6 +2703,43 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/input-task-parent/input-task-parent.component.html</context>
           <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4061217653237555367" datatype="html">
+        <source>Time tracking</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-list/task-list.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3108168000666137165" datatype="html">
+        <source>Deadline</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-list/task-list.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/task/task.page.html</context>
+          <context context-type="linenumber">36,37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7238645691627834742" datatype="html">
+        <source>Story points</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-list/task-list.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
+          <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7215101881367554791" datatype="html">
@@ -2845,33 +2894,11 @@
           <context context-type="linenumber">22,23</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3108168000666137165" datatype="html">
-        <source>Deadline</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/pages/task/task.page.html</context>
-          <context context-type="linenumber">36,37</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="8706787861441663087" datatype="html">
         <source>Estimated date</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
           <context context-type="linenumber">54</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7238645691627834742" datatype="html">
-        <source>Story points</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">59</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
-          <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4347094825344030699" datatype="html">

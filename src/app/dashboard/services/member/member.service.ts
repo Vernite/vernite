@@ -19,7 +19,7 @@ export class MemberService extends BaseService<
 > {
   protected override errorCodes = {
     NOT_ENOUGH_PRIVILEGES: {
-      message: $localize`You don't have enough privileges to do this`,
+      message: $localize`I'm sorry, but it looks like you don't have the necessary permissions to perform this action.`,
     },
     PROJECT_NOT_FOUND: {
       message: $localize`Project not found`,

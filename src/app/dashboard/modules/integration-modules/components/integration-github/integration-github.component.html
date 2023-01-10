@@ -5,10 +5,10 @@
     <div class="card-content">
       <!-- If GitHub account does not exist show Connect to GitHub button -->
       <ng-container *ngIf="((gitHubAccounts$ | async) || []).length === 0">
-        <p i18n>You are not connected to any GitHub account. You need to connect to GitHub first.</p>
+        <p i18n>In order to proceed, you'll need to connect your GitHub account first.</p>
       </ng-container>
       <ng-container *ngIf="((gitHubAccounts$ | async) || []).length! > 0">
-        <p i18n>Note: You need to authorize repositories to be able to use them in your integrations.</p>
+        <p i18n>Note: To use your repositories in our integrations, you'll need to authorize them first.</p>
       </ng-container>
     </div>
     <div class="card-actions flex justify-end">

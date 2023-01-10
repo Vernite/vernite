@@ -3347,6 +3347,118 @@
           <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="4061217653237555367" datatype="html">
+        <source>Time tracking</source>
+        <target state="translated">Pomiar czasu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-list/task-list.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="106522060698138765" datatype="html">
+        <source>Your account has been deleted. If you would like to restore it, please <x id="START_LINK" ctype="x-a" equiv-text="&lt;arouterLink=&quot;/auth/login&quot;&gt;"/>log in<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> within the next 7 days. After that, restoration will no longer be possible.</source>
+        <target state="translated">Twoje konto zostało usunięte. Jeśli chcesz je przywrócić, proszę <x id="START_LINK" ctype="x-a" equiv-text="&lt;arouterLink=&quot;/auth/login&quot;&gt;"/>zaloguj się<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> w ciągu najbliższych 7 dni. Po tym czasie przywrócenie nie będzie już możliwe.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/delete-account/delete-account.page.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8506198471323086608" datatype="html">
+        <source>Please enter your email and password to log in. If you don&apos;t have an account, you can create one by clicking <x id="START_LINK" ctype="x-a" equiv-text="&lt;arouterLink=&quot;/auth/register&quot;&gt;"/>register<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</source>
+        <target state="translated">Wprowadź adres e-mail i hasło, aby się zalogować. Jeśli nie masz konta, możesz je utworzyć, klikając <x id="START_LINK" ctype="x-a" equiv-text="&lt;arouterLink=&quot;/auth/register&quot;&gt;"/>zarejestruj się<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/login/login.page.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3817902654276343665" datatype="html">
+        <source>Sorry, your email confirmation link has expired. Please request a new confirmation link to complete the registration process.</source>
+        <target state="translated">Przepraszamy, Twój link potwierdzający wygasł. Poproś o nowy link potwierdzający, aby zakończyć proces rejestracji.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register-token-expired/register-token-expired.page.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="97834353916767673" datatype="html">
+        <source>Please fill out the form below to create a new account. All fields are required. Already have an account? Please <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/auth/login&quot;&gt;"/>click here<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> to log in.</source>
+        <target state="translated">Proszę wypełnij poniższy formularz, aby utworzyć nowe konto. Wszystkie pola są wymagane. Posiadasz już konto? Proszę <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/auth/login&quot;&gt;"/>kliknij tutaj<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>, aby się zalogować.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="800249765269957621" datatype="html">
+        <source>I&apos;m sorry, but it looks like you don&apos;t have the necessary permissions to perform this action.</source>
+        <target state="translated">Przepraszamy, ale wygląda na to, że nie masz uprawnień niezbędnych do wykonania tej czynności.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/services/member/member.service.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6237515152141275363" datatype="html">
+        <source>Clean and powerful task management software</source>
+        <target state="translated">Czyste i wydajne oprogramowanie do zarządzania zadaniami</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page-about/landing-page-about.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page/landing-page.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="31003531489836531" datatype="html">
+        <source>Vernite will help you managing your work and personal projects. It&apos;s built for productive people.</source>
+        <target state="translated">Vernite pomoże Ci zarządzać pracą i projektami osobistymi. Jest stworzony dla produktywnych ludzi.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page-about/landing-page-about.page.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page/landing-page.page.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1202662712029687724" datatype="html">
+        <source>User story</source>
+        <target state="translated">User story</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pipes/task-type.pipe.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3307214558906712688" datatype="html">
+        <source>In progress</source>
+        <target state="translated">W toku</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/tracker/tracker-entry/tracker-entry.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3513363077148951734" datatype="html">
+        <source>Open details</source>
+        <target state="translated">Otwórz szczegóły</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-row/task-row.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8944823571116480777" datatype="html">
+        <source>In order to proceed, you&apos;ll need to connect your GitHub account first.</source>
+        <target state="translated">Aby kontynuować, musisz najpierw połączyć swoje konto GitHub.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/modules/integration-modules/components/integration-github/integration-github.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6243584873278926248" datatype="html">
+        <source>Note: To use your repositories in our integrations, you&apos;ll need to authorize them first.</source>
+        <target state="translated">Uwaga: Aby korzystać z repozytoriów w naszych integracjach, trzeba je najpierw zautoryzować.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/modules/integration-modules/components/integration-github/integration-github.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>
