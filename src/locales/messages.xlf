@@ -215,6 +215,20 @@
           <context context-type="linenumber">2</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="3742657416068781599" datatype="html">
+        <source>Editor</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/textarea/textarea.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1295614462098694869" datatype="html">
+        <source>Preview</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/textarea/textarea.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="771664384252640128" datatype="html">
         <source>Bold</source>
         <context-group purpose="location">
@@ -282,7 +296,7 @@
         <source>New task</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/components/upper-navigation/upper-navigation.component.html</context>
-          <context context-type="linenumber">1</context>
+          <context context-type="linenumber">2</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/dialogs/task/task.dialog.html</context>
@@ -293,32 +307,39 @@
         <source>Bug report</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/components/upper-navigation/upper-navigation.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">9</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/dialogs/report-bug/report-bug.dialog.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="555381225765638927" datatype="html">
+        <source>Manual guide</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/upper-navigation/upper-navigation.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4915431133669985304" datatype="html">
         <source>Profile</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/components/upper-navigation/upper-navigation.component.html</context>
-          <context context-type="linenumber">24,25</context>
+          <context context-type="linenumber">28,29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4930506384627295710" datatype="html">
         <source>Settings</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/components/upper-navigation/upper-navigation.component.html</context>
-          <context context-type="linenumber">30,31</context>
+          <context context-type="linenumber">34,35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7507948636555938109" datatype="html">
         <source>Log out</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/_main/components/upper-navigation/upper-navigation.component.html</context>
-          <context context-type="linenumber">36,37</context>
+          <context context-type="linenumber">40,41</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/restore-account/restore-account.page.html</context>
@@ -1006,6 +1027,10 @@
           <context context-type="sourcefile">src/app/auth/pages/login/login.page.html</context>
           <context context-type="linenumber">28</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/components/landing-page-nav/landing-page-nav.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="3451483669820128990" datatype="html">
         <source>User is already logged</source>
@@ -1049,6 +1074,14 @@
           <context context-type="sourcefile">src/app/auth/pages/register-token-success/register-token-success.page.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page-about/landing-page-about.page.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page/landing-page.page.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="5656896471245312646" datatype="html">
         <source>Go to landing page</source>
@@ -1084,6 +1117,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/register-token-expired/register-token-expired.page.html</context>
           <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page-about/landing-page-about.page.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page/landing-page.page.html</context>
+          <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="414874761794563214" datatype="html">
@@ -1666,6 +1707,10 @@
           <context context-type="sourcefile">src/app/dashboard/components/view-options/view-options.component.html</context>
           <context context-type="linenumber">12,13</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/components/landing-page-nav/landing-page-nav.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="8508552938611649591" datatype="html">
         <source>Sprint</source>
@@ -2047,6 +2092,64 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/services/workspace/workspace.service.ts</context>
           <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7136888919962092730" datatype="html">
+        <source>Changelog</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/components/landing-page-nav/landing-page-nav.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/pages/project-about/project-about.page.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4447668871712407032" datatype="html">
+        <source>Docs</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/components/landing-page-nav/landing-page-nav.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7028204981963450021" datatype="html">
+        <source>Sign up</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/components/landing-page-nav/landing-page-nav.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6237515152141275363" datatype="html">
+        <source>Clean and powerful task management software</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page-about/landing-page-about.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page/landing-page.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="31003531489836531" datatype="html">
+        <source>Vernite will help you managing your work and personal projects. It&apos;s built for productive people.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page-about/landing-page-about.page.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page/landing-page.page.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5156047489151158244" datatype="html">
+        <source>Work in progress</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page-changelog/landing-page-changelog.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page-docs/landing-page-docs.page.html</context>
+          <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2969854625018722346" datatype="html">
@@ -2860,13 +2963,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/pages/backlog/backlog.page.html</context>
           <context context-type="linenumber">41</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7136888919962092730" datatype="html">
-        <source>Changelog</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/pages/project-about/project-about.page.html</context>
-          <context context-type="linenumber">14,15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3167655614715346069" datatype="html">

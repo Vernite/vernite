@@ -3295,6 +3295,58 @@
           <context context-type="linenumber">105</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="3742657416068781599" datatype="html">
+        <source>Editor</source>
+        <target state="translated">Edytor</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/textarea/textarea.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1295614462098694869" datatype="html">
+        <source>Preview</source>
+        <target state="translated">Podgląd</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/textarea/textarea.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7028204981963450021" datatype="html">
+        <source>Sign up</source>
+        <target state="translated">Zarejestruj się</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/components/landing-page-nav/landing-page-nav.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5156047489151158244" datatype="html">
+        <source>Work in progress</source>
+        <target state="translated">Praca w toku</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page-changelog/landing-page-changelog.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page-docs/landing-page-docs.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4447668871712407032" datatype="html">
+        <source>Docs</source>
+        <target state="translated">Dokumentacja</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/components/landing-page-nav/landing-page-nav.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="555381225765638927" datatype="html">
+        <source>Manual guide</source>
+        <target state="translated">Samouczek</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/upper-navigation/upper-navigation.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>
