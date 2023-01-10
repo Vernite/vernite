@@ -169,8 +169,15 @@ export class UserService extends BaseService<Errors<any>> {
    * @returns default user preferences
    */
   public getUserDefaultPreferences() {
+    const navigatorLanguage = this.isLanguageValid(navigator.language)
+      ? navigator.language
+      : 'en-US';
+    const urlLanguage = this.isLanguageValid(this.routerExtensionsService.getLanguageFromUrl())
+      ? this.routerExtensionsService.getLanguageFromUrl()
+      : 'en-US';
+
     return {
-      language: navigator.language || this.routerExtensionsService.getLanguageFromUrl(),
+      language: navigatorLanguage || urlLanguage || 'en-US',
       dateFormat: 'DD.MM.YYYY',
       timeFormat: 'HH:mm',
       firstDayOfWeek: 1,
@@ -257,12 +264,19 @@ export class UserService extends BaseService<Errors<any>> {
       .pipe(this.validate({}));
   }
 
+  private isLanguageValid(lang: string | null) {
+    if (!lang) return false;
+    return ['pl-PL', 'en-GB', 'it-IT', 'es-ES', 'de-DE', 'uk-UA'].includes(lang);
+  }
+
   public loadLocale(): void {
     this.getMyself().subscribe((user: User) => {
-      if (
-        this.routerExtensionsService.getLanguageFromUrl() &&
-        user.language !== this.routerExtensionsService.getLanguageFromUrl()
-      ) {
+      const urlLanguage = this.isLanguageValid(this.routerExtensionsService.getLanguageFromUrl())
+        ? this.routerExtensionsService.getLanguageFromUrl()
+        : null;
+      const userLanguage = this.isLanguageValid(user.language) ? user.language : null;
+
+      if (urlLanguage && userLanguage && userLanguage !== urlLanguage) {
         this.routerExtensionsService.reloadWithLanguage(user.language);
         return;
       }
