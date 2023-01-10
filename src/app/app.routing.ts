@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoggedInUsersGuard } from './auth/guard/logged-in-users.guard';
-import { LandingPageComponent } from './landing-page/landing-page/landing-page.component';
+import { LandingPagePage } from './landing-page/pages/landing-page/landing-page.page';
 import { MainViewComponent } from './_main/components/main-view/main-view.component';
 import { TermsAndConditionsPage } from './_main/pages/terms-and-conditions/terms-and-conditions.page';
 import { PrivacyPolicyPage } from './_main/pages/privacy-policy/privacy-policy.page';
+import { LandingPageAboutPage } from './landing-page/pages/landing-page-about/landing-page-about.page';
+import { LandingPageDocsPage } from './landing-page/pages/landing-page-docs/landing-page-docs.page';
+import { LandingPageChangelogPage } from './landing-page/pages/landing-page-changelog/landing-page-changelog.page';
 
 const routes: Routes = [
   {
@@ -21,15 +24,15 @@ const routes: Routes = [
   },
   {
     path: 'about',
-    component: LandingPageComponent,
+    component: LandingPageAboutPage,
   },
   {
     path: 'changelog',
-    component: LandingPageComponent,
+    component: LandingPageChangelogPage,
   },
   {
     path: 'docs',
-    component: LandingPageComponent,
+    component: LandingPageDocsPage,
   },
   {
     path: '',
@@ -37,7 +40,7 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        component: LandingPageComponent,
+        component: LandingPagePage,
       },
       {
         path: '',

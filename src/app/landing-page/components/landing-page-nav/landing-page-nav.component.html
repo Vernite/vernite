@@ -1,0 +1,16 @@
+<section class="nav">
+  <div class="logo" routerLink="/"></div>
+  <tabs class="ml-3">
+    <tab class="text-base" routerLink="/about" routerLinkActive="active" i18n>About</tab>
+    <tab class="text-base" routerLink="/changelog" routerLinkActive="active" i18n>Changelog</tab>
+    <tab class="text-base" routerLink="/docs" routerLinkActive="active" i18n>Docs</tab>
+  </tabs>
+  <div class="buttons">
+    <app-button variant="transparent" routerLink="/auth/login">
+      <span i18n>Log in</span>
+    </app-button>
+    <app-button variant="primary" routerLink="/auth/register">
+      <span i18n>Sign up</span>
+    </app-button>
+  </div>
+</section>

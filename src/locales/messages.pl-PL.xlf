@@ -3151,6 +3151,202 @@
           <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="4439272613456849405" datatype="html">
+        <source>Your registration was successful!</source>
+        <target state="translated">Twoja rejestracja przebiegła pomyślnie!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register-in-progress/register-in-progress.page.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register-token-success/register-token-success.page.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="648168694486340407" datatype="html">
+        <source>Go to login page</source>
+        <target state="translated">Przejdź do strony logowania</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register-in-progress/register-in-progress.page.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register-token-success/register-token-success.page.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5656896471245312646" datatype="html">
+        <source>Go to landing page</source>
+        <target state="translated">Przejdź do strony głównej</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register-in-progress/register-in-progress.page.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register-token-expired/register-token-expired.page.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register-token-success/register-token-success.page.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4324963447349708821" datatype="html">
+        <source>Your link has expired!</source>
+        <target state="translated">Twój link stracił datę ważności</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register-token-expired/register-token-expired.page.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4894289887140558275" datatype="html">
+        <source>Go to registration page</source>
+        <target state="translated">Przejdź do strony rejestracji</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register-token-expired/register-token-expired.page.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8742884847213574025" datatype="html">
+        <source>Back to login page</source>
+        <target state="translated">Wróć do strony logowania</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/forgot-password/forgot-password.page.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="414874761794563214" datatype="html">
+        <source>Your email address has been confirmed! Thank you for completing the registration process.</source>
+        <target state="translated">Twój adres email został potwierdzony! Dziękujemy za zakończenie procesu rejestracji.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register-token-success/register-token-success.page.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5884018920794115604" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>I agree to the <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/terms-and-conditions&quot; target=&quot;_blank&quot; click-stop-propagation&gt;"/>Terms and Conditions<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> and <x id="START_LINK_1" equiv-text="&lt;a routerLink=&quot;/privacy-policy&quot; target=&quot;_blank&quot; click-stop-propagation&gt;"/>Privacy Policy<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>.</source>
+        <target state="translated"><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/> Zgadzam się z <x id="START_LINK" ctype="x-a" equiv-text="&lt;a routerLink=&quot;/terms-and-conditions&quot; target=&quot;_blank&quot; click-stop-propagation&gt;"/>Zasadami i warunkami<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> oraz z <x id="START_LINK_1" equiv-text="&lt;a routerLink=&quot;/privacy-policy&quot; target=&quot;_blank&quot; click-stop-propagation&gt;"/>Polityką prywatności<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register/register.page.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2414149189004296404" datatype="html">
+        <source>Please check your email for a confirmation link and click it within the next 30 minutes to complete the registration process.</source>
+        <target state="translated">Proszę sprawdź swój email w celu znalezienia linku potwierdzającego i kliknij w niego w przeciągu 30 minut, żeby zakończyć proces rejestracji.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register-in-progress/register-in-progress.page.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3630717651062288229" datatype="html">
+        <source>New sprint</source>
+        <target state="translated">Nowy sprint</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/dialogs/sprint/sprint.dialog.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7215101881367554791" datatype="html">
+        <source>Show more</source>
+        <target state="translated">Pokaż więcej</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-list/task-list.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8739442281958563044" datatype="html">
+        <source>Monday</source>
+        <target state="translated">Poniedziałek</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-localization/settings-localization.page.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6950140976689343775" datatype="html">
+        <source>Sunday</source>
+        <target state="translated">Niedziela</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-localization/settings-localization.page.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5524799228426462100" datatype="html">
+        <source>First day of week</source>
+        <target state="translated">Pierwszy dzień tygodnia</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/pages/settings-localization/settings-localization.page.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6403738693836882703" datatype="html">
+        <source>New release</source>
+        <target state="translated">Nowe wydanie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/releases/dialog/release/release.dialog.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3541542172268855520" datatype="html">
+        <source>If you will move this task to finishing state, the attached pull request will be merged to the repository.</source>
+        <target state="translated">Po przesunięciu tego zadania, do stanu końcowego, przypisany do niego pull request zostanie połączony z repozytorium.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/tasks-board/tasks-board.component.ts</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3742657416068781599" datatype="html">
+        <source>Editor</source>
+        <target state="translated">Edytor</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/textarea/textarea.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1295614462098694869" datatype="html">
+        <source>Preview</source>
+        <target state="translated">Podgląd</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/textarea/textarea.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7028204981963450021" datatype="html">
+        <source>Sign up</source>
+        <target state="translated">Zarejestruj się</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/components/landing-page-nav/landing-page-nav.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5156047489151158244" datatype="html">
+        <source>Work in progress</source>
+        <target state="translated">Praca w toku</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page-changelog/landing-page-changelog.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/pages/landing-page-docs/landing-page-docs.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4447668871712407032" datatype="html">
+        <source>Docs</source>
+        <target state="translated">Dokumentacja</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/landing-page/components/landing-page-nav/landing-page-nav.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="555381225765638927" datatype="html">
+        <source>Manual guide</source>
+        <target state="translated">Samouczek</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/components/upper-navigation/upper-navigation.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>
