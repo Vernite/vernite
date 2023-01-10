@@ -16,10 +16,6 @@ const routes: Routes = [
     path: ':releaseId',
     component: ReleasePage,
   },
-  {
-    path: '**',
-    redirectTo: '',
-  },
 ];
 
 /**

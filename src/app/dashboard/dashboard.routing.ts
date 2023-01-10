@@ -74,21 +74,9 @@ const routes: Routes = [
                 path: ':projectId',
                 redirectTo: '/projects/:projectId',
               },
-              {
-                path: '**',
-                redirectTo: '',
-              },
             ],
           },
-          {
-            path: '**',
-            redirectTo: '',
-          },
         ],
-      },
-      {
-        path: '**',
-        redirectTo: '',
       },
     ],
   },
@@ -112,10 +100,6 @@ const routes: Routes = [
         ],
       },
     ],
-  },
-  {
-    path: '**',
-    redirectTo: '',
   },
 ];
 
