@@ -31,7 +31,7 @@
   </div>
 
   <!-- Assignee cell -->
-  <div class="cell w-52">
+  <div class="cell w-40">
     <app-assignee [assignee]="task.assigneeId && members && members.get(task.assigneeId) || null" [members]="members"
       [projectId]="projectId" [taskId]="task.id" click-stop-propagation>
     </app-assignee>
@@ -46,7 +46,7 @@
   <div class="cell w-52">{{ task.deadline | dateTimeByPreferences | async }}</div>
 
   <!-- Story points cell -->
-  <div class="cell w-52">
+  <div class="cell w-40">
     <pill>{{ task.storyPoints }}</pill>
   </div>
 
