@@ -58,6 +58,10 @@ const routes: Routes = [
         pathMatch: 'full',
         component: RegisterPage,
       },
+      {
+        path: '**',
+        redirectTo: '',
+      },
     ],
   },
 ];

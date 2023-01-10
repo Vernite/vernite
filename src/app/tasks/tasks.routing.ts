@@ -50,6 +50,10 @@ const routes: Routes = [
     path: 'releases',
     loadChildren: () => import('../releases/releases.module').then((m) => m.ReleasesModule),
   },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];
 
 /**

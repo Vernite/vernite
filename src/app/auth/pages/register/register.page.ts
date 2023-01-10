@@ -119,7 +119,7 @@ export class RegisterPage {
           }),
         )
         .subscribe(() => {
-          this.router.navigate(['/register/in-progress']);
+          this.router.navigate(['/auth/register/in-progress']);
         });
     }
   }
