@@ -1,0 +1,25 @@
+section {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  background-color: var(--color-gray-800);
+}
+
+.logo {
+  width: 100px;
+  height: 64px;
+  align-self: center;
+  background-image: url('../../../../assets/metadata/logo_with_name.svg');
+  background-position: 0 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+}
+
