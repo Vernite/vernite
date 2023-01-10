@@ -1,8 +1,9 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { Status } from '@tasks/interfaces/status.interface';
 import { Task } from '@tasks/interfaces/task.interface';
 import { ProjectMember } from '../../../dashboard/interfaces/project-member.interface';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 /**
  * Component to display list of tasks
@@ -12,7 +13,7 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss'],
 })
-export class TaskListComponent {
+export class TaskListComponent implements OnInit, OnChanges {
   /** Tasks to display */
   @Input() tasks: Task[] = [];
 
@@ -25,21 +26,31 @@ export class TaskListComponent {
   /** List of project statuses */
   @Input() statusList: Status[] = [];
 
-  @ViewChild(CdkVirtualScrollViewport, { static: false })
-  public viewPort!: CdkVirtualScrollViewport;
+  /** @ignore */
+  faPlus = faPlus;
+
+  public visibleTasks: Task[] = [];
+  public currentLimit: number = 50;
 
   constructor() {}
 
-  public get inverseOfTranslation(): string {
-    if (!this.viewPort || !this.viewPort['_renderedContentOffset']) {
-      return '-0px';
+  ngOnInit() {
+    this.visibleTasks = this.tasks.slice(0, this.currentLimit);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['tasks']) {
+      this.visibleTasks = this.tasks.slice(0, this.currentLimit);
     }
-    let offset = this.viewPort['_renderedContentOffset'];
-    return `-${offset}px`;
   }
 
   /** Track by function for tasks */
   trackByTask(index: number, task: Task) {
     return task.id;
+  }
+
+  increaseLimit() {
+    this.currentLimit += 50;
+    this.visibleTasks = this.tasks.slice(0, this.currentLimit);
   }
 }

@@ -1,7 +1,7 @@
 <app-task-view-options [project]="(project$ | async)!">
 </app-task-view-options>
 
-<div class="w-full mb-10 grow" *ngFor="let sprint of sprintListActive$ | async">
+<div class="w-full mb-10" *ngFor="let sprint of sprintListActive$ | async">
   <div class="flex items-end gap-3 mb-2">
     <h2 class="title text-xl font-bold">{{sprint.name}}</h2>
     <app-button variant="secondary" (click)="closeSprint(sprint)" i18n>Close sprint</app-button>
@@ -31,7 +31,7 @@
     [statusList]="(statusList$ | async) || []"></task-list>
 </div>
 
-<div class="w-full mb-10 grow" *ngFor="let sprint of sprintListCreated$ | async">
+<div class="w-full mb-10" *ngFor="let sprint of sprintListCreated$ | async">
   <div class="flex items-end gap-3 mb-2">
     <h2 class="title text-xl font-bold">{{sprint.name}}</h2>
     <ng-container *ngIf="((sprintListActive$ | async) || []).length">
@@ -63,7 +63,7 @@
     [statusList]="(statusList$ | async) || []"></task-list>
 </div>
 
-<div class="w-full mb-10 grow flex flex-col">
+<div class="w-full mb-10 flex flex-col">
   <h2 class="title text-xl font-bold" i18n>Backlog</h2>
   <task-list [tasks]="(taskList$ | async) || []" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
     [statusList]="(statusList$ | async) || []"></task-list>
