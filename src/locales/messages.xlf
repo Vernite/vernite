@@ -1777,15 +1777,15 @@
           <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7152796299173926576" datatype="html">
-        <source>You are not connected to any GitHub account. You need to connect to GitHub first.</source>
+      <trans-unit id="8944823571116480777" datatype="html">
+        <source>In order to proceed, you&apos;ll need to connect your GitHub account first.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/modules/integration-modules/components/integration-github/integration-github.component.html</context>
           <context context-type="linenumber">8,9</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3954301185930797306" datatype="html">
-        <source>Note: You need to authorize repositories to be able to use them in your integrations.</source>
+      <trans-unit id="6243584873278926248" datatype="html">
+        <source>Note: To use your repositories in our integrations, you&apos;ll need to authorize them first.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/modules/integration-modules/components/integration-github/integration-github.component.html</context>
           <context context-type="linenumber">11,12</context>
