@@ -1,20 +1,20 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LandingPageComponent } from './landing-page.component';
+import { LandingPageDocsPage } from './landing-page-docs.page';
 
-describe('LandingPageComponent', () => {
-  let component: LandingPageComponent;
-  let fixture: ComponentFixture<LandingPageComponent>;
+describe('LandingPageDocsPage', () => {
+  let component: LandingPageDocsPage;
+  let fixture: ComponentFixture<LandingPageDocsPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LandingPageComponent],
+      declarations: [LandingPageDocsPage],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LandingPageComponent);
+    fixture = TestBed.createComponent(LandingPageDocsPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
