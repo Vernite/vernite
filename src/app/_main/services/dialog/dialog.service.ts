@@ -57,7 +57,7 @@ export class DialogService {
           `${options.outlet} is not assigned to any dialog outlet component, you need to call registerOutlet()`,
         );
 
-      dialog = outletComponent.renderDialog(component, data);
+      dialog = outletComponent.renderDialog(component, data, options);
     } else {
       dialog = this.matDialog.open(component, {
         data,
