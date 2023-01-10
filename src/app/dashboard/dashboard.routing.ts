@@ -15,11 +15,6 @@ import { ProjectPage } from './pages/project/project.page';
  */
 const routes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
-    component: WorkspacesListPage,
-  },
-  {
     path: 'settings',
     loadChildren: () => import('../settings/settings.module').then((m) => m.SettingsModule),
   },

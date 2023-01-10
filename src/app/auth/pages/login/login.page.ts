@@ -45,7 +45,7 @@ export class LoginPage implements OnInit {
       if (!isLoggedIn) return;
 
       localStorage.setItem('logged', 'true');
-      this.router.navigate(['/']);
+      this.router.navigate(['/dashboard']);
     });
   }
 
@@ -75,7 +75,7 @@ export class LoginPage implements OnInit {
           if (response.deleted) {
             this.router.navigate(['/auth/restore-account']);
           } else {
-            this.router.navigate(['/']);
+            this.router.navigate(['/dashboard']);
           }
         });
     }
@@ -89,7 +89,7 @@ export class LoginPage implements OnInit {
     switch (error.status) {
       case 403:
         this.error = $localize`User is already logged`;
-        this.router.navigate(['/']);
+        this.router.navigate(['/dashboard']);
         break;
       case 404:
         this.error = $localize`Wrong username or password`;

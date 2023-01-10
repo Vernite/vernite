@@ -20,34 +20,52 @@ const routes: Routes = [
     component: PrivacyPolicyPage,
   },
   {
-    path: 'landing-page',
-    // TODO: Move this to lazy loading module
+    path: 'about',
+    component: LandingPageComponent,
+  },
+  {
+    path: 'changelog',
+    component: LandingPageComponent,
+  },
+  {
+    path: 'docs',
     component: LandingPageComponent,
   },
   {
     path: '',
-    component: MainViewComponent,
-    canActivate: [LoggedInUsersGuard],
     children: [
       {
-        path: 'email',
-        loadChildren: () => import('./emails/emails.module').then((m) => m.EmailsModule),
-      },
-      {
-        path: 'calendar',
-        loadChildren: () => import('./calendar/calendar.module').then((m) => m.CalendarModule),
-      },
-      {
-        path: 'messages',
-        loadChildren: () => import('./messages/messages.module').then((m) => m.MessagesModule),
-      },
-      {
-        path: 'meetings',
-        loadChildren: () => import('./meetings/meetings.module').then((m) => m.MeetingsModule),
+        path: '',
+        pathMatch: 'full',
+        component: LandingPageComponent,
       },
       {
         path: '',
-        loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+        component: MainViewComponent,
+        canActivate: [LoggedInUsersGuard],
+        children: [
+          {
+            path: 'email',
+            loadChildren: () => import('./emails/emails.module').then((m) => m.EmailsModule),
+          },
+          {
+            path: 'calendar',
+            loadChildren: () => import('./calendar/calendar.module').then((m) => m.CalendarModule),
+          },
+          {
+            path: 'messages',
+            loadChildren: () => import('./messages/messages.module').then((m) => m.MessagesModule),
+          },
+          {
+            path: 'meetings',
+            loadChildren: () => import('./meetings/meetings.module').then((m) => m.MeetingsModule),
+          },
+          {
+            path: '',
+            loadChildren: () =>
+              import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+          },
+        ],
       },
     ],
   },

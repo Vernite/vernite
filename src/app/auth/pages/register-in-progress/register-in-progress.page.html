@@ -1,0 +1,23 @@
+<section class="main">
+  <section class="box">
+    <section class="form-side">
+      <div class="logo" routerLink="/"></div>
+      <div class="container">
+        <div>
+          <h1 class="text-2xl font-bold" i18n>Your registration was successful!</h1>
+          <h2 class="text-xl" i18n>Please check your email for a confirmation link and click it within the next 30 minutes to complete the registration process.</h2>
+        </div>
+        <div class="buttons">
+          <a class="navigate-button" routerLink="/auth/login">
+            <app-icon [icon]="faChevronLeft" size="10px"></app-icon>
+            <span i18n>Go to login page</span>
+          </a>
+          <a class="navigate-button" routerLink="/">
+            <span i18n>Go to landing page</span>
+            <app-icon [icon]="faChevronRight" size="10px"></app-icon>
+          </a>
+        </div>
+      </div>
+    </section>
+  </section>
+</section>
