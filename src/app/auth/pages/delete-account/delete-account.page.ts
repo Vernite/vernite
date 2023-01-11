@@ -28,7 +28,7 @@ export class DeleteAccountPage implements OnInit {
    */
   deleteAccount(token: string) {
     if (token) {
-      this.authService.deleteAccountConfirmation(token).subscribe(() => {});
+      this.authService.deleteAccount(token).subscribe(() => {});
     }
   }
 }

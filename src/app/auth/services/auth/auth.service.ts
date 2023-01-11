@@ -1,13 +1,16 @@
 import { Injectable, Injector } from '@angular/core';
 import { Service } from '@main/decorators/service/service.decorator';
 import dayjs from 'dayjs';
-import { tap, Observable, switchMap, catchError, map, of } from 'rxjs';
+import { tap, Observable, switchMap, catchError, map, of, EMPTY } from 'rxjs';
 import { ApiService } from '@main/services/api/api.service';
 import { BaseService } from '@main/services/base/base.service';
 import { Errors } from '@main/interfaces/http-error.interface';
 import { User } from '../../interfaces/user.interface';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { ProtoService } from '@main/services/proto/proto.service';
+import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
+import { DialogService } from '@main/services/dialog/dialog.service';
+import { ChangePasswordDialog } from 'src/app/settings/dialog/change-password/change-password.dialog';
 
 /**
  * Authentication service
@@ -28,6 +31,7 @@ export class AuthService extends BaseService<Errors<'INVALID_TOKEN'>> {
     private apiService: ApiService,
     private recaptchaV3Service: ReCaptchaV3Service,
     private protoService: ProtoService,
+    private dialogService: DialogService,
   ) {
     super(injector);
   }
@@ -116,16 +120,48 @@ export class AuthService extends BaseService<Errors<'INVALID_TOKEN'>> {
    * @param password new password
    * @returns set new password response
    */
-  public setNewPassword(token: string, password: string) {
+  public setNewPasswordFromToken(token: string, password: string) {
     return this.apiService.post(`/auth/password/reset`, { body: { token, password } });
+  }
+
+  public changePassword(oldPassword: string, newPassword: string) {
+    return this.apiService.post(`/auth/password/change`, { body: { oldPassword, newPassword } });
+  }
+
+  public openChangePasswordDialog() {
+    return this.dialogService.open(ChangePasswordDialog, {}).afterClosed();
   }
 
   /**
    * Delete account
    * @returns delete account response
    */
-  public deleteAccount() {
+  public sendEmailToDeleteAccount() {
     return this.apiService.delete(`/auth/delete`);
+  }
+
+  /**
+   * Delete account with confirmation
+   */
+  public deleteAccountWithConfirmation(): Observable<void> {
+    return this.dialogService
+      .confirm({
+        title: $localize`Delete account`,
+        message: $localize`Upon proceeding, an email with a deletion link will be send to your email account. To delete account you will need to click given link. Are you sure you want to proceed with deleting your account? Please note that this action will log you out.`,
+        confirmText: $localize`Delete`,
+        cancelText: $localize`Cancel`,
+        variant: AlertDialogVariant.IMPORTANT,
+      })
+      .pipe(
+        switchMap((confirmed) => {
+          if (!confirmed) return EMPTY;
+          return this.sendEmailToDeleteAccount().pipe(
+            switchMap(() => {
+              return this.logout();
+            }),
+          );
+        }),
+      );
   }
 
   /**
@@ -133,7 +169,7 @@ export class AuthService extends BaseService<Errors<'INVALID_TOKEN'>> {
    * @param token delete account token received by email
    * @returns delete account confirmation response
    */
-  public deleteAccountConfirmation(token: string) {
+  public deleteAccount(token: string) {
     return this.apiService.delete(`/auth/delete/confirm`, { body: { token } }).pipe(
       this.validate({
         403: 'INVALID_TOKEN',
