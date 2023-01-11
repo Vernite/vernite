@@ -3,7 +3,7 @@ import { expectToFail, expectToPass } from '@tests/helpers/validator-testing.hel
 import { lengthValidator } from './length.validator';
 
 describe('Test length limit validator', () => {
-  const validator = lengthValidator(1, 50);
+  const validator = lengthValidator(3, 50);
 
   it('should pass', () => {
     const control = new FormControl('a0123456789');
@@ -11,17 +11,22 @@ describe('Test length limit validator', () => {
   });
 
   it('should pass', () => {
-    const control = new FormControl('1');
+    const control = new FormControl('abc');
+    expectToPass(validator(control));
+  });
+
+  it('should pass', () => {
+    const control = new FormControl('');
     expectToPass(validator(control));
   });
 
   it('should not pass', () => {
-    const control = new FormControl('012345678901234567890123456789012345678901234567890');
+    const control = new FormControl('a');
     expectToFail(validator(control));
   });
 
   it('should not pass', () => {
-    const control = new FormControl('');
+    const control = new FormControl('012345678901234567890123456789012345678901234567890');
     expectToFail(validator(control));
   });
 });
