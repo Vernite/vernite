@@ -18,9 +18,9 @@ export class SettingsLocalizationPage implements OnInit {
   /** Form to change localization settings */
   public form = new FormGroup({
     language: new FormControl('', requiredValidator()),
-    dateFormat: new FormControl(''),
-    timeFormat: new FormControl(''),
-    firstDayOfWeek: new FormControl(0),
+    dateFormat: new FormControl('', requiredValidator()),
+    timeFormat: new FormControl('', requiredValidator()),
+    firstDayOfWeek: new FormControl(0, requiredValidator()),
   });
 
   /**

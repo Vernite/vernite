@@ -7,6 +7,9 @@ import { EMPTY, map, Observable, shareReplay, BehaviorSubject, tap } from 'rxjs'
 import { SlackIntegrationService } from '@messages/services/slack-integration.service';
 import { SlackChannel } from '../../interfaces/slack.interface';
 import { memoize } from 'lodash-es';
+import { notEmptyValidator } from '@main/validators/not-empty.validator';
+import { requiredValidator } from '@main/validators/required.validator';
+import { validateForm } from '@main/classes/form.class';
 
 /**
  * Conversation page component
@@ -22,7 +25,7 @@ export class ConversationPage implements OnInit {
 
   /** Message form group */
   public form = new FormGroup({
-    message: new FormControl(''),
+    message: new FormControl('', [requiredValidator(), notEmptyValidator()]),
   });
 
   /** Id of the integration */
@@ -85,6 +88,8 @@ export class ConversationPage implements OnInit {
    * Send message
    */
   sendMessage() {
+    if (!validateForm(this.form)) return;
+
     this.channel$.subscribe((channel) => {
       this.slackIntegrationService.sendMessage(
         this.form.value.message,

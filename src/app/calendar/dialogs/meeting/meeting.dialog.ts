@@ -11,6 +11,9 @@ import { MemberService } from '@dashboard/services/member/member.service';
 import { UserService } from '@auth/services/user/user.service';
 import { Loader } from '../../../_main/classes/loader/loader.class';
 import { withLoader } from '@main/operators/loader.operator';
+import { maxLengthValidator } from '@main/validators/max-length.validator';
+import { lengthValidator } from '@main/validators/length.validator';
+import { notEmptyValidator } from '@main/validators/not-empty.validator';
 
 /** Meeting dialog variant */
 export enum MeetingDialogVariant {
@@ -51,9 +54,16 @@ export class MeetingDialog implements OnInit {
   public form = new FormGroup({
     id: new FormControl<number | null>(null),
     projectId: new FormControl<number | null>(null, [requiredValidator()]),
-    name: new FormControl<string | null>('', [requiredValidator()]),
-    location: new FormControl<string | null>(''),
-    description: new FormControl<string | null>(''),
+    name: new FormControl<string | null>('', [
+      requiredValidator(),
+      lengthValidator(1, 50),
+      notEmptyValidator(),
+    ]),
+    description: new FormControl<string | null>('', [
+      maxLengthValidator(1000),
+      notEmptyValidator(),
+    ]),
+    location: new FormControl<string | null>('', [maxLengthValidator(1000)]),
     startDate: new FormControl<unixTimestamp | null>(null, [requiredValidator()]),
     endDate: new FormControl<unixTimestamp | null>(null, [requiredValidator()]),
     participantIds: new FormControl<number[] | null>(null),

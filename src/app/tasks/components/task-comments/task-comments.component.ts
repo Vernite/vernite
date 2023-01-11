@@ -4,6 +4,8 @@ import { FormGroup, FormControl } from '@ngneat/reactive-forms';
 import { requiredValidator } from '../../../_main/validators/required.validator';
 import { EMPTY, Observable } from 'rxjs';
 import { Comment } from '../../interfaces/comment.interface';
+import { lengthValidator } from '@main/validators/length.validator';
+import { notEmptyValidator } from '@main/validators/not-empty.validator';
 
 /**
  * Component to display comments for task
@@ -25,7 +27,11 @@ export class TaskCommentsComponent implements OnInit {
 
   /** Form to create new comment */
   public form = new FormGroup({
-    content: new FormControl('', [requiredValidator()]),
+    content: new FormControl('', [
+      requiredValidator(),
+      lengthValidator(1, 1000),
+      notEmptyValidator(),
+    ]),
   });
 
   constructor(private commentService: CommentService) {}

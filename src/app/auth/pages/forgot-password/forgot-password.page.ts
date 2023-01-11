@@ -5,6 +5,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { requiredValidator } from '@main/validators/required.validator';
 import { Subscription } from 'rxjs';
 import { AuthService } from '@auth/services/auth/auth.service';
+import { emailValidator } from '@main/validators/email.validator';
 
 /**
  * Forgot password page component
@@ -30,7 +31,7 @@ export class ForgotPasswordPage {
    * Form group for reset password.
    */
   public form = new FormGroup({
-    email: new FormControl('', [requiredValidator()], []),
+    email: new FormControl('', [requiredValidator(), emailValidator()]),
   });
 
   /**

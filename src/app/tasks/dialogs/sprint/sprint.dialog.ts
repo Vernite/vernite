@@ -14,6 +14,8 @@ import { unixTimestamp } from '../../../_main/interfaces/date.interface';
 import { Sprint } from '@tasks/interfaces/sprint.interface';
 import { ProjectService } from '@dashboard/services/project/project.service';
 import { SprintStatus } from '@tasks/enums/sprint-status.enum';
+import { lengthValidator } from '@main/validators/length.validator';
+import { notEmptyValidator } from '@main/validators/not-empty.validator';
 
 /**
  * Sprint dialog variant: create or edit
@@ -54,7 +56,11 @@ export class SprintDialog implements OnInit {
   /** Sprint editing or creation form */
   public form = new FormGroup({
     id: new FormControl<number | null>(null),
-    name: new FormControl<string>('', [requiredValidator()]),
+    name: new FormControl<string>('', [
+      requiredValidator(),
+      lengthValidator(1, 50),
+      notEmptyValidator(),
+    ]),
     projectId: new FormControl<number | null>(null, [requiredValidator()]),
     description: new FormControl<string>(''),
     startDate: new FormControl<unixTimestamp | null>(null, [requiredValidator()]),

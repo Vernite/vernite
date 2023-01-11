@@ -13,6 +13,7 @@ import { omit } from 'lodash-es';
 import { ApiFile } from '@main/interfaces/api-file.interface';
 import { isApiFile } from '@main/util/is-api-file/is-api-file.util';
 import { ProjectForm } from '../../interfaces/project-form.interface';
+import { lengthValidator } from '@main/validators/length.validator';
 
 /**
  * Project form general component
@@ -42,9 +43,9 @@ export class ProjectFormGeneralComponent implements OnInit, ProjectForm {
     name: new FormControl<string>('', [
       requiredValidator(),
       notEmptyValidator(),
-      maxLengthValidator(50),
+      lengthValidator(1, 50),
     ]),
-    description: new FormControl<string>(''),
+    description: new FormControl<string>('', [maxLengthValidator(1000)]),
     logo: new FormControl<File | ApiFile | undefined>(undefined),
   });
 

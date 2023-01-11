@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
-import { maxLengthValidator } from '@main/validators/max-length.validator';
 import { Observable, Subscription } from 'rxjs';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { WorkspaceService } from '../../services/workspace/workspace.service';
+import { lengthValidator } from '@main/validators/length.validator';
+import { notEmptyValidator } from '@main/validators/not-empty.validator';
 
 /**
  * Edit workspace page component.
@@ -20,7 +21,7 @@ export class EditWorkspacePage {
    * Form group for the workspace editing.
    */
   public form = new FormGroup({
-    name: new FormControl('', [requiredValidator(), maxLengthValidator(50)], []),
+    name: new FormControl('', [requiredValidator(), lengthValidator(1, 50), notEmptyValidator()]),
     id: new FormControl(-1),
   });
 

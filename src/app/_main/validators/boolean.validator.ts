@@ -2,15 +2,15 @@ import { AbstractControl, ValidatorFn } from '@angular/forms';
 import { ValidationError } from '../interfaces/validation-error.interface';
 
 /**
- * Validator to check if the length is not lesser than specyfic number
+ * Validator to check if the variable is a boolean
  * @returns {ValidatorFn}
  */
-export function minLengthValidator(length: number): ValidatorFn {
+export function booleanValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationError | null => {
-    if (control.value.length < length) {
+    if (control.value !== true && control.value !== false) {
       return {
-        type: 'min-length',
-        message: $localize`Length should not be lesser than ${length}`,
+        type: 'boolean',
+        message: $localize`It should be a boolean`,
       };
     }
     return null;
