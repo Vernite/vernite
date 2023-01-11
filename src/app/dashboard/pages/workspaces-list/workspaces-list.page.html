@@ -7,12 +7,8 @@
 <ng-container *ngIf="!(workspaces$ | async)?.length && !loader.pending">
   <div class="empty">
     <div class="content">
-      <h2 i18n>
-        No Workspaces found
-      </h2>
-      <p i18n>
-        It looks like you don't have any workspaces yet. To create a new workspace click on the button below.
-      </p>
+      <h2 i18n>No workspaces found</h2>
+      <p i18n>It looks like you don't have any workspaces yet. To create a new workspace click on the button below.</p>
       <app-button type="button" variant="primary" routerLink="/workspaces/create" i18n>Create workspace</app-button>
     </div>
   </div>
@@ -22,8 +18,7 @@
   <!-- Page header -->
   <section class="flex justify-between items-center">
     <h2 class="text-xl font-bold" i18n>Workspaces</h2>
-    <app-button variant="primary" [routerLink]="['/', 'workspaces', 'create']" [icon]="faPlus" i18n>New
-      workspace</app-button>
+    <app-button variant="primary" [routerLink]="['/', 'workspaces', 'create']" [icon]="faPlus" i18n>New workspace</app-button>
   </section>
 
   <!-- Table -->

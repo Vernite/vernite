@@ -3459,6 +3459,212 @@
           <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="4106609339020587365" datatype="html">
+        <source>Password changed successfully!</source>
+        <target state="translated">Hasło zostało zmienione pomyślnie!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/dialog/change-password/change-password.dialog.ts</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8174919026012824751" datatype="html">
+        <source>Repeat new password</source>
+        <target state="translated">Powtórz nowe hasło</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/dialog/change-password/change-password.dialog.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3588415639242079458" datatype="html">
+        <source>New password</source>
+        <target state="translated">Nowe hasło</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/dialog/change-password/change-password.dialog.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5340498030552368470" datatype="html">
+        <source>Current password</source>
+        <target state="translated">Aktualne hasło</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/dialog/change-password/change-password.dialog.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7783914774924915188" datatype="html">
+        <source>Go to Settings</source>
+        <target state="translated">Przejdź do ustawień</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/messages/pages/messages-no-integration/messages-no-integration.page.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4626691080856841707" datatype="html">
+        <source>Messages module require Slack integration to work. To connect your account with Slack you need to add it in settings page.</source>
+        <target state="translated">Moduł wiadomości wymaga do działania integracji ze Slackiem. Aby połączyć swoje konto ze Slackiem, trzeba zintegrować je w ustawieniach.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/messages/pages/messages-no-integration/messages-no-integration.page.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8510010920962635535" datatype="html">
+        <source>No Slack integration found</source>
+        <target state="translated">Nie znaleziono integracji ze Slackiem</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/messages/pages/messages-no-integration/messages-no-integration.page.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7742018872696898961" datatype="html">
+        <source>Current password is incorrect.</source>
+        <target state="translated">Aktualne hasło jest nieprawidłowe.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/dialog/change-password/change-password.dialog.ts</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4793742345938783904" datatype="html">
+        <source>It looks like you don&apos;t have any workspaces yet. To create a new workspace click on the button below.</source>
+        <target state="translated">Wygląda na to, że nie masz jeszcze żadnych przestrzeni pracy. Aby utworzyć nową przestrzeń pracy, kliknij przycisk poniżej.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3088974227232952510" datatype="html">
+        <source>It looks like you don&apos;t have any projects in this workspace. To create a new project click on the button below.</source>
+        <target state="translated">Wygląda na to, że nie masz żadnych projektów w tej przestrzeni pracy. Aby dodać nowy projekt, kliknij przycisk poniżej.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4536683624033105698" datatype="html">
+        <source>No workspaces found</source>
+        <target state="translated">Nie znaleziono przestrzeni pracy</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/workspaces-list/workspaces-list.page.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4834468293638623933" datatype="html">
+        <source>No Slack integration found</source>
+        <target state="translated">Nie znaleziono integracji ze Slackiem</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/messages/pages/messages-no-integration/messages-no-integration.page.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5511080430936870510" datatype="html">
+        <source>Messages module require Slack integration to work. To connect your account with Slack you need to add it in settings page.</source>
+        <target state="translated">Moduł wiadomości wymaga do działania integracji ze Slackiem. Aby połączyć swoje konto ze Slackiem, trzeba zintegrować je w ustawieniach.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/messages/pages/messages-no-integration/messages-no-integration.page.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8949368183634013537" datatype="html">
+        <source>No projects found</source>
+        <target state="translated">Nie znaleziono projektów</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/projects-list/projects-list.page.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9161470346270233124" datatype="html">
+        <source>GitHub connection success</source>
+        <target state="translated">Połączenie z Github zakończyło się z powodzeniem</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/pages/github-integration/github-integration.page.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2713372386882434046" datatype="html">
+        <source>No tasks have been assigned to you at the moment. Feel free to check back later to see if any new tasks have been added.</source>
+        <target state="translated">W tej chwili nie przydzielono Ci żadnych zadań. Możesz sprawdzić później, czy nie zostały dodane nowe zadania.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/modules/widgets/components/widget-tasks/widget-tasks.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="442024177654997903" datatype="html">
+        <source>Tasks assigned to you</source>
+        <target state="translated">Zadania przypisane do Ciebie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/modules/widgets/components/widget-tasks/widget-tasks.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1845610180500330241" datatype="html">
+        <source>Upon proceeding, an email with a deletion link will be send to your email account. To delete account you will need to click given link. Are you sure you want to proceed with deleting your account? Please note that this action will log you out.</source>
+        <target state="translated">Po przejściu dalej, zostanie wysłana na Twoje konto e-mail, wiadomość z linkiem do usunięcia konta. Aby usunąć konto, musisz kliknąć podany link. Czy na pewno chcesz kontynuować usuwanie konta? Zwóć uwagę, że ta czynność spowoduje wylogowanie.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/services/auth/auth.service.ts</context>
+          <context context-type="linenumber">150</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6014998502450698703" datatype="html">
+        <source>Unknown</source>
+        <target state="translated">Nieznany</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/modules/audit-log/pipes/audit-log-project-entries/audit-log-project-entries.pipe.ts</context>
+          <context context-type="linenumber">156</context>
+        </context-group>
+        <note priority="1" from="description">ctx. Changed assignee from unknown user to someone else</note>
+        <note priority="1" from="meaning">unknown user</note>
+      </trans-unit>
+      <trans-unit id="6887217976194118647" datatype="html">
+        <source>It should be a boolean</source>
+        <target state="translated">To powinan być wartość logiczna</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/validators/boolean.validator.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2214710726089159734" datatype="html">
+        <source>Length should not be lesser than <x id="PH" equiv-text="min_length"/></source>
+        <target state="translated">Długość nie powinna być mniejsza niż <x id="PH" equiv-text="min_length"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/validators/length.validator.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4399119669761168901" datatype="html">
+        <source>Number should not be negative</source>
+        <target state="translated">Liczba nie powinna być ujemna</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/validators/not-negative-number.validator.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6430186931625112983" datatype="html">
+        <source>Given passwords are not the same</source>
+        <target state="translated">Dane hasła nie są takie same</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/register/register.page.ts</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/dialog/change-password/change-password.dialog.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4627971026179779078" datatype="html">
+        <source>This field requires a non-whitespace value</source>
+        <target state="translated">To pole wymaga wartości innej niż znaki białe</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/_main/validators/not-empty.validator.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1928215924830096701" datatype="html">
+        <source>No updates were made to any of your projects.</source>
+        <target state="translated">Żaden z Twoich projektów nie został zaktualizowany.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/modules/widgets/components/widget-audit-log/widget-audit-log.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>
