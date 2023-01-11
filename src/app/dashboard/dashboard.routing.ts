@@ -9,6 +9,7 @@ import { ProjectsListPage } from './pages/projects-list/projects-list.page';
 import { WorkspacesListPage } from './pages/workspaces-list/workspaces-list.page';
 import { CreateProjectPage } from './pages/create-project/create-project.page';
 import { ProjectPage } from './pages/project/project.page';
+import { DashboardPage } from './pages/dashboard/dashboard.page';
 
 /**
  * Dashboard routes list
@@ -27,10 +28,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: MockPage,
-    data: {
-      image: 'assets/mocks/dashboard.svg',
-    },
+    component: DashboardPage,
   },
 
   // Workspaces sub route

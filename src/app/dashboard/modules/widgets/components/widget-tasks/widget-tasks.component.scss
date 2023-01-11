@@ -1,0 +1,18 @@
+.project {
+  padding: 1rem;
+  background-color: var(--color-secondary-800);
+  border-radius: var(--border-radius);
+
+  p {
+    padding-bottom: 1rem;
+  }
+}
+
+.loader,
+.empty {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  background-color: var(--color-secondary-800);
+  border-radius: var(--border-radius);
+}

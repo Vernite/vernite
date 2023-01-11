@@ -1,0 +1,15 @@
+<widget-header>
+  <p class="text-title" i18n>Changelog</p>
+</widget-header>
+<widget-content>
+  <section *ngFor="let group of projects$ | async" class="project">
+    <p class="text-title">{{ group.project.name }}</p>
+    <audit-log [auditLogs]="group.auditLog" [noScroll]="true"></audit-log>
+  </section>
+  <section *ngIf="!(projects$ | async)?.length && !loader.pending" class="empty">
+    <p class="text-base" i18n>No updates were made to any of your projects during the audited period.</p>
+  </section>
+  <section *ngIf="loader.pending" class="loader">
+    <loader size="2rem"></loader>
+  </section>
+</widget-content>

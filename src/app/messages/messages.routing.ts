@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ConversationPage } from './pages/conversation/conversation.page';
 import { MessengerSummaryPage } from './pages/messenger-summary/messenger-summary.page';
 import { MessengerPage } from './pages/messenger/messenger.page';
+import { MessagesNoIntegration } from './pages/messages-no-integration/messages-no-integration.page';
 
 /**
  * Messages routes list
@@ -16,6 +17,10 @@ const routes: Routes = [
         path: '',
         pathMatch: 'full',
         component: MessengerSummaryPage,
+      },
+      {
+        path: 'no-integration',
+        component: MessagesNoIntegration,
       },
       {
         path: ':integrationId/:channelId',

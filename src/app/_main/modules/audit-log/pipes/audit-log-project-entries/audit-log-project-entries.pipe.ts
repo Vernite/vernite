@@ -148,12 +148,20 @@ export class AuditLogProjectEntriesPipe implements PipeTransform {
                       case 'assigneeId':
                         return {
                           label: $localize`assignee`,
-                          oldValue: members.find(
-                            (member) => member.user.id === auditLog.oldValues?.assigneeId,
-                          )?.user.name,
-                          newValue: members.find(
-                            (member) => member.user.id === auditLog.newValues?.assigneeId,
-                          )?.user.name,
+                          oldValue: (() => {
+                            const member = members.find(
+                              (member) => member.user.id === auditLog.oldValues?.assigneeId,
+                            );
+                            if (!member)
+                              return $localize`:unknown user|ctx. Changed assignee from unknown user to someone else:Unknown`;
+                            return `${member?.user.name} ${member?.user.surname}`;
+                          })(),
+                          newValue: (() => {
+                            const member = members.find(
+                              (member) => member.user.id === auditLog.newValues?.assigneeId,
+                            );
+                            return `${member?.user.name} ${member?.user.surname}`;
+                          })(),
                         };
                       case 'sprintId':
                         return {

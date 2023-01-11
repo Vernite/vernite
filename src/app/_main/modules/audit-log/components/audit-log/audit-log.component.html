@@ -1,4 +1,9 @@
-<cdk-virtual-scroll-viewport autosize class="grow">
-  <audit-log-entry *cdkVirtualFor="let auditLog of auditLogs; trackBy: trackByAuditLog"
-    [auditLog]="auditLog"></audit-log-entry>
-</cdk-virtual-scroll-viewport>
+<ng-container *ngIf="!noScroll; else noScroll">
+  <cdk-virtual-scroll-viewport autosize class="grow">
+    <audit-log-entry *cdkVirtualFor="let auditLog of auditLogs; trackBy: trackByAuditLog"
+      [auditLog]="auditLog"></audit-log-entry>
+  </cdk-virtual-scroll-viewport>
+</ng-container>
+<ng-template #noScroll>
+  <audit-log-entry *ngFor="let auditLog of auditLogs; trackBy: trackByAuditLog" [auditLog]="auditLog"></audit-log-entry>
+</ng-template>

@@ -1,0 +1,17 @@
+<widget-header>
+  <p class="text-title" i18n>Tasks assigned to you</p>
+</widget-header>
+<widget-content>
+  <section *ngFor="let group of projects$ | async" class="project">
+    <p class="text-title">{{ group.project.name }}</p>
+    <task-list [projectId]="group.project.id" [members]="group.members" [statusList]="group.statuses"
+      [columns]="columns" [tasks]="group.tasks" [pageSize]="10"></task-list>
+  </section>
+  <section *ngIf="!(projects$ | async)?.length && !loader.pending" class="empty">
+    <p class="text-base" i18n>No tasks have been assigned to you at the moment. Feel free to check back later to see if
+      any new tasks have been added.</p>
+  </section>
+  <section *ngIf="loader.pending" class="loader">
+    <loader size="2rem"></loader>
+  </section>
+</widget-content>

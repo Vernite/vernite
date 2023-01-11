@@ -23,6 +23,8 @@ export class TaskRowComponent implements AfterViewInit {
   /** Task to display */
   @Input() task!: Task;
 
+  @Input() columns: Set<string> = new Set();
+
   /** Id of the project */
   @Input() projectId!: number;
 

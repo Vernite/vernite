@@ -2,12 +2,12 @@
 
   <!-- Header -->
   <div class="header-row">
-    <div class="header-cell w-full" i18n>Title</div>
-    <div class="header-cell w-52" i18n>Status</div>
-    <div class="header-cell w-40" i18n>Assignee</div>
-    <div class="header-cell w-52" i18n>Time tracking</div>
-    <div class="header-cell w-52" i18n>Deadline</div>
-    <div class="header-cell w-40" i18n>Story points</div>
+    <div *ngIf="columns.has('title')" class="header-cell w-full" i18n>Title</div>
+    <div *ngIf="columns.has('status')" class="header-cell w-52" i18n>Status</div>
+    <div *ngIf="columns.has('assignee')" class="header-cell w-40" i18n>Assignee</div>
+    <div *ngIf="columns.has('time-tracking')" class="header-cell w-52" i18n>Time tracking</div>
+    <div *ngIf="columns.has('deadline')" class="header-cell w-52" i18n>Deadline</div>
+    <div *ngIf="columns.has('story-points')" class="header-cell w-40" i18n>Story points</div>
     <div class="header-cell action">
       <!-- Actions -->
     </div>
@@ -16,7 +16,7 @@
   <!-- Body -->
   <div class="body">
     <task-row *ngFor="let task of visibleTasks; trackBy: trackByTask" [task]="task" [projectId]="projectId"
-      [members]="members" [statusList]="statusList"></task-row>
+      [members]="members" [statusList]="statusList" [columns]="columns"></task-row>
     <button *ngIf="visibleTasks.length < tasks.length" class="show-more" (click)="increaseLimit()">
       <app-icon size="16px" [icon]="faPlus"></app-icon>
       <span class="text-base" i18n>Show more</span>

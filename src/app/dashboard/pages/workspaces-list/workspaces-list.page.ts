@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
 import { Router } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { Observable } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 import { Page } from '@main/decorators/page/page.decorator';
 import { DialogService } from '@main/services/dialog/dialog.service';
 import { Workspace } from '../../interfaces/workspace.interface';
 import { ProjectService } from '../../services/project/project.service';
 import { WorkspaceService } from '../../services/workspace/workspace.service';
+import { Loader } from '../../../_main/classes/loader/loader.class';
+import { withLoader, startLoader, stopLoader } from '../../../_main/operators/loader.operator';
 
 /**
  * Workspaces list page component.
@@ -26,14 +28,11 @@ export class WorkspacesListPage implements OnInit {
    */
   constructor(
     private workspaceService: WorkspaceService,
-    private projectService: ProjectService,
     private dialogService: DialogService,
     private router: Router,
   ) {}
 
-  /**
-   * Plus icon to display on the add button
-   */
+  /** @ignore */
   public faPlus = faPlus;
 
   /**
@@ -41,9 +40,8 @@ export class WorkspacesListPage implements OnInit {
    */
   public workspaces$?: Observable<Workspace[]>;
 
-  /**
-   * Lifecycle hook to load workspaces at the start of the page.
-   */
+  public loader = new Loader();
+
   ngOnInit() {
     this.loadWorkspaces();
   }
@@ -52,7 +50,12 @@ export class WorkspacesListPage implements OnInit {
    * Loads the workspaces list from the workspace service.
    */
   loadWorkspaces() {
-    this.workspaces$ = this.workspaceService.list();
+    this.loader.markAsPending();
+    this.workspaces$ = of(null).pipe(
+      startLoader(this.loader),
+      switchMap(() => this.workspaceService.list()),
+      stopLoader(this.loader),
+    );
   }
 
   /**

@@ -17,6 +17,8 @@ import { Schedule } from '@tasks/interfaces/schedule.interface';
 import { Task } from '@tasks/interfaces/task.interface';
 import * as dayjs from 'dayjs';
 import { isNumber } from 'lodash-es';
+import { ProjectService } from '../../../dashboard/services/project/project.service';
+import { forkJoin } from 'rxjs';
 import {
   BehaviorSubject,
   combineLatest,
@@ -54,6 +56,7 @@ export class TaskService extends BaseService<
     private dialogService: DialogService,
     private memberService: MemberService,
     private snackbarService: SnackbarService,
+    private projectService: ProjectService,
   ) {
     super(injector);
   }
@@ -71,6 +74,15 @@ export class TaskService extends BaseService<
       this.validate({
         404: 'PROJECT_NOT_FOUND',
       }),
+    );
+  }
+
+  public listAll(filters?: DataFilter<Task, any>[] | DataFilter<Task, any>): Observable<Task[]> {
+    return this.projectService.list().pipe(
+      switchMap((projects) => {
+        return forkJoin(projects.map((project) => this.list(project.id, filters)));
+      }),
+      map((tasks) => tasks.flat()),
     );
   }
 

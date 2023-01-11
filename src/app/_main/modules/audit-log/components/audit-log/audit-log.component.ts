@@ -9,6 +9,8 @@ import { AuditLog } from '../../interfaces/audit-log.interface';
 export class AuditLogComponent {
   @Input() auditLogs!: AuditLog<any>[];
 
+  @Input() noScroll: boolean = false;
+
   public trackByAuditLog(index: number, auditLog: AuditLog<any>) {
     return auditLog.date;
   }

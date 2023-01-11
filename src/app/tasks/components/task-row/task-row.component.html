@@ -1,7 +1,7 @@
 <div class="row" [class.expanded]="isExpanded" (click)="toggle()">
 
   <!-- Title cell -->
-  <div class="cell w-full">
+  <div *ngIf="columns.has('title')" class="cell w-full">
     <div class="title">
       <app-icon [icon]="faChevronRight" size="16px" [class.invisible]="!task.subTasks?.length"></app-icon>
       <span class="type" [style.background-color]="task.type | taskType:'color'"></span>
@@ -24,29 +24,29 @@
   </div>
 
   <!-- Status cell -->
-  <div class="cell w-52 p-0">
+  <div *ngIf="columns.has('status')" class="cell w-52 p-0">
     <app-status-label [projectId]="projectId" [taskId]="task.id" [statuses]="statusList" [statusId]="task.statusId!"
       click-stop-propagation>
     </app-status-label>
   </div>
 
   <!-- Assignee cell -->
-  <div class="cell w-40">
+  <div *ngIf="columns.has('assignee')" class="cell w-40">
     <app-assignee [assignee]="task.assigneeId && members && members.get(task.assigneeId) || null" [members]="members"
       [projectId]="projectId" [taskId]="task.id" click-stop-propagation>
     </app-assignee>
   </div>
 
   <!-- Time tracking cell -->
-  <div class="cell w-52">
+  <div *ngIf="columns.has('time-tracking')" class="cell w-52">
     <tracker [projectId]="projectId" [task]="task" click-stop-propagation></tracker>
   </div>
 
   <!-- Deadline cell -->
-  <div class="cell w-52">{{ task.deadline | dateTimeByPreferences | async }}</div>
+  <div *ngIf="columns.has('deadline')" class="cell w-52">{{ task.deadline | dateTimeByPreferences | async }}</div>
 
   <!-- Story points cell -->
-  <div class="cell w-40">
+  <div *ngIf="columns.has('story-points')" class="cell w-40">
     <pill>{{ task.storyPoints }}</pill>
   </div>
 
@@ -74,6 +74,7 @@
 <div #subtasks *ngIf="task.subTasks?.length" class="subtasks"
   [style.max-height]="isExpanded ? subtasksMaxHeight + 'px' : 0">
   <ng-container *ngFor="let subTask of task.subTasks || []; trackBy: trackByTask">
-    <task-row [task]="subTask" [projectId]="projectId" [members]="members" [statusList]="statusList"></task-row>
+    <task-row [task]="subTask" [projectId]="projectId" [members]="members" [statusList]="statusList"
+      [columns]="columns"></task-row>
   </ng-container>
 </div>

@@ -17,6 +17,15 @@ export class TaskListComponent implements OnInit, OnChanges {
   /** Tasks to display */
   @Input() tasks: Task[] = [];
 
+  @Input() columns: Set<string> = new Set([
+    'title',
+    'status',
+    'assignee',
+    'time-tracking',
+    'deadline',
+    'story-points',
+  ]);
+
   /** List of project members */
   @Input() members!: Map<number, ProjectMember>;
 
@@ -26,11 +35,13 @@ export class TaskListComponent implements OnInit, OnChanges {
   /** List of project statuses */
   @Input() statusList: Status[] = [];
 
+  @Input() pageSize = 50;
+
   /** @ignore */
   faPlus = faPlus;
 
   public visibleTasks: Task[] = [];
-  public currentLimit: number = 50;
+  public currentLimit: number = this.pageSize;
 
   constructor() {}
 
@@ -50,7 +61,7 @@ export class TaskListComponent implements OnInit, OnChanges {
   }
 
   increaseLimit() {
-    this.currentLimit += 50;
+    this.currentLimit += this.pageSize;
     this.visibleTasks = this.tasks.slice(0, this.currentLimit);
   }
 }
