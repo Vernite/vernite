@@ -44,6 +44,7 @@ export class ProjectsListPage implements OnInit {
     this.activatedRoute.params.subscribe(({ workspaceId }) => {
       this.workspaceId = workspaceId;
 
+      this.loader.markAsPending();
       this.workspace$ = this.workspaceService.get(workspaceId);
       this.projects$ = this.workspace$.pipe(
         map((workspace) => workspace.projectsWithPrivileges.map((project) => project.project)),
