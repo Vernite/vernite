@@ -8,6 +8,8 @@ import { requiredValidator } from '../../../_main/validators/required.validator'
 import { unixTimestamp } from '../../../_main/interfaces/date.interface';
 import { ProjectService } from '@dashboard/services/project/project.service';
 import { Release } from '../../interfaces/release.interface';
+import { lengthValidator } from '@main/validators/length.validator';
+import { notEmptyValidator } from '@main/validators/not-empty.validator';
 
 /** Interface to represent release dialog variant */
 export enum ReleaseDialogVariant {
@@ -44,8 +46,12 @@ export class ReleaseDialog implements OnInit {
   public form = new FormGroup({
     id: new FormControl<number | null>(null),
     projectId: new FormControl<number | null>(null, [requiredValidator()]),
-    name: new FormControl<string>('', [requiredValidator()]),
-    description: new FormControl<string>(''),
+    name: new FormControl<string>('', [
+      requiredValidator(),
+      lengthValidator(1, 50),
+      notEmptyValidator(),
+    ]),
+    description: new FormControl<string>('', [notEmptyValidator()]),
     deadline: new FormControl<unixTimestamp | null>(null, [requiredValidator()]),
   });
 

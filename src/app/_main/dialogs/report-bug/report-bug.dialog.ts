@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { validateForm } from '@main/classes/form.class';
 import { requiredValidator } from '@main/validators/required.validator';
+import { lengthValidator } from '@main/validators/length.validator';
 
 /** Report bug dialog component */
 @Component({
@@ -13,8 +14,11 @@ import { requiredValidator } from '@main/validators/required.validator';
 export class ReportBugDialog implements OnInit {
   /** Report bug dialog form */
   public form = new FormGroup({
-    title: new FormControl<string | null>('', [requiredValidator()]),
-    description: new FormControl<string | null>(''),
+    title: new FormControl<string | null>('', [requiredValidator(), lengthValidator(3, 100)]),
+    description: new FormControl<string | null>('', [
+      requiredValidator(),
+      lengthValidator(3, 1000),
+    ]),
   });
 
   constructor(private dialogRef: MatDialogRef<ReportBugDialog>) {}

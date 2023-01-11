@@ -31,16 +31,12 @@ export class ChangePasswordPage implements OnInit {
    * Form group for setting new password.
    */
   public form = new FormGroup({
-    password: new FormControl('', [requiredValidator(), passwordValidator()], []),
-    repeatPassword: new FormControl(
-      '',
-      [
-        requiredValidator(),
-        passwordValidator(),
-        sameAsValidator('password', $localize`Given passwords are not the same `),
-      ],
-      [],
-    ),
+    password: new FormControl('', [requiredValidator(), passwordValidator()]),
+    repeatPassword: new FormControl('', [
+      requiredValidator(),
+      passwordValidator(),
+      sameAsValidator('password', $localize`Given passwords are not the same `),
+    ]),
   });
 
   constructor(

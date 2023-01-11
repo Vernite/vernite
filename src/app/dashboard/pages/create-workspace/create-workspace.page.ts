@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { Router } from '@angular/router';
-import { maxLengthValidator } from '@main/validators/max-length.validator';
 import { Subscription } from 'rxjs';
 import { Page } from '@main/decorators/page/page.decorator';
 import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { WorkspaceService } from '../../services/workspace/workspace.service';
+import { lengthValidator } from '@main/validators/length.validator';
+import { notEmptyValidator } from '@main/validators/not-empty.validator';
 
 /**
  * Create workspace page component.
@@ -21,7 +22,7 @@ export class CreateWorkspacePage {
    * Form group for the workspace creation.
    */
   public form = new FormGroup({
-    name: new FormControl('', [requiredValidator(), maxLengthValidator(50)], []),
+    name: new FormControl('', [requiredValidator(), lengthValidator(1, 50), notEmptyValidator()]),
   });
 
   /**

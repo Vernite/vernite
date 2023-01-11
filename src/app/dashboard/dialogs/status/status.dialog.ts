@@ -5,6 +5,10 @@ import { requiredValidator } from '@main/validators/required.validator';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { Status } from '@tasks/interfaces/status.interface';
 import { validateForm } from '@main/classes/form.class';
+import { lengthValidator } from '@main/validators/length.validator';
+import { notEmptyValidator } from '@main/validators/not-empty.validator';
+import { booleanValidator } from '@main/validators/boolean.validator';
+import { notNegativeNumberValidator } from '@main/validators/not-negative-number.validator';
 
 /**
  * Status dialog data
@@ -29,10 +33,10 @@ export interface StatusDialogData {
 export class StatusDialog implements OnInit {
   /** Status dialog form */
   public form = new FormGroup({
-    name: new FormControl('', [requiredValidator()]),
-    begin: new FormControl(false),
-    final: new FormControl(false),
-    color: new FormControl<color>(0, [requiredValidator()]),
+    name: new FormControl('', [requiredValidator(), lengthValidator(1, 50), notEmptyValidator()]),
+    begin: new FormControl(false, [booleanValidator()]),
+    final: new FormControl(false, [booleanValidator()]),
+    color: new FormControl<color>(0, [requiredValidator(), notNegativeNumberValidator()]),
   });
 
   constructor(

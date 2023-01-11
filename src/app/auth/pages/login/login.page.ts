@@ -6,6 +6,7 @@ import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { AuthService } from '@auth/services/auth/auth.service';
 import { Loader } from '../../../_main/classes/loader/loader.class';
 import { startLoader, stopLoader } from '../../../_main/operators/loader.operator';
+import { booleanValidator } from '@main/validators/boolean.validator';
 
 /**
  * Login page component
@@ -35,9 +36,9 @@ export class LoginPage implements OnInit {
 
   /** Form group for login. */
   public form = new FormGroup({
-    email: new FormControl('', [requiredValidator()], []),
-    password: new FormControl('', [requiredValidator()], []),
-    remember: new FormControl<boolean>(false, [], []),
+    email: new FormControl('', [requiredValidator()]),
+    password: new FormControl('', [requiredValidator()]),
+    remember: new FormControl<boolean>(false, [booleanValidator()]),
   });
 
   ngOnInit() {

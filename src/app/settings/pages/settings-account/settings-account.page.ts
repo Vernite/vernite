@@ -5,6 +5,7 @@ import { UserService } from '@auth/services/user/user.service';
 import { requiredValidator } from '@main/validators/required.validator';
 import { SnackbarService } from '@main/services/snackbar/snackbar.service';
 import { Router } from '@angular/router';
+import { notEmptyValidator } from '@main/validators/not-empty.validator';
 
 /**
  * Settings account page component
@@ -25,8 +26,8 @@ export class SettingsAccountPage implements OnInit {
   /** Form to edit account data */
   public form = new FormGroup({
     email: new FormControl('', requiredValidator()),
-    name: new FormControl('', requiredValidator()),
-    surname: new FormControl('', requiredValidator()),
+    name: new FormControl('', [requiredValidator(), notEmptyValidator()]),
+    surname: new FormControl('', [requiredValidator(), notEmptyValidator()]),
     username: new FormControl('', requiredValidator()),
   });
 
