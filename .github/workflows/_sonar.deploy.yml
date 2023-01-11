@@ -25,15 +25,12 @@ jobs:
         with:
           path: dist
           key: ${{ runner.os }}-build-${{ github.run_id }}
-          restore-keys: |
-            ${{ runner.os }}-build-
 
-      # Download artifacts (coverage)
-      - name: Download artifacts (coverage)
-        uses: actions/download-artifact@v2
+      - name: Download cache (unit-tests)
+        uses: actions/cache@v2
         with:
-          name: unit-tests
           path: coverage
+          key: ${{ runner.os }}-unit-tests-${{ github.run_id }}
 
       # SonarQube scan
       - uses: sonarsource/sonarqube-scan-action@master

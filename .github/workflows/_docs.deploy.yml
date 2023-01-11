@@ -25,7 +25,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: documentation
-          key: ${{ runner.os }}-docs-build-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-docs-build-${{ github.run_id }}
 
       # Download cache (unit-tests)
       - name: Download cache (unit-tests)
@@ -40,6 +40,10 @@ jobs:
         with:
           path: documentation/audit
           key: ${{ runner.os }}-audit-build-${{ github.run_id }}
+
+      # Copy unit tests to documentation directory
+      - name: Copy unit tests to documentation directory
+        run: cp -r coverage documentation/coverage
 
       # Get app version from package.json
       - name: Get app version
