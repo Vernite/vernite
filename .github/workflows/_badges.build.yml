@@ -35,14 +35,14 @@ jobs:
         uses: actions/cache@v2
         with:
           path: documentation
-          key: ${{ runner.os }}-docs-build-${{ github.run_id }
+          key: ${{ runner.os }}-docs-build-${{ github.run_id }}
 
       # Download unit tests from cache
       - name: Download unit tests from cache
         uses: actions/cache@v2
         with:
           path: coverage
-          key: ${{ runner.os }}-unit-tests-${{ github.run_id }
+          key: ${{ runner.os }}-unit-tests-${{ github.run_id }}
 
       # Build badges
       - name: Badges build
@@ -53,5 +53,5 @@ jobs:
         uses: actions/cache@v2
         with:
           path: badges
-          key: ${{ runner.os }}-badges-build-${{ github.run_id }
+          key: ${{ runner.os }}-badges-build-${{ github.run_id }}
 

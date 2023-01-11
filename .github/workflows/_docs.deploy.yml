@@ -32,14 +32,14 @@ jobs:
         uses: actions/cache@v2
         with:
           path: coverage
-          key: ${{ runner.os }}-unit-tests-${{ github.run_id }
+          key: ${{ runner.os }}-unit-tests-${{ github.run_id }}
 
       # Download cache (audit-report)
       - name: Download cache (audit-report)
         uses: actions/cache@v2
         with:
           path: documentation/audit
-          key: ${{ runner.os }}-audit-build-${{ github.run_id }
+          key: ${{ runner.os }}-audit-build-${{ github.run_id }}
 
       # Get app version from package.json
       - name: Get app version

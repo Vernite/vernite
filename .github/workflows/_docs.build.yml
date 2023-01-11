@@ -43,5 +43,5 @@ jobs:
         uses: actions/cache@v2
         with:
           path: documentation
-          key: ${{ runner.os }}-docs-build-${{ github.run_id }
+          key: ${{ runner.os }}-docs-build-${{ github.run_id }}
 

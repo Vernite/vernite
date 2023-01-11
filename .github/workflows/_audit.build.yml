@@ -43,5 +43,5 @@ jobs:
         uses: actions/cache@v2
         with:
           path: documentation/audit
-          key: ${{ runner.os }}-audit-build-${{ github.run_id }
+          key: ${{ runner.os }}-audit-build-${{ github.run_id }}
 

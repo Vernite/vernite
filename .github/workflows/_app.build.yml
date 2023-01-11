@@ -44,4 +44,4 @@ jobs:
         uses: actions/cache@v2
         with:
           path: dist
-          key: ${{ runner.os }}-build-${{ github.run_id }
+          key: ${{ runner.os }}-build-${{ github.run_id }}
