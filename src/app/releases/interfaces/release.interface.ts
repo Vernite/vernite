@@ -22,7 +22,4 @@ export interface Release extends JSONParsable {
 
   /** Tasks attached to this release */
   tasks: Task[];
-
-  /** Project of this release */
-  project: Project;
 }

@@ -20,12 +20,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # Download artifacts
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
+      # Download cache
+      - name: Download cache
+        uses: actions/cache@v2
         with:
-          name: build-${{ inputs.configuration }}
           path: dist
+          key: ${{ runner.os }}-build-${{ hashFiles('**/yarn.lock') }}
 
       # Copy default redirect page
       - name: Redirect page copy

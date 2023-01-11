@@ -152,6 +152,7 @@ export class ProjectService extends BaseService<
    * @param projectId id of the project to get audit log for
    * @returns Observable with audit log
    */
+  @Cache()
   public auditLog(projectId: number): Observable<AuditLog<Task>[]> {
     return this.apiService.get<AuditLog<Task>[]>(`/project/${projectId}/auditlog`).pipe(
       map((auditLogs) =>

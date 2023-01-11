@@ -55,7 +55,7 @@
           <button mat-menu-item (click)="editStatus(element)">
             <span i18n>Edit status</span>
           </button>
-          <button mat-menu-item class="important">
+          <button mat-menu-item (click)="removeStatus(element)" class="important">
             <span i18n>Remove status</span>
           </button>
         </mat-menu>
@@ -66,6 +66,10 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;" class="mt-3" cdkDrag></mat-row>
   </mat-table>
 </ng-container>
+
+<div *ngIf="error" class="error-box">
+  <p i18n>{{ error }}</p>
+</div>
 
 <ng-template #mark let-value="value">
   <ng-container *ngIf="value">

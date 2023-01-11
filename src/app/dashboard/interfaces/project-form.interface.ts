@@ -10,4 +10,6 @@ export interface ProjectForm {
 
   /** Save project form */
   save(): Observable<Project>;
+
+  validate(): Observable<boolean>;
 }

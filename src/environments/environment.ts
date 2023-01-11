@@ -30,6 +30,8 @@ export const environment = {
 
   disableIntegrationRegistryCheck: false,
 
+  domain: null,
+
   /**
    * Url to the websocket server.
    */

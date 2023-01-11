@@ -32,6 +32,7 @@ export class AuditLogProjectEntriesPipe implements PipeTransform {
   ) {}
 
   transform(auditLog: AuditLog<Task>) {
+    console.log('transform', auditLog);
     if (auditLog.type === 'task') {
       const user = auditLog.user;
       const task = Object.assign(

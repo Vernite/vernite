@@ -30,28 +30,28 @@ jobs:
       - name: Install yarn
         run: npm i -g yarn
 
-      # Download artifacts
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
+      # Download docs from cache
+      - name: Download docs from cache
+        uses: actions/cache@v2
         with:
-          name: documentation
           path: documentation
+          key: ${{ runner.os }}-docs-build-${{ hashFiles('**/yarn.lock') }}
 
-      # Download artifacts
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
+      # Download unit tests from cache
+      - name: Download unit tests from cache
+        uses: actions/cache@v2
         with:
-          name: unit-tests
           path: coverage
+          key: ${{ runner.os }}-unit-tests-${{ hashFiles('**/yarn.lock') }}
 
       # Build badges
       - name: Badges build
         run: yarn badges:build
 
-      # Upload artifacts
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+      # Cache results
+      - name: Cache results
+        uses: actions/cache@v2
         with:
-          name: badges
           path: badges
+          key: ${{ runner.os }}-badges-build-${{ hashFiles('**/yarn.lock') }}
 

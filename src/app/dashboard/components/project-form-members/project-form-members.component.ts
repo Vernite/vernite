@@ -108,4 +108,8 @@ export class ProjectFormMembersComponent implements OnInit, ProjectForm {
       }),
     );
   }
+
+  validate() {
+    return of(true);
+  }
 }

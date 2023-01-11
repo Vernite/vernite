@@ -1,4 +1,4 @@
-import { Observable, share, shareReplay } from 'rxjs';
+import { Observable, share, shareReplay, EMPTY, from } from 'rxjs';
 
 /**
  * Options to modify caching behavior
@@ -28,11 +28,12 @@ export function Cache(options?: CacheOptions): MethodDecorator {
       const cache = target[cacheKey];
 
       if (cache) {
-        return cache;
+        // console.log('cache hit', target.constructor.name, cacheKey);
+        return from(cache);
       }
 
-      const result = originalMethod.apply(this, args) as Observable<any>;
-      target[cacheKey] = result.pipe(share(), shareReplay(1));
+      const result = originalMethod.apply(this, args).pipe(shareReplay(1));
+      target[cacheKey] = result;
 
       if (options && options.interval) {
         setTimeout(() => {

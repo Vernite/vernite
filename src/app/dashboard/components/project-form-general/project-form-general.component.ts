@@ -91,4 +91,8 @@ export class ProjectFormGeneralComponent implements OnInit, ProjectForm {
   save() {
     return this.saveForm().pipe(switchMap((project) => this.saveLogo(project)));
   }
+
+  validate() {
+    return of(this.form.valid);
+  }
 }

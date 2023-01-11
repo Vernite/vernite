@@ -38,10 +38,10 @@ jobs:
       - name: Audit build
         run: yarn audit:build
 
-      # Upload artifacts
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+      # Cache results
+      - name: Cache results
+        uses: actions/cache@v2
         with:
-          name: audit-report
           path: documentation/audit
+          key: ${{ runner.os }}-audit-build-${{ hashFiles('**/yarn.lock') }}
 

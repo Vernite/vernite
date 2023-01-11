@@ -11,6 +11,7 @@ import { ProtoService } from '@main/services/proto/proto.service';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 import { DialogService } from '@main/services/dialog/dialog.service';
 import { ChangePasswordDialog } from 'src/app/settings/dialog/change-password/change-password.dialog';
+import { Cache } from '../../../_main/decorators/cache/cache.decorator';
 
 /**
  * Authentication service
@@ -210,6 +211,7 @@ export class AuthService extends BaseService<Errors<'INVALID_TOKEN'>> {
    * If user is logged in
    * @returns true if user is logged in
    */
+  @Cache()
   public isLoggedIn(): Observable<boolean> {
     return this.apiService.get(`/auth/me`).pipe(
       map(() => true),

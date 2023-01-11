@@ -2,6 +2,7 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { ProjectForm } from '@dashboard/interfaces/project-form.interface';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { IntegrationModulesGridComponent } from '../integration-modules-grid/integration-modules-grid.component';
+import { of } from 'rxjs';
 
 /**
  * Project form integrations component
@@ -20,5 +21,9 @@ export class ProjectFormIntegrationsComponent implements ProjectForm {
 
   public save() {
     return this.integrationModulesGrid.saveAll();
+  }
+
+  validate() {
+    return of(true);
   }
 }

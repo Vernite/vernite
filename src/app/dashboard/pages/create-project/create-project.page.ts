@@ -11,7 +11,7 @@ import { WorkspaceService } from '@dashboard/services/workspace/workspace.servic
 import { Loader } from '@main/classes/loader/loader.class';
 import { setLoaderMessage, startLoader, stopLoader } from '@main/operators/loader.operator';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable, of, switchMap, tap } from 'rxjs';
+import { Observable, of, switchMap, tap, forkJoin, map, filter } from 'rxjs';
 import { validateForm } from '../../../_main/classes/form.class';
 
 /**
@@ -83,7 +83,7 @@ export class CreateProjectPage {
     if (validateForm(this.projectFormGeneral.form) === false) return;
 
     (
-      of(null).pipe(
+      this.validate().pipe(
         startLoader(this.loader, $localize`Saving project...`),
         switchMap(() => this.projectFormGeneral.save()),
         tap((project) => {
@@ -133,5 +133,17 @@ export class CreateProjectPage {
     if (index > 0 && index < this.stages.length) {
       this.setStage(this.stages[index - 1]);
     }
+  }
+
+  public validate() {
+    return forkJoin([
+      this.projectFormGeneral.validate(),
+      this.projectFormMembers.validate(),
+      this.projectFormStatuses.validate(),
+      this.projectFormIntegrations.validate(),
+    ]).pipe(
+      map((results) => results.every((result) => result)),
+      filter(Boolean),
+    );
   }
 }

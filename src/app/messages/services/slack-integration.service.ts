@@ -200,6 +200,11 @@ export class SlackIntegrationService extends BaseService<
     );
   }
 
+  @Cache()
+  public getMembers(slackId: number, channelId: string) {
+    return this.apiService.get(`/user/integration/slack/${slackId}/channel/${channelId}/members`);
+  }
+
   /**
    * Get slack channel details by integration id and channel id
    * @param slackId Slack integration id
@@ -207,10 +212,9 @@ export class SlackIntegrationService extends BaseService<
    * @returns Observable with slack channel
    */
   public getChannel(slackId: number, channelId: string): Observable<SlackChannel> {
-    // TODO: Move it to other endpoint for optimization
-    return this.getChannels(slackId).pipe(
-      map((channels) => channels.find((channel) => channel.id === channelId)!),
-    );
+    return this.apiService
+      .get(`/user/integration/slack/${slackId}/channel/${channelId}/info`)
+      .pipe(this.validate());
   }
 
   /**

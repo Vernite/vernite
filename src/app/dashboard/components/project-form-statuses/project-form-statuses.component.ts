@@ -28,8 +28,13 @@ export class ProjectFormStatusesComponent implements ProjectForm, OnInit {
   /** Status list */
   public statusList: Status[] = [];
 
+  /** Status list to remove */
+  public statusListToRemove: Status[] = [];
+
   /** Current status list (before save) */
   public currentStatusList: Status[] = [];
+
+  public error: string = '';
 
   /** @ignore */
   faGripLines = faGripLines;
@@ -93,6 +98,15 @@ export class ProjectFormStatusesComponent implements ProjectForm, OnInit {
         ).pipe(defaultIfEmpty([])),
       ),
 
+      // Delete all removed statuses
+      switchMap(() =>
+        forkJoin(
+          this.statusListToRemove.map((status) =>
+            this.statusService.delete(this.project!.id, status),
+          ),
+        ).pipe(defaultIfEmpty([])),
+      ),
+
       map(() => this.project!),
     ) as Observable<Project>;
   }
@@ -134,5 +148,39 @@ export class ProjectFormStatusesComponent implements ProjectForm, OnInit {
         }),
       )
       .subscribe();
+  }
+
+  public removeStatus(status: Status) {
+    this.statusList = this.statusList.filter((s) => s.ordinal !== status.ordinal);
+    this.updateOrdinals();
+
+    if (status.id) {
+      this.statusListToRemove.push(status);
+    }
+  }
+
+  public validate() {
+    this.error = '';
+
+    // Check if status list contains at least two statuses
+    if (this.statusList.length < 2) {
+      this.error = $localize`Status list must contain at least two statuses`;
+    }
+
+    // Check if status list contains at least one begin status
+    if (!this.statusList.find((status) => status.begin)) {
+      this.error = $localize`Status list must contain at least one begin status`;
+    }
+
+    // Check if status list contains at least one final status
+    if (!this.statusList.find((status) => status.final)) {
+      this.error = $localize`Status list must contain at least one final status`;
+    }
+
+    if (this.error) {
+      return of(false);
+    }
+
+    return of(true);
   }
 }

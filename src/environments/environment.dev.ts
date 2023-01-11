@@ -8,6 +8,7 @@ export const environment = {
   disableConsoleLog: false,
   version: app.version,
   disableIntegrationRegistryCheck: false,
+  domain: 'insiders.vernite.dev',
   websocketUrl: 'wss://insiders.vernite.dev/api/ws',
   logSocketMessages: false,
   captchaSiteKey: '6LcUZ8gfAAAAAGpAZpXpV1K8NO_7-rSCPD-tGtR9',

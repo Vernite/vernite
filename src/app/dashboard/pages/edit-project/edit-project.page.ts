@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, of, switchMap, forkJoin, map, filter } from 'rxjs';
 import { ProjectService } from '../../services/project/project.service';
 import { WorkspaceService } from '../../services/workspace/workspace.service';
 import { Loader } from '@main/classes/loader/loader.class';
@@ -79,7 +79,7 @@ export class EditProjectPage implements OnInit {
    */
   public submitUpdate(): void {
     (
-      of(null).pipe(
+      this.validate().pipe(
         startLoader(this.loader, $localize`Saving project...`),
         switchMap(() => this.projectFormGeneral.save()),
         setLoaderMessage(this.loader, $localize`Saving project members...`),
@@ -108,5 +108,17 @@ export class EditProjectPage implements OnInit {
    */
   public close() {
     this.router.navigate(['/', 'projects', this.projectId]);
+  }
+
+  public validate() {
+    return forkJoin([
+      this.projectFormGeneral.validate(),
+      this.projectFormMembers.validate(),
+      this.projectFormStatuses.validate(),
+      this.projectFormIntegrations.validate(),
+    ]).pipe(
+      map((results) => results.every((result) => result)),
+      filter(Boolean),
+    );
   }
 }

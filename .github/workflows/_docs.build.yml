@@ -38,12 +38,10 @@ jobs:
       - name: Docs build
         run: yarn docs:build:${{ inputs.configuration }}
 
-      # Upload artifacts
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+      # Cache results
+      - name: Cache results
+        uses: actions/cache@v2
         with:
-          name: documentation
-          path: |
-            documentation
-            documentation.json
+          path: documentation
+          key: ${{ runner.os }}-docs-build-${{ hashFiles('**/yarn.lock') }}
 

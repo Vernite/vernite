@@ -39,9 +39,9 @@ jobs:
       - name: Build ⚙️
         run: yarn build:${{ inputs.configuration }}
 
-      # Upload artifacts
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+      # Cache results
+      - name: Cache results
+        uses: actions/cache@v2
         with:
-          name: build-${{ inputs.configuration }}
           path: dist
+          key: ${{ runner.os }}-build-${{ hashFiles('**/yarn.lock') }}

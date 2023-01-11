@@ -34,10 +34,10 @@ jobs:
       - name: Unit tests
         run: yarn unit:build
 
-      # Upload artifacts
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+      # Cache results
+      - name: Cache results
+        uses: actions/cache@v2
         with:
-          name: unit-tests
           path: coverage
+          key: ${{ runner.os }}-unit-tests-${{ hashFiles('**/yarn.lock') }}
 
