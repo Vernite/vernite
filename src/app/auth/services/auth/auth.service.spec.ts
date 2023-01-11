@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 describe('Service: AuthService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
+      imports: [HttpClientModule, MatDialogModule],
       providers: [
         AuthService,
         MatDialogModule,
