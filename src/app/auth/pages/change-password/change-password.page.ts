@@ -65,7 +65,7 @@ export class ChangePasswordPage implements OnInit {
 
     if (this.form.valid && this.token) {
       this.resetSubscription = this.authService
-        .setNewPassword(this.token, this.form.value.password)
+        .setNewPasswordFromToken(this.token, this.form.value.password)
         .subscribe(() => {
           this.router.navigate(['/auth/login']);
         });
