@@ -86,7 +86,7 @@ export class ChangePasswordDialog implements OnInit {
   handleError(error: any) {
     switch (error.status) {
       case 404:
-        this.error = $localize`Old password is incorrect.`;
+        this.error = $localize`Current password is incorrect.`;
         break;
     }
   }

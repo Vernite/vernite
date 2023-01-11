@@ -8,13 +8,8 @@
   <ng-container *ngIf="!projects.length && !loader.pending">
     <div class="empty">
       <div class="content">
-        <h2 i18n>
-          No projects found
-        </h2>
-        <p i18n>
-          It looks like you don't have any projects in this workspace. To create a new project click on the button
-          below.
-        </p>
+        <h2 i18n>No projects found</h2>
+        <p i18n>It looks like you don't have any projects in this workspace. To create a new project click on the button below.</p>
         <app-button type="button" variant="primary"
           [routerLink]="['/', 'workspaces', workspaceId, 'projects', 'create']" i18n>Create project</app-button>
       </div>

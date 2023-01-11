@@ -10,7 +10,7 @@ export function notEmptyValidator(): ValidatorFn {
     if (control.value && control.value.trim() === '') {
       return {
         type: 'not-empty',
-        message: $localize`This field cannot consist of only whitespace characters`,
+        message: $localize`This field requires a non-whitespace value`,
       };
     }
     return null;
