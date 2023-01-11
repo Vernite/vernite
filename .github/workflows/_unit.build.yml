@@ -39,5 +39,5 @@ jobs:
         uses: actions/cache@v2
         with:
           path: coverage
-          key: ${{ runner.os }}-unit-tests-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-unit-tests-${{ github.run_id }
 

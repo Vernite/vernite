@@ -33,4 +33,4 @@ jobs:
         uses: actions/cache@v2
         with:
           path: coverage
-          key: ${{ runner.os }}-e2e-tests-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-e2e-tests-${{ github.run_id }

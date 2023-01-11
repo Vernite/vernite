@@ -26,6 +26,8 @@ jobs:
         with:
           path: dist
           key: ${{ runner.os }}-build-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
 
       # Copy default redirect page
       - name: Redirect page copy
