@@ -21,13 +21,13 @@ jobs:
 
       # Download cache
       - name: Download cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: dist
           key: ${{ runner.os }}-build-${{ github.run_id }}
 
       - name: Download cache (unit-tests)
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: coverage
           key: ${{ runner.os }}-unit-tests-${{ github.run_id }}

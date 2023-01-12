@@ -36,7 +36,7 @@ jobs:
 
       # Cache results
       - name: Cache results
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: coverage
           key: ${{ runner.os }}-unit-tests-${{ github.run_id }}

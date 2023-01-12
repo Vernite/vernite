@@ -40,7 +40,7 @@ jobs:
 
       # Cache results
       - name: Cache results
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: documentation
           key: ${{ runner.os }}-docs-build-${{ github.run_id }}

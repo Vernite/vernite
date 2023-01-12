@@ -30,7 +30,7 @@ jobs:
 
       # Cache results
       - name: Cache results
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: coverage
           key: ${{ runner.os }}-e2e-tests-${{ github.run_id }}

@@ -22,28 +22,39 @@ jobs:
 
       # Download cache (documentation)
       - name: Download cache (documentation)
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: documentation
           key: ${{ runner.os }}-docs-build-${{ github.run_id }}
 
       # Download cache (unit-tests)
       - name: Download cache (unit-tests)
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: coverage
           key: ${{ runner.os }}-unit-tests-${{ github.run_id }}
 
       # Download cache (audit-report)
       - name: Download cache (audit-report)
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: documentation/audit
           key: ${{ runner.os }}-audit-build-${{ github.run_id }}
 
+      # Download cache (badges)
+      - name: Download cache (badges)
+        uses: actions/cache@v3
+        with:
+          path: badges
+          key: ${{ runner.os }}-badges-build-${{ github.run_id }}
+
       # Copy unit tests to documentation directory
       - name: Copy unit tests to documentation directory
         run: cp -r coverage documentation/coverage
+
+      # Copy badges directory to documentation/assets
+      - name: Copy badges directory to documentation/assets
+        run: cp -r badges documentation/assets
 
       # Get app version from package.json
       - name: Get app version
