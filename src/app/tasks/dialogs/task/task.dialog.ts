@@ -28,6 +28,7 @@ import { Release } from 'src/app/releases/interfaces/release.interface';
 import { ReleaseService } from 'src/app/releases/services/release.service';
 import { ProjectMember } from '../../../dashboard/interfaces/project-member.interface';
 import { MemberService } from '@dashboard/services/member/member.service';
+import { maxLengthValidator } from '@main/validators/max-length.validator';
 
 /** Task dialog variant: create or edit */
 export enum TaskDialogVariant {
@@ -103,10 +104,10 @@ export class TaskDialog implements OnInit {
     id: new FormControl<number | null>(null),
     parentTaskId: new FormControl<number | null>(null),
     type: new FormControl<TaskType>(this.taskTypes$.value[0][1], [requiredValidator()]),
-    name: new FormControl<string>('', [requiredValidator()]),
+    name: new FormControl<string>('', [requiredValidator(), maxLengthValidator(100)]),
     statusId: new FormControl<number | null>(null, [requiredValidator()]),
     projectId: new FormControl<number | null>(null, [requiredValidator()]),
-    description: new FormControl<string>(''),
+    description: new FormControl<string>('', [maxLengthValidator(1000)]),
     priority: new FormControl<TaskPriority>(TaskPriority.MEDIUM, [requiredValidator()]),
     deadline: new FormControl<unixTimestamp | null>(null),
     estimatedDate: new FormControl<unixTimestamp | null>(null),

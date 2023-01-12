@@ -6,6 +6,7 @@ import { requiredValidator } from '@main/validators/required.validator';
 import { sameAsValidator } from '@main/validators/same-as.validator';
 import { Subscription } from 'rxjs';
 import { AuthService } from '@auth/services/auth/auth.service';
+import { maxLengthValidator } from '@main/validators/max-length.validator';
 
 /**
  * Change password page component
@@ -31,10 +32,15 @@ export class ChangePasswordPage implements OnInit {
    * Form group for setting new password.
    */
   public form = new FormGroup({
-    password: new FormControl('', [requiredValidator(), passwordValidator()]),
+    password: new FormControl('', [
+      requiredValidator(),
+      passwordValidator(),
+      maxLengthValidator(100),
+    ]),
     repeatPassword: new FormControl('', [
       requiredValidator(),
       passwordValidator(),
+      maxLengthValidator(100),
       sameAsValidator('password', $localize`Given passwords are not the same `),
     ]),
   });

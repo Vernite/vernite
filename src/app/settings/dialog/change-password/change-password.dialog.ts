@@ -10,6 +10,7 @@ import { withLoader } from '@main/operators/loader.operator';
 import { Loader } from '@main/classes/loader/loader.class';
 import { passwordValidator } from '@main/validators/password.validator';
 import { sameAsValidator } from '@main/validators/same-as.validator';
+import { maxLengthValidator } from '@main/validators/max-length.validator';
 
 /**
  * Change password dialog component
@@ -32,11 +33,20 @@ export class ChangePasswordDialog implements OnInit {
 
   /** Change password dialog form */
   public form = new FormGroup({
-    oldPassword: new FormControl('', [requiredValidator(), passwordValidator()]),
-    newPassword: new FormControl('', [requiredValidator(), passwordValidator()]),
+    oldPassword: new FormControl('', [
+      requiredValidator(),
+      passwordValidator(),
+      maxLengthValidator(100),
+    ]),
+    newPassword: new FormControl('', [
+      requiredValidator(),
+      passwordValidator(),
+      maxLengthValidator(100),
+    ]),
     rep_newPassword: new FormControl('', [
       requiredValidator(),
       passwordValidator(),
+      maxLengthValidator(100),
       sameAsValidator('newPassword', $localize`Given passwords are not the same`),
     ]),
   });

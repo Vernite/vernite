@@ -11,6 +11,7 @@ import { Loader } from '../../../_main/classes/loader/loader.class';
 import { startLoader, stopLoader } from '../../../_main/operators/loader.operator';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { booleanValidator } from '@main/validators/boolean.validator';
+import { maxLengthValidator } from '@main/validators/max-length.validator';
 
 /**
  * Register stages
@@ -54,16 +55,21 @@ export class RegisterPage {
    * Form group for register.
    */
   public form = new FormGroup({
-    email: new FormControl('', [requiredValidator(), emailValidator()]),
-    password: new FormControl('', [requiredValidator(), passwordValidator()]),
+    email: new FormControl('', [requiredValidator(), emailValidator(), maxLengthValidator(320)]),
+    password: new FormControl('', [
+      requiredValidator(),
+      passwordValidator(),
+      maxLengthValidator(100),
+    ]),
     repeatPassword: new FormControl('', [
       requiredValidator(),
       passwordValidator(),
+      maxLengthValidator(100),
       sameAsValidator('password', $localize`Given passwords are not the same`),
     ]),
-    name: new FormControl('', [requiredValidator()]),
-    surname: new FormControl('', [requiredValidator()]),
-    username: new FormControl('', [requiredValidator()]),
+    name: new FormControl('', [requiredValidator(), maxLengthValidator(100)]),
+    surname: new FormControl('', [requiredValidator(), maxLengthValidator(100)]),
+    username: new FormControl('', [requiredValidator(), maxLengthValidator(100)]),
     agreements: new FormControl('', [requiredValidator(), booleanValidator()]),
   });
 
