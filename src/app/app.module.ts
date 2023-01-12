@@ -8,7 +8,6 @@ import { LandingPagePage } from './landing-page/pages/landing-page/landing-page.
 import { MainModule } from './_main/_main.module';
 import { environment } from '../environments/environment';
 import { LandingPageNavComponent } from './landing-page/components/landing-page-nav/landing-page-nav.component';
-import { LandingPageAboutPage } from './landing-page/pages/landing-page-about/landing-page-about.page';
 import { LandingPageDocsPage } from './landing-page/pages/landing-page-docs/landing-page-docs.page';
 import { LandingPageChangelogPage } from './landing-page/pages/landing-page-changelog/landing-page-changelog.page';
 
@@ -16,7 +15,6 @@ import { LandingPageChangelogPage } from './landing-page/pages/landing-page-chan
   declarations: [
     AppComponent,
     LandingPagePage,
-    LandingPageAboutPage,
     LandingPageDocsPage,
     LandingPageChangelogPage,
     LandingPageNavComponent,

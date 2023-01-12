@@ -5,7 +5,6 @@ import { LandingPagePage } from './landing-page/pages/landing-page/landing-page.
 import { MainViewComponent } from './_main/components/main-view/main-view.component';
 import { TermsAndConditionsPage } from './_main/pages/terms-and-conditions/terms-and-conditions.page';
 import { PrivacyPolicyPage } from './_main/pages/privacy-policy/privacy-policy.page';
-import { LandingPageAboutPage } from './landing-page/pages/landing-page-about/landing-page-about.page';
 import { LandingPageDocsPage } from './landing-page/pages/landing-page-docs/landing-page-docs.page';
 import { LandingPageChangelogPage } from './landing-page/pages/landing-page-changelog/landing-page-changelog.page';
 
@@ -21,10 +20,6 @@ const routes: Routes = [
   {
     path: 'privacy-policy',
     component: PrivacyPolicyPage,
-  },
-  {
-    path: 'about',
-    component: LandingPageAboutPage,
   },
   {
     path: 'changelog',

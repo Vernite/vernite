@@ -1,10 +1,15 @@
+:host {
+  position: relative;
+}
+
 section {
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
-  background-color: var(--color-gray-800);
+  border-bottom: 1px solid var(--color-secondary-600);
+  background-color: var(--color-secondary-800);
 }
 
 .logo {
@@ -21,5 +26,13 @@ section {
 .buttons {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
+:host ::ng-deep button.tab {
+  padding: 1.4rem 1.5rem;
+
+  &:hover {
+    background-color: var(--color-secondary-700);
+  }
+}

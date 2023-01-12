@@ -55,6 +55,11 @@
   --text-5xl-font-size: 2rem;
   --text-5xl-font-weight: 400;
   --text-5xl-text-transform: none;
+
+  // 10xl
+  --text-10xl-font-size: 4rem;
+  --text-10xl-font-weight: 400;
+  --text-10xl-text-transform: none;
 }
 
 /* ==================================== */
@@ -183,6 +188,20 @@
 
 .text-5xl {
   @include text-5xl;
+
+  color: var(--color-text);
+}
+
+// --------------- 10xl ------------------ //
+@mixin text-10xl {
+  font-family: var(--font-family);
+  font-size: var(--text-10xl-font-size);
+  font-weight: var(--text-10xl-font-weight);
+  text-transform: var(--text-10xl-text-transform);
+}
+
+.text-10xl {
+  @include text-10xl;
 
   color: var(--color-text);
 }

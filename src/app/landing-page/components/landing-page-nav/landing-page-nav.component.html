@@ -1,7 +1,9 @@
 <section class="nav">
   <div class="logo" routerLink="/"></div>
   <tabs class="ml-3">
-    <tab class="text-base" routerLink="/about" routerLinkActive="active" i18n>About</tab>
+    <tab class="text-base" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <span i18n>About</span>
+    </tab>
     <tab class="text-base" routerLink="/changelog" routerLinkActive="active" i18n>Changelog</tab>
     <tab class="text-base" routerLink="/docs" routerLinkActive="active" i18n>Docs</tab>
   </tabs>
