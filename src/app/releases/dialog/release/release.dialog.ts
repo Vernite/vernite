@@ -10,6 +10,7 @@ import { ProjectService } from '@dashboard/services/project/project.service';
 import { Release } from '../../interfaces/release.interface';
 import { lengthValidator } from '@main/validators/length.validator';
 import { notEmptyValidator } from '@main/validators/not-empty.validator';
+import { maxLengthValidator } from '@main/validators/max-length.validator';
 
 /** Interface to represent release dialog variant */
 export enum ReleaseDialogVariant {
@@ -48,10 +49,10 @@ export class ReleaseDialog implements OnInit {
     projectId: new FormControl<number | null>(null, [requiredValidator()]),
     name: new FormControl<string>('', [
       requiredValidator(),
-      lengthValidator(1, 50),
+      maxLengthValidator(50),
       notEmptyValidator(),
     ]),
-    description: new FormControl<string>('', [notEmptyValidator()]),
+    description: new FormControl<string>('', [notEmptyValidator(), maxLengthValidator(1000)]),
     deadline: new FormControl<unixTimestamp | null>(null, [requiredValidator()]),
   });
 

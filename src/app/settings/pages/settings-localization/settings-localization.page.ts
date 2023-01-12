@@ -5,6 +5,7 @@ import * as dayjs from 'dayjs';
 import { UserService } from '../../../auth/services/user/user.service';
 import { environment } from 'src/environments/environment';
 import { SnackbarService } from '@main/services/snackbar/snackbar.service';
+import { maxLengthValidator } from '@main/validators/max-length.validator';
 
 /**
  * Component to display localization settings
@@ -17,10 +18,10 @@ import { SnackbarService } from '@main/services/snackbar/snackbar.service';
 export class SettingsLocalizationPage implements OnInit {
   /** Form to change localization settings */
   public form = new FormGroup({
-    language: new FormControl('', requiredValidator()),
-    dateFormat: new FormControl('', requiredValidator()),
-    timeFormat: new FormControl('', requiredValidator()),
-    firstDayOfWeek: new FormControl(0, requiredValidator()),
+    language: new FormControl('', [requiredValidator(), maxLengthValidator(5)]),
+    dateFormat: new FormControl('', [requiredValidator(), maxLengthValidator(10)]),
+    timeFormat: new FormControl('', [requiredValidator()]),
+    firstDayOfWeek: new FormControl(0, [requiredValidator()]),
   });
 
   /**
