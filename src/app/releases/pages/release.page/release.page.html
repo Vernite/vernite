@@ -3,7 +3,7 @@
     <h2 class="title text-xl font-bold">{{release.name}}</h2>
     <app-button variant="secondary" (click)="publishRelease(release)" i18n>Publish release</app-button>
     <div class="text-base">
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu" i18n-aria-label>
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
@@ -16,5 +16,6 @@
       </mat-menu>
     </div>
   </div>
-  <task-list [tasks]="release.tasks" [members]="(members$ | async) || emptyMap" [projectId]="projectId" [statusList]="(statusList$ | async) || []"></task-list>
+  <task-list [tasks]="release.tasks" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
+    [statusList]="(statusList$ | async) || []"></task-list>
 </ng-container>

@@ -1,4 +1,4 @@
-import { AfterViewInit, ElementRef, OnInit, Component, Input, ViewChild } from '@angular/core';
+import { ElementRef, OnInit, Component, Input, ViewChild } from '@angular/core';
 import { ControlAccessor } from '@main/classes/control-accessor/control-accessor.class';
 import { marked, Renderer } from 'marked';
 import hljs from 'highlight.js';
@@ -22,7 +22,7 @@ import { SelectionEditPlugin } from '../../libs/monaco/plugins/selection-edit.pl
   templateUrl: './textarea.component.html',
   styleUrls: ['./textarea.component.scss'],
 })
-export class TextareaComponent extends ControlAccessor implements OnInit, AfterViewInit {
+export class TextareaComponent extends ControlAccessor implements OnInit {
   /**
    * Floating label text to display
    */
@@ -104,8 +104,6 @@ export class TextareaComponent extends ControlAccessor implements OnInit, AfterV
     Marked.init();
     hljs.configure({ languages: [] });
   }
-
-  ngAfterViewInit(): void {}
 
   onEditorInit(editor: any) {
     this.editor = editor;

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MockPage } from '@main/pages/mock/mock.page';
 import { CreateWorkspacePage } from './pages/create-workspace/create-workspace.page';
 import { EditProjectPage } from './pages/edit-project/edit-project.page';
 import { EditWorkspacePage } from './pages/edit-workspace/edit-workspace.page';

@@ -73,7 +73,7 @@ export class DialogRef<R = any> {
    * Updates the dialog's position.
    * @param position New dialog position.
    */
-  updatePosition(position?: DialogPosition): this {
+  updatePosition(_position?: DialogPosition): this {
     throw new Error(`method not be called when using custom outlet`);
   }
 
@@ -82,17 +82,17 @@ export class DialogRef<R = any> {
    * @param width New width of the dialog.
    * @param height New height of the dialog.
    */
-  updateSize(width?: string, height?: string): this {
+  updateSize(_width?: string, _height?: string): this {
     throw new Error(`method should not be called when using custom outlet`);
   }
 
   /** Add a CSS class or an array of classes to the overlay pane. */
-  addPanelClass(classes: string | string[]): this {
+  addPanelClass(_classes: string | string[]): this {
     throw new Error(`method should not be called when using custom outlet`);
   }
 
   /** Remove a CSS class or an array of classes from the overlay pane. */
-  removePanelClass(classes: string | string[]): this {
+  removePanelClass(_classes: string | string[]): this {
     throw new Error(`method should not be called when using custom outlet`);
   }
 

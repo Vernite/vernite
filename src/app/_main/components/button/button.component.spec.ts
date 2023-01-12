@@ -25,7 +25,7 @@ describe(ButtonComponent.name, () => {
       /*html*/ `<app-button>Hello world!</app-button>`,
     );
     instance.focus();
-    await new Promise((resolve, reject) => setTimeout(resolve, 200));
+    await new Promise((resolve) => setTimeout(resolve, 200));
     expect(document.activeElement === find('button').nativeElement).toBe(true);
   });
 });

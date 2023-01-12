@@ -8,7 +8,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from '@main/services/dialog/dialog.service';
 import { ProjectService } from '../../services/project/project.service';
 import { Loader } from '../../../_main/classes/loader/loader.class';
-import { withLoader, startLoader, stopLoader } from '../../../_main/operators/loader.operator';
+import { withLoader } from '../../../_main/operators/loader.operator';
 
 /**
  * Projects list page component

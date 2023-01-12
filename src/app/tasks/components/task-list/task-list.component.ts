@@ -1,8 +1,7 @@
-import { Component, Input, ViewChild, OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { Status } from '@tasks/interfaces/status.interface';
 import { Task } from '@tasks/interfaces/task.interface';
 import { ProjectMember } from '../../../dashboard/interfaces/project-member.interface';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 /**

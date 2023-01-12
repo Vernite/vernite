@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '@dashboard/interfaces/project.interface';
 import { Workspace } from '@dashboard/interfaces/workspace.interface';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { Observable, of, switchMap, forkJoin, map, filter } from 'rxjs';
+import { Observable, switchMap, forkJoin, map, filter } from 'rxjs';
 import { ProjectService } from '../../services/project/project.service';
 import { WorkspaceService } from '../../services/workspace/workspace.service';
 import { Loader } from '@main/classes/loader/loader.class';

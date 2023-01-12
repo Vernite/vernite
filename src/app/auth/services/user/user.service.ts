@@ -5,7 +5,7 @@ import { Cache } from '@main/decorators/cache/cache.decorator';
 import { ErrorCodes, Errors } from '@main/interfaces/http-error.interface';
 import { ApiService } from '@main/services/api/api.service';
 import { BaseService } from '@main/services/base/base.service';
-import { Observable, map, switchMap, tap } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { unixTimestamp } from '../../../_main/interfaces/date.interface';
 import { Service } from '../../../_main/decorators/service/service.decorator';

@@ -90,10 +90,11 @@ export class TaskService extends BaseService<
    * Get list of tasks
    * @param projectId Project id needed to list all tasks
    * @returns Request observable with list of tasks
+   * @TODO add filters (or remove this parameter)
    */
   public backlog(
     projectId: number,
-    filters?: DataFilter<Task, any>[] | DataFilter<Task, any>,
+    _filters?: DataFilter<Task, any>[] | DataFilter<Task, any>,
   ): Observable<Task[]> {
     const params = new HttpParams();
     params.append('backlog', true);

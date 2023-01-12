@@ -7,7 +7,7 @@ import { MessengerPage } from './pages/messenger/messenger.page';
 import { MainModule } from '@main/_main.module';
 import { MessageComponent } from './components/message/message.component';
 import { MessageGroupComponent } from './components/message-group/message-group.component';
-import { MessagesNoIntegration } from './pages/messages-no-integration/messages-no-integration.page';
+import { MessagesNoIntegrationPage } from './pages/messages-no-integration/messages-no-integration.page';
 
 /** Communication module with all messaging tools and pages */
 @NgModule({
@@ -18,7 +18,7 @@ import { MessagesNoIntegration } from './pages/messages-no-integration/messages-
     MessengerPage,
     MessageComponent,
     MessageGroupComponent,
-    MessagesNoIntegration,
+    MessagesNoIntegrationPage,
   ],
   exports: [MessageComponent],
 })

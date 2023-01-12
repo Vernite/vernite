@@ -1,5 +1,5 @@
 import { MatDialogRef } from '@angular/material/dialog';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { validateForm } from '@main/classes/form.class';
 import { requiredValidator } from '@main/validators/required.validator';
@@ -11,7 +11,7 @@ import { lengthValidator } from '@main/validators/length.validator';
   templateUrl: './report-bug.dialog.html',
   styleUrls: ['./report-bug.dialog.scss'],
 })
-export class ReportBugDialog implements OnInit {
+export class ReportBugDialog {
   /** Report bug dialog form */
   public form = new FormGroup({
     title: new FormControl<string | null>('', [requiredValidator(), lengthValidator(3, 100)]),
@@ -22,8 +22,6 @@ export class ReportBugDialog implements OnInit {
   });
 
   constructor(private dialogRef: MatDialogRef<ReportBugDialog>) {}
-
-  ngOnInit() {}
 
   /** Close dialog */
   cancel() {

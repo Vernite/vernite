@@ -16,7 +16,7 @@ describe(IconComponent.name, () => {
   });
 
   it('Should have defined size', async () => {
-    const { element, find } = await shallow.render({
+    const { find } = await shallow.render({
       bind: { size: '2rem' },
     });
     expect(getComputedStyle(find('fa-icon').nativeElement).fontSize).toBe('32px');

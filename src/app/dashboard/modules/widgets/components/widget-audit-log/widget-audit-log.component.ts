@@ -2,13 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../../../../tasks/services/task/task.service';
 import { map, Observable, switchMap, forkJoin, of, EMPTY } from 'rxjs';
 import { MemberService } from '../../../../services/member/member.service';
-import { ProjectMember } from '../../../../interfaces/project-member.interface';
-import { Status } from '../../../../../tasks/interfaces/status.interface';
-import { Task } from '@tasks/interfaces/task.interface';
 import { ProjectService } from '../../../../services/project/project.service';
 import { StatusService } from '../../../../../tasks/services/status/status.service';
 import { Project } from '../../../../interfaces/project.interface';
-import { TaskFilters } from '../../../../../tasks/filters/task.filters';
 import { UserService } from '../../../../../auth/services/user/user.service';
 import { Loader } from '../../../../../_main/classes/loader/loader.class';
 import { withLoader } from '../../../../../_main/operators/loader.operator';
@@ -54,7 +50,7 @@ export class WidgetAuditLogComponent implements OnInit {
 
   private loadProject(project: Project) {
     return this.userService.getMyself().pipe(
-      switchMap((user) => {
+      switchMap(() => {
         return forkJoin({
           project: of(project),
           auditLog: this.projectService.auditLog(project.id),

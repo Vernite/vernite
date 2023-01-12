@@ -6,7 +6,7 @@
     <h2 class="title text-xl font-bold">{{sprint.name}}</h2>
     <app-button variant="secondary" (click)="closeSprint(sprint)" i18n>Close sprint</app-button>
     <div class="text-base">
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu" i18n-aria-label>
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
@@ -41,7 +41,7 @@
       <app-button variant="primary" (click)="startSprint(sprint)" i18n>Start sprint</app-button>
     </ng-container>
     <div class="text-base">
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu" i18n-aria-label>
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">

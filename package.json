@@ -24,7 +24,7 @@
     "docs:serve": "cross-env STORYBOOK_ENVIRONMENT=prod concurrently -r -k \"yarn compodoc:serve -t\" \"start-storybook -p 6006\"",
     "docs:build": "yarn print \"You need to choose configuration: 'dev', 'prod' and type command like 'yarn docs:build:dev'\" --color=yellow",
     "docs:build:dev": "cross-env STORYBOOK_ENVIRONMENT=dev yarn storybook:build",
-    "docs:build:prod": "cross-env STORYBOOK_ENVIRONMENT=prod yarn storybook:build",
+    "docs:build:prod": "cross-env STORYBOOK_ENVIRONMENT=$npm_package_version yarn storybook:build",
     "docs:coverage": "yarn compodoc:build",
     "audit:build": "yarn audit --json | yarn yarn-audit-html --output documentation/audit/index.html",
     "i18n:extract": "ng extract-i18n --output-path=src/locales",
@@ -36,7 +36,8 @@
     "storybook:serve": "start-storybook -p 6006",
     "storybook:build": "yarn compodoc:build && build-storybook -o documentation",
     "badges:build": "node tools/badge-generator.js",
-    "print": "node tools/print.mjs"
+    "print": "node tools/print.mjs",
+    "version": "cross-env VERSION=$npm_package_version node -p -e \"process.env.VERSION\""
   },
   "private": true,
   "dependencies": {
@@ -116,8 +117,8 @@
     "@types/mocha": "^9.1.1",
     "@types/ua-parser-js": "^0.7.36",
     "@types/uuid": "^8.3.4",
-    "@typescript-eslint/eslint-plugin": "5.11.0",
-    "@typescript-eslint/parser": "5.11.0",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
     "autoprefixer": "^10.4.4",
     "babel-loader": "^8.2.5",
     "badge-maker": "^3.3.1",

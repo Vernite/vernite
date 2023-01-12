@@ -27,7 +27,7 @@ describe('AppComponent', () => {
 
   it(`should have preload class in body`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
+    const _app = fixture.componentInstance;
 
     document.body.classList.add('preload');
     expect(document.body.classList).toContain('preload');

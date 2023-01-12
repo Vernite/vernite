@@ -1,14 +1,13 @@
-import { Component, OnInit, Pipe } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Observable, of, switchMap } from 'rxjs';
 import { Page } from '@main/decorators/page/page.decorator';
 import { DialogService } from '@main/services/dialog/dialog.service';
 import { Workspace } from '../../interfaces/workspace.interface';
-import { ProjectService } from '../../services/project/project.service';
 import { WorkspaceService } from '../../services/workspace/workspace.service';
 import { Loader } from '../../../_main/classes/loader/loader.class';
-import { withLoader, startLoader, stopLoader } from '../../../_main/operators/loader.operator';
+import { startLoader, stopLoader } from '../../../_main/operators/loader.operator';
 
 /**
  * Workspaces list page component.

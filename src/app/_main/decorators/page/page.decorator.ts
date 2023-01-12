@@ -12,5 +12,5 @@
  * ```
  */
 export function Page() {
-  return function decorator(target: any) {};
+  return function decorator(_target: any) {};
 }

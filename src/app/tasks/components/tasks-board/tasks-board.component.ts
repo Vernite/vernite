@@ -76,7 +76,7 @@ export class BoardComponent {
       event.previousContainer.element.nativeElement.dataset['index'],
     );
     const newStatusIndex = Number(event.container.element.nativeElement.dataset['index']);
-    const previousStatus = this.statusList[previousStatusIndex];
+    const _previousStatus = this.statusList[previousStatusIndex];
     const newStatus = this.statusList[newStatusIndex];
     const previousTaskIndex = event.previousIndex;
     const task = event.previousContainer.data[previousTaskIndex];

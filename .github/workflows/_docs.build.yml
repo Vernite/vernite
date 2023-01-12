@@ -38,6 +38,10 @@ jobs:
       - name: Docs build
         run: yarn docs:build:${{ inputs.configuration }}
 
+      # Copy documentation.json file
+      - name: Copy documentation.json file
+        run: cp documentation.json documentation/
+
       # Cache results
       - name: Cache results
         uses: actions/cache@v3

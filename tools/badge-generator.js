@@ -1,8 +1,19 @@
 /* eslint-disable */
+function requireIfExists(...modules) {
+  for (let module of modules) {
+    try {
+      return require(module);
+    } catch (error) {
+      // pass and try next file
+    }
+  }
+  throw ('None of the provided modules exist.')
+}
+
 let { makeBadge } = require('badge-maker');
 const testsCoverageSummary = require('../coverage/vernite/coverage-summary.json');
 const testsResults = require('../coverage/karma-result.json');
-const docsSummary = require('../documentation.json');
+const docsSummary = requireIfExists('../documentation/documentation.json', '../documentation.json');
 const { writeFileSync, existsSync, mkdirSync } = require('fs');
 
 const createBadge = makeBadge;

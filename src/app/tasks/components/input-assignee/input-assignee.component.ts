@@ -2,7 +2,6 @@ import { Input, Component, ChangeDetectorRef, Optional } from '@angular/core';
 import { ControlAccessor } from '@main/classes/control-accessor/control-accessor.class';
 import { ProjectMember } from '../../../dashboard/interfaces/project-member.interface';
 import { NgControl } from '@angular/forms';
-import { memoize } from 'lodash-es';
 import { faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 /** Component to select assignee for the task. Used for example in task edit dialog and filters. */

@@ -4,6 +4,7 @@
   "overrides": [
     {
       "files": ["*.ts"],
+      "parser": "@typescript-eslint/parser",
       "parserOptions": {
         "project": ["tsconfig.json"],
         "createDefaultProgram": true
@@ -14,29 +15,56 @@
         "plugin:prettier/recommended",
         "plugin:storybook/recommended"
       ],
-      "plugins": ["@ngneat/reactive-forms"],
+      "plugins": ["@typescript-eslint", "@ngneat/reactive-forms", "unused-imports"],
       "rules": {
         "@angular-eslint/no-empty-lifecycle-method": "warn",
         "comma-dangle": ["error", "always-multiline"],
         "@typescript-eslint/comma-dangle": ["error", "only-multiline"],
         "storybook/prefer-pascal-case": "off",
         "no-unused-vars": "off",
-        // "unused-imports/no-unused-imports": "error",
-        // "unused-imports/no-unused-vars": [
-        //   "warn",
-        //   {
-        //     "vars": "all",
-        //     "varsIgnorePattern": "^_",
-        //     "args": "after-used",
-        //     "argsIgnorePattern": "^_"
-        //   }
-        // ],
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+          "warn",
+          {
+            "vars": "all",
+            "varsIgnorePattern": "^_",
+            "args": "after-used",
+            "argsIgnorePattern": "^_"
+          }
+        ],
         "@ngneat/reactive-forms/no-angular-forms-imports": "error"
       }
     },
     {
       "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended"]
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {
+        "@angular-eslint/template/i18n": [
+          "warn",
+          {
+            "checkId": false,
+            "checkText": false,
+            "checkAttributes": true,
+            "requireDescription": false,
+            "ignoreAttributes": [
+              "variant",
+              "routerLinkActive",
+              "matColumnDef",
+              "theme",
+              "rel",
+              "http-equiv",
+              "name",
+              "autocomplete",
+              "icon",
+              "comparer",
+              "align",
+              "data-custom-class",
+              "fragment",
+              "accept"
+            ]
+          }
+        ]
+      }
     }
   ],
   "rules": {

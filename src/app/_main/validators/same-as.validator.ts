@@ -13,7 +13,7 @@ export function sameAsValidator(compareWith: string, message: string): Validator
     let compareField = control.parent?.get(compareWith);
 
     if (!alreadySubscribed && compareField) {
-      compareField?.valueChanges.subscribe((val) => {
+      compareField?.valueChanges.subscribe((_val) => {
         if (control.touched) {
           control.updateValueAndValidity();
         }

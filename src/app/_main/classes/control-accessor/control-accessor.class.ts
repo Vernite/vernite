@@ -229,14 +229,14 @@ export class ControlAccessor<T = any>
    * This method is called by the forms API on initialization to update the form model when values propagate from the view to the model.
    * @param fn Callback to be called when the control value changes.
    */
-  registerOnChange(fn: any): void {}
+  registerOnChange(_fn: any): void {}
 
   /**
    * Registers a callback function that is called by the forms API on initialization to update the form model on blur.
    *
    * @param fn Callback to be called when the control is touched.
    */
-  registerOnTouched(fn: any): void {}
+  registerOnTouched(_fn: any): void {}
 
   /**
    * Set disabled state on the control. If set to true, the control will be disabled.
