@@ -1,6 +1,7 @@
 import { ProjectMember } from './project-member.interface';
 import { JSONParsable } from './../../_main/interfaces/json-parsable.interface';
 import { ApiFile } from '@main/interfaces/api-file.interface';
+import { Status } from '../../tasks/interfaces/status.interface';
 
 export interface Project extends JSONParsable {
   /**
@@ -34,4 +35,6 @@ export interface Project extends JSONParsable {
    * Logo file metadata
    */
   logo?: ApiFile;
+
+  statuses: Status[];
 }

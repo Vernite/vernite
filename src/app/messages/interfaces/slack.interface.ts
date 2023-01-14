@@ -48,7 +48,7 @@ export interface SlackChannel extends JSONParsable {
 /** Interface to represent Slack channel with user */
 export interface SlackChannelWithUser extends Omit<SlackChannel, 'user'> {
   /** The user the slack channel is with */
-  user?: SlackUser;
+  user?: SlackUser | null;
 }
 
 /** Interface to represent Slack integration */

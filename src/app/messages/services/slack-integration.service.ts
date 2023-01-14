@@ -135,6 +135,21 @@ export class SlackIntegrationService extends BaseService<
   }
 
   /**
+   * Get slack users by integration id
+   * @param slackId Slack integration id
+   * @returns Observable with users list
+   */
+  @Cache()
+  public getUsers(slackId: number): Observable<SlackUser[]> {
+    return this.apiService.get(`/user/integration/slack/${slackId}/user`).pipe(
+      this.validate({
+        404: 'INTEGRATION_NOT_FOUND',
+        409: 'CONFLICT',
+      }),
+    );
+  }
+
+  /**
    * Get messages from slack channel
    * @param slackId Slack integration id
    * @param channelId Slack channel id
@@ -182,21 +197,16 @@ export class SlackIntegrationService extends BaseService<
    * @returns list of slack channels joined with users
    */
   public getChannelsWithUsers(slackId: number) {
-    return this.getChannels(slackId).pipe(
-      switchMap((channels) => {
-        return forkJoin(
-          channels.map((channel) => {
-            if (!channel.user) return of(channel as SlackChannelWithUser);
-
-            return this.getUser(slackId, channel.user).pipe(
-              map((user) => ({
-                ...channel,
-                user,
-              })),
-            );
-          }),
-        );
-      }),
+    return forkJoin({
+      channels: this.getChannels(slackId),
+      users: this.getUsers(slackId),
+    }).pipe(
+      map(({ channels, users }) =>
+        channels.map((channel) => ({
+          ...channel,
+          user: (channel.user && users.find((user) => user.id === channel.user)) || null,
+        })),
+      ),
     );
   }
 

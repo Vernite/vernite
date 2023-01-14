@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../../../../tasks/services/task/task.service';
-import { map, Observable, switchMap, forkJoin, of, EMPTY } from 'rxjs';
+import { Observable, forkJoin, EMPTY, map } from 'rxjs';
 import { MemberService } from '../../../../services/member/member.service';
 import { ProjectMember } from '../../../../interfaces/project-member.interface';
 import { Status } from '../../../../../tasks/interfaces/status.interface';
@@ -8,7 +8,6 @@ import { Task } from '@tasks/interfaces/task.interface';
 import { ProjectService } from '../../../../services/project/project.service';
 import { StatusService } from '../../../../../tasks/services/status/status.service';
 import { Project } from '../../../../interfaces/project.interface';
-import { TaskFilters } from '../../../../../tasks/filters/task.filters';
 import { UserService } from '../../../../../auth/services/user/user.service';
 import { Loader } from '../../../../../_main/classes/loader/loader.class';
 import { withLoader } from '../../../../../_main/operators/loader.operator';
@@ -45,24 +44,27 @@ export class WidgetTasksComponent implements OnInit {
   }
 
   private loadProjects() {
-    return this.projectService.list().pipe(
-      switchMap((projects) => {
-        return forkJoin(projects.map((project) => this.loadProject(project)));
+    return forkJoin({
+      projects: this.projectService.list(),
+      tasks: this.taskService.listTasksAssignedToMe(),
+    }).pipe(
+      map(({ projects, tasks }) => {
+        return projects.map((project) =>
+          this.loadProject(
+            project,
+            tasks.filter((task) => task.projectId === project.id),
+          ),
+        );
       }),
-      map((projects) => projects.filter((project) => project.tasks.length > 0)),
     );
   }
 
-  private loadProject(project: Project) {
-    return this.userService.getMyself().pipe(
-      switchMap((user) => {
-        return forkJoin({
-          project: of(project),
-          members: this.memberService.map(project.id),
-          statuses: this.statusService.list(project.id),
-          tasks: this.taskService.list(project.id, TaskFilters.ASSIGNEE_ID(user.id)),
-        });
-      }),
-    );
+  private loadProject(project: Project, tasks: Task[]) {
+    return {
+      project: project,
+      members: new Map(),
+      statuses: project.statuses,
+      tasks: tasks,
+    };
   }
 }

@@ -381,4 +381,12 @@ export class TaskService extends BaseService<
       map((tasks) => tasks.filter((task) => task.type === TaskType.EPIC)),
     );
   }
+
+  /**
+   * List all tasks assigned to current user
+   * @returns Observable with list of tasks assigned to current user
+   */
+  public listTasksAssignedToMe(): Observable<(Task & { projectId: number })[]> {
+    return this.apiService.get('/me/tasks');
+  }
 }
