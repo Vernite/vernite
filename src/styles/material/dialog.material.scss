@@ -29,6 +29,7 @@ app-dialog-outlet {
 
   .mat-dialog-content {
     @include text-base;
+    max-height: 100vh;
   }
 
   .mat-dialog-actions {
@@ -36,7 +37,6 @@ app-dialog-outlet {
     justify-content: flex-end;
     padding-top: 1.25rem;
     border-top: 1px solid var(--color-dialog-delimiter);
-    margin-top: 1.25rem;
 
     >* {
       margin-left: 1.25rem;

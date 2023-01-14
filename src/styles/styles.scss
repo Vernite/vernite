@@ -36,6 +36,10 @@
 @tailwind utilities;
 
 // Global styles
+html {
+  overflow: hidden;
+}
+
 html,
 body {
   height: 100%;

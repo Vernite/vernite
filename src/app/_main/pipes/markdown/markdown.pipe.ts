@@ -1,5 +1,5 @@
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { PipeTransform, Pipe } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { PipeTransform, Pipe, SecurityContext } from '@angular/core';
 import { marked, Renderer } from 'marked';
 import { Marked } from '@main/libs/marked/marked.lib';
 
@@ -23,7 +23,7 @@ export class MarkdownPipe implements PipeTransform {
    * @param value - markdown to display
    * @returns markdown
    */
-  transform(value: string): SafeHtml {
+  transform(value: string): string {
     // const innerHTML = marked.parse(value || '', { renderer: this.renderer });
     // TODO: Add hljs to the marked options (https://marked.js.org/using_advanced)
     // this.output.nativeElement
@@ -32,6 +32,6 @@ export class MarkdownPipe implements PipeTransform {
     //     hljs.highlightElement(c);
     //   });
 
-    return this.sanitizer.bypassSecurityTrustHtml(marked(value));
+    return this.sanitizer.sanitize(SecurityContext.HTML, marked(value)) || '';
   }
 }

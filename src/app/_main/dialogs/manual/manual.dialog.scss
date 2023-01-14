@@ -1,13 +1,11 @@
 :host {
   position: relative;
   display: block;
-  width: calc(100% + 4rem);
-  height: calc(100% + 4rem);
-  margin: -2rem;
 }
 
 .mat-dialog-content {
   height: 100%;
+  margin: 0 -2rem;
 }
 
 .close-button {
