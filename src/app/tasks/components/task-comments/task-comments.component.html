@@ -3,7 +3,7 @@
   </message>
 </div>
 <app-input type="textarea" [formControl]="form.get('content')">
-  <div class="grow flex justify-end">
+  <div class="suffix h-full flex flex-col justify-end pb-2 z-10">
     <app-button variant="primary" icon="matSend" matTooltip="Send" i18n-matTooltip (click)="sendComment()">
     </app-button>
   </div>

@@ -7,6 +7,10 @@ import { ValidationError } from '../interfaces/validation-error.interface';
  */
 export function maxLengthValidator(length: number): ValidatorFn {
   return (control: AbstractControl): ValidationError | null => {
+    if (control.value == null) {
+      return null;
+    }
+
     if (control.value.length > length) {
       return {
         type: 'max-length',
