@@ -25,7 +25,7 @@
   <div>
     <h2 class="text-base description">{{ (sprint.startDate | date: 'dd.MM.yyyy HH:mm') }} - {{ (sprint.finishDate |
       date: 'dd.MM.yyyy HH:mm') }}</h2>
-    <h2 class="text-base description markdown-preview" [innerHTML]="sprint.description | markdown"></h2>
+    <h2 class="text-base description markdown-preview">{{ sprint.description | markdown }}</h2>
   </div>
   <task-list [tasks]="sprint.tasks" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
     [statusList]="(statusList$ | async) || []"></task-list>
@@ -57,7 +57,7 @@
   <div>
     <h2 class="text-base description">{{ (sprint.startDate | date: 'dd.MM.yyyy HH:mm') }} - {{ (sprint.finishDate |
       date: 'dd.MM.yyyy HH:mm') }}</h2>
-    <h2 class="text-base description markdown-preview" [innerHTML]="sprint.description | markdown"></h2>
+    <h2 class="text-base description markdown-preview">{{ sprint.description | markdown }}</h2>
   </div>
   <task-list [tasks]="sprint.tasks" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
     [statusList]="(statusList$ | async) || []"></task-list>

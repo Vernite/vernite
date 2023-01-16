@@ -19,7 +19,7 @@
       <h3 class="text-lg opacity-50">
         {{ (event.startDate || event.endDate) | dayjsFormat:'dddd, D MMMM' }}
       </h3>
-      <p class="text-base markdown-preview" [innerHTML]="event.description | markdown"></p>
+      <p class="text-base markdown-preview">{{ event.description | markdown }}</p>
     </div>
   </div>
 </ng-template>

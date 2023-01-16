@@ -24,7 +24,7 @@ import { ControlAccessor } from '../../classes/control-accessor/control-accessor
 })
 export class InputComponent extends ControlAccessor implements AfterViewInit {
   /** Type of the input */
-  @Input() type: 'text' | 'number' | 'email' | 'password' = 'text';
+  @Input() type: 'text' | 'number' | 'email' | 'password' | 'textarea' = 'text';
 
   /** Floating label text to display */
   @Input() floatingLabel?: string;

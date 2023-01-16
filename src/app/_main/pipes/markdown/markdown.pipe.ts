@@ -1,6 +1,6 @@
 import { DomSanitizer } from '@angular/platform-browser';
-import { PipeTransform, Pipe, SecurityContext } from '@angular/core';
-import { marked, Renderer } from 'marked';
+import { PipeTransform, Pipe } from '@angular/core';
+import { Renderer } from 'marked';
 import { Marked } from '@main/libs/marked/marked.lib';
 
 /**
@@ -32,6 +32,7 @@ export class MarkdownPipe implements PipeTransform {
     //     hljs.highlightElement(c);
     //   });
 
-    return this.sanitizer.sanitize(SecurityContext.HTML, marked(value)) || '';
+    // return this.sanitizer.sanitize(SecurityContext.HTML, marked(value)) || '';
+    return value;
   }
 }

@@ -14,15 +14,15 @@ import {
   faUnderline,
 } from '@fortawesome/free-solid-svg-icons';
 import { Marked } from '@main/libs/marked/marked.lib';
-import './textarea.theme';
+import './markdown-editor.theme';
 import { SelectionEditPlugin } from '../../libs/monaco/plugins/selection-edit.plugin';
 
 @Component({
-  selector: 'app-textarea',
-  templateUrl: './textarea.component.html',
-  styleUrls: ['./textarea.component.scss'],
+  selector: 'markdown-editor',
+  templateUrl: './markdown-editor.component.html',
+  styleUrls: ['./markdown-editor.component.scss'],
 })
-export class TextareaComponent extends ControlAccessor implements OnInit {
+export class MarkdownEditorComponent extends ControlAccessor implements OnInit {
   /**
    * Floating label text to display
    */

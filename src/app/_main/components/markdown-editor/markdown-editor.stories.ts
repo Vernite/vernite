@@ -1,14 +1,14 @@
 import { DOCS_SELECT, DOCS_READONLY } from '../../../../stories/helpers/arg-type.helper';
 import { FormControl } from '@ngneat/reactive-forms';
-import { TextareaComponent } from './textarea.component';
+import { MarkdownEditorComponent } from './markdown-editor.component';
 import { FormControlStoryPageConfig } from 'src/stories/helpers/classes/form-control-story-page-config.class';
 import { StoryTemplate } from 'src/stories/helpers/classes/story-template.class';
 import { Story } from 'src/stories/helpers/classes/story.class';
 
 const config = new FormControlStoryPageConfig({
   title: 'Components/Textarea',
-  component: TextareaComponent,
-  selector: 'app-textarea',
+  component: MarkdownEditorComponent,
+  selector: 'markdown-editor',
   argTypes: {
     autocomplete: DOCS_SELECT,
     input: DOCS_READONLY,

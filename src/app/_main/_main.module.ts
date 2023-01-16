@@ -1,3 +1,4 @@
+import { TextareaAutosizeDirective } from './directives/textarea-autosize/textarea-autosize.directive';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ObserversModule } from '@angular/cdk/observers';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -43,7 +44,7 @@ import { SelectComponent } from './components/select/select.component';
 import { SidebarNavigationComponent } from './components/sidebar-navigation/sidebar-navigation.component';
 import { SnackbarOutletComponent } from './components/snackbar-outlet/snackbar-outlet.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
-import { TextareaComponent } from './components/textarea/textarea.component';
+import { MarkdownEditorComponent } from './components/markdown-editor/markdown-editor.component';
 import { UpperNavigationComponent } from './components/upper-navigation/upper-navigation.component';
 import { AlertDialog } from './dialogs/alert/alert.dialog';
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation/click-stop-propagation.directive';
@@ -161,7 +162,7 @@ const ngModuleConfig = {
     SelectComponent,
     OptionComponent,
     MainViewComponent,
-    TextareaComponent,
+    MarkdownEditorComponent,
     CheckboxComponent,
     CardComponent,
     ClickStopPropagationDirective,
@@ -202,6 +203,7 @@ const ngModuleConfig = {
     TermsAndConditionsPage,
     PrivacyPolicyPage,
     ManualDialog,
+    TextareaAutosizeDirective,
   ],
   providers: [
     /*=============================================

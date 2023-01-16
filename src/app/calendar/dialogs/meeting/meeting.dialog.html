@@ -17,8 +17,8 @@
     </app-input>
 
     <!-- Description field -->
-    <app-textarea floatingLabel="Description" placeholder="Sample description..." formControlName="description"
-      i18n-floatingLabel i18n-placeholder [rows]="4"></app-textarea>
+    <app-input type="textarea" floatingLabel="Description" placeholder="Sample description..."
+      formControlName="description" i18n-floatingLabel i18n-placeholder></app-input>
 
     <!-- Location field -->
     <app-input floatingLabel="Location" placeholder="Location" formControlName="location" i18n-floatingLabel
@@ -46,6 +46,8 @@
 </div>
 <div mat-dialog-actions>
   <app-button mat-button (click)="cancel()" i18n>Cancel</app-button>
-  <app-button *ngIf="data.variant === MeetingDialogVariant.CREATE" (click)="confirm()" variant="primary" i18n>Create</app-button>
-  <app-button *ngIf="data.variant === MeetingDialogVariant.EDIT" (click)="confirm()" variant="primary" i18n>Save changes</app-button>
+  <app-button *ngIf="data.variant === MeetingDialogVariant.CREATE" (click)="confirm()" variant="primary"
+    i18n>Create</app-button>
+  <app-button *ngIf="data.variant === MeetingDialogVariant.EDIT" (click)="confirm()" variant="primary" i18n>Save
+    changes</app-button>
 </div>

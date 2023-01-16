@@ -1,14 +1,14 @@
-import { TextareaComponent } from './textarea.component';
+import { MarkdownEditorComponent } from './markdown-editor.component';
 import { NgControl } from '@angular/forms';
 import { Shallow } from 'shallow-render';
 import { MainModule } from '../../_main.module';
 import { TestNgControl } from '../../../../tests/helpers/ng-control-testing-provider.helper';
 
 describe('TextareaComponent', () => {
-  let shallow: Shallow<TextareaComponent>;
+  let shallow: Shallow<MarkdownEditorComponent>;
 
   beforeEach(() => {
-    shallow = new Shallow(TextareaComponent, MainModule).provide({
+    shallow = new Shallow(MarkdownEditorComponent, MainModule).provide({
       provide: NgControl,
       useClass: TestNgControl,
     });

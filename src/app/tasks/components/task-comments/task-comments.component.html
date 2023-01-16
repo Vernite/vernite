@@ -2,9 +2,9 @@
   <message *ngFor="let comment of comments$ | async" [content]="comment.content" [timestamp]="comment.createdAt">
   </message>
 </div>
-<app-textarea [formControl]="form.get('content')">
+<app-input type="textarea" [formControl]="form.get('content')">
   <div class="grow flex justify-end">
     <app-button variant="primary" icon="matSend" matTooltip="Send" i18n-matTooltip (click)="sendComment()">
     </app-button>
   </div>
-</app-textarea>
+</app-input>

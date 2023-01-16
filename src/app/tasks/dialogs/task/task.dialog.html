@@ -26,8 +26,8 @@
     </app-input>
 
     <!-- Description field -->
-    <app-textarea floatingLabel="Description" placeholder="Sample description..." formControlName="description"
-      i18n-floatingLabel i18n-placeholder [rows]="10"></app-textarea>
+    <app-input type="textarea" floatingLabel="Description" placeholder="Sample description..."
+      formControlName="description" i18n-floatingLabel i18n-placeholder></app-input>
 
     <!-- Status -->
     <app-select formControlName="statusId" floatingLabel="Status" i18n-floatingLabel>
@@ -112,6 +112,8 @@
 </div>
 <div mat-dialog-actions>
   <app-button mat-button (click)="cancel()" i18n>Cancel</app-button>
-  <app-button *ngIf="data.variant === TaskDialogVariant.CREATE" (click)="confirm()" variant="primary" i18n>Create</app-button>
-  <app-button *ngIf="data.variant === TaskDialogVariant.EDIT" (click)="confirm()" variant="primary" i18n>Save changes</app-button>
+  <app-button *ngIf="data.variant === TaskDialogVariant.CREATE" (click)="confirm()" variant="primary"
+    i18n>Create</app-button>
+  <app-button *ngIf="data.variant === TaskDialogVariant.EDIT" (click)="confirm()" variant="primary" i18n>Save
+    changes</app-button>
 </div>

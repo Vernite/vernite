@@ -1,6 +1,6 @@
 <div class="changelog text-base mt-10 mb-1" i18n>Description</div>
 <hr class="opacity-50">
-<div class="description markdown-preview pt-3" [innerHTML]="((project$ | async)?.description || '') | markdown"></div>
+<div class="description markdown-preview pt-3">{{ ((project$ | async)?.description || '') | markdown }}</div>
 
 <div class="changelog text-base mt-10 mb-1" i18n>Members</div>
 <hr class="opacity-50">
