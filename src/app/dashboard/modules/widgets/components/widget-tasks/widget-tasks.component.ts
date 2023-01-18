@@ -49,12 +49,14 @@ export class WidgetTasksComponent implements OnInit {
       tasks: this.taskService.listTasksAssignedToMe(),
     }).pipe(
       map(({ projects, tasks }) => {
-        return projects.map((project) =>
-          this.loadProject(
-            project,
-            tasks.filter((task) => task.projectId === project.id),
-          ),
-        );
+        return projects
+          .map((project) =>
+            this.loadProject(
+              project,
+              tasks.filter((task) => task.projectId === project.id),
+            ),
+          )
+          .filter((project) => project.tasks.length > 0);
       }),
     );
   }
