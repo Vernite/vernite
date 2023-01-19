@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { LandingPageNavComponent } from './landing-page/components/landing-page-nav/landing-page-nav.component';
 import { LandingPageDocsPage } from './landing-page/pages/landing-page-docs/landing-page-docs.page';
 import { LandingPageChangelogPage } from './landing-page/pages/landing-page-changelog/landing-page-changelog.page';
+import { LandingPageCarouselComponent } from './landing-page/components/landing-page-carousel/landing-page-carousel.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { LandingPageChangelogPage } from './landing-page/pages/landing-page-chan
     LandingPageDocsPage,
     LandingPageChangelogPage,
     LandingPageNavComponent,
+    LandingPageCarouselComponent,
   ],
   imports: [AppRoutingModule, BrowserAnimationsModule, MainModule],
   providers: [
