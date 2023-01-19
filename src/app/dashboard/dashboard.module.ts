@@ -28,6 +28,7 @@ import { WidgetTasksComponent } from './modules/widgets/components/widget-tasks/
 import { DashboardPage } from './pages/dashboard/dashboard.page';
 import { WidgetAuditLogComponent } from './modules/widgets/components/widget-audit-log/widget-audit-log.component';
 import { AuditLogModule } from '../_main/modules/audit-log/audit-log.module';
+import { GithubIntegrationPage } from './pages/github-integration/github-integration.page';
 
 @NgModule({
   imports: [
@@ -61,6 +62,7 @@ import { AuditLogModule } from '../_main/modules/audit-log/audit-log.module';
     WidgetTasksComponent,
     WidgetAuditLogComponent,
     DashboardPage,
+    GithubIntegrationPage,
   ],
   providers: [GitIntegrationService],
 })
