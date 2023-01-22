@@ -64,7 +64,7 @@ jobs:
 
       # Deploy documentation to Github pages
       - name: Deploy documentation 📄
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: documentation
@@ -73,7 +73,7 @@ jobs:
 
       # Deploy documentation index to Github pages
       - name: Deploy docs-pages
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: docs-pages
