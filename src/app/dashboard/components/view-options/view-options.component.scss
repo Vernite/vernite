@@ -1,0 +1,31 @@
+:host {
+  width: 100%;
+  color: var(--color-text);
+}
+
+section {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 1rem;
+  background-size: contain;
+  border-radius: var(--border-radius);
+}
+
+.options {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filters-overlay {
+  width: 400px;
+  padding: 1rem;
+  background-color: var(--color-secondary-800);
+  border-radius: var(--border-radius);
+}

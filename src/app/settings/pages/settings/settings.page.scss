@@ -1,0 +1,54 @@
+@import '../../../../styles/typography';
+
+section {
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar {
+  width: 315px;
+  height: 100%;
+  padding: 40px;
+
+  a {
+    @include text-base;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    margin-bottom: 0.35rem;
+    border-radius: var(--border-radius);
+    color: var(--color-text);
+    transition: background-color 0.1s ease-in-out;
+
+    app-icon {
+      margin-right: 1rem;
+    }
+
+    &:hover {
+      background-color: var(--color-secondary-500);
+    }
+
+    &.active {
+      background-color: var(--color-secondary-500);
+
+      &::before {
+        position: absolute;
+        top: 10%;
+        left: -10px;
+        width: 4px;
+        height: 80%;
+        background-color: var(--color-primary-700);
+        border-radius: var(--border-radius);
+        content: '';
+      }
+    }
+  }
+}
+
+.content {
+  width: 100%;
+  max-width: 800px;
+  padding: 40px;
+}

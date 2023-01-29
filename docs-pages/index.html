@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<head>
+  <script type="text/javascript">
+    fetch('https://api.github.com/repos/vernite/frontend/contents/?ref=gh-pages')
+      .then(data => data.json())
+      .then((data) => {
+        const list = document.createElement('ul');
+        document.body.appendChild(list);
+        data.forEach(item => {
+          if (item.type !== 'dir') return;
+
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = `https://vernite.github.io/frontend/${item.name}`;
+          a.innerText = item.name;
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+      });
+  </script>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #111827
+    }
+
+    ul {
+      padding-left: 0.5rem;
+    }
+
+    ul li {
+      list-style: none;
+    }
+
+    a {
+      color: #f9fafb;
+    }
+  </style>
+</head>
+
+<body>
+
+</body>

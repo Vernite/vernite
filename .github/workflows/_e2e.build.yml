@@ -1,0 +1,36 @@
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  cypress-run:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules-yarn
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Install yarn
+        run: npm i -g yarn
+      - name: Install cypress
+        run: yarn add cypress@12.0.0 --dev
+      # and run all Cypress tests
+      - name: Cypress run
+        run: |
+          yarn e2e:build
+          yarn e2e:coverage
+
+      # Cache results
+      - name: Cache results
+        uses: actions/cache@v3
+        with:
+          path: coverage
+          key: ${{ runner.os }}-e2e-tests-${{ github.run_id }}

@@ -1,0 +1,11 @@
+<div class="general">
+  <div class="header">
+    <ng-container *ngIf="control.value | dayjs as date">
+      <div class="year">{{ date | year }}</div>
+      <div class="date">{{ date | dayjsFormat:'MMMM D' }}</div>
+      <div class="opacity-50">{{ date | dayOfWeek }}</div>
+    </ng-container>
+  </div>
+  <time-picker [formControl]="control"></time-picker>
+</div>
+<date-picker [formControl]="control"></date-picker>

@@ -1,0 +1,38 @@
+<h2 class="text-xl font-bold mb-5" i18n>Sessions</h2>
+
+<!-- Sessions list -->
+<ng-container>
+  <app-list-group label="Where You are logged in" i18n-label></app-list-group>
+  <div class="list">
+    <ul *ngFor="let session of sessionsList$ | async">
+      <li>
+        <div class="sessions-entry">
+          <div class="labels">
+            <div class="agent">
+              <p class="text-base label">
+                {{ agentType("os", session.userAgent) }},
+              </p>
+              <p class="text-base description">
+                {{ agentType("browser", session.userAgent) }}
+              </p>
+            </div>
+            <div class="local">
+              <p *ngIf="session.geoip" class="text-base">
+                {{ location(session.geoip) }}
+              </p>
+              <p *ngIf="!session.current" class="text-base description">
+                {{ changeDate(session.lastUsed) }}
+              </p>
+              <p *ngIf="session.current" class="text-base">
+                <mark i18n>Active now</mark>
+              </p>
+            </div>
+          </div>
+          <div *ngIf="!session.current" class="actions">
+            <app-button variant="secondary" (click)="deleteSession(session.id)" i18n>Log out</app-button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</ng-container>

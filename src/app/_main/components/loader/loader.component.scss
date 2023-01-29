@@ -1,0 +1,38 @@
+:host {
+  display: block;
+}
+
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/** @author jh3y */
+.loader:before {
+  -webkit-animation: spin .5s infinite linear;
+  animation: spin .5s infinite linear;
+  border-radius: 100%;
+  -webkit-box-shadow: inset -2px 0 0 0px var(--color-text);
+  box-shadow: inset -2px 0 0 0px var(--color-text);
+  content: '';
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  display: block;
+}

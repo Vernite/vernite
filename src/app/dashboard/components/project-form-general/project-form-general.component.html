@@ -1,0 +1,22 @@
+<form [formGroup]="form">
+
+  <!-- Workspace input -->
+  <app-select formControlName="workspaceId" floatingLabel="Workspace" i18n-floatingLabel>
+    <app-option *ngFor="let workspace of workspaces$ | async" [value]="workspace.id">
+      {{ workspace.name }}
+    </app-option>
+  </app-select>
+
+  <!-- Logo input -->
+  <input-file formControlName="logo" floatingLabel="Logo" i18n-floatingLabel accept="image/*" i18n-accept
+    i18n-placeholder></input-file>
+
+  <!-- Name input -->
+  <app-input formControlName="name" type="text" placeholder="New project" floatingLabel="Project name"
+    i18n-floatingLabel i18n-placeholder></app-input>
+
+  <!-- Description input -->
+  <app-input type="textarea" formControlName="description" floatingLabel="Description"
+    placeholder="Sample description..." i18n-floatingLabel i18n-placeholder></app-input>
+
+</form>

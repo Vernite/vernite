@@ -1,0 +1,25 @@
+.integration-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border: 1px solid var(--color-secondary-300);
+  border-radius: var(--border-radius);
+
+  &.suspended {
+    opacity: 0.5;
+  }
+
+  .labels {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 0;
+
+    .description {
+      display: block;
+      padding-left: 0.5rem;
+      opacity: 0.5;
+    }
+  }
+}

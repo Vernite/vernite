@@ -1,0 +1,15 @@
+<app-input #trigger="cdkOverlayOrigin" [formControl]="displayControl" [floatingLabel]="floatingLabel"
+  [staticLabel]="staticLabel" [placeholder]="placeholder" [readonly]="true" [pending]="pending"
+  (focus)="onFocusStateChanged($event)" cdkOverlayOrigin>
+  <span class="suffix">
+    <app-icon [icon]="faCalendar" size="16px"></app-icon>
+  </span>
+</app-input>
+
+<ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="(isPickerOpen$ | async) || false"
+  [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'" [cdkConnectedOverlayHasBackdrop]="true">
+  <div #overlay class="overlay">
+    <date-time-picker [formControl]="control"></date-time-picker>
+  </div>
+</ng-template>

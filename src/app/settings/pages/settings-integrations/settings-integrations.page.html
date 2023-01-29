@@ -1,0 +1,25 @@
+<h2 class="text-xl font-bold mb-5" i18n>Integrations</h2>
+
+<!-- GitHub integrations list -->
+<ng-container>
+  <app-list-group label="GitHub" i18n-label>
+    <app-button [icon]="faPlus" class="suffix" variant="transparent" (click)="openGitHubIntegration()"></app-button>
+  </app-list-group>
+  <div class="list">
+    <app-integration-entry *ngFor="let o of gitHubAccounts$ | async" [label]="o.account.login" [integration]="o.account"
+      (disconnect)="disconnectGithubAccount($event)" [description]="o.usage | async" i18n-label>
+    </app-integration-entry>
+  </div>
+</ng-container>
+
+<!-- Slack integrations list -->
+<ng-container>
+  <app-list-group class="mt-3" label="Slack" i18n-label>
+    <app-button [icon]="faPlus" class="suffix" variant="transparent" (click)="openSlackIntegration()"></app-button>
+  </app-list-group>
+  <div class="list">
+    <app-integration-entry *ngFor="let account of slackAccounts$ | async" [label]="account.teamName"
+      [description]="account.installerUserId" (disconnect)="disconnectSlackAccount($event)" i18n-label>
+    </app-integration-entry>
+  </div>
+</ng-container>

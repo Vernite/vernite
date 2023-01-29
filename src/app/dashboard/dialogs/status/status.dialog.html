@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" autocomplete="off">
+
+    <!-- Name field -->
+    <app-input floatingLabel="Name" formControlName="name" i18n-floatingLabel>
+    </app-input>
+
+    <!-- Color field -->
+    <input-color formControlName="color" i18n-floatingLabel floatingLabel="Color"></input-color>
+
+    <!-- Begin field -->
+    <app-checkbox formControlName="begin" i18n>Begin</app-checkbox>
+
+    <!-- Final field -->
+    <app-checkbox formControlName="final" i18n>Final</app-checkbox>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <app-button mat-button (click)="cancel()" i18n>Cancel</app-button>
+  <app-button (click)="close()" variant="primary">{{ data.confirmButtonText }}</app-button>
+</div>

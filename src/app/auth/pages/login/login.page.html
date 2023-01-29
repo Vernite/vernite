@@ -1,0 +1,36 @@
+<section class="main">
+  <section class="box">
+    <section class="form-side">
+      <div class="logo" routerLink="/"></div>
+      <form [formGroup]="form" (submit)="login()">
+        <div>
+          <h2 class="text-xl font-bold" i18n>Login to system</h2>
+          <p class="text-base" i18n>Please enter your email and password to log in. If you don't have an account, you can create one by clicking <a
+              routerLink="/auth/register">register</a>.</p>
+        </div>
+
+        <div *ngIf="error" class="error-box">
+          {{ error }}
+        </div>
+
+        <app-input formControlName="email" type="email" placeholder="test@example.com" floatingLabel="Email or Username"
+          i18n-floatingLabel i18n-placeholder></app-input>
+
+        <app-input formControlName="password" type="password" placeholder="●●●●●●●" floatingLabel="Password"
+          i18n-floatingLabel></app-input>
+
+        <p class="text-base" i18n>Forgot your password? <a routerLink="/auth/password-reset">Reset password</a>.</p>
+
+        <div class="remember-me">
+          <app-checkbox formControlName="remember" i18n>Remember me</app-checkbox>
+        </div>
+
+        <app-button variant="primary" [pending]="loader.pending" i18n>Log in</app-button>
+
+      </form>
+    </section>
+    <section class="image-side">
+
+    </section>
+  </section>
+</section>

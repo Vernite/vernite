@@ -1,0 +1,5 @@
+<div class="flex items-center">
+  <app-icon *ngIf="icon" [icon]="icon" size="1rem"></app-icon>
+  <ng-content></ng-content>
+</div>
+<app-icon *ngIf="checkmark && selected" class="suffix" [icon]="faCheck" size="0.75rem"></app-icon>

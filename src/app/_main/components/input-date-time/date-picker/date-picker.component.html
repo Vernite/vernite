@@ -1,0 +1,32 @@
+<div class="date">
+  <div class="year-header">
+    {{ cursor | dayjsFormat:'YYYY' }}
+  </div>
+  <div class="header">
+    <button class="previous-month" (click)="previousMonth()">
+      <app-icon [icon]="faChevronLeft" size="1rem"></app-icon>
+    </button>
+    <h4 class="month-name">
+      {{ cursor | month }}
+    </h4>
+    <button class="next-month" (click)="nextMonth()">
+      <app-icon [icon]="faChevronRight" size="1rem"></app-icon>
+    </button>
+  </div>
+  <div class="calendar">
+    <div class="weekdays">
+      <span *ngFor="let weekday of weekdaysShort" class="weekday">{{ weekday }}</span>
+    </div>
+    <div class="calendar-grid">
+      <div class="row" *ngFor="let row of daysGrid">
+        <div class="cell" *ngFor="let day of row" (click)="selectDay(day)" [class.today]="day.today"
+          [class.selected]="day.selected">
+          <span class="day" [class.opacity-50]="day.isFromPreviousMonth || day.isFromNextMonth">{{ day.name }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!hideTodayButton" class="date-actions">
+    <button (click)="today()" i18n>Today</button>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="wrapper">
+  <button type="button" (click)="toggleDetails()" class="total" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+    <span>{{ (timer$ | async) || 0 | timeTrackTimer }}</span>
+  </button>
+
+  <button type="button" class="toggle" (click)="toggle()">
+    <app-icon [icon]="enabled ? faCircleStop : faCirclePlay"
+      [style.color]="enabled ? 'var(--color-red-500)' : 'var(--color-green-500)'"></app-icon>
+  </button>
+</div>
+
+<ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="(isOpen$ | async) || false" (backdropClick)="closeDetails()"
+  [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'" [cdkConnectedOverlayHasBackdrop]="true">
+  <div #overlay class="tracker-overlay">
+    <ul>
+      <li *ngFor="let timeTrack of timeTracks">
+        <tracker-entry [timeTrack]="timeTrack"></tracker-entry>
+      </li>
+      <li *ngIf="!timeTracks?.length" class="no-tracks">
+        <app-card class="mb-3">
+          <div class="card-content" i18n>Time in this task hasn't been tracked yet</div>
+        </app-card>
+      </li>
+    </ul>
+    <app-button [icon]="faPlus" class="w-full" (click)="insertTimeTrack()" i18n>Add new time track</app-button>
+  </div>
+</ng-template>

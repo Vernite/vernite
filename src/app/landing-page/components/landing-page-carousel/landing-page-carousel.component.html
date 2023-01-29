@@ -1,0 +1,36 @@
+<app-button [icon]="faChevronLeft" variant="transparent" class="previous-image" (click)="previousImage()"></app-button>
+<div class="images">
+  <div class="images-wrapper" [style.transform]="transform">
+    <div #image class="image">
+      <ng-container *ngTemplateOutlet="frameHeader"></ng-container>
+      <img src="assets/screenshots/landing-page-screenshot-1.png" alt="landing-page-screen-1" i18n-alt>
+    </div>
+    <div #image class="image">
+      <ng-container *ngTemplateOutlet="frameHeader"></ng-container>
+      <img src="assets/screenshots/landing-page-screenshot-2.png" alt="landing-page-screen-2" i18n-alt>
+    </div>
+    <div #image class="image">
+      <ng-container *ngTemplateOutlet="frameHeader"></ng-container>
+      <img src="assets/screenshots/landing-page-screenshot-3.png" alt="landing-page-screen-3" i18n-alt>
+    </div>
+    <div #image class="image">
+      <ng-container *ngTemplateOutlet="frameHeader"></ng-container>
+      <img src="assets/screenshots/landing-page-screenshot-4.png" alt="landing-page-screen-4" i18n-alt>
+    </div>
+  </div>
+</div>
+<app-button [icon]="faChevronRight" variant="transparent" class="next-image" (click)="nextImage()"></app-button>
+<div class="dots">
+  <div class="dot" [class.active]="currentImageIndex === 0" (click)="setImage(0)"></div>
+  <div class="dot" [class.active]="currentImageIndex === 1" (click)="setImage(1)"></div>
+  <div class="dot" [class.active]="currentImageIndex === 2" (click)="setImage(2)"></div>
+  <div class="dot" [class.active]="currentImageIndex === 3" (click)="setImage(3)"></div>
+</div>
+
+<ng-template #frameHeader>
+  <div class="header">
+    <button class="circle red"></button>
+    <button class="circle yellow"></button>
+    <button class="circle green"></button>
+  </div>
+</ng-template>

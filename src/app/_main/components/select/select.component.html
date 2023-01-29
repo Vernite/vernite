@@ -1,0 +1,32 @@
+<ng-container *ngIf="isControlInitialized">
+
+  <!-- Overlay origin -->
+  <div class="trigger" #trigger="cdkOverlayOrigin" cdkOverlayOrigin></div>
+
+  <!-- Select input -->
+  <app-input #input (click)="toggleOverlay()" type="text" [formControl]="displayControl" [readonly]="true"
+    [floatingLabel]="floatingLabel" [allowResizeByError]="allowResizeByError" [pending]="pending">
+    <div class="prefix" *ngLet="selectedOptions$ | async as selectedOptions">
+      <app-icon class="prefix" *ngIf="!multiple && selectedOptions.length && selectedOptions[0].icon" size="1rem"
+        [icon]="selectedOptions[0].icon"></app-icon>
+      <ng-content select=".prefix"></ng-content>
+    </div>
+    <app-icon *ngIf="!readonly" class="suffix" [icon]="faChevronDown" size="0.75rem"></app-icon>
+    <div *ngIf="multiple" class="overlay">
+      <pill *ngFor="let option of selectedOptions$ | async">{{ option.viewValue }}</pill>
+    </div>
+  </app-input>
+
+  <!-- Select overlay -->
+  <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="isOpen"
+    [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'" [cdkConnectedOverlayHasBackdrop]="true"
+    [cdkConnectedOverlayMinWidth]="overlayMinWidth + 'px'" [cdkConnectedOverlayWidth]="overlayMinWidth + 'px'">
+    <div #overlay class="connected-overlay" (clickOutside)="closeOverlay()">
+      <ng-content select="app-option"></ng-content>
+      <div *ngIf="!queryOptions?.length">
+        <ng-content select="app-empty-options"></ng-content>
+      </div>
+    </div>
+  </ng-template>
+
+</ng-container>

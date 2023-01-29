@@ -1,7 +1,25 @@
 {
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=827846
   "recommendations": [
-    
-    "nrwl.angular-console",
-    "esbenp.prettier-vscode"
+    "angular.ng-template",
+    "ghaschel.vscode-angular-html",
+    "mrmlnc.vscode-scss",
+    "abierbaum.vscode-file-peek",
+    "dbaeumer.vscode-eslint",
+    "dannymcgee.ng-html",
+    "alexiv.vscode-angular2-files",
+    "mikael.angular-beastcode",
+    "christian-kohler.path-intellisense",
+    "roman-lo.vscode-ng-i18n-editor",
+    "finico.angular-dx",
+    "aaron-bond.better-comments",
+    "simontest.simontest",
+    "vscode-icons-team.vscode-icons",
+    "rvest.vs-code-prettier-eslint",
+    "editorconfig.editorconfig",
+    "stylelint.vscode-stylelint",
+    "vunguyentuan.vscode-css-variables",
+    "tobermory.es6-string-html",
+    "gruntfuggly.todo-tree"
   ]
 }

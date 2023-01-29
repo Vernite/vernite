@@ -1,0 +1,10 @@
+<button #btn [ngClass]="[variant]" [disabled]="disabled" [type]="type" [class.button-with-icon]="icon"
+  [class.icon-button]="!contentRef.childNodes.length">
+  <div class="prefix" [class.pending]="pending">
+    <mat-spinner diameter="18" [class.hide]="!pending"></mat-spinner>
+    <app-icon *ngIf="icon" [icon]="icon" [class.hide]="pending" size="16px"></app-icon>
+  </div>
+  <span #contentRef>
+    <ng-content></ng-content>
+  </span>
+</button>

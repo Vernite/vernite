@@ -1,0 +1,138 @@
+@import '../../../../styles/typography';
+
+:host {
+  display: flex;
+  overflow: visible;
+  min-height: 58px;
+  flex-direction: column;
+  flex-grow: 0;
+  flex-shrink: 1;
+
+  &.collapsed {
+    .icons {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .element {
+      padding-left: 0.85rem;
+
+      &:hover {
+        .text {
+          padding: 0.5rem;
+          background-color: var(--color-secondary-800);
+          border-radius: var(--border-radius);
+          opacity: 1;
+        }
+      }
+
+      .text {
+        z-index: 5;
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+section {
+  @include text-title;
+
+  display: flex;
+  height: 46px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.25rem 0.5rem;
+  border-radius: var(--border-radius);
+  color: var(--color-neutral-300);
+  cursor: pointer;
+  transition: color 0.1s ease, background-color .1s ease;
+
+  &:hover {
+    background-color: rgba(124, 170, 215, 0.1);
+    color: var(--color-text);
+
+    .icons .options {
+      opacity: 1;
+    }
+  }
+
+  .element {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    padding: 0 0 0 1.25rem;
+    transition: padding-left 0.4s ease;
+
+    app-icon {
+      margin-right: 1.25rem;
+    }
+
+    .text {
+      opacity: 1;
+      transition: opacity 0.4s ease, padding 0.4s ease;
+    }
+
+  }
+
+  .icons {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding-right: 0.5rem;
+
+    &>* {
+      min-width: 1.5rem;
+      min-height: 1.5rem;
+      border-radius: 4px;
+      transition: background-color .1s ease;
+
+      &:hover {
+        background-color: var(--color-secondary-800);
+      }
+    }
+
+    .options {
+      display: flex;
+      align-items: center;
+      opacity: 0;
+      transition: opacity .1s ease;
+    }
+
+    .open-below {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+
+      app-icon {
+        display: flex;
+        justify-content: center;
+        transition: transform .2s ease;
+
+        &.active {
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    .options button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.list {
+  display: block;
+  overflow: auto;
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.25rem;
+  background-color: var(--color-secondary-600);
+  cursor: pointer;
+  transition: max-height .4s ease;
+}

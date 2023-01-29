@@ -1,0 +1,71 @@
+:host {
+  display: block;
+  overflow: visible;
+  animation: open 1s ease-in-out forwards;
+}
+
+.content {
+  display: flex;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+
+  .message {
+    margin-right: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .close-button {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    color: var(--color-text);
+    cursor: pointer;
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      display: block;
+      width: 1px;
+      height: 1rem;
+      margin-top: 0.25rem;
+      background-color: var(--color-text);
+      border-radius: 50%;
+      content: '';
+      transition: background-color 0.4s ease;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+@keyframes open {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes close {
+  from {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}

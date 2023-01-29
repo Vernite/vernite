@@ -1,0 +1,19 @@
+/**
+ * Mixin to apply specific styles to the element only in specific theme.
+ *
+ * Example usage:
+ * ```scss
+ * .my-element {
+ *     @include theme(dark) {
+ *         color: var(--color-text-dark);
+ *     }
+ * }
+ * ```
+ */
+@mixin theme($theme) {
+  @at-root {
+    body[theme=$theme] & {
+      @content;
+    }
+  }
+}

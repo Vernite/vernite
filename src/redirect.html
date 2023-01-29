@@ -1,0 +1,32 @@
+<!-- eslint-disable @angular-eslint/template/i18n -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    const availableLanguages = ['de-DE', 'en-GB', 'en-US', 'es-ES', 'it-IT', 'pl-PL', 'uk-UA'];
+    const defaultLanguage = 'en-US';
+    const localStorageLanguage = localStorage.getItem('language');
+    const navigatorLanguage = navigator.language || navigator.userLanguage;
+    const language = localStorageLanguage || navigatorLanguage || 'en-US';
+
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    });
+    let path = params.path || '';
+
+    if (availableLanguages.includes(language)) {
+      window.location = '/' + language + path;
+    } else {
+      window.location = '/' + defaultLanguage + path;
+    }
+  </script>
+  <title>Vernite</title>
+</head>
+
+<body></body>
+
+</html>

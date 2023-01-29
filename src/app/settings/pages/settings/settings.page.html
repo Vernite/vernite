@@ -1,0 +1,47 @@
+<section>
+
+  <!-- Sidebar navigation -->
+  <nav class="sidebar">
+    <ul>
+
+      <!-- Account settings -->
+      <li>
+        <a routerLink="/settings/account" routerLinkActive="active">
+          <app-icon [icon]="faUser" size="16px"></app-icon>
+          <span>Account</span>
+        </a>
+      </li>
+
+      <!-- Localization settings -->
+      <li>
+        <a routerLink="/settings/localization" routerLinkActive="active">
+          <app-icon [icon]="faGlobe" size="16px"></app-icon>
+          <span>Localization</span>
+        </a>
+      </li>
+
+      <!-- Integrations settings -->
+      <li>
+        <a routerLink="/settings/integrations" routerLinkActive="active">
+          <app-icon [icon]="faCircleNodes" size="16px"></app-icon>
+          <span>Integrations</span>
+        </a>
+      </li>
+
+      <!-- Sessions settings -->
+      <li>
+        <a routerLink="/settings/sessions" routerLinkActive="active">
+          <app-icon [icon]="faAddressCard" size="16px"></app-icon>
+          <span>Sessions</span>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+
+  <!-- Content of the settings page -->
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+
+</section>

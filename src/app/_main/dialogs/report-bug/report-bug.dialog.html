@@ -1,0 +1,18 @@
+<h1 mat-dialog-title i18n>Bug report</h1>
+<div mat-dialog-content>
+  <form (submit)="send()" [formGroup]="form" autocomplete="off">
+
+    <!-- Title field -->
+    <app-input floatingLabel="Title" formControlName="title" i18n-floatingLabel i18n-placeholder>
+    </app-input>
+
+    <!-- Description field -->
+    <app-input type="textarea" floatingLabel="Description" formControlName="description" i18n-floatingLabel
+      i18n-placeholder></app-input>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <app-button mat-button (click)="cancel()" i18n>Cancel</app-button>
+  <app-button (click)="send()" variant="primary" i18n>Send</app-button>
+</div>

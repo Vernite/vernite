@@ -1,0 +1,36 @@
+<h1 mat-dialog-title *ngIf="data.variant === ReleaseDialogVariant.EDIT" i18n>Edit release: {{ data.release?.name }}</h1>
+<h1 mat-dialog-title *ngIf="data.variant === ReleaseDialogVariant.CREATE" i18n>Create new release</h1>
+<div mat-dialog-content>
+  <form (submit)="confirm()" [formGroup]="form" autocomplete="off">
+
+    <!-- Project -->
+    <app-select formControlName="projectId" floatingLabel="Project"
+      [readonly]="data.variant === ReleaseDialogVariant.EDIT" i18n-floatingLabel>
+      <app-option *ngFor="let project of projectList$ | async" [value]="project.id">{{project.name}}
+      </app-option>
+      <app-empty-options i18n>Selected workspace is empty</app-empty-options>
+    </app-select>
+
+    <!-- Name field -->
+    <app-input floatingLabel="Name" placeholder="New release" formControlName="name" i18n-floatingLabel
+      i18n-placeholder>
+    </app-input>
+
+    <!-- Description field -->
+    <app-input type="textarea" floatingLabel="Description" placeholder="Sample description..."
+      formControlName="description" i18n-floatingLabel i18n-placeholder></app-input>
+
+    <!-- Start date -->
+    <app-input-date-time formControlName="deadline" floatingLabel="Release date" placeholder="Choose a date"
+      i18n-floatingLabel i18n-placeholder>
+    </app-input-date-time>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <app-button mat-button (click)="cancel()" i18n>Cancel</app-button>
+  <app-button *ngIf="data.variant === ReleaseDialogVariant.CREATE" (click)="confirm()" variant="primary"
+    i18n>Create</app-button>
+  <app-button *ngIf="data.variant === ReleaseDialogVariant.EDIT" (click)="confirm()" variant="primary" i18n>Save
+    changes</app-button>
+</div>

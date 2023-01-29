@@ -1,0 +1,25 @@
+<ng-container [ngSwitch]="prefix">
+  <ng-container *ngSwitchCase="'fas'">
+    <fa-icon [icon]="iconDefinition" [ngStyle]="style"></fa-icon>
+  </ng-container>
+  <ng-container *ngSwitchCase="'far'">
+    <fa-icon [icon]="iconDefinition" [ngStyle]="style"></fa-icon>
+  </ng-container>
+  <ng-container *ngSwitchCase="'fab'">
+    <fa-icon [icon]="iconDefinition" [ngStyle]="style"></fa-icon>
+  </ng-container>
+  <ng-container *ngSwitchCase="'mat'">
+    <mat-icon [ngStyle]="style">{{ snakeCaseName }}</mat-icon>
+  </ng-container>
+  <ng-container *ngSwitchCase="'cu'">
+    <mat-icon [ngStyle]="style" [svgIcon]="snakeCaseName"></mat-icon>
+    <!-- <svg [ngStyle]="style" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" width="100%"
+      xmlns:xlink="http://www.w3.org/1999/xlink">
+      <use [attr.href]="'assets/icons/' + snakeCaseName + '.svg'"
+        [attr.xlink:href]="'assets/icons/' + snakeCaseName + '.svg'"></use>
+    </svg> -->
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    <mat-icon [ngStyle]="style">question_mark</mat-icon>
+  </ng-container>
+</ng-container>

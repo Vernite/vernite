@@ -1,0 +1,9 @@
+{
+  "/api": {
+    "target": "https://insiders.vernite.dev",
+    "secure": false,
+    "ws": true,
+    "wss": true,
+    "changeOrigin": true
+  }
+}

@@ -1,0 +1,60 @@
+@use '@angular/material' as mat;
+
+@import '~monaco-editor/min/vs/editor/editor.main';
+@import '~highlight.js/styles/github-dark.css';
+
+// Global files imports
+@import 'colors';
+@import 'typography';
+@import 'preload';
+
+// Themes imports
+@import 'themes/default.theme';
+@import 'themes/dark.theme';
+
+// Material overrides
+@import 'material/input.material';
+@import 'material/select.material';
+@import 'material/spinner.material';
+@import 'material/table.material';
+@import 'material/menu.material';
+@import 'material/dialog.material';
+@import 'material/typography.material';
+@import 'material/checkbox.material';
+@import 'material/error-box.material';
+@import 'material/tooltip.material';
+
+// Elements
+@import 'elements/table';
+@import 'elements/markdown';
+@import 'elements/scrollbar';
+@import 'elements/resize';
+
+// Tailwind dependencies imports
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Global styles
+html {
+  overflow: hidden;
+}
+
+html,
+body,
+app-root {
+  height: 100%;
+  min-height: 100vh;
+}
+
+app-root {
+  display: block;
+}
+
+body {
+  margin: 0;
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
+}

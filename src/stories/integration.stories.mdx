@@ -1,0 +1,10 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Core/CI\CD pipeline" />
+
+# CI/CD pipeline
+Continuos integration was resolved using tool named [GitHub Actions](https://github.com/features/actions).
+Actions are located in `.github/workflows/` directory. At this moment there is one pipeline to deploy application named `deploy.yml`.
+This action after every push to the master branch rebuild the application and deploy it to the production environment using `rsync protocol`.
+This action also build documentation page, publishes it and runs tests. There is also included a small script to create badges to use them in `Readme.md` and documentation files.
+This file is named `badge-generator.js` and is located in the root directory.

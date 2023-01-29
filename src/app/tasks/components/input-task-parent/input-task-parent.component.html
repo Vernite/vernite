@@ -1,0 +1,10 @@
+<input-task-property i18n-label label="Parent task" [(isOpen)]="isOpen">
+  <app-select [formControl]="control" [allowResizeByError]="true" floatingLabel="Parent task" i18n-floatingLabel
+    comparer="id">
+    <app-option *ngFor="let task of tasks$ | async" [value]="task.id">
+      <!-- TODO: Task type icon -->
+      <span>{{ task.name }}</span>
+    </app-option>
+    <app-empty-options i18n>There are no matching tasks</app-empty-options>
+  </app-select>
+</input-task-property>

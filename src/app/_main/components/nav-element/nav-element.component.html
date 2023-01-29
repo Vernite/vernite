@@ -1,0 +1,24 @@
+<section>
+  <div class="element" (click)="toggleNavElement()">
+    <app-icon *ngIf="icon" [icon]="icon" size="1rem"></app-icon>
+    <span class="text">
+      <ng-content></ng-content>
+    </span>
+  </div>
+  <div class="icons">
+    <div class="options" [class.hidden]="!showOptions" [matMenuTriggerFor]="menu">
+      <button mat-icon-button aria-label="Menu" i18n-aria-label>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <ng-content select=".options"></ng-content>
+      </mat-menu>
+    </div>
+    <div class="open-below" [class.hidden]="(showArrow$ | async) === false" (click)="toggleNavElement()">
+      <app-icon [icon]="faAngleDown" size="16px" [class.active]="active"></app-icon>
+    </div>
+  </div>
+</section>
+<div class="list" #elementList>
+  <ng-content select=".open-below"></ng-content>
+</div>

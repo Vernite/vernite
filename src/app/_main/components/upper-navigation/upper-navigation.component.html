@@ -1,0 +1,44 @@
+<app-button class="new-task" *ngIf="isButtonDisabled()" variant="primary" (click)="createNewTask()" type="button"
+  i18n>New task</app-button>
+<div class="search"></div>
+<section class="flex-end-position">
+  <fa-icon></fa-icon>
+  <div class="profile">
+    <div class="actions">
+      <div class="notification"></div>
+      <app-button class="bug-reporter" variant="transparent" matTooltip="Bug report" [icon]="faBug"
+        (click)="reportBug()" i18n-matTooltip></app-button>
+      <app-button class="manual-guide" variant="transparent" matTooltip="Manual guide" [icon]="faCircleQuestion"
+        (click)="openManualGuide()" i18n-matTooltip></app-button>
+    </div>
+    <div class="myself" *ngIf="myself$ | async as myself">
+      <div class="avatar"></div>
+      <div class="name">{{myself.name}} {{myself.surname}}</div>
+    </div>
+    <div #openBelow class="open-below" (click)="toggleProfile()" [class.active]="active">
+      <app-icon [icon]="faAngleDown" size="16px"></app-icon>
+    </div>
+  </div>
+</section>
+<div class="options" [class.active]="active">
+  <ul>
+    <li>
+      <a routerLink="/settings/account" routerLinkActive="active">
+        <app-icon [icon]="faUser" size="16px"></app-icon>
+        <h2 i18n>Profile</h2>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/settings/localization" routerLinkActive="active">
+        <app-icon [icon]="faCog" size="16px"></app-icon>
+        <h2 i18n>Settings</h2>
+      </a>
+    </li>
+    <li>
+      <a (click)="logout()">
+        <app-icon [icon]="faSignOut" size="16px"></app-icon>
+        <h2 i18n>Log out</h2>
+      </a>
+    </li>
+  </ul>
+</div>

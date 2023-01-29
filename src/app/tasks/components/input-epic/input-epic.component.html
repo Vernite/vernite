@@ -1,0 +1,6 @@
+<input-task-property i18n-label label="Epic" [(isOpen)]="isOpen">
+  <app-select [formControl]="control" [allowResizeByError]="true" floatingLabel="Epic" i18n-floatingLabel comparer="id">
+    <app-option *ngFor="let task of epics$ | async" [value]="task.id">{{ task.name }}</app-option>
+    <app-empty-options i18n>Epics not found in this project</app-empty-options>
+  </app-select>
+</input-task-property>

@@ -1,0 +1,18 @@
+<app-sidebar-navigation *ngIf="!hideNavigation" resize [width]="sidebarWidth">
+</app-sidebar-navigation>
+
+<section>
+  <app-upper-navigation *ngIf="!hideNavigation"></app-upper-navigation>
+
+  <app-snackbar-outlet></app-snackbar-outlet>
+
+  <section class="content">
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+
+    <app-dialog-outlet [outlet]="DialogOutlet.CONTENT_RIGHT"></app-dialog-outlet>
+  </section>
+</section>
+
+<span class="version">{{ version }}</span>

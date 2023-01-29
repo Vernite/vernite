@@ -1,0 +1,207 @@
+/**
+ * This typography specification is based on: https://spectrum.adobe.com/page/typography/
+ * and the tailwind utility classes: https://tailwindcss.com/docs/font-size
+ *
+ * Tips:
+ * 16px <-> 1rem
+ */
+/* ======================= */
+/* ==== CONFIGURATION ==== */
+/* ======================= */
+:root {
+  --font-family: montserrat, roboto, 'Helvetica Neue', sans-serif;
+
+  // label
+  --text-label-font-size: 0.75rem;
+  --text-label-font-weight: 400;
+  --text-label-text-transform: uppercase;
+
+  // title
+  --text-title-font-size: 0.875rem;
+  --text-title-font-weight: 700;
+  --text-title-text-transform: none;
+
+  // base
+  --text-base-font-size: 0.875rem;
+  --text-base-font-weight: 400;
+  --text-base-text-transform: none;
+
+  // lg
+  --text-lg-font-size: 1rem;
+  --text-lg-font-weight: 400;
+  --text-lg-text-transform: none;
+
+  // xl
+  --text-xl-font-size: 1.125rem;
+  --text-xl-font-weight: 400;
+  --text-xl-text-transform: none;
+
+  // 2xl
+  --text-2xl-font-size: 1.25rem;
+  --text-2xl-font-weight: 400;
+  --text-2xl-text-transform: none;
+
+  // 3xl
+  --text-3xl-font-size: 1.5rem;
+  --text-3xl-font-weight: 400;
+  --text-3xl-text-transform: none;
+
+  // 4xl
+  --text-4xl-font-size: 1.75rem;
+  --text-4xl-font-weight: 400;
+  --text-4xl-text-transform: none;
+
+  // 5xl
+  --text-5xl-font-size: 2rem;
+  --text-5xl-font-weight: 400;
+  --text-5xl-text-transform: none;
+
+  // 10xl
+  --text-10xl-font-size: 4rem;
+  --text-10xl-font-weight: 400;
+  --text-10xl-text-transform: none;
+}
+
+/* ==================================== */
+/* ==== UTILITY CLASSES AND MIXINS ==== */
+/* ==================================== */
+
+// ------------ label ------------------ //
+@mixin text-label {
+  font-family: var(--font-family);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  text-transform: var(--text-label-text-transform);
+}
+
+.text-label {
+  @include text-label;
+
+  color: var(--color-text);
+}
+
+// ------------- base ------------------ //
+@mixin text-base {
+  font-family: var(--font-family);
+  font-size: var(--text-base-font-size);
+  font-weight: var(--text-base-font-weight);
+  text-transform: var(--text-base-text-transform);
+}
+
+.text-base {
+  @include text-base;
+
+  color: var(--color-text);
+}
+
+// ------------- title ------------------ //
+@mixin text-title {
+  font-family: var(--font-family);
+  font-size: var(--text-title-font-size);
+  font-weight: var(--text-title-font-weight);
+  text-transform: var(--text-title-text-transform);
+}
+
+.text-title {
+  @include text-title;
+
+  color: var(--color-text);
+}
+
+// --------------- lg ------------------ //
+@mixin text-lg {
+  font-family: var(--font-family);
+  font-size: var(--text-lg-font-size);
+  font-weight: var(--text-lg-font-weight);
+  text-transform: var(--text-lg-text-transform);
+}
+
+.text-lg {
+  @include text-lg;
+
+  color: var(--color-text);
+}
+
+// --------------- xl ------------------ //
+@mixin text-xl {
+  font-family: var(--font-family);
+  font-size: var(--text-xl-font-size);
+  font-weight: var(--text-xl-font-weight);
+  text-transform: var(--text-xl-text-transform);
+}
+
+.text-xl {
+  @include text-xl;
+
+  color: var(--color-text);
+}
+
+// --------------- 2xl ------------------ //
+@mixin text-2xl {
+  font-family: var(--font-family);
+  font-size: var(--text-2xl-font-size);
+  font-weight: var(--text-2xl-font-weight);
+  text-transform: var(--text-2xl-text-transform);
+}
+
+.text-2xl {
+  @include text-2xl;
+
+  color: var(--color-text);
+}
+
+// --------------- 3xl ------------------ //
+@mixin text-3xl {
+  font-family: var(--font-family);
+  font-size: var(--text-3xl-font-size);
+  font-weight: var(--text-3xl-font-weight);
+  text-transform: var(--text-3xl-text-transform);
+}
+
+.text-3xl {
+  @include text-3xl;
+
+  color: var(--color-text);
+}
+
+// --------------- 4xl ------------------ //
+@mixin text-4xl {
+  font-family: var(--font-family);
+  font-size: var(--text-4xl-font-size);
+  font-weight: var(--text-4xl-font-weight);
+  text-transform: var(--text-4xl-text-transform);
+}
+
+.text-4xl {
+  @include text-4xl;
+
+  color: var(--color-text);
+}
+
+// --------------- 5xl ------------------ //
+@mixin text-5xl {
+  font-family: var(--font-family);
+  font-size: var(--text-5xl-font-size);
+  font-weight: var(--text-5xl-font-weight);
+  text-transform: var(--text-5xl-text-transform);
+}
+
+.text-5xl {
+  @include text-5xl;
+
+  color: var(--color-text);
+}
+
+// --------------- 10xl ------------------ //
+@mixin text-10xl {
+  font-family: var(--font-family);
+  font-size: var(--text-10xl-font-size);
+  font-weight: var(--text-10xl-font-weight);
+  text-transform: var(--text-10xl-text-transform);
+}
+
+.text-10xl {
+  @include text-10xl;
+
+  color: var(--color-text);
+}

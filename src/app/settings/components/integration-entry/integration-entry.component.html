@@ -1,0 +1,13 @@
+<div class="integration-entry" [class.suspended]="suspended">
+  <div class="labels">
+    <p class="text-base label">
+      {{ label }}
+    </p>
+    <p class="text-base description">
+      {{ description }}
+    </p>
+  </div>
+  <div class="actions">
+    <app-button variant="secondary" (click)="disconnect.emit(integration)" i18n>Remove</app-button>
+  </div>
+</div>

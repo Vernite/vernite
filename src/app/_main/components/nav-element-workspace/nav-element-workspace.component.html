@@ -1,0 +1,75 @@
+<section>
+  <div class="workspace">
+    <div class="element" (click)="toggleWorkspace()">
+      <div class="workspace-icon">{{ (workspace.name || '').substr(0, 2) }}</div>
+      <span class="text" #contentRef>
+        <ng-content></ng-content>
+      </span>
+    </div>
+    <div class="icons">
+      <div class="options">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu" i18n-aria-label>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="createProject()">
+            <span i18n>Create project</span>
+          </button>
+          <button mat-menu-item (click)="routeToWorkspace()">
+            <span i18n>Manage projects</span>
+          </button>
+          <button mat-menu-item (click)="editWorkspace()">
+            <span i18n>Edit workspace</span>
+          </button>
+          <button mat-menu-item class="important" (click)="deleteWorkspace()">
+            <span i18n>Delete workspace</span>
+          </button>
+        </mat-menu>
+      </div>
+      <div class="open-below" (click)="toggleWorkspace()">
+        <app-icon [icon]="faAngleDown" size="16px" [class.active]="activeWorkspace"></app-icon>
+      </div>
+    </div>
+  </div>
+  <div class="project" [style.max-height]="activeWorkspace ? elementList.scrollHeight + 16 + 'px' : 0">
+    <ul #elementList>
+      <li *ngFor="let projectWithPriv of workspace.projectsWithPrivileges">
+        <span class="project-short-name">{{ projectWithPriv.project.name.substr(0, 2) }}</span>
+        <div class="sub-element" (click)="routeToProject(projectWithPriv.project)">{{ projectWithPriv.project.name }}
+        </div>
+        <div class="icons" [matMenuTriggerFor]="menu">
+          <div class="options">
+            <button mat-icon-button aria-label="Menu" i18n-aria-label>
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item *ngIf="projectWithPriv.project.gitHubIntegration"
+                (click)="openWithVSCode(projectWithPriv.project)">
+                <span i18n>Open in github.dev</span>
+              </button>
+              <button mat-menu-item *ngIf="projectWithPriv.project.gitHubIntegration"
+                (click)="openWithLocalVSCode(projectWithPriv.project)">
+                <span i18n>Open in Visual Studio Code</span>
+              </button>
+              <button mat-menu-item *ngIf="projectWithPriv.project.gitHubIntegration"
+                (click)="openWithLocalVSCodeInsiders(projectWithPriv.project)">
+                <span i18n>Open in Visual Studio Code Insiders</span>
+              </button>
+              <button mat-menu-item (click)="editProject(projectWithPriv.project)">
+                <span i18n>Edit project</span>
+              </button>
+              <button mat-menu-item class="important" (click)="deleteProject(projectWithPriv.project)">
+                <span i18n>Delete project</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+      </li>
+      <li *ngIf="!workspace.projectsWithPrivileges?.length" class="create-project bg-transparent">
+        <app-button [icon]="faPlus" variant="transparent" [routerLink]="['/', workspace.id, 'create']" class="w-full"
+          i18n>Create project</app-button>
+      </li>
+    </ul>
+  </div>
+  <ng-content select=".options"></ng-content>
+</section>

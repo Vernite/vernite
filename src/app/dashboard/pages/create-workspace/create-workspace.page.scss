@@ -1,0 +1,13 @@
+form {
+  padding: 4rem;
+}
+
+.buttons {
+  display: flex;
+  margin-top: 1rem;
+
+  &>* {
+    display: block;
+    margin-right: 1rem;
+  }
+}

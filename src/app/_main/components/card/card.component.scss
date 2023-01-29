@@ -1,0 +1,50 @@
+@import '../../../../styles/typography';
+
+:host {
+  display: block;
+  width: 100%;
+  flex-grow: 1;
+  flex-shrink: 1;
+
+  &.important {
+    .card {
+      border: 1px solid var(--color-red-700);
+    }
+
+    .card-header-wrapper {
+      color: var(--color-red-700);
+    }
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  border: 1px solid var(--color-secondary-500);
+  border-radius: var(--border-radius);
+}
+
+:host ::ng-deep .card-title {
+  @include text-title;
+
+  margin-bottom: 7px;
+  color: var(--color-text);
+}
+
+:host ::ng-deep .card-content {
+  @include text-base;
+
+  &:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
+  color: var(--color-text);
+  opacity: 0.7;
+}
+
+:host ::ng-deep .card-actions {
+  @include text-base;
+
+  color: var(--color-text);
+}

@@ -1,0 +1,44 @@
+<div [ngClass]="['input-form-field', 'text-align-' + align]" [class.required]="required"
+  [class.has-value]="![null, undefined, ''].includes(control.value) || autofilledByBrowser">
+  <label *ngIf="staticLabel" class="static-label">{{ staticLabel }}</label>
+  <div class="input-wrapper">
+    <div class="fragments-wrapper">
+      <div class="fragment-left">
+        <div #fragmentLeft class="fragment-left-wrapper">
+          <ng-content select=".prefix"></ng-content>
+        </div>
+      </div>
+      <div class="fragment-middle">
+        <label *ngIf="floatingLabel" class="floating-label">{{ floatingLabel }}</label>
+      </div>
+      <div class="fragment-right">
+        <ng-container *ngIf="pending; else suffix">
+          <loader></loader>
+        </ng-container>
+        <ng-template #suffix>
+          <ng-content select=".suffix"></ng-content>
+        </ng-template>
+      </div>
+    </div>
+    <input #input *ngIf="type !== 'textarea'" [name]="name" [type]="type" [placeholder]="placeholder"
+      [formControl]="control" [readonly]="readonly" [autocomplete]="autocomplete" (focus)="onFocus()" (blur)="onBlur()"
+      [style.padding-left]="(align === 'left' ? fragmentLeft.clientWidth + 16 : 0) + 'px'">
+    <textarea #input *ngIf="type === 'textarea'" [name]="name" [placeholder]="placeholder" [formControl]="control"
+      [readonly]="readonly" [autocomplete]="autocomplete" (focus)="onFocus()" (blur)="onBlur()"
+      [style.padding-left]="(align === 'left' ? fragmentLeft.clientWidth + 16 : 0) + 'px'" [minRows]="4"
+      autosize></textarea>
+    <div *ngIf="type === 'textarea'" class="textarea-corner">
+      <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0.999999" y1="5.29289" x2="5.29289" y2="1" stroke="white" stroke-linecap="round"
+          i18n-stroke-linecap />
+        <line x1="3" y1="5.29289" x2="5.29289" y2="3" stroke="white" stroke-linecap="round" i18n-stroke-linecap />
+      </svg>
+    </div>
+    <div class="overlay">
+      <ng-content select=".overlay"></ng-content>
+    </div>
+  </div>
+  <div *ngIf="control.touched && control.invalid" class="error" [class.relative]="allowResizeByError">
+    {{ control.errors | validationError }}
+  </div>
+</div>

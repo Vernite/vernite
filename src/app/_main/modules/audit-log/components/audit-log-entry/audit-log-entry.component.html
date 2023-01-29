@@ -1,0 +1,36 @@
+<ng-container *ngIf="auditLog | auditLogProjectEntries | async as log">
+  <div class="label base-text">
+    <span class="opacity-70" i18n>User</span>
+    <span>&nbsp;{{ log.userLabel }}</span>
+    <span class="opacity-70">&nbsp;{{ log.action }}</span>
+    <span class="opacity-70">&nbsp;{{ log.taskType }}&nbsp;</span>
+    <button *ngIf="log.actionCode !== 'DELETED'" class="link"
+      [routerLink]="['/', 'projects', log.projectId, 'tasks', log.taskId]">{{ log.taskLabel
+      }}</button>
+    <span *ngIf="log.actionCode === 'DELETED'">{{ log.taskLabel }}</span>
+  </div>
+  <ul *ngIf="log.changes && log.changes.length" class="changes base-text">
+    <li *ngFor="let change of log.changes">
+      <ng-container *ngIf="!change.oldValue">
+        <span class="opacity-70" i18n>added</span>
+        <span>&nbsp;{{ change.label }}</span>
+        <span>&nbsp;{{ change.newValue }}</span>
+      </ng-container>
+      <ng-container *ngIf="change.oldValue && !change.newValue">
+        <span class="opacity-70" i18n>removed</span>
+        <span>&nbsp;{{ change.label }}</span>
+        <span>&nbsp;{{ change.oldValue }}</span>
+      </ng-container>
+      <ng-container *ngIf="change.oldValue && change.newValue">
+        <span class="opacity-70" i18n>changed</span>
+        <span>&nbsp;{{ change.label }}&nbsp;</span>
+        <span class="opacity-70" i18n>from</span>
+        <span>&nbsp;</span>
+        <span class="line-through">{{ change.oldValue }}</span>
+        <span>&nbsp;</span>
+        <span class="opacity-70" i18n>to</span>
+        <span>&nbsp;{{ change.newValue }}</span>
+      </ng-container>
+    </li>
+  </ul>
+</ng-container>

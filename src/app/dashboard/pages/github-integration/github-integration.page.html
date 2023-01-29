@@ -1,0 +1,6 @@
+<ng-container *ngIf="status$ | async as status">
+  <h2 *ngIf="status === 'success'" i18n>GitHub connection success</h2>
+  <h2 *ngIf="status === 'error'" i18n>GitHub connection failure</h2>
+</ng-container>
+
+<p i18n>You can close this page</p>

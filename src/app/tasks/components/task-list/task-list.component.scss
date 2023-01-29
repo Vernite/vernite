@@ -1,0 +1,47 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.header-row {
+  z-index: 2;
+  background-color: var(--color-secondary-700);
+}
+
+.show-more {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: var(--border-radius);
+  color: var(--color-text);
+  cursor: pointer;
+  gap: 0.5rem;
+
+  span {
+    z-index: 2;
+  }
+
+  &:hover {
+    &::before {
+      opacity: 0.3;
+    }
+  }
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    content: '';
+    opacity: 0.2;
+    transition: opacity 0.2s ease-in-out;
+  }
+}

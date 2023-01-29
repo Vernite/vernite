@@ -1,0 +1,78 @@
+<div class="form-field">
+  <section class="switch">
+    <button (click)="openEditor()" [class.active]="mode === 'editor'" type="button" i18n>Editor</button>
+    <button (click)="openPreview()" [class.active]="mode === 'preview'" type="button" i18n>Preview</button>
+  </section>
+  <ngx-monaco-editor (onInit)="onEditorInit($event)" [class.hidden]="mode !== 'editor'" [options]="editorOptions"
+    [formControl]="control"></ngx-monaco-editor>
+  <div #output class="preview markdown-preview" [class.hidden]="mode !== 'preview'"></div>
+  <section class="tools">
+
+    <!-- Bold -->
+    <div class="tool" matTooltip="Bold" i18n-matTooltip (click)="applyBold()">
+      <div class="icon">
+        <app-icon size="16px" [icon]="faBold"></app-icon>
+      </div>
+    </div>
+
+    <!-- Italic -->
+    <div class="tool" matTooltip="Italic" i18n-matTooltip (click)="applyItalic()">
+      <div class="icon">
+        <app-icon size="16px" [icon]="faItalic"></app-icon>
+      </div>
+    </div>
+
+    <!-- Underline -->
+    <div class="tool" matTooltip="Underline" i18n-matTooltip (click)="applyUnderline()">
+      <div class="icon">
+        <app-icon size="16px" [icon]="faUnderline"></app-icon>
+      </div>
+    </div>
+
+    <!-- Link -->
+    <div class="tool" matTooltip="Link" i18n-matTooltip (click)="applyLink()">
+      <div class="icon">
+        <app-icon size="16px" [icon]="faLink"></app-icon>
+      </div>
+    </div>
+
+    <!-- List -->
+    <div class="tool" matTooltip="Dotted list" i18n-matTooltip (click)="applyList()">
+      <div class="icon">
+        <app-icon size="16px" [icon]="faList"></app-icon>
+      </div>
+    </div>
+
+    <!-- List numeric -->
+    <div class="tool" matTooltip="Numeric list" i18n-matTooltip (click)="applyListNumeric()">
+      <div class="icon">
+        <app-icon size="16px" [icon]="faListNumeric"></app-icon>
+      </div>
+    </div>
+
+    <!-- Quote -->
+    <div class="tool" matTooltip="Quote" i18n-matTooltip (click)="applyQuote()">
+      <div class="icon">
+        <app-icon size="16px" [icon]="faQuoteLeft"></app-icon>
+      </div>
+    </div>
+
+    <!-- Code -->
+    <div class="tool" matTooltip="Code" i18n-matTooltip (click)="applyCode()">
+      <div class="icon">
+        <app-icon size="16px" [icon]="faCode"></app-icon>
+      </div>
+    </div>
+
+    <!-- Code block -->
+    <div class="tool" matTooltip="Block of code" i18n-matTooltip (click)="applyCodeBlock()">
+      <div class="icon">
+        <app-icon size="16px" [icon]="faFileCode"></app-icon>
+      </div>
+    </div>
+
+    <!-- External icons -->
+    <ng-content></ng-content>
+
+  </section>
+</div>

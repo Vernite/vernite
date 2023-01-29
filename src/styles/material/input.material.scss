@@ -1,0 +1,191 @@
+/**
+ * @TODO: Remove this file after the full migration to app-input component
+ */
+mat-form-field.mat-form-field-appearance-outline {
+  width: 100%;
+  max-width: 400px;
+
+  // default styling
+  input,
+  textarea {
+    @include text-base;
+
+    caret-color: var(--color-text);
+    color: var(--color-text);
+  }
+
+  .mat-form-field-outline {
+    background-color: var(--color-input-background);
+    border-radius: var(--border-radius);
+    color: var(--color-input-border);
+
+    >* {
+      border-color: var(--color-input-border);
+    }
+  }
+
+  .mat-form-field-infix {
+    height: 55.56px;
+    padding: 0.6rem 0;
+    border-top-width: 14.5px;
+
+    textarea.mat-input-element {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .mat-form-field-flex {
+    padding: 0 1.1rem;
+    cursor: text;
+
+    .mat-form-field-outline>* {
+      position: relative;
+      background-color: var(--color-input-background);
+
+      &::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: var(--color-input-background-hover);
+        content: '';
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.1s ease;
+      }
+    }
+
+    .mat-form-field-outline-thick {
+      >* {
+        background-color: var(--color-input-background);
+      }
+
+      .mat-form-field-outline-start {
+        width: 12px !important;
+        border-radius: var(--border-radius) 0 0 var(--border-radius);
+      }
+
+      .mat-form-field-outline-gap {
+        border-radius: 0;
+      }
+
+      .mat-form-field-outline-end {
+        border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      }
+    }
+  }
+
+  // Labels
+  .mat-form-field-label-wrapper {
+    mat-label {
+      @include text-base;
+
+      color: var(--color-text);
+    }
+
+    .mat-form-field-label {
+      top: 1.6em;
+    }
+
+    .mat-form-field-required-marker {
+      color: var(--color-text);
+    }
+  }
+
+  &.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.3938em) scale(0.75);
+  }
+
+  &.without-floating-label {
+    .mat-form-field-infix {
+      border-top-width: 11px;
+    }
+  }
+
+  // Hint and error
+  .mat-form-field-subscript-wrapper {
+    padding: 0;
+  }
+
+  // Placeholder
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-input-placeholder);
+  }
+
+  // Invalid value styling
+  &.ng-touched.ng-invalid {
+    .mat-form-field-outline>* {
+      border-color: var(--color-input-error);
+    }
+  }
+
+  // focused styling
+  &.mat-primary.mat-focused {
+    .mat-form-field-label-wrapper {
+      mat-label {
+        color: var(--color-input-label-focused);
+      }
+    }
+
+    .mat-form-field-outline>.mat-form-field-outline-gap {
+      border-top-color: transparent;
+    }
+
+    .mat-form-field-outline>* {
+      border-color: var(--color-input-border-focus);
+    }
+  }
+
+  // hover styling
+  .mat-form-field-flex:hover {
+    .mat-form-field-outline-thick>* {
+      &::before {
+        opacity: 0.3;
+      }
+    }
+  }
+}
+
+input,
+textarea {
+  color: var(--color-text);
+  font-family: Montserrat, sans-serif;
+}
+
+// remove unwanted background color after selecting values suggested by browser
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:autofill,
+input:autofill:focus,
+input:-webkit-autofill::first-line {
+  @include text-base;
+
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+:-webkit-autofill::first-line,
+:-webkit-autofill,
+:-webkit-autofill:hover,
+:-webkit-autofill:focus,
+:-webkit-autofill:active {
+  font-family: var(--font-family) !important;
+  font-size: 0.875rem !important;
+  font-weight: 400 !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+app-input.full-width {
+  width: 100%;
+
+  .form-field,
+  .form-field .mat-form-field {
+    max-width: none;
+  }
+}

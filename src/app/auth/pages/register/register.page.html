@@ -1,0 +1,53 @@
+<section class="main">
+  <section class="box">
+    <section class="form-side">
+      <div class="logo" routerLink="/"></div>
+      <form [formGroup]="form" (submit)="register()">
+        <div>
+          <h2 class="text-xl font-bold" i18n>Register</h2>
+          <p class="text-base" i18n>Please fill out the form below to create a new account. All fields are required. Already have an account? Please <a routerLink="/auth/login">click here</a> to log in.</p>
+        </div>
+
+        <div *ngIf="error" class="error-box">
+          {{ error }}
+        </div>
+
+        <ng-container *ngIf="stage===RegisterStage.IMPORTANT_DATA">
+          <app-input formControlName="email" type="email" placeholder="test@example.com" floatingLabel="Email"
+            i18n-floatingLabel i18n-placeholder></app-input>
+
+          <app-input formControlName="password" type="password" placeholder="●●●●●●●" floatingLabel="Password"
+            i18n-floatingLabel></app-input>
+
+          <app-input formControlName="repeatPassword" type="password" placeholder="●●●●●●●"
+            floatingLabel="Repeat password" i18n-floatingLabel></app-input>
+
+          <div class="agreements">
+            <app-checkbox formControlName="agreements" i18n>
+              <span>I agree to the <a routerLink="/terms-and-conditions" target="_blank" click-stop-propagation>Terms and Conditions</a> and <a routerLink="/privacy-policy" target="_blank" click-stop-propagation>Privacy Policy</a></span>.
+            </app-checkbox>
+          </div>
+
+          <app-button variant="primary" type="button" (click)="nextStage()" i18n>Next</app-button>
+        </ng-container>
+        <ng-container *ngIf="stage===RegisterStage.PERSONAL_DATA">
+          <app-input formControlName="name" type="text" placeholder="John" floatingLabel="First name"
+            i18n-floatingLabel="first name of a person" i18n-placeholder></app-input>
+
+          <app-input formControlName="surname" type="text" placeholder="Smith" floatingLabel="Last name"
+            i18n-floatingLabel i18n-placeholder></app-input>
+
+          <app-input formControlName="username" type="text" placeholder="John98" floatingLabel="Username"
+            i18n-floatingLabel i18n-placeholder></app-input>
+          <div class="buttons">
+            <app-button variant="secondary" type="button" (click)="previousStage()" i18n>Back</app-button>
+            <app-button variant="primary" [pending]="loader.pending" i18n>Register</app-button>
+          </div>
+        </ng-container>
+      </form>
+    </section>
+    <section class="image-side">
+
+    </section>
+  </section>
+</section>

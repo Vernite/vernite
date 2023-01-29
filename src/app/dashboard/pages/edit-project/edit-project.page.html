@@ -1,0 +1,38 @@
+<tabs>
+  <div class="prefix" i18n>Edit project</div>
+  <tab (click)="setStage(ProjectFormStage.GENERAL)" [class.active]="stage === ProjectFormStage.GENERAL" i18n>General</tab>
+  <tab (click)="setStage(ProjectFormStage.MEMBERS)" [class.active]="stage === ProjectFormStage.MEMBERS" i18n>Members</tab>
+  <tab (click)="setStage(ProjectFormStage.STATUSES)" [class.active]="stage === ProjectFormStage.STATUSES" i18n>Statuses</tab>
+  <tab (click)="setStage(ProjectFormStage.INTEGRATIONS)" [class.active]="stage === ProjectFormStage.INTEGRATIONS" i18n>Integrations</tab>
+</tabs>
+
+<ng-container *ngIf="workspace$ | async as workspace">
+  <ng-container *ngIf="project$ | async as project">
+
+    <!-- General stage -->
+    <section [class.hidden]="stage !== ProjectFormStage.GENERAL" class="p-5">
+      <project-form-general [workspace]="workspace" [project]="project"></project-form-general>
+    </section>
+
+    <!-- Members stage -->
+    <section [class.hidden]="stage !== ProjectFormStage.MEMBERS" class="p-5">
+      <project-form-members [project]="project"></project-form-members>
+    </section>
+
+    <!-- Statuses stage -->
+    <section [class.hidden]="stage !== ProjectFormStage.STATUSES" class="p-5">
+      <project-form-statuses [project]="project"></project-form-statuses>
+    </section>
+
+    <!-- Integrations stage -->
+    <section [class.hidden]="stage !== ProjectFormStage.INTEGRATIONS" class="p-5">
+      <project-form-integrations [project]="project"></project-form-integrations>
+    </section>
+
+  </ng-container>
+</ng-container>
+
+<div class="flex justify-end pr-5">
+  <app-button type="button" variant="secondary" (click)="close()" class="mr-5" i18n>Cancel</app-button>
+  <app-button type="button" variant="primary" (click)="submitUpdate()" i18n>Save changes</app-button>
+</div>

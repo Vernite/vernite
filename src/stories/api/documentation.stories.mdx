@@ -1,0 +1,7 @@
+import { Meta } from '@storybook/addon-docs';
+
+import { FullscreenIframe } from '../helpers/components/fullscreen-iframe.mdx';
+
+<Meta title="API/Documentation" />
+
+<FullscreenIframe src={"https://vernite.dev/" + (process.env.STORYBOOK_ENVIRONMENT != 'prod' ? "dev/" : "") + "api/swagger-ui/index.html#/"} />

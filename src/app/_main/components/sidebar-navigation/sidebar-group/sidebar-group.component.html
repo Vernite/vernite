@@ -1,0 +1,7 @@
+<div class="header">
+  <app-icon *ngIf="icon" [icon]="icon" size="0.75rem"></app-icon>
+  <ng-content select=".title"></ng-content>
+</div>
+<div class="content">
+  <ng-content select=".content"></ng-content>
+</div>

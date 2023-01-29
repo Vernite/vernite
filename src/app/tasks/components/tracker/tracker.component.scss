@@ -1,0 +1,44 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+
+  .total {
+    padding: 0.25rem 0.5rem;
+    margin-right: 1rem;
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: var(--color-secondary-400);
+    }
+
+    span {
+      display: inline-block;
+      width: 100px;
+      color: var(--color-text);
+      white-space: nowrap;
+    }
+  }
+}
+
+.tracker-overlay {
+  position: relative;
+  padding: 0.5rem 0.5rem;
+  margin-top: 1rem;
+  background-color: var(--color-secondary-700);
+  border-radius: var(--border-radius);
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 2rem;
+    background-color: red;
+    content: '';
+    transform: rotate(45deg);
+  }
+
+  ul {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+}

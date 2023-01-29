@@ -1,0 +1,64 @@
+body {
+  // Universal
+  --border-radius: 7px;
+
+  // Text
+  --color-text: var(--color-neutral-800);
+
+  // TODO: Move all this variables to components
+
+  // Inputs
+  --color-input-background: var(--color-secondary-500);
+  --color-input-background-hover: var(--color-secondary-600);
+  --color-input-border: var(--color-secondary-400);
+  --color-input-border-focus: var(--color-primary-500);
+  --color-input-text: var(--color-text);
+  --color-input-label-focused: var(--color-text);
+  --color-input-placeholder: var(--color-secondary-200);
+  --color-input-error: var(--color-red-500);
+
+  // Selects
+  --color-select-panel-background: var(--color-secondary-500);
+  --color-select-panel-background-hover: var(--color-secondary-400);
+  --color-select-panel-text: var(--color-text);
+  --color-select-panel-option-background-focused: var(--color-secondary-400);
+  --color-select-panel-text-selected: var(--color-text);
+
+  // Buttons
+  --color-button-primary-background: var(--color-primary-500);
+  --color-button-primary-background-hover: var(--color-primary-600);
+  --color-button-primary-background-active: var(--color-primary-700);
+  --color-button-primary-border-active: var(--color-primary-700);
+  --color-button-secondary-background: var(--color-secondary-500);
+  --color-button-secondary-background-hover: var(--color-secondary-600);
+  --color-button-secondary-background-active: var(--color-secondary-700);
+  --color-button-secondary-border-active: var(--color-secondary-500);
+  --color-button-important-background: var(--color-red-500);
+  --color-button-important-background-hover: var(--color-red-600);
+  --color-button-important-background-active: var(--color-red-700);
+  --color-button-important-border-active: var(--color-red-500);
+
+  // Links
+  --color-link: var(--color-primary-400);
+  --color-link-hover: var(--color-primary-300);
+
+  // Table
+  --color-table-header-border: var(--color-secondary-400);
+  --color-table-row-background: var(--color-secondary-600);
+  --color-table-row-hover-background: var(--color-secondary-500);
+
+  // Menu
+  --color-menu-background: var(--color-secondary-600);
+  --color-menu-background-hover: var(--color-secondary-700);
+  --color-menu-background-important: var(--color-red-500);
+
+  // Dialog
+  --color-dialog-background: var(--color-secondary-800);
+  --color-dialog-delimiter: var(--color-secondary-500);
+  --color-dialog-important-border: var(--color-red-500);
+  --color-dialog-important-text: var(--color-red-500);
+
+  // Tasks
+  --color-board-task-background: var(--color-secondary-600);
+  --color-board-task-background-hover: var(--color-secondary-500);
+}

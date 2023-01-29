@@ -1,0 +1,94 @@
+{
+  "files.associations": {
+    ".xtm": "xml",
+    ".ngI18nconfig": "json"
+  },
+  "eslint.validate": ["javascript", "typescript", "html"],
+  "eslint.options": {
+    "extensions": [".js", ".ts", ".html"]
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+  "editor.formatOnSave": true,
+
+  "[typescript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+
+  "stylelint.enable": true,
+  "scss.validate": false,
+  "css.validate": false,
+  "less.validate": false,
+
+  "stylelint.validate": ["scss"],
+
+  "explorer.compactFolders": false,
+
+  "search.exclude": {
+    ".git": true,
+    "node_modules": true
+  },
+
+  /* ======================== */
+  /* ==== Material icons ==== */
+  /* ======================== */
+  "material-icon-theme.files.associations": {
+    "*.page.ts": "angular-resolver"
+  },
+
+  /* ====================== */
+  /* ==== Hidden files ==== */
+  /* ====================== */
+  "files.exclude": {
+    "**/.git": false,
+    "**/.svn": false,
+    "**/.hg": false,
+    "**/CVS": false,
+    "**/.DS_Store": false,
+    "**/Thumbs.db": false,
+    ".stylelintrc.json": false,
+    ".browserslistrc": false,
+    ".editorconfig": false,
+    ".eslintrc.json": false,
+    ".gitattributes": false,
+    ".gitignore": false,
+    ".ngI18nconfig": false,
+    ".prettierrc.js": false,
+    "cypress.json": false,
+    "package-lock.json": false,
+    "LICENSE.md": false,
+    "tailwind.config.js": false,
+    "tsconfig.app.json": false,
+    "tsconfig.doc.json": false,
+    "tsconfig.json": false,
+    "tsconfig.spec.json": false,
+    "yarn.lock": false,
+    "karma.conf.js": false,
+    "documentation": false,
+    ".github": false,
+    ".angular": false,
+    "node_modules": false,
+    "proxy.conf.json": false,
+    "coverage": false
+  },
+  "explorerExclude.backup": {},
+
+  /* ================== */
+  /* ==== Spelling ==== */
+  /* ================== */
+  "cSpell.words": [
+    "auditlog",
+    "compodoc",
+    "devkit",
+    "Donte",
+    "lcov",
+    "ngneat",
+    "protobuf",
+    "tabuckner",
+    "Vernite",
+    "Xmark"
+  ],
+  "docify.programmingLanguage": "javascript"
+}

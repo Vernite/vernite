@@ -1,0 +1,13 @@
+.mat-column-grip,
+.mat-column-action {
+  min-width: 50px;
+  flex-grow: 0;
+
+  app-icon {
+    opacity: 0.2;
+  }
+}
+
+.error-box {
+  margin: 1rem 0 0 0;
+}

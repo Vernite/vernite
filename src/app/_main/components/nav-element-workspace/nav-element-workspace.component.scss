@@ -1,0 +1,224 @@
+@import '../../../../styles/typography';
+
+:host {
+  @include text-title;
+
+  background-color: var(--color-secondary-600);
+
+  &.collapsed {
+    .workspace .element {
+      padding: 0.5rem;
+
+      .text {
+        max-height: 1rem;
+        opacity: 0;
+      }
+    }
+
+    .project.active li .sub-element {
+      max-height: 1rem;
+      opacity: 0;
+    }
+
+    .project-short-name {
+      min-width: 3rem;
+      opacity: 1;
+    }
+
+    .create-project {
+      app-button::ng-deep {
+
+        button {
+          display: flex;
+          min-width: 42px;
+          max-width: 42px;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          margin: 0;
+
+          .prefix {
+            margin-right: 0;
+          }
+
+          span {
+            display: none;
+            width: 0;
+            opacity: 0;
+          }
+        }
+
+      }
+    }
+  }
+}
+
+.workspace {
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.5rem;
+  border-radius: var(--border-radius);
+  color: var(--color-neutral-300);
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+
+  &:hover {
+    background-color: var(--color-secondary-500);
+
+    .icons .options {
+      opacity: 1;
+    }
+  }
+
+  .element {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    padding: 0.5rem 0 0.5rem 0.75rem;
+    opacity: 1;
+    transition: padding 0.4s ease;
+
+    .text {
+      display: block;
+      min-width: 100px;
+      max-height: 75px;
+      transition: opacity 0.4s ease, max-height 0.4s ease;
+    }
+  }
+
+  .icons {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding-right: 0.5rem;
+
+    &>* {
+      min-width: 1.5rem;
+      min-height: 1.5rem;
+      border-radius: 4px;
+      transition: background-color .1s ease;
+
+      &:hover {
+        background-color: var(--color-secondary-600);
+      }
+    }
+
+    .options {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      opacity: 0;
+      transition: opacity .1s ease;
+    }
+
+    .open-below {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+
+      app-icon {
+        display: flex;
+        justify-content: center;
+
+        &.active {
+          transform: scaleY(-1);
+        }
+      }
+    }
+
+    .options button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.project {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  justify-content: center;
+  background-color: var(--color-secondary-800);
+  color: var(--color-neutral-300);
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out, max-height 0.4s ease;
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    margin: 0.5rem;
+    border-radius: var(--border-radius);
+    transition: background-color .1s ease;
+
+    &:hover {
+      background-color: var(--color-secondary-500);
+
+      .icons {
+        opacity: 1;
+      }
+    }
+
+    .sub-element {
+      display: flex;
+      width: 100%;
+      min-width: 150px;
+      height: 100%;
+      max-height: 75px;
+      align-items: center;
+      padding: 0 0 0 1rem;
+      opacity: 1;
+      transition: opacity 0.4s ease, max-height 0.4s ease;
+    }
+
+    .icons {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      padding: 0 5px 0 0;
+      opacity: 0;
+      transition: opacity .1s ease;
+    }
+  }
+}
+
+button {
+  display: flex;
+  align-items: center;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.workspace-icon {
+  $size: 1.75rem;
+
+  display: flex;
+  width: $size;
+  min-width: $size;
+  height: $size;
+  min-height: $size;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  margin-right: 1rem;
+  background-color: var(--color-secondary-400);
+  border-radius: var(--border-radius);
+}
+
+.project-short-name {
+  display: flex;
+  min-width: 0;
+  justify-content: center;
+  padding: 4px 0;
+  opacity: 0;
+  transition: opacity 0.4s ease, min-width 0.4s ease;
+}

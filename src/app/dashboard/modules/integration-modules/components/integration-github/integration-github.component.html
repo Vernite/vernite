@@ -1,0 +1,38 @@
+<main>
+  <h2 class="text-xl font-bold mb-5">Github</h2>
+
+  <app-card>
+    <div class="card-content">
+      <!-- If GitHub account does not exist show Connect to GitHub button -->
+      <ng-container *ngIf="((gitHubAccounts$ | async) || []).length === 0">
+        <p i18n>In order to proceed, you'll need to connect your GitHub account first.</p>
+      </ng-container>
+      <ng-container *ngIf="((gitHubAccounts$ | async) || []).length! > 0">
+        <p i18n>Note: To use your repositories in our integrations, you'll need to authorize them first.</p>
+      </ng-container>
+    </div>
+    <div class="card-actions flex justify-end">
+      <app-button *ngIf="((gitHubAccounts$ | async) || []).length === 0" (click)="connectGitHubAccount()" type="button"
+        variant="secondary" i18n>Connect GitHub account</app-button>
+      <app-button *ngIf="((gitHubAccounts$ | async) || []).length! > 0" (click)="manageRepositories()" type="button"
+        variant="secondary" i18n>Configure Repositories</app-button>
+    </div>
+  </app-card>
+
+  <form [formGroup]="form" autocomplete="off" class="mt-4">
+
+    <!-- Repository select -->
+    <ng-container *ngIf="!loader.pending">
+      <app-select formControlName="repository" floatingLabel="Repository" i18n-floatingLabel>
+        <app-option *ngFor="let repository of repositories" [value]="repository.fullName"
+          [icon]="repository.private ? faLock : faGlobe" class="repository-option">
+          <span class="opacity-50">@</span>
+          {{repository.fullName.split('/')[0]}}
+          <span class="opacity-50">/</span>
+          {{repository.fullName.split('/')[1]}}
+        </app-option>
+      </app-select>
+    </ng-container>
+
+  </form>
+</main>

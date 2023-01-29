@@ -1,15 +1,21 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# compiled output
-dist
-tmp
+# Compiled output
+/dist
+/documentation
+/storybook-static
+/tmp
 /out-tsc
+/bazel-out
+documentation.json
 
-# dependencies
-node_modules
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
 
 # IDEs and editors
-/.idea
+.idea/
 .project
 .classpath
 .c9/
@@ -17,23 +23,28 @@ node_modules
 .settings/
 *.sublime-workspace
 
-# IDE - VSCode
+# Visual Studio Code
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+.history/*
 
-# misc
-/.sass-cache
+# Miscellaneous
+/.angular/cache
+.sass-cache/
 /connect.lock
-/coverage
 /libpeerconnection.log
-npm-debug.log
-yarn-error.log
 testem.log
 /typings
+/.nyc_output
 
-# System Files
+# Coverage
+/coverage
+/reports
+/cypress/videos
+
+# System files
 .DS_Store
 Thumbs.db

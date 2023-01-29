@@ -1,0 +1,16 @@
+<div class="flex justify-between">
+  <h4 class="text-xl flex items-center" i18n>Integration modules</h4>
+  <app-button type="button" class="ml-2" [icon]="faPlus" (click)="openIntegrationModuleSelectDialog()" i18n>
+    Add modules
+  </app-button>
+</div>
+<div>
+  <div [class.hidden]="selectedModules.size === 0" class="grid">
+    <template #grid></template>
+  </div>
+  <div class="empty-list" *ngIf="selectedModules.size === 0">
+    <span class="text-base">
+      There is no integration modules added to this list. Use "Add modules" to add one.
+    </span>
+  </div>
+</div>

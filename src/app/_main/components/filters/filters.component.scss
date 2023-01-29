@@ -1,0 +1,18 @@
+.filters {
+  width: 100%;
+
+  app-button {
+    width: 100%;
+
+    ::ng-deep button {
+      width: 100%;
+    }
+  }
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1rem;
+}

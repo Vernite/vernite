@@ -1,0 +1,51 @@
+<div *ngIf="task" class="task">
+  <div class="top-section">
+    <div class="assignees" *ngIf="members">
+      <app-assignee [assignee]="members.get(task.assigneeId || -1) || null" [projectId]="projectId" [taskId]="task.id"
+        [members]="members || []"></app-assignee>
+    </div>
+    <div *ngIf="task.deadline" class="deadline">
+      <div class="title" i18n>
+        Due date
+      </div>
+      <div class="value">{{ task.deadline | dateTimeByPreferences | async }}</div>
+    </div>
+  </div>
+  <div class="name">
+    <span class="task-type" [style.background-color]="task.type | taskType:'color'"></span>
+    <span class="task-id">#{{ task.id }}</span>
+    <span>{{ task.name }}</span>
+  </div>
+  <!-- Time tracking cell -->
+  <div class="mt-3">
+    <tracker [projectId]="projectId" [task]="task"></tracker>
+  </div>
+  <div class="actions">
+    <a *ngIf="task.issue" [href]="task.issue.url" target="_blank">
+      <app-icon [icon]="faCodeCommit" size="14px"></app-icon>
+    </a>
+    <a *ngIf="task.pull" [href]="task.pull.url" target="_blank">
+      <app-icon [icon]="faCodePullRequest" size="14px"></app-icon>
+    </a>
+    <a *ngIf="task.mergedPullList" [href]="task.mergedPullList[0]" target="_blank">
+      <app-icon [icon]="faCodePullRequest" size="14px"></app-icon>
+      <app-icon class="check" [icon]="faCheck" size="14px"></app-icon>
+    </a>
+  </div>
+  <div class="options">
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="flex items-center">
+      <app-icon icon="matMoreVert"></app-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="edit()">
+        <span i18n>Edit task</span>
+      </button>
+      <button mat-menu-item (click)="createSubtask()">
+        <span i18n>Create subtask</span>
+      </button>
+      <button mat-menu-item class="important" (click)="delete()">
+        <span i18n>Delete task</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>

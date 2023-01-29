@@ -1,0 +1,10 @@
+<div class="comments">
+  <message *ngFor="let comment of comments$ | async" [content]="comment.content" [timestamp]="comment.createdAt">
+  </message>
+</div>
+<app-input type="textarea" [formControl]="form.get('content')">
+  <div class="suffix h-full flex flex-col justify-end pb-2 z-10">
+    <app-button variant="primary" icon="matSend" matTooltip="Send" i18n-matTooltip (click)="sendComment()">
+    </app-button>
+  </div>
+</app-input>

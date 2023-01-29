@@ -1,0 +1,49 @@
+:host {
+  position: relative;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  flex-shrink: 0;
+  background-color: var(--color-secondary-800);
+  transition: width 0.4s ease;
+
+  &.collapsed {
+    width: 60px !important;
+
+    .logo-section {
+      justify-content: center;
+      padding: 0.75rem 0;
+    }
+
+    .logo {
+      display: none;
+    }
+
+    .entries {
+      padding: 0;
+    }
+  }
+}
+
+.logo-section {
+  display: flex;
+  height: 62px;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.15rem;
+}
+
+.logo {
+  height: 100%;
+  flex-grow: 1;
+  margin: 0;
+  background-image: url('../../../../assets/metadata/logo_with_name.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.entries {
+  padding: 0 0.25rem 0 0.75rem;
+  overflow-y: auto;
+}

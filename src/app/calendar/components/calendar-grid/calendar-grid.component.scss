@@ -1,0 +1,57 @@
+:host {
+  display: grid;
+  flex-grow: 1;
+  background-color: var(--color-secondary-800);
+  grid-auto-rows: minmax(0, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-rows: 2rem;
+}
+
+.week-name-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--color-secondary-400);
+  border-left: 1px solid var(--color-secondary-400);
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--color-secondary-400);
+  border-left: 1px solid var(--color-secondary-400);
+  color: var(--color-text);
+
+  &.today .day::before {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    width: 1.75rem;
+    height: 1.75rem;
+    background-color: var(--color-primary-500);
+    border-radius: 1.75rem;
+    content: '';
+  }
+
+  &:not(.current-month) .day {
+    opacity: 0.4;
+  }
+
+  .day {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+
+    span {
+      z-index: 2;
+    }
+  }
+
+  .events {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+}

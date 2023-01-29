@@ -1,0 +1,130 @@
+<section class="logo-section">
+  <div class="logo" routerLink="/dashboard"></div>
+  <app-button class="navigation-collapse-button" variant="transparent" [icon]="faArrowRightArrowLeft" (click)="toggle()"
+    type="button"></app-button>
+</section>
+
+<div #entries class="entries">
+  <sidebar-entry icon="cuDashboard" routerLink="/dashboard" routerLinkActive="active" [collapsed]="isCollapsed">
+    <span class="header" i18n>Dashboard</span>
+  </sidebar-entry>
+  <sidebar-entry [icon]="faCalendarDay" routerLink="/calendar" routerLinkActive="active" [collapsed]="isCollapsed">
+    <span class="header" i18n>Calendar</span>
+  </sidebar-entry>
+
+  <sidebar-entry *ngIf="!(slackIntegrations$ | async)?.length" [icon]="faMessage" routerLink="/messages/no-integration"
+    [collapsed]="isCollapsed">
+    <span class="header" i18n>Messages</span>
+  </sidebar-entry>
+  <sidebar-entry *ngIf="(slackIntegrations$ | async)?.length" [icon]="faMessage" [collapsed]="isCollapsed"
+    [expandable]="true">
+    <span class="header" i18n>Messages</span>
+    <div class="content">
+      <sidebar-entry *ngFor="let integration of slackIntegrations$ | async" [icon]="faServer" [collapsed]="isCollapsed"
+        [expandable]="true">
+        <span class="header">{{ integration.teamName }}</span>
+        <div class="content">
+          <sidebar-entry *ngFor="let channel of integration.channels" [icon]="channel.user ? faUser : faHashtag"
+            [collapsed]="isCollapsed" [routerLink]="['/', 'messages', integration.id, channel.id]">
+            <span class="header">{{ channel.name || channel.user.displayName || channel.user.name }}</span>
+          </sidebar-entry>
+        </div>
+      </sidebar-entry>
+    </div>
+  </sidebar-entry>
+
+  <sidebar-entry *ngIf="!(workspaceList$ | async)?.length" [icon]="faLayerGroup" [collapsed]="isCollapsed"
+    [expandable]="false" [showOptions]="true" routerLink="/workspaces">
+    <span class="header" i18n>Workspaces</span>
+    <ng-container class="options">
+      <button mat-menu-item routerLink="/workspaces">
+        <span i18n>Manage workspaces</span>
+      </button>
+      <button mat-menu-item routerLink="/workspaces/create">
+        <span i18n>Create new workspace</span>
+      </button>
+    </ng-container>
+  </sidebar-entry>
+
+  <sidebar-entry *ngIf="(workspaceList$ | async)?.length" [icon]="faLayerGroup" [collapsed]="isCollapsed"
+    [expandable]="true" [showOptions]="true">
+    <span class="header" i18n>Workspaces</span>
+    <ng-container class="options">
+      <button mat-menu-item routerLink="/workspaces">
+        <span i18n>Manage workspaces</span>
+      </button>
+      <button mat-menu-item routerLink="/workspaces/create">
+        <span i18n>Create new workspace</span>
+      </button>
+    </ng-container>
+    <div class="content">
+      <ng-container *ngFor="let workspace of workspaceList$ | async">
+        <sidebar-entry *ngIf="!workspace.projectsWithPrivileges?.length" [expandable]="false" [collapsed]="isCollapsed"
+          [textIcon]="true" [showOptions]="true" [routerLink]="['/', 'workspaces', workspace.id, 'projects']">
+          <span class="header">{{ workspace.name }}</span>
+          <ng-container class="options">
+            <button mat-menu-item (click)="createProject(workspace)">
+              <span i18n>Create project</span>
+            </button>
+            <button mat-menu-item (click)="routeToWorkspace(workspace)">
+              <span i18n>Manage projects</span>
+            </button>
+            <button mat-menu-item (click)="editWorkspace(workspace)">
+              <span i18n>Edit workspace</span>
+            </button>
+            <button mat-menu-item class="important" (click)="deleteWorkspace(workspace)">
+              <span i18n>Delete workspace</span>
+            </button>
+          </ng-container>
+        </sidebar-entry>
+
+        <sidebar-entry *ngIf="workspace.projectsWithPrivileges?.length" [expandable]="true" [collapsed]="isCollapsed"
+          [textIcon]="true" [showOptions]="true">
+          <span class="header">{{ workspace.name }}</span>
+          <div class="content">
+            <sidebar-entry *ngFor="let projectWithPrivileges of workspace.projectsWithPrivileges"
+              [collapsed]="isCollapsed" [textIcon]="!projectWithPrivileges.project.logo"
+              [imageIcon]="projectWithPrivileges.project.logo?.url" [showOptions]="true"
+              [routerLink]="['/', 'projects', projectWithPrivileges.project.id]">
+              <span class="header">{{ projectWithPrivileges.project.name }}</span>
+              <ng-container class="options">
+                <button mat-menu-item *ngIf="projectWithPrivileges.project.gitHubIntegration"
+                  (click)="openWithVSCode(projectWithPrivileges.project)">
+                  <span i18n>Open in github.dev</span>
+                </button>
+                <button mat-menu-item *ngIf="projectWithPrivileges.project.gitHubIntegration"
+                  (click)="openWithLocalVSCode(projectWithPrivileges.project)">
+                  <span i18n>Open in Visual Studio Code</span>
+                </button>
+                <button mat-menu-item *ngIf="projectWithPrivileges.project.gitHubIntegration"
+                  (click)="openWithLocalVSCodeInsiders(projectWithPrivileges.project)">
+                  <span i18n>Open in Visual Studio Code Insiders</span>
+                </button>
+                <button mat-menu-item (click)="editProject(projectWithPrivileges.project)">
+                  <span i18n>Edit project</span>
+                </button>
+                <button mat-menu-item class="important" (click)="deleteProject(projectWithPrivileges.project)">
+                  <span i18n>Delete project</span>
+                </button>
+              </ng-container>
+            </sidebar-entry>
+          </div>
+          <ng-container class="options">
+            <button mat-menu-item (click)="createProject(workspace)">
+              <span i18n>Create project</span>
+            </button>
+            <button mat-menu-item (click)="routeToWorkspace(workspace)">
+              <span i18n>Manage projects</span>
+            </button>
+            <button mat-menu-item (click)="editWorkspace(workspace)">
+              <span i18n>Edit workspace</span>
+            </button>
+            <button mat-menu-item class="important" (click)="deleteWorkspace(workspace)">
+              <span i18n>Delete workspace</span>
+            </button>
+          </ng-container>
+        </sidebar-entry>
+      </ng-container>
+    </div>
+  </sidebar-entry>
+</div>

@@ -1,0 +1,28 @@
+main {
+  padding: 20px;
+  background-color: var(--color-secondary-600);
+  border-radius: var(--border-radius);
+  color: var(--color-text);
+
+  section {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--color-text);
+
+    .github {
+      width: 100%;
+    }
+
+    app-button {
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.repository-option ::ng-deep app-icon {
+  opacity: 0.5;
+}

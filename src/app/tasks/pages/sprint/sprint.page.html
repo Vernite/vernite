@@ -1,0 +1,35 @@
+<app-task-view-options [project]="(project$ | async)!"></app-task-view-options>
+
+<ng-container *ngIf="activeSprint$ | async as activeSprint">
+  <div class="flex items-end gap-3 mb-2">
+    <h2 class="title text-xl font-bold">{{activeSprint.name}}</h2>
+    <app-button variant="secondary" (click)="closeSprint(activeSprint)" i18n>Close sprint</app-button>
+    <div class="text-base">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu" i18n-aria-label>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="editSprint(activeSprint)">
+          <span i18n>Edit sprint</span>
+        </button>
+        <button mat-menu-item (click)="revertSprint(activeSprint)">
+          <span i18n>Revert sprint to backlog</span>
+        </button>
+        <button mat-menu-item class="important" (click)="deleteSprint(activeSprint)">
+          <span i18n>Delete sprint</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  <ng-container *ngIf="view === 'list'">
+    <task-list [tasks]="(tasks$ | async) || []" [members]="(members$ | async) || emptyMap" [projectId]="projectId"
+      [statusList]="(statusList$ | async) || []"></task-list>
+  </ng-container>
+  <ng-container *ngIf="view === 'board'">
+    <tasks-board [members]="(members$ | async) || emptyMap" [projectId]="projectId"
+      [statusList]="(statusListWithTasks$ | async) || []" [board]="(board$ | async) || []"></tasks-board>
+  </ng-container>
+</ng-container>
+<ng-container *ngIf="(activeSprint$ | async) === undefined">
+  <h1 class="w-full text-center text-xl" i18n>There is no active sprint</h1>
+</ng-container>

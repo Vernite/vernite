@@ -1,0 +1,23 @@
+<div class="time">
+  <div class="time-selector">
+    <button class="arrow-up" (mousedown)="onKeyDown(increaseHours)" (mouseup)="onKeyUp()">
+      <app-icon [icon]="faChevronUp" size="1rem"></app-icon>
+    </button>
+    <app-input type="number" [ngModel]="cursor | dayjsFormat:'HH'" (change)="onHourChange($event)" align="center">
+    </app-input>
+    <button class="arrow-down" (mousedown)="onKeyDown(decreaseHours)" (mouseup)="onKeyUp()">
+      <app-icon [icon]="faChevronDown" size="1rem"></app-icon>
+    </button>
+  </div>
+  <span class="colon">:</span>
+  <div class="time-selector">
+    <button class="arrow-up" (mousedown)="onKeyDown(increaseMinutes)" (mouseup)="onKeyUp()">
+      <app-icon [icon]="faChevronUp" size="1rem"></app-icon>
+    </button>
+    <app-input type="number" [ngModel]="cursor | dayjsFormat:'mm'" (change)="onMinuteChange($event)" align="center">
+    </app-input>
+    <button class="arrow-down" (mousedown)="onKeyDown(decreaseMinutes)" (mouseup)="onKeyUp()">
+      <app-icon [icon]="faChevronDown" size="1rem"></app-icon>
+    </button>
+  </div>
+</div>

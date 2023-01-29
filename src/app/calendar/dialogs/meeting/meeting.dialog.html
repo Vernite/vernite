@@ -1,0 +1,53 @@
+<h1 mat-dialog-title *ngIf="data.variant === MeetingDialogVariant.EDIT" i18n>Edit meeting: {{ data.meeting?.name }}</h1>
+<h1 mat-dialog-title *ngIf="data.variant === MeetingDialogVariant.CREATE" i18n>Create new meeting</h1>
+<div mat-dialog-content>
+  <form (submit)="confirm()" [formGroup]="form" autocomplete="off">
+
+    <!-- Project -->
+    <app-select formControlName="projectId" floatingLabel="Project"
+      [readonly]="data.variant === MeetingDialogVariant.EDIT" i18n-floatingLabel>
+      <app-option *ngFor="let project of projects$ | async" [value]="project.id">{{project.name}}
+      </app-option>
+      <app-empty-options i18n>Projects list is empty</app-empty-options>
+    </app-select>
+
+    <!-- Name field -->
+    <app-input floatingLabel="Name" placeholder="New meeting" formControlName="name" i18n-floatingLabel
+      i18n-placeholder>
+    </app-input>
+
+    <!-- Description field -->
+    <app-input type="textarea" floatingLabel="Description" placeholder="Sample description..."
+      formControlName="description" i18n-floatingLabel i18n-placeholder></app-input>
+
+    <!-- Location field -->
+    <app-input floatingLabel="Location" placeholder="Location" formControlName="location" i18n-floatingLabel
+      i18n-placeholder>
+    </app-input>
+
+    <!-- Start date field -->
+    <app-input-date-time formControlName="startDate" floatingLabel="Start date" i18n-floatingLabel>
+    </app-input-date-time>
+
+    <!-- End date field -->
+    <app-input-date-time formControlName="endDate" floatingLabel="End date" i18n-floatingLabel>
+    </app-input-date-time>
+
+    <!-- Participants -->
+    <app-select *ngIf="form.get('projectId').value" formControlName="participantIds" [multiple]="true"
+      floatingLabel="Participants" [pending]="membersLoader.pending" i18n-floatingLabel>
+      <app-option *ngFor="let member of members$ | async" [value]="member.user.id" [checkmark]="true">
+        {{member.user.name}}
+      </app-option>
+      <app-empty-options i18n>Project members list is empty</app-empty-options>
+    </app-select>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <app-button mat-button (click)="cancel()" i18n>Cancel</app-button>
+  <app-button *ngIf="data.variant === MeetingDialogVariant.CREATE" (click)="confirm()" variant="primary"
+    i18n>Create</app-button>
+  <app-button *ngIf="data.variant === MeetingDialogVariant.EDIT" (click)="confirm()" variant="primary" i18n>Save
+    changes</app-button>
+</div>

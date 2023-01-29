@@ -1,0 +1,16 @@
+<div [formGroup]="form">
+  <app-button variant="transparent" [icon]="faTrash" [pending]="deleteLoader.pending" (click)="delete()" class="mr-4">
+  </app-button>
+  <app-input-date-time formControlName="startDate" floatingLabel="Start date" [pending]="saveLoader.pending"
+    i18n-floatingLabel>
+  </app-input-date-time>
+  <app-input-date-time formControlName="endDate" floatingLabel="End date" [pending]="saveLoader.pending"
+    i18n-floatingLabel>
+  </app-input-date-time>
+  <ng-container *ngIf="timeTrack.endDate">
+    <span class="text-base">{{ timeTrack | timeTrackDuration }}</span>
+  </ng-container>
+  <ng-container *ngIf="!timeTrack.endDate">
+    <span class="text-base" i18n>In progress</span>
+  </ng-container>
+</div>

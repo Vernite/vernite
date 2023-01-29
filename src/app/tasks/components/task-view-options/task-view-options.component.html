@@ -1,0 +1,14 @@
+<section *ngIf="project">
+  <div *ngIf="inSprint" class="tabs">
+    <a [routerLink]="['/', 'projects', projectId, 'sprint']" [queryParams]="{ view: 'list' }" routerLinkActive="active">
+      <h2 i18n>List</h2>
+    </a>
+    <a [routerLink]="['/', 'projects', projectId, 'sprint']" [queryParams]="{ view: 'board' }"
+      routerLinkActive="active">
+      <h2 i18n>Board</h2>
+    </a>
+  </div>
+  <div *ngIf="!inSprint">
+    <app-button (click)="openDialog()" i18n>Create new sprint</app-button>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+mat-dialog-container.mat-dialog-container,
+app-dialog-outlet {
+  padding: 0;
+  background-color: var(--color-dialog-background);
+  border-radius: var(--border-radius);
+  color: var(--color-text);
+
+  >* {
+    display: block;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+  }
+
+  .important-dialog {
+    border: 2px solid var(--color-dialog-important-border);
+  }
+
+  .mat-dialog-title {
+    @include text-xl;
+
+    margin-bottom: 1rem;
+    font-family: var(--font-family);
+    font-weight: 700;
+
+    &.important {
+      color: var(--color-dialog-important-text);
+    }
+  }
+
+  .mat-dialog-content {
+    @include text-base;
+    max-height: 100vh;
+  }
+
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-dialog-delimiter);
+
+    >* {
+      margin-left: 1.25rem;
+    }
+  }
+}

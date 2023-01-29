@@ -1,0 +1,11 @@
+<form [formGroup]="form" (submit)="submitCreate()">
+  <h2 class="text-xl font-bold mb-5" i18n>Create new workspace</h2>
+  <app-input formControlName="name" type="text" placeholder="New workspace" floatingLabel="Workspace name"
+    i18n-floatingLabel i18n-placeholder></app-input>
+
+  <div class="buttons">
+    <app-button variant="primary" [pending]="createSubscription && !createSubscription.closed" i18n>Save</app-button>
+    <app-button variant="secondary" type="button" routerLink="/workspaces" i18n>Cancel</app-button>
+  </div>
+
+</form>
