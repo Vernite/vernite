@@ -1,0 +1,112 @@
+<<<<<<< HEAD
+name: Dev checks
+=======
+name: Development checks
+>>>>>>> backend/dev
+
+on:
+  push:
+    branches: [dev]
+<<<<<<< HEAD
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+  prepare-environment:
+    needs: [checkout]
+    uses: ./.github/workflows/_env.yml
+
+  unit-tests:
+    needs: [prepare-environment]
+    uses: ./.github/workflows/_unit.build.yml
+
+  e2e-tests:
+    needs: [prepare-environment]
+    uses: ./.github/workflows/_e2e.build.yml
+
+  build:
+    needs: [unit-tests]
+    uses: ./.github/workflows/_app.build.yml
+    with:
+      configuration: dev
+
+  deploy:
+    needs: [build]
+    uses: ./.github/workflows/_app.deploy.yml
+    with:
+      configuration: dev
+    secrets:
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+  build-storybook:
+    needs: [prepare-environment]
+    uses: ./.github/workflows/_docs.build.yml
+    with:
+      configuration: dev
+
+  badges:
+    needs: [unit-tests, build-storybook]
+    uses: ./.github/workflows/_badges.build.yml
+
+  sonar:
+    needs: [build, unit-tests]
+    uses: ./.github/workflows/_sonar.deploy.yml
+    with:
+      configuration: dev
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+  audit:
+    needs: [prepare-environment]
+    uses: ./.github/workflows/_audit.build.yml
+
+  docs:
+    needs: [build-storybook, unit-tests, audit, badges]
+    uses: ./.github/workflows/_docs.deploy.yml
+    with:
+      configuration: dev
+    secrets:
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+=======
+jobs:
+  build:
+    uses: ./.github/workflows/build-app.yml
+    secrets:
+      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+      SPRING_APPLICATION_PROPERTIES: ${{ secrets.SPRING_APPLICATION_PROPERTIES }}
+      VERNITE_2022_PRIVATE_KEY_PEM: ${{ secrets.VERNITE_2022_PRIVATE_KEY_PEM }}
+
+  deploy:
+    needs: [build]
+    uses: ./.github/workflows/deploy.yml
+    with:
+      config: vernite-dev
+    secrets:
+      AUTO_DEPLOY_KEY: ${{ secrets.AUTO_DEPLOY_KEY }}
+  
+  sonar:
+    needs: [build]
+    uses: ./.github/workflows/sonar.yml
+    secrets:
+      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+      SPRING_APPLICATION_PROPERTIES: ${{ secrets.SPRING_APPLICATION_PROPERTIES }}
+      VERNITE_2022_PRIVATE_KEY_PEM: ${{ secrets.VERNITE_2022_PRIVATE_KEY_PEM }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+  docs:
+    needs: [build]
+    uses: ./.github/workflows/docs.yml
+    secrets:
+      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+      SPRING_APPLICATION_PROPERTIES: ${{ secrets.SPRING_APPLICATION_PROPERTIES }}
+      VERNITE_2022_PRIVATE_KEY_PEM: ${{ secrets.VERNITE_2022_PRIVATE_KEY_PEM }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+>>>>>>> backend/dev
