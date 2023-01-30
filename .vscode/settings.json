@@ -95,5 +95,7 @@
     "Vernite",
     "Xmark"
   ],
-  "java.compile.nullAnalysis.mode": "automatic"
+  "docify.programmingLanguage": "javascript",
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

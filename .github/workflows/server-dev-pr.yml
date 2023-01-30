@@ -1,8 +1,10 @@
-name: Development PR checks
+name: Development server PR checks
 
 on:
   pull_request:
     branches: [dev]
+    paths:
+      - 'packages/server/**'
 
 jobs:
   build:

@@ -1,11 +1,11 @@
-name: 'Dependency Review'
+name: 'Server dependency review'
 
 on:
   push:
     branches:
       - dev
     paths:
-      - 'pom.xml'
+      - 'packages/server/pom.xml'
     
 
 permissions:

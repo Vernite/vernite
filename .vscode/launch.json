@@ -45,6 +45,14 @@
       "type": "node",
       "request": "launch",
       "preLaunchTask": "npm: docs:serve"
+    },
+    {
+      "type": "java",
+      "name": "Launch java server",
+      "request": "launch",
+      "mainClass": "dev.vernite.vernite.VerniteApplication",
+      "projectName": "vernite",
+      "cwd": "${workspaceFolder}/packages/server"
     }
   ]
 }
