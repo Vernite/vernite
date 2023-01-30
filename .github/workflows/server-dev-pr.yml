@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/build-app.yml
+    uses: ./.github/workflows/server-build.yml
     secrets:
       MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
       SPRING_APPLICATION_PROPERTIES: ${{ secrets.SPRING_APPLICATION_PROPERTIES }}
