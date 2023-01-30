@@ -1,0 +1,6 @@
+{
+  "name": "cypress",
+  "scripts": {
+    "build": "echo build"
+  }
+}

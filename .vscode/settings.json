@@ -3,17 +3,9 @@
     ".xtm": "xml",
     ".ngI18nconfig": "json"
   },
-  "eslint.validate": [
-    "javascript",
-    "typescript",
-    "html"
-  ],
+  "eslint.validate": ["javascript", "typescript", "html"],
   "eslint.options": {
-    "extensions": [
-      ".js",
-      ".ts",
-      ".html"
-    ]
+    "extensions": [".js", ".ts", ".html"]
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
@@ -27,9 +19,7 @@
   "scss.validate": false,
   "css.validate": false,
   "less.validate": false,
-  "stylelint.validate": [
-    "scss"
-  ],
+  "stylelint.validate": ["scss"],
   "explorer.compactFolders": false,
   "search.exclude": {
     ".git": true,
@@ -92,6 +82,7 @@
     "Donte",
     "lcov",
     "ngneat",
+    "nrwl",
     "protobuf",
     "tabuckner",
     "Vernite",

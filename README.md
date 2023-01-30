@@ -15,3 +15,17 @@ Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and 
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+---
+
+Each project needs a `package.json` file with properly configured scripts
+
+Running frontend serve:
+
+```bash
+yarn nx run frontend:serve
+```
+
+```bash
+yarn nx run [:package]:[:target]
+```

@@ -2,7 +2,10 @@
   "extends": "nx/presets/npm.json",
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "affected": {
-    "defaultBase": "master"
+    "defaultBase": "dev"
+  },
+  "cli": {
+    "packageManager": "yarn"
   },
   "tasksRunnerOptions": {
     "default": {
@@ -11,11 +14,17 @@
         "cacheableOperations": [
           "build",
           "lint",
-          "test",
-          "e2e"
+          "test"
         ],
         "accessToken": "ZDBhMWFjY2EtYzMzYi00OThiLTk5ZGYtZWMyZGU4YWQ5ZmM0fHJlYWQtd3JpdGU="
       }
+    }
+  },
+  "targetDefaults": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ]
     }
   }
 }
