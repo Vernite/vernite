@@ -35,7 +35,12 @@
   /* ==== Material icons ==== */
   /* ======================== */
   "material-icon-theme.files.associations": {
-    "*.page.ts": "angular-resolver"
+    "*.page.ts": "angular-resolver",
+    "tsconfig.doc.json": "tsconfig",
+    ".ngI18nconfig": "I18n"
+  },
+  "material-icon-theme.folders.associations": {
+    ".config": "config"
   },
 
   /* ====================== */
