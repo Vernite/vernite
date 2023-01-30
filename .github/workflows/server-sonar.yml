@@ -1,4 +1,4 @@
-name: Run Sonar analysis
+name: Run server Sonar analysis
 on:
   workflow_dispatch:
   workflow_call:
@@ -46,6 +46,10 @@ jobs:
           mysql -h 127.0.0.1 -uroot -proot -e 'create database vernite_test charset utf8mb4'
           mysql -h 127.0.0.1 -uroot -proot -e 'create user "vernite"@"localhost" identified by "${{ secrets.MYSQL_PASSWORD }}"'
           mysql -h 127.0.0.1 -uroot -proot -e 'grant all on *.* to "vernite"@"localhost" with grant option'
+
+      # Change working directory
+      - name: Change working directory
+        run: cd packages/server
 
       # Install properties secrets
       - name: Install properties

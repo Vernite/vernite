@@ -1,4 +1,4 @@
-name: Deploy to vernite server
+name: Deploy server
 
 on:
   workflow_call:
@@ -19,6 +19,10 @@ jobs:
       # Checkout repository
       - name: Checkout
         uses: actions/checkout@v3
+
+      # Change working directory
+      - name: Change directory
+        run: cd packages/server
 
       # Download cache
       - name: Download cache

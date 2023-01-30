@@ -1,8 +1,10 @@
-name: Development checks
+name: Development server checks
 
 on:
   push:
     branches: [dev]
+    paths:
+      - 'packages/server/**'
 jobs:
   build:
     uses: ./.github/workflows/build-app.yml
@@ -36,4 +38,3 @@ jobs:
       MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
       SPRING_APPLICATION_PROPERTIES: ${{ secrets.SPRING_APPLICATION_PROPERTIES }}
       VERNITE_2022_PRIVATE_KEY_PEM: ${{ secrets.VERNITE_2022_PRIVATE_KEY_PEM }}
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
