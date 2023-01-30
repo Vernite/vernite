@@ -2,7 +2,8 @@ name: Development server checks
 
 on:
   push:
-    branches: [dev]
+    branches:
+      - dev
     paths:
       - 'packages/server/**'
 jobs:

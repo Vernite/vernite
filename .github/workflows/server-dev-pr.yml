@@ -2,7 +2,8 @@ name: Development server PR checks
 
 on:
   pull_request:
-    branches: [dev]
+    branches:
+      - dev
     paths:
       - 'packages/server/**'
 

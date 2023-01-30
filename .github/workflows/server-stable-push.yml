@@ -2,7 +2,8 @@ name: Production server checks
 
 on:
   push:
-    branches: [stable]
+    branches:
+      - main
     paths:
       - 'packages/server/**'
 
