@@ -90,5 +90,6 @@
     "Vernite",
     "Xmark"
   ],
-  "docify.programmingLanguage": "javascript"
+  "docify.programmingLanguage": "javascript",
+  "java.compile.nullAnalysis.mode": "automatic"
 }
