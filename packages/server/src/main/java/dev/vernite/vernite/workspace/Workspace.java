@@ -52,10 +52,9 @@ import dev.vernite.vernite.project.Project;
 import dev.vernite.vernite.projectworkspace.ProjectWithPrivileges;
 import dev.vernite.vernite.projectworkspace.ProjectWorkspace;
 import dev.vernite.vernite.user.User;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 import org.hibernate.annotations.OnDelete;
@@ -66,28 +65,22 @@ import org.hibernate.annotations.Where;
  * Entity for representing collection of projects.
  * Its connected to user and has unique id for that user.
  */
+@Data
 @Entity
-@ToString
 @NoArgsConstructor
-@EqualsAndHashCode
 public class Workspace {
 
     @Valid
-    @Setter
-    @Getter
     @EmbeddedId
     @JsonUnwrapped
     @NotNull(message = "workspace id cannot be null")
     private WorkspaceId id;
 
-    @Getter
     @Column(nullable = false, length = 50)
     @Size(min = 1, max = 50, message = "workspace name must be shorter than 50 characters")
     @NotBlank(message = "workspace name must contain at least one non-whitespace character")
     private String name;
 
-    @Setter
-    @Getter
     @JsonIgnore
     @MapsId("userId")
     @ToString.Exclude
@@ -96,8 +89,6 @@ public class Workspace {
     @NotNull(message = "workspace must have user set")
     private User user;
 
-    @Setter
-    @Getter
     @JsonIgnore
     @Deprecated
     @ToString.Exclude
@@ -107,8 +98,6 @@ public class Workspace {
     @NotNull(message = "project workspaces connection must be set")
     private List<ProjectWorkspace> projectWorkspaces = List.of();
 
-    @Setter
-    @Getter
     @ManyToMany
     @ToString.Exclude
     @OrderBy("name, id")

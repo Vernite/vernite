@@ -2,17 +2,18 @@ name: Production server checks
 
 on:
   push:
-    branches: [stable]
+    branches:
+      - main
     paths:
       - 'packages/server/**'
 
 jobs:
   build:
-    uses: ./.github/workflows/build-app.yml
+    uses: ./.github/workflows/server-build.yml
 
   deploy:
     needs: [build]
-    uses: ./.github/workflows/deploy.yml
+    uses: ./.github/workflows/server-deploy.yml
     with:
       config: vernite
     secrets:

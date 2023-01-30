@@ -2,12 +2,13 @@ name: Development server checks
 
 on:
   push:
-    branches: [dev]
+    branches:
+      - dev
     paths:
       - 'packages/server/**'
 jobs:
   build:
-    uses: ./.github/workflows/build-app.yml
+    uses: ./.github/workflows/server-build.yml
     secrets:
       MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
       SPRING_APPLICATION_PROPERTIES: ${{ secrets.SPRING_APPLICATION_PROPERTIES }}
@@ -15,7 +16,7 @@ jobs:
 
   deploy:
     needs: [build]
-    uses: ./.github/workflows/deploy.yml
+    uses: ./.github/workflows/server-deploy.yml
     with:
       config: vernite-dev
     secrets:
@@ -23,7 +24,7 @@ jobs:
 
   sonar:
     needs: [build]
-    uses: ./.github/workflows/sonar.yml
+    uses: ./.github/workflows/server-sonar.yml
     secrets:
       MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
       SPRING_APPLICATION_PROPERTIES: ${{ secrets.SPRING_APPLICATION_PROPERTIES }}
@@ -33,7 +34,7 @@ jobs:
 
   docs:
     needs: [build]
-    uses: ./.github/workflows/docs.yml
+    uses: ./.github/workflows/server-docs.yml
     secrets:
       MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
       SPRING_APPLICATION_PROPERTIES: ${{ secrets.SPRING_APPLICATION_PROPERTIES }}

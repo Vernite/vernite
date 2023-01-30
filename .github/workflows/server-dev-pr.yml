@@ -2,13 +2,14 @@ name: Development server PR checks
 
 on:
   pull_request:
-    branches: [dev]
+    branches:
+      - dev
     paths:
       - 'packages/server/**'
 
 jobs:
   build:
-    uses: ./.github/workflows/build-app.yml
+    uses: ./.github/workflows/server-build.yml
     secrets:
       MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
       SPRING_APPLICATION_PROPERTIES: ${{ secrets.SPRING_APPLICATION_PROPERTIES }}
