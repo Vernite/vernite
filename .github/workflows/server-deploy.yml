@@ -27,7 +27,7 @@ jobs:
       - name: Download cache
         uses: actions/cache@v3
         with:
-          path: target
+          path: packages/server/target
           key: ${{ runner.os }}-build-${{ github.run_id }}
 
       # Deploy to server using rsync

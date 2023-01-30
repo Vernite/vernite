@@ -3,34 +3,38 @@
     ".xtm": "xml",
     ".ngI18nconfig": "json"
   },
-  "eslint.validate": ["javascript", "typescript", "html"],
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "html"
+  ],
   "eslint.options": {
-    "extensions": [".js", ".ts", ".html"]
+    "extensions": [
+      ".js",
+      ".ts",
+      ".html"
+    ]
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true
   },
   "editor.formatOnSave": true,
-
   "[typescript]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
-
   "stylelint.enable": true,
   "scss.validate": false,
   "css.validate": false,
   "less.validate": false,
-
-  "stylelint.validate": ["scss"],
-
+  "stylelint.validate": [
+    "scss"
+  ],
   "explorer.compactFolders": false,
-
   "search.exclude": {
     ".git": true,
     "node_modules": true
   },
-
   /* ======================== */
   /* ==== Material icons ==== */
   /* ======================== */
@@ -42,7 +46,6 @@
   "material-icon-theme.folders.associations": {
     ".config": "config"
   },
-
   /* ====================== */
   /* ==== Hidden files ==== */
   /* ====================== */
@@ -79,7 +82,6 @@
     "coverage": false
   },
   "explorerExclude.backup": {},
-
   /* ================== */
   /* ==== Spelling ==== */
   /* ================== */
@@ -97,5 +99,5 @@
   ],
   "docify.programmingLanguage": "javascript",
   "java.compile.nullAnalysis.mode": "automatic",
-  "java.configuration.updateBuildConfiguration": "interactive"
+  "java.configuration.updateBuildConfiguration": "automatic"
 }
