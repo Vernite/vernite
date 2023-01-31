@@ -1,0 +1,17 @@
+{
+  "name": "@vernite/protobuf",
+  "version": "1.0.19",
+  "repository": "https://github.com/Vernite/protobuf",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "main": "vernite.js",
+  "dependencies": {
+    "typescript": "^4.9.3",
+    "google-protobuf": "^3.21.2"
+  },
+  "devDependencies": {
+    "@types/google-protobuf": "^3.15.6",
+    "@types/node": "^16.11.6"
+  }
+}

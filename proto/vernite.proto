@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package vernite;
+
+option java_multiple_files = true;
+option java_package = "dev.vernite.protobuf";
+option java_outer_classname = "VerniteProtobuf";
+
+import "google/protobuf/any.proto";
+
+message KeepAlive {
+  int64 id = 1; // ID of the keep alive.
+}
+
+message CommunicatorModel {
+  // (S2C) Model representing a chat channel.
+  message Channel {
+    string id = 1; // ID of the channel.
+    string name = 2; // Name of channel. Present only if channel is not a DM.
+    string user = 3; // ID of user that the channel is a DM with. Present only if channel is a DM.
+    bool channel = 4; // Whether the channel is a DM. If true channel is not a DM.
+    string team = 5; // ID of team / server the channel is in. Might be absent if channel is a DM.
+    string provider = 6; // Service the channel is associated with.
+  }
+  // (S2C) Model representing a chat user.
+  message ChatUser {
+    string id = 1; // ID of the user.
+    string team = 2; // Team associated with the user. Might be absent.
+    string name = 3; // Name of the user.
+    string displayName = 4; // Display name of the user.
+    bool bot = 5; // Whether the user is a bot.
+    string avatar = 6; // Link to the user's avatar.
+    string provider = 7; // Service the user is associated with.
+  }
+  // (S2C) Model representing a chat message.
+  message Message {
+    string id = 1; // ID of the message.
+    string user = 2; // ID of the user that sent the message.
+    string channel = 3; // ID of the channel the message was sent to.
+    string content = 4; // Content of the message.
+    int64 timestamp = 5; // Timestamp of the message.
+    string provider = 6; // Service that sent the message.
+  }
+  // (C2S) Send a message to a channel.
+  message SendMessage {
+    string channel = 1; // ID of the channel to send the message to.
+    string content = 2; // Content of the message.
+    string provider = 3; // Service to send the message to.
+    int64 integrationID = 4; // ID of the integration that sent the message.
+  }
+}
+
+enum BasicAction {
+  ADDED = 0; // The object was added.
+  UPDATED = 1; // The object was updated.
+  REMOVED = 2; // The object was removed.
+}
+
+// (S2C) Ignored null fields
+message Task {
+  int64 id = 1; // ID of the task.
+  string name = 2; // Name of the task.
+  string description = 3; // Description of the task.
+  int64 createdAt = 4; // Timestamp of when the task was created.
+  int32 type = 5; // Type of the task.
+  // int64 deadline = 6; // Timestamp of when the task is due.
+  // int64 estimatedDate = 7; // Timestamp of when the task is estimated to be completed.
+  string priority = 8; // Priority of the task.
+  int64 statusId = 9; // Status of the task.
+  // int64 sprintId = 10; // Sprint the task is in.
+  // int64 assigneeId = 11; // ID of the user assigned to the task.
+  // int64 parentTaskId = 12; // ID of the parent task.
+  int64 createdBy = 13; // ID of the user that created the task.
+  // int64 releaseId = 14; // ID of the release the task is in.
+  int64 projectId = 15; // ID of the project the task is in.
+  BasicAction action = 16; // Action that was performed on the task.
+}

@@ -1,0 +1,49 @@
+name: TypeScript
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Node.js version 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install Protoc
+        run: sudo apt-get install -y protobuf-compiler
+      - name: Cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules-yarn
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install yarn
+        run: npm i -g yarn
+      - name: Install dependencies
+        if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
+        run: yarn install
+      - name: Build proto libraries ⚙️
+        run: |
+          protoc -I=./proto --plugin="protoc-gen-ts=./node_modules/.bin/protoc-gen-ts" --ts_out="dist/typescript" --ts_opt="explicit_override" proto/vernite.proto
+      - name: Build TypeScript
+        run: |
+          cd dist/typescript
+          yarn install
+          yarn tsc -p tsconfig.json
+      - name: Deploy TypeScript 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+          branch: build-typescript
+          folder: dist/typescript
