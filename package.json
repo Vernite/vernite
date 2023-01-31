@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "BSD-2-Clause",
   "scripts": {},
-  "private": false,
+  "private": true,
   "dependencies": {},
   "devDependencies": {
     "@nrwl/nx-cloud": "latest",

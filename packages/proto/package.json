@@ -1,0 +1,22 @@
+{
+  "name": "proto",
+  "version": "0.0.0",
+  "main": "dist/typescript/vernite.js",
+  "scripts": {
+    "build": "yarn build:typescript",
+    "build:typescript": "yarn protoc-gen-ts:windows -I=./src/ --ts_proto_out=dist/typescript ./src/vernite.proto",
+    "protoc-gen-ts:windows": "protoc --plugin=protoc-gen-ts_proto=.\\node_modules\\.bin\\protoc-gen-ts_proto.cmd",
+    "protoc-gen-ts:linux": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto",
+    "serve": "echo \"Warning: Not implemented yet\""
+  },
+  "dependencies": {
+    "google-protobuf": "^3.21.2",
+    "typescript": "^4.9.3"
+  },
+  "devDependencies": {
+    "@types/google-protobuf": "^3.15.6",
+    "@types/node": "^16.11.6",
+    "protoc": "^1.1.3",
+    "ts-proto": "^1.138.0"
+  }
+}

@@ -1,9 +1,11 @@
+const { join } = require('path');
+
 module.exports = {
   corePlugins: {
     fontSize: false
   },
   content: [
-    "./packages/*/src/**/*.{html,ts,mdx}"
+    './src/**/*.{html,ts,mdx}',
   ],
   theme: {
     extend: {

@@ -76,7 +76,9 @@
     "ua-parser-js": "^1.0.2",
     "uuid": "^8.3.2",
     "zone.js": "~0.11.4",
-    "ui": "*"
+    "ui": "*",
+    "proto": "*",
+    "core-ts": "*"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "14.1.0",
