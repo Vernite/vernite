@@ -32,8 +32,6 @@ build/
 ### VS Code ###
 .vscode/
 
-.mvn
-
-workflow-2022.private-key.der
+### Vernite ###
 vernite-2022.private-key.der
 application.properties
