@@ -3,10 +3,12 @@
   "version": "0.0.0",
   "license": "BSD-2-Clause",
   "scripts": {},
-  "private": false,
+  "private": true,
   "dependencies": {},
   "devDependencies": {
+    "@nrwl/angular": "^15.6.3",
     "@nrwl/nx-cloud": "latest",
+    "@nxrocks/nx-spring-boot": "^6.2.1",
     "@types/node": "16.11.7",
     "nx": "15.6.3",
     "prettier": "^2.6.2",
