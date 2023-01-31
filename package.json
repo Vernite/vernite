@@ -1,18 +1,20 @@
 {
   "name": "vernite",
   "version": "0.0.0",
-  "license": "MIT",
+  "license": "BSD-2-Clause",
   "scripts": {},
-  "private": true,
+  "private": false,
   "dependencies": {},
   "devDependencies": {
-    "@nrwl/cypress": "15.6.3",
     "@nrwl/nx-cloud": "latest",
     "@types/node": "16.11.7",
-    "cypress": "^12.2.0",
     "nx": "15.6.3",
     "prettier": "^2.6.2",
     "typescript": "^4.9.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Vernite/vernite.git"
   },
   "workspaces": [
     "packages/*"

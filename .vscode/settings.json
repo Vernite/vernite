@@ -25,16 +25,20 @@
     ".git": true,
     "node_modules": true
   },
+  "monoWorkspace.folders.custom": [{ "regex": "cypress", "prefix": "🔥" }],
   /* ======================== */
   /* ==== Material icons ==== */
   /* ======================== */
   "material-icon-theme.files.associations": {
     "*.page.ts": "angular-resolver",
     "tsconfig.doc.json": "tsconfig",
-    ".ngI18nconfig": "I18n"
+    "*.webpack.ts": "webpack",
+    ".ngI18nconfig": "I18n",
+    ".env.insiders": "Tune"
   },
   "material-icon-theme.folders.associations": {
-    ".config": "config"
+    ".config": "config",
+    "ui": "context"
   },
   /* ====================== */
   /* ==== Hidden files ==== */
@@ -80,15 +84,18 @@
     "compodoc",
     "devkit",
     "Donte",
+    "jsdevtools",
     "lcov",
     "ngneat",
     "nrwl",
     "protobuf",
+    "recaptcha",
+    "storysource",
     "tabuckner",
+    "tailwindcss",
     "Vernite",
     "Xmark"
   ],
-  "docify.programmingLanguage": "javascript",
   "java.compile.nullAnalysis.mode": "automatic",
   "java.configuration.updateBuildConfiguration": "automatic"
 }

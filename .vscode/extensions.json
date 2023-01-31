@@ -13,13 +13,15 @@
     "roman-lo.vscode-ng-i18n-editor",
     "finico.angular-dx",
     "aaron-bond.better-comments",
-    "simontest.simontest",
-    "vscode-icons-team.vscode-icons",
     "rvest.vs-code-prettier-eslint",
     "editorconfig.editorconfig",
     "stylelint.vscode-stylelint",
     "vunguyentuan.vscode-css-variables",
     "tobermory.es6-string-html",
-    "gruntfuggly.todo-tree"
+    "gruntfuggly.todo-tree",
+    "pkief.material-icon-theme",
+    "pranaygp.vscode-css-peek",
+    "nrwl.angular-console",
+    "webben.browserslist"
   ]
 }

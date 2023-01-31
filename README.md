@@ -20,12 +20,17 @@ Visit the [Nx Documentation](https://nx.dev) to learn more.
 
 Each project needs a `package.json` file with properly configured scripts
 
-Running frontend serve:
+Running client commands:
 
 ```bash
-yarn nx run frontend:serve
+yarn nx run client:serve
+yarn nx run client:build:dev
 ```
 
 ```bash
 yarn nx run [:package]:[:target]
 ```
+
+dev configuration - `dev` server (local development)
+insiders configuration - `insiders` server
+production configuration - `production` server
