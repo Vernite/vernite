@@ -30,7 +30,7 @@ jobs:
 
       # Set up Node.js
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "16"
 
@@ -59,11 +59,15 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      # Fix nvmw file permissions
+      - name: Fix nvmw file permissions
+        run: chmod +x ./packages/server/.nvmw
+
       # Test by nx
       - name: Test
-        run:
-          chmod +x packages/server/mvnw |
-          yarn nx run-many --target=test
+        uses: mansagroup/nrwl-nx-action@v3
+        with:
+          targets: test
 
       # Cache results
       - name: Cache results
