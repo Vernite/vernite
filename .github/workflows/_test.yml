@@ -12,7 +12,7 @@ on:
         required: true
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     environment: dev
     steps:
@@ -59,9 +59,9 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      # Fix nvmw file permissions
-      - name: Fix nvmw file permissions
-        run: chmod +x ./packages/server/.nvmw
+      # Fix mvnw file permissions
+      - name: Fix mvnw file permissions
+        run: chmod +x ./packages/server/.mvnw
 
       # Test by nx
       - name: Test
