@@ -45,7 +45,7 @@ jobs:
 
       # Install properties secrets
       - name: Install properties
-        run: 'echo "$SPRING_APPLICATION_PROPERTIES" > application.properties'
+        run: 'echo "$SPRING_APPLICATION_PROPERTIES" > ./packages/server/application.properties'
         env:
           SPRING_APPLICATION_PROPERTIES: ${{ secrets.SPRING_APPLICATION_PROPERTIES }}
 
@@ -53,7 +53,7 @@ jobs:
       - name: Prepare secret
         run: |
           echo "${{ secrets.VERNITE_2022_PRIVATE_KEY_PEM }}" > key.pem
-          openssl pkcs8 -topk8 -inform pem -in key.pem -out "vernite-2022.private-key.der" -outform der -nocrypt
+          openssl pkcs8 -topk8 -inform pem -in key.pem -out "./packages/server/vernite-2022.private-key.der" -outform der -nocrypt
 
       # Install dependencies
       - name: Install dependencies
@@ -61,7 +61,9 @@ jobs:
 
       # Build by nx
       - name: Build
-        run: yarn nx run-many --target=build
+        run:
+          chmod +x packages/server/mvnw
+          yarn nx run-many --target=build
 
       # Cache results
       - name: Cache results
