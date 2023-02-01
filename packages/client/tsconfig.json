@@ -22,6 +22,7 @@
     "module": "esnext",
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
+    "preserveSymlinks": true,
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"
