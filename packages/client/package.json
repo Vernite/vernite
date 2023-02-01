@@ -11,6 +11,7 @@
     "lint": "ng lint",
     "analyze:serve": "webpack-bundle-analyzer dist/vernite/en-US/stats.json",
     "analyze:build": "yarn analyze:serve -m static -O -r documentation/report/index.html",
+    "test": "yarn unit:build",
     "unit:serve": "yarn print \"You need to choose browser: 'firefox', 'chrome' and type command like 'yarn unit:serve:chrome'\" --color=yellow",
     "unit:serve:firefox": "concurrently -r -k \"http-server --port=9877 ./coverage/vernite\" \"ng test\"",
     "unit:serve:chrome": "concurrently -r -k \"http-server --port=9877 ./coverage/vernite\" \"ng test --browsers=Chrome\"",
