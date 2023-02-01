@@ -62,7 +62,7 @@ jobs:
       # Build by nx
       - name: Build
         run:
-          chmod +x packages/server/mvnw
+          chmod +x packages/server/mvnw |
           yarn nx run-many --target=build
 
       # Cache results
