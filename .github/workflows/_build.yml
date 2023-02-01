@@ -61,7 +61,7 @@ jobs:
 
       # Build by nx
       - name: Build
-        run: nx run-many --target=build
+        run: yarn nx run-many --target=build
 
       # Cache results
       - name: Cache results
