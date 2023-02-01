@@ -1,6 +1,7 @@
 {
   "name": "proto",
   "version": "0.0.0",
+  "license": "BSD-2-Clause",
   "main": "dist/typescript/vernite.js",
   "scripts": {
     "build": "yarn build:typescript && yarn build:java",
@@ -10,7 +11,7 @@
     "build:java": "protoc -I=./src --java_out=dist/java ./src/vernite.proto",
     "protoc-gen-ts:windows": "protoc --plugin=protoc-gen-ts_proto=.\\node_modules\\.bin\\protoc-gen-ts_proto.cmd",
     "protoc-gen-ts:default": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto",
-    "serve": "echo \"Warning: Not implemented yet\""
+    "serve": "node ../tools/watch.js ./src/vernite.proto \"yarn build\""
   },
   "dependencies": {
     "google-protobuf": "^3.21.2",
