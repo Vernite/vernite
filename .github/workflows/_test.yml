@@ -22,6 +22,8 @@ jobs:
         with:
           fetch-depth: 0
       - uses: nrwl/nx-set-shas@v3
+        with:
+          main-branch-name: dev
 
       # Set up JDK 17
       - name: Set up JDK 17
