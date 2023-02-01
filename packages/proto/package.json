@@ -4,7 +4,7 @@
   "main": "dist/typescript/vernite.js",
   "scripts": {
     "build": "yarn build:typescript && yarn build:java",
-    "build:typescript": "run-script-os",
+    "build:typescript": "yarn build:typescript:windows",
     "build:typescript:windows": "yarn protoc-gen-ts:windows -I=./src/ --ts_proto_out=dist/typescript ./src/vernite.proto",
     "build:typescript:default": "yarn protoc-gen-ts:default -I=./src/ --ts_proto_out=dist/typescript ./src/vernite.proto",
     "build:java": "protoc -I=./src --java_out=dist/java ./src/vernite.proto",
