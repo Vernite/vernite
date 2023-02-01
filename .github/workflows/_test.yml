@@ -61,7 +61,7 @@ jobs:
 
       # Fix mvnw file permissions
       - name: Fix mvnw file permissions
-        run: chmod +x ./packages/server/.mvnw
+        run: chmod +x ./packages/server/mvnw
 
       # Test by nx
       - name: Test
