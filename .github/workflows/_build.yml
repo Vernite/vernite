@@ -67,9 +67,7 @@ jobs:
 
       # Build by nx
       - name: Build
-        uses: mansagroup/nrwl-nx-action@v3
-        with:
-          targets: build
+        run: yarn nx affected --target=build
 
       # Cache results
       - name: Cache results

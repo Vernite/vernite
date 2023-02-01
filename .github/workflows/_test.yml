@@ -67,9 +67,7 @@ jobs:
 
       # Test by nx
       - name: Test
-        uses: mansagroup/nrwl-nx-action@v3
-        with:
-          targets: test
+        run: yarn nx affected --target=test
 
       # Cache results
       - name: Cache results
