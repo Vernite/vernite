@@ -1,5 +1,7 @@
 {
   "name": "cypress",
+  "version": "0.0.0",
+  "license": "BSD-2-Clause",
   "scripts": {
     "build": "echo build"
   },
