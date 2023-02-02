@@ -2,7 +2,9 @@
   "name": "vernite",
   "version": "0.0.0",
   "license": "BSD-2-Clause",
-  "scripts": {},
+  "scripts": {
+    "postinstall": "yarn lec ./node_modules/protoc/bin/protoc"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.2.12",
@@ -94,6 +96,7 @@
     "karma-jasmine-html-reporter": "~1.7.0",
     "karma-spec-reporter": "^0.0.34",
     "karma-structured-json-reporter": "^1.0.1",
+    "lec": "^1.0.1",
     "lcov-result-merger": "^4.0.0",
     "nx": "15.6.3",
     "nyc": "^15.1.0",
