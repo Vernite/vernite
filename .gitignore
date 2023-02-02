@@ -1,7 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-dist
+packages/proto/dist/java/dev
+packages/proto/dist/typescript/google
+packages/proto/dist/typescript/vernite.ts
 tmp
 /out-tsc
 
