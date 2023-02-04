@@ -5,7 +5,8 @@
   },
   "eslint.validate": ["javascript", "typescript", "html"],
   "eslint.options": {
-    "extensions": [".js", ".ts", ".html"]
+    "extensions": [".js", ".ts", ".html"],
+    "overrideConfigFile": "./.config/.eslintrc"
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
@@ -84,6 +85,7 @@
     "compodoc",
     "devkit",
     "Donte",
+    "fileoverview",
     "jsdevtools",
     "lcov",
     "ngneat",
@@ -100,5 +102,6 @@
     "Xmark"
   ],
   "java.compile.nullAnalysis.mode": "automatic",
-  "java.configuration.updateBuildConfiguration": "automatic"
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "eslint.packageManager": "yarn"
 }

@@ -6,14 +6,14 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
-      require('karma-jasmine'),
-      require('karma-chrome-launcher'),
-      require('karma-jasmine-html-reporter'),
-      require('karma-coverage'),
       require('@angular-devkit/build-angular/plugins/karma'),
-      require('karma-structured-json-reporter'),
+      require('karma-chrome-launcher'),
+      require('karma-coverage'),
       require('karma-firefox-launcher'),
+      require('karma-jasmine-html-reporter'),
+      require('karma-jasmine'),
       require('karma-spec-reporter'),
+      require('karma-structured-json-reporter'),
     ],
     files: [
       'src/tests/karma/karma.css',
@@ -33,7 +33,7 @@ module.exports = function (config) {
       suppressAll: true, // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/vernite'),
+      dir: './coverage/',
       subdir: '.',
       reporters: [
         { type: 'html' },
