@@ -45,3 +45,12 @@ jobs:
           REMOTE_USER: 'frontend'
           TARGET: "/var/www/html/${{ inputs.configuration == 'insiders' && 'dev' || 'prod' }}"
           EXCLUDE: "/dist/, /node_modules/"
+
+      # Add result to summary
+      - name: Add success result to summary
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: echo "🟩 - Client deploy success" >> $GITHUB_STEP_SUMMARY
+
+      - name: Add skipped result to summary
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: echo "⬜ - Client deploy skipped" >> $GITHUB_STEP_SUMMARY
