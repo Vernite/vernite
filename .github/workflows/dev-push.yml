@@ -1,0 +1,23 @@
+name: Insiders server deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build:
+    uses: ./.github/workflows/_build.yml
+    secrets: inherit
+
+  test:
+    uses: ./.github/workflows/_test.yml
+    secrets: inherit
+
+  deploy_client:
+    needs: [build, test]
+    uses: ./.github/workflows/_client-deploy.yml
+    with:
+      configuration: insiders
+    secrets: inherit

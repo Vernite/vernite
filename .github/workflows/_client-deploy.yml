@@ -1,0 +1,47 @@
+name: Deploy client
+
+on:
+  workflow_call:
+    inputs:
+      configuration:
+        required: true
+        type: string
+        description: insiders or production
+    secrets:
+      SSH_KEY_FRONTEND:
+        required: true
+        description: SSH key for frontend server
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/client
+
+    steps:
+      # Checkout repository
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Download client cache results
+      - name: Download cache
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: packages/client/dist
+          key: ${{ runner.os }}-${{ github.run_id }}-build-client
+
+      # Deploy client using rsync
+      - name: Deploy app 🚀
+        uses: easingthemes/ssh-deploy@main
+        if: steps.cache.outputs.cache-hit == 'true'
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY_FRONTEND }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "./dist/vernite/"
+          REMOTE_HOST: '51.83.255.98'
+          REMOTE_PORT: '2224'
+          REMOTE_USER: 'frontend'
+          TARGET: "/var/www/html/${{ inputs.configuration == 'insiders' && 'dev' || 'prod' }}"
+          EXCLUDE: "/dist/, /node_modules/"

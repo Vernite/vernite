@@ -72,10 +72,16 @@ jobs:
       - name: Build
         run: yarn nx affected --target=build
 
-      # Cache results
-      # TODO: Cache all build results
+      # Cache server build results
       - name: Cache results
         uses: actions/cache@v3
         with:
           path: packages/server/target
-          key: ${{ runner.os }}-build-${{ github.run_id }}
+          key: ${{ runner.os }}-${{ github.run_id }}-build-server
+
+      # Cache client build results
+      - name: Cache results
+        uses: actions/cache@v3
+        with:
+          path: packages/client/dist
+          key: ${{ runner.os }}-${{ github.run_id }}-build-client
