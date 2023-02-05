@@ -105,7 +105,6 @@ export class GitIntegrationService extends BaseService<
    */
   @Cache()
   public getGitHubIntegration(): Observable<GitIntegration> {
-    console.log('function call');
     return this.apiService.get('/user/integration/git/github/repository');
   }
 
