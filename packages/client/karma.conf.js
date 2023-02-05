@@ -1,3 +1,3 @@
-const config = require('../../.config/karma.conf.js');
+const configBuilder = require('../../.config/karma.conf.js');
 
-module.exports = config;
+module.exports = configBuilder({ __dirname });

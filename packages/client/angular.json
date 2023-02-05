@@ -125,21 +125,6 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
-            },
-            "e2e": {
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true,
-              "vendorChunk": true,
-              "customWebpackConfig": {
-                "path": "./cypress/coverage.webpack.ts"
-              },
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.dev.ts"
-                }
-              ]
             }
           },
           "defaultConfiguration": "production"
@@ -155,13 +140,6 @@
             }
           },
           "defaultConfiguration": "development"
-        },
-        "serve-coverage": {
-          "builder": "@angular-builders/custom-webpack:dev-server",
-          "options": {
-            "proxyConfig": "proxy.conf.json",
-            "browserTarget": "vernite:build:e2e"
-          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -185,8 +163,7 @@
             "styles": [
               "../../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles/styles.scss"
-            ],
-            "scripts": []
+            ]
           }
         },
         "lint": {
@@ -195,78 +172,6 @@
             "lintFilePatterns": [
               "src/**/*.ts",
               "src/**/*.html"
-            ]
-          }
-        },
-        "cypress-run": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "devServerTarget": "vernite:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "vernite:serve:production"
-            }
-          }
-        },
-        "cypress-open": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "watch": true,
-            "headless": false
-          }
-        },
-        "e2e": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "devServerTarget": "vernite:serve-coverage",
-            "watch": true,
-            "headless": false
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "vernite:serve-coverage:production"
-            }
-          }
-        },
-        "e2e-ci": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "browser": "chrome",
-            "devServerTarget": "vernite:serve-coverage",
-            "headless": true,
-            "watch": false
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "vernite:serve-coverage:production"
-            }
-          }
-        },
-        "storybook": {
-          "builder": "@storybook/angular:start-storybook",
-          "options": {
-            "browserTarget": "angular-cli:build",
-            "port": 6006,
-            "compodocArgs": [
-              "-e",
-              "json",
-              "--disablePrivate",
-              "--disableInternal",
-              "--disableLifeCycleHooks"
-            ]
-          }
-        },
-        "build-storybook": {
-          "builder": "@storybook/angular:build-storybook",
-          "options": {
-            "browserTarget": "angular-cli:build",
-            "compodocArgs": [
-              "-e",
-              "json",
-              "--disablePrivate",
-              "--disableInternal",
-              "--disableLifeCycleHooks"
             ]
           }
         }

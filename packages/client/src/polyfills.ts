@@ -54,7 +54,7 @@ import 'zone.js'; // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  *
- * @ TODO: Think to move this somewhere else
+ * TODO: Think to move this somewhere else
  */
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';

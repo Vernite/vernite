@@ -16,6 +16,12 @@
   "[typescript]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
+  "karmaTestExplorer": {
+    "enableExtension": true,
+    "karmaConfFilePath": "./karma.conf.js",
+    "projectWorkspaces": ["packages/client"],
+    "testFiles": ["packages/client/src/**/*.spec.ts"]
+  },
   "stylelint.enable": true,
   "scss.validate": false,
   "css.validate": false,
