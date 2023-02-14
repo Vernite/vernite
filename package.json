@@ -108,7 +108,7 @@
     "storybook-dark-mode": "^2.0.6",
     "storybook-tailwind-dark-mode": "^1.0.15",
     "stylelint": "^14.6.0",
-    "stylelint-config-idiomatic-order": "^8.1.0",
+    "stylelint-config-idiomatic-order": "^9.0.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recommended-scss": "^6.0.0",
     "stylelint-prettier": "^2.0.0",
