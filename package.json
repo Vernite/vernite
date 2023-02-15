@@ -22,7 +22,7 @@
     "@fortawesome/angular-fontawesome": "^0.10.2",
     "@fortawesome/fontawesome-svg-core": "^6.1.0",
     "@fortawesome/free-brands-svg-icons": "^6.1.0",
-    "@fortawesome/free-regular-svg-icons": "^6.1.0",
+    "@fortawesome/free-regular-svg-icons": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.1.0",
     "@ngneat/reactive-forms": "4.1.0",
     "@ngneat/until-destroy": "^9.2.1",
