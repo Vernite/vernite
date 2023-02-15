@@ -50,6 +50,7 @@ message CommunicatorModel {
   }
 }
 
+// (S2C) Basic operation type.
 enum BasicAction {
   ADDED = 0; // The object was added.
   UPDATED = 1; // The object was updated.
