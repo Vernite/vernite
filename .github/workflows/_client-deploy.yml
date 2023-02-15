@@ -39,7 +39,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY_FRONTEND }}
           ARGS: "-rltgoDzvO --delete"
-          SOURCE: "./dist/vernite/"
+          SOURCE: "./packages/client/dist/vernite/"
           REMOTE_HOST: '51.83.255.98'
           REMOTE_PORT: '2224'
           REMOTE_USER: 'frontend'
