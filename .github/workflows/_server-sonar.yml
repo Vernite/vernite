@@ -88,14 +88,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        if: ${{ contains(fromJSON(affected.outputs.affected).projects, "server") }}
+        if: ${{ contains(fromJSON(steps.affected.outputs.affected).projects, "server") }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=backend
 
       # Add result to summary
       - name: Add success result to summary
-        if: ${{ contains(fromJSON(affected.outputs.affected).projects, "server") }}
+        if: ${{ contains(fromJSON(steps.affected.outputs.affected).projects, "server") }}
         run: echo "🟩 - Server sonar analysis success" >> $GITHUB_STEP_SUMMARY
 
       - name: Add skipped result to summary
-        if: ${{ !contains(fromJSON(affected.outputs.affected).projects, "server") }}
+        if: ${{ !contains(fromJSON(steps.affected.outputs.affected).projects, "server") }}
         run: echo "⬜ - Server sonar analysis skipped" >> $GITHUB_STEP_SUMMARY
