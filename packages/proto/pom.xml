@@ -9,7 +9,7 @@
   <version>1.0.19-SNAPSHOT</version>
 
   <name>protobuf</name>
-  <description>Vernite Protobuf</description>
+  <description>Vernite protobuf</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
