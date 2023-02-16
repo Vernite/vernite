@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Service } from '@main/decorators/service/service.decorator';
-import { environment } from 'src/environments/environment';
 import { RequestOptions } from '../../interfaces/request-options.interface';
 import { DataFilter, DataFilterType } from '@main/interfaces/filters.interface';
+import { environment } from './../../../../environments/environment.prod';
 
 /**
  * Service to access the API

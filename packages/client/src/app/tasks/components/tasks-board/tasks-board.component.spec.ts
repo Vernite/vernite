@@ -2,9 +2,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BoardComponent } from './tasks-board.component';
-import { MainModule } from 'src/app/_main/_main.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ViewOptionsComponent } from '@dashboard/components/view-options/view-options.component';
+import { MainModule } from '@main/_main.module';
 
 describe('BoardComponent', () => {
   let component: BoardComponent;

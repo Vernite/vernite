@@ -1,6 +1,5 @@
 import { Component, ElementRef, HostBinding, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Workspace } from 'src/app/dashboard/interfaces/workspace.interface';
 import { WorkspaceService } from '@dashboard/services/workspace/workspace.service';
 import {
   faArrowRightArrowLeft,
@@ -17,6 +16,7 @@ import { DialogService } from '@main/services/dialog/dialog.service';
 import { Observable } from 'rxjs';
 import { SlackIntegrationService } from '@messages/services/slack-integration.service';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { Workspace } from '@dashboard/interfaces/workspace.interface';
 
 @Component({
   selector: 'app-sidebar-navigation',

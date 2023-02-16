@@ -3,10 +3,10 @@ import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Page } from '@main/decorators/page/page.decorator';
-import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { WorkspaceService } from '../../services/workspace/workspace.service';
 import { lengthValidator } from '@main/validators/length.validator';
 import { notEmptyValidator } from '@main/validators/not-empty.validator';
+import { requiredValidator } from './../../../_main/validators/required.validator';
 
 /**
  * Create workspace page component.

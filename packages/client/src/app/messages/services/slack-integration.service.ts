@@ -16,7 +16,7 @@ import {
   SlackUser,
 } from '@messages/interfaces/slack.interface';
 import { ProtoService } from '../../_main/services/proto/proto.service';
-import { vernite } from '@vernite/protobuf';
+import { CommunicatorModel_Message, CommunicatorModel_SendMessage } from '@proto/vernite';
 
 /** Slack integration service to manage channels and send/receive messages */
 @Injectable({
@@ -293,7 +293,7 @@ export class SlackIntegrationService extends BaseService<
    * @param provider Integration provider (in this case it's always `slack`)
    */
   public sendMessage(content: string, channelId: string, integrationId: number, provider: string) {
-    const messageObject = new vernite.CommunicatorModel.SendMessage({
+    const messageObject = CommunicatorModel_SendMessage.create({
       content,
       channel: channelId,
       provider,
@@ -308,9 +308,9 @@ export class SlackIntegrationService extends BaseService<
    * @param channelId Slack channel id
    * @returns observable with messages from slack channel
    */
-  public protoMessages(channelId: string): Observable<vernite.CommunicatorModel.Message> {
+  public protoMessages(channelId: string) {
     return this.protoService
-      .get<vernite.CommunicatorModel.Message>(vernite.CommunicatorModel.Message)
+      .get(CommunicatorModel_Message)
       .pipe(filter((message) => message.channel === channelId));
   }
 }

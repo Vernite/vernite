@@ -8,7 +8,7 @@ import { ButtonComponent } from '@main/components/button/button.component';
 import { MainModule } from '@main/_main.module';
 import { DeleteAccountPage } from './delete-account.page';
 import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service } from 'ng-recaptcha';
-import { environment } from 'src/environments/environment';
+import { environment } from 'packages/client/src/environments/environment.dev';
 
 describe('DeleteAccountPage', () => {
   let component: DeleteAccountPage;

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogOutlet } from '@main/services/dialog/dialog.service';
-import { environment } from 'src/environments/environment';
 import { RouterExtensionsService } from '@main/services/router-extensions/router-extensions.service';
 import { AuthService } from '../../../auth/services/auth/auth.service';
 import { ProtoService } from '../../services/proto/proto.service';
 import { UserService } from '../../../auth/services/user/user.service';
+import { environment } from './../../../../environments/environment';
 
 /**
  * Main view component

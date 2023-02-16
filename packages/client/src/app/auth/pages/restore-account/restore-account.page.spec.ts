@@ -7,7 +7,7 @@ import { MainModule } from '@main/_main.module';
 
 import { RestoreAccountPage } from './restore-account.page';
 import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service } from 'ng-recaptcha';
-import { environment } from 'src/environments/environment';
+import { environment } from 'packages/client/src/environments/environment';
 
 describe('RestoreAccountPage', () => {
   let component: RestoreAccountPage;

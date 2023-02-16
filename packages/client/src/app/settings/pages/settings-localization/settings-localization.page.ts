@@ -3,9 +3,9 @@ import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { requiredValidator } from '@main/validators/required.validator';
 import * as dayjs from 'dayjs';
 import { UserService } from '../../../auth/services/user/user.service';
-import { environment } from 'src/environments/environment';
 import { SnackbarService } from '@main/services/snackbar/snackbar.service';
 import { maxLengthValidator } from '@main/validators/max-length.validator';
+import { environment } from './../../../../environments/environment';
 
 /**
  * Component to display localization settings

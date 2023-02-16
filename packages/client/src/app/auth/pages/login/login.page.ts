@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@ngneat/reactive-forms';
 import { Router } from '@angular/router';
 import { catchError, EMPTY, of, Subscription, switchMap } from 'rxjs';
-import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { AuthService } from '@auth/services/auth/auth.service';
 import { Loader } from '../../../_main/classes/loader/loader.class';
 import { startLoader, stopLoader } from '../../../_main/operators/loader.operator';
 import { booleanValidator } from '@main/validators/boolean.validator';
+import { requiredValidator } from './../../../_main/validators/required.validator';
 
 /**
  * Login page component

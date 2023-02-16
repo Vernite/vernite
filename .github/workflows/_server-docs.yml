@@ -57,14 +57,16 @@ jobs:
         uses: actions/cache@v3
         with:
           path: packages/server/target
-          key: ${{ runner.os }}-build-${{ github.run_id }}
+          key: ${{ runner.os }}-${{ github.run_id }}-build-server
 
       # Build javadoc and jacoco
       - name: Generate Javadoc & Jacoco
+        if: steps.cache.outputs.cache-hit == 'true'
         run: mvn jacoco:report javadoc:javadoc
 
       # Upload code coverage
       - name: Generate code coverage
+        if: steps.cache.outputs.cache-hit == 'true'
         uses: codecov/codecov-action@v3
         with:
           files: target/site/jacoco/jacoco.xml
@@ -74,5 +76,15 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: target/site
+          folder: /packages/server/target/site
+          target-folder: server
           single-commit: true
+
+      # Add result to summary
+      - name: Add success result to summary
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: echo "🟩 - Server docs build success" >> $GITHUB_STEP_SUMMARY
+
+      - name: Add skipped result to summary
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: echo "⬜ - Server docs build skipped" >> $GITHUB_STEP_SUMMARY
