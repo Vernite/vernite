@@ -39,7 +39,7 @@ message CommunicatorModel {
     string channel = 3; // ID of the channel the message was sent to.
     string content = 4; // Content of the message.
     int64 timestamp = 5; // Timestamp of the message.
-    string provider = 6; // Service that the message came from.
+    string provider = 6; // Service that sent the message.
   }
   // (C2S) Send a message to a channel.
   message SendMessage {
