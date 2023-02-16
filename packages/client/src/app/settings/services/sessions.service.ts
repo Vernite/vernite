@@ -1,9 +1,9 @@
 import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserSession } from 'src/app/settings/interfaces/session.interface';
 import { ApiService } from '@main/services/api/api.service';
 import { BaseService } from '@main/services/base/base.service';
 import { Errors } from '@main/interfaces/http-error.interface';
+import { UserSession } from '../interfaces/session.interface';
 
 /**
  * Sessions service

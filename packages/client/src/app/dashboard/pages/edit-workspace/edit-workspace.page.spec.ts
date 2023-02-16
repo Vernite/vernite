@@ -2,10 +2,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditWorkspacePage } from './edit-workspace.page';
-import { MainModule } from 'src/app/_main/_main.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MainModule } from '@main/_main.module';
 
 describe('EditWorkspacePage', () => {
   let component: EditWorkspacePage;

@@ -5,7 +5,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service } from 'ng-recaptcha';
-import { environment } from 'src/environments/environment';
+import { environment } from 'packages/client/src/environments/environment';
 
 describe('Service: AuthService', () => {
   beforeEach(() => {

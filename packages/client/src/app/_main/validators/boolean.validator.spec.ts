@@ -1,6 +1,6 @@
 import { FormControl } from '@ngneat/reactive-forms';
-import { expectToFail, expectToPass } from '@tests/helpers/validator-testing.helper';
 import { booleanValidator } from './boolean.validator';
+import { expectToFail, expectToPass } from '@tests/helpers/validator-testing.helper';
 
 describe('Test boolean validator', () => {
   const validator = booleanValidator();

@@ -15,7 +15,7 @@ import { SnackbarOutletComponent } from '../snackbar-outlet/snackbar-outlet.comp
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgControl } from '@angular/forms';
 import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service } from 'ng-recaptcha';
-import { environment } from 'src/environments/environment';
+import { environment } from 'packages/client/src/environments/environment';
 
 describe('MainViewComponent', () => {
   let component: MainViewComponent;

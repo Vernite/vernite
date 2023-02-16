@@ -2,11 +2,11 @@ import { AfterViewInit, Component, ElementRef, HostBinding, Input, ViewChild } f
 import { Router } from '@angular/router';
 import { faAngleDown, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { BehaviorSubject } from 'rxjs';
-import { Project } from 'src/app/dashboard/interfaces/project.interface';
-import { Workspace } from 'src/app/dashboard/interfaces/workspace.interface';
 import { ProjectService } from '@dashboard/services/project/project.service';
 import { WorkspaceService } from '@dashboard/services/workspace/workspace.service';
 import { DialogService } from '../../services/dialog/dialog.service';
+import { Workspace } from '@dashboard/interfaces/workspace.interface';
+import { Project } from '@dashboard/interfaces/project.interface';
 
 /**
  * Nav element workspace component

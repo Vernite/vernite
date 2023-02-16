@@ -2,8 +2,7 @@
 
 # compiled output
 packages/proto/dist/java/dev
-packages/proto/dist/typescript/google
-packages/proto/dist/typescript/vernite.ts
+packages/proto/dist/typescript/
 tmp
 /out-tsc
 

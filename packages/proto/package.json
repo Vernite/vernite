@@ -6,8 +6,8 @@
   "scripts": {
     "build": "yarn build:typescript && yarn build:java",
     "build:typescript": "run-script-os",
-    "build:typescript:windows": "yarn protoc-gen-ts:windows -I=./src/ --ts_proto_out=dist/typescript ./src/vernite.proto",
-    "build:typescript:default": "yarn protoc-gen-ts:default -I=./src/ --ts_proto_out=dist/typescript ./src/vernite.proto",
+    "build:typescript:windows": "yarn protoc-gen-ts:windows -I=./src/ --ts_proto_out=dist/typescript ./src/vernite.proto --ts_proto_opt=outputTypeRegistry=true --ts_proto_opt=snakeToCamel=true",
+    "build:typescript:default": "yarn protoc-gen-ts:default -I=./src/ --ts_proto_out=dist/typescript ./src/vernite.proto --ts_proto_opt=outputTypeRegistry=true --ts_proto_opt=snakeToCamel=true",
     "build:java": "yarn build:java:protoc && yarn build:java:mvn",
     "build:java:protoc": "protoc -I=./src --java_out=dist/java ./src/vernite.proto",
     "build:java:mvn": "mvn install",

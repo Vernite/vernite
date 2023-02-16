@@ -24,11 +24,11 @@ import { Loader } from '../../../_main/classes/loader/loader.class';
 import { withLoader } from '@main/operators/loader.operator';
 import { SprintStatus } from '@tasks/enums/sprint-status.enum';
 import { SprintFilters } from '@dashboard/filters/sprint.filters';
-import { Release } from 'src/app/releases/interfaces/release.interface';
-import { ReleaseService } from 'src/app/releases/services/release.service';
 import { ProjectMember } from '../../../dashboard/interfaces/project-member.interface';
 import { MemberService } from '@dashboard/services/member/member.service';
 import { maxLengthValidator } from '@main/validators/max-length.validator';
+import { ReleaseService } from '../../../releases/services/release.service';
+import { Release } from '../../../releases/interfaces/release.interface';
 
 /** Task dialog variant: create or edit */
 export enum TaskDialogVariant {

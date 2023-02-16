@@ -4,10 +4,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { MatDialogTestingProvider } from '@tests/helpers/mat-dialog-testing-provider.helper';
 import { UpperNavigationComponent } from './upper-navigation.component';
 import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service } from 'ng-recaptcha';
 import { environment } from '../../../../environments/environment';
+import { MatDialogTestingProvider } from './../../../../tests/helpers/mat-dialog-testing-provider.helper';
 
 describe('UpperNavigationComponent', () => {
   let component: UpperNavigationComponent;

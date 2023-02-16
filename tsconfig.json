@@ -1,0 +1,53 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "declaration": true,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2020",
+    "module": "esnext",
+    "lib": ["esnext", "dom"],
+    "skipLibCheck": true,
+    "preserveSymlinks": true,
+    "paths": {
+      // Assets directory
+      "@assets/*": ["packages/client/src/assets/*"],
+      "@tests/*": ["packages/client/src/tests/*"],
+
+      // Modules directory
+      "@main/*": ["packages/client/src/app/_main/*"],
+      "@auth/*": ["packages/client/src/app/auth/*"],
+      "@dashboard/*": ["packages/client/src/app/dashboard/*"],
+      "@messages/*": ["packages/client/src/app/messages/*"],
+      "@tasks/*": ["packages/client/src/app/tasks/*"],
+      "@calendar/*": ["packages/client/src/app/calendar/*"],
+
+      // Utils directory
+      "@components/*": ["packages/client/src/app/_main/components/*"],
+      // Protobuf package
+      "@proto/*": ["packages/proto/dist/typescript/*"]
+    },
+    "types": ["jasmine"]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictMetadataEmit": true,
+    "strictTemplates": true
+  },
+  "include": ["packages"]
+}
