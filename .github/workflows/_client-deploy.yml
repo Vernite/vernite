@@ -23,6 +23,22 @@ jobs:
       # Checkout repository
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: nrwl/nx-set-shas@v3
+        with:
+          main-branch-name: dev
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      # Install dependencies
+      - name: Install dependencies
+        run: yarn install
 
       # Download client cache results
       - name: Download cache
