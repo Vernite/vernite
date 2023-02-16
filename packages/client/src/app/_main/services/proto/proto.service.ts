@@ -85,7 +85,7 @@ export class ProtoService {
   }
 
   /** IsType operator function - filters all different type messages */
-  protected isType<T extends UnknownMessage>(obj?: T) {
+  protected isType<T extends UnknownMessage>(obj?: MessageType<T>) {
     return filter((message: T) => {
       if (!obj) return true;
       return message.$type === obj.$type;
@@ -155,7 +155,7 @@ export class ProtoService {
    * @returns observable for specific message type
    */
   public get<T extends UnknownMessage & { action?: BasicAction }>(
-    obj?: T,
+    obj?: MessageType<T>,
     action?: BasicAction,
   ): Observable<T> {
     return this.socket().pipe(
