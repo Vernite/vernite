@@ -5,13 +5,13 @@ import { emailValidator } from '@main/validators/email.validator';
 import { passwordValidator } from '@main/validators/password.validator';
 import { sameAsValidator } from '@main/validators/same-as.validator';
 import { catchError, EMPTY, Subscription, of, switchMap } from 'rxjs';
-import { requiredValidator } from 'src/app/_main/validators/required.validator';
 import { AuthService } from '@auth/services/auth/auth.service';
 import { Loader } from '../../../_main/classes/loader/loader.class';
 import { startLoader, stopLoader } from '../../../_main/operators/loader.operator';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { booleanValidator } from '@main/validators/boolean.validator';
 import { maxLengthValidator } from '@main/validators/max-length.validator';
+import { requiredValidator } from '@main/validators/required.validator';
 
 /**
  * Register stages

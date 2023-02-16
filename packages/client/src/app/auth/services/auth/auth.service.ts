@@ -10,8 +10,8 @@ import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { ProtoService } from '@main/services/proto/proto.service';
 import { AlertDialogVariant } from '@main/dialogs/alert/alert.dialog';
 import { DialogService } from '@main/services/dialog/dialog.service';
-import { ChangePasswordDialog } from 'src/app/settings/dialog/change-password/change-password.dialog';
 import { Cache } from '../../../_main/decorators/cache/cache.decorator';
+import { ChangePasswordDialog } from '../../../settings/dialog/change-password/change-password.dialog';
 
 /**
  * Authentication service

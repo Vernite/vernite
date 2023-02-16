@@ -3,21 +3,20 @@ import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
 import {
   filter,
   from,
-  map,
   of,
+  map,
   switchMap,
   Observable,
-  OperatorFunction,
   share,
   finalize,
+  OperatorFunction,
 } from 'rxjs';
-import { Message } from 'google-protobuf';
-import { Any } from 'google-protobuf/google/protobuf/any_pb.js';
 import { Service } from '../../decorators/service/service.decorator';
-import { vernite } from '@vernite/protobuf';
 import { environment } from '../../../../environments/environment';
-import { MessageMetadataRegistry } from '@main/libs/proto/message-metadata-registry.class';
 import { Subject } from 'rxjs';
+import { BasicAction, KeepAlive } from '@proto/vernite';
+import { MessageType, messageTypeRegistry, UnknownMessage } from '@proto/typeRegistry';
+import { Any } from '@proto/google/protobuf/any';
 
 /**
  * Proto service (for real time communication using websocket)
@@ -32,9 +31,6 @@ export class ProtoService {
 
   /** Internal socket as middleware between websocket and subscribing subjects */
   protected _internalSocket$ = new Subject<MessageEvent<any>>();
-
-  /** Message metadata registry (used for storing meta for message types/classes) */
-  private messageMetadataRegistry = new MessageMetadataRegistry();
 
   constructor() {
     this.startSendingKeepAliveMessage();
@@ -74,7 +70,7 @@ export class ProtoService {
    * Start sending KeepAlive messages to websocket
    */
   protected startSendingKeepAliveMessage() {
-    this.get<vernite.KeepAlive>(vernite.KeepAlive).subscribe((message) => {
+    this.get(KeepAlive).subscribe((message) => {
       this.next(message);
     });
   }
@@ -89,38 +85,32 @@ export class ProtoService {
   }
 
   /** IsType operator function - filters all different type messages */
-  protected isType<T extends Message, K extends typeof Message>(
-    cls?: K,
-  ): OperatorFunction<Message, T> {
+  protected isType<T extends UnknownMessage>(obj?: T) {
     return filter((message: T) => {
-      if (!cls) return true;
-      return message instanceof cls;
-    }) as OperatorFunction<Message, T>;
+      if (!obj) return true;
+      return message.$type === obj.$type;
+    }) as OperatorFunction<UnknownMessage, T>;
   }
 
   /** Serialize message to send over websocket */
-  private serialize(value: Message) {
-    const any = new Any();
-    any.pack(
-      value.serializeBinary(),
-      this.messageMetadataRegistry.getByClassInstance(value)!.packageName,
+  private serialize(value: UnknownMessage) {
+    return of(
+      Any.create({
+        typeUrl: value.$type,
+        value: messageTypeRegistry.get(value.$type)!.encode(value).finish(),
+      }),
     );
-    return of(any.serializeBinary());
   }
 
   /** Deserialize message from websocket */
   private deserialize(e: MessageEvent) {
     return from(e.data.arrayBuffer() as Promise<Uint8Array>).pipe(
       map((buffer: Uint8Array) => {
-        const any = Any.deserializeBinary(buffer);
-        const type = any.getTypeName();
+        const any = Any.decode(buffer);
+        const type = any.typeUrl;
 
-        const messageClass = this.messageMetadataRegistry.getByPackageName(type)!.classConstructor;
-        const message = any.unpack((bytes: Uint8Array) => {
-          return messageClass.deserializeBinary(bytes);
-        }, type);
-
-        return message;
+        const messageType = messageTypeRegistry.get(type)!;
+        return messageType.decode(any.value) as MessageType;
       }),
     );
   }
@@ -145,7 +135,7 @@ export class ProtoService {
    * Send message over websocket
    * @param value value to send over websocket
    */
-  public next(value: Message) {
+  public next(value: UnknownMessage) {
     if (this.isConnectionClosed()) return;
 
     this.serialize(value).subscribe((data) => {
@@ -154,7 +144,7 @@ export class ProtoService {
   }
 
   /** Websocket observable */
-  protected socket() {
+  protected socket(): Observable<UnknownMessage> {
     return this._internalSocket$.pipe(switchMap(this.deserialize.bind(this)));
   }
 
@@ -164,12 +154,12 @@ export class ProtoService {
    * @param action basic action of message
    * @returns observable for specific message type
    */
-  public get<T extends Message & { action?: vernite.BasicAction }, K extends typeof Message = any>(
-    cls?: K,
-    action?: vernite.BasicAction,
+  public get<T extends UnknownMessage & { action?: BasicAction }>(
+    obj?: T,
+    action?: BasicAction,
   ): Observable<T> {
     return this.socket().pipe(
-      this.isType<T, K>(cls),
+      this.isType<T>(obj),
       filter((message: T) => {
         if (!action) return true;
         return message.action === action;
@@ -196,7 +186,7 @@ export class ProtoService {
    * Log message to console
    * @param message message to log
    */
-  protected logMessage<T extends Message>(message: T) {
+  protected logMessage<T extends UnknownMessage>(message: T) {
     if (environment.logSocketMessages) {
       console.groupCollapsed('[SOCKET] MESSAGE');
       console.log(message);

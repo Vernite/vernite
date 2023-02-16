@@ -1,5 +1,5 @@
-import { environment } from 'src/environments/environment';
 import { LoaderOptions } from './loader-options.interface';
+import { environment } from './../../../../environments/environment';
 
 /** Loader class to show progress spinner to the user */
 export class Loader {
