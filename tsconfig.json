@@ -25,6 +25,7 @@
     "paths": {
       // Assets directory
       "@assets/*": ["packages/client/src/assets/*"],
+      "@tests/*": ["packages/client/src/tests/*"],
 
       // Modules directory
       "@main/*": ["packages/client/src/app/_main/*"],

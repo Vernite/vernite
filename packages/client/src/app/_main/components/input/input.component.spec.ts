@@ -4,7 +4,7 @@ import { InputComponent } from './input.component';
 import { NgControl } from '@angular/forms';
 import { Shallow } from 'shallow-render';
 import { MainModule } from '@main/_main.module';
-import { TestNgControl } from '@tests/helpers/ng-control-testing-provider.helper';
+import { TestNgControl } from './../../../../tests/helpers/ng-control-testing-provider.helper';
 
 describe('InputComponent', () => {
   let shallow: Shallow<InputComponent>;

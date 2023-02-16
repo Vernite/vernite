@@ -8,7 +8,7 @@ import { ButtonComponent } from '@main/components/button/button.component';
 import { MainModule } from '@main/_main.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReCaptchaV3Service, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
-import { environment } from 'src/environments/environment';
+import { environment } from 'packages/client/src/environments/environment';
 
 describe('RegisterPage', () => {
   let component: RegisterPage;

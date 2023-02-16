@@ -9,7 +9,7 @@ import { MainModule } from '@main/_main.module';
 import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service } from 'ng-recaptcha';
-import { environment } from 'src/environments/environment';
+import { environment } from 'packages/client/src/environments/environment';
 
 describe('ForgotPasswordComponent', () => {
   let component: ForgotPasswordPage;
