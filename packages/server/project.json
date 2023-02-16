@@ -10,7 +10,7 @@
         "root": "packages/server"
       },
       "dependsOn": [
-        "^install"
+        "^build"
       ],
       "outputs": [
         "{workspaceRoot}/packages/server/target"
@@ -23,13 +23,19 @@
       },
       "outputs": [
         "{workspaceRoot}/packages/server/target"
+      ],
+      "dependsOn": [
+        "^build"
       ]
     },
     "test": {
       "executor": "@nxrocks/nx-spring-boot:test",
       "options": {
         "root": "packages/server"
-      }
+      },
+      "dependsOn": [
+        "^build"
+      ]
     },
     "clean": {
       "executor": "@nxrocks/nx-spring-boot:clean",
@@ -41,26 +47,41 @@
       "executor": "@nxrocks/nx-spring-boot:run",
       "options": {
         "root": "packages/server"
-      }
+      },
+      "dependsOn": [
+        "^build"
+      ]
     },
     "serve": {
       "executor": "@nxrocks/nx-spring-boot:serve",
       "options": {
         "root": "packages/server"
-      }
+      },
+      "dependsOn": [
+        "^build"
+      ]
     },
     "build-image": {
       "executor": "@nxrocks/nx-spring-boot:build-image",
       "options": {
         "root": "packages/server"
-      }
+      },
+      "dependsOn": [
+        "^build"
+      ]
     },
     "build-info": {
       "executor": "@nxrocks/nx-spring-boot:build-info",
       "options": {
         "root": "packages/server"
-      }
+      },
+      "dependsOn": [
+        "^build"
+      ]
     }
   },
-  "tags": []
+  "tags": [],
+  "implicitDependencies": [
+    "proto"
+  ]
 }

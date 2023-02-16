@@ -48,10 +48,11 @@
     },
     {
       "type": "java",
-      "name": "Launch java server",
+      "name": "Server package debug",
       "request": "launch",
       "mainClass": "dev.vernite.vernite.VerniteApplication",
       "projectName": "vernite",
+      "preLaunchTask": "buildServer",
       "cwd": "${workspaceFolder}/packages/server"
     }
   ]
