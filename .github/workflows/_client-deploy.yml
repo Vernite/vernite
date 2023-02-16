@@ -30,12 +30,16 @@ jobs:
         uses: actions/cache@v3
         with:
           path: packages/client/dist
-          key: ${{ runner.os }}-${{ github.run_id }}-build-client
+          key: ${{ runner.os }}-build-client
+
+      - name: Generate affected
+        id: affected
+        run: echo -e "affected=$(yarn -s nx print-affected | tr -d '\n')" >> $GITHUB_OUTPUT
 
       # Deploy client using rsync
       - name: Deploy app 🚀
         uses: easingthemes/ssh-deploy@main
-        if: steps.cache.outputs.cache-hit == 'true'
+        if: ${{ contains(fromJSON(affected.outputs.affected).projects, "client") }}
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY_FRONTEND }}
           ARGS: "-rltgoDzvO --delete"
@@ -48,9 +52,9 @@ jobs:
 
       # Add result to summary
       - name: Add success result to summary
-        if: steps.cache.outputs.cache-hit == 'true'
+        if: ${{ contains(fromJSON(affected.outputs.affected).projects, "client") }}
         run: echo "🟩 - Client deploy success" >> $GITHUB_STEP_SUMMARY
 
       - name: Add skipped result to summary
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: ${{ !contains(fromJSON(affected.outputs.affected).projects, "client") }}
         run: echo "⬜ - Client deploy skipped" >> $GITHUB_STEP_SUMMARY
