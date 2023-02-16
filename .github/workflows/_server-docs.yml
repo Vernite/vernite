@@ -76,7 +76,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: /packages/server/target/site
+          folder: packages/server/target/site
           target-folder: server
           single-commit: true
 
