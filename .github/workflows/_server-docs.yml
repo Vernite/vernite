@@ -54,19 +54,24 @@ jobs:
 
       # Download cache
       - name: Download cache
+        id: cache
         uses: actions/cache@v3
         with:
           path: packages/server/target
-          key: ${{ runner.os }}-${{ github.run_id }}-build-server
+          key: ${{ runner.os }}-build-server
+
+      - name: Generate affected
+        id: affected
+        run: echo -e "affected=$(yarn -s nx print-affected | tr -d '\n')" >> $GITHUB_OUTPUT
 
       # Build javadoc and jacoco
       - name: Generate Javadoc & Jacoco
-        if: steps.cache.outputs.cache-hit == 'true'
+        if: ${{ contains(fromJSON(affected.outputs.affected).projects, "server") }}
         run: mvn jacoco:report javadoc:javadoc
 
       # Upload code coverage
       - name: Generate code coverage
-        if: steps.cache.outputs.cache-hit == 'true'
+        if: ${{ contains(fromJSON(affected.outputs.affected).projects, "server") }}
         uses: codecov/codecov-action@v3
         with:
           files: target/site/jacoco/jacoco.xml
@@ -74,6 +79,7 @@ jobs:
       # Deploy to GitHub Pages
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
+        if: ${{ contains(fromJSON(affected.outputs.affected).projects, "server") }}
         with:
           branch: gh-pages
           folder: packages/server/target/site
@@ -82,9 +88,9 @@ jobs:
 
       # Add result to summary
       - name: Add success result to summary
-        if: steps.cache.outputs.cache-hit == 'true'
+        if: ${{ contains(fromJSON(affected.outputs.affected).projects, "server") }}
         run: echo "🟩 - Server docs build success" >> $GITHUB_STEP_SUMMARY
 
       - name: Add skipped result to summary
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: ${{ !contains(fromJSON(affected.outputs.affected).projects, "server") }}
         run: echo "⬜ - Server docs build skipped" >> $GITHUB_STEP_SUMMARY

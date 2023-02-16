@@ -3,6 +3,11 @@ name: Development PR checks
 on:
   workflow_dispatch:
   workflow_call:
+    inputs:
+      cache:
+        required: false
+        default: "dev"
+        type: string
     secrets:
       MYSQL_PASSWORD:
         required: true
@@ -25,6 +30,30 @@ jobs:
         with:
           main-branch-name: dev
 
+      # Cache server build results
+      - name: Cache results
+        uses: actions/cache@v3
+        with:
+          path: packages/server/target
+          key: ${{ runner.os }}-build-server-${{ inputs.cache }}
+          restore-keys: ${{ runner.os }}-build-server-dev
+
+      # Download protobuf cache
+      - name: Cache protobuf package
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository/dev/vernite/protobuf
+          key: ${{ runner.os }}-maven-protobuf-${{ inputs.cache }}
+          restore-keys: ${{ runner.os }}-maven-protobuf-dev
+
+      # Cache client build results
+      - name: Cache results
+        uses: actions/cache@v3
+        with:
+          path: packages/client/dist
+          key: ${{ runner.os }}-build-client-${{ inputs.cache }}
+          restore-keys: ${{ runner.os }}-build-client-dev
+
       # Set up JDK 17
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -32,13 +61,6 @@ jobs:
           java-version: "17"
           distribution: "temurin"
           cache: maven
-
-      # Download protobuf cache
-      - name: Cache protobuf package
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository/dev/vernite/protobuf
-          key: ${{ runner.os }}-maven-protobuf
 
       # Set up Node.js
       - name: Set up Node.js
@@ -78,17 +100,3 @@ jobs:
       # Build by nx
       - name: Build
         run: yarn nx affected --target=build
-
-      # Cache server build results
-      - name: Cache results
-        uses: actions/cache@v3
-        with:
-          path: packages/server/target
-          key: ${{ runner.os }}-${{ github.run_id }}-build-server
-
-      # Cache client build results
-      - name: Cache results
-        uses: actions/cache@v3
-        with:
-          path: packages/client/dist
-          key: ${{ runner.os }}-${{ github.run_id }}-build-client

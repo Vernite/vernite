@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     uses: ./.github/workflows/_build.yml
+    with:
+      cache: ${{ github.run_id }}
     secrets: inherit
 
   test:

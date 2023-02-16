@@ -30,11 +30,15 @@ jobs:
         uses: actions/cache@v3
         with:
           path: packages/server/target
-          key: ${{ runner.os }}-${{ github.run_id }}-build-server
+          key: ${{ runner.os }}-build-server
+
+      - name: Generate affected
+        id: affected
+        run: echo -e "affected=$(yarn -s nx print-affected | tr -d '\n')" >> $GITHUB_OUTPUT
 
       # Deploy to server using rsync
       - name: Deploy app
-        if: steps.cache.outputs.cache-hit == 'true'
+        if: ${{ contains(fromJSON(affected.outputs.affected).projects, "server") }}
         run: |
           eval $(ssh-agent -s)
           echo "${{ secrets.AUTO_DEPLOY_KEY }}" | tr -d '\r' | ssh-add - > /dev/null
@@ -46,9 +50,9 @@ jobs:
 
       # Add result to summary
       - name: Add success result to summary
-        if: steps.cache.outputs.cache-hit == 'true'
+        if: ${{ contains(fromJSON(affected.outputs.affected).projects, "server") }}
         run: echo "🟩 - Server deploy success" >> $GITHUB_STEP_SUMMARY
 
       - name: Add skipped result to summary
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: ${{ !contains(fromJSON(affected.outputs.affected).projects, "server") }}
         run: echo "⬜ - Server deploy skipped" >> $GITHUB_STEP_SUMMARY

@@ -71,10 +71,3 @@ jobs:
       # Test by nx
       - name: Test
         run: yarn nx affected --target=test
-
-      # Cache results
-      - name: Cache results
-        uses: actions/cache@v3
-        with:
-          path: packages/server/target
-          key: ${{ runner.os }}-build-${{ github.run_id }}
