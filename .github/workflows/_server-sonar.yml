@@ -35,6 +35,7 @@ jobs:
 
       # Install SonarQube
       - name: Cache SonarQube packages
+        id: cache
         uses: actions/cache@v3
         with:
           path: ~/.sonar/cache
@@ -75,7 +76,11 @@ jobs:
         uses: actions/cache@v3
         with:
           path: packages/server/target
-          key: ${{ runner.os }}-${{ github.run_id }}-build-server
+          key: ${{ runner.os }}-build-server
+
+      - name: Generate affected
+        id: affected
+        run: echo -e "affected=$(yarn -s nx print-affected | tr -d '\n')" >> $GITHUB_OUTPUT
 
       # Build and analyze
       - name: Build and analyze
@@ -83,14 +88,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        if: steps.cache.outputs.cache-hit == 'true'
+        if: ${{ contains(fromJSON(affected.outputs.affected).projects, "server") }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=backend
 
       # Add result to summary
       - name: Add success result to summary
-        if: steps.cache.outputs.cache-hit == 'true'
+        if: ${{ contains(fromJSON(affected.outputs.affected).projects, "server") }}
         run: echo "🟩 - Server sonar analysis success" >> $GITHUB_STEP_SUMMARY
 
       - name: Add skipped result to summary
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: ${{ !contains(fromJSON(affected.outputs.affected).projects, "server") }}
         run: echo "⬜ - Server sonar analysis skipped" >> $GITHUB_STEP_SUMMARY

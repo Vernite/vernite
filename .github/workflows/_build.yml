@@ -84,11 +84,11 @@ jobs:
         uses: actions/cache@v3
         with:
           path: packages/server/target
-          key: ${{ runner.os }}-${{ github.run_id }}-build-server
+          key: ${{ runner.os }}-build-server
 
       # Cache client build results
       - name: Cache results
         uses: actions/cache@v3
         with:
           path: packages/client/dist
-          key: ${{ runner.os }}-${{ github.run_id }}-build-client
+          key: ${{ runner.os }}-build-client

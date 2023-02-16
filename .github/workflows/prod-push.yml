@@ -15,13 +15,12 @@ jobs:
     uses: ./.github/workflows/_test.yml
     secrets: inherit
 
-  # TODO: Uncomment when client is ready
-  # deploy_client:
-  #   needs: [build, test]
-  #   uses: ./.github/workflows/_client-deploy.yml
-  #   with:
-  #     configuration: insiders
-  #   secrets: inherit
+  deploy_client:
+    needs: [build, test]
+    uses: ./.github/workflows/_client-deploy.yml
+    with:
+      configuration: production
+    secrets: inherit
 
   deploy_server:
     needs: [build, test]
