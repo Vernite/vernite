@@ -4,8 +4,7 @@
   "license": "BSD-2-Clause",
   "main": "dist/typescript/vernite.js",
   "scripts": {
-    "install": "yarn build:typescript && yarn build:java",
-    "build": "yarn install",
+    "build": "yarn build:typescript && yarn build:java",
     "build:typescript": "run-script-os",
     "build:typescript:windows": "yarn protoc-gen-ts:windows -I=./src/ --ts_proto_out=dist/typescript ./src/vernite.proto",
     "build:typescript:default": "yarn protoc-gen-ts:default -I=./src/ --ts_proto_out=dist/typescript ./src/vernite.proto",
