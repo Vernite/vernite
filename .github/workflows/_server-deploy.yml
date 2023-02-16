@@ -38,7 +38,7 @@ jobs:
 
       # Deploy to server using rsync
       - name: Deploy app
-        if: ${{ contains(fromJSON(steps.affected.outputs.affected).projects, "server") }}
+        if: ${{ contains(fromJSON(steps.affected.outputs.affected).projects, 'server') }}
         run: |
           eval $(ssh-agent -s)
           echo "${{ secrets.AUTO_DEPLOY_KEY }}" | tr -d '\r' | ssh-add - > /dev/null
@@ -50,9 +50,9 @@ jobs:
 
       # Add result to summary
       - name: Add success result to summary
-        if: ${{ contains(fromJSON(steps.affected.outputs.affected).projects, "server") }}
+        if: ${{ contains(fromJSON(steps.affected.outputs.affected).projects, 'server') }}
         run: echo "🟩 - Server deploy success" >> $GITHUB_STEP_SUMMARY
 
       - name: Add skipped result to summary
-        if: ${{ !contains(fromJSON(steps.affected.outputs.affected).projects, "server") }}
+        if: ${{ !contains(fromJSON(steps.affected.outputs.affected).projects, 'server') }}
         run: echo "⬜ - Server deploy skipped" >> $GITHUB_STEP_SUMMARY
