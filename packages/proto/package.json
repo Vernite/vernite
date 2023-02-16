@@ -8,7 +8,9 @@
     "build:typescript": "run-script-os",
     "build:typescript:windows": "yarn protoc-gen-ts:windows -I=./src/ --ts_proto_out=dist/typescript ./src/vernite.proto --ts_proto_opt=outputTypeRegistry=true --ts_proto_opt=snakeToCamel=true",
     "build:typescript:default": "yarn protoc-gen-ts:default -I=./src/ --ts_proto_out=dist/typescript ./src/vernite.proto --ts_proto_opt=outputTypeRegistry=true --ts_proto_opt=snakeToCamel=true",
-    "build:java": "protoc -I=./src --java_out=dist/java ./src/vernite.proto",
+    "build:java": "yarn build:java:protoc && yarn build:java:mvn",
+    "build:java:protoc": "protoc -I=./src --java_out=dist/java ./src/vernite.proto",
+    "build:java:mvn": "mvn install",
     "protoc-gen-ts:windows": "protoc --plugin=protoc-gen-ts_proto=.\\node_modules\\.bin\\protoc-gen-ts_proto.cmd",
     "protoc-gen-ts:default": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto",
     "serve": "node ../tools/watch.js ./src/vernite.proto \"yarn build\""
