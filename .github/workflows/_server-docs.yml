@@ -72,13 +72,13 @@ jobs:
           files: target/site/jacoco/jacoco.xml
 
       # Deploy to GitHub Pages
-      # TODO: Make this work with both client and server docs
-      # - name: Deploy
-      #   uses: JamesIves/github-pages-deploy-action@v4
-      #   with:
-      #     branch: gh-pages
-      #     folder: target/site
-      #     single-commit: true
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: /packages/server/target/site
+          target-folder: server
+          single-commit: true
 
       # Add result to summary
       - name: Add success result to summary
