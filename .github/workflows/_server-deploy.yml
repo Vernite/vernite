@@ -1,0 +1,54 @@
+name: Deploy server
+
+on:
+  workflow_call:
+    inputs:
+      configuration:
+        required: true
+        type: string
+        description: vernite-dev or vernite
+    secrets:
+      AUTO_DEPLOY_KEY:
+        required: true
+        description: SSH key for backend server
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/server
+
+    steps:
+      # Checkout repository
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Download server cache results
+      - name: Download cache
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: packages/server/target
+          key: ${{ runner.os }}-${{ github.run_id }}-build-server
+
+      # Deploy to server using rsync
+      - name: Deploy app
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: |
+          eval $(ssh-agent -s)
+          echo "${{ secrets.AUTO_DEPLOY_KEY }}" | tr -d '\r' | ssh-add - > /dev/null
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keyscan -t rsa -p 2224 51.83.255.98 >> ~/.ssh/known_hosts
+          rsync -a -e 'ssh -p 2224' target/vernite*jar backend@51.83.255.98:~/${{ inputs.configuration }}.jar
+          ssh -p 2224 backend@51.83.255.98 "sudo /usr/bin/systemctl restart ${{ inputs.configuration }}.service"
+
+      # Add result to summary
+      - name: Add success result to summary
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: echo "🟩 - Server deploy success" >> $GITHUB_STEP_SUMMARY
+
+      - name: Add skipped result to summary
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: echo "⬜ - Server deploy skipped" >> $GITHUB_STEP_SUMMARY

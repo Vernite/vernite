@@ -1,26 +1,29 @@
-name: Build server and run tests with Maven
-
+name: Run server Sonar analysis
 on:
   workflow_dispatch:
   workflow_call:
     secrets:
       MYSQL_PASSWORD:
-        required: true
+          required: true
       SPRING_APPLICATION_PROPERTIES:
         required: true
       VERNITE_2022_PRIVATE_KEY_PEM:
         required: true
+      SONAR_TOKEN:
+        required: true
+      SONAR_HOST_URL:
+        required: true
+
 
 jobs:
-  build:
+  analyze:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: packages/server
+
     steps:
-      # Checkout repository
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       # Set up JDK 17
       - name: Set up JDK 17
@@ -29,6 +32,14 @@ jobs:
           java-version: "17"
           distribution: "temurin"
           cache: maven
+
+      # Install SonarQube
+      - name: Cache SonarQube packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
 
       # Install and configure MySQL
       - name: Install and configure MySQL
@@ -51,13 +62,35 @@ jobs:
           echo "${{ secrets.VERNITE_2022_PRIVATE_KEY_PEM }}" > key.pem
           openssl pkcs8 -topk8 -inform pem -in key.pem -out "vernite-2022.private-key.der" -outform der -nocrypt
 
-      # Build with Maven
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
+      # Cache Maven packages
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
 
-      # Cache results
-      - name: Cache results
+      # Download cache
+      - name: Download cache
         uses: actions/cache@v3
         with:
           path: packages/server/target
-          key: ${{ runner.os }}-build-${{ github.run_id }}
+          key: ${{ runner.os }}-${{ github.run_id }}-build-server
+
+      # Build and analyze
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=backend
+
+      # Add result to summary
+      - name: Add success result to summary
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: echo "🟩 - Server sonar analysis success" >> $GITHUB_STEP_SUMMARY
+
+      - name: Add skipped result to summary
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: echo "⬜ - Server sonar analysis skipped" >> $GITHUB_STEP_SUMMARY
