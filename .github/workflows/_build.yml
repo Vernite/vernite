@@ -30,6 +30,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup environment
+        id: setup
         uses: ./.github/actions/setup
         with:
           configuration: ${{ inputs.configuration }}
@@ -39,3 +40,9 @@ jobs:
 
       - name: Build affected projects
         run: yarn nx affected --target=build
+
+      - name: Cache affected projects
+        uses: ./.github/actions/cache-affected-projects
+        with:
+          configuration: ${{ inputs.configuration }}
+          affected-projects: ${{ steps.setup.outputs.affected-projects }}

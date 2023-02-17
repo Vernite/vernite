@@ -1,7 +1,7 @@
 # Cache single directory
 
-name: Cache
-description: Cache single directory
+name: Restore cache
+description: Restore cache for single directory
 
 inputs:
   configuration:
@@ -21,9 +21,7 @@ runs:
   using: composite
   steps:
     - name: Client cache
-      uses: actions/cache@v3
+      uses: actions/cache/restore@v3
       with:
         path: ${{ inputs.path }}
-        key: ${{ runner.os }}-${{ inputs.cache-key }}-${{ inputs.configuration }}-${{ github.ref_name }}
-        restore-keys: |
-          ${{ runner.os }}-${{ inputs.cache-key }}-${{ inputs.configuration }}-
+        key: ${{ runner.os }}-${{ inputs.cache-key }}-${{ inputs.configuration }}

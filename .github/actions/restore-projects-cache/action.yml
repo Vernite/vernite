@@ -1,6 +1,6 @@
 # Cache all project output files
 
-name: Cache
+name: Restore projects cache
 description: Cache all project output files
 
 inputs:
@@ -13,28 +13,28 @@ runs:
   using: composite
   steps:
     - name: Cache client
-      uses: ./.github/actions/cache
+      uses: ./.github/actions/restore-cache
       with:
-        path: ./packages/client/dist
+        path: packages/client/dist
         cache-key: client
         configuration: ${{ inputs.configuration }}
 
     - name: Cache server
-      uses: ./.github/actions/cache
+      uses: ./.github/actions/restore-cache
       with:
-        path: ./packages/server/target
+        path: packages/server/target
         cache-key: server
         configuration: ${{ inputs.configuration }}
 
     - name: Cache protobuf
-      uses: ./.github/actions/cache
+      uses: ./.github/actions/restore-cache
       with:
-        path: ./packages/proto/dist
+        path: packages/proto/dist
         cache-key: proto
         configuration: ${{ inputs.configuration }}
 
     - name: Cache maven packages
-      uses: ./.github/actions/cache
+      uses: ./.github/actions/restore-cache
       with:
         path: ~/.m2
         cache-key: mwn-packages

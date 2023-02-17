@@ -117,8 +117,8 @@ runs:
       shell: bash
       run: chmod +x ./packages/server/mvnw
 
-    - name: Cache all projects
-      uses: ./.github/actions/cache-all
+    - name: Restore all projects caches
+      uses: ./.github/actions/restore-projects-cache
       with:
         configuration: ${{ inputs.configuration }}
 
