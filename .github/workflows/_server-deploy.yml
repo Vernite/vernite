@@ -42,11 +42,11 @@ jobs:
 
       # Download server cache results
       - name: Download cache
-        id: cache
-        uses: actions/cache@v3
+        uses: ./.github/actions/restore-cache
         with:
           path: packages/server/target
-          key: ${{ runner.os }}-build-server
+          cache-key: server
+          configuration: ${{ inputs.configuration }}
 
       - name: Generate affected
         id: affected
@@ -61,8 +61,8 @@ jobs:
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           ssh-keyscan -t rsa -p 2224 51.83.255.98 >> ~/.ssh/known_hosts
-          rsync -a -e 'ssh -p 2224' target/vernite*jar backend@51.83.255.98:~/${{ inputs.configuration }}.jar
-          ssh -p 2224 backend@51.83.255.98 "sudo /usr/bin/systemctl restart ${{ inputs.configuration }}.service"
+          rsync -a -e 'ssh -p 2224' target/vernite*jar backend@51.83.255.98:~/${{ inputs.configuration == 'insiders' && 'vernite-dev' || 'vernite' }}.jar
+          ssh -p 2224 backend@51.83.255.98 "sudo /usr/bin/systemctl restart ${{ inputs.configuration == 'insiders' && 'vernite-dev' || 'vernite' }}.service"
 
       # Add result to summary
       - name: Add success result to summary
