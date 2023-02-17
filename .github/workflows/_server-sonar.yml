@@ -89,10 +89,11 @@ jobs:
 
       # Download cache
       - name: Download cache
-        uses: actions/cache@v3
+        uses: ./.github/actions/restore-cache
         with:
           path: packages/server/target
-          key: ${{ runner.os }}-build-server
+          cache-key: server
+          configuration: insiders
 
       - name: Generate affected
         id: affected
