@@ -1,0 +1,139 @@
+# Create basic setup environment action
+
+name: Setup
+description: Setup environment for application
+
+inputs:
+  configuration:
+    description: "The configuration to use (development | insiders | production)"
+    required: true
+    default: development
+
+  node-version:
+    description: "The Node.js version to use"
+    required: true
+    default: '16'
+
+  java-version:
+    description: "The Java version to use"
+    required: true
+    default: '17'
+
+  java-distribution:
+    description: "The Java distribution to use"
+    required: true
+    default: temurin
+
+  main-branch-name:
+    description: "The main branch name to use (for dev workflows use: `dev`, for production purposes use `stable`)"
+    required: true
+    default: dev
+
+  # --- Secrets ---
+
+  mysql-password:
+    description: The MySQL password to use
+    required: true
+
+  spring-application-properties:
+    description: The Spring application properties to use
+    required: true
+
+  vernite-2022-private-key-pem:
+    description: The private key to use for signing JWT
+    required: true
+
+outputs:
+  version:
+    description: The version of the application
+    value: ${{ steps.version.outputs.version }}
+
+  affected-projects:
+    description: List of affected projects (in JSON format)
+    value: ${{ steps.affected-projects.outputs.affected-projects }}
+
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Setup nx repository configuration
+      uses: nrwl/nx-set-shas@v3
+      with:
+        main-branch-name: ${{ inputs.main-branch-name }}
+
+    - name: Set up JDK ${{ inputs.java-version }}
+      uses: actions/setup-java@v3
+      with:
+        java-version: ${{ inputs.java-version }}
+        distribution: ${{ inputs.java-distribution }}
+        cache: maven
+
+    - name: Set up Node.js ${{ inputs.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Install and configure MySQL
+      shell: bash
+      run: |
+        sudo systemctl start mysql.service
+        mysql -h 127.0.0.1 -uroot -proot -e 'create database vernite charset utf8mb4'
+        mysql -h 127.0.0.1 -uroot -proot -e 'create database vernite_test charset utf8mb4'
+        mysql -h 127.0.0.1 -uroot -proot -e 'create user "vernite"@"localhost" identified by "${{ inputs.mysql-password }}"'
+        mysql -h 127.0.0.1 -uroot -proot -e 'grant all on *.* to "vernite"@"localhost" with grant option'
+
+    - name: Create application.properties file
+      shell: bash
+      run: 'echo "$SPRING_APPLICATION_PROPERTIES" > ./packages/server/application.properties'
+      env:
+        SPRING_APPLICATION_PROPERTIES: ${{ inputs.spring-application-properties }}
+
+    - name: Prepare secret for signing JWT
+      shell: bash
+      run: |
+        echo "${{ inputs.vernite-2022-private-key-pem }}" > key.pem
+        openssl pkcs8 -topk8 -inform pem -in key.pem -out "./packages/server/vernite-2022.private-key.der" -outform der -nocrypt
+
+    - name: Download node_modules cache
+      id: cache
+      uses: actions/cache@v3
+      with:
+        path: ./node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Install Node.js dependencies
+      if: ${{ steps.cache.outputs.cache-hit != 'true' }}
+      shell: bash
+      run: yarn install
+
+    - name: Fix mvnw file permissions
+      shell: bash
+      run: chmod +x ./packages/server/mvnw
+
+    - name: Restore all projects caches
+      uses: ./.github/actions/restore-projects-cache
+      with:
+        configuration: ${{ inputs.configuration }}
+
+    - name: Fetch version from package.json
+      id: version
+      shell: bash
+      run: node -p -e "'version=' + require('./package.json').version" >> $GITHUB_OUTPUT
+
+    - name: Generate affected projects
+      id: affected-projects
+      shell: bash
+      run: echo "affected-projects=$(yarn -s nx print-affected 2>/dev/null | jq -c '.projects')" >> $GITHUB_OUTPUT
+
+    - name: Print all generated outputs
+      shell: bash
+      run: |
+        echo "version: ${{ steps.version.outputs.version }}"
+        echo "affected-projects: ${{ steps.affected-projects.outputs.affected-projects }}"

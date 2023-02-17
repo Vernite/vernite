@@ -9,10 +9,12 @@ on:
 jobs:
   build:
     uses: ./.github/workflows/_build.yml
-    with:
-      cache: ${{ github.run_id }}
     secrets: inherit
+    with:
+      configuration: development
 
   test:
     uses: ./.github/workflows/_test.yml
     secrets: inherit
+    with:
+      configuration: development
