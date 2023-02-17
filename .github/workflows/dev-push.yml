@@ -16,20 +16,22 @@ jobs:
   test:
     uses: ./.github/workflows/_test.yml
     secrets: inherit
+    with:
+      configuration: development
 
   deploy_client:
     needs: [build, test]
     uses: ./.github/workflows/_client-deploy.yml
+    secrets: inherit
     with:
       configuration: insiders
-    secrets: inherit
 
   deploy_server:
     needs: [build, test]
     uses: ./.github/workflows/_server-deploy.yml
+    secrets: inherit
     with:
       configuration: vernite-dev
-    secrets: inherit
 
   sonar_server:
     needs: [build]
