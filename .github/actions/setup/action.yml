@@ -1,29 +1,35 @@
 # Create basic setup environment action
-# Path: .github\actions\setup.yml
 
 name: Setup
 description: Setup environment for application
 
 inputs:
   configuration:
-    description: The configuration to use (development | insiders | production)
+    description: "The configuration to use (development | insiders | production)"
     required: true
     default: development
 
   node-version:
-    description: The Node.js version to use
+    description: "The Node.js version to use"
     required: true
     default: '16'
 
   java-version:
-    description: The Java version to use
+    description: "The Java version to use"
     required: true
     default: '17'
 
   java-distribution:
-    description: The Java distribution to use
+    description: "The Java distribution to use"
     required: true
     default: temurin
+
+  main-branch-name:
+    description: "The main branch name to use (for dev workflows use: `dev`, for production purposes use `stable`)"
+    required: true
+    default: dev
+
+  # --- Secrets ---
 
   mysql-password:
     description: The MySQL password to use
@@ -58,7 +64,7 @@ runs:
     - name: Setup nx repository configuration
       uses: nrwl/nx-set-shas@v3
       with:
-        main-branch-name: dev
+        main-branch-name: ${{ inputs.main-branch-name }}
 
     - name: Set up JDK ${{ inputs.java-version }}
       uses: actions/setup-java@v3
@@ -111,14 +117,15 @@ runs:
       shell: bash
       run: chmod +x ./packages/server/mvnw
 
+    - name: Cache all projects
+      uses: ./.github/actions/cache-all
+      with:
+        configuration: ${{ inputs.configuration }}
+
     - name: Fetch version from package.json
       id: version
       shell: bash
       run: node -p -e "'version=' + require('./package.json').version" >> $GITHUB_OUTPUT
-
-    - name: Install jq for parsing JSON
-      shell: bash
-      run: sudo apt-get install jq
 
     - name: Generate affected projects
       id: affected-projects

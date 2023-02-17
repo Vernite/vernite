@@ -3,6 +3,13 @@ name: Development PR checks
 on:
   workflow_dispatch:
   workflow_call:
+    inputs:
+      configuration:
+        description: "The configuration to use (development | insiders | production)"
+        required: true
+        default: development
+        type: string
+
     secrets:
       MYSQL_PASSWORD:
         description: MySQL password
@@ -25,6 +32,7 @@ jobs:
       - name: Setup environment
         uses: ./.github/actions/setup
         with:
+          configuration: ${{ inputs.configuration }}
           mysql-password: ${{ secrets.MYSQL_PASSWORD }}
           spring-application-properties: ${{ secrets.SPRING_APPLICATION_PROPERTIES }}
           vernite-2022-private-key-pem: ${{ secrets.VERNITE_2022_PRIVATE_KEY_PEM }}

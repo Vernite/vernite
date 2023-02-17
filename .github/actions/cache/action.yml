@@ -1,0 +1,29 @@
+# Cache single directory
+
+name: Cache
+description: Cache single directory
+
+inputs:
+  configuration:
+    description: The configuration to use (development | insiders | production)
+    required: true
+    default: development
+
+  path:
+    description: The path to cache
+    required: true
+
+  cache-key:
+    description: The cache key to use
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Client cache
+      uses: actions/cache@v3
+      with:
+        path: ${{ inputs.path }}
+        key: ${{ runner.os }}-${{ inputs.cache-key }}-${{ inputs.configuration }}-${{ $GITHUB_REF_NAME }}
+        restore-keys: |
+          ${{ runner.os }}-${{ inputs.cache-key }}-${{ inputs.configuration }}-

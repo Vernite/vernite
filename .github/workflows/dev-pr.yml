@@ -10,6 +10,8 @@ jobs:
   build:
     uses: ./.github/workflows/_build.yml
     secrets: inherit
+    with:
+      configuration: development
 
   test:
     uses: ./.github/workflows/_test.yml
