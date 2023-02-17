@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup environment
-        uses: ./.github/actions/setup
+        uses: ./.github/actions/setup.yml
         with:
           mysql-password: ${{ secrets.MYSQL_PASSWORD }}
           spring-application-properties: ${{ secrets.SPRING_APPLICATION_PROPERTIES }}
