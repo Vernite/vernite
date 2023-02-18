@@ -32,11 +32,19 @@ runs:
         cache-key: server
         configuration: ${{ inputs.configuration }}
 
-    - name: Cache protobuf
+    - name: Cache protobuf (dist/)
       uses: ./.github/actions/save-cache
       if: ${{ contains(fromJSON(inputs.affected-projects), 'proto') }}
       with:
         path: packages/proto/dist
+        cache-key: proto
+        configuration: ${{ inputs.configuration }}
+
+    - name: Cache protobuf (target/)
+      uses: ./.github/actions/save-cache
+      if: ${{ contains(fromJSON(inputs.affected-projects), 'proto') }}
+      with:
+        path: packages/proto/target
         cache-key: proto
         configuration: ${{ inputs.configuration }}
 

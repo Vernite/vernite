@@ -26,10 +26,17 @@ runs:
         cache-key: server
         configuration: ${{ inputs.configuration }}
 
-    - name: Cache protobuf
+    - name: Cache protobuf (dist/)
       uses: ./.github/actions/restore-cache
       with:
         path: packages/proto/dist
+        cache-key: proto
+        configuration: ${{ inputs.configuration }}
+
+    - name: Cache protobuf (target/)
+      uses: ./.github/actions/restore-cache
+      with:
+        path: packages/proto/target
         cache-key: proto
         configuration: ${{ inputs.configuration }}
 
