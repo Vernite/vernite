@@ -42,11 +42,11 @@ jobs:
 
       # Download client cache results
       - name: Download cache
-        id: cache
-        uses: actions/cache@v3
+        uses: ./.github/actions/restore-cache
         with:
           path: packages/client/dist
-          key: ${{ runner.os }}-build-client
+          cache-key: client
+          configuration: ${{ inputs.configuration }}
 
       - name: Generate affected
         id: affected

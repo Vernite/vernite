@@ -1,0 +1,35 @@
+# Cache single directory
+
+name: Save cache
+description: Save cache for single directory
+
+inputs:
+  configuration:
+    description: The configuration to use (development | insiders | production)
+    required: true
+    default: development
+
+  path:
+    description: The path to cache
+    required: true
+
+  cache-key:
+    description: The cache key to use
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Save cache
+      if: ${{ inputs.configuration != 'development' }}
+      uses: actions/cache/save@v3
+      with:
+        path: ${{ inputs.path }}
+        key: ${{ runner.os }}-${{ inputs.cache-key }}-${{ inputs.configuration }}
+
+    - name: Save cache
+      if: ${{ inputs.configuration == 'development' }}
+      shell: bash
+      run: |
+        echo "Cache is disabled for development configuration"
+        echo "Cache path: ${{ inputs.path }}"

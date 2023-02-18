@@ -1,0 +1,27 @@
+# Cache single directory
+
+name: Restore cache
+description: Restore cache for single directory
+
+inputs:
+  configuration:
+    description: The configuration to use (development | insiders | production)
+    required: true
+    default: development
+
+  path:
+    description: The path to cache
+    required: true
+
+  cache-key:
+    description: The cache key to use
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Client cache
+      uses: actions/cache/restore@v3
+      with:
+        path: ${{ inputs.path }}
+        key: ${{ runner.os }}-${{ inputs.cache-key }}-${{ inputs.configuration }}

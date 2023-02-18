@@ -1,0 +1,49 @@
+# Cache all project output files
+
+name: Save projects cache
+description: Cache all project output files
+
+inputs:
+  configuration:
+    description: The configuration to use (development | insiders | production)
+    required: true
+    default: development
+
+  affected-projects:
+    description: The affected projects
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Cache client
+      uses: ./.github/actions/save-cache
+      if: ${{ contains(fromJSON(inputs.affected-projects), 'client') }}
+      with:
+        path: packages/client/dist
+        cache-key: client
+        configuration: ${{ inputs.configuration }}
+
+    - name: Cache server
+      uses: ./.github/actions/save-cache
+      if: ${{ contains(fromJSON(inputs.affected-projects), 'server') }}
+      with:
+        path: packages/server/target
+        cache-key: server
+        configuration: ${{ inputs.configuration }}
+
+    - name: Cache protobuf
+      uses: ./.github/actions/save-cache
+      if: ${{ contains(fromJSON(inputs.affected-projects), 'proto') }}
+      with:
+        path: packages/proto/dist
+        cache-key: proto
+        configuration: ${{ inputs.configuration }}
+
+    - name: Cache maven packages
+      uses: ./.github/actions/save-cache
+      if: ${{ contains(fromJSON(inputs.affected-projects), 'proto') }}
+      with:
+        path: ~/.m2
+        cache-key: mwn-packages
+        configuration: ${{ inputs.configuration }}
