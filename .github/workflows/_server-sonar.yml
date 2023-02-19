@@ -2,9 +2,15 @@ name: Run server Sonar analysis
 on:
   workflow_dispatch:
   workflow_call:
+    inputs:
+      configuration:
+        description: "The configuration to use (development | insiders | production)"
+        required: true
+        default: development
+        type: string
     secrets:
       MYSQL_PASSWORD:
-          required: true
+        required: true
       SPRING_APPLICATION_PROPERTIES:
         required: true
       VERNITE_2022_PRIVATE_KEY_PEM:
@@ -23,33 +29,18 @@ jobs:
         working-directory: packages/server
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Setup environment
+        id: setup
+        uses: ./.github/actions/setup
         with:
-          fetch-depth: 0
+          configuration: ${{ inputs.configuration }}
+          mysql-password: ${{ secrets.MYSQL_PASSWORD }}
+          spring-application-properties: ${{ secrets.SPRING_APPLICATION_PROPERTIES }}
+          vernite-2022-private-key-pem: ${{ secrets.VERNITE_2022_PRIVATE_KEY_PEM }}
 
-      - uses: nrwl/nx-set-shas@v3
-        with:
-          main-branch-name: dev
-
-      # Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-
-      # Install dependencies
-      - name: Install dependencies
-        run: yarn install
-
-      # Set up JDK 17
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: "17"
-          distribution: "temurin"
-          cache: maven
-
-      # Install SonarQube
       - name: Cache SonarQube packages
         id: cache
         uses: actions/cache@v3
@@ -58,61 +49,10 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      # Install and configure MySQL
-      - name: Install and configure MySQL
-        run: |
-          sudo systemctl start mysql.service
-          mysql -h 127.0.0.1 -uroot -proot -e 'create database vernite charset utf8mb4'
-          mysql -h 127.0.0.1 -uroot -proot -e 'create database vernite_test charset utf8mb4'
-          mysql -h 127.0.0.1 -uroot -proot -e 'create user "vernite"@"localhost" identified by "${{ secrets.MYSQL_PASSWORD }}"'
-          mysql -h 127.0.0.1 -uroot -proot -e 'grant all on *.* to "vernite"@"localhost" with grant option'
-
-      # Install properties secrets
-      - name: Install properties
-        run: 'echo "$SPRING_APPLICATION_PROPERTIES" > application.properties'
-        env:
-          SPRING_APPLICATION_PROPERTIES: ${{ secrets.SPRING_APPLICATION_PROPERTIES }}
-
-      # Prepare secret for signing JWT
-      - name: Prepare secret
-        run: |
-          echo "${{ secrets.VERNITE_2022_PRIVATE_KEY_PEM }}" > key.pem
-          openssl pkcs8 -topk8 -inform pem -in key.pem -out "vernite-2022.private-key.der" -outform der -nocrypt
-
-      # Cache Maven packages
-      - name: Cache Maven packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
-      # Download cache
-      - name: Download cache
-        uses: ./.github/actions/restore-cache
-        with:
-          path: packages/server/target
-          cache-key: server
-          configuration: insiders
-
-      - name: Generate affected
-        id: affected
-        run: echo -e "affected=$(yarn -s nx print-affected | tr -d '\n')" >> $GITHUB_OUTPUT
-
-      # Build and analyze
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        if: ${{ contains(fromJSON(steps.affected.outputs.affected).projects, 'server') }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=backend
-
-      # Add result to summary
-      - name: Add success result to summary
-        if: ${{ contains(fromJSON(steps.affected.outputs.affected).projects, 'server') }}
-        run: echo "🟩 - Server sonar analysis success" >> $GITHUB_STEP_SUMMARY
-
-      - name: Add skipped result to summary
-        if: ${{ !contains(fromJSON(steps.affected.outputs.affected).projects, 'server') }}
-        run: echo "⬜ - Server sonar analysis skipped" >> $GITHUB_STEP_SUMMARY
+        if: ${{ contains(fromJSON(steps.setup.outputs.affected-projects), 'server') }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=server

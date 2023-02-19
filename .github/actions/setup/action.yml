@@ -1,4 +1,7 @@
 # Create basic setup environment action
+# This action creates persistent machine between jobs and reusable workflows
+#
+# This action should be configured to not run specific actions when they are not needed (like creating database, etc.)
 
 name: Setup
 description: Setup environment for application

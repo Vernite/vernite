@@ -20,6 +20,17 @@ inputs:
 runs:
   using: composite
   steps:
+    - uses: octokit/request-action@v2.x
+      if: ${{ inputs.configuration != 'development' }}
+      continue-on-error: true
+      with:
+        route: DELETE /repos/{owner}/{repo}/actions/caches
+        owner: vernite
+        repo: vernite
+        key: ${{ runner.os }}-${{ inputs.cache-key }}-${{ inputs.configuration }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Save cache
       if: ${{ inputs.configuration != 'development' }}
       uses: actions/cache/save@v3

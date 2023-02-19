@@ -46,8 +46,3 @@ jobs:
         with:
           configuration: ${{ inputs.configuration }}
           affected-projects: ${{ steps.setup.outputs.affected-projects }}
-
-      - name: Debug log
-        if: always()
-        run: |
-          ls -la /home/runner/.m2
