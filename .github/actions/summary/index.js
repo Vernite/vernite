@@ -6,7 +6,7 @@ core.notice('This is notice');
 (async () => {
   await core.summary
     .addHeading('Test Results')
-    .addCodeBlock(generateTestResults(), "js")
+    .addCodeBlock('console.log("sample code block")', "js")
     .addTable([
       [{ data: 'File', header: true }, { data: 'Result', header: true }],
       ['foo.js', 'Pass '],
