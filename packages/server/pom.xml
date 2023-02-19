@@ -29,7 +29,7 @@
 
     <repository>
       <id>local.repository</id>
-      <url>file://${project.baseDir}${file.separator}..${file.separator}..${file.separator}maven_repository</url>
+      <url>file://${project.basedir}${file.separator}..${file.separator}..${file.separator}maven_repository</url>
     </repository>
   </repositories>
 
