@@ -26,6 +26,7 @@
   </dependencies>
 
   <build>
+    <finalName>protobuf</finalName>
     <sourceDirectory>dist/java</sourceDirectory>
     <pluginManagement>
       <plugins>
