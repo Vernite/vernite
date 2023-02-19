@@ -44,7 +44,7 @@ jobs:
       # Deploy client using rsync
       - name: Deploy app 🚀
         uses: easingthemes/ssh-deploy@main
-        if: ${{ contains(fromJSON(steps.affected.outputs.affected).projects, 'client') }}
+        if: ${{ contains(fromJSON(steps.setup.outputs.affected-projects), 'client') }}
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY_FRONTEND }}
           ARGS: "-rltgoDzvO --delete"
