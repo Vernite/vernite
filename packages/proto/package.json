@@ -19,7 +19,9 @@
     "targets": {
       "build": {
         "outputs": [
-          "{workspaceRoot}/maven_repository/dev/vernite/protobuf"
+          "{workspaceRoot}/maven_repository/dev/vernite/protobuf",
+          "{workspaceRoot}/packages/proto/target",
+          "{workspaceRoot}/packages/proto/dist"
         ]
       }
     }
