@@ -50,4 +50,4 @@ jobs:
       - name: Debug log
         if: always()
         run: |
-          ls -la /home/runner
+          ls -la /home/runner/.m2
