@@ -43,7 +43,7 @@ runs:
       if: ${{ contains(fromJSON(inputs.affected-projects), 'proto') }}
       with:
         path: packages/proto/dist
-        cache-key: proto
+        cache-key: proto-dist
         configuration: ${{ inputs.configuration }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
@@ -52,15 +52,15 @@ runs:
       if: ${{ contains(fromJSON(inputs.affected-projects), 'proto') }}
       with:
         path: packages/proto/target
-        cache-key: proto
+        cache-key: proto-target
         configuration: ${{ inputs.configuration }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
-    - name: Cache maven packages
+    - name: Cache protobuf (maven repository)
       uses: ./.github/actions/save-cache
       if: ${{ contains(fromJSON(inputs.affected-projects), 'proto') }}
       with:
-        path: ~/.m2
-        cache-key: mwn-packages
+        path: maven_repository/dev/vernite/protobuf
+        cache-key: proto-repo
         configuration: ${{ inputs.configuration }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
