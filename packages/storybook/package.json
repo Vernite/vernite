@@ -18,7 +18,7 @@
     "react-dom": "18.2.0"
   },
   "scripts": {
-    "storybook": "ng run storybook:storybook",
-    "build-storybook": "ng run storybook:build-storybook"
+    "serve": "ng run storybook:storybook",
+    "build": "ng run storybook:build-storybook"
   }
 }
