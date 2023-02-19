@@ -10,10 +10,21 @@
     "build:typescript:default": "yarn protoc-gen-ts:default -I=./src/ --ts_proto_out=dist/typescript ./src/vernite.proto --ts_proto_opt=outputTypeRegistry=true --ts_proto_opt=snakeToCamel=true",
     "build:java": "yarn build:java:protoc && yarn build:java:mvn",
     "build:java:protoc": "protoc -I=./src --java_out=dist/java ./src/vernite.proto",
-    "build:java:mvn": "mvn install",
+    "build:java:mvn": "mvn package install:install-file -Dfile=target/protobuf.jar -DlocalRepositoryPath=../../maven_repository",
     "protoc-gen-ts:windows": "protoc --plugin=protoc-gen-ts_proto=.\\node_modules\\.bin\\protoc-gen-ts_proto.cmd",
     "protoc-gen-ts:default": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto",
     "serve": "node ../tools/watch.js ./src/vernite.proto \"yarn build\""
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "outputs": [
+          "{workspaceRoot}/maven_repository/dev/vernite/protobuf",
+          "{workspaceRoot}/packages/proto/target",
+          "{workspaceRoot}/packages/proto/dist"
+        ]
+      }
+    }
   },
   "dependencies": {
     "google-protobuf": "^3.21.2",
