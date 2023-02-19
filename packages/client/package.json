@@ -52,5 +52,14 @@
     "proto": "*",
     "ui": "*",
     "core-ts": "*"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "outputs": [
+          "dist/"
+        ]
+      }
+    }
   }
 }

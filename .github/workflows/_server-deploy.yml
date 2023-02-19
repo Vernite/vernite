@@ -20,41 +20,21 @@ jobs:
         working-directory: packages/server
 
     steps:
-      # Checkout repository
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
-      - uses: nrwl/nx-set-shas@v3
+      - name: Setup
+        id: setup
+        uses: ./.github/actions/setup
         with:
-          main-branch-name: dev
-
-      # Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-
-      # Install dependencies
-      - name: Install dependencies
-        run: yarn install
-
-      # Download server cache results
-      - name: Download cache
-        uses: ./.github/actions/restore-cache
-        with:
-          path: packages/server/target
-          cache-key: server
           configuration: ${{ inputs.configuration }}
-
-      - name: Generate affected
-        id: affected
-        run: echo -e "affected=$(yarn -s nx print-affected | tr -d '\n')" >> $GITHUB_OUTPUT
+          mysql-password: ${{ secrets.MYSQL_PASSWORD }}
+          spring-application-properties: ${{ secrets.SPRING_APPLICATION_PROPERTIES }}
+          vernite-2022-private-key-pem: ${{ secrets.VERNITE_2022_PRIVATE_KEY_PEM }}
 
       # Deploy to server using rsync
       - name: Deploy app
-        if: ${{ contains(fromJSON(steps.affected.outputs.affected).projects, 'server') }}
+        if: ${{ contains(fromJSON(steps.setup.outputs.affected-projects), 'server') }}
         run: |
           eval $(ssh-agent -s)
           echo "${{ secrets.AUTO_DEPLOY_KEY }}" | tr -d '\r' | ssh-add - > /dev/null
@@ -63,12 +43,3 @@ jobs:
           ssh-keyscan -t rsa -p 2224 51.83.255.98 >> ~/.ssh/known_hosts
           rsync -a -e 'ssh -p 2224' target/vernite*jar backend@51.83.255.98:~/${{ inputs.configuration == 'insiders' && 'vernite-dev' || 'vernite' }}.jar
           ssh -p 2224 backend@51.83.255.98 "sudo /usr/bin/systemctl restart ${{ inputs.configuration == 'insiders' && 'vernite-dev' || 'vernite' }}.service"
-
-      # Add result to summary
-      - name: Add success result to summary
-        if: ${{ contains(fromJSON(steps.affected.outputs.affected).projects, 'server') }}
-        run: echo "🟩 - Server deploy success" >> $GITHUB_STEP_SUMMARY
-
-      - name: Add skipped result to summary
-        if: ${{ !contains(fromJSON(steps.affected.outputs.affected).projects, 'server') }}
-        run: echo "⬜ - Server deploy skipped" >> $GITHUB_STEP_SUMMARY

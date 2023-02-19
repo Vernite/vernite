@@ -1,4 +1,7 @@
 # Create basic setup environment action
+# This action creates persistent machine between jobs and reusable workflows
+#
+# This action should be configured to not run specific actions when they are not needed (like creating database, etc.)
 
 name: Setup
 description: Setup environment for application
@@ -71,7 +74,6 @@ runs:
       with:
         java-version: ${{ inputs.java-version }}
         distribution: ${{ inputs.java-distribution }}
-        cache: maven
 
     - name: Set up Node.js ${{ inputs.node-version }}
       uses: actions/setup-node@v3
