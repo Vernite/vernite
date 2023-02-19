@@ -37,8 +37,12 @@ jobs:
     needs: [build]
     uses: ./.github/workflows/_server-sonar.yml
     secrets: inherit
+    with:
+      configuration: insiders
 
   docs_server:
     needs: [build]
     uses: ./.github/workflows/_server-docs.yml
     secrets: inherit
+    with:
+      configuration: insiders
