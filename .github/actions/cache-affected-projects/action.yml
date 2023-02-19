@@ -13,6 +13,10 @@ inputs:
     description: The affected projects
     required: true
 
+  GITHUB_TOKEN:
+    description: The GitHub token to use
+    required: true
+
 runs:
   using: composite
   steps:
@@ -23,6 +27,7 @@ runs:
         path: packages/client/dist
         cache-key: client
         configuration: ${{ inputs.configuration }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
     - name: Cache server
       uses: ./.github/actions/save-cache
@@ -31,6 +36,7 @@ runs:
         path: packages/server/target
         cache-key: server
         configuration: ${{ inputs.configuration }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
     - name: Cache protobuf (dist/)
       uses: ./.github/actions/save-cache
@@ -39,6 +45,7 @@ runs:
         path: packages/proto/dist
         cache-key: proto
         configuration: ${{ inputs.configuration }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
     - name: Cache protobuf (target/)
       uses: ./.github/actions/save-cache
@@ -47,6 +54,7 @@ runs:
         path: packages/proto/target
         cache-key: proto
         configuration: ${{ inputs.configuration }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
     - name: Cache maven packages
       uses: ./.github/actions/save-cache
@@ -55,3 +63,4 @@ runs:
         path: ~/.m2
         cache-key: mwn-packages
         configuration: ${{ inputs.configuration }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
