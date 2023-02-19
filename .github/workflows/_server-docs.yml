@@ -3,6 +3,11 @@ name: Build server docs and deploy to GitHub Pages
 on:
   workflow_dispatch:
   workflow_call:
+    inputs:
+      configuration:
+        required: true
+        type: string
+        description: vernite-dev or vernite
     secrets:
       MYSQL_PASSWORD:
         required: true
@@ -27,7 +32,7 @@ jobs:
         id: setup
         uses: ./.github/actions/setup
         with:
-          configuration: insiders
+          configuration: ${{ inputs.configuration }}
           mysql-password: ${{ secrets.MYSQL_PASSWORD }}
           spring-application-properties: ${{ secrets.SPRING_APPLICATION_PROPERTIES }}
           vernite-2022-private-key-pem: ${{ secrets.VERNITE_2022_PRIVATE_KEY_PEM }}
