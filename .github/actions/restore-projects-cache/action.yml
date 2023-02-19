@@ -17,32 +17,32 @@ runs:
       with:
         path: packages/client/dist
         cache-key: client
-        configuration: ${{ inputs.configuration }}
+        configuration: ${{ inputs.configuration == 'development' && 'insiders' || inputs.configuration }}
 
     - name: Cache server
       uses: ./.github/actions/restore-cache
       with:
         path: packages/server/target
         cache-key: server
-        configuration: ${{ inputs.configuration }}
+        configuration: ${{ inputs.configuration == 'development' && 'insiders' || inputs.configuration }}
 
     - name: Cache protobuf (dist/)
       uses: ./.github/actions/restore-cache
       with:
         path: packages/proto/dist
         cache-key: proto
-        configuration: ${{ inputs.configuration }}
+        configuration: ${{ inputs.configuration == 'development' && 'insiders' || inputs.configuration }}
 
     - name: Cache protobuf (target/)
       uses: ./.github/actions/restore-cache
       with:
         path: packages/proto/target
         cache-key: proto
-        configuration: ${{ inputs.configuration }}
+        configuration: ${{ inputs.configuration == 'development' && 'insiders' || inputs.configuration }}
 
     - name: Cache maven packages
       uses: ./.github/actions/restore-cache
       with:
         path: ~/.m2
         cache-key: mwn-packages
-        configuration: ${{ inputs.configuration }}
+        configuration: ${{ inputs.configuration == 'development' && 'insiders' || inputs.configuration }}
