@@ -81,11 +81,11 @@ function getMark(status) {
 function generateTableRow(packageName, data) {
   return [
     packageName,
-    getMark(data.build),
-    getMark(data.test),
-    data.test.tests.passed,
-    data.test.tests.failed,
-    data.test.tests.skipped,
+    getMark(data.build.status),
+    getMark(data.test.status),
+    `${data.test.tests.passed}`,
+    `${data.test.tests.failed}`,
+    `${data.test.tests.skipped}`,
     data.build.fetchedFromCache ? 'yes' : 'no',
   ]
 }
