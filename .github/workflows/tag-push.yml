@@ -1,0 +1,55 @@
+name: Production server deploy
+
+on:
+  push:
+    tags:
+      - '**'
+
+jobs:
+  build:
+    uses: ./.github/workflows/_build.yml
+    secrets: inherit
+    with:
+      configuration: production
+      all: true
+
+  test:
+    uses: ./.github/workflows/_test.yml
+    secrets: inherit
+
+  deploy_client:
+    needs: [build, test]
+    uses: ./.github/workflows/_client-deploy.yml
+    secrets: inherit
+    with:
+      configuration: production
+
+  deploy_server:
+    needs: [build, test]
+    uses: ./.github/workflows/_server-deploy.yml
+    secrets: inherit
+    with:
+      configuration: production
+
+  upload_artifacts:
+    runs-on: ubuntu-latest
+    needs: [build, test]
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Restore all projects caches
+        uses: ./.github/actions/restore-projects-cache
+        with:
+          configuration: production
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+          append_body: true
+          files: |
+            packages/server/target/*.jar
+            packages/client/dist/**
