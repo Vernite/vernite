@@ -16,6 +16,8 @@ jobs:
   test:
     uses: ./.github/workflows/_test.yml
     secrets: inherit
+    with:
+      configuration: production
 
   deploy_client:
     needs: [build, test]
