@@ -9,6 +9,11 @@ on:
         required: true
         default: development
         type: string
+      all:
+        description: "Whether to build all projects or only affected ones"
+        required: false
+        default: false
+        type: boolean
 
     secrets:
       MYSQL_PASSWORD:
@@ -39,7 +44,7 @@ jobs:
           vernite-2022-private-key-pem: ${{ secrets.VERNITE_2022_PRIVATE_KEY_PEM }}
 
       - name: Build affected projects
-        run: yarn nx affected --target=build
+        run: yarn nx affected --target=build ${{ inputs.all && '--all' || '' }}
 
       - name: Cache affected projects
         uses: ./.github/actions/cache-affected-projects
