@@ -6,10 +6,6 @@ on:
         description: 'Target version'
         required: true
         type: string
-    secrets:
-      GITHUB_TOKEN:
-        description: 'GitHub token'
-        required: true
 
 jobs:
   version-bump:
