@@ -18,11 +18,14 @@
   "nx": {
     "targets": {
       "build": {
+        "inputs": [
+          "{workspaceRoot}/src/vernite.proto",
+          "{workspaceRoot}/src/pom.xml"
+        ],
         "outputs": [
           "{workspaceRoot}/maven_repository/dev/vernite/protobuf",
           "{workspaceRoot}/packages/proto/target",
-          "{workspaceRoot}/packages/proto/dist",
-          "pom.xml"
+          "{workspaceRoot}/packages/proto/dist"
         ]
       }
     }
