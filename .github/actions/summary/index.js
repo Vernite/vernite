@@ -68,6 +68,8 @@ const data = {
   }
 };
 
+core.getState
+
 function getMark(status) {
   if (status === 'success') {
     return successMark;
