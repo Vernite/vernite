@@ -13,12 +13,13 @@
 
   <groupId>dev.vernite</groupId>
   <artifactId>vernite</artifactId>
-  <version>1.1.3-SNAPSHOT</version>
+  <version>${vernite.version}</version>
   <name>vernite</name>
   <description>Vernite server</description>
 
   <properties>
     <java.version>17</java.version>
+    <vernite.version>1.0.0-SNAPSHOT</vernite.version>
   </properties>
 
   <repositories>
@@ -148,7 +149,7 @@
     <dependency>
       <groupId>dev.vernite</groupId>
       <artifactId>protobuf</artifactId>
-      <version>1.0.19-SNAPSHOT</version>
+      <version>${vernite.version}</version>
     </dependency>
 
     <dependency>

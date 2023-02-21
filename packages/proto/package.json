@@ -1,6 +1,6 @@
 {
   "name": "proto",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "BSD-2-Clause",
   "main": "dist/typescript/vernite.js",
   "scripts": {
@@ -21,7 +21,8 @@
         "outputs": [
           "{workspaceRoot}/maven_repository/dev/vernite/protobuf",
           "{workspaceRoot}/packages/proto/target",
-          "{workspaceRoot}/packages/proto/dist"
+          "{workspaceRoot}/packages/proto/dist",
+          "pom.xml"
         ]
       }
     }
