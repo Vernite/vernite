@@ -19,8 +19,8 @@
     "targets": {
       "build": {
         "inputs": [
-          "{workspaceRoot}/src/vernite.proto",
-          "{workspaceRoot}/src/pom.xml"
+          "{projectRoot}/src/vernite.proto",
+          "{projectRoot}/src/pom.xml"
         ],
         "outputs": [
           "{workspaceRoot}/maven_repository/dev/vernite/protobuf",
