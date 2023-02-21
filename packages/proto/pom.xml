@@ -6,7 +6,7 @@
 
   <groupId>dev.vernite</groupId>
   <artifactId>protobuf</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>${vernite.version}</version>
 
   <name>protobuf</name>
   <description>Vernite Protobuf</description>
@@ -15,6 +15,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
+    <vernite.version>1.0.0-SNAPSHOT</vernite.version>
   </properties>
 
   <dependencies>
