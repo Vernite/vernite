@@ -74,6 +74,7 @@ runs:
       with:
         java-version: ${{ inputs.java-version }}
         distribution: ${{ inputs.java-distribution }}
+        cache: maven
 
     - name: Set up Node.js ${{ inputs.node-version }}
       uses: actions/setup-node@v3

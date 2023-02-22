@@ -1,0 +1,27 @@
+name: Version bump
+on:
+  workflow_call:
+    inputs:
+      version:
+        description: 'Target version'
+        required: true
+        type: string
+
+jobs:
+  version-bump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Bump versions
+        run: |
+          node packages/tools/version-all.js --version=${{ inputs.version }}
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "Bump version to ${{ inputs.version }}"
+          tag: ${{ inputs.version }}
