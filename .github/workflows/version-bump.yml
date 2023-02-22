@@ -18,7 +18,7 @@ jobs:
 
       - name: Bump versions
         run: |
-          node tools/version-all --version=${{ inputs.version }}
+          node packages/tools/version-all.js --version=${{ inputs.version }}
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v9

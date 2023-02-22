@@ -58,6 +58,6 @@ if (fileFormat === 'package.json') {
 }
 
 if (fileFormat === 'pom.xml') {
-  const mvnCommand = `mvn versions:set-property -Dproperty="vernite.version" -DnewVersion="${version}-SNAPSHOT" -f ${file}`;
+  const mvnCommand = `mvn versions:set -DnewVersion="${version}-SNAPSHOT" -f ${file}`;
   execSync(mvnCommand, { stdio: 'inherit' });
 }
