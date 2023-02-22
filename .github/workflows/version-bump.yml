@@ -38,4 +38,3 @@ jobs:
         with:
           message: "Bump version to ${{ inputs.version }}"
           tag: ${{ inputs.version }}
-          author_name: github
