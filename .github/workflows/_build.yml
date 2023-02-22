@@ -44,7 +44,7 @@ jobs:
           vernite-2022-private-key-pem: ${{ secrets.VERNITE_2022_PRIVATE_KEY_PEM }}
 
       - name: Build affected projects
-        run: yarn nx affected --target=build --skip-nx-cache ${{ inputs.all && '--all' || '' }}
+        run: yarn nx affected --target=build ${{ inputs.all && '--all' || '' }}
 
       - name: Cache affected projects
         uses: ./.github/actions/cache-affected-projects
