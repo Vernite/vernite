@@ -1,6 +1,6 @@
 name: Version bump
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       version:
         description: 'Target version'
