@@ -47,7 +47,7 @@ jobs:
       all: true
 
   test:
-    needs: [version-bump]
+    needs: [version-bump, build]
     uses: ./.github/workflows/_test.yml
     secrets: inherit
     with:
