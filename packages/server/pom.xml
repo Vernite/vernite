@@ -23,11 +23,6 @@
 
   <repositories>
     <repository>
-      <id>jitpack.io</id>
-      <url>https://jitpack.io</url>
-    </repository>
-
-    <repository>
       <id>local.repository</id>
       <url>file://${project.basedir}${file.separator}..${file.separator}..${file.separator}maven_repository</url>
     </repository>
@@ -159,15 +154,15 @@
     </dependency>
 
     <dependency>
-      <groupId>com.github.Vernite.java-slack-sdk</groupId>
+      <groupId>com.slack.api</groupId>
       <artifactId>bolt</artifactId>
-      <version>8f80be0ba7</version>
+      <version>1.27.3</version>
     </dependency>
 
     <dependency>
-      <groupId>com.github.Vernite.java-slack-sdk</groupId>
+      <groupId>com.slack.api</groupId>
       <artifactId>bolt-jakarta-servlet</artifactId>
-      <version>8f80be0ba7</version>
+      <version>1.27.3</version>
     </dependency>
 
     <dependency>
@@ -177,9 +172,9 @@
     </dependency>
 
     <dependency>
-      <groupId>com.github.Vernite.java-slack-sdk</groupId>
+      <groupId>com.slack.api</groupId>
       <artifactId>slack-api-client</artifactId>
-      <version>8f80be0ba7</version>
+      <version>1.27.3</version>
     </dependency>
 
     <dependency>
