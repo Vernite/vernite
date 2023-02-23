@@ -196,6 +196,7 @@
   </dependencies>
 
   <build>
+    <finalName>vernite</finalName>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>

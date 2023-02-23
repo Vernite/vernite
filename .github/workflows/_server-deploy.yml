@@ -41,5 +41,5 @@ jobs:
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           ssh-keyscan -t rsa -p 2224 51.83.255.98 >> ~/.ssh/known_hosts
-          rsync -a -e 'ssh -p 2224' target/vernite*jar backend@51.83.255.98:~/${{ inputs.configuration == 'insiders' && 'vernite-dev' || 'vernite' }}.jar
+          rsync -a -e 'ssh -p 2224' target/vernite.jar backend@51.83.255.98:~/${{ inputs.configuration == 'insiders' && 'vernite-dev' || 'vernite' }}.jar
           ssh -p 2224 backend@51.83.255.98 "sudo /usr/bin/systemctl restart ${{ inputs.configuration == 'insiders' && 'vernite-dev' || 'vernite' }}.service"
