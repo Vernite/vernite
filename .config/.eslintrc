@@ -15,7 +15,7 @@
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
         "project": [
-          "./.config/tsconfig.json"
+          "./tsconfig.json"
         ],
         "createDefaultProgram": true
       },

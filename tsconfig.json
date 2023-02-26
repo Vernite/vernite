@@ -1,33 +1,82 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
+/**
+ * This is the main tsconfig file that is used in all others TypeScript projects
+ * It is used to compile the TypeScript code into JavaScript code.
+ *
+ * Form more information about the tsconfig.json file, please visit:
+ * https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+ */
 {
+  /* For Angular project this option is disabled due to own compilation process */
   "compileOnSave": false,
+
+  /* Instructs the TypeScript compiler how to compile .ts files */
   "compilerOptions": {
+    /* Base url where the packages are located. All projects have base url set as workspaceRoot to use paths declared below */
     "baseUrl": "./",
+
+    /* Ensure that casing is correct in imports. */
     "forceConsistentCasingInFileNames": true,
+
+    /* Enable all strict type checking options. */
     "strict": true,
+
+    /* Ensure overriding members in derived classes are marked with an override modifier. */
     "noImplicitOverride": true,
+
+    /* Enforces using indexed accessors for keys declared using an indexed type */
     "noPropertyAccessFromIndexSignature": true,
+
+    /* Enable error reporting for codepaths that do not explicitly return in a function. */
     "noImplicitReturns": true,
+
+    /* Enable error reporting for fallthrough cases in switch statements. */
     "noFallthroughCasesInSwitch": true,
+
+    /* Enable importing .json files (used when importing 'package.json' for version check) */
     "resolveJsonModule": true,
+
+    /* Allow 'import x from y' when a module doesn't have a default export. */
     "allowSyntheticDefaultImports": true,
+
+    /* Create source map files for emitted JavaScript files. */
     "sourceMap": true,
+
+    /* Generate .d.ts files from TypeScript and JavaScript files in your project. */
     "declaration": true,
+
+    /* Emit more compliant, but verbose and less performant JavaScript for iteration. */
     "downlevelIteration": true,
+
+    /* Enable experimental support for decorators. */
     "experimentalDecorators": true,
+
+    /* Specify how TypeScript looks up a file from a given module specifier. */
     "moduleResolution": "node",
+
+    /* Allow importing helper functions from tslib once per project, instead of including them per-file. */
     "importHelpers": true,
+
+    /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
     "target": "es2020",
+
+    /* Specify what module code is generated. */
     "module": "esnext",
+
+    /* Specify a set of bundled library declaration files that describe the target runtime environment. */
     "lib": ["esnext", "dom"],
+
+    /* Skip type checking all .d.ts files. */
     "skipLibCheck": true,
+
+    /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */
     "preserveSymlinks": true,
+
+    /* Specify a set of entries that re-map imports to additional lookup locations. */
     "paths": {
-      // Assets directory
-      "@assets/*": ["packages/client/src/assets/*"],
+      /* TODO: Move this into corresponding package (Tests path) */
       "@tests/*": ["packages/client/src/tests/*"],
 
-      // Modules directory
+      /* TODO: Move those into corresponding package */
       "@main/*": ["packages/client/src/app/_main/*"],
       "@auth/*": ["packages/client/src/app/auth/*"],
       "@dashboard/*": ["packages/client/src/app/dashboard/*"],
@@ -35,19 +84,29 @@
       "@tasks/*": ["packages/client/src/app/tasks/*"],
       "@calendar/*": ["packages/client/src/app/calendar/*"],
 
-      // Utils directory
+      /* TODO: Move this into corresponding package (Components path) */
       "@components/*": ["packages/client/src/app/_main/components/*"],
-      // Protobuf package
+
+      /* Protobuf package */
       "@proto/*": ["packages/proto/dist/typescript/*"]
-    },
-    "types": ["jasmine"]
+    }
   },
+
+  /* Angular compilation options */
   "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
+    /* Reports an error for a supplied parameter whose injection type cannot be determined. */
     "strictInjectionParameters": true,
+
+    /* Whether access modifiers such as private/protected/readonly are honored when assigning a binding expression to an @Input() */
     "strictInputAccessModifiers": true,
+
+    /* Checks .metadata.json file for errors */
     "strictMetadataEmit": true,
+
+    /* Enables strict checking in components templates */
     "strictTemplates": true
   },
-  "include": ["packages"]
+
+  /* Paths of what files to include in final build */
+  "include": ["packages/"]
 }
