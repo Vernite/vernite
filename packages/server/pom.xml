@@ -13,7 +13,7 @@
 
   <groupId>dev.vernite</groupId>
   <artifactId>vernite</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <name>vernite</name>
   <description>Vernite server</description>
 
