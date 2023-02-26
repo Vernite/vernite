@@ -65,9 +65,7 @@ export class UpperNavigationComponent implements OnInit {
       map((workspaces) => {
         if (workspaces.length === 0) {
           this._isButtonDisabled = false;
-        } else if (
-          workspaces.filter((workspace) => workspace.projectsWithPrivileges.length).length === 0
-        ) {
+        } else if (workspaces.filter((workspace) => workspace.projects.length).length === 0) {
           this._isButtonDisabled = false;
         } else {
           this._isButtonDisabled = true;

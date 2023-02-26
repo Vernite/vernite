@@ -13,9 +13,8 @@ export interface Workspace extends JSONParsable {
    * Workspace name
    */
   name: string;
-
-  projectsWithPrivileges: {
-    project: Project;
-    privileges: number;
-  }[];
+  /**
+   * Workspace projects
+   */
+  projects: Project[];
 }

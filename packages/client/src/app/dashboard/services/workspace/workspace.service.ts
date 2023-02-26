@@ -103,9 +103,7 @@ export class WorkspaceService extends BaseService<
   public getWorkspaceByProjectId(projectId: number): Observable<Workspace> {
     return this.list().pipe(
       map((workspaces) => {
-        const workspace = workspaces.find((w) =>
-          w.projectsWithPrivileges.some((p) => p.project.id === projectId),
-        );
+        const workspace = workspaces.find((w) => w.projects.some((p) => p.id === projectId));
         if (!workspace) {
           throw new Error('Workspace not found');
         }

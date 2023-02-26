@@ -1,18 +1,18 @@
 /*
  * BSD 2-Clause License
- * 
+ *
  * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,7 +35,6 @@ import java.util.Date;
 import dev.vernite.vernite.project.Project;
 import dev.vernite.vernite.project.ProjectRepository;
 import dev.vernite.vernite.projectworkspace.ProjectMember;
-import dev.vernite.vernite.projectworkspace.ProjectWithPrivileges;
 import dev.vernite.vernite.projectworkspace.ProjectWorkspace;
 import dev.vernite.vernite.projectworkspace.ProjectWorkspaceKey;
 import dev.vernite.vernite.user.User;
@@ -132,34 +131,6 @@ public class OtherTests {
         member = new ProjectMember(user, 1L);
 
         assertEquals(false, member.equals(other));
-    }
-
-    @Test
-    void projectWithPrivilegesTests() {
-        Project project = new Project("name");
-        Project other = new Project("other");
-
-        ProjectWithPrivileges pwp = new ProjectWithPrivileges(project, 1L);
-        ProjectWithPrivileges opp = new ProjectWithPrivileges(other, 1L);
-
-        assertEquals(false, pwp.equals(null));
-        assertEquals(false, pwp.equals((Object) "name"));
-        assertEquals(false, pwp.equals(opp));
-        assertEquals(true, pwp.compareTo(opp) < 0);
-        assertNotEquals(pwp.hashCode(), opp.hashCode());
-
-        pwp = new ProjectWithPrivileges(null, 1L);
-
-        assertEquals(false, pwp.equals(opp));
-        assertNotEquals(pwp.hashCode(), opp.hashCode());
-
-        opp = new ProjectWithPrivileges(null, 1L);
-
-        assertEquals(true, pwp.equals(opp));
-
-        opp = new ProjectWithPrivileges(project, 2L);
-
-        assertEquals(false, pwp.equals(opp));
     }
 
     @Test

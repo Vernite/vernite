@@ -17,10 +17,7 @@
         "owner": "typescript",
         "source": "ts",
         "applyTo": "closedDocuments",
-        "fileLocation": [
-          "relative",
-          "${cwd}"
-        ],
+        "fileLocation": ["relative", "${cwd}"],
         "pattern": "$tsc",
         "background": {
           "activeOnStart": true,
@@ -36,11 +33,7 @@
     {
       "label": "buildServer",
       "command": "yarn",
-      "args": [
-        "nx",
-        "build",
-        "server"
-      ],
+      "args": ["nx", "build", "server", "--skip-nx-cache"],
       "type": "shell",
       "hide": true
     }
