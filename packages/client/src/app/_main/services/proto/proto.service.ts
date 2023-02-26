@@ -95,21 +95,34 @@ export class ProtoService {
   /** Serialize message to send over websocket */
   private serialize(value: UnknownMessage) {
     return of(
-      Any.create({
-        typeUrl: value.$type,
-        value: messageTypeRegistry.get(value.$type)!.encode(value).finish(),
-      }),
+      Any.encode(
+        Any.create({
+          typeUrl: '/' + value.$type,
+          value: messageTypeRegistry.get(value.$type)!.encode(value).finish(),
+        }),
+      ).finish(),
     );
   }
 
   /** Deserialize message from websocket */
   private deserialize(e: MessageEvent) {
     return from(e.data.arrayBuffer() as Promise<Uint8Array>).pipe(
-      map((buffer: Uint8Array) => {
-        const any = Any.decode(buffer);
-        const type = any.typeUrl;
+      map((arrayBuffer: ArrayBuffer) => {
+        const any = Any.decode(new Uint8Array(arrayBuffer));
+        const type = any.typeUrl.startsWith('/') ? any.typeUrl.slice(1) : any.typeUrl;
 
-        const messageType = messageTypeRegistry.get(type)!;
+        const messageType = messageTypeRegistry.get(type);
+
+        if (!messageType) {
+          throw new Error(
+            `Message type "${type}" not found in registry. Message types available in registry:\n${Array.from(
+              messageTypeRegistry.keys(),
+            )
+              .map((e) => `"/${e}"`)
+              .join(',\n')}`,
+          );
+        }
+
         return messageType.decode(any.value) as MessageType;
       }),
     );
