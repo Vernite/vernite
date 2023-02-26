@@ -56,7 +56,6 @@ jobs:
           prerelease: false
           generate_release_notes: true
           append_body: true
-          tag_name: ${{ inputs.version }}
           files: |
             client.zip
             packages/server/target/vernite.jar
