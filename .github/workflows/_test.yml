@@ -39,4 +39,4 @@ jobs:
 
       # Test by nx
       - name: Test
-        run: yarn nx affected --skip-nx-cache --target=test
+        run: yarn nx affected --target=test
