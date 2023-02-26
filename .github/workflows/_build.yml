@@ -34,6 +34,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Force pull (workaround https://github.com/actions/checkout/issues/439)
+        run: git pull
+
       - name: Setup environment
         id: setup
         uses: ./.github/actions/setup
