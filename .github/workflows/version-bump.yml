@@ -39,3 +39,5 @@ jobs:
           committer_email: contact.vernite@gmail.com
           author_name: vernite-bot
           author_email: contact.vernite@gmail.com
+        env:
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
