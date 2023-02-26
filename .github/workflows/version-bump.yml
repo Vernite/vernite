@@ -7,9 +7,6 @@ on:
         required: true
         type: string
 
-permissions:
-  contents: write
-
 jobs:
   version-bump:
     runs-on: ubuntu-latest
@@ -38,3 +35,7 @@ jobs:
         with:
           message: "Bump version to ${{ inputs.version }}"
           tag: ${{ inputs.version }}
+          committer_name: vernite-bot
+          committer_email: contact.vernite@gmail.com
+          author_name: vernite-bot
+          author_email: contact.vernite@gmail.com
