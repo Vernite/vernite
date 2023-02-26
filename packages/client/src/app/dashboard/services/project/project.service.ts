@@ -104,7 +104,7 @@ export class ProjectService extends BaseService<
     return this.workspaceService.list().pipe(
       map((workspaces) =>
         workspaces.reduce((projects: Project[], workspace: Workspace) => {
-          projects.push(...workspace.projectsWithPrivileges.map((p) => p.project));
+          projects.push(...workspace.projects);
           return projects;
         }, []),
       ),

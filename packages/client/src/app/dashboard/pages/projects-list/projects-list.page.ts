@@ -47,7 +47,7 @@ export class ProjectsListPage implements OnInit {
       this.loader.markAsPending();
       this.workspace$ = this.workspaceService.get(workspaceId);
       this.projects$ = this.workspace$.pipe(
-        map((workspace) => workspace.projectsWithPrivileges.map((project) => project.project)),
+        map((workspace) => workspace.projects),
         withLoader(this.loader),
       );
     });

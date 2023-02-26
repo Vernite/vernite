@@ -7,7 +7,8 @@
     "build": {
       "executor": "@nxrocks/nx-spring-boot:build",
       "options": {
-        "root": "packages/server"
+        "root": "packages/server",
+        "args": ["-DskipTests", "-T", "1C"]
       },
       "dependsOn": [
         "^build"
@@ -19,7 +20,8 @@
     "install": {
       "executor": "@nxrocks/nx-spring-boot:install",
       "options": {
-        "root": "packages/server"
+        "root": "packages/server",
+        "args": ["-DskipTests", "-T", "1C"]
       },
       "outputs": [
         "{workspaceRoot}/packages/server/target"

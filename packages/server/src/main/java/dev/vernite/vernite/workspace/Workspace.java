@@ -1,18 +1,18 @@
 /*
  * BSD 2-Clause License
- * 
+ *
  * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -49,7 +49,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 import dev.vernite.vernite.project.Project;
-import dev.vernite.vernite.projectworkspace.ProjectWithPrivileges;
 import dev.vernite.vernite.projectworkspace.ProjectWorkspace;
 import dev.vernite.vernite.user.User;
 import lombok.Data;
@@ -112,7 +111,7 @@ public class Workspace {
 
     /**
      * Default constructor for workspace.
-     * 
+     *
      * @param id   unique to user positive number for new workspace
      * @param name must not be {@literal null} and have size between 1 and 50
      * @param user must not be {@literal null} and must be entity from database
@@ -125,7 +124,7 @@ public class Workspace {
 
     /**
      * Constructor for workspace from create request.
-     * 
+     *
      * @param id     unique to user positive number for new workspace
      * @param user   must not be {@literal null} and must be entity from database
      * @param create must not be {@literal null} and must be valid
@@ -136,7 +135,7 @@ public class Workspace {
 
     /**
      * Updates workspace entity with data from update.
-     * 
+     *
      * @param update must not be {@literal null} and be valid
      */
     public void update(UpdateWorkspace update) {
@@ -147,17 +146,12 @@ public class Workspace {
 
     /**
      * Setter for name value. It performs {@link String#trim()} on its argument.
-     * 
+     *
      * @param name must not be {@literal null} and have at least one non-whitespace
      *             character and less than 50 characters
      */
     public void setName(String name) {
         this.name = name.trim();
-    }
-
-    @Deprecated
-    public List<ProjectWithPrivileges> getProjectsWithPrivileges() {
-        return getProjects().stream().map(p -> new ProjectWithPrivileges(p, 69L)).toList();
     }
 
 }

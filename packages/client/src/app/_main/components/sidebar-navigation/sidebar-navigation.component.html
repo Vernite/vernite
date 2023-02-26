@@ -59,7 +59,7 @@
     </ng-container>
     <div class="content">
       <ng-container *ngFor="let workspace of workspaceList$ | async">
-        <sidebar-entry *ngIf="!workspace.projectsWithPrivileges?.length" [expandable]="false" [collapsed]="isCollapsed"
+        <sidebar-entry *ngIf="!workspace.projects?.length" [expandable]="false" [collapsed]="isCollapsed"
           [textIcon]="true" [showOptions]="true" [routerLink]="['/', 'workspaces', workspace.id, 'projects']">
           <span class="header">{{ workspace.name }}</span>
           <ng-container class="options">
@@ -78,32 +78,32 @@
           </ng-container>
         </sidebar-entry>
 
-        <sidebar-entry *ngIf="workspace.projectsWithPrivileges?.length" [expandable]="true" [collapsed]="isCollapsed"
+        <sidebar-entry *ngIf="workspace.projects?.length" [expandable]="true" [collapsed]="isCollapsed"
           [textIcon]="true" [showOptions]="true">
           <span class="header">{{ workspace.name }}</span>
           <div class="content">
-            <sidebar-entry *ngFor="let projectWithPrivileges of workspace.projectsWithPrivileges"
-              [collapsed]="isCollapsed" [textIcon]="!projectWithPrivileges.project.logo"
-              [imageIcon]="projectWithPrivileges.project.logo?.url" [showOptions]="true"
-              [routerLink]="['/', 'projects', projectWithPrivileges.project.id]">
-              <span class="header">{{ projectWithPrivileges.project.name }}</span>
+            <sidebar-entry *ngFor="let project of workspace.projects"
+              [collapsed]="isCollapsed" [textIcon]="!project.logo"
+              [imageIcon]="project.logo?.url" [showOptions]="true"
+              [routerLink]="['/', 'projects', project.id]">
+              <span class="header">{{ project.name }}</span>
               <ng-container class="options">
-                <button mat-menu-item *ngIf="projectWithPrivileges.project.gitHubIntegration"
-                  (click)="openWithVSCode(projectWithPrivileges.project)">
+                <button mat-menu-item *ngIf="project.gitHubIntegration"
+                  (click)="openWithVSCode(project)">
                   <span i18n>Open in github.dev</span>
                 </button>
-                <button mat-menu-item *ngIf="projectWithPrivileges.project.gitHubIntegration"
-                  (click)="openWithLocalVSCode(projectWithPrivileges.project)">
+                <button mat-menu-item *ngIf="project.gitHubIntegration"
+                  (click)="openWithLocalVSCode(project)">
                   <span i18n>Open in Visual Studio Code</span>
                 </button>
-                <button mat-menu-item *ngIf="projectWithPrivileges.project.gitHubIntegration"
-                  (click)="openWithLocalVSCodeInsiders(projectWithPrivileges.project)">
+                <button mat-menu-item *ngIf="project.gitHubIntegration"
+                  (click)="openWithLocalVSCodeInsiders(project)">
                   <span i18n>Open in Visual Studio Code Insiders</span>
                 </button>
-                <button mat-menu-item (click)="editProject(projectWithPrivileges.project)">
+                <button mat-menu-item (click)="editProject(project)">
                   <span i18n>Edit project</span>
                 </button>
-                <button mat-menu-item class="important" (click)="deleteProject(projectWithPrivileges.project)">
+                <button mat-menu-item class="important" (click)="deleteProject(project)">
                   <span i18n>Delete project</span>
                 </button>
               </ng-container>

@@ -33,9 +33,9 @@
   </div>
   <div class="project" [style.max-height]="activeWorkspace ? elementList.scrollHeight + 16 + 'px' : 0">
     <ul #elementList>
-      <li *ngFor="let projectWithPriv of workspace.projectsWithPrivileges">
-        <span class="project-short-name">{{ projectWithPriv.project.name.substr(0, 2) }}</span>
-        <div class="sub-element" (click)="routeToProject(projectWithPriv.project)">{{ projectWithPriv.project.name }}
+      <li *ngFor="let project of workspace.projects">
+        <span class="project-short-name">{{ project.name.substr(0, 2) }}</span>
+        <div class="sub-element" (click)="routeToProject(project)">{{ project.name }}
         </div>
         <div class="icons" [matMenuTriggerFor]="menu">
           <div class="options">
@@ -43,29 +43,29 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item *ngIf="projectWithPriv.project.gitHubIntegration"
-                (click)="openWithVSCode(projectWithPriv.project)">
+              <button mat-menu-item *ngIf="project.gitHubIntegration"
+                (click)="openWithVSCode(project)">
                 <span i18n>Open in github.dev</span>
               </button>
-              <button mat-menu-item *ngIf="projectWithPriv.project.gitHubIntegration"
-                (click)="openWithLocalVSCode(projectWithPriv.project)">
+              <button mat-menu-item *ngIf="project.gitHubIntegration"
+                (click)="openWithLocalVSCode(project)">
                 <span i18n>Open in Visual Studio Code</span>
               </button>
-              <button mat-menu-item *ngIf="projectWithPriv.project.gitHubIntegration"
-                (click)="openWithLocalVSCodeInsiders(projectWithPriv.project)">
+              <button mat-menu-item *ngIf="project.gitHubIntegration"
+                (click)="openWithLocalVSCodeInsiders(project)">
                 <span i18n>Open in Visual Studio Code Insiders</span>
               </button>
-              <button mat-menu-item (click)="editProject(projectWithPriv.project)">
+              <button mat-menu-item (click)="editProject(project)">
                 <span i18n>Edit project</span>
               </button>
-              <button mat-menu-item class="important" (click)="deleteProject(projectWithPriv.project)">
+              <button mat-menu-item class="important" (click)="deleteProject(project)">
                 <span i18n>Delete project</span>
               </button>
             </mat-menu>
           </div>
         </div>
       </li>
-      <li *ngIf="!workspace.projectsWithPrivileges?.length" class="create-project bg-transparent">
+      <li *ngIf="!workspace.projects?.length" class="create-project bg-transparent">
         <app-button [icon]="faPlus" variant="transparent" [routerLink]="['/', workspace.id, 'create']" class="w-full"
           i18n>Create project</app-button>
       </li>
