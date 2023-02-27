@@ -33,7 +33,7 @@
     {
       "label": "buildServer",
       "command": "yarn",
-      "args": ["nx", "build", "server", "--skip-nx-cache"],
+      "args": ["nx", "build", "server"],
       "type": "shell",
       "hide": true
     }
