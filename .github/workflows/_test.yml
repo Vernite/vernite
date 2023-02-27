@@ -28,6 +28,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Setup environment
         uses: ./.github/actions/setup
@@ -39,4 +41,4 @@ jobs:
 
       # Test by nx
       - name: Test
-        run: yarn nx affected --skip-nx-cache --target=test
+        run: yarn nx affected --target=test
