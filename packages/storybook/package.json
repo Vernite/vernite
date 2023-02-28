@@ -1,13 +1,24 @@
 {
   "name": "storybook",
   "version": "1.0.1",
-  "scripts": {
-    "serve": "ng run storybook:storybook"
-  },
   "dependencies": {
-    "@storybook/angular": "^7.0.0-beta.56",
+    "@angular/core": "^14.2.12",
     "client": "*",
-    "storybook": "^7.0.0-beta.56",
-    "ui": "*"
+    "storybook": "7.0.0-beta.50"
+  },
+  "devDependencies": {
+    "@compodoc/compodoc": "1.1.19",
+    "@storybook/addon-essentials": "7.0.0-beta.50",
+    "@storybook/addon-interactions": "7.0.0-beta.50",
+    "@storybook/addon-links": "7.0.0-beta.50",
+    "@storybook/angular": "7.0.0-beta.50",
+    "@storybook/blocks": "7.0.0-beta.50",
+    "@storybook/testing-library": "0.0.14-next.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "scripts": {
+    "serve": "ng run storybook:storybook",
+    "build": "ng run storybook:build-storybook"
   }
 }

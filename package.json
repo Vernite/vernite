@@ -105,8 +105,6 @@
     "prettier": "^2.6.2",
     "run-script-os": "^1.1.6",
     "shallow-render": "14.2.2",
-    "storybook-dark-mode": "^2.0.6",
-    "storybook-tailwind-dark-mode": "^1.0.15",
     "stylelint": "^14.6.0",
     "stylelint-config-idiomatic-order": "^9.0.0",
     "stylelint-config-prettier": "^9.0.3",
