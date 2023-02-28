@@ -11,6 +11,7 @@ export class Utils {
    * @param string String to search in
    * @param regex Regex to search for
    * @param startPos Optional starting position in the string
+   * @deprecated Use string.search(regex) instead
    * @returns The index of the first match
    */
   public static regexIndexOf(string: string, regex: RegExp, startPos: number = 0) {

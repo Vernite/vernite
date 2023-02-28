@@ -1,7 +1,13 @@
 {
   "name": "storybook",
   "version": "1.0.1",
+  "scripts": {
+    "serve": "ng run storybook:storybook"
+  },
   "dependencies": {
-    "client": "*"
+    "@storybook/angular": "^7.0.0-beta.56",
+    "client": "*",
+    "storybook": "^7.0.0-beta.56",
+    "ui": "*"
   }
 }

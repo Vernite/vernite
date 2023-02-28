@@ -16,6 +16,7 @@
   "[typescript]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
+  "prettier.configPath": "./.config/.prettierrc.js",
   "karmaTestExplorer": {
     "enableExtension": true,
     "karmaConfFilePath": "./karma.conf.js",

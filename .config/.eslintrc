@@ -61,34 +61,7 @@
       ],
       "extends": [
         "plugin:@angular-eslint/template/recommended"
-      ],
-      "rules": {
-        "@angular-eslint/template/i18n": [
-          "warn",
-          {
-            "checkId": false,
-            "checkText": true,
-            "checkAttributes": true,
-            "requireDescription": false,
-            "ignoreAttributes": [
-              "variant",
-              "routerLinkActive",
-              "matColumnDef",
-              "theme",
-              "rel",
-              "http-equiv",
-              "name",
-              "autocomplete",
-              "icon",
-              "comparer",
-              "align",
-              "data-custom-class",
-              "fragment",
-              "accept"
-            ]
-          }
-        ]
-      }
+      ]
     }
   ],
   "rules": {

@@ -3,48 +3,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Development server",
+      "name": "[client] Debug",
       "type": "chrome",
       "request": "launch",
-      "preLaunchTask": "npm: start",
+      "preLaunchTask": "nx:client:serve",
       "url": "http://localhost:4200/",
-      "webRoot": "${workspaceFolder}",
-      "sourceMapPathOverrides": {
-        "webpack:/*": "${webRoot}/*",
-        "/./*": "${webRoot}/*",
-        "/src/*": "${webRoot}/*",
-        "/*": "*",
-        "/./~/*": "${webRoot}/node_modules/*"
-      }
-    },
-    {
-      "name": "Unit tests (chrome)",
-      "type": "chrome",
-      "request": "attach",
-      "port": 9222,
-      "address": "localhost",
-      "timeout": 600000,
-      "webRoot": "${workspaceFolder}",
-      "pathMapping": {
-        "/_karma_webpack_": "${workspaceFolder}"
-      },
-      "restart": true,
-      "sourceMaps": true,
-      "preLaunchTask": "npm: unit:serve:chrome"
-    },
-    {
-      "name": "Unit tests (firefox)",
-      "type": "firefox",
-      "request": "attach",
-      "port": 9222,
-      "webRoot": "${workspaceFolder}",
-      "preLaunchTask": "npm: unit:serve:firefox"
-    },
-    {
-      "name": "Documentation server",
-      "type": "node",
-      "request": "launch",
-      "preLaunchTask": "npm: docs:serve"
+      "webRoot": "${workspaceFolder}"
     },
     {
       "type": "java",

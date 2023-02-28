@@ -2,22 +2,17 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "type": "npm",
-      "script": "start",
+      "label": "nx:client:serve",
+      "command": "yarn",
+      "args": ["nx", "serve:insiders", "client"],
+      "type": "shell",
+      "hide": true,
       "isBackground": true,
-      "presentation": {
-        "focus": true,
-        "panel": "dedicated"
-      },
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
       "problemMatcher": {
         "owner": "typescript",
         "source": "ts",
         "applyTo": "closedDocuments",
-        "fileLocation": ["relative", "${cwd}"],
+        "fileLocation": ["relative", "${workspaceRoot}/src"],
         "pattern": "$tsc",
         "background": {
           "activeOnStart": true,

@@ -86,6 +86,7 @@ import { CollapsableDirective } from './directives/collapsable/collapsable.direc
 import { ResizeModule } from './modules/resize/resize.module';
 import { ReportBugDialog } from './dialogs/report-bug/report-bug.dialog';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
+import { UIModule } from '@ui/ui.module';
 
 /**
  * Main module configuration object
@@ -112,6 +113,7 @@ const ngModuleConfig = {
     ObserversModule,
     ScrollingModule,
     ExperimentalScrollingModule,
+    UIModule,
 
     /*=============================================
       =              Material modules               =
