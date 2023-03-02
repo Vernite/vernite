@@ -70,7 +70,7 @@
     "@types/lodash-es": "^4.17.6",
     "@types/marked": "^4.0.3",
     "@types/mocha": "^10.0.1",
-    "@types/node": "16.11.7",
+    "@types/node": "18.14.3",
     "@types/ua-parser-js": "^0.7.36",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.52.0",
