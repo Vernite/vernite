@@ -79,6 +79,10 @@ jobs:
         with:
           configuration: production
 
+      - name: Zip client
+        run: |
+          zip -r client.zip packages/client/dist
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
@@ -88,5 +92,5 @@ jobs:
           append_body: true
           tag_name: ${{ inputs.version }}
           files: |
-            packages/server/target/*.jar
-            packages/client/dist/**
+            client.zip
+            packages/server/target/vernite.jar
