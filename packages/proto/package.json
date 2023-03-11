@@ -1,6 +1,6 @@
 {
   "name": "proto",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "BSD-2-Clause",
   "main": "dist/typescript/vernite.js",
   "scripts": {

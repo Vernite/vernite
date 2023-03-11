@@ -33,9 +33,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Force pull (workaround https://github.com/actions/checkout/issues/439)
-        run: git pull
+        with:
+          fetch-depth: 0
 
       - name: Setup environment
         id: setup
@@ -47,7 +46,7 @@ jobs:
           vernite-2022-private-key-pem: ${{ secrets.VERNITE_2022_PRIVATE_KEY_PEM }}
 
       - name: Build affected projects
-        run: yarn nx affected --target=build --skip-nx-cache ${{ inputs.all && '--all' || '' }}
+        run: yarn nx affected --target=build ${{ inputs.all && '--all' || '' }}
 
       - name: Cache affected projects
         uses: ./.github/actions/cache-affected-projects
