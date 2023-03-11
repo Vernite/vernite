@@ -25,28 +25,20 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package dev.vernite.vernite.workspace;
+package dev.vernite.vernite.common.constants;
 
-import dev.vernite.vernite.common.constants.NameConstants;
-import dev.vernite.vernite.common.constraints.NullOrNotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 /**
- * Data transfer object containing information needed to update workspace.
+ * Utility class containing all message keys for not null validation on database
+ * relations.
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class UpdateWorkspace {
+@UtilityClass
+public class NullMessages {
 
     /**
-     * New name for workspace.
+     * Key for message when project is null.
      */
-    @NullOrNotBlank(message = NameConstants.BLANK_MESSAGE)
-    @Size(min = NameConstants.MIN_LENGTH, max = NameConstants.MAX_LENGTH, message = NameConstants.SIZE_MESSAGE)
-    private String name;
+    public static final String PROJECT = "nullProject";
 
 }

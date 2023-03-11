@@ -1,18 +1,18 @@
 /*
  * BSD 2-Clause License
- * 
+ *
  * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -34,37 +34,33 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import dev.vernite.vernite.common.constants.IDConstants;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.experimental.FieldNameConstants;
 
 /**
  * Composite ID for workspace.
- * 
+ *
  * It contains connected user id and id which is unique
  * among user workspaces and for each user starts on one.
  */
-@ToString
+@Data
 @Embeddable
 @NoArgsConstructor
-@EqualsAndHashCode
 @AllArgsConstructor
+@FieldNameConstants
 public class WorkspaceId implements Serializable {
 
-    private static final long serialVersionUID = 1;
+    private static final long serialVersionUID = 1L;
 
-    @Setter
-    @Getter
-    @PositiveOrZero(message = "workspace unique number must be non negative number")
+    @PositiveOrZero(message = IDConstants.NEGATIVE_MESSAGE)
     private long id;
 
-    @Setter
-    @Getter
     @JsonIgnore
-    @Positive(message = "user ID must be positive number")
+    @Positive(message = IDConstants.NEGATIVE_OR_ZERO_MESSAGE)
     private long userId;
 
 }

@@ -1,18 +1,18 @@
 /*
  * BSD 2-Clause License
- * 
- * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
- * 
+ *
+ * Copyright (c) 2023, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -28,270 +28,318 @@
 package dev.vernite.vernite.workspace;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Stream;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import dev.vernite.vernite.common.constants.NameConstants;
 import dev.vernite.vernite.project.Project;
-import dev.vernite.vernite.project.ProjectRepository;
 import dev.vernite.vernite.projectworkspace.ProjectWorkspace;
-import dev.vernite.vernite.projectworkspace.ProjectWorkspaceRepository;
-import dev.vernite.vernite.user.User;
-import dev.vernite.vernite.user.UserRepository;
-import dev.vernite.vernite.user.UserSession;
-import dev.vernite.vernite.user.UserSessionRepository;
 import dev.vernite.vernite.user.auth.AuthController;
+import dev.vernite.vernite.utils.IntegrationTestSetup;
 
 /**
- * TODO: refactor this class
+ * Integration tests for {@link WorkspaceController}
  */
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestInstance(Lifecycle.PER_CLASS)
-@TestPropertySource({ "classpath:application.properties", "classpath:application-test.properties" })
 class WorkspaceControllerTests {
+
+    private static void assertWorkspaceEquals(Workspace w1, Workspace w2) {
+        assertEquals(w1.getId().getId(), w2.getId().getId(), "Workspace id should be equal");
+        assertEquals(w1.getName(), w2.getName(), "Workspace name should be equal");
+    }
+
     @Autowired
     private WebTestClient client;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private UserSessionRepository sessionRepository;
-    @Autowired
-    private WorkspaceRepository workspaceRepository;
 
-    private User user;
-    private UserSession session;
-
-    @BeforeAll
-    void init() {
-        this.user = userRepository.findByUsername("Username");
-        if (this.user == null) {
-            this.user = userRepository.save(new User("Name", "Surname", "Username", "Email@test.pl", "1"));
-        }
-        session = new UserSession();
-        session.setIp("127.0.0.1");
-        session.setSession("session_token_workspace_tests");
-        session.setLastUsed(new Date());
-        session.setRemembered(true);
-        session.setUserAgent("userAgent");
-        session.setUser(user);
-        try {
-            session = sessionRepository.save(session);
-        } catch (DataIntegrityViolationException e) {
-            session = sessionRepository.findBySession("session_token_workspace_tests").orElseThrow();
-        }
-    }
+    @Autowired
+    private IntegrationTestSetup setup;
 
     @BeforeEach
     void clean() {
-        workspaceRepository.deleteAll();
+        setup.getDataBase().getWorkspace().deleteAll();
     }
 
-    void workspaceEquals(Workspace w1, Workspace w2) {
-        assertEquals(w1.getId().getId(), w2.getId().getId());
-        assertEquals(w1.getName(), w2.getName());
+    private Stream<List<Workspace>> testGetAllSuccess() {
+        return Stream.of(new ArrayList<>(),
+                new ArrayList<>(List.of(new Workspace(1, "Test 1", setup.getUser().user()),
+                        new Workspace(2, "Test 3", setup.getUser().user()),
+                        new Workspace(3, "Test 2", setup.getUser().user()))));
     }
 
-    @Test
-    void getAllSuccess() {
-        // Test empty return list
-        client.get().uri("/workspace").cookie(AuthController.COOKIE_NAME, session.getSession()).exchange()
-                .expectStatus().isOk().expectBodyList(Workspace.class).hasSize(0);
-        // Prepare some workspaces for next test
-        List<Workspace> workspaces = List.of(new Workspace(1, "Test 1", user), new Workspace(2, "Test 3", user),
-                new Workspace(3, "Test 2", user));
-        workspaceRepository.saveAll(workspaces);
-        // Test non empty return list
-        List<Workspace> result = client.get().uri("/workspace").cookie(AuthController.COOKIE_NAME, session.getSession())
-                .exchange().expectStatus().isOk().expectBodyList(Workspace.class).hasSize(3).returnResult()
-                .getResponseBody();
-        assertNotNull(result);
-        workspaceEquals(workspaces.get(0), result.get(0));
-        workspaceEquals(workspaces.get(1), result.get(2));
-        workspaceEquals(workspaces.get(2), result.get(1));
-        // Test soft delete
-        workspaceRepository.delete(workspaces.get(0));
-        client.get().uri("/workspace").cookie(AuthController.COOKIE_NAME, session.getSession()).exchange()
-                .expectStatus().isOk().expectBodyList(Workspace.class).hasSize(2);
+    @MethodSource
+    @ParameterizedTest
+    void testGetAllSuccess(List<Workspace> workspaces) {
+        setup.getDataBase().getWorkspace().saveAll(workspaces);
+        workspaces.sort(Comparator.comparing(Workspace::getName));
+        var result = client.get().uri("/workspace")
+                .cookie(AuthController.COOKIE_NAME, setup.getUser().getSessionToken()).exchange().expectStatus().isOk()
+                .expectBodyList(Workspace.class).hasSize(workspaces.size()).returnResult().getResponseBody();
+
+        assertNotNull(result, "Response should not be null");
+
+        for (var i = 0; i < workspaces.size(); i++) {
+            assertWorkspaceEquals(workspaces.get(i), result.get(i));
+        }
     }
 
-    @Test
-    void getAllUnauthorized() {
-        client.get().uri("/workspace").cookie(AuthController.COOKIE_NAME, "invalid_token").exchange().expectStatus()
+    @ParameterizedTest
+    @ValueSource(strings = { "invalid_token", "", " " })
+    void testGetAllUnauthorized(String token) {
+        client.get().uri("/workspace").cookie(AuthController.COOKIE_NAME, token).exchange().expectStatus()
                 .isUnauthorized();
-        client.get().uri("/workspace").exchange().expectStatus().isUnauthorized();
     }
 
     @Test
-    void createSuccess() {
-        Workspace workspace = client.post().uri("/workspace").cookie(AuthController.COOKIE_NAME, session.getSession())
-                .bodyValue(new CreateWorkspace("POST")).exchange().expectStatus().isOk().expectBody(Workspace.class)
+    void testCreateSuccess() {
+        var workspace = client.post().uri("/workspace")
+                .cookie(AuthController.COOKIE_NAME, setup.getUser().getSessionToken())
+                .bodyValue(new CreateWorkspace("Test")).exchange().expectStatus().isOk().expectBody(Workspace.class)
                 .returnResult().getResponseBody();
-        assertNotNull(workspace);
-        Optional<Workspace> optional = workspaceRepository.findById(new WorkspaceId(workspace.getId().getId(), user.getId()));
-        assertEquals(true, optional.isPresent());
-        Workspace result = optional.get();
-        workspaceEquals(result, workspace);
+
+        assertNotNull(workspace, "Response should not be null");
+
+        var optional = setup.getDataBase().getWorkspace()
+                .findById(new WorkspaceId(workspace.getId().getId(), setup.getUser().user().getId()));
+
+        assertTrue(optional.isPresent(), "Workspace should be present in database");
+
+        var result = optional.get();
+
+        assertWorkspaceEquals(workspace, result);
     }
 
-    @Test
-    void createBadRequest() {
-        // Test null name
-        client.post().uri("/workspace").cookie(AuthController.COOKIE_NAME, session.getSession())
-                .bodyValue(new CreateWorkspace(null)).exchange().expectStatus().isBadRequest();
-        // Test empty name
-        client.post().uri("/workspace").cookie(AuthController.COOKIE_NAME, session.getSession())
-                .bodyValue(new CreateWorkspace("")).exchange().expectStatus().isBadRequest();
-        // Test too long name
-        client.post().uri("/workspace").cookie(AuthController.COOKIE_NAME, session.getSession())
-                .bodyValue(new CreateWorkspace("a".repeat(51))).exchange().expectStatus().isBadRequest();
+    private Stream<CreateWorkspace> testCreateBadRequest() {
+        return Stream.of(new CreateWorkspace(""), new CreateWorkspace(" "), new CreateWorkspace());
     }
 
-    @Test
-    void createUnauthorized() {
-        client.post().uri("/workspace").cookie(AuthController.COOKIE_NAME, "invalid_token").exchange().expectStatus()
+    @MethodSource
+    @ParameterizedTest
+    void testCreateBadRequest(CreateWorkspace create) {
+        client.post().uri("/workspace").cookie(AuthController.COOKIE_NAME, setup.getUser().getSessionToken())
+                .bodyValue(create).exchange().expectStatus().isBadRequest();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "invalid_token", "", " " })
+    void testCreateUnauthorized(String token) {
+        client.post().uri("/workspace").cookie(AuthController.COOKIE_NAME, token).exchange().expectStatus()
                 .isUnauthorized();
-        client.post().uri("/workspace").exchange().expectStatus().isUnauthorized();
     }
 
     @Test
-    void getSuccess() {
-        Workspace workspace = workspaceRepository.save(new Workspace(1, "GET", user));
+    void testGetSuccess() {
+        var workspace = new Workspace(1, "Test", setup.getUser().user());
+        setup.getDataBase().getWorkspace().save(workspace);
 
-        Workspace result = client.get().uri("/workspace/{id}", workspace.getId().getId())
-                .cookie(AuthController.COOKIE_NAME, session.getSession()).exchange().expectStatus().isOk()
+        var result = client.get().uri("/workspace/{id}", workspace.getId().getId())
+                .cookie(AuthController.COOKIE_NAME, setup.getUser().getSessionToken()).exchange().expectStatus().isOk()
                 .expectBody(Workspace.class).returnResult().getResponseBody();
 
-        workspaceEquals(workspace, result);
+        assertNotNull(result, "Response should not be null");
+
+        assertWorkspaceEquals(workspace, result);
     }
 
-    @Test
-    void getUnauthorized() {
-        client.get().uri("/workspace/1").exchange().expectStatus().isUnauthorized();
-
-        long id = workspaceRepository.save(new Workspace(1, "GET", user)).getId().getId();
-        client.get().uri("/workspace/{id}", id).exchange().expectStatus().isUnauthorized();
-        client.get().uri("/workspace/{id}", id).cookie(AuthController.COOKIE_NAME, "invalid_token").exchange()
+    @ParameterizedTest
+    @ValueSource(strings = { "invalid_token", "", " " })
+    void testGetUnauthorized(String token) {
+        client.get().uri("/workspace/{id}", Long.MAX_VALUE).cookie(AuthController.COOKIE_NAME, token).exchange()
                 .expectStatus().isUnauthorized();
+
+        var id = setup.getDataBase().getWorkspace().save(new Workspace(1, "Test", setup.getUser().user())).getId()
+                .getId();
+
+        client.get().uri("/workspace/{id}", id).cookie(AuthController.COOKIE_NAME, token).exchange().expectStatus()
+                .isUnauthorized();
     }
 
     @Test
-    void getNotFound() {
-        client.get().uri("/workspace/1").cookie(AuthController.COOKIE_NAME, session.getSession()).exchange()
-                .expectStatus().isNotFound();
+    void testGetNotFound() {
+        client.get().uri("/workspace/{id}", Long.MAX_VALUE)
+                .cookie(AuthController.COOKIE_NAME, setup.getUser().getSessionToken()).exchange().expectStatus()
+                .isNotFound();
 
-        Workspace workspace = new Workspace(1, "GET", user);
-        workspaceRepository.delete(workspace);
-        client.get().uri("/workspace/{id}", workspace.getId().getId())
-                .cookie(AuthController.COOKIE_NAME, session.getSession()).exchange().expectStatus().isNotFound();
+        var id = setup.getDataBase().getWorkspace().save(new Workspace(1, "Test", setup.getUser().user())).getId();
+
+        client.get().uri("/workspace/{id}", id.getId())
+                .cookie(AuthController.COOKIE_NAME, setup.getUserNoAccess().getSessionToken())
+                .exchange().expectStatus().isNotFound();
+
+        setup.getDataBase().getWorkspace().deleteById(id);
+
+        client.get().uri("/workspace/{id}", id.getId())
+                .cookie(AuthController.COOKIE_NAME, setup.getUser().getSessionToken()).exchange().expectStatus()
+                .isNotFound();
     }
 
-    @Test
-    void updateSuccess() {
-        Workspace workspace = workspaceRepository.save(new Workspace(1, "PUT", user));
+    private Stream<UpdateWorkspace> testUpdateSuccess() {
+        return Stream.of(new UpdateWorkspace("Test 1"), new UpdateWorkspace("Test 2"));
+    }
+
+    @MethodSource
+    @ParameterizedTest
+    void testUpdateSuccess(UpdateWorkspace update) {
+        var workspace = setup.getDataBase().getWorkspace().save(new Workspace(1, "Test", setup.getUser().user()));
+
+        var result = client.put().uri("/workspace/{id}", workspace.getId().getId())
+                .cookie(AuthController.COOKIE_NAME, setup.getUser().getSessionToken()).bodyValue(update).exchange()
+                .expectStatus().isOk().expectBody(Workspace.class).returnResult().getResponseBody();
+
+        workspace.update(update);
+
+        assertNotNull(result, "Response should not be null");
+
+        assertWorkspaceEquals(workspace, result);
+
+        var optional = setup.getDataBase().getWorkspace()
+                .findById(new WorkspaceId(workspace.getId().getId(), setup.getUser().user().getId()));
+
+        assertTrue(optional.isPresent(), "Workspace should be present in database");
+
+        result = optional.get();
+
+        assertWorkspaceEquals(workspace, result);
+    }
+
+    private Stream<UpdateWorkspace> testUpdateBadRequest() {
+        return Stream.of(new UpdateWorkspace(""), new UpdateWorkspace(" "),
+                new UpdateWorkspace("a".repeat(NameConstants.MAX_LENGTH + 1)));
+    }
+
+    @MethodSource
+    @ParameterizedTest
+    void testUpdateBadRequest(UpdateWorkspace update) {
+        var workspace = setup.getDataBase().getWorkspace().save(new Workspace(1, "Test", setup.getUser().user()));
 
         client.put().uri("/workspace/{id}", workspace.getId().getId())
-                .cookie(AuthController.COOKIE_NAME, session.getSession()).bodyValue(new UpdateWorkspace()).exchange()
-                .expectStatus().isOk();
-
-        Workspace result = client.put().uri("/workspace/{id}", workspace.getId().getId())
-                .cookie(AuthController.COOKIE_NAME, session.getSession()).bodyValue(new UpdateWorkspace("NEW PUT"))
-                .exchange().expectStatus().isOk().expectBody(Workspace.class).returnResult().getResponseBody();
-        workspace.setName("NEW PUT");
-        workspaceEquals(workspace, result);
-        workspaceEquals(workspace, workspaceRepository.findByIdOrThrow(workspace.getId()));
-    }
-
-    @Test
-    void updateBadRequest() {
-        long id = workspaceRepository.save(new Workspace(1, "PUT", user)).getId().getId();
-
-        client.put().uri("/workspace/{id}", id)
-                .cookie(AuthController.COOKIE_NAME, session.getSession()).bodyValue(new UpdateWorkspace("")).exchange()
-                .expectStatus().isBadRequest();
-
-        client.put().uri("/workspace/{id}", id)
-                .cookie(AuthController.COOKIE_NAME, session.getSession())
-                .bodyValue(new UpdateWorkspace("a".repeat(51))).exchange()
+                .cookie(AuthController.COOKIE_NAME, setup.getUser().getSessionToken()).bodyValue(update).exchange()
                 .expectStatus().isBadRequest();
     }
 
-    @Test
-    void updateUnauthorized() {
-        client.put().uri("/workspace/1").bodyValue(new UpdateWorkspace("NEW PUT")).exchange().expectStatus()
-                .isUnauthorized();
+    @ParameterizedTest
+    @ValueSource(strings = { "invalid_token", "", " " })
+    void testUpdateUnauthorized(String token) {
+        client.put().uri("/workspace/{id}", Long.MAX_VALUE).cookie(AuthController.COOKIE_NAME, token).exchange()
+                .expectStatus().isUnauthorized();
 
-        long id = workspaceRepository.save(new Workspace(1, "PUT", user)).getId().getId();
-        client.put().uri("/workspace/{id}", id).bodyValue(new UpdateWorkspace("NEW PUT")).exchange().expectStatus()
+        var id = setup.getDataBase().getWorkspace().save(new Workspace(1, "Test", setup.getUser().user())).getId()
+                .getId();
+
+        client.put().uri("/workspace/{id}", id).cookie(AuthController.COOKIE_NAME, token).exchange().expectStatus()
                 .isUnauthorized();
-        client.put().uri("/workspace/{id}", id).cookie(AuthController.COOKIE_NAME, "invalid_token")
-                .bodyValue(new UpdateWorkspace("NEW PUT")).exchange().expectStatus().isUnauthorized();
     }
 
     @Test
-    void updateNotFound() {
-        client.put().uri("/workspace/1").cookie(AuthController.COOKIE_NAME, session.getSession())
-                .bodyValue(new UpdateWorkspace("NEW PUT")).exchange().expectStatus().isNotFound();
+    void testUpdateNotFound() {
+        client.put().uri("/workspace/{id}", Long.MAX_VALUE)
+                .cookie(AuthController.COOKIE_NAME, setup.getUser().getSessionToken()).bodyValue(new UpdateWorkspace())
+                .exchange().expectStatus().isNotFound();
+
+        var id = setup.getDataBase().getWorkspace().save(new Workspace(1, "Test", setup.getUser().user())).getId();
+
+        client.put().uri("/workspace/{id}", id.getId())
+                .cookie(AuthController.COOKIE_NAME, setup.getUserNoAccess().getSessionToken())
+                .bodyValue(new UpdateWorkspace()).exchange().expectStatus().isNotFound();
+
+        setup.getDataBase().getWorkspace().deleteById(id);
+
+        client.put().uri("/workspace/{id}", id.getId())
+                .cookie(AuthController.COOKIE_NAME, setup.getUser().getSessionToken()).bodyValue(new UpdateWorkspace())
+                .exchange().expectStatus().isNotFound();
     }
 
     @Test
-    void deleteSuccess(@Autowired ProjectRepository pRepo, @Autowired ProjectWorkspaceRepository pwRepo) {
-        Workspace workspace = workspaceRepository.save(new Workspace(1, "DELETE", user));
+    void testDeleteSuccess() {
+        var workspace = setup.getDataBase().getWorkspace().save(new Workspace(1, "Test", setup.getUser().user()));
+
         client.delete().uri("/workspace/{id}", workspace.getId().getId())
-                .cookie(AuthController.COOKIE_NAME, session.getSession()).exchange().expectStatus().isOk();
-        assertNotEquals(false, workspaceRepository.findById(workspace.getId()).isEmpty());
+                .cookie(AuthController.COOKIE_NAME, setup.getUser().getSessionToken()).exchange().expectStatus()
+                .isOk();
 
-        Project project = new Project("DELETE", "");
+        var optional = setup.getDataBase().getWorkspace()
+                .findById(new WorkspaceId(workspace.getId().getId(), setup.getUser().user().getId()));
+
+        assertTrue(optional.isEmpty(), "Workspace should not be present in database");
+
+        var project = new Project("Vernite tests", "");
         project.setActive(new Date());
-        project = pRepo.save(project);
-        Workspace workspace2 = workspaceRepository.save(new Workspace(1, "DELETE", user));
-        pwRepo.save(new ProjectWorkspace(project, workspace2, 1L));
+        project = setup.getDataBase().getProject().save(project);
 
-        client.delete().uri("/workspace/{id}", workspace2.getId().getId())
-                .cookie(AuthController.COOKIE_NAME, session.getSession()).exchange().expectStatus().isOk();
-        assertNotEquals(false, workspaceRepository.findById(workspace2.getId()).isEmpty());
-    }
-
-    @Test
-    void deleteConflict(@Autowired ProjectRepository pRepo, @Autowired ProjectWorkspaceRepository pwRepo) {
-        Project project = pRepo.save(new Project("DELETE", ""));
-        Workspace workspace = workspaceRepository.save(new Workspace(1, "DELETE", user));
-        pwRepo.save(new ProjectWorkspace(project, workspace, 1L));
+        workspace = setup.getDataBase().getWorkspace().save(new Workspace(1, "Test", setup.getUser().user()));
+        setup.getDataBase().getProjectWorkspace().save(new ProjectWorkspace(project, workspace, 1L));
 
         client.delete().uri("/workspace/{id}", workspace.getId().getId())
-                .cookie(AuthController.COOKIE_NAME, session.getSession()).exchange().expectStatus().is4xxClientError();
+                .cookie(AuthController.COOKIE_NAME, setup.getUser().getSessionToken()).exchange().expectStatus()
+                .isOk();
+
+        optional = setup.getDataBase().getWorkspace()
+                .findById(new WorkspaceId(workspace.getId().getId(), setup.getUser().user().getId()));
+
+        assertTrue(optional.isEmpty(), "Workspace should not be present in database");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "invalid_token", "", " " })
+    void testDeleteUnauthorized(String token) {
+        client.delete().uri("/workspace/{id}", Long.MAX_VALUE).cookie(AuthController.COOKIE_NAME, token).exchange()
+                .expectStatus().isUnauthorized();
+
+        var id = setup.getDataBase().getWorkspace().save(new Workspace(1, "Test", setup.getUser().user())).getId()
+                .getId();
+
+        client.delete().uri("/workspace/{id}", id).cookie(AuthController.COOKIE_NAME, token).exchange().expectStatus()
+                .isUnauthorized();
     }
 
     @Test
-    void deleteUnauthorized() {
-        client.delete().uri("/workspace/1").exchange().expectStatus().isUnauthorized();
+    void testDeleteNotFound() {
+        client.delete().uri("/workspace/{id}", Long.MAX_VALUE)
+                .cookie(AuthController.COOKIE_NAME, setup.getUser().getSessionToken()).exchange().expectStatus()
+                .isNotFound();
 
-        Workspace workspace = workspaceRepository.save(new Workspace(1, "DELETE", user));
-        client.delete().uri("/workspace/{id}", workspace.getId().getId()).exchange().expectStatus().isUnauthorized();
+        var id = setup.getDataBase().getWorkspace().save(new Workspace(1, "Test", setup.getUser().user())).getId();
+
+        client.delete().uri("/workspace/{id}", id.getId())
+                .cookie(AuthController.COOKIE_NAME, setup.getUserNoAccess().getSessionToken()).exchange().expectStatus()
+                .isNotFound();
+
+        setup.getDataBase().getWorkspace().deleteById(id);
+
+        client.delete().uri("/workspace/{id}", id.getId())
+                .cookie(AuthController.COOKIE_NAME, setup.getUser().getSessionToken()).exchange().expectStatus()
+                .isNotFound();
+    }
+
+    @Test
+    void testDeleteConflict() {
+        var workspace = setup.getDataBase().getWorkspace().save(new Workspace(1, "Test", setup.getUser().user()));
+        var project = setup.getDataBase().getProject().save(new Project("Vernite tests", ""));
+
+        setup.getDataBase().getProjectWorkspace().save(new ProjectWorkspace(project, workspace, 1L));
+
         client.delete().uri("/workspace/{id}", workspace.getId().getId())
-                .cookie(AuthController.COOKIE_NAME, "invalid_token").exchange().expectStatus().isUnauthorized();
-
-        workspaceRepository.findByIdOrThrow(workspace.getId());
+                .cookie(AuthController.COOKIE_NAME, setup.getUser().getSessionToken()).exchange().expectStatus()
+                .isEqualTo(409);
     }
 
-    @Test
-    void deleteNotFound() {
-        client.delete().uri("/workspace/1").cookie(AuthController.COOKIE_NAME, session.getSession()).exchange()
-                .expectStatus().isNotFound();
-    }
 }

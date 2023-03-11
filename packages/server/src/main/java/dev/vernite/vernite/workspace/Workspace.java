@@ -28,6 +28,7 @@
 package dev.vernite.vernite.workspace;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -48,6 +49,9 @@ import jakarta.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
+import dev.vernite.vernite.common.constants.IDConstants;
+import dev.vernite.vernite.common.constants.NameConstants;
+import dev.vernite.vernite.common.constants.NullMessages;
 import dev.vernite.vernite.project.Project;
 import dev.vernite.vernite.projectworkspace.ProjectWorkspace;
 import dev.vernite.vernite.user.User;
@@ -67,34 +71,31 @@ import org.hibernate.annotations.Where;
 @Data
 @Entity
 @NoArgsConstructor
-public class Workspace {
+public final class Workspace {
 
     @Valid
     @EmbeddedId
     @JsonUnwrapped
-    @NotNull(message = "workspace id cannot be null")
+    @NotNull(message = IDConstants.NULL_MESSAGE)
     private WorkspaceId id;
 
-    @Column(nullable = false, length = 50)
-    @Size(min = 1, max = 50, message = "workspace name must be shorter than 50 characters")
-    @NotBlank(message = "workspace name must contain at least one non-whitespace character")
+    @NotBlank(message = NameConstants.BLANK_MESSAGE)
+    @Column(nullable = false, length = NameConstants.MAX_LENGTH)
+    @Size(min = NameConstants.MIN_LENGTH, max = NameConstants.MAX_LENGTH, message = NameConstants.SIZE_MESSAGE)
     private String name;
 
     @JsonIgnore
-    @MapsId("userId")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(optional = false)
-    @NotNull(message = "workspace must have user set")
+    @MapsId("userId")
     private User user;
 
     @JsonIgnore
-    @Deprecated
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "workspace")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull(message = "project workspaces connection must be set")
+    @OneToMany(mappedBy = "workspace")
     private List<ProjectWorkspace> projectWorkspaces = List.of();
 
     @ManyToMany
@@ -102,7 +103,7 @@ public class Workspace {
     @OrderBy("name, id")
     @EqualsAndHashCode.Exclude
     @Where(clause = "active is null")
-    @NotNull(message = "projects connection must be set")
+    @NotNull(message = NullMessages.PROJECT)
     @JoinTable(name = "project_workspace", joinColumns = {
             @JoinColumn(name = "workspace_user_id", referencedColumnName = "user_id"),
             @JoinColumn(name = "workspace_id", referencedColumnName = "id"),
@@ -110,11 +111,11 @@ public class Workspace {
     private Set<Project> projects = Set.of();
 
     /**
-     * Default constructor for workspace.
+     * Default constructor.
      *
      * @param id   unique to user positive number for new workspace
-     * @param name must not be {@literal null} and have size between 1 and 50
-     * @param user must not be {@literal null} and must be entity from database
+     * @param name name for new workspace
+     * @param user owner of new workspace
      */
     public Workspace(long id, String name, User user) {
         this.setId(new WorkspaceId(id, user.getId()));
@@ -123,32 +124,29 @@ public class Workspace {
     }
 
     /**
-     * Constructor for workspace from create request.
+     * Constructor from create request.
      *
      * @param id     unique to user positive number for new workspace
-     * @param user   must not be {@literal null} and must be entity from database
-     * @param create must not be {@literal null} and must be valid
+     * @param user   owner of new workspace
+     * @param create body of create request
      */
     public Workspace(long id, User user, CreateWorkspace create) {
         this(id, create.getName(), user);
     }
 
     /**
-     * Updates workspace entity with data from update.
+     * Updates workspace with data from update.
      *
-     * @param update must not be {@literal null} and be valid
+     * @param update body of update request
      */
     public void update(UpdateWorkspace update) {
-        if (update.getName() != null) {
-            setName(update.getName());
-        }
+        Optional.ofNullable(update.getName()).ifPresent(this::setName);
     }
 
     /**
      * Setter for name value. It performs {@link String#trim()} on its argument.
      *
-     * @param name must not be {@literal null} and have at least one non-whitespace
-     *             character and less than 50 characters
+     * @param name new name value
      */
     public void setName(String name) {
         this.name = name.trim();

@@ -25,28 +25,29 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package dev.vernite.vernite.workspace;
+package dev.vernite.vernite.common.constants;
 
-import dev.vernite.vernite.common.constants.NameConstants;
-import dev.vernite.vernite.common.constraints.NullOrNotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 /**
- * Data transfer object containing information needed to update workspace.
+ * Utility class for ID constants. Contains message keys for ID validation.
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class UpdateWorkspace {
+@UtilityClass
+public class IDConstants {
 
     /**
-     * New name for workspace.
+     * Key for message when ID is null.
      */
-    @NullOrNotBlank(message = NameConstants.BLANK_MESSAGE)
-    @Size(min = NameConstants.MIN_LENGTH, max = NameConstants.MAX_LENGTH, message = NameConstants.SIZE_MESSAGE)
-    private String name;
+    public static final String NULL_MESSAGE = "notNullID";
+
+    /**
+     * Key for message when ID is negative.
+     */
+    public static final String NEGATIVE_MESSAGE = "negativeID";
+
+    /**
+     * Key for message when ID is non-positive.
+     */
+    public static final String NEGATIVE_OR_ZERO_MESSAGE = "nonPositiveID";
 
 }
