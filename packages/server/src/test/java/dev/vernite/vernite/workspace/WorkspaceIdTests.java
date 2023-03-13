@@ -1,18 +1,18 @@
 /*
  * BSD 2-Clause License
- * 
- * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
- * 
+ *
+ * Copyright (c) 2023, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -27,16 +27,22 @@
 
 package dev.vernite.vernite.workspace;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.stream.Stream;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
+/**
+ * Tests for {@link WorkspaceId} class. Tests validation constraints.
+ */
 class WorkspaceIdTests {
 
     private static Validator validator;
@@ -47,18 +53,30 @@ class WorkspaceIdTests {
         validator = factory.getValidator();
     }
 
-    @Test
-    void validationValidTest() {
-        assertTrue(validator.validate(new WorkspaceId(1, 1)).isEmpty());
-        assertTrue(validator.validate(new WorkspaceId(3, 7)).isEmpty());
-        assertTrue(validator.validate(new WorkspaceId(0, 4)).isEmpty());
+    private static Stream<WorkspaceId> testValidationValid() {
+        return Stream.of(
+                new WorkspaceId(1, 1),
+                new WorkspaceId(3, 7),
+                new WorkspaceId(0, 4));
     }
 
-    @Test
-    void validationInvalidTest() {
-        assertEquals(1, validator.validate(new WorkspaceId(-1, 4)).size());
-        assertEquals(1, validator.validate(new WorkspaceId(0, 0)).size());
-        assertEquals(2, validator.validate(new WorkspaceId(-3, 0)).size());
+    private static Stream<WorkspaceId> testValidationInvalid() {
+        return Stream.of(
+                new WorkspaceId(-1, 4),
+                new WorkspaceId(0, 0),
+                new WorkspaceId(-3, 0));
+    }
+
+    @MethodSource
+    @ParameterizedTest
+    void testValidationValid(WorkspaceId workspaceId) {
+        assertTrue(validator.validate(workspaceId).isEmpty(), "WorkspaceId " + workspaceId + " should be valid");
+    }
+
+    @MethodSource
+    @ParameterizedTest
+    void testValidationInvalid(WorkspaceId workspaceId) {
+        assertFalse(validator.validate(workspaceId).isEmpty(), "WorkspaceId " + workspaceId + " should be invalid");
     }
 
 }

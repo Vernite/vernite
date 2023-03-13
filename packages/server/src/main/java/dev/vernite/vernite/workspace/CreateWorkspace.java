@@ -1,18 +1,18 @@
 /*
  * BSD 2-Clause License
- * 
- * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
- * 
+ *
+ * Copyright (c) 2023, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -27,16 +27,15 @@
 
 package dev.vernite.vernite.workspace;
 
+import dev.vernite.vernite.common.constants.NameConstants;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Class containing information needed to create new workspace entity.
- * Has required constraints annotated using Java Bean Validation.
+ * Data transfer object containing information needed to create new workspace.
  */
 @Data
 @NoArgsConstructor
@@ -44,10 +43,10 @@ import lombok.NoArgsConstructor;
 public class CreateWorkspace {
 
     /**
-     * Name for new workspace. Must contain at least one non-whitespace character.
+     * Name for new workspace.
      */
-    @Size(min = 1, max = 50, message = "workspace name must be shorter than 50 characters")
-    @NotBlank(message = "workspace name must contain at least one non-whitespace character")
+    @NotBlank(message = NameConstants.BLANK_MESSAGE)
+    @Size(min = NameConstants.MIN_LENGTH, max = NameConstants.MAX_LENGTH, message = NameConstants.SIZE_MESSAGE)
     private String name;
 
 }

@@ -1,7 +1,7 @@
 /*
  * BSD 2-Clause License
  *
- * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
+ * Copyright (c) 2023, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -36,6 +36,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.FieldNameConstants;
 import dev.vernite.vernite.project.Project;
 import dev.vernite.vernite.workspace.Workspace;
 
@@ -48,6 +49,7 @@ import org.hibernate.annotations.OnDeleteAction;
  */
 @Data
 @NoArgsConstructor
+@FieldNameConstants
 @Entity(name = "project_workspace")
 public class ProjectWorkspace {
     @EmbeddedId

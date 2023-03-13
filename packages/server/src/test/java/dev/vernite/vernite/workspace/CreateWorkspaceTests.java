@@ -1,18 +1,18 @@
 /*
  * BSD 2-Clause License
- * 
- * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
- * 
+ *
+ * Copyright (c) 2023, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -27,16 +27,24 @@
 
 package dev.vernite.vernite.workspace;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.stream.Stream;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
+import dev.vernite.vernite.common.constants.NameConstants;
+
+/**
+ * Tests for {@link CreateWorkspace} class. Tests validation constraints.
+ */
 class CreateWorkspaceTests {
 
     private static Validator validator;
@@ -47,20 +55,31 @@ class CreateWorkspaceTests {
         validator = factory.getValidator();
     }
 
-    @Test
-    void validationValidTest() {
-        assertTrue(validator.validate(new CreateWorkspace("Name")).isEmpty());
-        assertTrue(validator.validate(new CreateWorkspace("  Name ")).isEmpty());
-        assertTrue(validator.validate(new CreateWorkspace("New name")).isEmpty());
+    private static Stream<CreateWorkspace> testValidationValid() {
+        return Stream.of(
+                new CreateWorkspace("Name"),
+                new CreateWorkspace("  Name "),
+                new CreateWorkspace("New name"));
     }
 
-    @Test
-    void validationInvalidTest() {
-        assertEquals(1, validator.validate(new CreateWorkspace(null)).size());
-        assertEquals(2, validator.validate(new CreateWorkspace("")).size());
-        assertEquals(1, validator.validate(new CreateWorkspace("  ")).size());
-        assertEquals(1, validator.validate(new CreateWorkspace("   ")).size());
-        assertEquals(1, validator.validate(new CreateWorkspace("a".repeat(51))).size());
+    private static Stream<CreateWorkspace> testValidationInvalid() {
+        return Stream.of(
+                new CreateWorkspace(null),
+                new CreateWorkspace(""),
+                new CreateWorkspace("   "),
+                new CreateWorkspace("a".repeat(NameConstants.MAX_LENGTH + 1)));
+    }
+
+    @MethodSource
+    @ParameterizedTest
+    void testValidationValid(CreateWorkspace create) {
+        assertTrue(validator.validate(create).isEmpty(), "Validation failed for " + create);
+    }
+
+    @MethodSource
+    @ParameterizedTest
+    void testValidationInvalid(CreateWorkspace create) {
+        assertFalse(validator.validate(create).isEmpty(), "Validation passed for " + create);
     }
 
 }

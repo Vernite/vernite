@@ -25,28 +25,52 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package dev.vernite.vernite.workspace;
+package dev.vernite.vernite.utils;
 
-import dev.vernite.vernite.common.constants.NameConstants;
-import dev.vernite.vernite.common.constraints.NullOrNotBlank;
-import jakarta.validation.constraints.Size;
+import org.springframework.stereotype.Component;
+
+import dev.vernite.vernite.project.ProjectRepository;
+import dev.vernite.vernite.projectworkspace.ProjectWorkspaceRepository;
+import dev.vernite.vernite.release.ReleaseRepository;
+import dev.vernite.vernite.sprint.SprintRepository;
+import dev.vernite.vernite.status.StatusRepository;
+import dev.vernite.vernite.task.TaskRepository;
+import dev.vernite.vernite.task.comment.CommentRepository;
+import dev.vernite.vernite.task.time.TimeTrackRepository;
+import dev.vernite.vernite.user.UserRepository;
+import dev.vernite.vernite.user.UserSessionRepository;
+import dev.vernite.vernite.workspace.WorkspaceRepository;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 /**
- * Data transfer object containing information needed to update workspace.
+ * Class containing database repositories.
  */
-@Data
-@NoArgsConstructor
+@Getter
+@Component
 @AllArgsConstructor
-public class UpdateWorkspace {
+public class DataBaseRepository {
 
-    /**
-     * New name for workspace.
-     */
-    @NullOrNotBlank(message = NameConstants.BLANK_MESSAGE)
-    @Size(min = NameConstants.MIN_LENGTH, max = NameConstants.MAX_LENGTH, message = NameConstants.SIZE_MESSAGE)
-    private String name;
+    private UserRepository user;
+
+    private UserSessionRepository userSession;
+
+    private WorkspaceRepository workspace;
+
+    private ProjectWorkspaceRepository projectWorkspace;
+
+    private ProjectRepository project;
+
+    private StatusRepository status;
+
+    private TaskRepository task;
+
+    private ReleaseRepository release;
+
+    private SprintRepository sprint;
+
+    private TimeTrackRepository timeTrack;
+
+    private CommentRepository comment;
 
 }
