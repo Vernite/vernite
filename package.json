@@ -47,6 +47,8 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
     "@angular-builders/custom-webpack": "14.1.0",
     "@angular-devkit/build-angular": "^14.2.10",
     "@angular-eslint/builder": "14.4.0",
