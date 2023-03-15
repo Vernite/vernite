@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EventRequest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">vernite</a> &gt; <a href="index.source.html" class="el_package">com.slack.api.bolt.request.builtin</a> &gt; <span class="el_source">EventRequest.java</span></div><h1>EventRequest.java</h1><pre class="source lang-java linenums">package com.slack.api.bolt.request.builtin;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.slack.api.bolt.context.builtin.EventContext;
+import com.slack.api.bolt.request.Request;
+import com.slack.api.bolt.request.RequestHeaders;
+import com.slack.api.bolt.request.RequestType;
+import com.slack.api.util.json.GsonFactory;
+import lombok.ToString;
+
+import java.util.Locale;
+
+@ToString(callSuper = true)
+public class EventRequest extends Request&lt;EventContext&gt; {
+
+    private final String requestBody;
+    private final RequestHeaders headers;
+    private final String eventType;
+    private final String eventSubtype;
+
+    public EventRequest(
+            String requestBody,
+<span class="nc" id="L25">            RequestHeaders headers) {</span>
+<span class="nc" id="L26">        this.requestBody = requestBody;</span>
+<span class="nc" id="L27">        this.headers = headers;</span>
+<span class="nc" id="L28">        JsonObject payload = GsonFactory.createSnakeCase().fromJson(requestBody, JsonElement.class).getAsJsonObject();</span>
+<span class="nc" id="L29">        JsonObject event = payload.get(&quot;event&quot;).getAsJsonObject();</span>
+<span class="nc" id="L30">        this.eventType = event.get(&quot;type&quot;).getAsString();</span>
+
+        // As of Nov 2020, only .authorizations[].enterprise_id can be &quot;null&quot; in JSON data.
+        // That being said, just in case, we should always check if a value is not null
+        // because if we call #getAsString or similar without checking that may result in a runtime exception.
+
+<span class="nc bnc" id="L36" title="All 4 branches missed.">        if (event.get(&quot;subtype&quot;) != null &amp;&amp; !event.get(&quot;subtype&quot;).isJsonNull()) {</span>
+<span class="nc" id="L37">            this.eventSubtype = event.get(&quot;subtype&quot;).getAsString();</span>
+        } else {
+<span class="nc" id="L39">            this.eventSubtype = null;</span>
+        }
+<span class="nc" id="L41">        String enterpriseId = null;</span>
+<span class="nc" id="L42">        String teamId = null;</span>
+<span class="nc" id="L43">        String userId = null;</span>
+
+        // To properly support events generated in a shared channel, we should prioritize
+        // enterprise_id / team_id in authorizations over the ones at the top-level.
+        // The reason why we should do that is that the top-level enterprise_id / team_id
+        // can be the one for a workspace that originated the shared channel,
+        // not the ID of the workspace where this app was installed.
+        //
+        // Bolt for Java does not support authed_teams here.
+        // We highly recommend switching to authorizations as it provides more information
+        // the app installation like enterprise_id that is missing in authed_teams.
+        //
+<span class="nc bnc" id="L55" title="All 4 branches missed.">        if (payload.get(&quot;authorizations&quot;) != null &amp;&amp; !payload.get(&quot;authorizations&quot;).isJsonNull()) {</span>
+<span class="nc" id="L56">            JsonArray authorizations = payload.get(&quot;authorizations&quot;).getAsJsonArray();</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">            if (authorizations.size() &gt; 0) {</span>
+<span class="nc" id="L58">                JsonObject authorization = authorizations.get(0).getAsJsonObject();</span>
+<span class="nc bnc" id="L59" title="All 4 branches missed.">                if (authorization != null &amp;&amp; !authorization.isJsonNull()) {</span>
+<span class="nc" id="L60">                    JsonElement enterpriseIdElement = authorization.get(&quot;enterprise_id&quot;);</span>
+<span class="nc bnc" id="L61" title="All 4 branches missed.">                    if (enterpriseIdElement != null &amp;&amp; !enterpriseIdElement.isJsonNull()) {</span>
+<span class="nc" id="L62">                        enterpriseId = enterpriseIdElement.getAsString();</span>
+                    }
+<span class="nc" id="L64">                    JsonElement teamIdElement = authorization.get(&quot;team_id&quot;);</span>
+<span class="nc bnc" id="L65" title="All 4 branches missed.">                    if (teamIdElement != null &amp;&amp; !teamIdElement.isJsonNull()) {</span>
+<span class="nc" id="L66">                        teamId = teamIdElement.getAsString();</span>
+                    }
+<span class="nc" id="L68">                    JsonElement userIdElement = authorization.get(&quot;user_id&quot;);</span>
+<span class="nc bnc" id="L69" title="All 4 branches missed.">                    if (userIdElement != null &amp;&amp; !userIdElement.isJsonNull()) {</span>
+<span class="nc" id="L70">                        userId = userIdElement.getAsString();</span>
+                    }
+                }
+            }
+<span class="nc" id="L74">        } else {</span>
+            // NOTE: When this app works in shared channels,
+            // these IDs could be unusable for authorize function
+            // as it may be the source of the events, not the installed org/workspace
+<span class="nc" id="L78">            JsonElement enterpriseIdElement = payload.get(&quot;enterprise_id&quot;);</span>
+<span class="nc bnc" id="L79" title="All 4 branches missed.">            if (enterpriseIdElement != null &amp;&amp; !enterpriseIdElement.isJsonNull()) {</span>
+<span class="nc" id="L80">                enterpriseId = enterpriseIdElement.getAsString();</span>
+            }
+<span class="nc" id="L82">            JsonElement teamIdElement = payload.get(&quot;team_id&quot;);</span>
+<span class="nc bnc" id="L83" title="All 4 branches missed.">            if (teamIdElement != null &amp;&amp; !teamIdElement.isJsonNull()) {</span>
+<span class="nc" id="L84">                teamId = teamIdElement.getAsString();</span>
+            }
+        }
+<span class="nc" id="L87">        this.getContext().setEnterpriseId(enterpriseId);</span>
+<span class="nc" id="L88">        this.getContext().setTeamId(teamId);</span>
+<span class="nc" id="L89">        this.getContext().setRequestUserId(userId);</span>
+        // set retry related header values to the context
+<span class="nc bnc" id="L91" title="All 4 branches missed.">        if (this.headers != null &amp;&amp; this.headers.getNames().size() &gt; 0) {</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            for (String name : this.headers.getNames()) {</span>
+<span class="nc" id="L93">                String normalizedName = name.toLowerCase(Locale.ENGLISH);</span>
+<span class="nc" id="L94">                String value = this.headers.getFirstValue(name);</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">                if (normalizedName.equals(&quot;x-slack-retry-num&quot;)) {</span>
+                    try {
+<span class="nc" id="L97">                        Integer num = Integer.parseInt(value);</span>
+<span class="nc" id="L98">                        this.getContext().setRetryNum(num);</span>
+<span class="nc" id="L99">                    } catch (NumberFormatException e) {</span>
+<span class="nc" id="L100">                    }</span>
+                }
+<span class="nc bnc" id="L102" title="All 2 branches missed.">                if (normalizedName.equals(&quot;x-slack-retry-reason&quot;)) {</span>
+<span class="nc" id="L103">                    this.getContext().setRetryReason(value);</span>
+                }
+<span class="nc" id="L105">            }</span>
+        }
+
+<span class="nc bnc" id="L108" title="All 4 branches missed.">        if (event.get(&quot;channel&quot;) != null &amp;&amp; event.get(&quot;channel&quot;).isJsonPrimitive()) {</span>
+<span class="nc" id="L109">            this.getContext().setChannelId(event.get(&quot;channel&quot;).getAsString());</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        } else if (event.get(&quot;channel_id&quot;) != null) {</span>
+<span class="nc" id="L111">            this.getContext().setChannelId(event.get(&quot;channel_id&quot;).getAsString());</span>
+        }
+<span class="nc" id="L113">    }</span>
+
+<span class="nc" id="L115">    private EventContext context = new EventContext();</span>
+
+    @Override
+    public EventContext getContext() {
+<span class="nc" id="L119">        return context;</span>
+    }
+
+    @Override
+    public RequestType getRequestType() {
+<span class="nc" id="L124">        return RequestType.Event;</span>
+    }
+
+    @Override
+    public String getRequestBodyAsString() {
+<span class="nc" id="L129">        return requestBody;</span>
+    }
+
+    @Override
+    public RequestHeaders getHeaders() {
+<span class="nc" id="L134">        return this.headers;</span>
+    }
+
+    public String getEventType() {
+<span class="nc" id="L138">        return eventType;</span>
+    }
+
+    public String getEventTypeAndSubtype() {
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        if (eventSubtype == null) {</span>
+<span class="nc" id="L143">            return eventType;</span>
+        } else {
+<span class="nc" id="L145">            return eventType + &quot;:&quot; + eventSubtype;</span>
+        }
+    }
+
+    @Override
+    public String getResponseUrl() {
+<span class="nc" id="L151">        return null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
