@@ -19,6 +19,10 @@
 
   <properties>
     <java.version>17</java.version>
+    <slack.bolt.version>1.28.0</slack.bolt.version>
+    <springdoc.version>2.0.4</springdoc.version>
+    <jwwt.version>0.11.5</jwwt.version>
+    <ffmpeg.version>5.1.2-1.5.8</ffmpeg.version>
   </properties>
 
   <repositories>
@@ -68,13 +72,13 @@
     <dependency>
       <groupId>org.bytedeco</groupId>
       <artifactId>ffmpeg</artifactId>
-      <version>5.1.2-1.5.8</version>
+      <version>${ffmpeg.version}</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.bytedeco/ffmpeg-platform -->
     <dependency>
       <groupId>org.bytedeco</groupId>
       <artifactId>ffmpeg-platform</artifactId>
-      <version>5.1.2-1.5.8</version>
+      <version>${ffmpeg.version}</version>
     </dependency>
 
     <dependency>
@@ -86,32 +90,32 @@
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-common</artifactId>
-      <version>2.0.2</version>
+      <version>${springdoc.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-      <version>2.0.4</version>
+      <version>${springdoc.version}</version>
     </dependency>
 
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt-api</artifactId>
-      <version>0.11.5</version>
+      <version>${jwwt.version}</version>
     </dependency>
 
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt-impl</artifactId>
-      <version>0.11.5</version>
+      <version>${jwwt.version}</version>
       <scope>runtime</scope>
     </dependency>
 
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt-jackson</artifactId>
-      <version>0.11.5</version>
+      <version>${jwwt.version}</version>
       <scope>runtime</scope>
     </dependency>
 
@@ -156,13 +160,13 @@
     <dependency>
       <groupId>com.slack.api</groupId>
       <artifactId>bolt</artifactId>
-      <version>1.28.0</version>
+      <version>${slack.bolt.version}</version>
     </dependency>
 
     <dependency>
       <groupId>com.slack.api</groupId>
       <artifactId>bolt-jakarta-servlet</artifactId>
-      <version>1.28.0</version>
+      <version>${slack.bolt.version}</version>
     </dependency>
 
     <dependency>
@@ -174,7 +178,7 @@
     <dependency>
       <groupId>com.slack.api</groupId>
       <artifactId>slack-api-client</artifactId>
-      <version>1.28.0</version>
+      <version>${slack.bolt.version}</version>
     </dependency>
 
     <dependency>
