@@ -43,7 +43,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import dev.vernite.vernite.common.constants.NameConstants;
 
 /**
- * Tests for {@link CreateWorkspace} class. Tests validation constraints.
+ * Tests for {@link UpdateWorkspace} class. Tests validation constraints.
  */
 class UpdateWorkspaceTests {
 

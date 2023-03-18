@@ -25,47 +25,35 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package dev.vernite.vernite.common.utils;
-
-import java.security.SecureRandom;
+package dev.vernite.vernite.common.constants;
 
 import lombok.experimental.UtilityClass;
 
 /**
- * Utils for common secure random operations.
+ * Utility class for description constants. Contains all constraints used in
+ * the project REST API for description validation.
  */
 @UtilityClass
-public class SecureRandomUtils {
-
-    private static final int DEFAULT_LENGTH = 128;
-
-    private static final SecureRandom RANDOM = new SecureRandom();
-
-    private static final char[] CHARS = "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM".toCharArray();
+public class DescriptionConstants {
 
     /**
-     * Generates a secure random string of the given length.
-     *
-     * @param length must be greater than 0
-     * @return the generated string
+     * Minimum length of description.
      */
-    public static String generateSecureRandomString(int length) {
-        var secureCharacters = new char[length];
-
-        for (var index = 0; index < secureCharacters.length; index++) {
-            secureCharacters[index] = CHARS[RANDOM.nextInt(CHARS.length)];
-        }
-
-        return new String(secureCharacters);
-    }
+    public static final int MIN_LENGTH = 0;
 
     /**
-     * Generates a secure random string of length 128.
-     *
-     * @return the generated string
+     * Maximum length of description.
      */
-    public static String generateSecureRandomString() {
-        return generateSecureRandomString(DEFAULT_LENGTH);
-    }
+    public static final int MAX_LENGTH = 1000;
+
+    /**
+     * Key for message when description size is not correct.
+     */
+    public static final String SIZE_MESSAGE = "wrongDescriptionSize";
+
+    /**
+     * Key for message when description is null.
+     */
+    public static final String NULL_MESSAGE = "nullDescription";
 
 }

@@ -1,18 +1,18 @@
 /*
  * BSD 2-Clause License
- * 
- * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
- * 
+ *
+ * Copyright (c) 2023, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -27,16 +27,25 @@
 
 package dev.vernite.vernite.project;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.stream.Stream;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
+import dev.vernite.vernite.common.constants.DescriptionConstants;
+import dev.vernite.vernite.common.constants.NameConstants;
+
+/**
+ * Tests for {@link UpdateProject} class. Tests validation constraints.
+ */
 class UpdateProjectTests {
 
     private static Validator validator;
@@ -47,23 +56,35 @@ class UpdateProjectTests {
         validator = factory.getValidator();
     }
 
-    @Test
-    void validationValidTest() {
-        assertTrue(validator.validate(new UpdateProject()).isEmpty());
-        assertTrue(validator.validate(new UpdateProject("Name", "Description", 1L)).isEmpty());
-        assertTrue(validator.validate(new UpdateProject("  Name ", " ", 4L)).isEmpty());
-        assertTrue(validator.validate(new UpdateProject("  Name ", " Description", 73L)).isEmpty());
-        assertTrue(validator.validate(new UpdateProject("  Name ", " Description", null)).isEmpty());
-        assertTrue(validator.validate(new UpdateProject("  Name ", null, 2L)).isEmpty());
-        assertTrue(validator.validate(new UpdateProject(null, "Description", 3L)).isEmpty());
+    private static Stream<UpdateProject> testValidationValid() {
+        return Stream.of(
+                new UpdateProject(),
+                new UpdateProject("Name", "Description", 1L),
+                new UpdateProject("  Name ", " ", 4L),
+                new UpdateProject("  Name ", " Description", 73L),
+                new UpdateProject("  Name ", " Description", null),
+                new UpdateProject("  Name ", null, 2L),
+                new UpdateProject(null, "Description", 3L));
     }
 
-    @Test
-    void validationInvalidTest() {
-        assertEquals(1, validator.validate(new UpdateProject("Name", "", -1L)).size());
-        assertEquals(2, validator.validate(new UpdateProject("", null, 1L)).size());
-        assertEquals(1, validator.validate(new UpdateProject("a".repeat(51), "", null)).size());
-        assertEquals(1, validator.validate(new UpdateProject(null, "a".repeat(1001), 1L)).size());
+    private static Stream<UpdateProject> testValidationInvalid() {
+        return Stream.of(
+                new UpdateProject("Name", "", -1L),
+                new UpdateProject("", null, 1L),
+                new UpdateProject("a".repeat(NameConstants.MAX_LENGTH + 1), "", null),
+                new UpdateProject(null, "a".repeat(DescriptionConstants.MAX_LENGTH + 1), 1L));
+    }
+
+    @MethodSource
+    @ParameterizedTest
+    void testValidationValid(UpdateProject create) {
+        assertTrue(validator.validate(create).isEmpty(), "Validation failed for " + create);
+    }
+
+    @MethodSource
+    @ParameterizedTest
+    void testValidationInvalid(UpdateProject create) {
+        assertFalse(validator.validate(create).isEmpty(), "Validation passed for " + create);
     }
 
 }

@@ -83,7 +83,7 @@ public class WorkspaceController {
      */
     @PostMapping
     public Workspace create(@NotNull @Parameter(hidden = true) User user, @RequestBody @Valid CreateWorkspace create) {
-        long id = counterRepository.getIncrementCounter(user.getCounterSequence().getId());
+        var id = counterRepository.getIncrementCounter(user.getCounterSequence().getId());
         return workspaceRepository.save(new Workspace(id, user, create));
     }
 
@@ -111,7 +111,7 @@ public class WorkspaceController {
     @PutMapping("/{id}")
     public Workspace update(@NotNull @Parameter(hidden = true) User user, @PathVariable long id,
             @RequestBody @Valid UpdateWorkspace update) {
-        Workspace workspace = workspaceRepository.findByIdOrThrow(new WorkspaceId(id, user.getId()));
+        var workspace = workspaceRepository.findByIdOrThrow(new WorkspaceId(id, user.getId()));
         workspace.update(update);
         return workspaceRepository.save(workspace);
     }
@@ -124,7 +124,7 @@ public class WorkspaceController {
      */
     @DeleteMapping("/{id}")
     public void delete(@NotNull @Parameter(hidden = true) User user, @PathVariable long id) {
-        Workspace workspace = workspaceRepository.findByIdOrThrow(new WorkspaceId(id, user.getId()));
+        var workspace = workspaceRepository.findByIdOrThrow(new WorkspaceId(id, user.getId()));
         if (!workspace.getProjects().isEmpty()) {
             throw new ConflictStateException(WORKSPACE_NOT_EMPTY);
         }

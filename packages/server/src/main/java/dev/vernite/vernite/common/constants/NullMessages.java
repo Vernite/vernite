@@ -41,4 +41,44 @@ public class NullMessages {
      */
     public static final String PROJECT = "nullProject";
 
+    /**
+     * Key for message when workspace id is null.
+     */
+    public static final String WORKSPACE_ID = "nullWorkspaceId";
+
+    /**
+     * Key for message when member is null.
+     */
+    public static final String MEMBER = "nullMember";
+
+    /**
+     * Key for message when user is null.
+     */
+    public static final String USER = "nullUser";
+
+    /**
+     * Key for message when status is null.
+     */
+    public static final String STATUS = "nullStatus";
+
+    /**
+     * Key for message when counter is null.
+     */
+    public static final String COUNTER = "nullCounter";
+
+    /**
+     * Key for message when sprint is null.
+     */
+    public static final String SPRINT = "nullSprint";
+
+    /**
+     * Key for message when release is null.
+     */
+    public static final String RELEASE = "nullRelease";
+
+    /**
+     * Key for message when meeting is null.
+     */
+    public static final String MEETING = "nullMeeting";
+
 }

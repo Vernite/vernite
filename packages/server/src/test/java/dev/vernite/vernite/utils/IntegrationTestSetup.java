@@ -108,7 +108,9 @@ public class IntegrationTestSetup {
         userSession.setUserAgent("userAgent");
         userSession.setUser(user);
 
-        this.userNoAccess = new UserInfo(user, dataBase.getUserSession().save(userSession));
+        userNoAccess = new UserInfo(user, dataBase.getUserSession().save(userSession));
+
+        user = this.user.user();
 
         workspace = dataBase.getWorkspace().save(new Workspace(1, "Work", user));
         workspaceEmpty = dataBase.getWorkspace().save(new Workspace(2, "Hobby", user));

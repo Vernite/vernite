@@ -27,6 +27,7 @@
 
 package dev.vernite.vernite.workspace;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import jakarta.persistence.Embeddable;
@@ -43,7 +44,6 @@ import lombok.experimental.FieldNameConstants;
 
 /**
  * Composite ID for workspace.
- *
  * It contains connected user id and id which is unique
  * among user workspaces and for each user starts on one.
  */
@@ -54,6 +54,7 @@ import lombok.experimental.FieldNameConstants;
 @FieldNameConstants
 public class WorkspaceId implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @PositiveOrZero(message = IDConstants.NEGATIVE_MESSAGE)

@@ -1,18 +1,18 @@
 /*
  * BSD 2-Clause License
- * 
- * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
- * 
+ *
+ * Copyright (c) 2023, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Optional;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -57,6 +58,10 @@ import org.hibernate.annotations.OnDeleteAction;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import dev.vernite.vernite.cdn.File;
+import dev.vernite.vernite.common.constants.DescriptionConstants;
+import dev.vernite.vernite.common.constants.IDConstants;
+import dev.vernite.vernite.common.constants.NameConstants;
+import dev.vernite.vernite.common.constants.NullMessages;
 import dev.vernite.vernite.common.utils.counter.CounterSequence;
 import dev.vernite.vernite.integration.git.github.model.ProjectIntegration;
 import dev.vernite.vernite.meeting.Meeting;
@@ -78,51 +83,51 @@ import lombok.ToString;
 @Entity
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Project extends SoftDeleteEntity implements Comparable<Project> {
+public final class Project extends SoftDeleteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @PositiveOrZero(message = "project ID must be non negative number")
+    @PositiveOrZero(message = IDConstants.NEGATIVE_MESSAGE)
     private long id;
 
-    @Column(nullable = false, length = 50)
-    @Size(min = 1, max = 50, message = "project name must be shorter than 50 characters")
-    @NotBlank(message = "project name must contain at least one non-whitespace character")
+    @NotBlank(message = NameConstants.BLANK_MESSAGE)
+    @Column(nullable = false, length = NameConstants.MAX_LENGTH)
+    @Size(min = NameConstants.MIN_LENGTH, max = NameConstants.MAX_LENGTH, message = NameConstants.SIZE_MESSAGE)
     private String name;
 
-    @Column(nullable = false, length = 1000)
-    @NotNull(message = "project description cannot be null")
-    @Size(max = 1000, message = "project description must be shorter than 1000 characters")
+    @NotNull(message = DescriptionConstants.NULL_MESSAGE)
+    @Column(nullable = false, length = DescriptionConstants.MAX_LENGTH)
+    @Size(max = DescriptionConstants.MAX_LENGTH, message = DescriptionConstants.SIZE_MESSAGE)
     private String description;
 
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "project")
+    @NotNull(message = NullMessages.MEMBER)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull(message = "project workspaces connection must be set")
     private List<ProjectWorkspace> projectWorkspaces = new ArrayList<>();
 
     @ManyToMany
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @NotNull(message = "users connection must be set")
+    @NotNull(message = NullMessages.USER)
     @JoinTable(name = "project_workspace", joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "workspace_user_id", referencedColumnName = "id"))
     private Set<User> users = new HashSet<>();
 
     @ToString.Exclude
     @OrderBy("ordinal")
     @EqualsAndHashCode.Exclude
+    @NotNull(message = NullMessages.STATUS)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull(message = "project must have statuses")
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "project")
     private List<Status> statuses = new ArrayList<>();
 
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @NotNull(message = "counter must be set")
+    @NotNull(message = NullMessages.COUNTER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToOne(cascade = CascadeType.PERSIST, optional = false)
     private CounterSequence taskCounter;
@@ -139,7 +144,7 @@ public class Project extends SoftDeleteEntity implements Comparable<Project> {
     @OrderBy("startDate")
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "project")
-    @NotNull(message = "counter must be set")
+    @NotNull(message = NullMessages.SPRINT)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Sprint> sprints = new ArrayList<>();
 
@@ -148,7 +153,7 @@ public class Project extends SoftDeleteEntity implements Comparable<Project> {
     @OrderBy("deadline DESC")
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "project")
-    @NotNull(message = "releases must be set")
+    @NotNull(message = NullMessages.RELEASE)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Release> releases = new ArrayList<>();
 
@@ -157,7 +162,7 @@ public class Project extends SoftDeleteEntity implements Comparable<Project> {
     @EqualsAndHashCode.Exclude
     @OrderBy("startDate, endDate")
     @OneToMany(mappedBy = "project")
-    @NotNull(message = "meetings must be set")
+    @NotNull(message = NullMessages.MEETING)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Meeting> meetings = new ArrayList<>();
 
@@ -167,11 +172,10 @@ public class Project extends SoftDeleteEntity implements Comparable<Project> {
     private File logo;
 
     /**
-     * Default constructor for project.
-     * 
-     * @param name        must not be {@literal null} and have size between 1 and 50
-     * @param description must not be {@literal null} and must be shorter than 1000
-     *                    characters.
+     * Default constructor.
+     *
+     * @param name        name of new project
+     * @param description description of new project
      */
     public Project(String name, String description) {
         setName(name);
@@ -180,33 +184,29 @@ public class Project extends SoftDeleteEntity implements Comparable<Project> {
     }
 
     /**
-     * Constructor for project from create request.
-     * 
-     * @param create must not be {@literal null} and must be valid
+     * Constructor from create request.
+     *
+     * @param create body of create request
      */
     public Project(CreateProject create) {
         this(create.getName(), create.getDescription());
     }
 
     /**
-     * Updates project entity with data from update.
-     * 
-     * @param update must not be {@literal null} and be valid
+     * Updates project with data from update.
+     *
+     * @param update body of update request
      */
     public void update(UpdateProject update) {
-        if (update.getName() != null) {
-            setName(update.getName());
-        }
-        if (update.getDescription() != null) {
-            setDescription(update.getDescription());
-        }
+        Optional.ofNullable(update.getName()).ifPresent(this::setName);
+        Optional.ofNullable(update.getDescription()).ifPresent(this::setDescription);
     }
 
     /**
      * Checks whether user is member of project.
-     * 
+     *
      * @param user potential project member
-     * @return {@literal true} if given user is member of project; {@literal false}
+     * @return {@literal true} if given user is member of project, {@literal false}
      *         otherwise
      */
     public boolean isMember(User user) {
@@ -215,7 +215,7 @@ public class Project extends SoftDeleteEntity implements Comparable<Project> {
 
     /**
      * Remove user from project members.
-     * 
+     *
      * @param user must not be {@literal null}
      * @return removed connection; can be null if user wasn't member
      */
@@ -228,7 +228,7 @@ public class Project extends SoftDeleteEntity implements Comparable<Project> {
 
     /**
      * Find index of user in project workspace list.
-     * 
+     *
      * @param user must not be {@literal null}. Must be value returned by
      *             repository.
      * @return index in project workspaces with given user or -1 when not found.
@@ -246,9 +246,8 @@ public class Project extends SoftDeleteEntity implements Comparable<Project> {
 
     /**
      * Setter for name value. It performs {@link String#trim()} on its argument.
-     * 
-     * @param name must not be {@literal null} and have at least one non-whitespace
-     *             character and less than 50 characters
+     *
+     * @param name new name value
      */
     public void setName(String name) {
         this.name = name.trim();
@@ -257,19 +256,11 @@ public class Project extends SoftDeleteEntity implements Comparable<Project> {
     /**
      * Setter for description value. It performs {@link String#trim()} on its
      * argument.
-     * 
-     * @param description must not be {@literal null} and have at least one
-     *                    non-whitespace character and less than 50 characters
+     *
+     * @param description new description value
      */
     public void setDescription(String description) {
         this.description = description.trim();
-    }
-
-    @Override
-    @Deprecated
-    public int compareTo(Project other) {
-        return getName().equals(other.getName()) ? Long.compare(getId(), other.getId())
-                : getName().compareTo(other.getName());
     }
 
     @Deprecated
