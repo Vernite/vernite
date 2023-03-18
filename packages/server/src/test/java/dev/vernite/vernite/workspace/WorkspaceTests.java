@@ -1,18 +1,18 @@
 /*
  * BSD 2-Clause License
- * 
- * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
- * 
+ *
+ * Copyright (c) 2023, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -28,7 +28,10 @@
 package dev.vernite.vernite.workspace;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.stream.Stream;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -36,9 +39,18 @@ import jakarta.validation.ValidatorFactory;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import dev.vernite.vernite.common.constants.NameConstants;
 import dev.vernite.vernite.user.User;
 
+/**
+ * Tests for {@link Workspace} class. Tests validation constraints, constructor
+ * and custom getters/setters.
+ */
 class WorkspaceTests {
 
     private static final User user = new User("name", "surname", "username", "email", "password");
@@ -52,78 +64,76 @@ class WorkspaceTests {
         validator = factory.getValidator();
     }
 
-    @Test
-    void constructorBaseTest() {
-        Workspace workspace = new Workspace(1, "Name", user);
-
-        assertEquals(1, workspace.getId().getId());
-        assertEquals("Name", workspace.getName());
-        assertEquals(user, workspace.getUser());
-
-        workspace = new Workspace(1, "  Name  ", user);
-
-        assertEquals(1, workspace.getId().getId());
-        assertEquals("Name", workspace.getName());
-        assertEquals(user, workspace.getUser());
+    private static Stream<Arguments> testConstructor() {
+        return Stream.of(
+                Arguments.of(1, "Name", user),
+                Arguments.of(1, "  Name  ", user));
     }
 
-    @Test
-    void constructorCreateTest() {
+    private static Stream<UpdateWorkspace> testUpdate() {
+        return Stream.of(
+                new UpdateWorkspace("New name"),
+                new UpdateWorkspace("  New name  "),
+                new UpdateWorkspace(null));
+    }
+
+    private static Stream<Workspace> testValidationInvalid() {
+        return Stream.of(
+                new Workspace(1, "", user),
+                new Workspace(1, "  ", user),
+                new Workspace(-1, "Name", user),
+                new Workspace(1, "a".repeat(NameConstants.MAX_LENGTH + 1), user));
+    }
+
+    @ParameterizedTest
+    @MethodSource("testConstructor")
+    void testBaseConstructor(int id, String name, User user) {
+        Workspace workspace = new Workspace(id, name, user);
+
+        assertEquals(id, workspace.getId().getId(), "Id should be equal");
+        assertEquals(name.trim(), workspace.getName(), "Trimmed name should be equal");
+        assertEquals(user, workspace.getUser(), "User should be equal");
+    }
+
+    @ParameterizedTest
+    @MethodSource("testConstructor")
+    void testCreateConstructor(int id, String name, User user) {
         Workspace workspace = new Workspace(1, user, new CreateWorkspace("Name"));
 
-        assertEquals(1, workspace.getId().getId());
-        assertEquals("Name", workspace.getName());
-        assertEquals(user, workspace.getUser());
-
-        workspace = new Workspace(1, user, new CreateWorkspace("  Name  "));
-
-        assertEquals(1, workspace.getId().getId());
-        assertEquals("Name", workspace.getName());
-        assertEquals(user, workspace.getUser());
+        assertEquals(id, workspace.getId().getId(), "Id should be equal");
+        assertEquals(name.trim(), workspace.getName(), "Trimmed name should be equal");
+        assertEquals(user, workspace.getUser(), "User should be equal");
     }
 
-    @Test
-    void updateTest() {
+    @MethodSource
+    @ParameterizedTest
+    void testUpdate(UpdateWorkspace update) {
         Workspace workspace = new Workspace(1, "Name", user);
-        workspace.update(new UpdateWorkspace("New name"));
+        workspace.update(update);
 
-        assertEquals(1, workspace.getId().getId());
-        assertEquals("New name", workspace.getName());
-        assertEquals(user, workspace.getUser());
+        String newName = update.getName() == null ? "Name" : update.getName().trim();
 
-        workspace.update(new UpdateWorkspace(null));
-
-        assertEquals(1, workspace.getId().getId());
-        assertEquals("New name", workspace.getName());
-        assertEquals(user, workspace.getUser());
+        assertEquals(newName, workspace.getName(), "Trimmed name should be equal");
     }
 
-    @Test
-    void setNameTest() {
+    @ParameterizedTest
+    @ValueSource(strings = { "New name", "  New name  ", "" })
+    void testSetName(String name) {
         Workspace workspace = new Workspace(1, "Name", user);
-        workspace.setName("New name");
+        workspace.setName(name);
 
-        assertEquals(1, workspace.getId().getId());
-        assertEquals("New name", workspace.getName());
-        assertEquals(user, workspace.getUser());
-
-        workspace.setName("  New name  ");
-
-        assertEquals(1, workspace.getId().getId());
-        assertEquals("New name", workspace.getName());
-        assertEquals(user, workspace.getUser());
+        assertEquals(name.trim(), workspace.getName(), "Trimmed name should be equal");
     }
 
     @Test
-    void validationValidTest() {
-        assertTrue(validator.validate(new Workspace(1, "Name", user)).isEmpty());
+    void testValidationValid() {
+        assertTrue(validator.validate(new Workspace(1, "Name", user)).isEmpty(), "Workspace should be valid");
     }
 
-    @Test
-    void validationInvalidTest() {
-        assertEquals(2, validator.validate(new Workspace(1, "", user)).size());
-        assertEquals(2, validator.validate(new Workspace(1, "  ", user)).size());
-        assertEquals(3, validator.validate(new Workspace(-1, "   ", user)).size());
-        assertEquals(1, validator.validate(new Workspace(1, "a".repeat(51), user)).size());
+    @MethodSource
+    @ParameterizedTest
+    void testValidationInvalid(Workspace workspace) {
+        assertFalse(validator.validate(workspace).isEmpty(), "Workspace should be invalid");
     }
+
 }

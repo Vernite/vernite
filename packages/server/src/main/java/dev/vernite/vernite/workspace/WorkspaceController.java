@@ -1,18 +1,18 @@
 /*
  * BSD 2-Clause License
- * 
- * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
- * 
+ *
+ * Copyright (c) 2023, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,6 @@ import java.util.List;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-
 import dev.vernite.vernite.common.exception.ConflictStateException;
 import dev.vernite.vernite.common.utils.counter.CounterSequenceRepository;
 import dev.vernite.vernite.user.User;
@@ -56,6 +55,8 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/workspace")
 public class WorkspaceController {
 
+    private static final String WORKSPACE_NOT_EMPTY = "workspaceNotEmpty";
+
     private CounterSequenceRepository counterRepository;
 
     private WorkspaceRepository workspaceRepository;
@@ -63,8 +64,8 @@ public class WorkspaceController {
     /**
      * Retrieves all workspaces for authenticated user. There might be extra virtual
      * workspace with ID 0 for projects that aren't contained in any workspace.
-     * 
-     * @param user logged in user
+     *
+     * @param user authenticated user
      * @return list with workspaces ordered by name and ID
      */
     @GetMapping
@@ -75,21 +76,21 @@ public class WorkspaceController {
     /**
      * Create new workspace for authenticated user. New workspace will have next
      * unused ID unique for user.
-     * 
-     * @param user   logged in user
+     *
+     * @param user   authenticated user
      * @param create data for new workspace
      * @return newly created workspace
      */
     @PostMapping
     public Workspace create(@NotNull @Parameter(hidden = true) User user, @RequestBody @Valid CreateWorkspace create) {
-        long id = counterRepository.getIncrementCounter(user.getCounterSequence().getId());
+        var id = counterRepository.getIncrementCounter(user.getCounterSequence().getId());
         return workspaceRepository.save(new Workspace(id, user, create));
     }
 
     /**
      * Retrieve workspace with given ID for authenticated user.
-     * 
-     * @param user logged in user
+     *
+     * @param user authenticated user
      * @param id   ID of workspace
      * @return workspace with given ID
      */
@@ -101,8 +102,8 @@ public class WorkspaceController {
     /**
      * Update workspace with given ID. Performs partial update using only supplied
      * fields from request body.
-     * 
-     * @param user   logged in user
+     *
+     * @param user   authenticated user
      * @param id     ID of workspace
      * @param update data to update
      * @return workspace after update
@@ -110,22 +111,22 @@ public class WorkspaceController {
     @PutMapping("/{id}")
     public Workspace update(@NotNull @Parameter(hidden = true) User user, @PathVariable long id,
             @RequestBody @Valid UpdateWorkspace update) {
-        Workspace workspace = workspaceRepository.findByIdOrThrow(new WorkspaceId(id, user.getId()));
+        var workspace = workspaceRepository.findByIdOrThrow(new WorkspaceId(id, user.getId()));
         workspace.update(update);
         return workspaceRepository.save(workspace);
     }
 
     /**
      * Delete workspace with given ID. Workspace to delete must be empty.
-     * 
-     * @param user logged in user
+     *
+     * @param user authenticated user
      * @param id   ID of workspace
      */
     @DeleteMapping("/{id}")
     public void delete(@NotNull @Parameter(hidden = true) User user, @PathVariable long id) {
-        Workspace workspace = workspaceRepository.findByIdOrThrow(new WorkspaceId(id, user.getId()));
+        var workspace = workspaceRepository.findByIdOrThrow(new WorkspaceId(id, user.getId()));
         if (!workspace.getProjects().isEmpty()) {
-            throw new ConflictStateException("workspace must be empty to delete");
+            throw new ConflictStateException(WORKSPACE_NOT_EMPTY);
         }
         workspaceRepository.delete(workspace);
     }

@@ -25,28 +25,40 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package dev.vernite.vernite.workspace;
+package dev.vernite.vernite.common.constants;
 
-import dev.vernite.vernite.common.constants.NameConstants;
-import dev.vernite.vernite.common.constraints.NullOrNotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 /**
- * Data transfer object containing information needed to update workspace.
+ * Utility class for name constants. Contains all constants used in the
+ * project REST API for name validation.
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class UpdateWorkspace {
+@UtilityClass
+public class NameConstants {
 
     /**
-     * New name for workspace.
+     * Minimum length of name.
      */
-    @NullOrNotBlank(message = NameConstants.BLANK_MESSAGE)
-    @Size(min = NameConstants.MIN_LENGTH, max = NameConstants.MAX_LENGTH, message = NameConstants.SIZE_MESSAGE)
-    private String name;
+    public static final int MIN_LENGTH = 1;
+
+    /**
+     * Maximum length of name.
+     */
+    public static final int MAX_LENGTH = 50;
+
+    /**
+     * Maximum length of long name.
+     */
+    public static final int MAX_LONG_LENGTH = 100;
+
+    /**
+     * Key for message when name size is not correct.
+     */
+    public static final String SIZE_MESSAGE = "wrongNameSize";
+
+    /**
+     * Key for message when name is blank.
+     */
+    public static final String BLANK_MESSAGE = "blankName";
 
 }

@@ -1,18 +1,18 @@
 /*
  * BSD 2-Clause License
- * 
- * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
- * 
+ *
+ * Copyright (c) 2023, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -27,16 +27,25 @@
 
 package dev.vernite.vernite.project;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.stream.Stream;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
+import dev.vernite.vernite.common.constants.DescriptionConstants;
+import dev.vernite.vernite.common.constants.NameConstants;
+
+/**
+ * Tests for {@link CreateProject} class. Tests validation constraints.
+ */
 class CreateProjectTests {
 
     private static Validator validator;
@@ -47,21 +56,33 @@ class CreateProjectTests {
         validator = factory.getValidator();
     }
 
-    @Test
-    void validationValidTest() {
-        assertTrue(validator.validate(new CreateProject("Name", "Description", 1L)).isEmpty());
-        assertTrue(validator.validate(new CreateProject("  Name ", " ", 4L)).isEmpty());
-        assertTrue(validator.validate(new CreateProject("  Name ", " Description", 73L)).isEmpty());
+    private static Stream<CreateProject> testValidationValid() {
+        return Stream.of(
+                new CreateProject("Name", "Description", 1L),
+                new CreateProject("  Name ", " ", 4L),
+                new CreateProject("  Name ", " Description", 73L));
     }
 
-    @Test
-    void validationInvalidTest() {
-        assertEquals(3, validator.validate(new CreateProject()).size());
-        assertEquals(1, validator.validate(new CreateProject("Name", null, 1L)).size());
-        assertEquals(1, validator.validate(new CreateProject("Name", "", -1L)).size());
-        assertEquals(3, validator.validate(new CreateProject("", null, 1L)).size());
-        assertEquals(1, validator.validate(new CreateProject("a".repeat(51), "", 1L)).size());
-        assertEquals(1, validator.validate(new CreateProject("Name", "a".repeat(1001), 1L)).size());
+    private static Stream<CreateProject> testValidationInvalid() {
+        return Stream.of(
+                new CreateProject(),
+                new CreateProject("Name", null, 1L),
+                new CreateProject("Name", "", -1L),
+                new CreateProject("", null, 1L),
+                new CreateProject("a".repeat(NameConstants.MAX_LENGTH + 1), "", 1L),
+                new CreateProject("Name", "a".repeat(DescriptionConstants.MAX_LENGTH + 1), 1L));
+    }
+
+    @MethodSource
+    @ParameterizedTest
+    void testValidationValid(CreateProject create) {
+        assertTrue(validator.validate(create).isEmpty(), "Validation failed for " + create);
+    }
+
+    @MethodSource
+    @ParameterizedTest
+    void testValidationInvalid(CreateProject create) {
+        assertFalse(validator.validate(create).isEmpty(), "Validation passed for " + create);
     }
 
 }

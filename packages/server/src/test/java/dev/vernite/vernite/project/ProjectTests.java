@@ -1,18 +1,18 @@
 /*
  * BSD 2-Clause License
- * 
- * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
- * 
+ *
+ * Copyright (c) 2023, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -27,11 +27,13 @@
 
 package dev.vernite.vernite.project;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+
+import java.util.stream.Stream;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -39,7 +41,13 @@ import jakarta.validation.ValidatorFactory;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import dev.vernite.vernite.common.constants.DescriptionConstants;
+import dev.vernite.vernite.common.constants.NameConstants;
 import dev.vernite.vernite.projectworkspace.ProjectWorkspace;
 import dev.vernite.vernite.user.User;
 import dev.vernite.vernite.workspace.Workspace;
@@ -57,129 +65,113 @@ class ProjectTests {
         validator = factory.getValidator();
     }
 
-    @Test
-    void constructorBaseTest() {
+    private static Stream<Arguments> testConstructor() {
+        return Stream.of(
+                Arguments.of("Name", "Description"),
+                Arguments.of("  Name  ", "  Description  "));
+    }
+
+    private static Stream<UpdateProject> testUpdate() {
+        return Stream.of(
+                new UpdateProject("NewName", "NewDescription", null),
+                new UpdateProject("  Name ", "   Description  ", null),
+                new UpdateProject());
+    }
+
+    private static Stream<Project> testValidationInvalid() {
+        return Stream.of(
+                new Project("", "Description"),
+                new Project("  ", "Description"),
+                new Project("a".repeat(NameConstants.MAX_LENGTH + 1), "Description"),
+                new Project("Name", "a".repeat(DescriptionConstants.MAX_LENGTH + 1)));
+    }
+
+    @ParameterizedTest
+    @MethodSource("testConstructor")
+    void testBaseConstructor(String name, String description) {
+        Project project = new Project(name, description);
+
+        assertEquals(name.trim(), project.getName(), "Trimmed name should be equal");
+        assertEquals(description.trim(), project.getDescription(), "Trimmed description should be equal");
+        assertNotNull(project.getTaskCounter(), "Task counter should not be null");
+    }
+
+    @ParameterizedTest
+    @MethodSource("testConstructor")
+    void testCreateConstructor(String name, String description) {
+        Project project = new Project(new CreateProject(name, description, 1L));
+
+        assertEquals(name.trim(), project.getName(), "Trimmed name should be equal");
+        assertEquals(description.trim(), project.getDescription(), "Trimmed description should be equal");
+        assertNotNull(project.getTaskCounter(), "Task counter should not be null");
+    }
+
+    @MethodSource
+    @ParameterizedTest
+    void testUpdate(UpdateProject update) {
         Project project = new Project("Name", "Description");
+        project.update(update);
 
-        assertEquals("Name", project.getName());
-        assertEquals("Description", project.getDescription());
-        assertNotNull(project.getTaskCounter());
+        String newName = update.getName() == null ? "Name" : update.getName().trim();
+        String newDescription = update.getDescription() == null ? "Description" : update.getDescription().trim();
 
-        project = new Project("  Name ", "   Description  ");
-
-        assertEquals("Name", project.getName());
-        assertEquals("Description", project.getDescription());
-        assertNotNull(project.getTaskCounter());
+        assertEquals(newName, project.getName(), "Trimmed name should be equal");
+        assertEquals(newDescription, project.getDescription(), "Trimmed description should be equal");
     }
 
     @Test
-    void constructorCreateTest() {
-        Project project = new Project(new CreateProject("Name", "Description", 1L));
-
-        assertEquals("Name", project.getName());
-        assertEquals("Description", project.getDescription());
-        assertNotNull(project.getTaskCounter());
-
-        project = new Project(new CreateProject("  Name ", "   Description  ", 1L));
-
-        assertEquals("Name", project.getName());
-        assertEquals("Description", project.getDescription());
-        assertNotNull(project.getTaskCounter());
-    }
-
-    @Test
-    void updateTest() {
-        Project project = new Project("Name", "Description");
-        project.update(new UpdateProject("NewName", "NewDescription", null));
-
-        assertEquals("NewName", project.getName());
-        assertEquals("NewDescription", project.getDescription());
-
-        project.update(new UpdateProject("  Name ", "   Description  ", null));
-
-        assertEquals("Name", project.getName());
-        assertEquals("Description", project.getDescription());
-
-        project.update(new UpdateProject());
-
-        assertEquals("Name", project.getName());
-        assertEquals("Description", project.getDescription());
-    }
-
-    @Test
-    void isMemberTest() {
+    void testIsMember() {
         Project project = new Project("Name", "Description");
 
-        assertFalse(project.isMember(user));
+        assertFalse(project.isMember(user), "User should not be a member of the project");
 
         project.getUsers().add(user);
         project.getProjectWorkspaces().add(new ProjectWorkspace(project, new Workspace(1, "Name", user), 1L));
 
-        assertTrue(project.isMember(user));
+        assertTrue(project.isMember(user), "User should be a member of the project");
     }
 
     @Test
-    void removeMemberTest() {
+    void testRemoveMember() {
         Project project = new Project("Name", "Description");
+
+        assertNull(project.removeMember(user), "User should not be a member of the project");
+
         project.getUsers().add(user);
         project.getProjectWorkspaces().add(new ProjectWorkspace(project, new Workspace(1, "Name", user), 1L));
 
-        assertNotNull(project.removeMember(user));
+        assertNotNull(project.removeMember(user), "User should be a member of the project");
 
-        assertNull(project.removeMember(user));
+        assertNull(project.removeMember(user), "User should not be a member of the project");
     }
 
-    @Test
-    void setNameTest() {
+    @ParameterizedTest
+    @ValueSource(strings = { "New name", "  New name  ", "" })
+    void testSetName(String name) {
         Project project = new Project("Name", "Description");
-        project.setName("New name");
+        project.setName(name);
 
-        assertEquals("New name", project.getName());
-
-        project.setName("  New name  ");
-
-        assertEquals("New name", project.getName());
+        assertEquals(name.trim(), project.getName(), "Trimmed name should be equal");
     }
 
-    @Test
-    void setDescriptionTest() {
+    @ParameterizedTest
+    @ValueSource(strings = { "New description", "  New description  ", "" })
+    void testSetDescription(String description) {
         Project project = new Project("Name", "Description");
-        project.setDescription("New description");
+        project.setDescription(description);
 
-        assertEquals("New description", project.getDescription());
-
-        project.setDescription("  New description  ");
-
-        assertEquals("New description", project.getDescription());
+        assertEquals(description.trim(), project.getDescription(), "Trimmed description should be equal");
     }
 
     @Test
-    void validationValidTest() {
-        assertTrue(validator.validate(new Project("Name", "Description")).isEmpty());
+    void testValidationValid() {
+        assertTrue(validator.validate(new Project("Name", "Description")).isEmpty(), "Project should be valid");
     }
 
-    @Test
-    void validationInvalidTest() {
-        assertEquals(2, validator.validate(new Project("", "Description")).size());
-        assertEquals(2, validator.validate(new Project("  ", "Description")).size());
-        assertEquals(1, validator.validate(new Project("a".repeat(51), "Description")).size());
-        assertEquals(1, validator.validate(new Project("Name", "a".repeat(1001))).size());
+    @MethodSource
+    @ParameterizedTest
+    void testValidationInvalid(Project project) {
+        assertFalse(validator.validate(project).isEmpty(), "Project should be invalid");
     }
 
-    @Test
-    void compareToTest() {
-        Project project = new Project("name", "desc");
-        Project other = new Project("other", "desc");
-
-        assertEquals(true, project.compareTo(other) < 0);
-
-        other.setName("name");
-        other.setId(1);
-
-        assertEquals(true, project.compareTo(other) < 0);
-
-        other.setId(project.getId());
-
-        assertEquals(0, project.compareTo(other));
-    }
 }

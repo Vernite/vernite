@@ -1,18 +1,18 @@
 /*
  * BSD 2-Clause License
- * 
- * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
- * 
+ *
+ * Copyright (c) 2023, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -39,11 +39,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StateManager {
 
-    private static record Item(long id, long expire) {
+    private static final long DEFAULT_TTL = 1000L * 60L * 5L;
+
+    private static final int DEFAULT_STATE_SIZE = 128;
+
+    private record Item(long id, long expire) {
 
         /**
          * Checks if the item is invalid.
-         * 
+         *
          * @param now the current time
          * @return true if the item is invalid
          */
@@ -63,7 +67,7 @@ public class StateManager {
      * Creates a new state manager with ttl of 5 minutes and state size of 128.
      */
     public StateManager() {
-        this(1000 * 60 * 5, 128);
+        this(DEFAULT_TTL, DEFAULT_STATE_SIZE);
     }
 
     private void update() {
@@ -73,7 +77,7 @@ public class StateManager {
 
     /**
      * Creates a new state.
-     * 
+     *
      * @param id id connected to the state
      * @return the state
      */
@@ -86,7 +90,7 @@ public class StateManager {
 
     /**
      * Checks if the state is valid.
-     * 
+     *
      * @param state the state
      * @return true if the state is valid
      */
@@ -98,7 +102,7 @@ public class StateManager {
     /**
      * Gets the id connected to the state. Removes the state from the manager in
      * case of success.
-     * 
+     *
      * @param state the state
      * @return the id or null if the state is invalid
      */

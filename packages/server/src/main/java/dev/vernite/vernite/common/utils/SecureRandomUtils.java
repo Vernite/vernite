@@ -1,18 +1,18 @@
 /*
  * BSD 2-Clause License
- * 
- * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
- * 
+ *
+ * Copyright (c) 2023, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -29,14 +29,15 @@ package dev.vernite.vernite.common.utils;
 
 import java.security.SecureRandom;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 /**
  * Utils for common secure random operations.
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@UtilityClass
 public class SecureRandomUtils {
+
+    private static final int DEFAULT_LENGTH = 128;
 
     private static final SecureRandom RANDOM = new SecureRandom();
 
@@ -44,7 +45,7 @@ public class SecureRandomUtils {
 
     /**
      * Generates a secure random string of the given length.
-     * 
+     *
      * @param length must be greater than 0
      * @return the generated string
      */
@@ -60,11 +61,11 @@ public class SecureRandomUtils {
 
     /**
      * Generates a secure random string of length 128.
-     * 
+     *
      * @return the generated string
      */
     public static String generateSecureRandomString() {
-        return generateSecureRandomString(128);
+        return generateSecureRandomString(DEFAULT_LENGTH);
     }
 
 }

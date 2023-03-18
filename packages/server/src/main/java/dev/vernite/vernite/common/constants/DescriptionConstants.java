@@ -25,28 +25,35 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package dev.vernite.vernite.workspace;
+package dev.vernite.vernite.common.constants;
 
-import dev.vernite.vernite.common.constants.NameConstants;
-import dev.vernite.vernite.common.constraints.NullOrNotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 /**
- * Data transfer object containing information needed to update workspace.
+ * Utility class for description constants. Contains all constraints used in
+ * the project REST API for description validation.
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class UpdateWorkspace {
+@UtilityClass
+public class DescriptionConstants {
 
     /**
-     * New name for workspace.
+     * Minimum length of description.
      */
-    @NullOrNotBlank(message = NameConstants.BLANK_MESSAGE)
-    @Size(min = NameConstants.MIN_LENGTH, max = NameConstants.MAX_LENGTH, message = NameConstants.SIZE_MESSAGE)
-    private String name;
+    public static final int MIN_LENGTH = 0;
+
+    /**
+     * Maximum length of description.
+     */
+    public static final int MAX_LENGTH = 1000;
+
+    /**
+     * Key for message when description size is not correct.
+     */
+    public static final String SIZE_MESSAGE = "wrongDescriptionSize";
+
+    /**
+     * Key for message when description is null.
+     */
+    public static final String NULL_MESSAGE = "nullDescription";
 
 }

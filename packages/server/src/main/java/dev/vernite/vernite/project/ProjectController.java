@@ -1,18 +1,18 @@
 /*
  * BSD 2-Clause License
- * 
+ *
  * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -53,6 +53,7 @@ import dev.vernite.vernite.auditlog.AuditLog;
 import dev.vernite.vernite.auditlog.AuditLogRepository;
 import dev.vernite.vernite.cdn.File;
 import dev.vernite.vernite.cdn.FileManager;
+import dev.vernite.vernite.common.utils.SecureRandomUtils;
 import dev.vernite.vernite.event.Event;
 import dev.vernite.vernite.event.EventFilter;
 import dev.vernite.vernite.event.EventService;
@@ -72,7 +73,6 @@ import dev.vernite.vernite.user.UserRepository;
 import dev.vernite.vernite.utils.ErrorType;
 import dev.vernite.vernite.utils.ImageConverter;
 import dev.vernite.vernite.utils.ObjectNotFoundException;
-import dev.vernite.vernite.utils.SecureStringUtils;
 import dev.vernite.vernite.workspace.Workspace;
 import dev.vernite.vernite.workspace.WorkspaceId;
 import dev.vernite.vernite.workspace.WorkspaceRepository;
@@ -116,16 +116,16 @@ public class ProjectController {
     /**
      * Create new project. Creating user will be automatically added to that
      * project.
-     * 
+     *
      * @param user   logged in user
      * @param create data for new project
      * @return newly created project
      */
     @PostMapping
     public Project create(@NotNull @Parameter(hidden = true) User user, @RequestBody @Valid CreateProject create) {
-        long id = create.getWorkspaceId();
-        Workspace workspace = workspaceRepository.findByIdOrThrow(new WorkspaceId(id, user.getId()));
-        Project project = projectRepository.save(new Project(create));
+        var id = create.getWorkspaceId();
+        var workspace = workspaceRepository.findByIdOrThrow(new WorkspaceId(id, user.getId()));
+        var project = projectRepository.save(new Project(create));
         projectWorkspaceRepository.save(new ProjectWorkspace(project, workspace, 1L));
         return project;
     }
@@ -133,8 +133,8 @@ public class ProjectController {
     /**
      * Retrieve project. If user is not member of project with given ID this method
      * returns not found error.
-     * 
-     * @param user logged in user
+     *
+     * @param user authenticated user
      * @param id   ID of project
      * @return project with given ID
      */
@@ -146,8 +146,8 @@ public class ProjectController {
     /**
      * Update project with given ID. Performs partial update using only supplied
      * fields from request body. Authenticated user must be member of project.
-     * 
-     * @param user   logged in user
+     *
+     * @param user   authenticated user
      * @param id     ID of project
      * @param update data to update
      * @return project after update
@@ -155,7 +155,7 @@ public class ProjectController {
     @PutMapping("/{id}")
     public Project update(@NotNull @Parameter(hidden = true) User user, @PathVariable long id,
             @RequestBody @Valid UpdateProject update) {
-        Project project = projectRepository.findByIdAndMemberOrThrow(id, user);
+        var project = projectRepository.findByIdAndMemberOrThrow(id, user);
         if (update.getWorkspaceId() != null) {
             changeWorkspace(update.getWorkspaceId(), project, user);
         }
@@ -164,8 +164,8 @@ public class ProjectController {
     }
 
     private void changeWorkspace(long workspaceId, Project project, User user) {
-        Workspace workspace = workspaceRepository.findByIdOrThrow(new WorkspaceId(workspaceId, user.getId()));
-        ProjectWorkspace pw = project.removeMember(user);
+        var workspace = workspaceRepository.findByIdOrThrow(new WorkspaceId(workspaceId, user.getId()));
+        var pw = project.removeMember(user);
         projectWorkspaceRepository.delete(pw);
         projectWorkspaceRepository.save(new ProjectWorkspace(project, workspace, pw.getPrivileges()));
         if (pw.getWorkspace().getId().getId() == 0 && pw.getWorkspace().getProjectWorkspaces().isEmpty()) {
@@ -176,7 +176,7 @@ public class ProjectController {
     /**
      * Delete project with given ID. Project will be soft deleted and full delete
      * wil happen after a week. Authenticated user must be member of project.
-     * 
+     *
      * @param user logged in user
      * @param id   ID of project
      */
@@ -189,7 +189,7 @@ public class ProjectController {
 
     /**
      * Retrieve project members. Authenticated user must be member of project.
-     * 
+     *
      * @param user logged in user
      * @param id   ID of project
      * @return list of project members
@@ -203,7 +203,7 @@ public class ProjectController {
 
     /**
      * Retrieve project member. Authenticated user must be member of project.
-     * 
+     *
      * @param user     logged in user
      * @param id       ID of project
      * @param memberId ID of searched user
@@ -224,7 +224,7 @@ public class ProjectController {
      * project. If authenticated user is not member of project no one will be added
      * to this project. If user with given email / username does not exists no error
      * will be thrown.
-     * 
+     *
      * @param user   logged in user
      * @param invite list of project and user to add.
      * @return list with project and users which were added to projects
@@ -258,7 +258,7 @@ public class ProjectController {
     /**
      * Remove members from project. Authenticated user must be member of project and
      * have sufficient privileges.
-     * 
+     *
      * @param user logged in user
      * @param id   ID of project
      * @param ids  IDs of users to remove
@@ -286,7 +286,7 @@ public class ProjectController {
 
     /**
      * Leave project. Authenticated user leaves project with given ID.
-     * 
+     *
      * @param user logged in user
      * @param id   ID of project
      */
@@ -303,7 +303,7 @@ public class ProjectController {
 
     /**
      * Retrieve project time tracks. Authenticated user must be member of project.
-     * 
+     *
      * @param user logged in user
      * @param id   ID of project
      * @return list with all time tracks from given project
@@ -317,7 +317,7 @@ public class ProjectController {
     /**
      * Retrieve git issues for project. Retrieve all issues from integrated git
      * providers.
-     * 
+     *
      * @param user logged in user
      * @param id   ID of project
      * @return list with issues
@@ -331,7 +331,7 @@ public class ProjectController {
     /**
      * Retrieve git pull requests for project. Retrieve all pull requests from
      * integrated git providers.
-     * 
+     *
      * @param user logged in user
      * @param id   ID of project
      * @return list with pull requests
@@ -345,7 +345,7 @@ public class ProjectController {
     /**
      * Retrieve git branches for project. Retrieve all branches from integrated git
      * providers.
-     * 
+     *
      * @param user logged in user
      * @param id   ID of project
      * @return list with branches
@@ -358,7 +358,7 @@ public class ProjectController {
 
     /**
      * Retrieve events for project.
-     * 
+     *
      * @param user   logged in user
      * @param id     ID of project
      * @param from   timestamp after events happen
@@ -376,7 +376,7 @@ public class ProjectController {
     /**
      * Update project logo. Given file will be converted to image/webp format with
      * resolution 400x400. Alpha channel is supported.
-     * 
+     *
      * @param user logged in user
      * @param id   ID of project
      * @param file new logo image
@@ -402,7 +402,7 @@ public class ProjectController {
 
     /**
      * Delete project logo. After that logo will be empty.
-     * 
+     *
      * @param user logged in user
      * @param id   ID of project
      */
@@ -416,7 +416,7 @@ public class ProjectController {
     /**
      * Create calendar synchronization link. Creates link for iCalendar format
      * synchronization of project calendar.
-     * 
+     *
      * @param user logged in user
      * @param id   ID of project
      * @return link to project calendar in iCalendar format
@@ -424,9 +424,9 @@ public class ProjectController {
     @PostMapping("/{id}/events/sync")
     public String createCalendarSync(@NotNull @Parameter(hidden = true) User user, @PathVariable long id) {
         Project project = projectRepository.findByIdAndMemberOrThrow(id, user);
-        String key = SecureStringUtils.generateRandomSecureString();
+        String key = SecureRandomUtils.generateSecureRandomString();
         while (calendarRepository.findByKey(key).isPresent()) {
-            key = SecureStringUtils.generateRandomSecureString();
+            key = SecureRandomUtils.generateSecureRandomString();
         }
         Optional<CalendarIntegration> integration = calendarRepository.findByUserAndProject(user, project);
         if (integration.isPresent()) {

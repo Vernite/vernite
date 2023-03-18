@@ -25,28 +25,60 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package dev.vernite.vernite.workspace;
+package dev.vernite.vernite.common.constants;
 
-import dev.vernite.vernite.common.constants.NameConstants;
-import dev.vernite.vernite.common.constraints.NullOrNotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 /**
- * Data transfer object containing information needed to update workspace.
+ * Utility class containing all message keys for not null validation on database
+ * relations.
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class UpdateWorkspace {
+@UtilityClass
+public class NullMessages {
 
     /**
-     * New name for workspace.
+     * Key for message when project is null.
      */
-    @NullOrNotBlank(message = NameConstants.BLANK_MESSAGE)
-    @Size(min = NameConstants.MIN_LENGTH, max = NameConstants.MAX_LENGTH, message = NameConstants.SIZE_MESSAGE)
-    private String name;
+    public static final String PROJECT = "nullProject";
+
+    /**
+     * Key for message when workspace id is null.
+     */
+    public static final String WORKSPACE_ID = "nullWorkspaceId";
+
+    /**
+     * Key for message when member is null.
+     */
+    public static final String MEMBER = "nullMember";
+
+    /**
+     * Key for message when user is null.
+     */
+    public static final String USER = "nullUser";
+
+    /**
+     * Key for message when status is null.
+     */
+    public static final String STATUS = "nullStatus";
+
+    /**
+     * Key for message when counter is null.
+     */
+    public static final String COUNTER = "nullCounter";
+
+    /**
+     * Key for message when sprint is null.
+     */
+    public static final String SPRINT = "nullSprint";
+
+    /**
+     * Key for message when release is null.
+     */
+    public static final String RELEASE = "nullRelease";
+
+    /**
+     * Key for message when meeting is null.
+     */
+    public static final String MEETING = "nullMeeting";
 
 }

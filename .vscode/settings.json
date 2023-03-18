@@ -88,6 +88,7 @@
   /* ================== */
   "cSpell.words": [
     "auditlog",
+    "classpath",
     "compodoc",
     "devkit",
     "Donte",
@@ -104,6 +105,7 @@
     "protobuf",
     "protoc",
     "recaptcha",
+    "Servlet",
     "storysource",
     "tabuckner",
     "tailwindcss",

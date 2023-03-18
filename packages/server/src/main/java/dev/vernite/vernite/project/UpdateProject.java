@@ -1,18 +1,18 @@
 /*
  * BSD 2-Clause License
- * 
- * Copyright (c) 2022, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
- * 
+ *
+ * Copyright (c) 2023, [Aleksandra Serba, Marcin Czerniak, Bartosz Wawrzyniak, Adrian Antkowiak]
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -30,15 +30,16 @@ package dev.vernite.vernite.project;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 
+import dev.vernite.vernite.common.constants.DescriptionConstants;
+import dev.vernite.vernite.common.constants.IDConstants;
+import dev.vernite.vernite.common.constants.NameConstants;
 import dev.vernite.vernite.common.constraints.NullOrNotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Class containing information needed to update project entity.
- * Has required constraints annotated using Java Bean Validation.
- * It performs partial update using only present fields.
+ * Data transfer object containing information needed to update project.
  */
 @Data
 @NoArgsConstructor
@@ -46,22 +47,22 @@ import lombok.NoArgsConstructor;
 public class UpdateProject {
 
     /**
-     * New name for project. Must contain at least one non-whitespace character.
+     * New name for project.
      */
-    @Size(min = 1, max = 50, message = "project name must be shorter than 50 characters")
-    @NullOrNotBlank(message = "project name must contain at least one non-whitespace character")
+    @NullOrNotBlank(message = NameConstants.BLANK_MESSAGE)
+    @Size(min = NameConstants.MIN_LENGTH, max = NameConstants.MAX_LENGTH, message = NameConstants.SIZE_MESSAGE)
     private String name;
 
     /**
-     * New description for new project.
+     * New description for project.
      */
-    @Size(max = 1000, message = "project description must be shorter than 1000 characters")
+    @Size(max = DescriptionConstants.MAX_LENGTH, message = DescriptionConstants.SIZE_MESSAGE)
     private String description;
 
     /**
-     * New workspace id for project.
+     * New workspace ID for project.
      */
-    @PositiveOrZero(message = "workspace id must be positive or zero")
+    @PositiveOrZero(message = IDConstants.NEGATIVE_OR_ZERO_MESSAGE)
     private Long workspaceId;
 
 }
