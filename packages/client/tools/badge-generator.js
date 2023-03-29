@@ -7,7 +7,7 @@ function requireIfExists(...modules) {
       // pass and try next file
     }
   }
-  throw ('None of the provided modules exist.')
+  throw new Error('None of the provided modules exist.')
 }
 
 let { makeBadge } = require('badge-maker');

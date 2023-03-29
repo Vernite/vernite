@@ -28,9 +28,10 @@
 
 Before starting make sure you have installed the supported version of node and yarn.
 
-- yarn: `1.22.18`
 - node: `16.13.0`
-- java: `17`
+- yarn: `1.22.18`
+- java: `17.0.6`
+- mvn: `3.9.1`
 
 This repository is using nx workspace. To install all dependencies run:
 

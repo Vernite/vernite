@@ -59,8 +59,32 @@
   "nx": {
     "targets": {
       "build": {
+        "inputs": [
+          "../../tsconfig.json",
+          "src/",
+          "angular.json",
+          "package.json",
+          "tailwind.config.js",
+          "tsconfig.app.json",
+          "tsconfig.json"
+        ],
         "outputs": [
           "dist/"
+        ]
+      },
+      "test": {
+        "inputs": [
+          "../../tsconfig.json",
+          "src/",
+          "angular.json",
+          "karma.conf.js",
+          "package.json",
+          "tailwind.config.js",
+          "tsconfig.json",
+          "tsconfig.spec.json"
+        ],
+        "outputs": [
+          "coverage/"
         ]
       }
     }

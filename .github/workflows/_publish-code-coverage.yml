@@ -1,0 +1,37 @@
+name: Code Coverage
+
+on:
+  workflow_call:
+    secrets:
+      CODECOV_TOKEN:
+        required: true
+        description: codecov token for authorization
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.x'
+
+    - name: Restore cache for target test
+      uses: ./.github/actions/restore-target-outputs
+      with:
+        target: test
+        configuration: development
+
+    - name: List all test files
+      id: list_lcov_files
+      run: echo "LCOV_FILES=$(node packages/tools/list-lcov-files.js)" >> $GITHUB_OUTPUT
+
+    - name: Upload app coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        files: ${{ steps.list_lcov_files.outputs.LCOV_FILES }}
+        token: ${{ secrets.CODECOV_TOKEN }}
