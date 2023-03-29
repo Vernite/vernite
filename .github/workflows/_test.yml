@@ -47,4 +47,3 @@ jobs:
         with:
           target: test
           configuration: ${{ inputs.configuration }}
-
