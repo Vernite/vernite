@@ -42,3 +42,6 @@ jobs:
       # Test by nx
       - name: Test
         run: yarn nx affected --target=test
+
+      - name: Summary
+        uses: ./.github/actions/summary

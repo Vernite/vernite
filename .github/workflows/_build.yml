@@ -54,3 +54,6 @@ jobs:
           configuration: ${{ inputs.configuration }}
           affected-projects: ${{ steps.setup.outputs.affected-projects }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Summary
+        uses: ./.github/actions/summary
