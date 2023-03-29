@@ -1,8 +1,8 @@
 const cache = require('@actions/cache');
 const core = require('@actions/core');
-const { nxAffected } = require('../../../packages/tools/utils/nx-affected');
 const { readFileSync, existsSync } = require('fs');
 const { resolve } = require('path');
+const { nxAffected } = import('../../../packages/tools/utils/nx-affected');
 
 /**
  * @param {string} project
