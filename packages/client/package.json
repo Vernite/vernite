@@ -59,8 +59,32 @@
   "nx": {
     "targets": {
       "build": {
+        "inputs": [
+          "{workspaceRoot}/tsconfig.json",
+          "{projectRoot}/src/",
+          "{projectRoot}/angular.json",
+          "{projectRoot}/package.json",
+          "{projectRoot}/tailwind.config.js",
+          "{projectRoot}/tsconfig.app.json",
+          "{projectRoot}/tsconfig.json"
+        ],
         "outputs": [
-          "dist/"
+          "{projectRoot}/dist/"
+        ]
+      },
+      "test": {
+        "inputs": [
+          "{workspaceRoot}/tsconfig.json",
+          "{projectRoot}/src/",
+          "{projectRoot}/angular.json",
+          "{projectRoot}/karma.conf.js",
+          "{projectRoot}/package.json",
+          "{projectRoot}/tailwind.config.js",
+          "{projectRoot}/tsconfig.json",
+          "{projectRoot}/tsconfig.spec.json"
+        ],
+        "outputs": [
+          "{projectRoot}/coverage/"
         ]
       }
     }

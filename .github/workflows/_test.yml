@@ -39,6 +39,11 @@ jobs:
           spring-application-properties: ${{ secrets.SPRING_APPLICATION_PROPERTIES }}
           vernite-2022-private-key-pem: ${{ secrets.VERNITE_2022_PRIVATE_KEY_PEM }}
 
-      # Test by nx
       - name: Test
         run: yarn nx affected --target=test
+
+      - name: Cache results of affected projects
+        uses: ./.github/actions/cache-target-outputs
+        with:
+          target: test
+          configuration: ${{ inputs.configuration }}

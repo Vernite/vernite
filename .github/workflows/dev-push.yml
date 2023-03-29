@@ -35,7 +35,7 @@ jobs:
       configuration: insiders
 
   sonar_server:
-    needs: [build]
+    needs: [build, test]
     uses: ./.github/workflows/_server-sonar.yml
     secrets: inherit
     with:
@@ -47,3 +47,8 @@ jobs:
     secrets: inherit
     with:
       configuration: insiders
+
+  publish_code_coverage:
+    needs: [build, test]
+    uses: ./.github/workflows/_publish-code-coverage.yml
+    secrets: inherit

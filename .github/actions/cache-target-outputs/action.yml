@@ -1,0 +1,24 @@
+# Save cache for specific nx target outputs
+
+name: Save cache
+description: Save cache for all affected projects
+
+inputs:
+  configuration:
+    description: The configuration to use (development | insiders | production)
+    required: true
+    default: development
+
+  target:
+    description: The target to use (build | test)
+    required: true
+    default: build
+
+  os:
+    description: The operating system of the runner
+    required: true
+    default: ${{ runner.os }}
+
+runs:
+  using: 'node16'
+  main: 'index.js'

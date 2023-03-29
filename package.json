@@ -8,6 +8,7 @@
   "private": true,
   "prettier": "./.config/.prettierrc.js",
   "dependencies": {
+    "@actions/cache": "^3.1.4",
     "@angular/animations": "^14.2.12",
     "@angular/cdk": "^14.2.7",
     "@angular/cdk-experimental": "14.2.7",
