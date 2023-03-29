@@ -1,7 +1,7 @@
-# Save cache for specific nx target outputs
+# Restore cache for specific nx target outputs
 
-name: Save cache
-description: Save cache for all affected projects
+name: Restore cache
+description: Restore cache for all projects
 
 inputs:
   configuration:

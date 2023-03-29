@@ -52,7 +52,7 @@ async function run() {
     });
 
     if (paths.length) {
-      await cache.saveCache(paths, key);
+      await cache.restoreCache(paths, key);
 
       console.log('Successfully cached paths:');
       console.log(paths.join('\n'));

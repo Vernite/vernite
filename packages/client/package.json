@@ -60,31 +60,31 @@
     "targets": {
       "build": {
         "inputs": [
-          "../../tsconfig.json",
-          "src/",
-          "angular.json",
-          "package.json",
-          "tailwind.config.js",
-          "tsconfig.app.json",
-          "tsconfig.json"
+          "{workspaceRoot}/tsconfig.json",
+          "{projectRoot}/src/",
+          "{projectRoot}/angular.json",
+          "{projectRoot}/package.json",
+          "{projectRoot}/tailwind.config.js",
+          "{projectRoot}/tsconfig.app.json",
+          "{projectRoot}/tsconfig.json"
         ],
         "outputs": [
-          "dist/"
+          "{projectRoot}/dist/"
         ]
       },
       "test": {
         "inputs": [
-          "../../tsconfig.json",
-          "src/",
-          "angular.json",
-          "karma.conf.js",
-          "package.json",
-          "tailwind.config.js",
-          "tsconfig.json",
-          "tsconfig.spec.json"
+          "{workspaceRoot}/tsconfig.json",
+          "{projectRoot}/src/",
+          "{projectRoot}/angular.json",
+          "{projectRoot}/karma.conf.js",
+          "{projectRoot}/package.json",
+          "{projectRoot}/tailwind.config.js",
+          "{projectRoot}/tsconfig.json",
+          "{projectRoot}/tsconfig.spec.json"
         ],
         "outputs": [
-          "coverage/"
+          "{projectRoot}/coverage/"
         ]
       }
     }
