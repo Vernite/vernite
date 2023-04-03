@@ -20,7 +20,7 @@
   <properties>
     <java.version>17</java.version>
     <slack.bolt.version>1.28.0</slack.bolt.version>
-    <springdoc.version>2.0.4</springdoc.version>
+    <springdoc.version>2.1.0</springdoc.version>
     <jwwt.version>0.11.5</jwwt.version>
     <ffmpeg.version>5.1.2-1.5.8</ffmpeg.version>
   </properties>
